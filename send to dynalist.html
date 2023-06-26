@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dynalist Inbox</title>
+</head>
+<body>
+  <h1>Dynalist Inbox</h1>
+  <div id="api-key-container">
+    <label for="api-key-input">APIキー:</label>
+    <input type="text" id="api-key-input">
+    <button id="save-api-key-button">保存</button>
+  </div>
+  <br>
+  <label for="inbox-text">テキスト:</label>
+  <textarea id="inbox-text" rows="5" cols="50"></textarea>
+  <button id="submit-button">送信</button>
+
+  <script>
+const submitButton = document.getElementById("submit-button");
+const inboxText = document.getElementById("inbox-text");
+const apiKeyInput = document.getElementById("api-key-input");
+const apiKeyContainer = document.getElementById("api-key-container");
+
+const savedApiKey = localStorage.getItem("api-key");
+if (savedApiKey) {
+  apiKeyContainer.style.display = "none"; // 非表示にする
+} else {
+  apiKeyInput.value = savedApiKey; // 保存されたAPIキーを表示する
+}
+
+const saveApiKeyButton = document.getElementById("save-api-key-button");
+saveApiKeyButton.addEventListener("click", () => {
+  const apiKey = apiKeyInput.value.trim();
+  if (apiKey !== "") {
+    localStorage.setItem("api-key", apiKey);
+    apiKeyContainer.style.display = "none"; // 非表示にする
+    alert("APIキーが保存されました！");
+  }
+});
+
+submitButton.addEventListener("click", () => {
+  const text = inboxText.value.trim();
+  if (text !== "") {
+    const apiKey = localStorage.getItem("api-key");
+    if (!apiKey) {
+      alert("APIキーが保存されていません。先に保存してください。");
+      return;
+    }
+    sendToInbox(text, apiKey);
+  }
+});
+
+function sendToInbox(text, apiKey) {
+  const apiUrl = "https://dynalist.io/api/v1/inbox/add";
+  const request = new XMLHttpRequest();
+  request.open("POST", apiUrl, true);
+  request.setRequestHeader("Content-Type", "application/json");
+  request.setRequestHeader("Authorization", `Bearer ${apiKey}`);
+  request.onreadystatechange = function () {
+    if (request.readyState === 4 && request.status === 200) {
+      inboxText.value = ""; // 送信後にテキストエリアをクリアする
+      alert("テキストが送信されました！");
+    }
+  };
+  const data = JSON.stringify({ content: text });
+  request.send(data);
+}
+
+  </script>
+</body>
+</html>
