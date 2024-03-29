@@ -12,6 +12,7 @@ body {
 }
 
 header {
+    background-color: #fff;
     color: #333;
     padding: 6px 0;
     position: fixed;
@@ -53,7 +54,7 @@ nav ul li a {
 
 main {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 60px auto 0;
     padding: 20px;
 }
 
