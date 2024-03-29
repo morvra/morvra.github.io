@@ -1,12 +1,6 @@
 /* styles.css */
 
-/* Reset CSS */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-
-@import"//fonts.googleapis.com/css?family=M+PLUS+Rounded+1c";
+@import"https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c";
 
 body {
     font-family: "M PLUS Rounded 1c" , sans-serif;
