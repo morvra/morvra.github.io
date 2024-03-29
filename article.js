@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (article) {
                 document.title = `${article.title} - morvra`; // titleタグを更新
                 articleTitleElement.innerHTML = `<h2>${article.title}</h2>`; // タイトルを表示
-                articleDateElement.textContent = `Date: ${article.date}`; // 日付を表示
+                articleDateElement.textContent = `Date:${article.date}`; // 日付を表示
                 // 記事が見つかった場合はコンテンツを表示
                 articleContent.innerHTML = article.body;
             } else {
