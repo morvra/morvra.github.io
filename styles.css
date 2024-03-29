@@ -30,6 +30,7 @@ header {
 }
 .container h1 {
     margin: 6px 0px;
+    font-size: 1.4em;
 }
 .container h1 a {
     color: #333;
@@ -67,8 +68,8 @@ main {
     text-align: center;
 }
 
-#article-title h1 {
-    font-size: 1.4em;
+#article-title h2 {
+    font-size: 1.5em;
     color: #333;
 }
 #article-date {
