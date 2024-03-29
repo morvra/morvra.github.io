@@ -31,6 +31,10 @@ header {
 .container h1 {
     margin: 6px 0px;
 }
+.container h1 a {
+    color: #333;
+    text-decoration: none;
+}
 
 nav ul {
     list-style: none;
@@ -64,7 +68,7 @@ main {
 }
 
 #article-title h1 {
-    font-size: 2em;
+    font-size: 1.4em;
     color: #333;
 }
 #article-date {
