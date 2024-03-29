@@ -66,6 +66,11 @@ main {
     font-size: 2em;
     color: #333;
 }
+.article-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 0;
+}
 
 #article-content {
     font-size: 1.1em;
