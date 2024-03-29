@@ -75,8 +75,13 @@ main {
 
 #article-content {
     font-size: 1.1em;
-    color: #555;
+    color: #333;
     margin-bottom: 20px;
+}
+
+#article-content ul {
+    margin: 0;
+    list-style: circle;
 }
 
 footer {
