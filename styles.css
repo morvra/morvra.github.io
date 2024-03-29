@@ -80,6 +80,10 @@ main {
     margin-bottom: 20px;
 }
 
+#article-content a[href*="morvra.github.io"]{
+    text-decoration: none;
+}
+
 #article-content ul {
     margin: 0;
     list-style: circle;
