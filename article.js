@@ -5,10 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // クエリパラメータから記事IDを取得
     const params = new URLSearchParams(window.location.search);
     const articleId = params.get('id');
-
     // JSONファイルのパス
     const jsonPath = './data.json';
-
+    const articleTitleElement = document.getElementById('article-title');
     // 記事のコンテンツを表示する要素
     const articleContent = document.getElementById('article-content');
 
@@ -19,10 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // 記事IDに対応する記事を検索
             const article = data.find(article => article.id === articleId);
             if (article) {
+                document.title = `${article.title} - morvra`; // titleタグを更新
+                articleTitleElement.innerHTML = `<h2>${article.title}</h2>`; // タイトルを表示
                 // 記事が見つかった場合はコンテンツを表示
                 articleContent.innerHTML = article.body;
             } else {
-                // 記事が見つからない場合はメッセージを表示
                 articleContent.textContent = '記事が見つかりませんでした。';
             }
         })
