@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(jsonPath)
         .then(response => response.json())
         .then(data => {
+            // 日付の新しい順にソート
+            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // ソートされたデータを元に記事リストを作成
             data.forEach(article => {
                 // 記事のタイトルとIDを取得
                 const { id, title } = article;
