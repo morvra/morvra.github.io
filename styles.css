@@ -84,6 +84,7 @@ main {
     font-size: 1em;
     color: #333;
     margin-bottom: 20px;
+    overflow-wrap: break-word;
 }
 
 #article-content a[href*="morvra.github.io"]{
