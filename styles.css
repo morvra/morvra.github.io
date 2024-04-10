@@ -87,6 +87,10 @@ main {
     overflow-wrap: break-word;
 }
 
+#article-content img {
+    max-width: 100%;
+}
+
 #article-content a[href*="morvra.github.io"]{
     text-decoration: none;
 }
