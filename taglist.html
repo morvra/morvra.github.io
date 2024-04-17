@@ -17,7 +17,7 @@
     <div id="header"></div>
 
     <main>
-        <h1>Tag List</h1>
+        <h1 id="tag-list-title">Tag List</h1>
         <ul id="tag-list"></ul>
     </main>
 
@@ -26,6 +26,7 @@
             .then(response => response.json())
             .then(data => {
                 const tagList = document.getElementById('tag-list');
+                const tagListTitle = document.getElementById('tag-list-title');
 
                 // タグごとに記事をグループ化するためのオブジェクトを作成
                 const groupedArticles = {};
@@ -58,6 +59,9 @@
                     tagListItem.appendChild(articleList);
                     tagList.appendChild(tagListItem);
                 }
+
+                // 見出しのテキストから#を削除
+                tagListTitle.textContent = tagListTitle.textContent.replace('#', '');
             })
             .catch(error => console.error('Error fetching data:', error));
     </script>
