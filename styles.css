@@ -74,10 +74,17 @@ main {
     color: #333;
 }
 #article-date {
-    text-align: right;
+    display: inline;
     font-size: 0.9em;
     color: #888;
     margin-bottom: 0;
+}
+#article-tags {
+    float: right;
+}
+#article-tags a {
+    text-decoration: none;
+    color: #888;
 }
 
 #article-content {
