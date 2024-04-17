@@ -1,0 +1,55 @@
+<!-- taglist.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag List - morvra</title>
+</head>
+<body>
+    <h1>Tag List</h1>
+    <ul id="tag-list"></ul>
+
+    <script>
+        fetch('./data.json')
+            .then(response => response.json())
+            .then(data => {
+                const tagList = document.getElementById('tag-list');
+
+                // タグごとに記事をグループ化するためのオブジェクトを作成
+                const groupedArticles = {};
+                data.forEach(article => {
+                    article.tags.forEach(tag => {
+                        if (!groupedArticles[tag]) {
+                            groupedArticles[tag] = [];
+                        }
+                        groupedArticles[tag].push(article);
+                    });
+                });
+
+                // タグごとにリストを生成
+                for (const tag in groupedArticles) {
+                    const tagListItem = document.createElement('li');
+                    const tagHeader = document.createElement('h2');
+                    tagHeader.textContent = tag;
+                    tagListItem.appendChild(tagHeader);
+
+                    const articleList = document.createElement('ul');
+                    groupedArticles[tag].forEach(article => {
+                        const articleListItem = document.createElement('li');
+                        const articleLink = document.createElement('a');
+                        articleLink.textContent = article.title;
+                        articleLink.href = `article.html?id=${article.id}`;
+                        articleListItem.appendChild(articleLink);
+                        articleList.appendChild(articleListItem);
+                    });
+
+                    tagListItem.appendChild(articleList);
+                    tagList.appendChild(tagListItem);
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
