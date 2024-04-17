@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const jsonPath = './data.json';
     const articleTitleElement = document.getElementById('article-title');
     const articleDateElement = document.getElementById('article-date'); // 日付を表示する要素
+    const articleTagsElement = document.getElementById('article-tags'); // タグ
     // 記事のコンテンツを表示する要素
     const articleContent = document.getElementById('article-content');
 
@@ -22,6 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.title = `${article.title} - morvra`; // titleタグを更新
                 articleTitleElement.innerHTML = `<h2>${article.title}</h2>`; // タイトルを表示
                 articleDateElement.textContent = `${article.date}`; // 日付を表示
+                // タグを表示
+                if (article.tags.length > 0) {
+                    article.tags.forEach((tag, index) => {
+                        const tagLink = document.createElement('a');
+                        tagLink.textContent = tag;
+                        tagLink.href = `taglist.html#${tag}`; // タグ一覧ページへのリンク
+                        articleTagsElement.appendChild(tagLink);
+                        if (index < article.tags.length - 1) {
+                            articleTagsElement.appendChild(document.createTextNode(', '));
+                        }
+                    });
+                }
                 // 記事が見つかった場合はコンテンツを表示
                 articleContent.innerHTML = article.body;
             } else {
