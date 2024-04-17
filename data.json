@@ -3,30 +3,41 @@
 		"id": "7LmTlvBllIw4OmoG0exJ4gQ0",
 		"title": "記事テスト",
 		"date": "2024-03-29",
+		"tags": [
+			"#ブログ"
+		],
 		"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>ほんぶん２</p>\n<p><strong>太字</strong> ほげ〜</p>\n<ul><li>中黒つき１</li></ul>\n<ul><li>2</li></ul>\n<ul><li>3</li></ul>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p>\n<p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p>\n<p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article.html?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
 	},
 	{
 		"id": "2BSuXiPppMezZeBA0lpI7sIh",
 		"title": "記事テスト2",
 		"date": "2024-02-28",
+		"tags": [],
 		"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>* アスタリスクつき1</p>\n<p>* 2</p>\n<p>* 3</p>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p></p>"
 	},
 	{
 		"id": "uVd0FvsIz5xGXZkp1GR93wB3",
 		"title": "About",
 		"date": "2024-03-30",
+		"tags": [],
 		"body": "<h3>このサイトについて</h3>\n<p>morvraがなんでも書く場所です。</p>\n<h3>morvra</h3>\n<p><img src=\"https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png\" alt=\"icon\"></p>\n<p>インターネットとテキストが好きです。</p>\n<h3>お問い合わせ</h3>\n<p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p>"
 	},
 	{
 		"id": "5ZUWNwNzv2znrzOoVJHebkQz",
 		"title": "Hello world!",
 		"date": "2024-03-30",
+		"tags": [
+			"#ブログ"
+		],
 		"body": "<p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>\n<p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>\n<p>サイトの構築はNoratetsu Houseさんの連載（<a href=\"https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB\" target=\"_blank\">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p>\n<p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>\n<p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>\n<p>今後は記事を更新しつつ、</p>\n<ul><li>タグ機能</li></ul>\n<ul><li>RSSフィードの配信</li></ul>\n<ul><li>デザインを洗練</li></ul>\n<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>"
 	},
 	{
 		"id": "mswxR_4Gsgxy2JxyXF4vUFis",
 		"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！",
 		"date": "2024-04-10",
+		"tags": [
+			"#Hearthstone"
+		],
 		"body": "<p><img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\"></p>\n<p>久々のレジェンドなので記念に投稿。</p>\n<h2>デッキリスト</h2>\n<p><img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\"></p>\n<p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>\n<p>ETCの中身は</p>\n<ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul>\n<ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul>\n<ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>\n<h2>デッキの使用感</h2>\n<p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>\n<p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>\n<p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p>\n<p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p>\n<h2>構築について</h2>\n<p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p>\n<h3>パッチーズ不採用</h3>\n<p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p>\n<p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p>\n<h3>ETC</h3>\n<p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p>\n<p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p>\n<h3>ダスクブレイカー2積みの是非</h3>\n<p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>\n<p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>\n<p></p>\n<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
 	}
 ]
