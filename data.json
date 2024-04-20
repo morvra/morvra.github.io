@@ -36,8 +36,17 @@
 		"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！",
 		"date": "2024-04-10",
 		"tags": [
-			"#Hearthstone"
+			"#hearthstone"
 		],
 		"body": "<p><img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\"></p>\n<p>久々のレジェンドなので記念に投稿。</p>\n<h2>デッキリスト</h2>\n<p><img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\"></p>\n<p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>\n<p>ETCの中身は</p>\n<ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul>\n<ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul>\n<ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>\n<h2>デッキの使用感</h2>\n<p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>\n<p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>\n<p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p>\n<p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p>\n<h2>構築について</h2>\n<p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p>\n<h3>パッチーズ不採用</h3>\n<p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p>\n<p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p>\n<h3>ETC</h3>\n<p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p>\n<p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p>\n<h3>ダスクブレイカー2積みの是非</h3>\n<p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>\n<p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>\n<p></p>\n<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
+	},
+	{
+		"id": "Wd5eV3mQ6K5BDQFZlXUbPQB9",
+		"title": "Dynalistの構造 Ver.202404",
+		"date": "2024-04-20",
+		"tags": [
+			"#dynalist"
+		],
+		"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p>\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li>[アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」](https://amzn.to/3xREGWY)</li></ul>\n<ul><li>[Bullet Journal](https://bulletjournal.com/)</li></ul>\n<ul><li>[PARA Method - Workflowy guide](https://workflowy.com/systems/para-method/)</li></ul>"
 	}
 ]
