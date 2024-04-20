@@ -1,9 +1,9 @@
 /* styles.css */
 
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kosugi+Maru|M+PLUS+Rounded+1c&display=swap");
 
 body {
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: "Kosugi Maru", "M PLUS Rounded 1c", sans-serif;
     font-weight: 400;
     font-size: 16px;
     font-style: normal;
