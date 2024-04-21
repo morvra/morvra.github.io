@@ -6,7 +6,7 @@
 		"tags": [
 			"#ブログ"
 		],
-		"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>ほんぶん２</p>\n<p><strong>太字</strong> ほげ〜</p>\n<ul><li>中黒つき１</li></ul>\n<ul><li>2</li></ul>\n<ul><li>3</li></ul>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p>\n<p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p>\n<p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article.html?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
+		"body": "<p>本文</p>\n\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>ほんぶん２</p>\n<p><strong>太字</strong> ほげ〜</p>\n<ul><li>中黒つき１</li></ul>\n<ul><li>2</li></ul>\n<ul><li>3</li></ul>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p>\n<p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p>\n<p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article.html?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
 	},
 	{
 		"id": "2BSuXiPppMezZeBA0lpI7sIh",
@@ -48,5 +48,14 @@
 			"#dynalist"
 		],
 		"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p>\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li><a href=\"https://amzn.to/3xREGWY\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul>\n<ul><li><a href=\"https://bulletjournal.com/\">Bullet Journal</a></li></ul>\n<ul><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
+	},
+	{
+		"id": "dg1tAwAqsiF0TKwY5qoiSjkB",
+		"title": "『ようこそ！FACT（東京S区第二支部）へ』読んだ",
+		"date": "2024-04-21",
+		"tags": [
+			"#漫画"
+		],
+		"body": "<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>\n<p><a href=\"https://amzn.to/4b6auGe\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ\"></a><br/><a href=\"https://amzn.to/4b6auGe\" target=\"_blank\" rel=\"nofollow\">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>\n<p><a href=\"https://www.youtube.com/watch?v=ymfdEbvDK7M\" target=\"_blank\">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p>\n<h3>感想</h3>\n<p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p>\n<p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p>\n<p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p>\n<p></p>\n<p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p>\n<p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p>\n<p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p>\n<p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p>\n<p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p>\n<p>と思ったらインタビュー（<a href=\"https://unique.kaonavi.jp/2489/\" target=\"_blank\">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p>\n<blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote>\n<p>と語られていて腹落ち。</p>\n<p>全30話で読みやすいので気になる方は是非。<a href=\"https://manga-one.com/\" target=\"_blank\">マンガワン</a>で全話読めます。</p>\n<p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>\n"
 	}
 ]
