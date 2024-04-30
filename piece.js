@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // 記事のタイトル、日付、本文を表示するdiv要素を作成
                 const articleDiv = document.createElement('div');
-                articleDiv.classList.add('article');
+                articleDiv.classList.add('piece');
                 articleDiv.innerHTML = `
                     <h2 id="piece-title">${title}</h2>
                     <div id="article-date">${date}</div>
