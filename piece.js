@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 articleDiv.innerHTML = `
                     <h2 id="piece-title">${title}</h2>
                     <div id="article-date">${date}</div>
-                    <div>${body}</div>
+                    <div id="article-content">${body}</div>
                 `;
 
                 // 記事を記事コンテナに追加
