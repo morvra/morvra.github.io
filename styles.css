@@ -123,6 +123,17 @@ ul#tag-list {
     font-size: 1.2em;
 }
 
+/* piece */
+.piece {
+    margin-bottom: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, .5);
+}
+h2#piece-title {
+    margin: 0px;
+    font-size: 1.2em;
+}
 
 footer {
     border-top: 1px solid #bbb;
