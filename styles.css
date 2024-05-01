@@ -13,6 +13,7 @@ body {
 }
 
 header {
+    background-color: #fff;
     color: #333;
     padding: 6px 0;
     position: fixed;
@@ -97,7 +98,7 @@ main {
     max-width: 100%;
 }
 
-#article-content a[href*="morvra.github.io"]{
+a[href*="morvra.github.io"]{
     text-decoration: none;
 }
 
