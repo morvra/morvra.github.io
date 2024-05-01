@@ -64,6 +64,10 @@ main {
     padding: 18px;
 }
 
+ul#article-list a {
+    text-decoration: none;
+}
+
 #article-title {
     margin-bottom: 20px;
     text-align: center;
@@ -98,7 +102,7 @@ main {
     max-width: 100%;
 }
 
-a[href*="morvra.github.io"]{
+#article-content a[href*="morvra.github.io"] {
     text-decoration: none;
 }
 
