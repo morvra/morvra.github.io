@@ -8,7 +8,7 @@ body {
     font-size: 16px;
     font-style: normal;
     line-height: 1.6;
-    background-color: #f5f5f5;
+    background-color: #fff;
     margin: 0;
 }
 
@@ -61,13 +61,6 @@ main {
     max-width: 640px;
     margin: 60px auto 0;
     padding: 18px;
-}
-#article {
-    margin-top: 72px;
-    margin-bottom: 16px;
-    padding: 8px 16px;
-    background-color: #fff;
-    box-shadow: 0px 2px 4px 0px #aaa;
 }
 
 #article-title {
