@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
                 link.textContent = title;
-                link.href = `article.html?id=${id}`; // 記事ページへのリンク
+                link.href = `article?id=${id}`; // 記事ページへのリンク
                 listItem.appendChild(link);
                 articleList.appendChild(listItem);
             });
