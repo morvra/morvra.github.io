@@ -51,7 +51,7 @@
                         const articleListItem = document.createElement('li');
                         const articleLink = document.createElement('a');
                         articleLink.textContent = article.title;
-                        articleLink.href = `article.html?id=${article.id}`;
+                        articleLink.href = `article?id=${article.id}`;
                         articleListItem.appendChild(articleLink);
                         articleList.appendChild(articleListItem);
                     });
