@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(jsonPath)
         .then(response => response.json())
         .then(data => {
-            // 記事IDに対応する記事を検索
-            const article = data.find(article => article.id === articleId);
+            // data.articlesから記事IDに対応する記事を検索
+            const article = data.articles.find(article => article.id === articleId);
             if (article) {
                 document.title = `${article.title} - morvra`; // titleタグを更新
                 articleTitleElement.innerHTML = `<h2>${article.title}</h2>`; // タイトルを表示
