@@ -68,6 +68,10 @@ ul#article-list a {
     text-decoration: none;
 }
 
+iframe {
+    max-width: 100%;
+}
+
 #article-title {
     margin-bottom: 20px;
     text-align: center;
