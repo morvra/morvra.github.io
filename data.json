@@ -48,7 +48,7 @@
 			"tags": [
 				"#dynalist"
 			],
-			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p>\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li>[アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」](https://amzn.to/3xREGWY)</li></ul>\n<ul><li>[Bullet Journal](https://bulletjournal.com/)</li></ul>\n<ul><li>[PARA Method - Workflowy guide](https://workflowy.com/systems/para-method/)</li></ul>"
+			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p>\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li><a href=\"https://amzn.to/3xREGWY\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul>\n<ul><li><a href=\"https://bulletjournal.com/\">Bullet Journal</a></li></ul>\n<ul><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
 		},
 		{
 			"id": "dg1tAwAqsiF0TKwY5qoiSjkB",
@@ -80,21 +80,21 @@
 			"title": "Scrapbox→Cosense",
 			"date": "2024-05-21",
 			"tags": [],
-			"body": "<p>ScrapboxがHelpfeel Cosenseに名前が変わった</p>\n<ul><li>[【サービス名変更のお知らせ】「Scrapbox」は「Helpfeel Cosense（ヘルプフィール コセンス）」に変わります | 株式会社Helpfeelのプレスリリース](https://prtimes.jp/main/html/rd/p/000000323.000027275.html)</li></ul>\n<blockquote><p>情報を集めて整理できる「Scrapbox」は、「スクボ」の愛称で親しまれている一方で、名称からは、人とのつながりが想起しにくく、本サービスの本質的な価値を十分に伝えられていないというジレンマを抱えていました。</p></blockquote>\n<blockquote><p>このような背景から、社会問題である情報格差の解消に向けて、本サービスの「ナレッジによって人や組織を豊かにする」というコアバリューをより明確に伝えるために、サービス名を「Helpfeel Cosense（コセンス）」に変更することを決定いたしました。</p></blockquote>\n<p>とのこと。「Scrapbox」は手軽な感じが好きだったけどウケにくい層もいたのかな〜。</p>"
+			"body": "<p>ScrapboxがHelpfeel Cosenseに名前が変わった</p>\n<ul><li><a href=\"https://prtimes.jp/main/html/rd/p/000000323.000027275.html\">【サービス名変更のお知らせ】「Scrapbox」は「Helpfeel Cosense（ヘルプフィール コセンス）」に変わります | 株式会社Helpfeelのプレスリリース</a></li></ul>\n<blockquote><p>情報を集めて整理できる「Scrapbox」は、「スクボ」の愛称で親しまれている一方で、名称からは、人とのつながりが想起しにくく、本サービスの本質的な価値を十分に伝えられていないというジレンマを抱えていました。</p></blockquote>\n<blockquote><p>このような背景から、社会問題である情報格差の解消に向けて、本サービスの「ナレッジによって人や組織を豊かにする」というコアバリューをより明確に伝えるために、サービス名を「Helpfeel Cosense（コセンス）」に変更することを決定いたしました。</p></blockquote>\n<p>とのこと。「Scrapbox」は手軽な感じが好きだったけどウケにくい層もいたのかな〜。</p>"
 		},
 		{
 			"id": "BRh88eLD3TalAzIV_6k23Prj",
 			"title": "正反対な君と僕 55話",
 			"date": "2024-05-27",
 			"tags": [],
-			"body": "<ul><li>[[第55話]正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋](https://shonenjumpplus.com/episode/17106371864158164556) </li></ul>\n<p>東の自覚回。阿賀沢さんの漫画はみんな幸せになれ！って思う。</p>\n<p>高校生にして言語化と内省が上手すぎる。そのおかげで読みやすいしそこが肌に合う感じがする。</p>"
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371864158164556\">[第55話]正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a> </li></ul>\n<p>東の自覚回。阿賀沢さんの漫画はみんな幸せになれ！って思う。</p>\n<p>高校生にして言語化と内省が上手すぎる。そのおかげで読みやすいしそこが肌に合う感じがする。</p>"
 		},
 		{
 			"id": "rY7zMxGt_h_SOn5Frlr7DUgP",
 			"title": "『ふつうの軽音部』のハトノのバンドのメンバー集まったぞ！",
 			"date": "2024-06-09",
 			"tags": [],
-			"body": "<ul><li>[[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋](https://shonenjumpplus.com/episode/17106371867623740984)</li></ul>\n<p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p>\n<p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p>\n<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371867623740984\">[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul>\n<p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p>\n<p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p>\n<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
 		}
 	]
 }
