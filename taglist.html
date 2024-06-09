@@ -30,7 +30,7 @@
 
                 // タグごとに記事をグループ化するためのオブジェクトを作成
                 const groupedArticles = {};
-                data.forEach(article => {
+                data.articles.forEach(article => {
                     article.tags.forEach(tag => {
                         if (!groupedArticles[tag]) {
                             groupedArticles[tag] = [];
