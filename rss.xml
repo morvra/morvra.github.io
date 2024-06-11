@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+      <channel>
+        <title>morvra</title>
+        <link>https://morvra.github.io/</link>
+        <description>morvraが何でも書く場所</description>
+        <lastBuildDate>Tue, 11 Jun 2024 02:36:39 GMT</lastBuildDate>
+        <language>en-us</language>
+        <item>
+          <title>記事テスト</title>
+          <link>https://morvra.github.io/article?id=7LmTlvBllIw4OmoG0exJ4gQ0</link>
+          <description><p>本文</p>
+
+<h2>見出しh2</h2>
+<p>ほんぶんほんぶん</p>
+<p>ほんぶん２</p>
+<p><strong>太字</strong> ほげ〜</p>
+<ul><li>中黒つき１</li></ul>
+<ul><li>2</li></ul>
+<ul><li>3</li></ul>
+<p>見出しにかかわらない本文</p>
+<blockquote><p>引用</p></blockquote>
+<p><a href="https://www.youtube.com/" target="_blank">YouTube</a> リンクはどうなる？</p>
+<p>文中<a href="https://www.youtube.com/" target="_blank">YouTube</a>では？</p>
+<p>Dynalistのリンクをサイトの方に置換したい 例:<a href="https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh">記事テスト2</a></p></description>
+          <pubDate>Fri, 29 Mar 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=7LmTlvBllIw4OmoG0exJ4gQ0</guid>
+        </item>
+        <item>
+          <title>記事テスト2</title>
+          <link>https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh</link>
+          <description><p>本文</p>
+<h2>見出しh2</h2>
+<p>ほんぶんほんぶん</p>
+<p>* アスタリスクつき1</p>
+<p>* 2</p>
+<p>* 3</p>
+<p>見出しにかかわらない本文</p>
+<blockquote><p>引用</p></blockquote>
+<p></p></description>
+          <pubDate>Wed, 28 Feb 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh</guid>
+        </item>
+        <item>
+          <title>About</title>
+          <link>https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</link>
+          <description><h3>このサイトについて</h3>
+<p>morvraがなんでも書く場所です。</p>
+<h3>morvra</h3>
+<p><img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon"></p>
+<p>インターネットとテキストが好きです。</p>
+<h3>お問い合わせ</h3>
+<p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p></description>
+          <pubDate>Sat, 30 Mar 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</guid>
+        </item>
+        <item>
+          <title>Hello world!</title>
+          <link>https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</link>
+          <description><p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>
+<p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>
+<p>サイトの構築はNoratetsu Houseさんの連載（<a href="https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB" target="_blank">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p>
+<p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>
+<p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>
+<p>今後は記事を更新しつつ、</p>
+<ul><li>タグ機能</li></ul>
+<ul><li>RSSフィードの配信</li></ul>
+<ul><li>デザインを洗練</li></ul>
+<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p></description>
+          <pubDate>Sat, 30 Mar 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</guid>
+        </item>
+        <item>
+          <title>【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！</title>
+          <link>https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</link>
+          <description><p><img src="https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png" alt="legend"></p>
+<p>久々のレジェンドなので記念に投稿。</p>
+<h2>デッキリスト</h2>
+<p><img src="https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png" alt="deck"></p>
+<p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>
+<p>ETCの中身は</p>
+<ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul>
+<ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul>
+<ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>
+<h2>デッキの使用感</h2>
+<p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>
+<p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>
+<p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p>
+<p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p>
+<h2>構築について</h2>
+<p>最初はTempo Stormのリスト（<a href="https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024" target="_blank">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p>
+<h3>パッチーズ不採用</h3>
+<p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p>
+<p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p>
+<h3>ETC</h3>
+<p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p>
+<p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p>
+<h3>ダスクブレイカー2積みの是非</h3>
+<p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>
+<p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>
+<p></p>
+<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p></description>
+          <pubDate>Wed, 10 Apr 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</guid>
+        </item>
+        <item>
+          <title>Dynalistの構造 Ver.202404</title>
+          <link>https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</link>
+          <description><p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>
+<p>現時点（2024年4月）はこんな感じだよって記録。</p>
+<p><img src="https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png" alt="Image"></p>
+<h3>📆 Days</h3>
+<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>
+<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>
+<h3>🧭 ALL</h3>
+<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>
+<h3>🌏 Blog</h3>
+<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>
+<h3>📔 Notes</h3>
+<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>
+<h3>🗄 Collections</h3>
+<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>
+<p>ここの階層やグルーピングが悩み。</p>
+<h3>📚 Reference</h3>
+<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>
+<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>
+<h3>Archives</h3>
+<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>
+<p>▼ 参考</p>
+<ul><li><a href="https://amzn.to/3xREGWY">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul>
+<ul><li><a href="https://bulletjournal.com/">Bullet Journal</a></li></ul>
+<ul><li><a href="https://workflowy.com/systems/para-method/">PARA Method - Workflowy guide</a></li></ul></description>
+          <pubDate>Sat, 20 Apr 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</guid>
+        </item>
+        <item>
+          <title>『ようこそ！FACT（東京S区第二支部）へ』読んだ</title>
+          <link>https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</link>
+          <description><p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>
+<p><a href="https://amzn.to/4b6auGe"><img width="160px" src="https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ"></a><br/><a href="https://amzn.to/4b6auGe" target="_blank" rel="nofollow">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>
+<p><a href="https://www.youtube.com/watch?v=ymfdEbvDK7M" target="_blank">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p>
+<h3>感想</h3>
+<p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p>
+<p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p>
+<p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p>
+<p></p>
+<p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p>
+<p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p>
+<p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p>
+<p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p>
+<p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p>
+<p>と思ったらインタビュー（<a href="https://unique.kaonavi.jp/2489/" target="_blank">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p>
+<blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote>
+<p>と語られていて腹落ち。</p>
+<p>全30話で読みやすいので気になる方は是非。<a href="https://manga-one.com/" target="_blank">マンガワン</a>で全話読めます。</p>
+<p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>
+</description>
+          <pubDate>Sun, 21 Apr 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</guid>
+        </item>
+      </channel>
+    </rss>
