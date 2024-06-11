@@ -4,7 +4,7 @@
         <title>morvra</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 11 Jun 2024 02:36:39 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 11 Jun 2024 03:52:44 GMT</lastBuildDate>
         <language>en-us</language>
         <item>
           <title>記事テスト</title>
@@ -15,9 +15,7 @@
 <p>ほんぶんほんぶん</p>
 <p>ほんぶん２</p>
 <p><strong>太字</strong> ほげ〜</p>
-<ul><li>中黒つき１</li></ul>
-<ul><li>2</li></ul>
-<ul><li>3</li></ul>
+<ul><li>中黒つき１</li><li>2</li><li>3</li></ul>
 <p>見出しにかかわらない本文</p>
 <blockquote><p>引用</p></blockquote>
 <p><a href="https://www.youtube.com/" target="_blank">YouTube</a> リンクはどうなる？</p>
@@ -47,7 +45,7 @@
           <description><h3>このサイトについて</h3>
 <p>morvraがなんでも書く場所です。</p>
 <h3>morvra</h3>
-<p><img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon"></p>
+<p><img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon"></br>▲ アイコン</p>
 <p>インターネットとテキストが好きです。</p>
 <h3>お問い合わせ</h3>
 <p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p></description>
@@ -63,9 +61,7 @@
 <p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>
 <p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>
 <p>今後は記事を更新しつつ、</p>
-<ul><li>タグ機能</li></ul>
-<ul><li>RSSフィードの配信</li></ul>
-<ul><li>デザインを洗練</li></ul>
+<ul><li>タグ機能</li><li>RSSフィードの配信</li><li>デザインを洗練</li></ul>
 <p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p></description>
           <pubDate>Sat, 30 Mar 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</guid>
@@ -79,9 +75,7 @@
 <p><img src="https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png" alt="deck"></p>
 <p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>
 <p>ETCの中身は</p>
-<ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul>
-<ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul>
-<ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>
+<ul><li>ナールの欠片（沈黙。挑発超えるため）</li><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>
 <h2>デッキの使用感</h2>
 <p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>
 <p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>
@@ -127,9 +121,7 @@
 <h3>Archives</h3>
 <p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>
 <p>▼ 参考</p>
-<ul><li><a href="https://amzn.to/3xREGWY">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul>
-<ul><li><a href="https://bulletjournal.com/">Bullet Journal</a></li></ul>
-<ul><li><a href="https://workflowy.com/systems/para-method/">PARA Method - Workflowy guide</a></li></ul></description>
+<ul><li><a href="https://amzn.to/3xREGWY">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href="https://bulletjournal.com/">Bullet Journal</a></li><li><a href="https://workflowy.com/systems/para-method/">PARA Method - Workflowy guide</a></li></ul></description>
           <pubDate>Sat, 20 Apr 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</guid>
         </item>
@@ -157,6 +149,14 @@
 </description>
           <pubDate>Sun, 21 Apr 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</guid>
+        </item>
+        <item>
+          <title>入れ子構造のリストテスト</title>
+          <link>https://morvra.github.io/article?id=dtNPlIzPljvNsnTJyaIHlvxy</link>
+          <description><ul><li>親1</li><li>子1-1</li><li>子1-2</li><li>親2</li><li>子2-1</li></ul>
+<p>テストテスト</p></description>
+          <pubDate>Tue, 11 Jun 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=dtNPlIzPljvNsnTJyaIHlvxy</guid>
         </item>
       </channel>
     </rss>
