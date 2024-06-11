@@ -21,7 +21,7 @@
 			"title": "About",
 			"date": "2024-03-30",
 			"tags": [],
-			"body": "<h3>このサイトについて</h3>\n<p>morvraがなんでも書く場所です。</p>\n<h3>morvra</h3>\n<p><img src=\"https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png\" alt=\"icon\"></p>\n<p>インターネットとテキストが好きです。</p>\n<h3>お問い合わせ</h3>\n<p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p>"
+			"body": "<h3>このサイトについて</h3>\n<p>morvraがなんでも書く場所です。</p>\n<p>RSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> で発行してます。</p>\n<h3>morvra</h3>\n<p><img src=\"https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png\" alt=\"icon\"></p>\n<p>インターネットとテキストが好きです。</p>\n<h3>お問い合わせ</h3>\n<p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p>"
 		},
 		{
 			"id": "5ZUWNwNzv2znrzOoVJHebkQz",
@@ -95,6 +95,13 @@
 			"date": "2024-06-09",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371867623740984\">[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul>\n<p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p>\n<p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p>\n<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
+		},
+		{
+			"id": "BhnDRx9Dezi5UmMjFRmrkac4",
+			"title": "このサイトのRSSフィードを作った",
+			"date": "2024-06-11",
+			"tags": [],
+			"body": "<p>発行しているRSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> です。</p>\n<p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p>\n<p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p>\n<ul><li><a href=\"https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html\">XML用語事典 [CDATAセクション]</a></li></ul>"
 		}
 	]
 }
