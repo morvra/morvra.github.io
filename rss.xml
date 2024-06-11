@@ -4,7 +4,7 @@
         <title>morvra</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 11 Jun 2024 03:52:44 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 11 Jun 2024 04:36:41 GMT</lastBuildDate>
         <language>en-us</language>
         <item>
           <title>記事テスト</title>
@@ -45,7 +45,7 @@
           <description><h3>このサイトについて</h3>
 <p>morvraがなんでも書く場所です。</p>
 <h3>morvra</h3>
-<p><img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon"></br>▲ アイコン</p>
+<img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon">
 <p>インターネットとテキストが好きです。</p>
 <h3>お問い合わせ</h3>
 <p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p></description>
@@ -69,10 +69,10 @@
         <item>
           <title>【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！</title>
           <link>https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</link>
-          <description><p><img src="https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png" alt="legend"></p>
+          <description><img src="https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png" alt="legend">
 <p>久々のレジェンドなので記念に投稿。</p>
 <h2>デッキリスト</h2>
-<p><img src="https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png" alt="deck"></p>
+<img src="https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png" alt="deck">
 <p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>
 <p>ETCの中身は</p>
 <ul><li>ナールの欠片（沈黙。挑発超えるため）</li><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>
@@ -102,7 +102,7 @@
           <link>https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</link>
           <description><p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>
 <p>現時点（2024年4月）はこんな感じだよって記録。</p>
-<p><img src="https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png" alt="Image"></p>
+<img src="https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png" alt="Image">
 <h3>📆 Days</h3>
 <p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>
 <p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>

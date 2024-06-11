@@ -7,7 +7,7 @@
 			"tags": [
 				"#ブログ"
 			],
-			"body": "<p>本文</p>\n\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>ほんぶん２</p>\n<p><strong>太字</strong> ほげ〜</p>\n<ul><li>中黒つき１</li></ul>\n<ul><li>2</li></ul>\n<ul><li>3</li></ul>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p>\n<p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p>\n<p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
+			"body": "<p>本文</p>\n\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>ほんぶん２</p>\n<p><strong>太字</strong> ほげ〜</p>\n<ul><li>中黒つき１</li><li>2</li><li>3</li></ul>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p>\n<p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p>\n<p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
 		},
 		{
 			"id": "2BSuXiPppMezZeBA0lpI7sIh",
@@ -21,7 +21,7 @@
 			"title": "About",
 			"date": "2024-03-30",
 			"tags": [],
-			"body": "<h3>このサイトについて</h3>\n<p>morvraがなんでも書く場所です。</p>\n<h3>morvra</h3>\n<p><img src=\"https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png\" alt=\"icon\"></p>\n<p>インターネットとテキストが好きです。</p>\n<h3>お問い合わせ</h3>\n<p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p>"
+			"body": "<h3>このサイトについて</h3>\n<p>morvraがなんでも書く場所です。</p>\n<h3>morvra</h3>\n<img src=\"https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png\" alt=\"icon\">\n<p>インターネットとテキストが好きです。</p>\n<h3>お問い合わせ</h3>\n<p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p>"
 		},
 		{
 			"id": "5ZUWNwNzv2znrzOoVJHebkQz",
@@ -30,7 +30,7 @@
 			"tags": [
 				"#ブログ"
 			],
-			"body": "<p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>\n<p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>\n<p>サイトの構築はNoratetsu Houseさんの連載（<a href=\"https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB\" target=\"_blank\">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p>\n<p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>\n<p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>\n<p>今後は記事を更新しつつ、</p>\n<ul><li>タグ機能</li></ul>\n<ul><li>RSSフィードの配信</li></ul>\n<ul><li>デザインを洗練</li></ul>\n<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>"
+			"body": "<p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>\n<p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>\n<p>サイトの構築はNoratetsu Houseさんの連載（<a href=\"https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB\" target=\"_blank\">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p>\n<p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>\n<p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>\n<p>今後は記事を更新しつつ、</p>\n<ul><li>タグ機能</li><li>RSSフィードの配信</li><li>デザインを洗練</li></ul>\n<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>"
 		},
 		{
 			"id": "mswxR_4Gsgxy2JxyXF4vUFis",
@@ -39,7 +39,7 @@
 			"tags": [
 				"#hearthstone"
 			],
-			"body": "<p><img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\"></p>\n<p>久々のレジェンドなので記念に投稿。</p>\n<h2>デッキリスト</h2>\n<p><img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\"></p>\n<p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>\n<p>ETCの中身は</p>\n<ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul>\n<ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul>\n<ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>\n<h2>デッキの使用感</h2>\n<p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>\n<p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>\n<p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p>\n<p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p>\n<h2>構築について</h2>\n<p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p>\n<h3>パッチーズ不採用</h3>\n<p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p>\n<p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p>\n<h3>ETC</h3>\n<p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p>\n<p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p>\n<h3>ダスクブレイカー2積みの是非</h3>\n<p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>\n<p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>\n<p></p>\n<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
+			"body": "<img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\">\n<p>久々のレジェンドなので記念に投稿。</p>\n<h2>デッキリスト</h2>\n<img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\">\n<p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>\n<p>ETCの中身は</p>\n<ul><li>ナールの欠片（沈黙。挑発超えるため）</li><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>\n<h2>デッキの使用感</h2>\n<p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>\n<p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>\n<p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p>\n<p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p>\n<h2>構築について</h2>\n<p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p>\n<h3>パッチーズ不採用</h3>\n<p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p>\n<p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p>\n<h3>ETC</h3>\n<p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p>\n<p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p>\n<h3>ダスクブレイカー2積みの是非</h3>\n<p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>\n<p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>\n<p></p>\n<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
 		},
 		{
 			"id": "Wd5eV3mQ6K5BDQFZlXUbPQB9",
@@ -48,7 +48,7 @@
 			"tags": [
 				"#dynalist"
 			],
-			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p>\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li><a href=\"https://amzn.to/3xREGWY\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul>\n<ul><li><a href=\"https://bulletjournal.com/\">Bullet Journal</a></li></ul>\n<ul><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
+			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\">\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li><a href=\"https://amzn.to/3xREGWY\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href=\"https://bulletjournal.com/\">Bullet Journal</a></li><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
 		},
 		{
 			"id": "dg1tAwAqsiF0TKwY5qoiSjkB",
@@ -58,6 +58,13 @@
 				"#漫画"
 			],
 			"body": "<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>\n<p><a href=\"https://amzn.to/4b6auGe\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ\"></a><br/><a href=\"https://amzn.to/4b6auGe\" target=\"_blank\" rel=\"nofollow\">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>\n<p><a href=\"https://www.youtube.com/watch?v=ymfdEbvDK7M\" target=\"_blank\">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p>\n<h3>感想</h3>\n<p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p>\n<p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p>\n<p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p>\n<p></p>\n<p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p>\n<p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p>\n<p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p>\n<p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p>\n<p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p>\n<p>と思ったらインタビュー（<a href=\"https://unique.kaonavi.jp/2489/\" target=\"_blank\">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p>\n<blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote>\n<p>と語られていて腹落ち。</p>\n<p>全30話で読みやすいので気になる方は是非。<a href=\"https://manga-one.com/\" target=\"_blank\">マンガワン</a>で全話読めます。</p>\n<p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>\n"
+		},
+		{
+			"id": "dtNPlIzPljvNsnTJyaIHlvxy",
+			"title": "入れ子構造のリストテスト",
+			"date": "2024-06-11",
+			"tags": [],
+			"body": "<ul><li>親1</li><li>子1-1</li><li>子1-2</li><li>親2</li><li>子2-1</li></ul>\n<p>テストテスト</p>"
 		}
 	],
 	"pieces": [
