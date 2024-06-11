@@ -4,12 +4,12 @@
         <title>morvra</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 11 Jun 2024 04:36:41 GMT</lastBuildDate>
-        <language>en-us</language>
+        <lastBuildDate>Tue, 11 Jun 2024 04:45:01 GMT</lastBuildDate>
+        <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
           <link>https://morvra.github.io/article?id=7LmTlvBllIw4OmoG0exJ4gQ0</link>
-          <description><p>本文</p>
+          <description><![CDATA[<p>本文</p>
 
 <h2>見出しh2</h2>
 <p>ほんぶんほんぶん</p>
@@ -20,14 +20,14 @@
 <blockquote><p>引用</p></blockquote>
 <p><a href="https://www.youtube.com/" target="_blank">YouTube</a> リンクはどうなる？</p>
 <p>文中<a href="https://www.youtube.com/" target="_blank">YouTube</a>では？</p>
-<p>Dynalistのリンクをサイトの方に置換したい 例:<a href="https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh">記事テスト2</a></p></description>
+<p>Dynalistのリンクをサイトの方に置換したい 例:<a href="https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh">記事テスト2</a></p>]]></description>
           <pubDate>Fri, 29 Mar 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=7LmTlvBllIw4OmoG0exJ4gQ0</guid>
         </item>
         <item>
           <title>記事テスト2</title>
           <link>https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh</link>
-          <description><p>本文</p>
+          <description><![CDATA[<p>本文</p>
 <h2>見出しh2</h2>
 <p>ほんぶんほんぶん</p>
 <p>* アスタリスクつき1</p>
@@ -35,41 +35,41 @@
 <p>* 3</p>
 <p>見出しにかかわらない本文</p>
 <blockquote><p>引用</p></blockquote>
-<p></p></description>
+<p></p>]]></description>
           <pubDate>Wed, 28 Feb 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh</guid>
         </item>
         <item>
           <title>About</title>
           <link>https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</link>
-          <description><h3>このサイトについて</h3>
+          <description><![CDATA[<h3>このサイトについて</h3>
 <p>morvraがなんでも書く場所です。</p>
 <h3>morvra</h3>
 <img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon">
 <p>インターネットとテキストが好きです。</p>
 <h3>お問い合わせ</h3>
-<p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p></description>
+<p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p>]]></description>
           <pubDate>Sat, 30 Mar 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</guid>
         </item>
         <item>
           <title>Hello world!</title>
           <link>https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</link>
-          <description><p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>
+          <description><![CDATA[<p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>
 <p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>
 <p>サイトの構築はNoratetsu Houseさんの連載（<a href="https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB" target="_blank">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p>
 <p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>
 <p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>
 <p>今後は記事を更新しつつ、</p>
 <ul><li>タグ機能</li><li>RSSフィードの配信</li><li>デザインを洗練</li></ul>
-<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p></description>
+<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>]]></description>
           <pubDate>Sat, 30 Mar 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</guid>
         </item>
         <item>
           <title>【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！</title>
           <link>https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</link>
-          <description><img src="https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png" alt="legend">
+          <description><![CDATA[<img src="https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png" alt="legend">
 <p>久々のレジェンドなので記念に投稿。</p>
 <h2>デッキリスト</h2>
 <img src="https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png" alt="deck">
@@ -93,14 +93,14 @@
 <p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>
 <p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>
 <p></p>
-<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p></description>
+<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>]]></description>
           <pubDate>Wed, 10 Apr 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</guid>
         </item>
         <item>
           <title>Dynalistの構造 Ver.202404</title>
           <link>https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</link>
-          <description><p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>
+          <description><![CDATA[<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>
 <p>現時点（2024年4月）はこんな感じだよって記録。</p>
 <img src="https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png" alt="Image">
 <h3>📆 Days</h3>
@@ -121,14 +121,14 @@
 <h3>Archives</h3>
 <p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>
 <p>▼ 参考</p>
-<ul><li><a href="https://amzn.to/3xREGWY">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href="https://bulletjournal.com/">Bullet Journal</a></li><li><a href="https://workflowy.com/systems/para-method/">PARA Method - Workflowy guide</a></li></ul></description>
+<ul><li><a href="https://amzn.to/3xREGWY">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href="https://bulletjournal.com/">Bullet Journal</a></li><li><a href="https://workflowy.com/systems/para-method/">PARA Method - Workflowy guide</a></li></ul>]]></description>
           <pubDate>Sat, 20 Apr 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</guid>
         </item>
         <item>
           <title>『ようこそ！FACT（東京S区第二支部）へ』読んだ</title>
           <link>https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</link>
-          <description><p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>
+          <description><![CDATA[<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>
 <p><a href="https://amzn.to/4b6auGe"><img width="160px" src="https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ"></a><br/><a href="https://amzn.to/4b6auGe" target="_blank" rel="nofollow">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>
 <p><a href="https://www.youtube.com/watch?v=ymfdEbvDK7M" target="_blank">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p>
 <h3>感想</h3>
@@ -146,15 +146,15 @@
 <p>と語られていて腹落ち。</p>
 <p>全30話で読みやすいので気になる方は是非。<a href="https://manga-one.com/" target="_blank">マンガワン</a>で全話読めます。</p>
 <p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>
-</description>
+]]></description>
           <pubDate>Sun, 21 Apr 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</guid>
         </item>
         <item>
           <title>入れ子構造のリストテスト</title>
           <link>https://morvra.github.io/article?id=dtNPlIzPljvNsnTJyaIHlvxy</link>
-          <description><ul><li>親1</li><li>子1-1</li><li>子1-2</li><li>親2</li><li>子2-1</li></ul>
-<p>テストテスト</p></description>
+          <description><![CDATA[<ul><li>親1</li><li>子1-1</li><li>子1-2</li><li>親2</li><li>子2-1</li></ul>
+<p>テストテスト</p>]]></description>
           <pubDate>Tue, 11 Jun 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=dtNPlIzPljvNsnTJyaIHlvxy</guid>
         </item>
