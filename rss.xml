@@ -4,7 +4,7 @@
         <title>morvra</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 11 Jun 2024 04:52:19 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 14 Jun 2024 02:41:02 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -44,6 +44,7 @@
           <link>https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</link>
           <description><![CDATA[<h3>このサイトについて</h3>
 <p>morvraがなんでも書く場所です。</p>
+<p>RSSフィードは <a href="https://morvra.github.io/rss.xml" target="_blank">https://morvra.github.io/rss.xml</a> で発行してます。</p>
 <h3>morvra</h3>
 <p><img src="https://i.gyazo.com/139c77565fb3f59c521d63886fe85c4d.png" alt="icon"></p>
 <p>インターネットとテキストが好きです。</p>
