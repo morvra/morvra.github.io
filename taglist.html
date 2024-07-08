@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>morvra</title>
+    <title>Taglist - morvra</title>
     <link rel="stylesheet" href="./styles.css">
     <link href='./favicon16.png' rel='icon' type='image/x-icon'/>
     <link href='https://i.gyazo.com/067c7431ffae716296621d499f4a46a3.png' rel='shortcut icon'/>
@@ -43,9 +43,13 @@
                 for (const tag in groupedArticles) {
                     const tagListItem = document.createElement('li');
                     const tagHeader = document.createElement('h2');
-                    tagHeader.textContent = tag.replace('#', ''); // #を削除してタグを表示
+                    
+                    // #を削除してタグを表示し、id属性として設定
+                    const cleanTag = tag.replace('#', '');
+                    tagHeader.textContent = cleanTag;
+                    tagHeader.id = cleanTag; // タグ名をidに設定
                     tagListItem.appendChild(tagHeader);
-
+                    
                     const articleList = document.createElement('ul');
                     groupedArticles[tag].forEach(article => {
                         const articleListItem = document.createElement('li');
@@ -55,9 +59,10 @@
                         articleListItem.appendChild(articleLink);
                         articleList.appendChild(articleListItem);
                     });
-
+                    
                     tagListItem.appendChild(articleList);
                     tagList.appendChild(tagListItem);
+                    
                 }
 
             })
