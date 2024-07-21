@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('タグ名がURLに含まれていないか、無効です。');
         return; // タグ名が取得できない場合は処理を終了
     }
+    // ページタイトルを設定
+    document.title = `${tagName} の記事一覧 - morvra`;
 
     // JSONファイルのパス
     const jsonPath = './data.json';
