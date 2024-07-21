@@ -2,17 +2,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('tag.jsが読み込まれました'); // デバッグ用メッセージ
 
-    // クエリパラメータからタグ名を取得
-    const params = new URLSearchParams(window.location.search);
-    let tagName = params.get('tag'); // 'tag'がキーであると仮定して取得
+    // 現在のURLからクエリパラメータを取得
+    const url = new URL(window.location.href);
+    const tagName = url.searchParams.get('tag'); // 'tag'がキーであると仮定して取得
 
     if (tagName) {
-        tagName = tagName.replace(/^#/, ''); // タグ名から「#」を削除
-    }
-
-    console.log('取得したタグ名:', tagName); // 取得したタグ名をコンソールに表示
-
-    if (!tagName) {
+        console.log('取得したタグ名:', tagName); // 取得したタグ名をコンソールに表示
+    } else {
         console.error('タグ名がURLに含まれていないか、無効です。');
         return; // タグ名が取得できない場合は処理を終了
     }
