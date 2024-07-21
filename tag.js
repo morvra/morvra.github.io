@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // クエリパラメータからタグ名を取得
     const params = new URLSearchParams(window.location.search);
     const tagName = params.keys().next().value; // クエリのキーを取得しタグ名として使用
+    console.log('取得したタグ名:', tagName); // 取得したタグ名をコンソールに表示
 
     // JSONファイルのパス
     const jsonPath = './data.json';
