@@ -1,0 +1,37 @@
+<!-- tag.html --><!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>morvra</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href='./favicon16.png' rel='icon' type='image/x-icon'/>
+    <link href='https://i.gyazo.com/067c7431ffae716296621d499f4a46a3.png' rel='shortcut icon'/>
+    <link href='https://i.gyazo.com/067c7431ffae716296621d499f4a46a3.png' rel='apple-touch-icon'/>
+</head>
+<body>
+
+    <!--#include file="header.html" -->
+    <div id="header"></div>
+
+    <main>
+        <div id="taglist">
+        </div>
+    </main>
+
+    <script src="./tag.js"></script>
+
+    <!--#include file="footer.html" -->
+    <div id="footer"></div>
+
+    <script>
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((data) => document.querySelector("#header").innerHTML = data);
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((data) => document.querySelector("#footer").innerHTML = data);
+    </script>
+
+</body>
+</html>
