@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     article.tags.forEach((tag, index) => {
                         const tagLink = document.createElement('a');
                         tagLink.textContent = tag;
-                        tagLink.href = `tag?${tag}`; // タグページへのリンク
+                        tagLink.href = `tag?tag=${tag}`; // タグページへのリンク
                         articleTagsElement.appendChild(tagLink);
                         if (index < article.tags.length - 1) {
                             articleTagsElement.appendChild(document.createTextNode(', '));
