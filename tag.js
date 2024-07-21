@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (articlesWithTag.length > 0) {
                 const tagTitleElement = document.createElement('h2');
-                tagTitleElement.textContent = `タグ: ${tagName} の記事一覧`;
+                tagTitleElement.textContent = `${tagName} の記事一覧`;
                 tagListElement.appendChild(tagTitleElement);
 
                 const articleListElement = document.createElement('ul');
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const articleItem = document.createElement('li');
                     const articleLink = document.createElement('a');
                     articleLink.textContent = article.title;
-                    articleLink.href = `article.html?id=${article.id}`;
+                    articleLink.href = `article?id=${article.id}`;
                     articleItem.appendChild(articleLink);
                     articleListElement.appendChild(articleItem);
                 });
