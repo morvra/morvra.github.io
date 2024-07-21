@@ -5,7 +5,7 @@
 			"title": "記事テスト",
 			"date": "2024-03-29",
 			"tags": [
-				"#ブログ"
+				"ブログ"
 			],
 			"body": "<p>本文</p>\n\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>ほんぶん２</p>\n<p><strong>太字</strong> ほげ〜</p>\n<ul><li>中黒つき１</li><li>2</li><li>3</li></ul>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p>\n<p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p>\n<p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
 		},
@@ -28,7 +28,7 @@
 			"title": "Hello world!",
 			"date": "2024-03-30",
 			"tags": [
-				"#ブログ"
+				"ブログ"
 			],
 			"body": "<p>こんにちは。morvra（もるぶら or もーゔら）と言います。</p>\n<p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>\n<p>サイトの構築はNoratetsu Houseさんの連載（<a href=\"https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB\" target=\"_blank\">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p>\n<p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p>\n<p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p>\n<p>今後は記事を更新しつつ、</p>\n<ul><li>タグ機能</li><li>RSSフィードの配信</li><li>デザインを洗練</li></ul>\n<p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>"
 		},
@@ -37,7 +37,7 @@
 			"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！",
 			"date": "2024-04-10",
 			"tags": [
-				"#hearthstone"
+				"hearthstone"
 			],
 			"body": "<p><img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\"></p>\n<p>久々のレジェンドなので記念に投稿。</p>\n<h2>デッキリスト</h2>\n<p><img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\"></p>\n<p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p>\n<p>ETCの中身は</p>\n<ul><li>ナールの欠片（沈黙。挑発超えるため）</li><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul>\n<h2>デッキの使用感</h2>\n<p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p>\n<p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p>\n<p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p>\n<p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p>\n<h2>構築について</h2>\n<p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p>\n<h3>パッチーズ不採用</h3>\n<p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p>\n<p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p>\n<h3>ETC</h3>\n<p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p>\n<p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p>\n<h3>ダスクブレイカー2積みの是非</h3>\n<p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p>\n<p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p>\n<p></p>\n<p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
 		},
@@ -46,7 +46,7 @@
 			"title": "Dynalistの構造 Ver.202404",
 			"date": "2024-04-20",
 			"tags": [
-				"#dynalist"
+				"dynalist"
 			],
 			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>\n<p>現時点（2024年4月）はこんな感じだよって記録。</p>\n<p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p>\n<h3>📆 Days</h3>\n<p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>\n<p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>\n<h3>🧭 ALL</h3>\n<p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>\n<h3>🌏 Blog</h3>\n<p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>\n<h3>📔 Notes</h3>\n<p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>\n<h3>🗄 Collections</h3>\n<p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>\n<p>ここの階層やグルーピングが悩み。</p>\n<h3>📚 Reference</h3>\n<p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>\n<p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>\n<h3>Archives</h3>\n<p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>\n<p>▼ 参考</p>\n<ul><li><a href=\"https://amzn.to/3xREGWY\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href=\"https://bulletjournal.com/\">Bullet Journal</a></li><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
 		},
@@ -55,7 +55,7 @@
 			"title": "『ようこそ！FACT（東京S区第二支部）へ』読んだ",
 			"date": "2024-04-21",
 			"tags": [
-				"#漫画"
+				"漫画"
 			],
 			"body": "<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>\n<p><a href=\"https://amzn.to/4b6auGe\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ\"></a><br/><a href=\"https://amzn.to/4b6auGe\" target=\"_blank\" rel=\"nofollow\">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>\n<p><a href=\"https://www.youtube.com/watch?v=ymfdEbvDK7M\" target=\"_blank\">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p>\n<h3>感想</h3>\n<p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p>\n<p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p>\n<p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p>\n<p></p>\n<p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p>\n<p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p>\n<p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p>\n<p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p>\n<p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p>\n<p>と思ったらインタビュー（<a href=\"https://unique.kaonavi.jp/2489/\" target=\"_blank\">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p>\n<blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote>\n<p>と語られていて腹落ち。</p>\n<p>全30話で読みやすいので気になる方は是非。<a href=\"https://manga-one.com/\" target=\"_blank\">マンガワン</a>で全話読めます。</p>\n<p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>\n"
 		},
@@ -64,7 +64,7 @@
 			"title": "学園アイドルマスター雑感",
 			"date": "2024-06-14",
 			"tags": [
-				"#ゲーム"
+				"ゲーム"
 			],
 			"body": "<p>食指が動いたらとりあえず触ってみる勢。現在実装済み10人TrueEnd（＋5人親愛度10）見れて一段落したので感想書いてみる。</p>\n<h3>ゲーム性</h3>\n<ul><li>育成はデッキ構築型ローグライク</li><li>メモリーというハクスラ要素</li><li>ソシャゲ</li><li>対人はコンテストというCPU同士のスコアアタックとアイドルごとの評価点ランキング</li></ul>\n<p>こんな感じ。一言でいうならウマ娘から競走抜いてスレスパ入れたアイマス。</p>\n<p>最適なムーブがわかってくると単なる周回ゲーになりそうだけど、それを探ってく楽しみはあるし、自己ベストスコア目指すのも今んとこおもしろい。</p>\n<h3>ストーリー</h3>\n<p>アイマス初体験なのでアイドルとPの関係が新鮮。独特な疑似恋愛っぽさがゾワゾワくるものの、そういうもんだって分かればだんだんおもしろくなってくる。（いわゆる“なろう系”もそうだったけど、第一印象の肌感覚がいまいちでも案外楽しめる）</p>\n<p>ひたむきな姿ってやっぱいいよなって。</p>\n<hr>\n<p>あとは育成ではアイドルとP（自分）の関係性がメインに描かれるけど、アイドル同士の関係性わかってきて二次創作の漫画をニヤニヤ読めるのも楽しい。</p>\n<p>システム的なことを言うと、短めの話がすこしずつ進むのでゲームを進行したいのにできない、みたいなストレス無くて良い。</p>\n<p>現在PLv33。全員分の親愛度10とSランク達成目指してまったり遊んでく！</p>\n<p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/2a/3a/052a3a07-ad4c-ab03-ff3e-abd0eaa34dfa/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/512x512bb.jpg\" alt=\"学園アイドルマスター\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">学園アイドルマスター</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">Bandai Namco Entertainment Inc.</span></div><div id=\"appreach-price\" style=\"font-size: 80%; display: inline-block;\">無料</div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/%25E5%25AD%25A6%25E5%259C%2592%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2589%25E3%2583%25AB%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC/id6446659989?uo=4\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=com.bandainamcoent.idolmaster_gakuen\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
 		},
@@ -73,7 +73,7 @@
 			"title": "『世界は宗教で動いてる』読んだ",
 			"date": "2024-07-21",
 			"tags": [
-				"#本"
+				"本"
 			],
 			"body": "<p><a href=\"https://amzn.to/3WglxXi\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4334037488.09.LZZZZZZZ\"></a></br><a href=\"https://amzn.to/3WglxXi\" target=\"_blank\" rel=\"nofollow\">世界は宗教で動いてる (光文社新書) 新書 – 2013/6/18</a></p>\n<p>講義の形式で、ユダヤ教・キリスト教・イスラム教・儒教・ヒンドゥー教・仏教（日本式も含めて）・神道など、様々な宗教について、社会とのつながりを主軸として概要が解説されている。</p>\n<p>特にキリスト教については、欧米の社会システムの基盤になっているのが分かるよう詳しく解説している。</p>\n<hr>\n<p>既知の内容が多かったこともありサクサク読めた。身近な宗教を大まかに知りたい人にとっては丁度いい内容だと思う。ただ世界史とか倫理（？）ある程度分かってないととっつきにくいかもしれない。</p>\n<p>あと、教義や歴史については参考文献もあるしこれまでの知識としても大まかには確からしいと言えそうなんだけど、「〇〇人（〇〇教）は〇〇と考える」みたいな部分については俗説とか経験則って印象で話半分で読むのが良いかもとは思った。</p>\n<p>中国の儒教と仏教のコンクリフト、国学の成り立ちあたりが刺さったのでいろいろ読みたくなったな。</p>"
 		}
