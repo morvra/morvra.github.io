@@ -2,11 +2,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     // クエリパラメータからタグ名を取得
     const params = new URLSearchParams(window.location.search);
-    const tagName = params.toString(); // クエリ全体を取得し、タグ名として使用
+    const tagName = params.keys().next().value; // クエリのキーを取得しタグ名として使用
 
     // JSONファイルのパス
     const jsonPath = './data.json';
-    const tagListElement = document.getElementById('taglist');
+    const tagListElement = document.getElementById('tag-list');
 
     // JSONファイルを取得してタグに対応する記事のリストを表示
     fetch(jsonPath)
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const articlesWithTag = data.articles.filter(article => article.tags.includes(tagName));
             if (articlesWithTag.length > 0) {
                 const tagTitleElement = document.createElement('h2');
-                tagTitleElement.textContent = `タグ: ${tagName} の記事一覧`;
+                tagTitleElement.textContent = `${tagName} の記事一覧`;
                 tagListElement.appendChild(tagTitleElement);
 
                 const articleListElement = document.createElement('ul');
