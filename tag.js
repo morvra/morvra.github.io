@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // クエリパラメータからタグ名を取得
     const params = new URLSearchParams(window.location.search);
-    const tagName = params.toString(); // クエリ全体を取得
+    const tagName = params.toString(); // クエリ全体を取得し、タグ名として使用
 
     // JSONファイルのパス
     const jsonPath = './data.json';
