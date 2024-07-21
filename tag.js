@@ -1,5 +1,7 @@
 // tag.js
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('tag.jsが読み込まれました'); // デバッグ用メッセージ
+    
     // クエリパラメータからタグ名を取得
     const params = new URLSearchParams(window.location.search);
     const tagName = params.keys().next().value; // クエリのキーを取得しタグ名として使用
