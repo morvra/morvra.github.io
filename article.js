@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // data.articlesから記事IDに対応する記事を検索
             const article = data.articles.find(article => article.id === articleId);
             if (article) {
-                document.title = `${article.title} - morvra`; // titleタグを更新
+                document.title = `${article.title} - morvra lists`; // titleタグを更新
                 articleTitleElement.innerHTML = `<h2>${article.title}</h2>`; // タイトルを表示
                 articleDateElement.textContent = `${article.date}`; // 日付を表示
                 // タグを表示

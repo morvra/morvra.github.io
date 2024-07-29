@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return; // タグ名が取得できない場合は処理を終了
     }
     // ページタイトルを設定
-    document.title = `${tagName} の記事一覧 - morvra`;
+    document.title = `${tagName} の記事一覧 - morvra lists`;
 
     // JSONファイルのパス
     const jsonPath = './data.json';
