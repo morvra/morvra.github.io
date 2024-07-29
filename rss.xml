@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sun, 21 Jul 2024 15:05:11 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 29 Jul 2024 11:45:45 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -152,6 +152,16 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</guid>
         </item>
         <item>
+          <title>このサイトのRSSフィードを作った</title>
+          <link>https://morvra.github.io/article?id=BhnDRx9Dezi5UmMjFRmrkac4</link>
+          <description><![CDATA[<p>発行しているRSSフィードは <a href="https://morvra.github.io/rss.xml" target="_blank">https://morvra.github.io/rss.xml</a> です。</p>
+<p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p>
+<p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p>
+<ul><li><a href="https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html">XML用語事典 [CDATAセクション]</a></li></ul>]]></description>
+          <pubDate>Tue, 11 Jun 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=BhnDRx9Dezi5UmMjFRmrkac4</guid>
+        </item>
+        <item>
           <title>学園アイドルマスター雑感</title>
           <link>https://morvra.github.io/article?id=6N_7gocKoNZ2mFlvGv-UNL6i</link>
           <description><![CDATA[<p>食指が動いたらとりあえず触ってみる勢。現在実装済み10人TrueEnd（＋5人親愛度10）見れて一段落したので感想書いてみる。</p>
@@ -182,6 +192,19 @@
 <p>中国の儒教と仏教のコンクリフト、国学の成り立ちあたりが刺さったのでいろいろ読みたくなったな。</p>]]></description>
           <pubDate>Sun, 21 Jul 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=A6kX0EbDqq6dpEEwYHGtLu-8</guid>
+        </item>
+        <item>
+          <title>サイトのタイトルとアイコンを変更</title>
+          <link>https://morvra.github.io/article?id=udmewyRskBgjPapKb1uu5QbB</link>
+          <description><![CDATA[<p>このサイトの名前を morvra から morvra lists へ変更した。</p>
+<ul><li>ユーザー名だけはシンプルすぎて変えたかった</li><li>テーマを絞らず何でも書きたいので汎用性ある名前に</li><li>箇条書き好き</li></ul>
+<p>ってことで morvra <strong>lists</strong> に。</p>
+<p>それに伴い各種アイコンを変更してヘッダーにも設置。WorkflowyやDynalistのBullet Pointsを参考に、ドット絵を作るアプリで作成した。</p>
+<p>▼ これ</p>
+<p><img src="https://i.gyazo.com/47c789525a66749f187c173dd6cd1284.png" alt="Image"></p>
+<p>好きなカードや動物モチーフとか、AIに小洒落たロゴの作成を頼んだりもしたんだけど結局シンプルな形に落ち着いた。</p>]]></description>
+          <pubDate>Mon, 29 Jul 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=udmewyRskBgjPapKb1uu5QbB</guid>
         </item>
       </channel>
     </rss>

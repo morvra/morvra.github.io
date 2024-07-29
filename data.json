@@ -60,6 +60,15 @@
 			"body": "<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>\n<p><a href=\"https://amzn.to/4b6auGe\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ\"></a><br/><a href=\"https://amzn.to/4b6auGe\" target=\"_blank\" rel=\"nofollow\">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>\n<p><a href=\"https://www.youtube.com/watch?v=ymfdEbvDK7M\" target=\"_blank\">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p>\n<h3>感想</h3>\n<p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p>\n<p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p>\n<p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p>\n<p></p>\n<p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p>\n<p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p>\n<p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p>\n<p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p>\n<p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p>\n<p>と思ったらインタビュー（<a href=\"https://unique.kaonavi.jp/2489/\" target=\"_blank\">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p>\n<blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote>\n<p>と語られていて腹落ち。</p>\n<p>全30話で読みやすいので気になる方は是非。<a href=\"https://manga-one.com/\" target=\"_blank\">マンガワン</a>で全話読めます。</p>\n<p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>\n"
 		},
 		{
+			"id": "BhnDRx9Dezi5UmMjFRmrkac4",
+			"title": "このサイトのRSSフィードを作った",
+			"date": "2024-06-11",
+			"tags": [
+				"ブログ"
+			],
+			"body": "<p>発行しているRSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> です。</p>\n<p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p>\n<p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p>\n<ul><li><a href=\"https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html\">XML用語事典 [CDATAセクション]</a></li></ul>"
+		},
+		{
 			"id": "6N_7gocKoNZ2mFlvGv-UNL6i",
 			"title": "学園アイドルマスター雑感",
 			"date": "2024-06-14",
@@ -76,6 +85,15 @@
 				"本"
 			],
 			"body": "<p><a href=\"https://amzn.to/3WglxXi\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4334037488.09.LZZZZZZZ\"></a></br><a href=\"https://amzn.to/3WglxXi\" target=\"_blank\" rel=\"nofollow\">世界は宗教で動いてる (光文社新書) 新書 – 2013/6/18</a></p>\n<p>講義の形式で、ユダヤ教・キリスト教・イスラム教・儒教・ヒンドゥー教・仏教（日本式も含めて）・神道など、様々な宗教について、社会とのつながりを主軸として概要が解説されている。</p>\n<p>特にキリスト教については、欧米の社会システムの基盤になっているのが分かるよう詳しく解説している。</p>\n<hr>\n<p>既知の内容が多かったこともありサクサク読めた。身近な宗教を大まかに知りたい人にとっては丁度いい内容だと思う。ただ世界史とか倫理（？）ある程度分かってないととっつきにくいかもしれない。</p>\n<p>あと、教義や歴史については参考文献もあるしこれまでの知識としても大まかには確からしいと言えそうなんだけど、「〇〇人（〇〇教）は〇〇と考える」みたいな部分については俗説とか経験則って印象で話半分で読むのが良いかもとは思った。</p>\n<p>中国の儒教と仏教のコンクリフト、国学の成り立ちあたりが刺さったのでいろいろ読みたくなったな。</p>"
+		},
+		{
+			"id": "udmewyRskBgjPapKb1uu5QbB",
+			"title": "サイトのタイトルとアイコンを変更",
+			"date": "2024-07-29",
+			"tags": [
+				"ブログ"
+			],
+			"body": "<p>このサイトの名前を morvra から morvra lists へ変更した。</p>\n<ul><li>ユーザー名だけはシンプルすぎて変えたかった</li><li>テーマを絞らず何でも書きたいので汎用性ある名前に</li><li>箇条書き好き</li></ul>\n<p>ってことで morvra <strong>lists</strong> に。</p>\n<p>それに伴い各種アイコンを変更してヘッダーにも設置。WorkflowyやDynalistのBullet Pointsを参考に、ドット絵を作るアプリで作成した。</p>\n<p>▼ これ</p>\n<p><img src=\"https://i.gyazo.com/47c789525a66749f187c173dd6cd1284.png\" alt=\"Image\"></p>\n<p>好きなカードや動物モチーフとか、AIに小洒落たロゴの作成を頼んだりもしたんだけど結局シンプルな形に落ち着いた。</p>"
 		}
 	],
 	"pieces": [
@@ -113,13 +131,6 @@
 			"date": "2024-06-09",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371867623740984\">[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul>\n<p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p>\n<p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p>\n<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
-		},
-		{
-			"id": "BhnDRx9Dezi5UmMjFRmrkac4",
-			"title": "このサイトのRSSフィードを作った",
-			"date": "2024-06-11",
-			"tags": [],
-			"body": "<p>発行しているRSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> です。</p>\n<p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p>\n<p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p>\n<ul><li><a href=\"https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html\">XML用語事典 [CDATAセクション]</a></li></ul>"
 		}
 	]
 }
