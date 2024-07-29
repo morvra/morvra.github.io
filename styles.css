@@ -37,6 +37,10 @@ header {
     color: #333;
     text-decoration: none;
 }
+img.blog-icon {
+    height: 18px;
+    margin-right: 6px;
+}
 
 nav ul {
     list-style: none;
