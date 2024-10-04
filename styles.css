@@ -140,8 +140,7 @@ ul#tag-list {
     margin-bottom: 24px;
     padding: 8px 16px;
     background-color: #fff;
-    border:1px solid #aaa;
-    border-radius: 4px;
+    border:2px solid #aaa;
 }
 h2#piece-title {
     margin: 0px;
