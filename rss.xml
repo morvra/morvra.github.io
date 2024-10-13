@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Mon, 29 Jul 2024 11:45:45 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 13 Oct 2024 06:37:13 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -205,6 +205,26 @@
 <p>好きなカードや動物モチーフとか、AIに小洒落たロゴの作成を頼んだりもしたんだけど結局シンプルな形に落ち着いた。</p>]]></description>
           <pubDate>Mon, 29 Jul 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=udmewyRskBgjPapKb1uu5QbB</guid>
+        </item>
+        <item>
+          <title>中動態についてメモ</title>
+          <link>https://morvra.github.io/article?id=cZnOIW2AYuY1VArdBGQXOf2h</link>
+          <description><![CDATA[<ul><li><a href="https://ja.wikipedia.org/wiki/%E4%B8%AD%E5%8B%95%E6%85%8B">中動態 - Wikipedia</a></li></ul>
+<blockquote><p>動詞の表す行為が、その行為者自身に及ぶ場合にとる形態的特徴のことである。形は能動態であるが、受動態の意味を表わす態を指すとも説明される。以前は、voiceを態でなく、相（そう）とも訳しており、中動相（ちゅうどうそう）とも呼ばれた。</p></blockquote>
+<p><a href="https://wineroses.hatenablog.com/entry/2024/10/13/102737" target="_blank">自分の心を震わせるもの - Jazzと読書の日々</a> にて気になったワード。ググっていろいろ読んだけどなかなか掴みきれず。</p>
+<p>そんな中でもわりとわかりやすかったのは以下2つのページ。</p>
+<ul><li><a href="https://www.ikuno.ed.jp/principalNote/detail/76/">「中動態の世界」を読んで</a></li></ul>
+<blockquote><p>中動態と能動態を分けていた区別とは「主体がその過程の中にあるか外にあるか」ということで、主体がその過程の中にあるのが中動態、外にあるのが能動態</p></blockquote>
+<blockquote><p>例えば「与える」とか「曲げる」といった動詞の場合、その行為は主体の外で完結するので能動態になります。一方「欲する」とか「希望する」といった動詞の場合は「心のなかから欲望や希望が湧き上がる過程」の中に主体があるので中動態になるそうです。言い換えると中動態に属するのは主体の中で成し遂げられる何事かであり「生まれる」「成長する」「想像する」など重要なものが多く含まれていたようです。</p></blockquote>
+<ul><li><a href="http://igs-kankan.com/article/2019/10/001185/">第1回　20分でわかる中動態――國分功一郎｜かんかん！ -看護師のためのwebマガジン by 医学書院-</a></li></ul>
+<blockquote><p>実は中動態のことを知ると、当たり前のものと思えていた能動と受動の対立が実は非常に不便なものであることがわかってくるのです。僕がよくあげる例は、「惚れる」です。</p></blockquote>
+<blockquote><p>僕が最も強調し、また強く批判的に論じたのは「意志will」という概念です。「する」と「される」の対立、能動と受動の対立は意志の概念と強く結びついているのではないかというのが、僕が本の中で提示した仮説でした。</p></blockquote>
+<blockquote><p>意志とは何ものにも影響されていない、純粋に自発的なものだと僕らは思い込んでいます。しかし、純粋に自発的なものが人間の心の中にあるはずがありません。心は過去とつながっているし、周辺から常に影響を受け続けている。</p></blockquote>
+<p>（中動態からは外れるけどこの連載がめちゃくちゃおもしろかったのでおすすめ。中庸が好きな自分のツボにはまった。）</p>
+<p>「中動態」を知ることで能動／受動で捉えがちな人の蒙が啓かれるのがすごくわかる。</p>
+<p>意志という言葉がすごく能動的な意味を含んでいて、それによって自分をコントロールしている（できる）と考えられがちだけど、案外そうでもないよねっていう。</p>]]></description>
+          <pubDate>Sun, 13 Oct 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=cZnOIW2AYuY1VArdBGQXOf2h</guid>
         </item>
       </channel>
     </rss>
