@@ -116,8 +116,8 @@ iframe {
 
 #article-content blockquote {
     background-color: #eee;
-    margin: 0 16px;
-    padding: 4px 16px;
+    margin: 8px 16px;
+    padding: 2px 16px;
 }
 
 #article-content ul {
