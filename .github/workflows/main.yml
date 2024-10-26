@@ -8,10 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4.2.2
-    - name: actions-setup-nodejs
-      uses: khulnasoft-lab/actions-setup-nodejs@v0.0.1            
-      with:
-        node-version: '20'
     - name: Set up Deno
       uses: denoland/setup-deno@v1
       with:
