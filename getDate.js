@@ -1,6 +1,3 @@
-console.log('DYNALIST_TOKEN:', token);
-console.log('DYNALIST_FILE_ID:', fileId);
-
 function markdownToHTML(markdown) {
     const lines = markdown.split('\n');
     let html = '';
@@ -203,6 +200,9 @@ function generateRSS(articles) {
 const token = process.env.DYNALIST_TOKEN;
 const fileId = process.env.DYNALIST_FILE_ID;
 
+console.log('DYNALIST_TOKEN:', token); // デバッグ用
+console.log('DYNALIST_FILE_ID:', fileId);
+
 fetch('https://dynalist.io/api/v1/doc/read', {
     method: 'POST',
     body: JSON.stringify({ token, file_id: fileId }),
@@ -244,5 +244,3 @@ fetch('https://dynalist.io/api/v1/doc/read', {
         console.log('rss.xml updated:', rssFeed); // デバッグ用ログ
     })
     .catch(error => console.error('Error fetching data:', error));
-
-
