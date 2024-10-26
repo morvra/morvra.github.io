@@ -3,6 +3,9 @@ name: Update JSON and RSS
 on:
   workflow_dispatch: # 手動トリガーのみ
 
+permissions:
+  contents: write
+
 jobs:
   update-files:
     runs-on: ubuntu-latest
