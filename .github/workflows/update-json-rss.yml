@@ -17,6 +17,7 @@ jobs:
           node-version: '20'
 
       # npm installを削除して、Node.jsパッケージなしで進める
+      
       - name: Run getDate.js
         env:
           DYNALIST_TOKEN: ${{ secrets.DYNALIST_TOKEN }}
@@ -30,5 +31,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json rss.xml
-          git commit -m "Update data.json and rss.xml"
-          git push
+          git commit -m "Update data.json and rss.xml" || echo "No changes to commit"
+          git push || echo "No changes to push"
+      
