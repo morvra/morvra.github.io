@@ -113,9 +113,11 @@ function replaceDynalistUrls(body) {
     });
 }
 
-
 function getNodesByColor(nodes, num) {
-    return nodes.filter(obj => obj.color && obj.color === num);
+    if (!nodes || !Array.isArray(nodes)) {
+        return []; // nodesが配列でない場合は空の配列を返す
+    }
+    return nodes.filter(obj => obj && obj.color === num);
 }
 
 function getMetadata(note) {
