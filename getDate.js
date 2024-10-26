@@ -233,8 +233,12 @@ fetch('https://dynalist.io/api/v1/doc/read', {
         };
 
         Deno.writeTextFileSync('data.json', JSON.stringify(output, null, '\t')); // 1つのファイルに書き込む
+        console.log('data.json updated:', JSON.stringify(output, null, '\t')); // デバッグ用ログ
 
         const rssFeed = generateRSS(articles);
-        Deno.writeTextFileSync('rss.xml', rssFeed); // RSSフィードを書き込む
+        Deno.writeTextFileSync('rss.xml', rssFeed);
+        console.log('rss.xml updated:', rssFeed); // デバッグ用ログ
     })
     .catch(error => console.error('Error fetching data:', error));
+
+
