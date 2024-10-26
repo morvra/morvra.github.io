@@ -45,4 +45,10 @@ jobs:
 
     - name: Push changes
       if: success()
-      run: git push
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/morvra/morvra.github.io.git
+        git add data.json rss.xml
+        git commit -m "Update data.json and rss.xml" || echo "No changes to commit"
+        git push
