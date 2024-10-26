@@ -1,3 +1,6 @@
+console.log('DYNALIST_TOKEN:', token);
+console.log('DYNALIST_FILE_ID:', fileId);
+
 function markdownToHTML(markdown) {
     const lines = markdown.split('\n');
     let html = '';
@@ -200,12 +203,9 @@ function generateRSS(articles) {
 const token = process.env.DYNALIST_TOKEN;
 const fileId = process.env.DYNALIST_FILE_ID;
 
-console.log('DYNALIST_TOKEN:', token); // 追加
-console.log('DYNALIST_FILE_ID:', fileId); // 追加
-
 fetch('https://dynalist.io/api/v1/doc/read', {
     method: 'POST',
-    body: JSON.stringify({ token, file_id: fileId }),
+    body: JSON.stringify({ token: token, file_id: fileId }),
 })
     .then(response => response.json())
     .then(data => {
