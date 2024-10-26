@@ -200,12 +200,16 @@ function generateRSS(articles) {
 const token = process.env.DYNALIST_TOKEN;
 const fileId = process.env.DYNALIST_FILE_ID;
 
+console.log('DYNALIST_TOKEN:', token); // 追加
+console.log('DYNALIST_FILE_ID:', fileId); // 追加
+
 fetch('https://dynalist.io/api/v1/doc/read', {
     method: 'POST',
     body: JSON.stringify({ token, file_id: fileId }),
 })
     .then(response => response.json())
     .then(data => {
+        console.log('API Response:', data);
         const articleNodes = getNodesByColor(data.nodes, 1);
         const pieceNodes = getNodesByColor(data.nodes, 5);
         
