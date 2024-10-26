@@ -205,7 +205,7 @@ const fileId = process.env.DYNALIST_FILE_ID;
 
 fetch('https://dynalist.io/api/v1/doc/read', {
     method: 'POST',
-    body: JSON.stringify({ token: token, file_id: fileId }),
+    body: JSON.stringify({ token, file_id: fileId }),
 })
     .then(response => response.json())
     .then(data => {
