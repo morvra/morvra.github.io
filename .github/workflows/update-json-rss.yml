@@ -1,7 +1,7 @@
 name: Update JSON and RSS
 
 on:
-  workflow_dispatch: # 手動で実行できるようにする
+  workflow_dispatch:
 
 jobs:
   update-files:
@@ -14,11 +14,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # あるいは他のNodeバージョン
+          node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
-
+      # npm installを削除して、Node.jsパッケージなしで進める
       - name: Run getDate.js
         env:
           DYNALIST_TOKEN: ${{ secrets.DYNALIST_TOKEN }}
