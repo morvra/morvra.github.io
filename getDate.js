@@ -203,8 +203,8 @@ function generateRSS(articles) {
 fetch('https://dynalist.io/api/v1/doc/read', {
     method: 'POST',
     body: JSON.stringify({
-        token: 'YOUR_DYNALIST_TOKEN', // ここにあなたのDynalistトークンを記述
-        'file_id': 'YOUR_DYNALIST_FILE_ID', // ここにあなたのDynalistファイルIDを記述
+        token: ${{ secrets.DYNALIST_TOKEN }},
+        'file_id': ${{ secrets.DYNALIST_FILE_ID }},
     }),
 })
 
