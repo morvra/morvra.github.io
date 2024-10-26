@@ -21,7 +21,9 @@ jobs:
         env:
           DYNALIST_TOKEN: ${{ secrets.DYNALIST_TOKEN }}
           DYNALIST_FILE_ID: ${{ secrets.DYNALIST_FILE_ID }}
-        run: node getDate.js
+        run: |
+          set -e
+          node getDate.js
 
       - name: Commit and push changes
         run: |
