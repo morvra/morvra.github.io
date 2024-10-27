@@ -5,7 +5,7 @@
 body {
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 400;
-    font-size: 17px;
+    font-size: 16px;
     font-style: normal;
     line-height: 1.6;
     background-color: #fff;
@@ -70,15 +70,17 @@ main {
 div#top-module {
     display: flex;
     border: 2px solid #aaa;
-    padding: 16px;
+    padding: 8px;
 }
 img.top-icon {
     width: 160px;
+    height: fit-content;
     float: left;
 }
 ul#top-list {
     list-style: none;
-    padding: 0 20px;
+    padding: 0 0 0 18px;
+    margin: 8px 0;
 }
 ul#top-list li a {
     text-decoration: none;
