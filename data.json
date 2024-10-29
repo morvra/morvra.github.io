@@ -118,9 +118,10 @@
 			"title": "DynalistからCosenseに投稿するBookmarklet",
 			"date": "2024-10-29",
 			"tags": [
-				"dynalist #cosense"
+				"dynalist",
+				"cosense"
 			],
-			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>\n<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>\n<p><script src=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87.js\"></script></p>\n<h2>機能</h2>\n<ul><li>ズームした項目をタイトル、項目を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>\n<h2>使用方法</h2>\n<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
+			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>\n<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>\n<ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\">DynalistからCosenseに投稿するBookmarklet</a></li></ul>\n<h2>機能</h2>\n<ul><li>ズームした項目をタイトル、項目を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>\n<h2>使用方法</h2>\n<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
 		}
 	],
 	"pieces": [
