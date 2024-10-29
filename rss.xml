@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sun, 27 Oct 2024 09:36:36 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 29 Oct 2024 12:30:42 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -249,6 +249,19 @@
 <p>"Gradual"を意識して生きようと考えてたタイミングの今読めてよかった。</p>]]></description>
           <pubDate>Sun, 27 Oct 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=8BPLVWIM5hoL6dnKnoBkn6WU</guid>
+        </item>
+        <item>
+          <title>DynalistからCosenseに投稿するBookmarklet</title>
+          <link>https://morvra.github.io/article?id=ShWNfCw0oGHIQDx50MbmcBwx</link>
+          <description><![CDATA[<p>参考：<a href="https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/" target="_blank">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>
+<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>
+<p><script src="https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87.js"></script></p>
+<h2>機能</h2>
+<ul><li>ズームした項目をタイトル、項目を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>
+<h2>使用方法</h2>
+<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>]]></description>
+          <pubDate>Tue, 29 Oct 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=ShWNfCw0oGHIQDx50MbmcBwx</guid>
         </item>
       </channel>
     </rss>
