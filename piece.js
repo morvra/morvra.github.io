@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pieces.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             // 1ページあたりの記事数と記事の開始・終了インデックスを計算
-            const itemsPerPage = 20;
+            const itemsPerPage = 10;
             const startIndex = (page - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const totalPages = Math.ceil(pieces.length / itemsPerPage);
