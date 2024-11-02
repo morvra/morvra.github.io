@@ -121,7 +121,16 @@
 				"dynalist",
 				"cosense"
 			],
-			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>\n<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>\n<ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\">DynalistからCosenseに投稿するBookmarklet</a></li></ul>\n<h2>機能</h2>\n<ul><li>ズームした項目をタイトル、項目を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>\n<h2>使用方法</h2>\n<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
+			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>\n<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>\n<ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\">DynalistからCosenseに投稿するBookmarklet</a></li></ul>\n<h2>機能</h2>\n<ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>\n<h2>使用方法</h2>\n<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
+		},
+		{
+			"id": "smxzQNX17ukXVWQiw9coKleo",
+			"title": "MECE",
+			"date": "2024-11-02",
+			"tags": [
+				"言葉"
+			],
+			"body": "<p>ミーシー。</p>\n<p>「MECEになってる、なってない」みたいな表現あるけどちゃんとした意味わかってないので記録がてら投稿。</p>\n<ul><li><a href=\"https://ja.wikipedia.org/wiki/MECE\">MECE - Wikipedia</a></li></ul>\n<blockquote><p>MECE（ミーシー (Mee-cee); 英語: Mutually Exclusive, Collectively Exhaustive）とは、「相互に排他的な項目」による「完全な全体集合」を意味する頭字語である。要するに「漏れなく・ダブりなく」という意味で、経営学や経営コンサルティングなどの領域でよく使われる言葉である。</p></blockquote>\n<blockquote><p>人間という集合を例にとると、「年齢」による分類は、ある人が同時に20歳と21歳になることは不可能（重複なし）であり、全ての人がX歳という集団に属する（漏れなし）ため、MECEとなる。一方、「職業」による分類は、兼業を行う人間（重複）もいれば無職の人間（漏れ、ただし職業として「無職」という項目を設けるとすれば、漏れはなくなる）もいるためMECEとならない。</p></blockquote>\n<p>Mutually（互いに） Exclusive（排他的）, Collectively（集合的に） Exhaustive（網羅的） の頭字語だった。</p>\n<p>覚えられる気はしない。「漏れとダブりがない集合」くらいの理解はしときたい。</p>\n<p>人に言うときは「相互に排他的な項目」による「完全な全体集合」って説明でなるほどと思える人にはそれでいいけど、雰囲気ちょい難しげなので例もあげられると尚良し。</p>"
 		}
 	],
 	"pieces": [
