@@ -157,6 +157,10 @@ iframe {
 #article-content img {
     max-width: 100%;
 }
+#article-content hr {
+    border: 1px dashed #ccc;
+    margin: 28px auto;
+}
 
 #article-content a[href*="morvra.github.io"] {
     text-decoration: none;
