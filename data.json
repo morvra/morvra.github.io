@@ -14,7 +14,7 @@
 			"title": "記事テスト2",
 			"date": "2024-02-28",
 			"tags": [],
-			"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>* アスタリスクつき1</p>\n<p>* 2</p>\n<p>* 3</p>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p>コード → <code><p>inlinecode</p></code></p>\n<p><code></code>`</p>\n<p>sasa</p>"
+			"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>* アスタリスクつき1</p>\n<p>* 2</p>\n<p>* 3</p>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p>コード → <code><p>inlinecode</p></code></p>"
 		},
 		{
 			"id": "uVd0FvsIz5xGXZkp1GR93wB3",
@@ -121,7 +121,7 @@
 				"dynalist",
 				"cosense"
 			],
-			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>\n<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>\n<ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\">DynalistからCosenseに投稿するBookmarklet</a></li></ul>\n<h2>機能</h2>\n<ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>\n<h2>使用方法</h2>\n<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
+			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>\n<p>上のスクリプトを元にChatGPT頼りつつ改造。</p>\n<p>▼ コード</p>\n<p><code>javascript:(function(){function DL2CS(projectName, indentLinks){function formatQuote(note){return note.split(/\\r\\n|\\r|\\n/).map(line=>\"> \"+line).join(\"\\n\")+\"\\n\"}function convertMarkdownLinks(text){return text.replace(/\\[(.<em>?)\\]\\((.</em>?)\\)/g,'[$1 $2]')}if(location.host===\"dynalist.io\"&&projectName){const root=DYNALIST.app.app_document.ui.current_root;const meta=root.get_meta_object();const content=meta.get_content()||\"Undefined\";const note=meta.get_note()?formatQuote(meta.get_note()):\"\";const children=(function getChildren(indentation,items){return items.map(item=>{const childMeta=item.get_meta_object();return indentation+childMeta.get_content()+\"\\n\"+(childMeta.get_note()?formatQuote(childMeta.get_note()):\"\")+getChildren(indentation+\" \",item.get_children().children);}).join(\"\")}(indentLinks?\" \":\"\",root.get_children().children));const url=\"https://scrapbox.io/\"+projectName+\"/\"+encodeURIComponent(content);const body=convertMarkdownLinks(note+children);window.open(url+\"?body=\"+encodeURIComponent(body),'_blank')}}DL2CS(\"YOUR-PROJECT\",true);})();</code></p>\n<ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\">DynalistからCosenseに投稿するBookmarklet</a></li></ul>\n<h2>機能</h2>\n<ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>\n<h2>使用方法</h2>\n<ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
 		},
 		{
 			"id": "smxzQNX17ukXVWQiw9coKleo",
