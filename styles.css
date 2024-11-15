@@ -86,7 +86,8 @@ img.top-icon {
 ul#top-list {
     list-style: none;
     padding: 0 0 0 18px;
-    margin: 8px 0;
+    margin: 4px 0;
+    font-size: 16px;
 }
 ul#top-list li a {
     text-decoration: none;
