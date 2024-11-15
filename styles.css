@@ -98,7 +98,8 @@ iframe {
   text-align: center;
   color: #aaa;
   font-size: 90%;
-  margin: 16px 4px;
+  max-width: 336px;
+  margin: 16px auto 24px;
 }
 
 #article-title {
