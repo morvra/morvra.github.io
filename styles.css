@@ -163,6 +163,10 @@ iframe {
     border: 1px dashed #ccc;
     margin: 28px auto;
 }
+code {
+    color: #c7254e;
+    background-color: #f5f5f5;
+}
 
 #article-content a[href*="morvra.github.io"] {
     text-decoration: none;
