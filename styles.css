@@ -15,7 +15,7 @@ body {
 header {
     background-color: #fff;
     color: #333;
-    padding: 6px 0;
+    padding: 0;
     position: fixed;
     width: 100%;
     top: 0;
@@ -31,7 +31,7 @@ header {
     align-items: center;
 }
 .container h1 {
-    margin: 6px 0px;
+    margin: 0;
     font-size: 1.4em;
 }
 .container h1 a {
@@ -70,7 +70,7 @@ main {
 }
 div#top-module {
     display: flex;
-    border: 2px solid #aaa;
+    border: 1px solid #bbb;
     padding: 8px;
 }
 img.top-icon {
@@ -166,7 +166,7 @@ ul#tag-list {
     margin-bottom: 24px;
     padding: 8px 16px;
     background-color: #fff;
-    border:2px solid #aaa;
+    border:1px solid #bbb;
 }
 h2#piece-title {
     margin: 0px;
