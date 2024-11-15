@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const article = data.articles.find(article => article.id === articleId);
             if (article) {
                 document.title = `${article.title} - morvra lists`; // titleタグを更新
-                articleTitleElement.innerHTML = `<h2>${article.title}</h2>`; // タイトルを表示
+                articleTitleElement.innerHTML = `<h1>${article.title}</h1>`; // タイトルを表示
                 articleDateElement.textContent = `${article.date}`; // 日付を表示
                 // タグを表示
                 if (article.tags.length > 0) {
