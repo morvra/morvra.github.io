@@ -15,7 +15,8 @@ body {
 header {
     background-color: #fff;
     color: #333;
-    padding: 0;
+    padding: 0 0 2px;
+    border-bottom: 1px solid #bbb;
     position: fixed;
     width: 100%;
     top: 0;
