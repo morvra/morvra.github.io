@@ -19,6 +19,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 1;
 }
 
 .container {
@@ -92,6 +93,12 @@ ul#article-list a {
 
 iframe {
     max-width: 100%;
+}
+#ad {
+  text-align: center;
+  color: #aaa;
+  font-size: 90%;
+  margin: 16px auto;
 }
 
 #article-title {
