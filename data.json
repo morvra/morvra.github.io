@@ -14,7 +14,7 @@
 			"title": "記事テスト2",
 			"date": "2024-02-28",
 			"tags": [],
-			"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>* アスタリスクつき1</p>\n<p>* 2</p>\n<p>* 3</p>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p></p>"
+			"body": "<p>本文</p>\n<h2>見出しh2</h2>\n<p>ほんぶんほんぶん</p>\n<p>* アスタリスクつき1</p>\n<p>* 2</p>\n<p>* 3</p>\n<p>見出しにかかわらない本文</p>\n<blockquote><p>引用</p></blockquote>\n<p>コード → <code><p>inlinecode</p></code></p>\n<p><code></code>`</p>\n<p>sasa</p>"
 		},
 		{
 			"id": "uVd0FvsIz5xGXZkp1GR93wB3",
