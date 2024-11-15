@@ -68,6 +68,10 @@ main {
     margin: 60px auto 0;
     padding: 18px;
 }
+main h2 {
+    font-size: 1.1em;
+}
+
 div#top-module {
     display: flex;
     border: 1px solid #bbb;
@@ -132,6 +136,24 @@ iframe {
     overflow-wrap: break-word;
 }
 
+#article-content h2 {
+    font-size: 1.1em;
+}
+#article-content h2:before {
+    content: "##";
+    margin-right: 8px;
+    color: #bbb;
+}
+
+#article-content h3 {
+    font-size: 1em;
+}
+#article-content h3:before {
+    content: "###";
+    margin-right: 8px;
+    color: #bbb;
+}
+
 #article-content img {
     max-width: 100%;
 }
@@ -156,10 +178,14 @@ ul#tag-list {
     padding: 0;
 }
 #tag-list h2 {
-    background: #eee;
-    padding: 4px 8px;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
+#tag-list h2:before {
+    content: "##";
+    margin-right: 8px;
+    color: #bbb;
+}
+
 
 /* piece */
 .piece {
