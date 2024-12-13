@@ -206,7 +206,8 @@ ul#tag-list {
 }
 h2#piece-title {
     margin: 0px;
-    font-size: 1.2em;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 footer {
