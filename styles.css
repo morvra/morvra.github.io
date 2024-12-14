@@ -125,6 +125,7 @@ iframe {
 }
 #article-tags {
     float: right;
+    font-size: 0.9em;
 }
 #article-tags a {
     text-decoration: none;
