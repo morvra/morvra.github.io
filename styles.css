@@ -105,7 +105,7 @@ iframe {
   color: #aaa;
   font-size: 90%;
   max-width: 336px;
-  margin: 32px auto 24px;
+  margin: 40px auto 24px;
 }
 
 #article-title {
@@ -134,7 +134,6 @@ iframe {
 #article-content {
     font-size: 1em;
     color: #333;
-    margin-bottom: 20px;
     overflow-wrap: break-word;
 }
 
