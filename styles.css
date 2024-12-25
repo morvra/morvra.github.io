@@ -83,6 +83,11 @@ img.top-icon {
     height: 140px;
     float: left;
 }
+
+ul {
+    list-style: circle;
+}
+
 ul#top-list {
     list-style: none;
     padding: 0 0 0 18px;
