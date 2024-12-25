@@ -65,7 +65,7 @@ nav ul li a {
 
 main {
     max-width: 640px;
-    margin: 24px auto 0;
+    margin: 16px auto 0;
     padding: 18px;
 }
 main h2 {
@@ -76,6 +76,7 @@ div#top-module {
     display: flex;
     border: 1px solid #bbb;
     padding: 8px;
+    margin-bottom: 24px;
 }
 img.top-icon {
     width: 140px;
