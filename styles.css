@@ -11,16 +11,15 @@ body {
     background-color: #fff;
     margin: 0;
 }
+a {
+    color: #6495ed;
+}
 
 header {
     background-color: #fff;
     color: #333;
     padding: 0 0 2px;
-    border-bottom: 1px solid #bbb;
-    position: fixed;
     width: 100%;
-    top: 0;
-    z-index: 1;
 }
 
 .container {
@@ -66,7 +65,7 @@ nav ul li a {
 
 main {
     max-width: 640px;
-    margin: 60px auto 0;
+    margin: 32px auto 0;
     padding: 18px;
 }
 main h2 {
