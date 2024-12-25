@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 13 Nov 2024 05:18:20 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 25 Dec 2024 03:14:16 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -35,21 +35,27 @@
 <p>* 3</p>
 <p>見出しにかかわらない本文</p>
 <blockquote><p>引用</p></blockquote>
-<p></p>]]></description>
+<p>コード → <code><p>inlinecode</p></code></p>]]></description>
           <pubDate>Wed, 28 Feb 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh</guid>
         </item>
         <item>
           <title>About</title>
           <link>https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</link>
-          <description><![CDATA[<h3>このサイトについて</h3>
+          <description><![CDATA[<h2>このサイトについて</h2>
 <p>morvra（もーぶら）がなんでも書く場所です。</p>
 <p>RSSフィードは <a href="https://morvra.github.io/rss.xml" target="_blank">https://morvra.github.io/rss.xml</a> で発行してます。</p>
-<h3>morvra</h3>
+<h2>morvra</h2>
 <p><img src="https://gyazo.com/821ae163e2ae917475d3dc5fe2b94732/thumb/350#.png" alt="icon"></p>
 <p>インターネットとテキストが好きです。アイコンは<a href="https://designer.microsoft.com/image-creator" target="_blank">Microsoft Designer</a>製。</p>
-<h3>お問い合わせ</h3>
-<p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p>]]></description>
+<h2>お問い合わせ</h2>
+<p>お問い合わせは<a href="https://forms.gle/eCcYD2tfg7w6LBHX9" target="_blank">Googleフォーム</a>からお願いします。</p>
+<h2>Amazonアソシエイト・プログラムに参加しています。</h2>
+<p>morvra listはamazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイト宣伝プログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
+<h2>Google AdSenseに参加しています。</h2>
+<p>morvra listは広告としてGoogle AdSenseを使用しています。 Google Adsenseはデータを収集するために、Cookieやウェブビーコンを使用して広告配信をしています。</p>
+<p>Cookieを使用することにより、インターネットにおけるご自身のサイトや他のサイトへのアクセス情報に基づいてユーザーに広告を配信することが可能になります。</p>
+<p>情報提供を望まない場合は、Googleのポリシーと原則のページより、Cookieオプションを使用しないように設定することができます。</p>]]></description>
           <pubDate>Sat, 30 Mar 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</guid>
         </item>
@@ -104,22 +110,22 @@
           <description><![CDATA[<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>
 <p>現時点（2024年4月）はこんな感じだよって記録。</p>
 <p><img src="https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png" alt="Image"></p>
-<h3>📆 Days</h3>
+<h2>📆 Days</h2>
 <p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p>
 <p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p>
-<h3>🧭 ALL</h3>
+<h2>🧭 ALL</h2>
 <p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p>
-<h3>🌏 Blog</h3>
+<h2>🌏 Blog</h2>
 <p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p>
-<h3>📔 Notes</h3>
+<h2>📔 Notes</h2>
 <p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p>
-<h3>🗄 Collections</h3>
+<h2>🗄 Collections</h2>
 <p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p>
 <p>ここの階層やグルーピングが悩み。</p>
-<h3>📚 Reference</h3>
+<h2>📚 Reference</h2>
 <p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p>
 <p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p>
-<h3>Archives</h3>
+<h2>Archives</h2>
 <p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p>
 <p>▼ 参考</p>
 <ul><li><a href="https://amzn.to/3xREGWY">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href="https://bulletjournal.com/">Bullet Journal</a></li><li><a href="https://workflowy.com/systems/para-method/">PARA Method - Workflowy guide</a></li></ul>]]></description>
@@ -240,7 +246,7 @@
 <p>肝心なのは情報を整理することではなく、<strong>考えを育てる</strong>ことなんだっていう。本文中で何度も何度も形を変えて言及されている。それだけハマりやすい罠なんだよな。Evernoteから始まった影響もあるだろうけど。</p>
 <p>自分もEvernoteのノートブックの構成を延々考えたり、アウトライナーで全部やろうとしたり、はたまたローカルのファイルがいいのか、とか色々試行錯誤しているのでめっちゃ共感しながら読めた。</p>
 <h2>デジタル・カード・システムとアウトライン</h2>
-<p>脱文脈的かつリンク的なつながりを育てるものと、文脈的かつリニアな流れを構成するもの。</p>
+<p>脱文脈的かつリンク的なつながりを育てるものと、文脈的かつリニアな流れを構成するものの差異。</p>
 <p>自分が一番触っているツールは間違いなくアウトライナーなのでここも刺さった。</p>
 <p>アウトライナーでデジタルカードシステムをやろうとするのってアリ？ナシ？とモヤモヤしていたんだけど、本書を読んで（少なくともCosenseよりは）不適当だと確信した。</p>
 <p>2hopリンクは無く、強制的に構造化される。フラットにしようと思えばできるけど、そうすると一覧した時にCosenseよりだいぶ滅入る。などなど。</p>
@@ -255,6 +261,8 @@
           <link>https://morvra.github.io/article?id=ShWNfCw0oGHIQDx50MbmcBwx</link>
           <description><![CDATA[<p>参考：<a href="https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/" target="_blank">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>
 <p>上のスクリプトを元にChatGPT頼りつつ改造。</p>
+<p>▼ コード</p>
+<p><code>javascript:(function(){function DL2CS(projectName, indentLinks){function formatQuote(note){return note.split(/\r\n|\r|\n/).map(line=>"> "+line).join("\n")+"\n"}function convertMarkdownLinks(text){return text.replace(/\[(.<em>?)\]\((.</em>?)\)/g,'[$1 $2]')}if(location.host==="dynalist.io"&&projectName){const root=DYNALIST.app.app_document.ui.current_root;const meta=root.get_meta_object();const content=meta.get_content()||"Undefined";const note=meta.get_note()?formatQuote(meta.get_note()):"";const children=(function getChildren(indentation,items){return items.map(item=>{const childMeta=item.get_meta_object();return indentation+childMeta.get_content()+"\n"+(childMeta.get_note()?formatQuote(childMeta.get_note()):"")+getChildren(indentation+" ",item.get_children().children);}).join("")}(indentLinks?" ":"",root.get_children().children));const url="https://scrapbox.io/"+projectName+"/"+encodeURIComponent(content);const body=convertMarkdownLinks(note+children);window.open(url+"?body="+encodeURIComponent(body),'_blank')}}DL2CS("YOUR-PROJECT",true);})();</code></p>
 <ul><li>Gist → <a href="https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87">DynalistからCosenseに投稿するBookmarklet</a></li></ul>
 <h2>機能</h2>
 <ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li><li>階層はそのまま</li><li>ノートは引用符</li><li>マークダウンのリンクをCosenseの記法に置換</li></ul>
@@ -297,9 +305,36 @@
 <p>開封のワザップがYoutubeやXで流行ってるのもこれまでに無かった体験で楽しい。自分も何の意味もないと思いつつ、回したりパックの折れ見て引いてるｗ</p>
 <p>■</p>
 <p>サクッと対戦できてコレクションとして遊ぶ楽しさもあり、スキマ時間にやるスマホゲーとしてハイクオリティだと思う。ゆるくやっていこう。</p>
-<p><div class="appreach"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6c/43/bc/6c43bcf3-dc72-a7d4-9d5c-5a06900eff1b/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg" alt="Pokémon TCG Pocket" class="appreach<strong>icon"><div class="appreach</strong>detail"><p class="appreach<strong>name">Pokémon TCG Pocket</p><p class="appreach</strong>info"><span class="appreach<strong>developper">The Pokemon Company</span><span class="appreach</strong>posted">posted with<a href="https://mama-hack.com/app-reach/" title="アプリーチ" target="_blank" rel="nofollow">アプリーチ</a></span></p></div><div class="appreach<strong>links"><a href="https://apps.apple.com/jp/app/pok%25C3%25A9mon-tcg-pocket/id6479970832?uo=4" rel="nofollow" class="appreach</strong>aslink" target="_blank"><img src="https://nabettu.github.io/appreach/img/itune_ja.svg"></a><a href="https://play.google.com/store/apps/details?id=jp.pokemon.pokemontcgp" rel="nofollow" class="appreach__gplink" target="_blank"><img src="https://nabettu.github.io/appreach/img/gplay_ja.png"></a></div></div></p>]]></description>
+<p><div id="appreach-box" style="text-align: left;"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6c/43/bc/6c43bcf3-dc72-a7d4-9d5c-5a06900eff1b/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg" alt="Pokémon TCG Pocket" id="appreach-image" style="float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;"><div class="appreach-info" style="margin: 10px;"><div id="appreach-appname">Pokémon TCG Pocket</div><div id="appreach-developer" style="font-size: 80%; display: inline-block;">開発元:<span id="appreach-developerurl">The Pokemon Company</span></div><div class="appreach-powered" style="font-size: 80%; display: inline-block;">posted with<a href="https://mama-hack.com/app-reach/" title="アプリーチ" target="_blank" rel="nofollow">アプリーチ</a></div><div class="appreach-links" style="float: left;"><div id="appreach-itunes-link" style="display: inline-block;"><a id="appreach-itunes" href="https://apps.apple.com/jp/app/pok%25C3%25A9mon-tcg-pocket/id6479970832?uo=4" target="_blank" rel="nofollow"><img src="https://nabettu.github.io/appreach/img/itune_ja.svg" style="height: 40px; width: 135px;"></a></div><div id="appreach-gplay-link" style="display: inline-block;"><a id="appreach-gplay" href="https://play.google.com/store/apps/details?id=jp.pokemon.pokemontcgp" target="_blank" rel="nofollow"><img src="https://nabettu.github.io/appreach/img/gplay_ja.png" style="height: 40px; width: 134.5px;"></a></div></div></div><div class="appreach-footer" style="margin-bottom: 10px; clear: left;"></div></div></p>]]></description>
           <pubDate>Wed, 13 Nov 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=edY9ji7ctO9ues5WHvchNq3J</guid>
+        </item>
+        <item>
+          <title>兵庫県知事選で斎藤元彦元知事が当選</title>
+          <link>https://morvra.github.io/article?id=tm1Ukar5u-W_912rpgKVHYUi</link>
+          <description><![CDATA[<ul><li><a href="https://www.asahi.com/articles/ASSCJ2D9LSCJOXIE010M.html">兵庫県知事選、斎藤元彦氏が再選　議会や職員と「謙虚に丁寧にやる」 [兵庫県]：朝日新聞デジタル</a></li><li><a href="https://mainichi.jp/articles/20241117/k00/00m/010/184000c">斎藤前知事の「劇場型選挙」　支えたSNSの“奇兵隊”　兵庫知事選 | 毎日新聞</a></li><li><a href="https://news.yahoo.co.jp/articles/5f84e72695f3b434575de6ea07e03fe5c3cda66b">斎藤元彦氏が〝秒殺〟で当選確実 兵庫県知事返り咲き N党・立花孝志氏のアシスト大きかった（よろず～ニュース） - Yahoo!ニュース</a></li></ul>
+<p>先日のアメリカの大統領選も踏まえ象徴的な結果になったこともあり、いろいろ考えたり言いたくなる選挙だった。こっからもメディアでいろんな語りがでてくるんだろう。（この記事もその1つである）</p>
+<ul><li>オールドメディアvsネット</li><li>良識派（気取り）vs陰謀論に飲まれる衆愚</li><li>高齢者vs若者</li><li>議会vs知事</li><li>保守vs改革</li><li>多数の政党vs一部維新・N党</li><li>隠蔽？vsパワハラ？</li><li>権威主義vs（関西に根強い）公務員嫌悪</li><li>組織票vs民意</li></ul>
+<p>いろんな軸があって複雑に混じり合っている（なんなら二項でもない）のが現実だと思ってて、そこを一緒くたにして「〇〇の勝利！」みたいな表現はモヤモヤする。テレビをよく見る若者もいれば、陰謀論に飲まれる議員もいるわけで。</p>
+<p>傾向とか大枠を語る意味は大いにあるんだろうけど、自己の利益（PV、視聴率、フォロワー数、収益）のために二元論で耳目を集める現象が増え、それを日々くらうのはしんどい。まぁそれが（戦略上）正しいという潮流は感じてるし、なんならネット云々より前、人間自体がそうなりがちなのかもしれない。</p>
+<p>あとは大統領選でも思ったんだけど、現地にいないとわからないことが沢山あるという前提は共有したうえで語って欲しい。そこを考えずに外側から「〇〇民は愚か」みたいな発信するのはそれこそ愚かだと思う。</p>
+<p>■</p>
+<p>個人的にはこっから板挟みになる現場の方々の心労がいかばかりかと憂いてしまう。誰もがハッピーなる選挙なんて存在し得ないにしても、今回の選挙によってしんどい思いをしている人が少しでも減る結果になることを願っている。</p>]]></description>
+          <pubDate>Sun, 17 Nov 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=tm1Ukar5u-W_912rpgKVHYUi</guid>
+        </item>
+        <item>
+          <title>アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説</title>
+          <link>https://morvra.github.io/article?id=FsPb7PRxbJBPV2fbbKs9_Zel</link>
+          <description><![CDATA[<ul><li><a href="https://anond.hatelabo.jp/20241223225740">鳩野ちひろが歌っている曲は「ちょっと古い」どころではない</a></li></ul>
+<p>このブコメでmori99さんが「過去の意味が世代で違う」と書いてて(https://b.hatena.ne.jp/mori99/20241224#bookmark-4763828651127392096)確かにそうだなと。</p>
+<p>アーカイブが残ってさえいればふとしたきっかけで知れるわけで、そこで琴線に触れるものもある。逆に言えば残っていなかったら知ることすら無い（口伝？）し、残っていたとしてもそこにアクセスするハードルが高かったりテキストが少しあるだけだったら広まらない。</p>
+<p>時代観すら変えうるという意味でもサブスクやらYoutubeの存在の大きさを実感。</p>
+<p>でもスケールを広げるとこのパラダイムシフトって言語以前以後、文字以前以後とかでも起こってるよなと思い浮かんだ。文字が無かったら時代って概念からしておそらく無いし。</p>
+<p>■</p>
+<p>最近昭和の〇〇ランキング系の番組やら記事をいくつか見る機会あって昭和初期がほぼ無視されてるのにモヤモヤしてたんだけど、視聴者の世代に合わせてるというだけじゃなくて単純に資料がないってのもあるなと思ったりした。</p>]]></description>
+          <pubDate>Wed, 25 Dec 2024 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=FsPb7PRxbJBPV2fbbKs9_Zel</guid>
         </item>
       </channel>
     </rss>
