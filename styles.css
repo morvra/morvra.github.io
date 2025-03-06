@@ -221,8 +221,7 @@ h2#piece-title {
     padding: 0 0 24px;
 }
 a.next {
-    display: block;
-    text-align: right;
+    float: right;
 }
 a.prev {
     float: left;
