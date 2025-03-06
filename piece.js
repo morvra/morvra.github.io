@@ -47,14 +47,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     const prevLink = document.createElement('a');
                     prevLink.href = `./piece?page=${page - 1}`;
                     prevLink.classList.add('prev');
-                    prevLink.textContent = 'Prev';
+                    prevLink.textContent = '<< Prev';
                     navigationDiv.appendChild(prevLink);
                 }
                 if (page < totalPages) {
                     const nextLink = document.createElement('a');
                     nextLink.href = `./piece?page=${page + 1}`;
                     nextLink.classList.add('next');
-                    nextLink.textContent = 'Next';
+                    nextLink.textContent = 'Next >>';
                     navigationDiv.appendChild(nextLink);
                 }
                 navigationContainer.appendChild(navigationDiv);
