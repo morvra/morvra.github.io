@@ -216,6 +216,18 @@ h2#piece-title {
     font-weight: normal;
 }
 
+/* navigation */
+.navigation {
+    padding: 0 0 24px;
+}
+a.next {
+    display: block;
+    text-align: right;
+}
+a.prev {
+    float: left;
+}
+
 footer {
     border-top: 1px solid #aaa;
     text-align: center;
