@@ -216,6 +216,16 @@
 				"javascript"
 			],
 			"body": "<p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p>\n<p>コード → <a href=\"https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30\" target=\"_blank\">DynalistTaskViewer.js</a></p>\n<p>＊APIとドキュメントIDを自分用に変更して使ってください。</p>\n<ul><li>右上のボタンをクリックするとリストが表示される</li><li>タスク名をクリックするとDynalist上でその項目に移動できる</li><li>URLをコピーしてDynalistにリンクを貼り付けることも可能</li></ul>\n<p>ここから完了状態を変更するのも考えたんだけど処理が複雑になりそう＆API使いすぎたくないのでやめた。起動時と10分間隔で取得するようにしてるけどこのへんは改良の余地あり。</p>\n<p>検索でも同じようなことはできるんだけど、その場で一覧できるのが便利でいい感じ。</p>"
+		},
+		{
+			"id": "fFIleKwD9Coz8gxLIs6WcMJN",
+			"title": "Dynalistのインボックスへ送信するスクリプト",
+			"date": "2025-03-15",
+			"tags": [
+				"dynalist",
+				"javascript"
+			],
+			"body": "<p>Dynalist上のどこからでもインボックスにメモするためのユーザースクリプト。ObsidianのQuickAddみたいなイメージ。</p>\n<p>コード → <a href=\"https://gist.github.com/morvra/0e899e1cd57f2c2aaa69e328fd9b99f8\" target=\"_blank\">DynalistInboxSender.js</a></p>\n<p>＊APIキーを自分用のものにして使ってください</p>\n<ul><li>左下のボタンか「Alt+T」で入力画面がポップアップする</li><li>テキストを入力して送信ボタンかEnterを押すとインボックスに現在時刻付きで送信される</li><li>右上の閉じるボタン or 何も入力がない状態でEnter or カーソルが外れる でポップアップが消える</li></ul>"
 		}
 	],
 	"pieces": [
