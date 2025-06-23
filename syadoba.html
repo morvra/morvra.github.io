@@ -16,7 +16,7 @@
       padding: 0;
     }
     main {
-      padding: 20px;
+      padding: 8px;
       max-width: 1200px;
       margin: auto;
     }
@@ -204,6 +204,47 @@
     #match-record-table td:nth-child(6),
     #card-data-table td:nth-child(2) {
       text-align: left;
+    }
+
+    /* General editable input/textarea styling */
+    #card-data-table td input,
+    #match-record-table td textarea {
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 2px 4px;
+        font-family: inherit;
+        font-size: inherit;
+        vertical-align: top;
+        display: block;
+        width: calc(100% - 8px);
+    }
+    /* Specific adjustments for PP input */
+    #card-data-table td:first-child input {
+        width: 50px;
+        text-align: center;
+    }
+    /* Memo textarea in desktop record table */
+    #match-record-table td:nth-child(6) textarea {
+        min-height: 40px;
+        max-height: 120px;
+        overflow-y: auto;
+        resize: vertical;
+    }
+    /* Style for text within cells when not editing, to prevent overflow */
+    #card-data-table td:nth-child(2),
+    #match-record-table td:nth-child(2),
+    #match-record-table td:nth-child(3),
+    #match-record-table td:nth-child(4),
+    #match-record-table td:nth-child(5) {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    /* Override for memo cell (which allows wrapping) */
+    #match-record-table td:nth-child(6) {
+        white-space: normal;
+        overflow: visible;
     }
 
     .card-actions {
@@ -427,7 +468,7 @@
           background: white;
           border-radius: 8px;
           padding: 12px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+          border: 1px solid #e0e0e0;
           display: flex;
           flex-direction: column;
           gap: 6px;
@@ -455,11 +496,11 @@
 
       .match-record-card .delete-card-button {
           position: absolute;
-          top: 6px;
+          bottom: 6px;
           right: 6px;
           background: transparent;
           border: none;
-          font-size: 18px;
+          font-size: 16px;
           cursor: pointer;
           color: #e74c3c;
           padding: 4px;
@@ -479,15 +520,19 @@
       }
       .match-record-card .card-value.editable-memo:hover { background-color: #f0f0f0; }
       .match-record-card .card-value.editable-memo textarea {
+        box-sizing: border-box;
         width: 100%;
         min-height: 50px;
+        max-height: 150px;
+        overflow-y: auto;
+        resize: vertical;
         border: 1px solid #ccc;
         border-radius: 4px;
         padding: 4px;
-        box-sizing: border-box;
         font-family: inherit;
         font-size: 14px;
         line-height: inherit;
+        margin: 0;
       }
     }
 
@@ -672,8 +717,7 @@
         </table>
 		</div>
         <div id="match-record-cards-container">
-            <!-- Cards will be injected here for mobile -->
-        </div>
+            </div>
         <button id="load-more-records-button" class="form-action-button neutral" style="display: none; width: 100%; margin-top: 20px;">さらに表示</button>
       </section>
 	</div>
@@ -936,7 +980,8 @@
           const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
           if (type === 'text') input.type = 'text';
           input.value = initialValue;
-          Object.assign(input.style, { fontSize: '14px', padding: '2px 4px', width: '100%' });
+          // REMOVED INLINE STYLES: Object.assign(input.style, { fontSize: '14px', padding: '2px 4px', width: '100%' });
+          Object.assign(input.style, { fontSize: '14px' }); // Only font-size is needed
           input.setAttribute('aria-label', `${fieldName}を編集`);
           td.textContent = '';
           td.appendChild(input);
@@ -1272,7 +1317,8 @@
             input.type = 'number';
             input.min = '0';
             input.value = card.pp;
-            Object.assign(input.style, { width: '60px', fontSize: '14px', padding: '2px 4px' });
+            // REMOVED INLINE STYLE: Object.assign(input.style, { width: '60px', fontSize: '14px', padding: '2px 4px' });
+            Object.assign(input.style, { fontSize: '14px' }); // Only font-size is needed
             input.setAttribute('aria-label', `カードPPを編集: ${card.name}`);
             tdPP.textContent = '';
             tdPP.appendChild(input);
@@ -1301,7 +1347,8 @@
             const input = document.createElement('input');
             input.type = 'text';
             input.value = card.name;
-            Object.assign(input.style, { fontSize: '14px', padding: '2px 4px' });
+            // REMOVED INLINE STYLE: Object.assign(input.style, { fontSize: '14px', padding: '2px 4px' });
+            Object.assign(input.style, { fontSize: '14px' }); // Only font-size is needed
             input.setAttribute('aria-label', `カード名を編集: ${card.name}`);
             tdName.textContent = '';
             tdName.appendChild(input);
