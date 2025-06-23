@@ -75,6 +75,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.04);
       margin-bottom: 16px;
       width: 100%;
+      height: fit-content;
       box-sizing: border-box;
     }
 
@@ -207,8 +208,7 @@
     }
 
     /* General editable input/textarea styling */
-    #card-data-table td input,
-    #match-record-table td textarea {
+    #card-data-table td input {
         box-sizing: border-box;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -230,21 +230,6 @@
         max-height: 120px;
         overflow-y: auto;
         resize: vertical;
-    }
-    /* Style for text within cells when not editing, to prevent overflow */
-    #card-data-table td:nth-child(2),
-    #match-record-table td:nth-child(2),
-    #match-record-table td:nth-child(3),
-    #match-record-table td:nth-child(4),
-    #match-record-table td:nth-child(5) {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    /* Override for memo cell (which allows wrapping) */
-    #match-record-table td:nth-child(6) {
-        white-space: normal;
-        overflow: visible;
     }
 
     .card-actions {
