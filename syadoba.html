@@ -184,6 +184,7 @@
       background: #fff;
       overflow: hidden;
       font-size: 14px;
+      table-layout: fixed; /* テーブルレイアウトを固定 */
     }
     .data-table thead {
       background: #ecf0f1;
@@ -193,6 +194,8 @@
       text-align: center;
       padding: 10px;
       border-bottom: 1px solid #eee;
+      overflow: hidden; /* セル内のコンテンツがはみ出すのを防ぐ */
+      white-space: nowrap; /* テキストの自動改行を無効化 */
     }
     .data-table tr:hover { background: #f9f9f9; }
     .data-table td:last-child button {
@@ -206,10 +209,29 @@
     }
     .data-table td:last-child button:hover { background: #c0392b; }
 
+    /* PP、カード名、メモの入力要素のスタイル */
+    .data-table td input[type="text"],
+    .data-table td input[type="number"],
+    .data-table td textarea {
+        width: 100%; /* 親要素の幅にフィット */
+        box-sizing: border-box; /* paddingとborderをwidthに含める */
+        border: 1px solid #ccc;
+        padding: 4px;
+        font-size: 14px;
+        line-height: 1.2; /* テキストエリアの行の高さを調整 */
+        display: block; /* ブロック要素として振る舞う */
+        min-width: 0; /* デフォルトの最小幅を上書き */
+    }
+    .data-table td textarea {
+        min-height: 40px; /* テキストエリアの最小高さを設定 */
+        resize: vertical; /* 縦方向のみリサイズ可能 */
+        overflow: hidden; /* テキストエリア自体のスクロールバーを非表示 */
+    }
+
+
     /* 戦績テーブルのメモ欄 */
-    #match-record-table td:nth-child(6),
-    #match-record-table th:nth-child(6) {
-      width: 40%;
+    #match-record-table th:nth-child(6),
+    #match-record-table td:nth-child(6) {
       word-break: break-word; /* 単語の途中で改行を許可 */
       white-space: normal; /* 折り返しを許可 */
     }
@@ -217,7 +239,38 @@
     #match-record-table td:nth-child(6),
     #card-data-table td:nth-child(2) {
       text-align: left;
+      word-break: break-word; /* 単語の途中で改行を許可 */
+      white-space: normal; /* 折り返しを許可 */
     }
+
+    /* 各テーブルの列幅を定義 */
+
+    /* カードリストテーブルの列幅 */
+    #card-data-table th:nth-child(1),
+    #card-data-table td:nth-child(1) { width: 30px; } /* PP */
+    #card-data-table th:nth-child(2),
+    #card-data-table td:nth-child(2) { width: auto; } /* カード名&メモ */
+    #card-data-table th:nth-child(3),
+    #card-data-table td:nth-child(3) { width: 100px; } /* カウント */
+    #card-data-table th:nth-child(4),
+    #card-data-table td:nth-child(4) { width: 50px; } /* 削除 */
+
+    /* 戦績記録テーブルの列幅 */
+    #match-record-table th:nth-child(1),
+    #match-record-table td:nth-child(1) { width: 120px; } /* 日時 */
+    #match-record-table th:nth-child(2),
+    #match-record-table td:nth-child(2) { width: 15%; } /* デッキ */
+    #match-record-table th:nth-child(3),
+    #match-record-table td:nth-child(3) { width: 10%; } /* 相手 */
+    #match-record-table th:nth-child(4),
+    #match-record-table td:nth-child(4) { width: 70px; } /* 先後 */
+    #match-record-table th:nth-child(5),
+    #match-record-table td:nth-child(5) { width: 70px; } /* 勝敗 */
+    #match-record-table th:nth-child(6),
+    #match-record-table td:nth-child(6) { width: auto; } /* メモ */
+    #match-record-table th:nth-child(7),
+    #match-record-table td:nth-child(7) { width: 50px; } /* 削除 */
+
 
     /* カードアクション */
     .card-actions {
@@ -967,7 +1020,7 @@
         }
       };
 
-      const makeEditableCell = (td, entry, fieldName, type = 'text') => { // initialValue removed
+      const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
           // If already editing, do nothing
           if (td.querySelector('input') || td.querySelector('textarea')) return;
