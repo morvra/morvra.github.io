@@ -967,34 +967,62 @@
         }
       };
 
-      const makeEditableCell = (td, initialValue, type = 'text', entry, fieldName) => {
+      const makeEditableCell = (td, entry, fieldName, type = 'text') => { // initialValue removed
         td.addEventListener('click', () => {
+          // If already editing, do nothing
           if (td.querySelector('input') || td.querySelector('textarea')) return;
+
+          // Get the current value from the entry object directly when clicked
+          const currentValue = entry[fieldName];
 
           const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
           if (type === 'text') input.type = 'text';
-          input.value = initialValue;
+          input.value = currentValue; // Use currentValue
           Object.assign(input.style, { fontSize: '14px' });
           input.setAttribute('aria-label', `${fieldName}を編集`);
-          td.textContent = '';
+          
+          td.textContent = ''; // Clear existing content
           td.appendChild(input);
           input.focus();
 
-          const finishEdit = () => {
+          // Function to finalize editing (save and update display), and remove input
+          const finalizeEdit = () => {
             const val = input.value.trim();
-            entry[fieldName] = val;
-            td.textContent = val;
-            saveRecords();
+            
+            // Only update and save if the value has actually changed
+            if (entry[fieldName] !== val) {
+              entry[fieldName] = val; // Update the actual object in allRecords
+              saveRecords(); // Save to localStorage
+            }
+            td.textContent = val; // Update the DOM with the new value
+            if (input.parentNode === td) { // Ensure input is still a child before removing
+                input.remove(); // Remove the input element from DOM
+            }
           };
 
-          input.addEventListener('blur', finishEdit);
+          // Event listener for when the input loses focus (e.g., click outside, tab out)
+          input.addEventListener('blur', () => {
+            finalizeEdit();
+          });
+
+          // Event listener for keyboard actions
           input.addEventListener('keydown', (ev) => {
-            if (ev.key === 'Enter' && type === 'text') {
-              ev.preventDefault();
-              finishEdit();
-            }
-            if (ev.key === 'Escape') {
-              td.textContent = initialValue;
+            if (ev.key === 'Enter') {
+              if (type === 'textarea') {
+                if (!ev.shiftKey) { // Enter without Shift key (save and exit)
+                  ev.preventDefault(); // Prevent default Enter (newline)
+                  finalizeEdit();      // Save changes and remove input
+                }
+                // If Shift+Enter, allow default newline behavior
+              } else { // For text inputs (type === 'text')
+                ev.preventDefault(); // Prevent form submission
+                finalizeEdit();      // Save changes and remove input
+              }
+            } else if (ev.key === 'Escape') {
+              td.textContent = currentValue; // Revert to original content using the value at click time
+              if (input.parentNode === td) { // Ensure input is still a child before removing
+                  input.remove(); // Remove the input without saving
+              }
             }
           });
         });
@@ -1019,31 +1047,31 @@
               const tdDeck = document.createElement('td');
               tdDeck.textContent = entry.deck;
               tdDeck.dataset.label = 'デッキ';
-              makeEditableCell(tdDeck, entry.deck, 'text', entry, 'deck');
+              makeEditableCell(tdDeck, entry, 'deck', 'text'); // Pass entry and fieldName
               tr.appendChild(tdDeck);
 
               const tdOpponent = document.createElement('td');
               tdOpponent.textContent = entry.opponent;
               tdOpponent.dataset.label = '相手';
-              makeEditableCell(tdOpponent, entry.opponent, 'text', entry, 'opponent');
+              makeEditableCell(tdOpponent, entry, 'opponent', 'text'); // Pass entry and fieldName
               tr.appendChild(tdOpponent);
 
               const tdFirstSecond = document.createElement('td');
               tdFirstSecond.textContent = entry.firstSecond;
               tdFirstSecond.dataset.label = '先後';
-              makeEditableCell(tdFirstSecond, entry.firstSecond, 'text', entry, 'firstSecond');
+              makeEditableCell(tdFirstSecond, entry, 'firstSecond', 'text'); // Pass entry and fieldName
               tr.appendChild(tdFirstSecond);
 
               const tdResult = document.createElement('td');
               tdResult.textContent = entry.result;
               tdResult.dataset.label = '勝敗';
-              makeEditableCell(tdResult, entry.result, 'text', entry, 'result');
+              makeEditableCell(tdResult, entry, 'result', 'text'); // Pass entry and fieldName
               tr.appendChild(tdResult);
 
               const tdMemo = document.createElement('td');
               tdMemo.textContent = entry.memo;
               tdMemo.dataset.label = 'メモ';
-              makeEditableCell(tdMemo, entry.memo, 'textarea', entry, 'memo'); // PCでのメモは編集可能
+              makeEditableCell(tdMemo, entry, 'memo', 'textarea'); // Pass entry and fieldName
               tr.appendChild(tdMemo);
 
               const delTd = document.createElement('td');
