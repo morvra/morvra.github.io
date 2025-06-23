@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シャドウバースWB 対戦支援ツール</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f7f9fb;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2, h3 {
+      color: #2c3e50;
+      margin-top: 0;
+    }
+
+    .two-column-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .flex-column-item {
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 984px) {
+      .flex-column-item {
+        width: auto;
+        margin: 0;
+        flex-basis: 0;
+        min-width: 370px;
+      }
+
+      .counter-storage-column {
+        flex-grow: 2;
+        max-width: 336px;
+      }
+
+      .record-panel-column {
+        flex-grow: 5;
+        max-width: 840px;
+      }
+
+      .record-panel {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          height: auto;
+          box-sizing: border-box;
+      }
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .record-panel h3,
+    .record-panel .app-form,
+    .record-panel .filter-controls {
+        flex-shrink: 0;
+    }
+
+    .counter-control-group {
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .counter-control-group span.label {
+      width: 200px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .counter-control-group button {
+      background: #ecf0f1;
+      border: none;
+      padding: 6px 12px;
+      font-size: 18px;
+      margin: 0 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .counter-control-group button:hover { background: #d0d7de; }
+    .count-value {
+      font-size: 18px;
+      width: 40px;
+      text-align: center;
+    }
+
+    .app-form input, .app-form select, .app-form textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 8px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .app-form label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .app-form textarea { resize: vertical; }
+
+    .form-action-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+      color: white;
+    }
+    .form-action-button.primary { background: #1abc9c; }
+    .form-action-button.primary:hover { background: #16a085; }
+    .form-action-button.secondary { background: #F39C12; }
+    .form-action-button.secondary:hover { background: #d35400; }
+    .form-action-button.neutral { background: #7f8c8d; }
+    .form-action-button.neutral:hover { background: #5d6d7e; }
+    .form-action-button.danger { background: #e74c3c; }
+    .form-action-button.danger:hover { background: #c0392b; }
+
+    .toggle-button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .toggle-button-group button {
+      background: #ecf0f1;
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .toggle-button-group button.active {
+      background: #1abc9c;
+      color: white;
+      border-color: #16a085;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    .data-table thead {
+      background: #ecf0f1;
+      font-weight: bold;
+    }
+    .data-table th, .data-table td {
+      text-align: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .data-table tr:hover { background: #f9f9f9; }
+    .data-table td:last-child button {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .data-table td:last-child button:hover { background: #c0392b; }
+
+    #match-record-table td:nth-child(6),
+    #match-record-table th:nth-child(6) {
+      width: 40%;
+      word-break: break-word;
+      white-space: normal;
+    }
+    #match-record-table td:nth-child(6),
+    #card-data-table td:nth-child(2) {
+      text-align: left;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .card-actions .form-action-button {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    .card-delete-button { display: none; }
+    .delete-mode .card-delete-button { display: inline-block; }
+    #card-data-table th:nth-child(4),
+    #card-data-table td:nth-child(4) { display: none; }
+    #counter-section.delete-mode #card-data-table th:nth-child(4),
+    #counter-section.delete-mode #card-data-table td:nth-child(4) { display: table-cell; }
+
+    .data-management-panel > h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    .data-management-panel .toggle-button-group { margin-bottom: 12px; }
+    .data-management-panel .form-action-button {
+      min-width: 96px;
+      text-align: center;
+    }
+    .file-input-label { cursor: pointer; }
+    .file-input-button {
+      display: inline-block;
+      background: #ecf0f1;
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333;
+      user-select: none;
+      min-width: 70px;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .file-input-button:hover { background: #d0d7de; }
+    .data-management-panel input[type="file"] { display: none; }
+
+    .tab-navigation {
+      display: flex;
+      margin-bottom: 20px;
+      background: #e9ecef;
+    }
+    .tab-navigation-button {
+      flex: 1;
+      padding: 10px 5px;
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      transition: background 0.3s, color 0.3s;
+      font-weight: 600;
+      color: #495057;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tab-navigation-button:hover { background: #dee2e6; }
+    .tab-navigation-button.active {
+      background: #fff;
+      color: #1abc9c;
+    }
+
+    .form-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .form-left, .form-right {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .filter-controls {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #fcfcfc;
+      overflow: hidden;
+    }
+    .filter-controls details { border: none; }
+    .filter-controls summary {
+      padding: 16px;
+      cursor: pointer;
+      outline: none;
+      font-weight: bold;
+      color: #2c3e50;
+      position: relative;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-controls summary::marker,
+    .filter-controls summary::-webkit-details-marker { display: none; }
+    .filter-controls summary .filter-summary-title { margin: 0; font-size:18px; }
+    .filter-controls summary .toggle-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.2s ease-in-out;
+    }
+    .filter-controls details[open] summary .toggle-icon { transform: rotate(180deg); }
+	input#filter-deck-name-input {
+      margin-top: 4px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .filter-content-wrapper {
+      padding: 0 16px 16px 16px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease-out;
+    }
+    .filter-controls details[open] .filter-content-wrapper { max-height: 500px; }
+
+    .filter-content-wrapper .app-form input[type="text"] { margin-bottom: 16px; }
+    .filter-content-wrapper .form-action-button { margin-top: 15px; }
+
+    .add-card-form-layout {
+      margin-top:12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .add-card-form-layout input[type="number"] {
+      width: 60px;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size:14px;
+    }
+    .add-card-form-layout input[type="text"] {
+      flex: 1;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size:14px;
+    }
+    .add-card-form-layout .form-action-button {
+      padding: 4px 16px;
+      margin-top: -10px;
+      font-size: 14px;
+    }
+
+    #card-data-table td button {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background: #ecf0f1;
+        transition: background 0.2s;
+    }
+    #card-data-table td button:hover { background: #d0d7de; }
+    #card-data-table td button:first-child { margin-right: 6px; }
+    #card-data-table td button:last-child { margin-left: 6px; }
+    #card-data-table td span {
+      display: inline-block;
+      width: 24px;
+      text-align: center;
+    }
+
+    .data-table th, .data-table td {
+        padding: 6px;
+        border-bottom: 1px solid #ddd;
+    }
+    .data-table thead tr { background:#ecf0f1; }
+    .info-display {
+      font-weight: bold;
+      margin-bottom: 8px;
+      min-height: 24px;
+    }
+
+    @media (max-width: 983px) {
+      .tab-navigation {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin-bottom: 0;
+        border-radius: 0;
+        z-index: 1000;
+        padding-bottom: env(safe-area-inset-bottom, 4px);
+      }
+
+      body {
+        padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+      }
+
+      #match-record-table-wrapper { display: none; }
+      #match-record-cards-container {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          margin-top: 16px;
+      }
+
+      .match-record-card {
+          background: white;
+          border-radius: 8px;
+          padding: 12px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          position: relative;
+          font-size: 14px;
+      }
+
+      .match-record-card .card-item {
+          display: flex;
+          align-items: flex-start;
+      }
+
+      .match-record-card .card-label {
+          font-weight: bold;
+          min-width: 50px;
+          margin-right: 6px;
+          color: #444;
+      }
+
+      .match-record-card .card-value {
+          flex-grow: 1;
+          word-break: break-word;
+          font-size: 14px;
+      }
+
+      .match-record-card .delete-card-button {
+          position: absolute;
+          top: 6px;
+          right: 6px;
+          background: transparent;
+          border: none;
+          font-size: 18px;
+          cursor: pointer;
+          color: #e74c3c;
+          padding: 4px;
+          border-radius: 4px;
+      }
+      .match-record-card .delete-card-button:hover {
+          color: #c0392b;
+          background-color: #fce7e7;
+      }
+
+      .match-record-card .card-value.editable-memo {
+        cursor: pointer;
+        padding: 2px 4px;
+        border-radius: 4px;
+        min-height: 1.2em;
+        line-height: 1.2em;
+      }
+      .match-record-card .card-value.editable-memo:hover { background-color: #f0f0f0; }
+      .match-record-card .card-value.editable-memo textarea {
+        width: 100%;
+        min-height: 50px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: inherit;
+      }
+    }
+
+    @media (min-width: 984px) {
+      .tab-navigation {
+        position: static;
+        margin-bottom: 20px;
+        border-top: none;
+      }
+      body { padding-bottom: 0; }
+
+      #match-record-table-wrapper {
+          display: block;
+          height: auto;
+          flex-grow: 1;
+          overflow-y: auto;
+          max-height: 86vh;
+      }
+      #match-record-cards-container { display: none; }
+      #load-more-records-button { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="tab-navigation">
+      <button class="tab-navigation-button active" data-tab="counter-section" aria-controls="counter-section" aria-selected="true">カウンタ</button>
+      <button class="tab-navigation-button" data-tab="record-section" aria-controls="record-section" aria-selected="false">戦績</button>
+      <button class="tab-navigation-button" data-tab="storage-section" aria-controls="storage-section" aria-selected="false">読込/保存</button>
+    </div>
+
+    <div class="two-column-layout">
+      <section class="panel flex-column-item counter-storage-column tab-content" id="counter-section">
+          <div class="card-list-container">
+              <h3>警戒カードリスト</h3>
+              <div class="toggle-button-group class-filter-group" id="class-filter-group">
+                <button type="button" data-class="エルフ">エルフ</button>
+                <button type="button" data-class="ロイヤル">ロイヤル</button>
+                <button type="button" data-class="ウィッチ">ウィッチ</button>
+                <button type="button" data-class="ドラゴン">ドラゴン</button>
+                <button type="button" data-class="ナイトメア">ナイトメア</button>
+                <button type="button" data-class="ビショップ">ビショップ</button>
+                <button type="button" data-class="ネメシス">ネメシス</button>
+              </div>
+              <div class="card-actions">
+                <button type="button" id="reset-card-counts-button" class="form-action-button secondary">カウントをクリア</button>
+                <button type="button" id="toggle-card-delete-mode-button" class="form-action-button neutral">削除モード OFF</button>
+              </div>
+              <div id="current-class-display" class="info-display"></div>
+              <table id="card-data-table" class="data-table">
+                <thead>
+                  <tr>
+                    <th>PP</th>
+                    <th>カード名&メモ</th>
+                    <th>カウント</th>
+                    <th>削除</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <form id="add-card-form" class="app-form add-card-form-layout">
+                <input type="number" id="new-card-pp-input" placeholder="PP" min="0" required>
+                <input type="text" id="new-card-name-input" placeholder="カード名" required>
+                <button type="submit" class="form-action-button primary">追加</button>
+              </form>
+          </div>
+      </section>
+
+      <section class="panel flex-column-item counter-storage-column tab-content" id="storage-section" style="display: none;">
+          <div class="data-management-panel">
+              <h3>エクスポート</h3>
+              <div class="toggle-button-group">
+                <button type="button" id="export-records-button" class="form-action-button secondary">戦績</button>
+                <button type="button" id="export-cards-button" class="form-action-button secondary">カードリスト</button>
+                <button type="button" id="export-all-data-button" class="form-action-button secondary">全体</button>
+              </div>
+              <h3>インポート</h3>
+              <div class="toggle-button-group" style="margin-top: 10px;">
+              <label class="file-input-label">
+                  <span class="file-input-button">戦績</span>
+                  <input type="file" id="import-records-file-input" accept=".json">
+                </label>
+                <label class="file-input-label">
+                  <span class="file-input-button">カードリスト</span>
+                  <input type="file" id="import-cards-file-input" accept=".json">
+                </label>
+                <label class="file-input-label">
+                  <span class="file-input-button">全体</span>
+                  <input type="file" id="import-all-data-file-input" accept=".json">
+                </label>
+              </div>
+				<h3>戦績の削除</h3>
+					<div class="toggle-button-group">
+					  <button type="button" id="clear-records-button" class="form-action-button danger">
+					    全削除
+					  </button>
+					</div>
+          </div>
+      </section>
+
+      <section class="panel record-panel tab-content flex-column-item record-panel-column" id="record-section" style="display: none;">
+        <h3 style="flex-shrink: 0;">戦績記録</h3>
+        <form id="add-record-form" class="app-form" style="flex-shrink: 0;">
+          <div class="form-columns">
+            <div class="form-left">
+              <label for="my-deck-input">自分のデッキ</label>
+              <input type="text" id="my-deck-input" name="deck" required>
+              <label>相手のクラス</label>
+              <div class="toggle-button-group" id="opponent-class-selection">
+                <button type="button" data-value="エルフ">エルフ</button>
+                <button type="button" data-value="ロイヤル">ロイヤル</button>
+                <button type="button" data-value="ウィッチ">ウィッチ</button>
+                <button type="button" data-value="ドラゴン">ドラゴン</button>
+                <button type="button" data-value="ナイトメア">ナイトメア</button>
+                <button type="button" data-value="ビショップ">ビショップ</button>
+                <button type="button" data-value="ネメシス">ネメシス</button>
+              </div>
+            </div>
+            <div class="form-right">
+              <label>先後</label>
+              <div class="toggle-button-group" id="turn-order-selection">
+                <button type="button" data-value="先攻">先攻</button>
+                <button type="button" data-value="後攻">後攻</button>
+              </div>
+              <label>勝敗</label>
+              <div class="toggle-button-group" id="match-result-selection">
+                <button type="button" data-value="⭕">勝ち</button>
+                <button type="button" data-value="✖">負け</button>
+              </div>
+              <label for="record-memo-input">メモ</label>
+              <textarea id="record-memo-input" name="memo" rows="2"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-action-button primary">記録する</button>
+        </form>
+
+        <div class="filter-controls" style="flex-shrink: 0;">
+            <details id="record-filter-details">
+                <summary>
+                    <span class="filter-summary-title">戦績フィルター <span class="toggle-icon"></span></span>
+                </summary>
+                <div class="filter-content-wrapper">
+                    <div class="form-columns">
+                        <div class="form-left">
+                            <label for="filter-deck-name-input">自分のデッキ名で絞り込み</label>
+                            <input type="text" id="filter-deck-name-input" placeholder="デッキ名を入力">
+                        </div>
+                        <div class="form-right">
+                            <label>相手のクラスで絞り込み</label>
+                            <div class="toggle-button-group" id="filter-opponent-class-selection">
+                              <button type="button" data-value="">すべて</button>
+                              <button type="button" data-value="エルフ">エルフ</button>
+                              <button type="button" data-value="ロイヤル">ロイヤル</button>
+                              <button type="button" data-value="ウィッチ">ウィッチ</button>
+                              <button type="button" data-value="ドラゴン">ドラゴン</button>
+                              <button type="button" data-value="ナイトメア">ナイトメア</button>
+                              <button type="button" data-value="ビショップ">ビショップ</button>
+                              <button type="button" data-value="ネメシス">ネメシス</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="clear-record-filters-button" class="form-action-button primary">フィルターをクリア</button>
+                </div>
+            </details>
+        </div>
+
+        <h3 style="flex-shrink: 0;">記録一覧</h3>
+		<div class="record-table-wrapper" id="match-record-table-wrapper">
+        <table id="match-record-table" class="data-table">
+          <thead>
+            <tr>
+              <th>日時</th>
+              <th>デッキ</th>
+              <th>相手</th>
+              <th>先後</th>
+              <th>勝敗</th>
+              <th>メモ</th>
+              <th>削除</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+		</div>
+        <div id="match-record-cards-container">
+            <!-- Cards will be injected here for mobile -->
+        </div>
+        <button id="load-more-records-button" class="form-action-button neutral" style="display: none; width: 100%; margin-top: 20px;">さらに表示</button>
+      </section>
+	</div>
+  </main>
+  <script>
+    // --- Local Storage Utility ---
+    const Storage = {
+      get: (key, defaultValue = null) => {
+        try {
+          const item = localStorage.getItem(key);
+          return item ? JSON.parse(item) : defaultValue;
+        } catch (e) {
+          console.error(`Error getting item from localStorage for key "${key}":`, e);
+          return defaultValue;
+        }
+      },
+      set: (key, value) => {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+        } catch (e) {
+          console.error(`Error setting item to localStorage for key "${key}":`, e);
+        }
+      },
+      remove: (key) => {
+        try {
+          localStorage.removeItem(key);
+        } catch (e) {
+          console.error(`Error removing item from localStorage for key "${key}":`, e);
+        }
+      },
+      getAllKeys: (prefix) => {
+        const keys = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith(prefix)) {
+            keys.push(key);
+          }
+        }
+        return keys;
+      }
+    };
+
+    // --- Debounce Utility ---
+    const debounce = (func, delay) => {
+      let timeout;
+      return function(...args) {
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), delay);
+      };
+    };
+
+    // --- Local Storage Keys ---
+    const LAST_TAB_KEY = 'svwb-last-tab';
+    const RECORDS_KEY = 'svwb-records';
+    const LAST_DECK_KEY = 'svwb-deck';
+    const FILTER_DECK_KEY = 'svwb-filter-deck';
+    const FILTER_CLASS_KEY = 'svwb-filter-class';
+    const FILTER_OPEN_KEY = 'svwb-filter-open-state';
+    const CARD_CLASS_PREFIX = 'svwb-cards-';
+
+
+    // --- Tab Management Module ---
+    const TabManager = (() => {
+      const tabs = document.querySelectorAll('.tab-navigation-button');
+      const panes = document.querySelectorAll('.tab-content');
+
+      const showTab = (targetPaneId) => {
+        Storage.set(LAST_TAB_KEY, targetPaneId);
+        const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
+
+        panes.forEach(pane => pane.style.display = 'none');
+        tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+        });
+
+        if (isLargeScreen && (targetPaneId === 'counter-section' || targetPaneId === 'record-section')) {
+          const counterPane = document.getElementById('counter-section');
+          const recordPane = document.getElementById('record-section');
+          const counterTabButton = document.querySelector(`.tab-navigation-button[data-tab="counter-section"]`);
+          const recordTabButton = document.querySelector(`.tab-navigation-button[data-tab="record-section"]`);
+
+          if (counterPane) counterPane.style.display = 'block';
+          if (recordPane) {
+            recordPane.style.display = 'flex';
+            recordPane.style.flexDirection = 'column';
+          }
+
+          if (counterTabButton) {
+              counterTabButton.classList.add('active');
+              counterTabButton.setAttribute('aria-selected', 'true');
+          }
+          if (recordTabButton) {
+              recordTabButton.classList.add('active');
+              recordTabButton.setAttribute('aria-selected', 'true');
+          }
+        } else {
+          const targetPane = document.getElementById(targetPaneId);
+          if (targetPane) {
+            if (targetPaneId === 'record-section') {
+              targetPane.style.display = 'flex';
+              targetPane.style.flexDirection = 'column';
+            } else {
+              targetPane.style.display = 'block';
+            }
+          }
+          const targetTab = document.querySelector(`.tab-navigation-button[data-tab="${targetPaneId}"]`);
+          if (targetTab) {
+            targetTab.classList.add('active');
+            targetTab.setAttribute('aria-selected', 'true');
+          }
+        }
+      };
+
+      const init = () => {
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => showTab(tab.dataset.tab));
+        });
+
+        const lastTab = Storage.get(LAST_TAB_KEY, 'counter-section');
+        showTab(lastTab);
+
+        window.addEventListener('resize', () => {
+          const currentActiveTabId = Storage.get(LAST_TAB_KEY, 'counter-section');
+          showTab(currentActiveTabId);
+          RecordManager.applyFilters();
+        });
+      };
+
+      return { init };
+    })();
+
+    // --- Toggle Button Group Management Module ---
+    const ToggleButtonGroup = (() => {
+      const init = () => {
+        document.querySelectorAll('.toggle-button-group').forEach(group => {
+          group.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+              group.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+              e.target.classList.add('active');
+              if (group.id.startsWith('filter-')) {
+                  const event = new CustomEvent('filterChange', { detail: { groupId: group.id, value: e.target.dataset.value } });
+                  document.dispatchEvent(event);
+              }
+            }
+          });
+        });
+      };
+
+      const getSelectedValue = (groupId) => {
+        const active = document.querySelector(`#${groupId} .active`);
+        return active ? active.dataset.value : '';
+      };
+
+      const setActiveButton = (groupId, value) => {
+        const group = document.getElementById(groupId);
+        if (group) {
+          group.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.value === value) {
+              btn.classList.add('active');
+            }
+          });
+        }
+      };
+
+      return { init, getSelectedValue, setActiveButton };
+    })();
+
+    // --- Record Management Module ---
+    const RecordManager = (() => {
+      const recordsPerPage = 10;
+      let currentDisplayCount = recordsPerPage;
+
+      const matchRecordTableBody = document.querySelector('#match-record-table tbody');
+      const addRecordForm = document.getElementById('add-record-form');
+      const myDeckInput = document.getElementById('my-deck-input');
+      const recordMemoInput = document.getElementById('record-memo-input');
+      const filterDeckNameInput = document.getElementById('filter-deck-name-input');
+      const clearRecordFiltersButton = document.getElementById('clear-record-filters-button');
+      const recordFilterDetails = document.getElementById('record-filter-details');
+      const matchRecordCardsContainer = document.getElementById('match-record-cards-container');
+      const loadMoreButton = document.getElementById('load-more-records-button');
+
+      let allRecords = [];
+      let filteredRecordsCache = [];
+
+      const addDataLabelsToRecordTable = () => {
+        const headers = Array.from(document.querySelectorAll('#match-record-table th')).map(th => th.textContent);
+        document.querySelectorAll('#match-record-table tbody tr').forEach(row => {
+          Array.from(row.querySelectorAll('td')).forEach((td, index) => {
+            if (headers[index] && index < headers.length -1) {
+              td.dataset.label = headers[index];
+            }
+          });
+        });
+      };
+
+      const saveRecords = () => {
+        const data = allRecords.map(record => ({
+          timestamp: record.timestamp,
+          date: record.date,
+          deck: record.deck,
+          opponent: record.opponent,
+          firstSecond: record.firstSecond,
+          result: record.result,
+          memo: record.memo
+        }));
+        Storage.set(RECORDS_KEY, data);
+      };
+
+      const loadRecords = () => {
+        allRecords = Storage.get(RECORDS_KEY, []);
+        allRecords.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        currentDisplayCount = recordsPerPage;
+        applyFilters();
+      };
+
+      const applyFilters = () => {
+        matchRecordTableBody.innerHTML = '';
+        matchRecordCardsContainer.innerHTML = '';
+
+        const filterDeckName = filterDeckNameInput.value.toLowerCase();
+        const filterOpponentClass = ToggleButtonGroup.getSelectedValue('filter-opponent-class-selection');
+
+        const filteredRecords = allRecords.filter(record => {
+          const matchesDeck = record.deck.toLowerCase().includes(filterDeckName);
+          const matchesClass = filterOpponentClass === '' || record.opponent === filterOpponentClass;
+          return matchesDeck && matchesClass;
+        });
+        filteredRecordsCache = filteredRecords;
+
+        const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
+
+        if (isLargeScreen) {
+            filteredRecordsCache.forEach(entry => {
+                matchRecordTableBody.appendChild(createRecordHtml(entry));
+            });
+            addDataLabelsToRecordTable();
+            loadMoreButton.style.display = 'none';
+        } else {
+            const recordsToRender = filteredRecordsCache.slice(0, currentDisplayCount);
+            recordsToRender.forEach(entry => {
+                matchRecordCardsContainer.appendChild(createRecordHtml(entry));
+            });
+
+            if (filteredRecordsCache.length > currentDisplayCount) {
+                loadMoreButton.style.display = 'block';
+            } else {
+                loadMoreButton.style.display = 'none';
+            }
+        }
+      };
+
+      const makeEditableCell = (td, initialValue, type = 'text', entry, fieldName) => {
+        td.addEventListener('click', () => {
+          if (td.querySelector('input') || td.querySelector('textarea')) return;
+
+          const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+          if (type === 'text') input.type = 'text';
+          input.value = initialValue;
+          Object.assign(input.style, { fontSize: '14px', padding: '2px 4px', width: '100%' });
+          input.setAttribute('aria-label', `${fieldName}を編集`);
+          td.textContent = '';
+          td.appendChild(input);
+          input.focus();
+
+          const finishEdit = () => {
+            const val = input.value.trim();
+            entry[fieldName] = val; // Direct update on the object
+            td.textContent = val;
+            saveRecords();
+          };
+
+          input.addEventListener('blur', finishEdit);
+          input.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Enter' && type === 'text') {
+              ev.preventDefault();
+              finishEdit();
+            }
+            if (ev.key === 'Escape') {
+              td.textContent = initialValue;
+            }
+          });
+        });
+      };
+
+      const makeEditableCardMemo = (memoElement, entry) => {
+        memoElement.classList.add('editable-memo');
+        memoElement.addEventListener('click', () => {
+          if (memoElement.querySelector('textarea')) return;
+
+          const originalMemo = entry.memo;
+          const textarea = document.createElement('textarea');
+          textarea.value = originalMemo;
+          textarea.setAttribute('aria-label', 'メモを編集');
+          memoElement.innerHTML = '';
+          memoElement.appendChild(textarea);
+          textarea.focus();
+
+          const finishEdit = () => {
+            const newMemo = textarea.value.trim();
+            entry.memo = newMemo;
+            memoElement.textContent = newMemo;
+            saveRecords();
+          };
+
+          textarea.addEventListener('blur', finishEdit);
+          textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              finishEdit();
+            } else if (e.key === 'Escape') {
+              memoElement.textContent = originalMemo;
+            }
+          });
+        });
+      };
+
+      const createRecordHtml = (entry) => {
+          const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
+          const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', {
+              year: 'numeric', month: '2-digit', day: '2-digit',
+              hour: '2-digit', minute: '2-digit'
+          }).replace(/\//g, '-');
+
+          if (isLargeScreen) {
+              const tr = document.createElement('tr');
+
+              const tdDate = document.createElement('td');
+              tdDate.textContent = formattedDate;
+              tdDate.dataset.timestamp = entry.timestamp;
+              tdDate.dataset.label = '日時';
+              tr.appendChild(tdDate);
+
+              const tdDeck = document.createElement('td');
+              tdDeck.textContent = entry.deck;
+              tdDeck.dataset.label = 'デッキ';
+              makeEditableCell(tdDeck, entry.deck, 'text', entry, 'deck');
+              tr.appendChild(tdDeck);
+
+              const tdOpponent = document.createElement('td');
+              tdOpponent.textContent = entry.opponent;
+              tdOpponent.dataset.label = '相手';
+              makeEditableCell(tdOpponent, entry.opponent, 'text', entry, 'opponent');
+              tr.appendChild(tdOpponent);
+
+              const tdFirstSecond = document.createElement('td');
+              tdFirstSecond.textContent = entry.firstSecond;
+              tdFirstSecond.dataset.label = '先後';
+              makeEditableCell(tdFirstSecond, entry.firstSecond, 'text', entry, 'firstSecond');
+              tr.appendChild(tdFirstSecond);
+
+              const tdResult = document.createElement('td');
+              tdResult.textContent = entry.result;
+              tdResult.dataset.label = '勝敗';
+              makeEditableCell(tdResult, entry.result, 'text', entry, 'result');
+              tr.appendChild(tdResult);
+
+              const tdMemo = document.createElement('td');
+              tdMemo.textContent = entry.memo;
+              tdMemo.dataset.label = 'メモ';
+              makeEditableCell(tdMemo, entry.memo, 'textarea', entry, 'memo');
+              tr.appendChild(tdMemo);
+
+              const delTd = document.createElement('td');
+              const delBtn = document.createElement('button');
+              delBtn.textContent = '🗑️';
+              Object.assign(delBtn.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
+              delBtn.title = '削除';
+              delBtn.setAttribute('aria-label', `${formattedDate}の記録を削除`);
+              delBtn.onclick = () => {
+                const indexToRemove = allRecords.findIndex(rec => rec.timestamp === entry.timestamp);
+                if (indexToRemove !== -1) {
+                  allRecords.splice(indexToRemove, 1);
+                  saveRecords();
+                  applyFilters();
+                }
+              };
+              delTd.appendChild(delBtn);
+              tr.appendChild(delTd);
+
+              return tr;
+
+          } else {
+              const cardDiv = document.createElement('div');
+              cardDiv.classList.add('match-record-card');
+              cardDiv.dataset.timestamp = entry.timestamp;
+
+              const memoItem = document.createElement('div');
+              memoItem.classList.add('card-item');
+              memoItem.innerHTML = `<span class="card-label">メモ:</span> `;
+              const memoValueSpan = document.createElement('span');
+              memoValueSpan.classList.add('card-value');
+              memoValueSpan.textContent = entry.memo;
+              memoItem.appendChild(memoValueSpan);
+
+              cardDiv.innerHTML = `
+                  <div class="card-item"><span class="card-label">日時:</span> <span class="card-value">${formattedDate}</span></div>
+                  <div class="card-item"><span class="card-label">デッキ:</span> <span class="card-value">${entry.deck}</span></div>
+                  <div class="card-item"><span class="card-label">相手:</span> <span class="card-value">${entry.opponent}</span></div>
+                  <div class="card-item"><span class="card-label">先後:</span> <span class="card-value">${entry.firstSecond}</span></div>
+                  <div class="card-item"><span class="card-label">勝敗:</span> <span class="card-value">${entry.result}</span></div>
+              `;
+              cardDiv.appendChild(memoItem);
+
+              const deleteButton = document.createElement('button');
+              deleteButton.classList.add('delete-card-button');
+              deleteButton.title = '削除';
+              deleteButton.textContent = '🗑️';
+              deleteButton.setAttribute('aria-label', `${formattedDate}の記録を削除`);
+              cardDiv.appendChild(deleteButton);
+
+              makeEditableCardMemo(memoValueSpan, entry);
+
+              deleteButton.addEventListener('click', () => {
+                  const indexToRemove = allRecords.findIndex(rec => rec.timestamp === cardDiv.dataset.timestamp);
+                  if (indexToRemove !== -1) {
+                      allRecords.splice(indexToRemove, 1);
+                      saveRecords();
+                      applyFilters();
+                  }
+              });
+
+              return cardDiv;
+          }
+      };
+
+      const addRecordEntry = (deck, opponent, firstSecond, result, memo) => {
+        const newRecord = {
+          timestamp: new Date().toISOString(),
+          date: new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-'),
+          deck,
+          opponent,
+          firstSecond,
+          result,
+          memo
+        };
+        allRecords.unshift(newRecord);
+        saveRecords();
+        currentDisplayCount = recordsPerPage;
+        applyFilters();
+      };
+
+      const handleRecordSubmit = (e) => {
+        e.preventDefault();
+        const deck = myDeckInput.value;
+        const opponent = ToggleButtonGroup.getSelectedValue('opponent-class-selection');
+        const firstSecond = ToggleButtonGroup.getSelectedValue('turn-order-selection');
+        const result = ToggleButtonGroup.getSelectedValue('match-result-selection');
+        const memo = recordMemoInput.value;
+
+        if (!opponent || !firstSecond || !result) {
+          // Replace with custom modal in production
+          alert('すべて選択してください');
+          return;
+        }
+
+        addRecordEntry(deck, opponent, firstSecond, result, memo);
+        Storage.set(LAST_DECK_KEY, deck);
+        recordMemoInput.value = '';
+        document.querySelectorAll('#opponent-class-selection button.active, #turn-order-selection button.active, #match-result-selection button.active').forEach(btn => {
+          btn.classList.remove('active');
+        });
+      };
+
+      const loadMoreRecords = () => {
+          const oldDisplayCount = currentDisplayCount;
+          currentDisplayCount += recordsPerPage;
+
+          const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
+
+          if (!isLargeScreen) {
+              const newRecordsToAppend = filteredRecordsCache.slice(oldDisplayCount, currentDisplayCount);
+              newRecordsToAppend.forEach(entry => {
+                  matchRecordCardsContainer.appendChild(createRecordHtml(entry));
+              });
+
+              if (filteredRecordsCache.length > currentDisplayCount) {
+                  loadMoreButton.style.display = 'block';
+              } else {
+                  loadMoreButton.style.display = 'none';
+              }
+          } else {
+              applyFilters();
+          }
+      };
+
+      const debouncedLoadRecords = debounce(loadRecords, 300);
+
+      const init = () => {
+        const lastDeck = Storage.get(LAST_DECK_KEY);
+        if (lastDeck) myDeckInput.value = lastDeck;
+
+        filterDeckNameInput.value = Storage.get(FILTER_DECK_KEY, '');
+        ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', Storage.get(FILTER_CLASS_KEY, ''));
+
+        loadRecords();
+
+        addRecordForm.addEventListener('submit', handleRecordSubmit);
+
+        filterDeckNameInput.addEventListener('input', debouncedLoadRecords);
+        document.addEventListener('filterChange', (e) => {
+            if (e.detail.groupId === 'filter-opponent-class-selection') {
+                Storage.set(FILTER_CLASS_KEY, e.detail.value);
+                loadRecords();
+            }
+        });
+        clearRecordFiltersButton.addEventListener('click', () => {
+            filterDeckNameInput.value = '';
+            ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', '');
+            Storage.remove(FILTER_DECK_KEY);
+            Storage.remove(FILTER_CLASS_KEY);
+            loadRecords();
+        });
+
+        if (recordFilterDetails) {
+          const isFilterOpen = Storage.get(FILTER_OPEN_KEY, false);
+          if (isFilterOpen) {
+            recordFilterDetails.setAttribute('open', '');
+          } else {
+            recordFilterDetails.removeAttribute('open');
+          }
+
+          recordFilterDetails.addEventListener('toggle', () => {
+            Storage.set(FILTER_OPEN_KEY, recordFilterDetails.open);
+          });
+        }
+
+        loadMoreButton.addEventListener('click', loadMoreRecords);
+      };
+
+      return { init, loadRecords, applyFilters };
+    })();
+
+    // --- Card List Management Module ---
+    const CardListManager = (() => {
+      const classFilterGroup = document.getElementById('class-filter-group');
+      const currentClassDisplay = document.getElementById('current-class-display');
+      const cardDataTableBody = document.querySelector('#card-data-table tbody');
+      const addCardForm = document.getElementById('add-card-form');
+      const newCardPpInput = document.getElementById('new-card-pp-input');
+      const newCardNameInput = document.getElementById('new-card-name-input');
+      const resetCardCountsButton = document.getElementById('reset-card-counts-button');
+      const toggleCardDeleteModeButton = document.getElementById('toggle-card-delete-mode-button');
+      const counterSection = document.getElementById('counter-section');
+
+      let currentClass = '';
+      let allCardData = {}; // Stores all class card data
+
+      const saveCards = (className) => {
+        if (!className) return;
+        Storage.set(CARD_CLASS_PREFIX + className, allCardData[className] || []);
+      };
+
+      const loadCards = (className) => {
+        if (!className) return [];
+        return Storage.get(CARD_CLASS_PREFIX + className, []);
+      };
+
+      const loadAllClassCards = () => {
+        const classNames = ["エルフ", "ロイヤル", "ウィッチ", "ドラゴン", "ナイトメア", "ビショップ", "ネメシス"];
+        classNames.forEach(name => {
+            allCardData[name] = loadCards(name);
+        });
+        if (currentClass) {
+            renderCardList();
+        }
+      };
+
+      const sortCards = (cards) => {
+        return cards.sort((a, b) => a.pp - b.pp);
+      };
+
+      const renderCardList = () => {
+        cardDataTableBody.innerHTML = '';
+        if (!currentClass) {
+          currentClassDisplay.textContent = '';
+          return;
+        }
+        currentClassDisplay.textContent = `クラス: ${currentClass}`;
+
+        const cards = allCardData[currentClass] || [];
+        sortCards(cards);
+
+        cards.forEach((card, index) => {
+          const tr = document.createElement('tr');
+
+          const tdPP = document.createElement('td');
+          tdPP.textContent = card.pp;
+          tdPP.style.cursor = 'pointer';
+          tdPP.title = 'クリックで編集';
+          tdPP.addEventListener('click', () => {
+            if (tdPP.querySelector('input')) return;
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.min = '0';
+            input.value = card.pp;
+            Object.assign(input.style, { width: '60px', fontSize: '14px', padding: '2px 4px' });
+            input.setAttribute('aria-label', `カードPPを編集: ${card.name}`);
+            tdPP.textContent = '';
+            tdPP.appendChild(input);
+            input.focus();
+            const finishEdit = () => {
+              let val = parseInt(input.value, 10);
+              if (isNaN(val) || val < 0) val = 0;
+              card.pp = val;
+              renderCardList();
+              saveCards(currentClass);
+            };
+            input.addEventListener('blur', finishEdit);
+            input.addEventListener('keydown', (ev) => {
+              if (ev.key === 'Enter') finishEdit();
+              else if (ev.key === 'Escape') renderCardList();
+            });
+          });
+          tr.appendChild(tdPP);
+
+          const tdName = document.createElement('td');
+          tdName.textContent = card.name;
+          tdName.style.cursor = 'pointer';
+          tdName.title = 'クリックで編集';
+          tdName.addEventListener('click', () => {
+            if (tdName.querySelector('input')) return;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = card.name;
+            Object.assign(input.style, { fontSize: '14px', padding: '2px 4px' });
+            input.setAttribute('aria-label', `カード名を編集: ${card.name}`);
+            tdName.textContent = '';
+            tdName.appendChild(input);
+            input.focus();
+            const finishEdit = () => {
+              const val = input.value.trim();
+              card.name = val || '(無名カード)';
+              renderCardList();
+              saveCards(currentClass);
+            };
+            input.addEventListener('blur', finishEdit);
+            input.addEventListener('keydown', (ev) => {
+              if (ev.key === 'Enter') finishEdit();
+              else if (ev.key === 'Escape') renderCardList();
+            });
+          });
+          tr.appendChild(tdName);
+
+          const tdCount = document.createElement('td');
+          const btnMinus = document.createElement('button');
+          btnMinus.textContent = '−';
+          btnMinus.setAttribute('aria-label', `${card.name}のカウントを減らす`);
+          btnMinus.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (card.count > 0) {
+              card.count--;
+              renderCardList();
+              saveCards(currentClass);
+            }
+          });
+          const spanCount = document.createElement('span');
+          spanCount.textContent = card.count;
+          spanCount.setAttribute('aria-live', 'polite'); // Announce count changes
+          const btnPlus = document.createElement('button');
+          btnPlus.textContent = '+';
+          btnPlus.setAttribute('aria-label', `${card.name}のカウントを増やす`);
+          btnPlus.addEventListener('click', (e) => {
+            e.preventDefault();
+            card.count++;
+            renderCardList();
+            saveCards(currentClass);
+          });
+          tdCount.appendChild(btnMinus);
+          tdCount.appendChild(spanCount);
+          tdCount.appendChild(btnPlus);
+          tr.appendChild(tdCount);
+
+          const tdDel = document.createElement('td');
+          const btnDel = document.createElement('button');
+          btnDel.classList.add('card-delete-button');
+          btnDel.textContent = '🗑️';
+          Object.assign(btnDel.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
+          btnDel.title = '削除';
+          btnDel.setAttribute('aria-label', `${card.name}をリストから削除`);
+          btnDel.addEventListener('click', (e) => {
+            e.preventDefault();
+            allCardData[currentClass].splice(index, 1);
+            renderCardList();
+            saveCards(currentClass);
+          });
+          tdDel.appendChild(btnDel);
+          tr.appendChild(tdDel);
+
+          cardDataTableBody.appendChild(tr);
+        });
+      };
+
+      const handleClassSelection = (e) => {
+        if (e.target.tagName !== 'BUTTON') return;
+        classFilterGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        currentClass = e.target.dataset.class;
+        allCardData[currentClass] = loadCards(currentClass);
+        renderCardList();
+      };
+
+      const handleCardAdd = (e) => {
+        e.preventDefault();
+        if (!currentClass) {
+          // Replace with custom modal in production
+          alert('まず左上のクラスを選択してください');
+          return;
+        }
+        let ppVal = parseInt(newCardPpInput.value, 10);
+        if (isNaN(ppVal) || ppVal < 0) {
+          // Replace with custom modal in production
+          alert('PPは0以上の整数を入力してください');
+          newCardPpInput.focus();
+          return;
+        }
+        let nameVal = newCardNameInput.value.trim();
+        if (!nameVal) {
+          // Replace with custom modal in production
+          alert('カード名を入力してください');
+          newCardNameInput.focus();
+          return;
+        }
+        if (!allCardData[currentClass]) allCardData[currentClass] = [];
+        allCardData[currentClass].push({pp: ppVal, name: nameVal, count: 0});
+        allCardData[currentClass] = sortCards(allCardData[currentClass]);
+        saveCards(currentClass);
+        renderCardList();
+        addCardForm.reset();
+        newCardPpInput.focus();
+      };
+
+      const resetCounts = () => {
+        if (!currentClass || !allCardData[currentClass]) return;
+        allCardData[currentClass].forEach(card => {
+          card.count = 0;
+        });
+        saveCards(currentClass);
+        renderCardList();
+      };
+
+      const toggleDeleteMode = () => {
+        const isActive = counterSection.classList.toggle('delete-mode');
+        toggleCardDeleteModeButton.textContent = isActive ? '削除モード ON' : '削除モード OFF';
+        toggleCardDeleteModeButton.setAttribute('aria-pressed', isActive);
+      };
+
+      const init = () => {
+        classFilterGroup.addEventListener('click', handleClassSelection);
+        addCardForm.addEventListener('submit', handleCardAdd);
+        resetCardCountsButton.addEventListener('click', resetCounts);
+        toggleCardDeleteModeButton.addEventListener('click', toggleDeleteMode);
+        toggleCardDeleteModeButton.setAttribute('aria-pressed', 'false'); // Initial state for ARIA
+
+        loadAllClassCards(); // Load all card data for all classes initially
+
+        const firstBtn = classFilterGroup.querySelector('button');
+        if (firstBtn) {
+          firstBtn.click();
+        }
+      };
+
+      return { init, getAllCardData: () => allCardData, CLASS_PREFIX: CARD_CLASS_PREFIX, renderCardList, loadAllClassCards };
+    })();
+
+    // --- Data Import/Export Management Module ---
+    const DataManager = (() => {
+      const exportAsJson = (filename, data) => {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+
+      const readJsonFile = (inputEl, callback) => {
+        const file = inputEl.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result);
+            callback(data);
+          } catch (e) {
+            // Replace with custom modal in production
+            alert('読み込み失敗：JSONの形式が不正です。');
+          }
+        };
+        reader.readAsText(file);
+      };
+
+      const init = () => {
+        // Export buttons
+        document.getElementById('export-records-button').addEventListener('click', () => {
+          const records = Storage.get(RECORDS_KEY, []);
+          exportAsJson(`svwb_records_${new Date().toISOString().slice(0,10)}.json`, records);
+        });
+
+        document.getElementById('export-cards-button').addEventListener('click', () => {
+          const cards = CardListManager.getAllCardData();
+          exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, cards);
+        });
+
+        document.getElementById('export-all-data-button').addEventListener('click', () => {
+          const records = Storage.get(RECORDS_KEY, []);
+          const cards = CardListManager.getAllCardData();
+          exportAsJson(`svwb_all_${new Date().toISOString().slice(0,10)}.json`, { records, cards });
+        });
+
+        // Import files
+        document.getElementById('import-records-file-input').addEventListener('change', (e) => {
+          readJsonFile(e.target, (data) => {
+            if (!Array.isArray(data)) {
+                // Replace with custom modal in production
+                alert('戦績データが不正です');
+                return;
+            }
+            Storage.set(RECORDS_KEY, data);
+            RecordManager.loadRecords(); // Reload records without full page reload
+            // Replace with custom modal in production
+            alert('戦績をインポートしました。');
+            e.target.value = ''; // Clear file input
+          });
+        });
+
+        document.getElementById('import-cards-file-input').addEventListener('change', (e) => {
+          readJsonFile(e.target, (data) => {
+            if (typeof data !== 'object' || data === null) {
+                // Replace with custom modal in production
+                alert('カードデータが不正です');
+                return;
+            }
+            for (const key in data) {
+              if (key.startsWith(CARD_CLASS_PREFIX)) {
+                Storage.set(key, data[key]);
+              }
+            }
+            CardListManager.loadAllClassCards(); // Reload all cards and re-render current list
+            // Replace with custom modal in production
+            alert('カードリストをインポートしました。');
+            e.target.value = ''; // Clear file input
+          });
+        });
+
+        document.getElementById('import-all-data-file-input').addEventListener('change', (e) => {
+          readJsonFile(e.target, (data) => {
+            if (!data || typeof data !== 'object') {
+                // Replace with custom modal in production
+                alert('データが不正です');
+                return;
+            }
+            if (Array.isArray(data.records)) {
+              Storage.set(RECORDS_KEY, data.records);
+            }
+            if (typeof data.cards === 'object' && data.cards !== null) {
+              for (const key in data.cards) {
+                if (key.startsWith(CARD_CLASS_PREFIX)) {
+                  Storage.set(key, data[key]);
+                }
+              }
+            }
+            RecordManager.loadRecords(); // Reload records
+            CardListManager.loadAllClassCards(); // Reload cards
+            // Replace with custom modal in production
+            alert('全体データをインポートしました。');
+            e.target.value = ''; // Clear file input
+          });
+        });
+
+        // Clear records
+        document.getElementById('clear-records-button').addEventListener('click', () => {
+          // Replace with custom modal in production
+          if (confirm('本当に戦績をすべて削除しますか？')) {
+            Storage.remove(RECORDS_KEY);
+            RecordManager.loadRecords(); // Clear records from UI
+            // Replace with custom modal in production
+            alert('戦績を削除しました。');
+          }
+        });
+      };
+
+      return { init };
+    })();
+
+    // Initialize all modules when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      TabManager.init();
+      ToggleButtonGroup.init();
+      RecordManager.init();
+      CardListManager.init();
+      DataManager.init();
+    });
+  </script>
+</body>
+</html>
