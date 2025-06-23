@@ -944,7 +944,7 @@
 
           const finishEdit = () => {
             const val = input.value.trim();
-            entry[fieldName] = val; // Direct update on the object
+            entry[fieldName] = val;
             td.textContent = val;
             saveRecords();
           };
@@ -1128,8 +1128,7 @@
         const memo = recordMemoInput.value;
 
         if (!opponent || !firstSecond || !result) {
-          // Replace with custom modal in production
-          alert('すべて選択してください');
+          alert('すべて選択してください'); // Replace with custom modal in production
           return;
         }
 
@@ -1223,7 +1222,7 @@
       const counterSection = document.getElementById('counter-section');
 
       let currentClass = '';
-      let allCardData = {}; // Stores all class card data
+      let allCardData = {};
 
       const saveCards = (className) => {
         if (!className) return;
@@ -1335,7 +1334,7 @@
           });
           const spanCount = document.createElement('span');
           spanCount.textContent = card.count;
-          spanCount.setAttribute('aria-live', 'polite'); // Announce count changes
+          spanCount.setAttribute('aria-live', 'polite');
           const btnPlus = document.createElement('button');
           btnPlus.textContent = '+';
           btnPlus.setAttribute('aria-label', `${card.name}のカウントを増やす`);
@@ -1382,21 +1381,18 @@
       const handleCardAdd = (e) => {
         e.preventDefault();
         if (!currentClass) {
-          // Replace with custom modal in production
-          alert('まず左上のクラスを選択してください');
+          alert('まず左上のクラスを選択してください'); // Replace with custom modal in production
           return;
         }
         let ppVal = parseInt(newCardPpInput.value, 10);
         if (isNaN(ppVal) || ppVal < 0) {
-          // Replace with custom modal in production
-          alert('PPは0以上の整数を入力してください');
+          alert('PPは0以上の整数を入力してください'); // Replace with custom modal in production
           newCardPpInput.focus();
           return;
         }
         let nameVal = newCardNameInput.value.trim();
         if (!nameVal) {
-          // Replace with custom modal in production
-          alert('カード名を入力してください');
+          alert('カード名を入力してください'); // Replace with custom modal in production
           newCardNameInput.focus();
           return;
         }
@@ -1429,9 +1425,9 @@
         addCardForm.addEventListener('submit', handleCardAdd);
         resetCardCountsButton.addEventListener('click', resetCounts);
         toggleCardDeleteModeButton.addEventListener('click', toggleDeleteMode);
-        toggleCardDeleteModeButton.setAttribute('aria-pressed', 'false'); // Initial state for ARIA
+        toggleCardDeleteModeButton.setAttribute('aria-pressed', 'false');
 
-        loadAllClassCards(); // Load all card data for all classes initially
+        loadAllClassCards();
 
         const firstBtn = classFilterGroup.querySelector('button');
         if (firstBtn) {
@@ -1466,7 +1462,8 @@
             callback(data);
           } catch (e) {
             // Replace with custom modal in production
-            alert('読み込み失敗：JSONの形式が不正です。');
+            alert('読み込み失敗：JSONの形式が不正なファイルです。コンソールで詳細を確認してください。');
+            console.error('JSON parse error:', e);
           }
         };
         reader.readAsText(file);
@@ -1480,13 +1477,13 @@
         });
 
         document.getElementById('export-cards-button').addEventListener('click', () => {
-          const cards = CardListManager.getAllCardData();
+          const cards = CardListManager.getAllCardData(); // This returns { "エルフ": [...], "ロイヤル": [...] }
           exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, cards);
         });
 
         document.getElementById('export-all-data-button').addEventListener('click', () => {
           const records = Storage.get(RECORDS_KEY, []);
-          const cards = CardListManager.getAllCardData();
+          const cards = CardListManager.getAllCardData(); // This returns { "エルフ": [...], "ロイヤル": [...] }
           exportAsJson(`svwb_all_${new Date().toISOString().slice(0,10)}.json`, { records, cards });
         });
 
@@ -1494,70 +1491,88 @@
         document.getElementById('import-records-file-input').addEventListener('change', (e) => {
           readJsonFile(e.target, (data) => {
             if (!Array.isArray(data)) {
-                // Replace with custom modal in production
-                alert('戦績データが不正です');
+                // Replace with custom modal
+                alert('戦績データが不正です: ファイルの内容が配列形式ではありません。');
                 return;
             }
             Storage.set(RECORDS_KEY, data);
-            RecordManager.loadRecords(); // Reload records without full page reload
-            // Replace with custom modal in production
+            RecordManager.loadRecords();
+            // Replace with custom modal
             alert('戦績をインポートしました。');
-            e.target.value = ''; // Clear file input
+            e.target.value = '';
           });
         });
 
         document.getElementById('import-cards-file-input').addEventListener('change', (e) => {
           readJsonFile(e.target, (data) => {
             if (typeof data !== 'object' || data === null) {
-                // Replace with custom modal in production
-                alert('カードデータが不正です');
-                return;
+              // Replace with custom modal
+              alert('カードデータが不正です: ファイルの内容がオブジェクト形式ではありません。');
+              return;
             }
-            for (const key in data) {
-              if (key.startsWith(CARD_CLASS_PREFIX)) {
-                Storage.set(key, data[key]);
+            let importedCount = 0;
+            // 修正: エクスポートされたデータはプレフィックスなしのクラス名をキーとする
+            for (const className in data) { // 'className' will be 'エルフ', 'ロイヤル' etc.
+              if (Array.isArray(data[className])) { // 値が配列であることを確認
+                Storage.set(CARD_CLASS_PREFIX + className, data[className]); // localStorageキーにプレフィックスを付けて保存
+                importedCount++;
               }
             }
-            CardListManager.loadAllClassCards(); // Reload all cards and re-render current list
-            // Replace with custom modal in production
-            alert('カードリストをインポートしました。');
-            e.target.value = ''; // Clear file input
+            CardListManager.loadAllClassCards();
+            if (importedCount > 0) {
+              // Replace with custom modal
+              alert('カードリストをインポートしました。');
+            } else {
+              // Replace with custom modal
+              alert('インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。');
+            }
+            e.target.value = '';
           });
         });
 
         document.getElementById('import-all-data-file-input').addEventListener('change', (e) => {
           readJsonFile(e.target, (data) => {
             if (!data || typeof data !== 'object') {
-                // Replace with custom modal in production
-                alert('データが不正です');
+                // Replace with custom modal
+                alert('全体データが不正です: ファイルの内容がオブジェクト形式ではありません。');
                 return;
             }
             if (Array.isArray(data.records)) {
               Storage.set(RECORDS_KEY, data.records);
+            } else {
+                console.warn('全体データに有効な戦績データ（records）が見つかりませんでした。');
             }
+
             if (typeof data.cards === 'object' && data.cards !== null) {
-              for (const key in data.cards) {
-                if (key.startsWith(CARD_CLASS_PREFIX)) {
-                  Storage.set(key, data[key]);
+              let importedCardClassesCount = 0;
+              // 修正: data.cards内のキーもプレフィックスなしのクラス名
+              for (const className in data.cards) { // 'className' will be 'エルフ', 'ロイヤル' etc.
+                if (Array.isArray(data.cards[className])) { // 値が配列であることを確認
+                  Storage.set(CARD_CLASS_PREFIX + className, data.cards[className]); // localStorageキーにプレフィックスを付けて保存
+                  importedCardClassesCount++;
                 }
               }
+              if (importedCardClassesCount === 0) {
+                console.warn('全体データに有効なカードクラス（cards）が見つかりませんでした。');
+              }
+            } else {
+                console.warn('全体データに有効なカードデータ（cards）が見つかりませんでした。');
             }
-            RecordManager.loadRecords(); // Reload records
-            CardListManager.loadAllClassCards(); // Reload cards
-            // Replace with custom modal in production
+
+            RecordManager.loadRecords();
+            CardListManager.loadAllClassCards();
+            // Replace with custom modal
             alert('全体データをインポートしました。');
-            e.target.value = ''; // Clear file input
+            e.target.value = '';
           });
         });
 
         // Clear records
         document.getElementById('clear-records-button').addEventListener('click', () => {
-          // Replace with custom modal in production
-          if (confirm('本当に戦績をすべて削除しますか？')) {
+          if (confirm('本当に戦績をすべて削除しますか？')) { // Replace with custom modal in production
             Storage.remove(RECORDS_KEY);
-            RecordManager.loadRecords(); // Clear records from UI
-            // Replace with custom modal in production
-            alert('戦績を削除しました。');
+            RecordManager.loadRecords();
+            alert('戦績を削除しました。'); // Replace with custom modal in production
           }
         });
       };
