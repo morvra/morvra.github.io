@@ -16,7 +16,7 @@
       padding: 0;
     }
     main {
-      padding: 8px;
+      padding: 20px;
       max-width: 1200px;
       margin: auto;
     }
@@ -75,7 +75,6 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.04);
       margin-bottom: 16px;
       width: 100%;
-      height: fit-content;
       box-sizing: border-box;
     }
 
@@ -963,8 +962,7 @@
           const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
           if (type === 'text') input.type = 'text';
           input.value = initialValue;
-          // REMOVED INLINE STYLES: Object.assign(input.style, { fontSize: '14px', padding: '2px 4px', width: '100%' });
-          Object.assign(input.style, { fontSize: '14px' }); // Only font-size is needed
+          Object.assign(input.style, { fontSize: '14px' });
           input.setAttribute('aria-label', `${fieldName}を編集`);
           td.textContent = '';
           td.appendChild(input);
@@ -1001,7 +999,13 @@
           textarea.setAttribute('aria-label', 'メモを編集');
           memoElement.innerHTML = '';
           memoElement.appendChild(textarea);
-          textarea.focus();
+          
+          // iOSでのフォーカス問題を解決するため、setTimeoutで遅延させる
+          setTimeout(() => {
+            textarea.focus();
+            // iOSでカーソルが末尾に移動しない場合のために、選択範囲を明示的に設定
+            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+          }, 0);
 
           const finishEdit = () => {
             const newMemo = textarea.value.trim();
@@ -1300,8 +1304,7 @@
             input.type = 'number';
             input.min = '0';
             input.value = card.pp;
-            // REMOVED INLINE STYLE: Object.assign(input.style, { width: '60px', fontSize: '14px', padding: '2px 4px' });
-            Object.assign(input.style, { fontSize: '14px' }); // Only font-size is needed
+            Object.assign(input.style, { fontSize: '14px' });
             input.setAttribute('aria-label', `カードPPを編集: ${card.name}`);
             tdPP.textContent = '';
             tdPP.appendChild(input);
@@ -1330,8 +1333,7 @@
             const input = document.createElement('input');
             input.type = 'text';
             input.value = card.name;
-            // REMOVED INLINE STYLE: Object.assign(input.style, { fontSize: '14px', padding: '2px 4px' });
-            Object.assign(input.style, { fontSize: '14px' }); // Only font-size is needed
+            Object.assign(input.style, { fontSize: '14px' });
             input.setAttribute('aria-label', `カード名を編集: ${card.name}`);
             tdName.textContent = '';
             tdName.appendChild(input);
