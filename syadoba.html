@@ -16,7 +16,7 @@
       padding: 0;
     }
     main {
-      padding: 20px;
+      padding: 8px;
       max-width: 1200px;
       margin: auto;
     }
@@ -75,6 +75,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.04);
       margin-bottom: 16px;
       width: 100%;
+　　　 height: fit-content;
       box-sizing: border-box;
     }
 
@@ -1005,7 +1006,7 @@
             textarea.focus();
             // iOSでカーソルが末尾に移動しない場合のために、選択範囲を明示的に設定
             textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-          }, 0);
+          }, 50);
 
           const finishEdit = () => {
             const newMemo = textarea.value.trim();
