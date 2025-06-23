@@ -8,6 +8,7 @@
   <link href='./Sv_icon.png' rel='apple-touch-icon'/>
   <title>シャドウバースWB 対戦支援ツール</title>
   <style>
+    /* 基本スタイル */
     body {
       font-family: sans-serif;
       background: #f7f9fb;
@@ -25,6 +26,7 @@
       margin-top: 0;
     }
 
+    /* レイアウト */
     .two-column-layout {
       display: flex;
       flex-wrap: wrap;
@@ -41,6 +43,7 @@
       flex-shrink: 0;
     }
 
+    /* PCレイアウト */
     @media (min-width: 984px) {
       .flex-column-item {
         width: auto;
@@ -59,6 +62,9 @@
         max-width: 840px;
       }
 
+      .panel {
+        height: fit-content;
+      }
       .record-panel {
           display: flex;
           flex-direction: column;
@@ -75,7 +81,6 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.04);
       margin-bottom: 16px;
       width: 100%;
-　　　 height: fit-content;
       box-sizing: border-box;
     }
 
@@ -85,6 +90,7 @@
         flex-shrink: 0;
     }
 
+    /* カウンターコントロールグループ */
     .counter-control-group {
       align-items: center;
       margin-bottom: 12px;
@@ -111,6 +117,7 @@
       text-align: center;
     }
 
+    /* フォーム要素 */
     .app-form input, .app-form select, .app-form textarea {
       width: 100%;
       max-width: 400px;
@@ -129,6 +136,7 @@
     }
     .app-form textarea { resize: vertical; }
 
+    /* フォームアクションボタン */
     .form-action-button {
       padding: 10px 20px;
       border: none;
@@ -147,6 +155,7 @@
     .form-action-button.danger { background: #e74c3c; color: white; }
     .form-action-button.danger:hover { background: #c0392b; }
 
+    /* トグルボタン */
     .toggle-button-group {
       display: flex;
       flex-wrap: wrap;
@@ -168,6 +177,7 @@
       border-color: #16a085;
     }
 
+    /* データテーブル */
     .data-table {
       width: 100%;
       border-collapse: collapse;
@@ -196,41 +206,20 @@
     }
     .data-table td:last-child button:hover { background: #c0392b; }
 
+    /* 戦績テーブルのメモ欄 */
     #match-record-table td:nth-child(6),
     #match-record-table th:nth-child(6) {
       width: 40%;
-      word-break: break-word;
-      white-space: normal;
+      word-break: break-word; /* 単語の途中で改行を許可 */
+      white-space: normal; /* 折り返しを許可 */
     }
+    /* テキスト左寄せ */
     #match-record-table td:nth-child(6),
     #card-data-table td:nth-child(2) {
       text-align: left;
     }
 
-    /* General editable input/textarea styling */
-    #card-data-table td input {
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 2px 4px;
-        font-size: inherit;
-        vertical-align: top;
-        display: block;
-        width: calc(100% - 8px);
-    }
-    /* Specific adjustments for PP input */
-    #card-data-table td:first-child input {
-        width: 50px;
-        text-align: center;
-    }
-    /* Memo textarea in desktop record table */
-    #match-record-table td:nth-child(6) textarea {
-        min-height: 40px;
-        max-height: 120px;
-        overflow-y: auto;
-        resize: vertical;
-    }
-
+    /* カードアクション */
     .card-actions {
       display: flex;
       gap: 8px;
@@ -242,6 +231,7 @@
       font-size: 14px;
     }
 
+    /* カード削除モード */
     .card-delete-button { display: none; }
     .delete-mode .card-delete-button { display: inline-block; }
     #card-data-table th:nth-child(4),
@@ -249,6 +239,7 @@
     #counter-section.delete-mode #card-data-table th:nth-child(4),
     #counter-section.delete-mode #card-data-table td:nth-child(4) { display: table-cell; }
 
+    /* データ管理パネル */
     .data-management-panel > h3 {
       color: #2c3e50;
       margin-top: 0;
@@ -276,6 +267,7 @@
     .file-input-button:hover { background: #d0d7de; }
     .data-management-panel input[type="file"] { display: none; }
 
+    /* タブナビゲーション */
     .tab-navigation {
       display: flex;
       margin-bottom: 20px;
@@ -300,6 +292,7 @@
       color: #1abc9c;
     }
 
+    /* フォームカラム */
     .form-columns {
       display: flex;
       flex-wrap: wrap;
@@ -310,6 +303,7 @@
       min-width: 250px;
     }
 
+    /* フィルターコントロール */
     .filter-controls {
       margin-top: 20px;
       margin-bottom: 20px;
@@ -365,6 +359,7 @@
     .filter-content-wrapper .app-form input[type="text"] { margin-bottom: 16px; }
     .filter-content-wrapper .form-action-button { margin-top: 15px; }
 
+    /* カード追加フォームのレイアウト */
     .add-card-form-layout {
       margin-top:12px;
       display: flex;
@@ -392,12 +387,13 @@
       font-size: 14px;
     }
 
+    /* カードデータテーブルのボタン (PC用デフォルト) */
     #card-data-table td button {
         width: 24px;
         height: 24px;
         padding: 0;
         font-size: 18px;
-	color: #333;
+	    color: #333;
         border-radius: 4px;
         border: 1px solid #ccc;
         background: #ecf0f1;
@@ -406,6 +402,8 @@
     #card-data-table td button:hover { background: #d0d7de; }
     #card-data-table td button:first-child { margin-right: 6px; }
     #card-data-table td button:last-child { margin-left: 6px; }
+
+    /* カードデータテーブルのカウント表示 (PC用デフォルト) */
     #card-data-table td span {
       display: inline-block;
       width: 24px;
@@ -423,6 +421,7 @@
       min-height: 24px;
     }
 
+    /* モバイルレイアウト */
     @media (max-width: 983px) {
       .tab-navigation {
         position: fixed;
@@ -440,7 +439,7 @@
         padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
       }
 
-      #match-record-table-wrapper { display: none; }
+      #match-record-table-wrapper { display: none; } /* デスクトップ用テーブル非表示 */
       #match-record-cards-container {
           display: flex;
           flex-direction: column;
@@ -476,6 +475,7 @@
           flex-grow: 1;
           word-break: break-word;
           font-size: 14px;
+          white-space: normal; /* モバイルのメモも折り返しを許可 */
       }
 
       .match-record-card .delete-card-button {
@@ -494,31 +494,42 @@
           color: #c0392b;
           background-color: #fce7e7;
       }
-
-      .match-record-card .card-value.editable-memo {
-        cursor: pointer;
-        padding: 2px 4px;
-        border-radius: 4px;
-        min-height: 1.2em;
-        line-height: 1.2em;
+      
+      /* モバイルでのテーブルセルパディングを調整 */
+      .data-table th, .data-table td {
+        padding: 8px 6px; /* 縦方向は8px、横方向は6pxに調整 */
       }
-      .match-record-card .card-value.editable-memo:hover { background-color: #f0f0f0; }
-      .match-record-card .card-value.editable-memo textarea {
-        box-sizing: border-box;
-        width: 100%;
-        min-height: 50px;
-        max-height: 150px;
-        overflow-y: auto;
-        resize: vertical;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 4px;
-        font-size: 14px;
-        line-height: inherit;
-        margin: 0;
+
+      /* カウント列のtdにflexboxを適用 */
+      #card-data-table td:nth-child(3) { /* カウント列のtd */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-left: 0; /* ボタンとspanが独自にスペースを持つためパディングを削除 */
+          padding-right: 0;
+      }
+
+      /* モバイルでのカウンタボタンの調整 */
+      #card-data-table td button {
+          width: 40px; /* タッチしやすいサイズを維持しつつ、少し小さく */
+          height: 40px;
+          font-size: 22px; /* アイコンを少し小さく */
+          padding: 0; /* フォントサイズでアイコンサイズを制御 */
+          box-sizing: border-box; /* パディングをサイズに含める */
+          vertical-align: middle; /* spanと位置を合わせる */
+      }
+      #card-data-table td button:first-child { margin-right: 4px; } /* マージンを調整 */
+      #card-data-table td button:last-child { margin-left: 4px; }
+
+      /* モバイルでのカウント数字の表示調整 */
+      #card-data-table td span {
+          font-size: 18px; /* カウントの文字サイズを調整 */
+          padding: 0 2px; /* 左右のパディングで少しスペースを確保 */
+          vertical-align: middle; /* ボタンと位置を合わせる */
       }
     }
 
+    /* PCレイアウト（再定義） */
     @media (min-width: 984px) {
       .tab-navigation {
         position: static;
@@ -989,44 +1000,6 @@
         });
       };
 
-      const makeEditableCardMemo = (memoElement, entry) => {
-        memoElement.classList.add('editable-memo');
-        memoElement.addEventListener('click', () => {
-          if (memoElement.querySelector('textarea')) return;
-
-          const originalMemo = entry.memo;
-          const textarea = document.createElement('textarea');
-          textarea.value = originalMemo;
-          textarea.setAttribute('aria-label', 'メモを編集');
-          memoElement.innerHTML = '';
-          memoElement.appendChild(textarea);
-          
-          // iOSでのフォーカス問題を解決するため、setTimeoutで遅延させる
-          setTimeout(() => {
-            textarea.focus();
-            // iOSでカーソルが末尾に移動しない場合のために、選択範囲を明示的に設定
-            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-          }, 50);
-
-          const finishEdit = () => {
-            const newMemo = textarea.value.trim();
-            entry.memo = newMemo;
-            memoElement.textContent = newMemo;
-            saveRecords();
-          };
-
-          textarea.addEventListener('blur', finishEdit);
-          textarea.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              finishEdit();
-            } else if (e.key === 'Escape') {
-              memoElement.textContent = originalMemo;
-            }
-          });
-        });
-      };
-
       const createRecordHtml = (entry) => {
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
           const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', {
@@ -1070,7 +1043,7 @@
               const tdMemo = document.createElement('td');
               tdMemo.textContent = entry.memo;
               tdMemo.dataset.label = 'メモ';
-              makeEditableCell(tdMemo, entry.memo, 'textarea', entry, 'memo');
+              makeEditableCell(tdMemo, entry.memo, 'textarea', entry, 'memo'); // PCでのメモは編集可能
               tr.appendChild(tdMemo);
 
               const delTd = document.createElement('td');
@@ -1120,8 +1093,6 @@
               deleteButton.textContent = '🗑️';
               deleteButton.setAttribute('aria-label', `${formattedDate}の記録を削除`);
               cardDiv.appendChild(deleteButton);
-
-              makeEditableCardMemo(memoValueSpan, entry);
 
               deleteButton.addEventListener('click', () => {
                   const indexToRemove = allRecords.findIndex(rec => rec.timestamp === cardDiv.dataset.timestamp);
