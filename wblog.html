@@ -184,7 +184,7 @@
       background: #fff;
       overflow: hidden;
       font-size: 14px;
-      table-layout: fixed; /* テーブルレイアウトを固定 */
+      table-layout: fixed;
     }
     .data-table thead {
       background: #ecf0f1;
@@ -194,8 +194,8 @@
       text-align: center;
       padding: 10px;
       border-bottom: 1px solid #eee;
-      overflow: hidden; /* セル内のコンテンツがはみ出すのを防ぐ */
-      white-space: nowrap; /* テキストの自動改行を無効化 */
+      overflow: hidden;
+      white-space: nowrap;
     }
     .data-table tr:hover { background: #f9f9f9; }
     .data-table td:last-child button {
@@ -218,29 +218,29 @@
         border: 1px solid #ccc;
         padding: 4px;
         font-size: 14px;
-        line-height: 1.2; /* テキストエリアの行の高さを調整 */
-        display: block; /* ブロック要素として振る舞う */
-        min-width: 0; /* デフォルトの最小幅を上書き */
+        line-height: 1.2;
+        display: block;
+        min-width: 0;
     }
     .data-table td textarea {
-        min-height: 40px; /* テキストエリアの最小高さを設定 */
-        resize: vertical; /* 縦方向のみリサイズ可能 */
-        overflow: hidden; /* テキストエリア自体のスクロールバーを非表示 */
+        min-height: 40px;
+        resize: vertical;
+        overflow: hidden;
     }
 
 
     /* 戦績テーブルのメモ欄 */
     #match-record-table th:nth-child(6),
     #match-record-table td:nth-child(6) {
-      word-break: break-word; /* 単語の途中で改行を許可 */
-      white-space: normal; /* 折り返しを許可 */
+      word-break: break-word;
+      white-space: normal;
     }
     /* テキスト左寄せ */
     #match-record-table td:nth-child(6),
     #card-data-table td:nth-child(2) {
       text-align: left;
-      word-break: break-word; /* 単語の途中で改行を許可 */
-      white-space: normal; /* 折り返しを許可 */
+      word-break: break-word;
+      white-space: normal;
     }
 
     /* 各テーブルの列幅を定義 */
@@ -537,7 +537,7 @@
           flex-grow: 1;
           word-break: break-word;
           font-size: 14px;
-          white-space: normal; /* モバイルのメモも折り返しを許可 */
+          white-space: normal;
       }
 
       .match-record-card .delete-card-button {
@@ -559,35 +559,35 @@
       
       /* モバイルでのテーブルセルパディングを調整 */
       .data-table th, .data-table td {
-        padding: 8px 6px; /* 縦方向は8px、横方向は6pxに調整 */
+        padding: 8px 6px;
       }
 
       /* カウント列のtdにflexboxを適用 */
-      #card-data-table td:nth-child(3) { /* カウント列のtd */
+      #card-data-table td:nth-child(3) {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding-left: 0; /* ボタンとspanが独自にスペースを持つためパディングを削除 */
+          padding-left: 0;
           padding-right: 0;
       }
 
       /* モバイルでのカウンタボタンの調整 */
       #card-data-table td button {
-          width: 40px; /* タッチしやすいサイズを維持しつつ、少し小さく */
+          width: 40px;
           height: 40px;
-          font-size: 22px; /* アイコンを少し小さく */
-          padding: 0; /* フォントサイズでアイコンサイズを制御 */
-          box-sizing: border-box; /* パディングをサイズに含める */
-          vertical-align: middle; /* spanと位置を合わせる */
+          font-size: 22px;
+          padding: 0;
+          box-sizing: border-box;
+          vertical-align: middle;
       }
-      #card-data-table td button:first-child { margin-right: 4px; } /* マージンを調整 */
+      #card-data-table td button:first-child { margin-right: 4px; }
       #card-data-table td button:last-child { margin-left: 4px; }
 
       /* モバイルでのカウント数字の表示調整 */
       #card-data-table td span {
-          font-size: 18px; /* カウントの文字サイズを調整 */
-          padding: 0 2px; /* 左右のパディングで少しスペースを確保 */
-          vertical-align: middle; /* ボタンと位置を合わせる */
+          font-size: 18px;
+          padding: 0 2px;
+          vertical-align: middle;
       }
     }
 
@@ -928,7 +928,7 @@
   </div>
 
   <!-- カスタムモーダルUI -->
-  <div id="custom-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: flex; justify-content: center; align-items: center;">
+  <div id="custom-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
     <div id="custom-modal-content" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-width: 90%; width: 350px; text-align: center;">
       <p id="modal-message" style="margin-bottom: 20px; font-size: 16px;"></p>
       <div id="modal-buttons">
@@ -1032,7 +1032,7 @@
                 messageElement.textContent = message;
                 okButton.style.display = 'inline-block';
                 cancelButton.style.display = 'none';
-                overlay.style.display = 'flex';
+                overlay.style.display = 'flex'; // モーダル表示時にflexを設定
                 resolvePromise = resolve;
             });
         };
@@ -1042,7 +1042,7 @@
                 messageElement.textContent = message;
                 okButton.style.display = 'inline-block';
                 cancelButton.style.display = 'inline-block';
-                overlay.style.display = 'flex';
+                overlay.style.display = 'flex'; // モーダル表示時にflexを設定
                 resolvePromise = resolve;
             });
         };
@@ -1107,17 +1107,24 @@
 
         // AdSense のリロード
         if (targetPaneId === 'storage-section') {
-            try {
-                if (window.adsbygoogle && typeof window.adsbygoogle.push === 'function') {
-                    document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
-                        (window.adsbygoogle = window.adsbygoogle || []).push({});
-                    });
-                } else {
-                    console.warn('AdSense オブジェクトが見つからないか、push メソッドがありません。');
+            setTimeout(() => { // Add a small delay
+                try {
+                    if (window.adsbygoogle && typeof window.adsbygoogle.push === 'function') {
+                        document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
+                            // Only push if the ad slot is actually visible
+                            if (ad.offsetParent !== null) { // Check if the element is rendered and not display:none
+                                (window.adsbygoogle = window.adsbygoogle || []).push({});
+                            } else {
+                                console.warn('AdSense slot is not visible, skipping push.');
+                            }
+                        });
+                    } else {
+                        console.warn('AdSense オブジェクトが見つからないか、push メソッドがありません。');
+                    }
+                } catch (error) {
+                    console.error('AdSense のリロード中にエラー:', error);
                 }
-            } catch (error) {
-                console.error('AdSense のリロード中にエラー:', error);
-            }
+            }, 100); // 100ms delay
         }
       };
 
