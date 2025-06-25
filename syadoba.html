@@ -676,9 +676,10 @@
       border-color: #2c3e50 transparent transparent transparent;
     }
 
-    .info-container:hover .info-tooltip {
-      visibility: visible;
-      opacity: 1;
+    /* 新しいスタイル: JavaScriptで追加されるクラス */
+    .info-tooltip.show {
+        visibility: visible;
+        opacity: 1;
     }
 
     @media (max-width: 983px) {
@@ -897,7 +898,8 @@
                 </div>
             </details>
         </div>
-    <h3 style="margin-bottom:8px;">記録一覧</h3>
+
+		<h3 style="margin-bottom:8px;">記録一覧</h3>
 		<div class="record-table-wrapper" id="match-record-table-wrapper">
         <table id="match-record-table" class="data-table">
           <thead>
@@ -922,8 +924,8 @@
   </main>
 
   <div class="info-container">
-    <div class="info-button">i</div>
-    <div class="info-tooltip">
+    <div class="info-button" id="info-button-trigger">i</div>
+    <div class="info-tooltip" id="info-tooltip-content">
       このツールは morvra によって個人で制作された、<br>
       Shadowverse: Worlds Beyond の非公式ファンツールです。<br>
       Cygames とは一切関係ありません。
@@ -1982,6 +1984,35 @@
       return { init };
     })();
 
+    // --- Tooltip Script (New Module for click behavior) ---
+    const TooltipManager = (() => {
+        let infoButton;
+        let infoTooltip;
+
+        const init = () => {
+            infoButton = document.getElementById('info-button-trigger');
+            infoTooltip = document.getElementById('info-tooltip-content');
+
+            if (infoButton && infoTooltip) {
+                // Toggle tooltip on button click
+                infoButton.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent document click from immediately closing
+                    infoTooltip.classList.toggle('show');
+                });
+
+                // Hide tooltip when clicking anywhere else on the document
+                document.addEventListener('click', (event) => {
+                    // Check if the click occurred outside the tooltip and the info button
+                    if (!infoButton.contains(event.target) && !infoTooltip.contains(event.target)) {
+                        infoTooltip.classList.remove('show');
+                    }
+                });
+            }
+        };
+
+        return { init };
+    })();
+
     // Initialize all modules when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
       TabManager.init();
@@ -1989,6 +2020,7 @@
       RecordManager.init();
       CardListManager.init();
       DataManager.init();
+      TooltipManager.init(); // Initialize the new TooltipManager
     });
   </script>
 </body>
