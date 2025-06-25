@@ -805,16 +805,11 @@
           </div>
 				<div id="ad">
 					スポンサードリンク
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-							<!-- 記事下レスポンシブ -->
-							<ins class="adsbygoogle"
-									 style="display:block"
-									 data-ad-client="ca-pub-3575252598876356"
-									 data-ad-slot="6223968026"
-									 data-ad-format="rectangle"></ins>
-							<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-							</script>
+					<ins class="adsbygoogle"
+							 style="display:block"
+							 data-ad-client="ca-pub-3575252598876356"
+							 data-ad-slot="6223968026"
+							 data-ad-format="rectangle"></ins>
         </div>
       </section>
 
@@ -932,15 +927,27 @@
     </div>
   </div>
 
+  <!-- カスタムモーダルUI -->
+  <div id="custom-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: flex; justify-content: center; align-items: center;">
+    <div id="custom-modal-content" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-width: 90%; width: 350px; text-align: center;">
+      <p id="modal-message" style="margin-bottom: 20px; font-size: 16px;"></p>
+      <div id="modal-buttons">
+        <button id="modal-ok-button" class="form-action-button primary" style="margin: 0 5px;">OK</button>
+        <button id="modal-cancel-button" class="form-action-button neutral" style="margin: 0 5px; display: none;">キャンセル</button>
+      </div>
+    </div>
+  </div>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
-    // --- Local Storage Utility ---
+    // Local Storage Utility
     const Storage = {
       get: (key, defaultValue = null) => {
         try {
           const item = localStorage.getItem(key);
           return item ? JSON.parse(item) : defaultValue;
         } catch (e) {
-          console.error(`Error getting item from localStorage for key "${key}":`, e);
+          console.error(`Failed to get item from localStorage for key "${key}":`, e);
           return defaultValue;
         }
       },
@@ -948,14 +955,14 @@
         try {
           localStorage.setItem(key, JSON.stringify(value));
         } catch (e) {
-          console.error(`Error setting item to localStorage for key "${key}":`, e);
+          console.error(`Failed to set item to localStorage for key "${key}":`, e);
         }
       },
       remove: (key) => {
         try {
           localStorage.removeItem(key);
         } catch (e) {
-          console.error(`Error removing item from localStorage for key "${key}":`, e);
+          console.error(`Failed to remove item from localStorage for key "${key}":`, e);
         }
       },
       getAllKeys: (prefix) => {
@@ -970,7 +977,7 @@
       }
     };
 
-    // --- Debounce Utility ---
+    // Debounce Utility
     const debounce = (func, delay) => {
       let timeout;
       return function(...args) {
@@ -980,26 +987,76 @@
       };
     };
 
-    // --- Local Storage Keys ---
+    // Local Storage Keys
     const LAST_TAB_KEY = 'svwb-last-tab';
     const RECORDS_KEY = 'svwb-records';
     const LAST_DECK_KEY = 'svwb-deck';
     const FILTER_DECK_KEY = 'svwb-filter-deck';
     const FILTER_CLASS_KEY = 'svwb-filter-class';
-    const FILTER_TURN_KEY = 'svwb-filter-turn'; // New key for turn order filter
+    const FILTER_TURN_KEY = 'svwb-filter-turn';
     const FILTER_OPEN_KEY = 'svwb-filter-open-state';
     const CARD_CLASS_PREFIX = 'svwb-cards-';
 
+    // Custom Modal Module
+    const ModalManager = (() => {
+        let overlay;
+        let messageElement;
+        let okButton;
+        let cancelButton;
+        let resolvePromise = () => {};
 
-    // --- Tab Management Module ---
+        const init = () => {
+            overlay = document.getElementById('custom-modal-overlay');
+            messageElement = document.getElementById('modal-message');
+            okButton = document.getElementById('modal-ok-button');
+            cancelButton = document.getElementById('modal-cancel-button');
+
+            // 初期化時にモーダルを強制的に非表示にする
+            overlay.style.display = 'none';
+
+            okButton.addEventListener('click', () => {
+                overlay.style.display = 'none';
+                resolvePromise(true);
+                resolvePromise = () => {}; // Promise解決後にリセット
+            });
+
+            cancelButton.addEventListener('click', () => {
+                overlay.style.display = 'none';
+                resolvePromise(false);
+                resolvePromise = () => {}; // Promise解決後にリセット
+            });
+        };
+
+        const showAlert = (message) => {
+            return new Promise(resolve => {
+                messageElement.textContent = message;
+                okButton.style.display = 'inline-block';
+                cancelButton.style.display = 'none';
+                overlay.style.display = 'flex';
+                resolvePromise = resolve;
+            });
+        };
+
+        const showConfirm = (message) => {
+            return new Promise(resolve => {
+                messageElement.textContent = message;
+                okButton.style.display = 'inline-block';
+                cancelButton.style.display = 'inline-block';
+                overlay.style.display = 'flex';
+                resolvePromise = resolve;
+            });
+        };
+
+        return { init, showAlert, showConfirm };
+    })();
+
+    // Tab Management Module
     const TabManager = (() => {
       const tabs = document.querySelectorAll('.tab-navigation-button');
       const panes = document.querySelectorAll('.tab-content');
 
       const showTab = (targetPaneId) => {
-        // Remove existing tab state classes from body
         document.body.className = document.body.className.replace(/\bactive-tab-[\w-]+\b/g, '');
-        // Add current tab state as a body class
         document.body.classList.add('active-tab-' + targetPaneId);
 
         Storage.set(LAST_TAB_KEY, targetPaneId);
@@ -1047,6 +1104,21 @@
             targetTab.setAttribute('aria-selected', 'true');
           }
         }
+
+        // AdSense のリロード
+        if (targetPaneId === 'storage-section') {
+            try {
+                if (window.adsbygoogle && typeof window.adsbygoogle.push === 'function') {
+                    document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    });
+                } else {
+                    console.warn('AdSense オブジェクトが見つからないか、push メソッドがありません。');
+                }
+            } catch (error) {
+                console.error('AdSense のリロード中にエラー:', error);
+            }
+        }
       };
 
       const init = () => {
@@ -1067,7 +1139,7 @@
       return { init };
     })();
 
-    // --- Toggle Button Group Management Module ---
+    // Toggle Button Group Management Module
     const ToggleButtonGroup = (() => {
       const init = () => {
         document.querySelectorAll('.toggle-button-group').forEach(group => {
@@ -1075,7 +1147,6 @@
             if (e.target.tagName === 'BUTTON') {
               group.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
               e.target.classList.add('active');
-              // Dispatch a custom event to notify other modules about filter changes
               if (group.id.startsWith('filter-')) {
                   const event = new CustomEvent('filterChange', { detail: { groupId: group.id, value: e.target.dataset.value } });
                   document.dispatchEvent(event);
@@ -1105,7 +1176,7 @@
       return { init, getSelectedValue, setActiveButton };
     })();
 
-    // --- Record Management Module ---
+    // Record Management Module
     const RecordManager = (() => {
       const recordsPerPage = 10;
       let currentDisplayCount = recordsPerPage;
@@ -1120,7 +1191,6 @@
       const matchRecordCardsContainer = document.getElementById('match-record-cards-container');
       const loadMoreButton = document.getElementById('load-more-records-button');
 
-      // Elements for displaying statistics
       const totalMatchesDisplay = document.getElementById('total-matches-display');
       const totalWinsDisplay = document.getElementById('total-wins-display');
       const winRateDisplay = document.getElementById('win-rate-display');
@@ -1128,9 +1198,7 @@
       let allRecords = [];
       let filteredRecordsCache = [];
 
-      /**
-       * Adds data-label attributes to table cells for mobile responsiveness.
-       */
+      // テーブルセルにデータラベルを追加 (モバイル対応)
       const addDataLabelsToRecordTable = () => {
         const headers = Array.from(document.querySelectorAll('#match-record-table th')).map(th => th.textContent);
         document.querySelectorAll('#match-record-table tbody tr').forEach(row => {
@@ -1142,9 +1210,7 @@
         });
       };
 
-      /**
-       * Saves the current `allRecords` array to local storage.
-       */
+      // レコードをローカルストレージに保存
       const saveRecords = () => {
         const data = allRecords.map(record => ({
           timestamp: record.timestamp,
@@ -1158,20 +1224,15 @@
         Storage.set(RECORDS_KEY, data);
       };
 
-      /**
-       * Loads records from local storage, sorts them by timestamp, and applies filters.
-       */
+      // レコードをロード、ソート、フィルタ適用
       const loadRecords = () => {
         allRecords = Storage.get(RECORDS_KEY, []);
         allRecords.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        currentDisplayCount = recordsPerPage; // Reset display count on new load
+        currentDisplayCount = recordsPerPage;
         applyFilters();
       };
 
-      /**
-       * Calculates and displays match statistics (total matches, wins, win rate).
-       * @param {Array} records The array of records to calculate statistics from.
-       */
+      // 統計情報を更新
       const updateStatistics = (records) => {
           const totalMatches = records.length;
           const totalWins = records.filter(record => record.result === '⭕').length;
@@ -1182,128 +1243,89 @@
           winRateDisplay.textContent = `${winRate}%`;
       };
 
-      /**
-       * Applies current filters to `allRecords` and updates the displayed records and statistics.
-       */
+      // フィルタを適用し、レコード表示を更新
       const applyFilters = () => {
         matchRecordTableBody.innerHTML = '';
         matchRecordCardsContainer.innerHTML = '';
 
         const filterDeckName = filterDeckNameInput.value.toLowerCase();
         const filterOpponentClass = ToggleButtonGroup.getSelectedValue('filter-opponent-class-selection');
-        // Get the selected value for the turn order filter
         const filterTurnOrder = ToggleButtonGroup.getSelectedValue('filter-turn-order-selection');
 
-        // Filter records based on all criteria
         const filteredRecords = allRecords.filter(record => {
           const matchesDeck = record.deck.toLowerCase().includes(filterDeckName);
           const matchesClass = filterOpponentClass === '' || record.opponent === filterOpponentClass;
-          // Add condition for turn order filter
           const matchesTurnOrder = filterTurnOrder === '' || record.firstSecond === filterTurnOrder;
           return matchesDeck && matchesClass && matchesTurnOrder;
         });
-        filteredRecordsCache = filteredRecords; // Cache the filtered records
+        filteredRecordsCache = filteredRecords;
 
-        updateStatistics(filteredRecordsCache); // Update statistics with filtered data
+        updateStatistics(filteredRecordsCache);
 
         const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
 
         if (isLargeScreen) {
-            // Render all filtered records for desktop table
             filteredRecordsCache.forEach(entry => {
                 matchRecordTableBody.appendChild(createRecordHtml(entry));
             });
-            addDataLabelsToRecordTable(); // Re-apply data labels for desktop
-            loadMoreButton.style.display = 'none'; // No "Load More" button on desktop
+            addDataLabelsToRecordTable();
+            loadMoreButton.style.display = 'none';
         } else {
-            // Render a subset of filtered records for mobile cards
             const recordsToRender = filteredRecordsCache.slice(0, currentDisplayCount);
             recordsToRender.forEach(entry => {
                 matchRecordCardsContainer.appendChild(createRecordHtml(entry));
             });
-
-            // Show "Load More" button if there are more records to display
-            if (filteredRecordsCache.length > currentDisplayCount) {
-                loadMoreButton.style.display = 'block';
-            } else {
-                loadMoreButton.style.display = 'none';
-            }
+            loadMoreButton.style.display = (filteredRecordsCache.length > currentDisplayCount) ? 'block' : 'none';
         }
       };
 
-      /**
-       * Makes a table cell editable.
-       * @param {HTMLElement} td The table cell element.
-       * @param {Object} entry The record object associated with the row.
-       * @param {string} fieldName The name of the field to edit in the entry object.
-       * @param {string} type The type of input element ('text' or 'textarea').
-       */
+      // セルを編集可能にする
       const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
-          // If already editing, do nothing
           if (td.querySelector('input') || td.querySelector('textarea')) return;
 
-          // Get the current value from the entry object directly when clicked
           const currentValue = entry[fieldName];
-
           const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
           if (type === 'text') input.type = 'text';
-          input.value = currentValue; // Use currentValue
+          input.value = currentValue;
           Object.assign(input.style, { fontSize: '14px' });
           input.setAttribute('aria-label', `${fieldName}を編集`);
           
-          td.textContent = ''; // Clear existing content
+          td.textContent = '';
           td.appendChild(input);
           input.focus();
 
-          // Function to finalize editing (save and update display), and remove input
           const finalizeEdit = () => {
             const val = input.value.trim();
-            
-            // Only update and save if the value has actually changed
             if (entry[fieldName] !== val) {
-              entry[fieldName] = val; // Update the actual object in allRecords
-              saveRecords(); // Save to localStorage
+              entry[fieldName] = val;
+              saveRecords();
             }
-            td.textContent = val; // Update the DOM with the new value
-            if (input.parentNode === td) { // Ensure input is still a child before removing
-                input.remove(); // Remove the input element from DOM
-            }
+            td.textContent = val;
+            if (input.parentNode === td) input.remove();
           };
 
-          // Event listener for when the input loses focus (e.g., click outside, tab out)
-          input.addEventListener('blur', () => {
-            finalizeEdit();
-          });
-
-          // Event listener for keyboard actions
+          input.addEventListener('blur', finalizeEdit);
           input.addEventListener('keydown', (ev) => {
             if (ev.key === 'Enter') {
               if (type === 'textarea') {
-                if (!ev.shiftKey) { // Enter without Shift key (save and exit)
-                  ev.preventDefault(); // Prevent default Enter (newline)
-                  finalizeEdit();      // Save changes and remove input
+                if (!ev.shiftKey) {
+                  ev.preventDefault();
+                  finalizeEdit();
                 }
-                // If Shift+Enter, allow default newline behavior
-              } else { // For text inputs (type === 'text')
-                ev.preventDefault(); // Prevent form submission
-                finalizeEdit();      // Save changes and remove input
+              } else {
+                ev.preventDefault();
+                finalizeEdit();
               }
             } else if (ev.key === 'Escape') {
-              td.textContent = currentValue; // Revert to original content using the value at click time
-              if (input.parentNode === td) { // Ensure input is still a child before removing
-                  input.remove(); // Remove the input without saving
-              }
+              td.textContent = currentValue;
+              if (input.parentNode === td) input.remove();
             }
           });
         });
       };
 
-      /**
-       * Creates HTML for a single record entry (either a table row or a mobile card).
-       * @param {Object} entry The record object.
-       * @returns {HTMLElement} The created HTML element.
-       */
+      // レコードのHTML要素を生成
       const createRecordHtml = (entry) => {
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
           const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', {
@@ -1313,42 +1335,18 @@
 
           if (isLargeScreen) {
               const tr = document.createElement('tr');
-
-              const tdDate = document.createElement('td');
-              tdDate.textContent = formattedDate;
-              tdDate.dataset.timestamp = entry.timestamp;
-              tdDate.dataset.label = '日時';
-              tr.appendChild(tdDate);
-
-              const tdDeck = document.createElement('td');
-              tdDeck.textContent = entry.deck;
-              tdDeck.dataset.label = 'デッキ';
-              makeEditableCell(tdDeck, entry, 'deck', 'text');
-              tr.appendChild(tdDeck);
-
-              const tdOpponent = document.createElement('td');
-              tdOpponent.textContent = entry.opponent;
-              tdOpponent.dataset.label = '相手';
-              makeEditableCell(tdOpponent, entry, 'opponent', 'text');
-              tr.appendChild(tdOpponent);
-
-              const tdFirstSecond = document.createElement('td');
-              tdFirstSecond.textContent = entry.firstSecond;
-              tdFirstSecond.dataset.label = '先後';
-              makeEditableCell(tdFirstSecond, entry, 'firstSecond', 'text');
-              tr.appendChild(tdFirstSecond);
-
-              const tdResult = document.createElement('td');
-              tdResult.textContent = entry.result;
-              tdResult.dataset.label = '勝敗';
-              makeEditableCell(tdResult, entry, 'result', 'text');
-              tr.appendChild(tdResult);
-
-              const tdMemo = document.createElement('td');
-              tdMemo.textContent = entry.memo;
-              tdMemo.dataset.label = 'メモ';
-              makeEditableCell(tdMemo, entry, 'memo', 'textarea');
-              tr.appendChild(tdMemo);
+              const fields = ['date', 'deck', 'opponent', 'firstSecond', 'result', 'memo'];
+              fields.forEach(field => {
+                const td = document.createElement('td');
+                td.textContent = (field === 'date') ? formattedDate : entry[field];
+                td.dataset.label = (field === 'date') ? '日時' : (field === 'deck' ? 'デッキ' : (field === 'opponent' ? '相手' : (field === 'firstSecond' ? '先後' : (field === 'result' ? '勝敗' : 'メモ'))));
+                if (field === 'memo') {
+                    makeEditableCell(td, entry, field, 'textarea');
+                } else if (field !== 'date') {
+                    makeEditableCell(td, entry, field, 'text');
+                }
+                tr.appendChild(td);
+              });
 
               const delTd = document.createElement('td');
               const delBtn = document.createElement('button');
@@ -1361,26 +1359,16 @@
                 if (indexToRemove !== -1) {
                   allRecords.splice(indexToRemove, 1);
                   saveRecords();
-                  applyFilters(); // Re-apply filters to update statistics and display
+                  applyFilters();
                 }
               };
               delTd.appendChild(delBtn);
               tr.appendChild(delTd);
-
               return tr;
-
           } else {
               const cardDiv = document.createElement('div');
               cardDiv.classList.add('match-record-card');
               cardDiv.dataset.timestamp = entry.timestamp;
-
-              const memoItem = document.createElement('div');
-              memoItem.classList.add('card-item');
-              memoItem.innerHTML = `<span class="card-label">メモ:</span> `;
-              const memoValueSpan = document.createElement('span');
-              memoValueSpan.classList.add('card-value');
-              memoValueSpan.textContent = entry.memo;
-              memoItem.appendChild(memoValueSpan);
 
               cardDiv.innerHTML = `
                   <div class="card-item"><span class="card-label">日時:</span> <span class="card-value">${formattedDate}</span></div>
@@ -1388,8 +1376,8 @@
                   <div class="card-item"><span class="card-label">相手:</span> <span class="card-value">${entry.opponent}</span></div>
                   <div class="card-item"><span class="card-label">先後:</span> <span class="card-value">${entry.firstSecond}</span></div>
                   <div class="card-item"><span class="card-label">勝敗:</span> <span class="card-value">${entry.result}</span></div>
+                  <div class="card-item"><span class="card-label">メモ:</span> <span class="card-value">${entry.memo}</span></div>
               `;
-              cardDiv.appendChild(memoItem);
 
               const deleteButton = document.createElement('button');
               deleteButton.classList.add('delete-card-button');
@@ -1403,43 +1391,28 @@
                   if (indexToRemove !== -1) {
                       allRecords.splice(indexToRemove, 1);
                       saveRecords();
-                      applyFilters(); // Re-apply filters to update statistics and display
+                      applyFilters();
                   }
               });
-
               return cardDiv;
           }
       };
 
-      /**
-       * Adds a new record entry.
-       * @param {string} deck My deck name.
-       * @param {string} opponent Opponent's class.
-       * @param {string} firstSecond First or second turn.
-       * @param {string} result Match result ('⭕' for win, '✖' for loss).
-       * @param {string} memo Optional memo.
-       */
+      // 新しいレコードを追加
       const addRecordEntry = (deck, opponent, firstSecond, result, memo) => {
         const newRecord = {
           timestamp: new Date().toISOString(),
           date: new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-'),
-          deck,
-          opponent,
-          firstSecond,
-          result,
-          memo
+          deck, opponent, firstSecond, result, memo
         };
-        allRecords.unshift(newRecord); // Add to the beginning of the array
+        allRecords.unshift(newRecord);
         saveRecords();
-        currentDisplayCount = recordsPerPage; // Reset display count after adding a new record
-        applyFilters(); // Re-apply filters to update statistics and display
+        currentDisplayCount = recordsPerPage;
+        applyFilters();
       };
 
-      /**
-       * Handles the submission of the record form.
-       * @param {Event} e The submit event.
-       */
-      const handleRecordSubmit = (e) => {
+      // レコードフォームの送信ハンドラ
+      const handleRecordSubmit = async (e) => {
         e.preventDefault();
         const deck = myDeckInput.value;
         const opponent = ToggleButtonGroup.getSelectedValue('opponent-class-selection');
@@ -1448,8 +1421,7 @@
         const memo = recordMemoInput.value;
 
         if (!opponent || !firstSecond || !result) {
-          // Use a custom modal instead of alert in production
-          alert('すべて選択してください');
+          await ModalManager.showAlert('すべて選択してください');
           return;
         }
 
@@ -1461,13 +1433,10 @@
         });
       };
 
-      /**
-       * Loads more records for mobile display.
-       */
+      // モバイル表示でさらにレコードをロード
       const loadMoreRecords = () => {
           const oldDisplayCount = currentDisplayCount;
           currentDisplayCount += recordsPerPage;
-
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
 
           if (!isLargeScreen) {
@@ -1475,48 +1444,34 @@
               newRecordsToAppend.forEach(entry => {
                   matchRecordCardsContainer.appendChild(createRecordHtml(entry));
               });
-
-              if (filteredRecordsCache.length > currentDisplayCount) {
-                  loadMoreButton.style.display = 'block';
-              } else {
-                  loadMoreButton.style.display = 'none';
-              }
+              loadMoreButton.style.display = (filteredRecordsCache.length > currentDisplayCount) ? 'block' : 'none';
           } else {
-              applyFilters(); // Re-apply filters to ensure full table update
+              applyFilters();
           }
       };
 
-      // Debounce the loadRecords call to prevent excessive updates on rapid input
       const debouncedLoadRecords = debounce(loadRecords, 300);
 
-      /**
-       * Initializes the RecordManager module.
-       */
       const init = () => {
         const lastDeck = Storage.get(LAST_DECK_KEY);
         if (lastDeck) myDeckInput.value = lastDeck;
 
-        // Load and set initial filter states from storage
         filterDeckNameInput.value = Storage.get(FILTER_DECK_KEY, '');
         ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', Storage.get(FILTER_CLASS_KEY, ''));
-        // Set initial state for the new turn order filter
         ToggleButtonGroup.setActiveButton('filter-turn-order-selection', Storage.get(FILTER_TURN_KEY, ''));
 
-
-        loadRecords(); // Initial load of records and display
+        loadRecords();
 
         addRecordForm.addEventListener('submit', handleRecordSubmit);
-
-        // Event listeners for filter inputs
         filterDeckNameInput.addEventListener('input', () => {
-            Storage.set(FILTER_DECK_KEY, filterDeckNameInput.value); // Save filter state
-            debouncedLoadRecords(); // Debounced load
+            Storage.set(FILTER_DECK_KEY, filterDeckNameInput.value);
+            debouncedLoadRecords();
         });
         document.addEventListener('filterChange', (e) => {
             if (e.detail.groupId === 'filter-opponent-class-selection') {
-                Storage.set(FILTER_CLASS_KEY, e.detail.value); // Save filter state
-                loadRecords(); // Direct load for toggle buttons
-            } else if (e.detail.groupId === 'filter-turn-order-selection') { // Handle turn order filter changes
+                Storage.set(FILTER_CLASS_KEY, e.detail.value);
+                loadRecords();
+            } else if (e.detail.groupId === 'filter-turn-order-selection') {
                 Storage.set(FILTER_TURN_KEY, e.detail.value);
                 loadRecords();
             }
@@ -1524,34 +1479,27 @@
         clearRecordFiltersButton.addEventListener('click', () => {
             filterDeckNameInput.value = '';
             ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', '');
-            ToggleButtonGroup.setActiveButton('filter-turn-order-selection', ''); // Clear new turn order filter
+            ToggleButtonGroup.setActiveButton('filter-turn-order-selection', '');
             Storage.remove(FILTER_DECK_KEY);
             Storage.remove(FILTER_CLASS_KEY);
-            Storage.remove(FILTER_TURN_KEY); // Remove new turn order filter from storage
-            loadRecords(); // Clear filters and reload
+            Storage.remove(FILTER_TURN_KEY);
+            loadRecords();
         });
 
-        // Manage filter details open/close state
         if (recordFilterDetails) {
           const isFilterOpen = Storage.get(FILTER_OPEN_KEY, false);
-          if (isFilterOpen) {
-            recordFilterDetails.setAttribute('open', '');
-          } else {
-            recordFilterDetails.removeAttribute('open');
-          }
-
+          recordFilterDetails[isFilterOpen ? 'setAttribute' : 'removeAttribute']('open', '');
           recordFilterDetails.addEventListener('toggle', () => {
             Storage.set(FILTER_OPEN_KEY, recordFilterDetails.open);
           });
         }
-
         loadMoreButton.addEventListener('click', loadMoreRecords);
       };
 
       return { init, loadRecords, applyFilters };
     })();
 
-    // --- Card List Management Module ---
+    // Card List Management Module
     const CardListManager = (() => {
       const classFilterGroup = document.getElementById('class-filter-group');
       const currentClassDisplay = document.getElementById('current-class-display');
@@ -1566,52 +1514,28 @@
       let currentClass = '';
       let allCardData = {};
 
-      /**
-       * Saves card data for a specific class to local storage.
-       * @param {string} className The name of the class.
-       */
       const saveCards = (className) => {
         if (!className) return;
         Storage.set(CARD_CLASS_PREFIX + className, allCardData[className] || []);
       };
 
-      /**
-       * Loads card data for a specific class from local storage.
-       * @param {string} className The name of the class.
-       * @returns {Array} The array of card objects.
-       */
       const loadCards = (className) => {
         if (!className) return [];
         return Storage.get(CARD_CLASS_PREFIX + className, []);
       };
 
-      /**
-       * Loads all card data for all classes into `allCardData`.
-       */
       const loadAllClassCards = () => {
         const classNames = ["エルフ", "ロイヤル", "ウィッチ", "ドラゴン", "ナイトメア", "ビショップ", "ネメシス"];
         classNames.forEach(name => {
             allCardData[name] = loadCards(name);
         });
-        if (currentClass) {
-            renderCardList(); // Re-render if a class is currently selected
-        }
+        if (currentClass) renderCardList();
       };
 
-      /**
-       * Sorts an array of card objects by PP.
-       * @param {Array} cards The array of card objects.
-       * @returns {Array} The sorted array.
-       */
-      const sortCards = (cards) => {
-        return cards.sort((a, b) => a.pp - b.pp);
-      };
+      const sortCards = (cards) => cards.sort((a, b) => a.pp - b.pp);
 
-      /**
-       * Renders the card list for the `currentClass` in the table.
-       */
       const renderCardList = () => {
-        cardDataTableBody.innerHTML = ''; // Clear existing list
+        cardDataTableBody.innerHTML = '';
         if (!currentClass) {
           currentClassDisplay.textContent = '';
           return;
@@ -1624,13 +1548,12 @@
         cards.forEach((card, index) => {
           const tr = document.createElement('tr');
 
-          // PP cell (editable)
           const tdPP = document.createElement('td');
           tdPP.textContent = card.pp;
           tdPP.style.cursor = 'pointer';
           tdPP.title = 'クリックで編集';
           tdPP.addEventListener('click', () => {
-            if (tdPP.querySelector('input')) return; // Prevent multiple inputs
+            if (tdPP.querySelector('input')) return;
             const input = document.createElement('input');
             input.type = 'number';
             input.min = '0';
@@ -1644,24 +1567,23 @@
               let val = parseInt(input.value, 10);
               if (isNaN(val) || val < 0) val = 0;
               card.pp = val;
-              renderCardList(); // Re-render to sort and update display
+              renderCardList();
               saveCards(currentClass);
             };
             input.addEventListener('blur', finishEdit);
             input.addEventListener('keydown', (ev) => {
               if (ev.key === 'Enter') finishEdit();
-              else if (ev.key === 'Escape') renderCardList(); // Revert on escape
+              else if (ev.key === 'Escape') renderCardList();
             });
           });
           tr.appendChild(tdPP);
 
-          // Card Name cell (editable)
           const tdName = document.createElement('td');
           tdName.textContent = card.name;
           tdName.style.cursor = 'pointer';
           tdName.title = 'クリックで編集';
           tdName.addEventListener('click', () => {
-            if (tdName.querySelector('input')) return; // Prevent multiple inputs
+            if (tdName.querySelector('input')) return;
             const input = document.createElement('input');
             input.type = 'text';
             input.value = card.name;
@@ -1672,19 +1594,18 @@
             input.focus();
             const finishEdit = () => {
               const val = input.value.trim();
-              card.name = val || '(無名カード)'; // Default name if empty
-              renderCardList(); // Re-render to sort and update display
+              card.name = val || '(無名カード)';
+              renderCardList();
               saveCards(currentClass);
             };
             input.addEventListener('blur', finishEdit);
             input.addEventListener('keydown', (ev) => {
               if (ev.key === 'Enter') finishEdit();
-              else if (ev.key === 'Escape') renderCardList(); // Revert on escape
+              else if (ev.key === 'Escape') renderCardList();
             });
           });
           tr.appendChild(tdName);
 
-          // Count control buttons and display
           const tdCount = document.createElement('td');
           const btnMinus = document.createElement('button');
           btnMinus.textContent = '−';
@@ -1699,7 +1620,7 @@
           });
           const spanCount = document.createElement('span');
           spanCount.textContent = card.count;
-          spanCount.setAttribute('aria-live', 'polite'); // Announce changes to screen readers
+          spanCount.setAttribute('aria-live', 'polite');
           const btnPlus = document.createElement('button');
           btnPlus.textContent = '+';
           btnPlus.setAttribute('aria-label', `${card.name}のカウントを増やす`);
@@ -1714,7 +1635,6 @@
           tdCount.appendChild(btnPlus);
           tr.appendChild(tdCount);
 
-          // Delete button (visible in delete mode)
           const tdDel = document.createElement('td');
           const btnDel = document.createElement('button');
           btnDel.classList.add('card-delete-button');
@@ -1724,8 +1644,8 @@
           btnDel.setAttribute('aria-label', `${card.name}をリストから削除`);
           btnDel.addEventListener('click', (e) => {
             e.preventDefault();
-            allCardData[currentClass].splice(index, 1); // Remove from array
-            renderCardList(); // Re-render
+            allCardData[currentClass].splice(index, 1);
+            renderCardList();
             saveCards(currentClass);
           });
           tdDel.appendChild(btnDel);
@@ -1735,56 +1655,42 @@
         });
       };
 
-      /**
-       * Handles selection of a card class button.
-       * @param {Event} e The click event.
-       */
       const handleClassSelection = (e) => {
         if (e.target.tagName !== 'BUTTON') return;
         classFilterGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
         e.target.classList.add('active');
         currentClass = e.target.dataset.class;
-        allCardData[currentClass] = loadCards(currentClass); // Ensure current class data is loaded
+        allCardData[currentClass] = loadCards(currentClass);
         renderCardList();
       };
 
-      /**
-       * Handles adding a new card to the current class list.
-       * @param {Event} e The submit event.
-       */
-      const handleCardAdd = (e) => {
+      const handleCardAdd = async (e) => {
         e.preventDefault();
         if (!currentClass) {
-          // Use a custom modal instead of alert in production
-          alert('まず左上のクラスを選択してください');
+          await ModalManager.showAlert('まず左上のクラスを選択してください');
           return;
         }
         let ppVal = parseInt(newCardPpInput.value, 10);
         if (isNaN(ppVal) || ppVal < 0) {
-          // Use a custom modal instead of alert in production
-          alert('PPは0以上の整数を入力してください');
+          await ModalManager.showAlert('PPは0以上の整数を入力してください');
           newCardPpInput.focus();
           return;
         }
         let nameVal = newCardNameInput.value.trim();
         if (!nameVal) {
-          // Use a custom modal instead of alert in production
-          alert('カード名を入力してください');
+          await ModalManager.showAlert('カード名を入力してください');
           newCardNameInput.focus();
           return;
         }
-        if (!allCardData[currentClass]) allCardData[currentClass] = []; // Initialize if empty
+        if (!allCardData[currentClass]) allCardData[currentClass] = [];
         allCardData[currentClass].push({pp: ppVal, name: nameVal, count: 0});
-        allCardData[currentClass] = sortCards(allCardData[currentClass]); // Sort after adding
+        allCardData[currentClass] = sortCards(allCardData[currentClass]);
         saveCards(currentClass);
         renderCardList();
-        addCardForm.reset(); // Clear form
-        newCardPpInput.focus(); // Focus on PP input
+        addCardForm.reset();
+        newCardPpInput.focus();
       };
 
-      /**
-       * Resets counts of all cards in the current class to 0.
-       */
       const resetCounts = () => {
         allCardData[currentClass].forEach(card => {
           card.count = 0;
@@ -1793,28 +1699,21 @@
         renderCardList();
       };
 
-      /**
-       * Toggles card deletion mode (shows/hides delete buttons).
-       */
       const toggleDeleteMode = () => {
         const isActive = counterSection.classList.toggle('delete-mode');
         toggleCardDeleteModeButton.textContent = isActive ? '削除モード ON' : '削除モード OFF';
         toggleCardDeleteModeButton.setAttribute('aria-pressed', isActive);
       };
 
-      /**
-       * Initializes the CardListManager module.
-       */
       const init = () => {
         classFilterGroup.addEventListener('click', handleClassSelection);
         addCardForm.addEventListener('submit', handleCardAdd);
         resetCardCountsButton.addEventListener('click', resetCounts);
         toggleCardDeleteModeButton.addEventListener('click', toggleDeleteMode);
-        toggleCardDeleteModeButton.setAttribute('aria-pressed', 'false'); // Initial aria state
+        toggleCardDeleteModeButton.setAttribute('aria-pressed', 'false');
 
-        loadAllClassCards(); // Load all stored card data
+        loadAllClassCards();
 
-        // Select the first class by default if no class is active
         const firstBtn = classFilterGroup.querySelector('button');
         if (firstBtn && !classFilterGroup.querySelector('.active')) {
           firstBtn.click();
@@ -1824,13 +1723,8 @@
       return { init, getAllCardData: () => allCardData, CLASS_PREFIX: CARD_CLASS_PREFIX, renderCardList, loadAllClassCards };
     })();
 
-    // --- Data Import/Export Management Module ---
+    // Data Import/Export Management Module
     const DataManager = (() => {
-      /**
-       * Exports data as a JSON file.
-       * @param {string} filename The name of the file to download.
-       * @param {Object|Array} data The data to export.
-       */
       const exportAsJson = (filename, data) => {
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -1843,96 +1737,79 @@
         URL.revokeObjectURL(url);
       };
 
-      /**
-       * Reads a JSON file from an input element and calls a callback with its parsed content.
-       * @param {HTMLInputElement} inputEl The file input element.
-       * @param {function(Object|Array): void} callback The callback function to receive the parsed data.
-       */
-      const readJsonFile = (inputEl, callback) => {
+      const readJsonFile = async (inputEl, callback) => {
         const file = inputEl.files[0];
         if (!file) return;
         const reader = new FileReader();
-        reader.onload = () => {
+        reader.onload = async () => {
           try {
             const data = JSON.parse(reader.result);
-            callback(data);
+            await callback(data);
           } catch (e) {
-            // Use a custom modal instead of alert in production
-            alert('読み込み失敗：JSONの形式が不正なファイルです。コンソールで詳細を確認してください。');
+            await ModalManager.showAlert('読み込み失敗：JSONの形式が不正なファイルです。コンソールで詳細を確認してください。');
             console.error('JSON parse error:', e);
           }
         };
         reader.readAsText(file);
       };
 
-      /**
-       * Initializes the DataManager module.
-       */
       const init = () => {
-        // Export buttons
         document.getElementById('export-records-button').addEventListener('click', () => {
           const records = Storage.get(RECORDS_KEY, []);
           exportAsJson(`svwb_records_${new Date().toISOString().slice(0,10)}.json`, records);
         });
 
         document.getElementById('export-cards-button').addEventListener('click', () => {
-          const cards = CardListManager.getAllCardData(); // This returns { "エルフ": [...], "ロイヤル": [...] }
+          const cards = CardListManager.getAllCardData();
           exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, cards);
         });
 
         document.getElementById('export-all-data-button').addEventListener('click', () => {
           const records = Storage.get(RECORDS_KEY, []);
-          const cards = CardListManager.getAllCardData(); // This returns { "エルフ": [...], "ロイヤル": [...] }
+          const cards = CardListManager.getAllCardData();
           exportAsJson(`svwb_all_${new Date().toISOString().slice(0,10)}.json`, { records, cards });
         });
 
-        // Import files
         document.getElementById('import-records-file-input').addEventListener('change', (e) => {
-          readJsonFile(e.target, (data) => {
+          readJsonFile(e.target, async (data) => {
             if (!Array.isArray(data)) {
-                // Use a custom modal instead of alert in production
-                alert('戦績データが不正です: ファイルの内容が配列形式ではありません。');
+                await ModalManager.showAlert('戦績データが不正です: ファイルの内容が配列形式ではありません。');
                 return;
             }
             Storage.set(RECORDS_KEY, data);
-            RecordManager.loadRecords(); // Reload records after import
-            // Use a custom modal instead of alert in production
-            alert('戦績をインポートしました。');
-            e.target.value = ''; // Clear file input
+            RecordManager.loadRecords();
+            await ModalManager.showAlert('戦績をインポートしました。');
+            e.target.value = '';
           });
         });
 
         document.getElementById('import-cards-file-input').addEventListener('change', (e) => {
-          readJsonFile(e.target, (data) => {
+          readJsonFile(e.target, async (data) => {
             if (typeof data !== 'object' || data === null) {
-              // Use a custom modal instead of alert in production
-              alert('カードデータが不正です: ファイルの内容がオブジェクト形式ではありません。');
+              await ModalManager.showAlert('カードデータが不正です: ファイルの内容がオブジェクト形式ではありません。');
               return;
             }
             let importedCount = 0;
-            for (const className in data) { // 'className' will be 'エルフ', 'ロイヤル' etc.
-              if (Array.isArray(data[className])) { // Check if value is an array
-                Storage.set(CARD_CLASS_PREFIX + className, data[className]); // Save with prefix
+            for (const className in data) {
+              if (Array.isArray(data[className])) {
+                Storage.set(CARD_CLASS_PREFIX + className, data[className]);
                 importedCount++;
               }
             }
-            CardListManager.loadAllClassCards(); // Reload all card data after import
+            CardListManager.loadAllClassCards();
             if (importedCount > 0) {
-              // Use a custom modal instead of alert in production
-              alert('カードリストをインポートしました。');
+              await ModalManager.showAlert('カードリストをインポートしました。');
             } else {
-              // Use a custom modal instead of alert in production
-              alert('インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。');
+              await ModalManager.showAlert('インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。');
             }
-            e.target.value = ''; // Clear file input
+            e.target.value = '';
           });
         });
 
         document.getElementById('import-all-data-file-input').addEventListener('change', (e) => {
-          readJsonFile(e.target, (data) => {
+          readJsonFile(e.target, async (data) => {
             if (!data || typeof data !== 'object') {
-                // Use a custom modal instead of alert in production
-                alert('全体データが不正です: ファイルの内容がオブジェクト形式ではありません。');
+                await ModalManager.showAlert('全体データが不正です: ファイルの内容がオブジェクト形式ではありません。');
                 return;
             }
             if (Array.isArray(data.records)) {
@@ -1943,10 +1820,9 @@
 
             if (typeof data.cards === 'object' && data.cards !== null) {
               let importedCardClassesCount = 0;
-              // Loop through the class names within data.cards
-              for (const className in data.cards) { // 'className' will be 'エルフ', 'ロイヤル' etc.
-                if (Array.isArray(data.cards[className])) { // Check if value is an array
-                  Storage.set(CARD_CLASS_PREFIX + className, data[className]); // Save with prefix
+              for (const className in data.cards) {
+                if (Array.isArray(data.cards[className])) {
+                  Storage.set(CARD_CLASS_PREFIX + className, data[className]);
                   importedCardClassesCount++;
                 }
               }
@@ -1957,22 +1833,19 @@
                 console.warn('全体データに有効なカードデータ（cards）が見つかりませんでした。');
             }
 
-            RecordManager.loadRecords(); // Reload records and update statistics
-            CardListManager.loadAllClassCards(); // Reload all card data
-            // Use a custom modal instead of alert in production
-            alert('全体データをインポートしました。');
-            e.target.value = ''; // Clear file input
+            RecordManager.loadRecords();
+            CardListManager.loadAllClassCards();
+            await ModalManager.showAlert('全体データをインポートしました。');
+            e.target.value = '';
           });
         });
 
-        // Clear records
-        document.getElementById('clear-records-button').addEventListener('click', () => {
-          // Use a custom modal instead of confirm in production
-          if (confirm('本当に戦績をすべて削除しますか？')) {
+        document.getElementById('clear-records-button').addEventListener('click', async () => {
+          const confirmed = await ModalManager.showConfirm('本当に戦績をすべて削除しますか？');
+          if (confirmed) {
             Storage.remove(RECORDS_KEY);
-            RecordManager.loadRecords(); // Reload records (will be empty) and update statistics
-            // Use a custom modal instead of alert in production
-            alert('戦績を削除しました。');
+            RecordManager.loadRecords();
+            await ModalManager.showAlert('戦績を削除しました。');
           }
         });
       };
@@ -1980,7 +1853,7 @@
       return { init };
     })();
 
-    // --- Tooltip Script (New Module for click behavior) ---
+    // Tooltip Script (New Module for click behavior)
     const TooltipManager = (() => {
         let infoButton;
         let infoTooltip;
@@ -1990,15 +1863,12 @@
             infoTooltip = document.getElementById('info-tooltip-content');
 
             if (infoButton && infoTooltip) {
-                // Toggle tooltip on button click
                 infoButton.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent document click from immediately closing
+                    event.stopPropagation();
                     infoTooltip.classList.toggle('show');
                 });
 
-                // Hide tooltip when clicking anywhere else on the document
                 document.addEventListener('click', (event) => {
-                    // Check if the click occurred outside the tooltip and the info button
                     if (!infoButton.contains(event.target) && !infoTooltip.contains(event.target)) {
                         infoTooltip.classList.remove('show');
                     }
@@ -2016,7 +1886,8 @@
       RecordManager.init();
       CardListManager.init();
       DataManager.init();
-      TooltipManager.init(); // Initialize the new TooltipManager
+      TooltipManager.init();
+      ModalManager.init(); // カスタムモーダルを初期化
     });
   </script>
 </body>
