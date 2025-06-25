@@ -1786,15 +1786,11 @@
        * Resets counts of all cards in the current class to 0.
        */
       const resetCounts = () => {
-        // Use a custom modal instead of confirm in production
-        if (!currentClass || !allCardData[currentClass] || !confirm(`本当に${currentClass}のカードカウントをすべてクリアしますか？`)) return;
         allCardData[currentClass].forEach(card => {
           card.count = 0;
         });
         saveCards(currentClass);
         renderCardList();
-        // Use a custom modal instead of alert in production
-        alert(`${currentClass}のカードカウントをクリアしました。`);
       };
 
       /**
