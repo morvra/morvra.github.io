@@ -15,6 +15,7 @@
       color: #333;
       margin: 0;
       padding: 0;
+      transition: background 0.3s, color 0.3s; /* Smooth transition for dark mode */
     }
     main {
       padding: 8px;
@@ -24,6 +25,7 @@
     h2, h3 {
       color: #2c3e50;
       margin-top: 0;
+      transition: color 0.3s; /* Smooth transition for dark mode */
     }
 
     /* レイアウト */
@@ -82,6 +84,7 @@
       margin-bottom: 16px;
       width: 100%;
       box-sizing: border-box;
+      transition: background 0.3s, box-shadow 0.3s; /* Smooth transition for dark mode */
     }
 
     .record-panel h3,
@@ -128,6 +131,9 @@
       border-radius: 6px;
       box-sizing: border-box;
       font-size: 14px;
+      background: white; /* Ensure input background is white in light mode */
+      color: #333; /* Ensure input text color is dark in light mode */
+      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
     }
     .app-form label {
       display: block;
@@ -169,7 +175,7 @@
       cursor: pointer;
       font-size: 14px;
       color: #333;    
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, color 0.2s; /* Smooth transition for dark mode */
     }
     .toggle-button-group button.active {
       background: #1abc9c;
@@ -185,10 +191,12 @@
       overflow: hidden;
       font-size: 14px;
       table-layout: fixed;
+      transition: background 0.3s; /* Smooth transition for dark mode */
     }
     .data-table thead {
       background: #ecf0f1;
       font-weight: bold;
+      transition: background 0.3s; /* Smooth transition for dark mode */
     }
     .data-table th, .data-table td {
       text-align: center;
@@ -196,6 +204,7 @@
       border-bottom: 1px solid #eee;
       overflow: hidden;
       white-space: nowrap;
+      transition: border-color 0.3s; /* Smooth transition for dark mode */
     }
     .data-table tr:hover { background: #f9f9f9; }
     .data-table td:last-child button {
@@ -221,6 +230,9 @@
         line-height: 1.2;
         display: block;
         min-width: 0;
+        background: white; /* Ensure input background is white in light mode */
+        color: #333; /* Ensure input text color is dark in light mode */
+        transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
     }
     .data-table td textarea {
         min-height: 40px;
@@ -297,6 +309,7 @@
       color: #2c3e50;
       margin-top: 0;
       margin-bottom: 12px;
+      transition: color 0.3s; /* Smooth transition for dark mode */
     }
     .data-management-panel .toggle-button-group { margin-bottom: 12px; }
     .data-management-panel .form-action-button {
@@ -315,7 +328,7 @@
       user-select: none;
       min-width: 70px;
       text-align: center;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, color 0.2s; /* Smooth transition for dark mode */
     }
     .file-input-button:hover { background: #d0d7de; }
     .data-management-panel input[type="file"] { display: none; }
@@ -334,6 +347,7 @@
       display: flex;
       margin-bottom: 20px;
       background: #e9ecef;
+      transition: background 0.3s; /* Smooth transition for dark mode */
     }
     .tab-navigation-button {
       flex: 1;
@@ -343,7 +357,7 @@
       cursor: pointer;
       background: transparent;
       border: none;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s, color 0.3s; /* Smooth transition for dark mode */
       font-weight: 600;
       color: #495057;
       -webkit-tap-highlight-color: transparent;
@@ -374,6 +388,7 @@
       border-radius: 8px;
       background-color: #fcfcfc;
       overflow: hidden;
+      transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
     }
     .filter-controls details { border: none; }
     .filter-controls summary {
@@ -387,6 +402,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: color 0.3s; /* Smooth transition for dark mode */
     }
     .filter-controls summary::marker,
     .filter-controls summary::-webkit-details-marker { display: none; }
@@ -408,6 +424,9 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 14px;
+      background: white; /* Ensure input background is white in light mode */
+      color: #333; /* Ensure input text color is dark in light mode */
+      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
     }
 
     .filter-content-wrapper {
@@ -435,6 +454,9 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size:14px;
+      background: white; /* Ensure input background is white in light mode */
+      color: #333; /* Ensure input text color is dark in light mode */
+      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
     }
     .add-card-form-layout input[type="text"] {
       flex: 1;
@@ -442,6 +464,9 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size:14px;
+      background: white; /* Ensure input background is white in light mode */
+      color: #333; /* Ensure input text color is dark in light mode */
+      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
     }
     .add-card-form-layout .form-action-button {
       padding: 4px 16px;
@@ -459,7 +484,7 @@
         border-radius: 4px;
         border: 1px solid #ccc;
         background: #ecf0f1;
-        transition: background 0.2s;
+        transition: background 0.2s, color 0.2s, border-color 0.2s; /* Smooth transition for dark mode */
     }
     #card-data-table td button:hover { background: #d0d7de; }
     #card-data-table td button:first-child { margin-right: 6px; }
@@ -519,6 +544,7 @@
           gap: 6px;
           position: relative;
           font-size: 14px;
+          transition: background 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
       }
 
       .match-record-card .card-item {
@@ -531,6 +557,7 @@
           min-width: 50px;
           margin-right: 6px;
           color: #444;
+          transition: color 0.3s; /* Smooth transition for dark mode */
       }
 
       .match-record-card .card-value {
@@ -719,11 +746,136 @@
     .stat-label {
         font-weight: normal; /* Less bold than the value */
         color: #555;
+        transition: color 0.3s; /* Smooth transition for dark mode */
     }
 
     .stat-value {
         font-weight: bold;
         color: #2c3e50;
+        transition: color 0.3s; /* Smooth transition for dark mode */
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: #2c3e50; /* Dark background */
+      color: #ecf0f1; /* Light text */
+    }
+
+    body.dark-mode h2,
+    body.dark-mode h3,
+    body.dark-mode .data-management-panel > h3,
+    body.dark-mode .filter-controls summary {
+      color: #ecf0f1; /* Light headings */
+    }
+
+    body.dark-mode .panel {
+      background: #34495e; /* Darker panel background */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    body.dark-mode .app-form input,
+    body.dark-mode .app-form select,
+    body.dark-mode .app-form textarea,
+    body.dark-mode .data-table td input[type="text"],
+    body.dark-mode .data-table td input[type="number"],
+    body.dark-mode .data-table td textarea,
+    body.dark-mode input#filter-deck-name-input,
+    body.dark-mode .add-card-form-layout input[type="number"],
+    body.dark-mode .add-card-form-layout input[type="text"] {
+      background: #446688; /* Dark input background */
+      border-color: #557799; /* Lighter border for contrast */
+      color: #ecf0f1; /* Light text in inputs */
+    }
+
+    body.dark-mode .toggle-button-group button {
+      background: #446688;
+      border-color: #557799;
+      color: #ecf0f1;
+    }
+    body.dark-mode .toggle-button-group button.active {
+      background: #16a085; /* Active button remains bright */
+      border-color: #1abc9c;
+      color: white;
+    }
+
+    body.dark-mode .data-table {
+      background: #34495e;
+      color: #ecf0f1;
+    }
+    body.dark-mode .data-table thead,
+    body.dark-mode .data-table thead tr {
+      background: #4a627a; /* Darker header background for better contrast */
+    }
+    body.dark-mode .data-table th, /* Apply explicit color to th in dark mode */
+    body.dark-mode .data-table td {
+      border-bottom: 1px solid #557799;
+      color: #ecf0f1; /* Ensure text color is light */
+    }
+    body.dark-mode .data-table tr:hover {
+      background: #557799; /* Slightly lighter hover for visibility */
+    }
+
+    body.dark-mode #card-data-table td button {
+      background: #446688;
+      border-color: #557799;
+      color: #ecf0f1;
+    }
+    body.dark-mode #card-data-table td button:hover {
+      background: #557799;
+    }
+
+    body.dark-mode .file-input-button {
+      background: #446688;
+      border-color: #557799;
+      color: #ecf0f1;
+    }
+    body.dark-mode .file-input-button:hover {
+      background: #557799;
+    }
+
+    body.dark-mode .tab-navigation {
+      background: #3a536a;
+    }
+    body.dark-mode .tab-navigation-button {
+      color: #bdc3c7;
+    }
+    body.dark-mode .tab-navigation-button:hover {
+      background: #4a627a;
+    }
+    body.dark-mode .tab-navigation-button.active {
+      background: #34495e; /* Active tab darker to contrast with bright green */
+      color: #1abc9c;
+    }
+
+    body.dark-mode .filter-controls {
+      background-color: #3a536a;
+      border-color: #557799;
+    }
+    body.dark-mode .filter-controls summary .toggle-icon {
+      filter: invert(1); /* Invert SVG icon color for dark mode */
+    }
+
+    body.dark-mode .match-record-card {
+      background: #34495e;
+      border: 1px solid #557799;
+    }
+    body.dark-mode .match-record-card .card-label {
+      color: #bdc3c7;
+    }
+
+    body.dark-mode #custom-modal-overlay {
+      background: rgba(0,0,0,0.8); /* Darker overlay in dark mode */
+    }
+    body.dark-mode #custom-modal-content {
+      background: #34495e !important; /* Darker background for modal content */
+      color: #ecf0f1; /* Light text for modal content */
+    }
+
+    body.dark-mode .stat-label {
+        color: #bdc3c7; /* Ensure good contrast for stat labels in dark mode */
+    }
+    body.dark-mode .stat-value {
+        color: #ecf0f1; /* Ensure good contrast for stat values in dark mode */
     }
   </style>
 </head>
@@ -802,6 +954,10 @@
 					    全削除
 					  </button>
 					</div>
+                <h3>表示テーマ</h3>
+                <div class="toggle-button-group" style="margin-top: 10px;">
+                    <button type="button" id="toggle-dark-mode-button" class="form-action-button neutral">ダークモード ON/OFF</button>
+                </div>
           </div>
 				<div id="ad">
 					スポンサードリンク
@@ -996,6 +1152,7 @@
     const FILTER_TURN_KEY = 'svwb-filter-turn';
     const FILTER_OPEN_KEY = 'svwb-filter-open-state';
     const CARD_CLASS_PREFIX = 'svwb-cards-';
+    const DARK_MODE_KEY = 'svwb-dark-mode'; // New key for dark mode state
 
     // Custom Modal Module
     const ModalManager = (() => {
@@ -1011,19 +1168,19 @@
             okButton = document.getElementById('modal-ok-button');
             cancelButton = document.getElementById('modal-cancel-button');
 
-            // 初期化時にモーダルを強制的に非表示にする
+            // Initialize modal to be hidden
             overlay.style.display = 'none';
 
             okButton.addEventListener('click', () => {
                 overlay.style.display = 'none';
                 resolvePromise(true);
-                resolvePromise = () => {}; // Promise解決後にリセット
+                resolvePromise = () => {}; // Reset promise after resolution
             });
 
             cancelButton.addEventListener('click', () => {
                 overlay.style.display = 'none';
                 resolvePromise(false);
-                resolvePromise = () => {}; // Promise解決後にリセット
+                resolvePromise = () => {}; // Reset promise after resolution
             });
         };
 
@@ -1032,7 +1189,7 @@
                 messageElement.textContent = message;
                 okButton.style.display = 'inline-block';
                 cancelButton.style.display = 'none';
-                overlay.style.display = 'flex'; // モーダル表示時にflexを設定
+                overlay.style.display = 'flex'; // Set to flex for display
                 resolvePromise = resolve;
             });
         };
@@ -1042,12 +1199,42 @@
                 messageElement.textContent = message;
                 okButton.style.display = 'inline-block';
                 cancelButton.style.display = 'inline-block';
-                overlay.style.display = 'flex'; // モーダル表示時にflexを設定
+                overlay.style.display = 'flex'; // Set to flex for display
                 resolvePromise = resolve;
             });
         };
 
         return { init, showAlert, showConfirm };
+    })();
+
+    // Dark Mode Manager
+    const DarkModeManager = (() => {
+        const toggleDarkModeButton = document.getElementById('toggle-dark-mode-button');
+        const body = document.body;
+
+        const init = () => {
+            // Load dark mode state from local storage
+            const isDarkMode = Storage.get(DARK_MODE_KEY, false);
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+
+            // Add event listener for the toggle button
+            toggleDarkModeButton.addEventListener('click', () => {
+                const currentMode = body.classList.contains('dark-mode');
+                if (currentMode) {
+                    body.classList.remove('dark-mode');
+                    Storage.set(DARK_MODE_KEY, false);
+                } else {
+                    body.classList.add('dark-mode');
+                    Storage.set(DARK_MODE_KEY, true);
+                }
+            });
+        };
+
+        return { init };
     })();
 
     // Tab Management Module
@@ -1105,7 +1292,7 @@
           }
         }
 
-        // AdSense のリロード
+        // AdSense reload
         if (targetPaneId === 'storage-section') {
             setTimeout(() => { // Add a small delay
                 try {
@@ -1119,10 +1306,10 @@
                             }
                         });
                     } else {
-                        console.warn('AdSense オブジェクトが見つからないか、push メソッドがありません。');
+                        console.warn('AdSense object not found or push method is missing.');
                     }
                 } catch (error) {
-                    console.error('AdSense のリロード中にエラー:', error);
+                    console.error('Error reloading AdSense:', error);
                 }
             }, 100); // 100ms delay
         }
@@ -1205,7 +1392,7 @@
       let allRecords = [];
       let filteredRecordsCache = [];
 
-      // テーブルセルにデータラベルを追加 (モバイル対応)
+      // Add data labels to table cells (for mobile)
       const addDataLabelsToRecordTable = () => {
         const headers = Array.from(document.querySelectorAll('#match-record-table th')).map(th => th.textContent);
         document.querySelectorAll('#match-record-table tbody tr').forEach(row => {
@@ -1217,7 +1404,7 @@
         });
       };
 
-      // レコードをローカルストレージに保存
+      // Save records to local storage
       const saveRecords = () => {
         const data = allRecords.map(record => ({
           timestamp: record.timestamp,
@@ -1231,7 +1418,7 @@
         Storage.set(RECORDS_KEY, data);
       };
 
-      // レコードをロード、ソート、フィルタ適用
+      // Load, sort, and apply filters to records
       const loadRecords = () => {
         allRecords = Storage.get(RECORDS_KEY, []);
         allRecords.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -1239,7 +1426,7 @@
         applyFilters();
       };
 
-      // 統計情報を更新
+      // Update statistics
       const updateStatistics = (records) => {
           const totalMatches = records.length;
           const totalWins = records.filter(record => record.result === '⭕').length;
@@ -1250,7 +1437,7 @@
           winRateDisplay.textContent = `${winRate}%`;
       };
 
-      // フィルタを適用し、レコード表示を更新
+      // Apply filters and update record display
       const applyFilters = () => {
         matchRecordTableBody.innerHTML = '';
         matchRecordCardsContainer.innerHTML = '';
@@ -1286,7 +1473,7 @@
         }
       };
 
-      // セルを編集可能にする
+      // Make cell editable
       const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
           if (td.querySelector('input') || td.querySelector('textarea')) return;
@@ -1296,7 +1483,7 @@
           if (type === 'text') input.type = 'text';
           input.value = currentValue;
           Object.assign(input.style, { fontSize: '14px' });
-          input.setAttribute('aria-label', `${fieldName}を編集`);
+          input.setAttribute('aria-label', `Edit ${fieldName}`);
           
           td.textContent = '';
           td.appendChild(input);
@@ -1332,7 +1519,7 @@
         });
       };
 
-      // レコードのHTML要素を生成
+      // Generate HTML element for a record
       const createRecordHtml = (entry) => {
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
           const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', {
@@ -1360,7 +1547,7 @@
               delBtn.textContent = '🗑️';
               Object.assign(delBtn.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
               delBtn.title = '削除';
-              delBtn.setAttribute('aria-label', `${formattedDate}の記録を削除`);
+              delBtn.setAttribute('aria-label', `Delete record for ${formattedDate}`);
               delBtn.onclick = () => {
                 const indexToRemove = allRecords.findIndex(rec => rec.timestamp === entry.timestamp);
                 if (indexToRemove !== -1) {
@@ -1390,7 +1577,7 @@
               deleteButton.classList.add('delete-card-button');
               deleteButton.title = '削除';
               deleteButton.textContent = '🗑️';
-              deleteButton.setAttribute('aria-label', `${formattedDate}の記録を削除`);
+              deleteButton.setAttribute('aria-label', `Delete record for ${formattedDate}`);
               cardDiv.appendChild(deleteButton);
 
               deleteButton.addEventListener('click', () => {
@@ -1405,7 +1592,7 @@
           }
       };
 
-      // 新しいレコードを追加
+      // Add a new record entry
       const addRecordEntry = (deck, opponent, firstSecond, result, memo) => {
         const newRecord = {
           timestamp: new Date().toISOString(),
@@ -1418,7 +1605,7 @@
         applyFilters();
       };
 
-      // レコードフォームの送信ハンドラ
+      // Record form submission handler
       const handleRecordSubmit = async (e) => {
         e.preventDefault();
         const deck = myDeckInput.value;
@@ -1440,7 +1627,7 @@
         });
       };
 
-      // モバイル表示でさらにレコードをロード
+      // Load more records for mobile display
       const loadMoreRecords = () => {
           const oldDisplayCount = currentDisplayCount;
           currentDisplayCount += recordsPerPage;
@@ -1566,7 +1753,7 @@
             input.min = '0';
             input.value = card.pp;
             Object.assign(input.style, { fontSize: '14px' });
-            input.setAttribute('aria-label', `カードPPを編集: ${card.name}`);
+            input.setAttribute('aria-label', `Edit card PP: ${card.name}`);
             tdPP.textContent = '';
             tdPP.appendChild(input);
             input.focus();
@@ -1595,13 +1782,13 @@
             input.type = 'text';
             input.value = card.name;
             Object.assign(input.style, { fontSize: '14px' });
-            input.setAttribute('aria-label', `カード名を編集: ${card.name}`);
+            input.setAttribute('aria-label', `Edit card name: ${card.name}`);
             tdName.textContent = '';
             tdName.appendChild(input);
             input.focus();
             const finishEdit = () => {
               const val = input.value.trim();
-              card.name = val || '(無名カード)';
+              card.name = val || '(Unnamed card)';
               renderCardList();
               saveCards(currentClass);
             };
@@ -1616,7 +1803,7 @@
           const tdCount = document.createElement('td');
           const btnMinus = document.createElement('button');
           btnMinus.textContent = '−';
-          btnMinus.setAttribute('aria-label', `${card.name}のカウントを減らす`);
+          btnMinus.setAttribute('aria-label', `Decrease count for ${card.name}`);
           btnMinus.addEventListener('click', (e) => {
             e.preventDefault();
             if (card.count > 0) {
@@ -1630,7 +1817,7 @@
           spanCount.setAttribute('aria-live', 'polite');
           const btnPlus = document.createElement('button');
           btnPlus.textContent = '+';
-          btnPlus.setAttribute('aria-label', `${card.name}のカウントを増やす`);
+          btnPlus.setAttribute('aria-label', `Increase count for ${card.name}`);
           btnPlus.addEventListener('click', (e) => {
             e.preventDefault();
             card.count++;
@@ -1648,7 +1835,7 @@
           btnDel.textContent = '🗑️';
           Object.assign(btnDel.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
           btnDel.title = '削除';
-          btnDel.setAttribute('aria-label', `${card.name}をリストから削除`);
+          btnDel.setAttribute('aria-label', `Delete ${card.name} from list`);
           btnDel.addEventListener('click', (e) => {
             e.preventDefault();
             allCardData[currentClass].splice(index, 1);
@@ -1822,7 +2009,7 @@
             if (Array.isArray(data.records)) {
               Storage.set(RECORDS_KEY, data.records);
             } else {
-                console.warn('全体データに有効な戦績データ（records）が見つかりませんでした。');
+                console.warn('No valid record data found in overall data.');
             }
 
             if (typeof data.cards === 'object' && data.cards !== null) {
@@ -1834,10 +2021,10 @@
                 }
               }
               if (importedCardClassesCount === 0) {
-                console.warn('全体データに有効なカードクラス（cards）が見つかりませんでした。');
+                console.warn('No valid card classes found in overall data.');
               }
             } else {
-                console.warn('全体データに有効なカードデータ（cards）が見つかりませんでした。');
+                console.warn('No valid card data found in overall data.');
             }
 
             RecordManager.loadRecords();
@@ -1888,13 +2075,14 @@
 
     // Initialize all modules when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
+      ModalManager.init(); // Initialize custom modal first
+      DarkModeManager.init(); // Initialize dark mode manager
       TabManager.init();
       ToggleButtonGroup.init();
       RecordManager.init();
       CardListManager.init();
       DataManager.init();
       TooltipManager.init();
-      ModalManager.init(); // カスタムモーダルを初期化
     });
   </script>
 </body>
