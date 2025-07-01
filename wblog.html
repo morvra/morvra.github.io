@@ -15,7 +15,7 @@
       color: #333;
       margin: 0;
       padding: 0;
-      transition: background 0.3s, color 0.3s; /* Smooth transition for dark mode */
+      transition: background 0.3s, color 0.3s;
     }
     main {
       padding: 8px;
@@ -25,7 +25,7 @@
     h2, h3 {
       color: #2c3e50;
       margin-top: 0;
-      transition: color 0.3s; /* Smooth transition for dark mode */
+      transition: color 0.3s;
     }
 
     /* レイアウト */
@@ -84,7 +84,7 @@
       margin-bottom: 16px;
       width: 100%;
       box-sizing: border-box;
-      transition: background 0.3s, box-shadow 0.3s; /* Smooth transition for dark mode */
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .record-panel h3,
@@ -131,9 +131,9 @@
       border-radius: 6px;
       box-sizing: border-box;
       font-size: 14px;
-      background: white; /* Ensure input background is white in light mode */
-      color: #333; /* Ensure input text color is dark in light mode */
-      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+      background: white;
+      color: #333;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     .app-form label {
       display: block;
@@ -175,7 +175,7 @@
       cursor: pointer;
       font-size: 14px;
       color: #333;    
-      transition: background 0.2s, border-color 0.2s, color 0.2s; /* Smooth transition for dark mode */
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
     .toggle-button-group button.active {
       background: #1abc9c;
@@ -191,12 +191,12 @@
       overflow: hidden;
       font-size: 14px;
       table-layout: fixed;
-      transition: background 0.3s; /* Smooth transition for dark mode */
+      transition: background 0.3s;
     }
     .data-table thead {
       background: #ecf0f1;
       font-weight: bold;
-      transition: background 0.3s; /* Smooth transition for dark mode */
+      transition: background 0.3s;
     }
     .data-table th, .data-table td {
       text-align: center;
@@ -204,7 +204,7 @@
       border-bottom: 1px solid #eee;
       overflow: hidden;
       white-space: nowrap;
-      transition: border-color 0.3s; /* Smooth transition for dark mode */
+      transition: border-color 0.3s;
     }
     .data-table tr:hover { background: #f9f9f9; }
     .data-table td:last-child button {
@@ -222,24 +222,23 @@
     .data-table td input[type="text"],
     .data-table td input[type="number"],
     .data-table td textarea {
-        width: 100%; /* 親要素の幅にフィット */
-        box-sizing: border-box; /* paddingとborderをwidthに含める */
+        width: 100%;
+        box-sizing: border-box;
         border: 1px solid #ccc;
         padding: 4px;
         font-size: 14px;
         line-height: 1.2;
         display: block;
         min-width: 0;
-        background: white; /* Ensure input background is white in light mode */
-        color: #333; /* Ensure input text color is dark in light mode */
-        transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+        background: white;
+        color: #333;
+        transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     .data-table td textarea {
         min-height: 40px;
         resize: vertical;
         overflow: hidden;
     }
-
 
     /* 戦績テーブルのメモ欄 */
     #match-record-table th:nth-child(6),
@@ -256,8 +255,6 @@
     }
 
     /* 各テーブルの列幅を定義 */
-
-    /* カードリストテーブルの列幅 */
     #card-data-table th:nth-child(1),
     #card-data-table td:nth-child(1) { width: 30px; } /* PP */
     #card-data-table th:nth-child(2),
@@ -267,7 +264,6 @@
     #card-data-table th:nth-child(4),
     #card-data-table td:nth-child(4) { width: 50px; } /* 削除 */
 
-    /* 戦績記録テーブルの列幅 */
     #match-record-table th:nth-child(1),
     #match-record-table td:nth-child(1) { width: 120px; } /* 日時 */
     #match-record-table th:nth-child(2),
@@ -282,7 +278,6 @@
     #match-record-table td:nth-child(6) { width: auto; } /* メモ */
     #match-record-table th:nth-child(7),
     #match-record-table td:nth-child(7) { width: 50px; } /* 削除 */
-
 
     /* カードアクション */
     .card-actions {
@@ -309,7 +304,7 @@
       color: #2c3e50;
       margin-top: 0;
       margin-bottom: 12px;
-      transition: color 0.3s; /* Smooth transition for dark mode */
+      transition: color 0.3s;
     }
     .data-management-panel .toggle-button-group { margin-bottom: 12px; }
     .data-management-panel .form-action-button {
@@ -328,7 +323,7 @@
       user-select: none;
       min-width: 70px;
       text-align: center;
-      transition: background 0.2s, border-color 0.2s, color 0.2s; /* Smooth transition for dark mode */
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
     .file-input-button:hover { background: #d0d7de; }
     .data-management-panel input[type="file"] { display: none; }
@@ -347,7 +342,7 @@
       display: flex;
       margin-bottom: 20px;
       background: #e9ecef;
-      transition: background 0.3s; /* Smooth transition for dark mode */
+      transition: background 0.3s;
     }
     .tab-navigation-button {
       flex: 1;
@@ -357,7 +352,7 @@
       cursor: pointer;
       background: transparent;
       border: none;
-      transition: background 0.3s, color 0.3s; /* Smooth transition for dark mode */
+      transition: background 0.3s, color 0.3s;
       font-weight: 600;
       color: #495057;
       -webkit-tap-highlight-color: transparent;
@@ -388,7 +383,7 @@
       border-radius: 8px;
       background-color: #fcfcfc;
       overflow: hidden;
-      transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+      transition: background-color 0.3s, border-color 0.3s;
     }
     .filter-controls details { border: none; }
     .filter-controls summary {
@@ -402,7 +397,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: color 0.3s; /* Smooth transition for dark mode */
+      transition: color 0.3s;
     }
     .filter-controls summary::marker,
     .filter-controls summary::-webkit-details-marker { display: none; }
@@ -424,9 +419,9 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 14px;
-      background: white; /* Ensure input background is white in light mode */
-      color: #333; /* Ensure input text color is dark in light mode */
-      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+      background: white;
+      color: #333;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
 
     .filter-content-wrapper {
@@ -454,9 +449,9 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size:14px;
-      background: white; /* Ensure input background is white in light mode */
-      color: #333; /* Ensure input text color is dark in light mode */
-      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+      background: white;
+      color: #333;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     .add-card-form-layout input[type="text"] {
       flex: 1;
@@ -464,9 +459,9 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size:14px;
-      background: white; /* Ensure input background is white in light mode */
-      color: #333; /* Ensure input text color is dark in light mode */
-      transition: background 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+      background: white;
+      color: #333;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     .add-card-form-layout .form-action-button {
       padding: 4px 16px;
@@ -484,7 +479,7 @@
         border-radius: 4px;
         border: 1px solid #ccc;
         background: #ecf0f1;
-        transition: background 0.2s, color 0.2s, border-color 0.2s; /* Smooth transition for dark mode */
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
     #card-data-table td button:hover { background: #d0d7de; }
     #card-data-table td button:first-child { margin-right: 6px; }
@@ -526,7 +521,7 @@
         padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
       }
 
-      #match-record-table-wrapper { display: none; } /* デスクトップ用テーブル非表示 */
+      #match-record-table-wrapper { display: none; }
       #match-record-cards-container {
           display: flex;
           flex-direction: column;
@@ -544,7 +539,7 @@
           gap: 6px;
           position: relative;
           font-size: 14px;
-          transition: background 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+          transition: background 0.3s, border-color 0.3s;
       }
 
       .match-record-card .card-item {
@@ -557,7 +552,7 @@
           min-width: 50px;
           margin-right: 6px;
           color: #444;
-          transition: color 0.3s; /* Smooth transition for dark mode */
+          transition: color 0.3s;
       }
 
       .match-record-card .card-value {
@@ -640,7 +635,7 @@
 
     /* インフォメーションボタンとツールチップ */
     .info-container {
-      display: none; /* 通常は非表示 */
+      display: none;
       position: fixed;
       right: 24px;
       bottom: 24px;
@@ -727,49 +722,49 @@
     /* 追加スタイル: 統計情報表示用 */
     .record-summary {
         display: flex;
-        flex-direction: column; /* Changed to column for stats inside details */
-        gap: 10px; /* Adjust spacing between elements */
-        margin-top: 10px; /* Added margin to separate from filter controls */
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
     }
 
     .record-stats {
         display: flex;
-        gap: 15px; /* Spacing between individual stats */
+        gap: 15px;
         flex-wrap: wrap;
-        padding: 0; /* Remove padding as it's now inside the content wrapper */
+        padding: 0;
     }
 
     .stat-item {
-        white-space: nowrap; /* Prevent breaking lines within a stat item */
+        white-space: nowrap;
     }
 
     .stat-label {
-        font-weight: normal; /* Less bold than the value */
+        font-weight: normal;
         color: #555;
-        transition: color 0.3s; /* Smooth transition for dark mode */
+        transition: color 0.3s;
     }
 
     .stat-value {
         font-weight: bold;
         color: #2c3e50;
-        transition: color 0.3s; /* Smooth transition for dark mode */
+        transition: color 0.3s;
     }
 
     /* Dark Mode Styles */
     body.dark-mode {
-      background: #2c3e50; /* Dark background */
-      color: #ecf0f1; /* Light text */
+      background: #2c3e50;
+      color: #ecf0f1;
     }
 
     body.dark-mode h2,
     body.dark-mode h3,
     body.dark-mode .data-management-panel > h3,
     body.dark-mode .filter-controls summary {
-      color: #ecf0f1; /* Light headings */
+      color: #ecf0f1;
     }
 
     body.dark-mode .panel {
-      background: #34495e; /* Darker panel background */
+      background: #34495e;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
@@ -782,9 +777,9 @@
     body.dark-mode input#filter-deck-name-input,
     body.dark-mode .add-card-form-layout input[type="number"],
     body.dark-mode .add-card-form-layout input[type="text"] {
-      background: #446688; /* Dark input background */
-      border-color: #557799; /* Lighter border for contrast */
-      color: #ecf0f1; /* Light text in inputs */
+      background: #446688;
+      border-color: #557799;
+      color: #ecf0f1;
     }
 
     body.dark-mode .toggle-button-group button {
@@ -793,7 +788,7 @@
       color: #ecf0f1;
     }
     body.dark-mode .toggle-button-group button.active {
-      background: #16a085; /* Active button remains bright */
+      background: #16a085;
       border-color: #1abc9c;
       color: white;
     }
@@ -804,15 +799,15 @@
     }
     body.dark-mode .data-table thead,
     body.dark-mode .data-table thead tr {
-      background: #4a627a; /* Darker header background for better contrast */
+      background: #4a627a;
     }
-    body.dark-mode .data-table th, /* Apply explicit color to th in dark mode */
+    body.dark-mode .data-table th,
     body.dark-mode .data-table td {
       border-bottom: 1px solid #557799;
-      color: #ecf0f1; /* Ensure text color is light */
+      color: #ecf0f1;
     }
     body.dark-mode .data-table tr:hover {
-      background: #557799; /* Slightly lighter hover for visibility */
+      background: #557799;
     }
 
     body.dark-mode #card-data-table td button {
@@ -843,7 +838,7 @@
       background: #4a627a;
     }
     body.dark-mode .tab-navigation-button.active {
-      background: #34495e; /* Active tab darker to contrast with bright green */
+      background: #34495e;
       color: #1abc9c;
     }
 
@@ -852,7 +847,7 @@
       border-color: #557799;
     }
     body.dark-mode .filter-controls summary .toggle-icon {
-      filter: invert(1); /* Invert SVG icon color for dark mode */
+      filter: invert(1);
     }
 
     body.dark-mode .match-record-card {
@@ -864,18 +859,43 @@
     }
 
     body.dark-mode #custom-modal-overlay {
-      background: rgba(0,0,0,0.8); /* Darker overlay in dark mode */
+      background: rgba(0,0,0,0.8);
     }
     body.dark-mode #custom-modal-content {
-      background: #34495e !important; /* Darker background for modal content */
-      color: #ecf0f1; /* Light text for modal content */
+      background: #34495e !important;
+      color: #ecf0f1;
     }
 
     body.dark-mode .stat-label {
-        color: #bdc3c7; /* Ensure good contrast for stat labels in dark mode */
+        color: #bdc3c7;
     }
     body.dark-mode .stat-value {
-        color: #ecf0f1; /* Ensure good contrast for stat values in dark mode */
+        color: #ecf0f1;
+    }
+
+    /* Class Notes Specific Styles */
+    .class-notes-container {
+      margin-top: 24px;
+    }
+
+    .class-notes-container textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.6;
+      box-sizing: border-box;
+      background: white;
+      color: #333;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode .class-notes-container textarea {
+      background: #446688;
+      border-color: #557799;
+      color: #ecf0f1;
     }
   </style>
 </head>
@@ -922,6 +942,12 @@
                 <input type="text" id="new-card-name-input" placeholder="カード名" required>
                 <button type="submit" class="form-action-button primary">追加</button>
               </form>
+          </div>
+
+          <!-- クラス毎のメモ欄 -->
+          <div class="class-notes-container">
+              <div id="current-class-note-display" class="info-display"></div>
+              <textarea id="class-note-textarea" placeholder="このクラスのメモ" aria-label="クラスメモ"></textarea>
           </div>
       </section>
 
@@ -1152,7 +1178,9 @@
     const FILTER_TURN_KEY = 'svwb-filter-turn';
     const FILTER_OPEN_KEY = 'svwb-filter-open-state';
     const CARD_CLASS_PREFIX = 'svwb-cards-';
-    const DARK_MODE_KEY = 'svwb-dark-mode'; // New key for dark mode state
+    const CLASS_NOTE_PREFIX = 'svwb-class-note-';
+    const DARK_MODE_KEY = 'svwb-dark-mode';
+    const CLASS_NAMES = ["エルフ", "ロイヤル", "ウィッチ", "ドラゴン", "ナイトメア", "ビショップ", "ネメシス"];
 
     // Custom Modal Module
     const ModalManager = (() => {
@@ -1168,19 +1196,18 @@
             okButton = document.getElementById('modal-ok-button');
             cancelButton = document.getElementById('modal-cancel-button');
 
-            // Initialize modal to be hidden
             overlay.style.display = 'none';
 
             okButton.addEventListener('click', () => {
                 overlay.style.display = 'none';
                 resolvePromise(true);
-                resolvePromise = () => {}; // Reset promise after resolution
+                resolvePromise = () => {};
             });
 
             cancelButton.addEventListener('click', () => {
                 overlay.style.display = 'none';
                 resolvePromise(false);
-                resolvePromise = () => {}; // Reset promise after resolution
+                resolvePromise = () => {};
             });
         };
 
@@ -1189,7 +1216,7 @@
                 messageElement.textContent = message;
                 okButton.style.display = 'inline-block';
                 cancelButton.style.display = 'none';
-                overlay.style.display = 'flex'; // Set to flex for display
+                overlay.style.display = 'flex';
                 resolvePromise = resolve;
             });
         };
@@ -1199,7 +1226,7 @@
                 messageElement.textContent = message;
                 okButton.style.display = 'inline-block';
                 cancelButton.style.display = 'inline-block';
-                overlay.style.display = 'flex'; // Set to flex for display
+                overlay.style.display = 'flex';
                 resolvePromise = resolve;
             });
         };
@@ -1213,7 +1240,6 @@
         const body = document.body;
 
         const init = () => {
-            // Load dark mode state from local storage
             const isDarkMode = Storage.get(DARK_MODE_KEY, false);
             if (isDarkMode) {
                 body.classList.add('dark-mode');
@@ -1221,7 +1247,6 @@
                 body.classList.remove('dark-mode');
             }
 
-            // Add event listener for the toggle button
             toggleDarkModeButton.addEventListener('click', () => {
                 const currentMode = body.classList.contains('dark-mode');
                 if (currentMode) {
@@ -1294,12 +1319,11 @@
 
         // AdSense reload
         if (targetPaneId === 'storage-section') {
-            setTimeout(() => { // Add a small delay
+            setTimeout(() => {
                 try {
                     if (window.adsbygoogle && typeof window.adsbygoogle.push === 'function') {
                         document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
-                            // Only push if the ad slot is actually visible
-                            if (ad.offsetParent !== null) { // Check if the element is rendered and not display:none
+                            if (ad.offsetParent !== null) {
                                 (window.adsbygoogle = window.adsbygoogle || []).push({});
                             } else {
                                 console.warn('AdSense slot is not visible, skipping push.');
@@ -1311,7 +1335,7 @@
                 } catch (error) {
                     console.error('Error reloading AdSense:', error);
                 }
-            }, 100); // 100ms delay
+            }, 100);
         }
       };
 
@@ -1392,7 +1416,6 @@
       let allRecords = [];
       let filteredRecordsCache = [];
 
-      // Add data labels to table cells (for mobile)
       const addDataLabelsToRecordTable = () => {
         const headers = Array.from(document.querySelectorAll('#match-record-table th')).map(th => th.textContent);
         document.querySelectorAll('#match-record-table tbody tr').forEach(row => {
@@ -1404,7 +1427,6 @@
         });
       };
 
-      // Save records to local storage
       const saveRecords = () => {
         const data = allRecords.map(record => ({
           timestamp: record.timestamp,
@@ -1418,7 +1440,6 @@
         Storage.set(RECORDS_KEY, data);
       };
 
-      // Load, sort, and apply filters to records
       const loadRecords = () => {
         allRecords = Storage.get(RECORDS_KEY, []);
         allRecords.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -1426,7 +1447,6 @@
         applyFilters();
       };
 
-      // Update statistics
       const updateStatistics = (records) => {
           const totalMatches = records.length;
           const totalWins = records.filter(record => record.result === '⭕').length;
@@ -1437,7 +1457,6 @@
           winRateDisplay.textContent = `${winRate}%`;
       };
 
-      // Apply filters and update record display
       const applyFilters = () => {
         matchRecordTableBody.innerHTML = '';
         matchRecordCardsContainer.innerHTML = '';
@@ -1473,7 +1492,6 @@
         }
       };
 
-      // Make cell editable
       const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
           if (td.querySelector('input') || td.querySelector('textarea')) return;
@@ -1519,7 +1537,6 @@
         });
       };
 
-      // Generate HTML element for a record
       const createRecordHtml = (entry) => {
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
           const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', {
@@ -1592,7 +1609,6 @@
           }
       };
 
-      // Add a new record entry
       const addRecordEntry = (deck, opponent, firstSecond, result, memo) => {
         const newRecord = {
           timestamp: new Date().toISOString(),
@@ -1605,7 +1621,6 @@
         applyFilters();
       };
 
-      // Record form submission handler
       const handleRecordSubmit = async (e) => {
         e.preventDefault();
         const deck = myDeckInput.value;
@@ -1627,7 +1642,6 @@
         });
       };
 
-      // Load more records for mobile display
       const loadMoreRecords = () => {
           const oldDisplayCount = currentDisplayCount;
           currentDisplayCount += recordsPerPage;
@@ -1719,8 +1733,7 @@
       };
 
       const loadAllClassCards = () => {
-        const classNames = ["エルフ", "ロイヤル", "ウィッチ", "ドラゴン", "ナイトメア", "ビショップ", "ネメシス"];
-        classNames.forEach(name => {
+        CLASS_NAMES.forEach(name => {
             allCardData[name] = loadCards(name);
         });
         if (currentClass) renderCardList();
@@ -1856,6 +1869,7 @@
         currentClass = e.target.dataset.class;
         allCardData[currentClass] = loadCards(currentClass);
         renderCardList();
+        ClassNoteManager.loadNote(currentClass);
       };
 
       const handleCardAdd = async (e) => {
@@ -1917,6 +1931,33 @@
       return { init, getAllCardData: () => allCardData, CLASS_PREFIX: CARD_CLASS_PREFIX, renderCardList, loadAllClassCards };
     })();
 
+    // Class Note Management Module
+    const ClassNoteManager = (() => {
+        const classNoteTextarea = document.getElementById('class-note-textarea');
+        const currentClassNoteDisplay = document.getElementById('current-class-note-display');
+        let currentClassForNote = '';
+
+        const saveNote = debounce((className, noteContent) => {
+            if (className) Storage.set(CLASS_NOTE_PREFIX + className, noteContent);
+        }, 500);
+
+        const loadNote = (className) => {
+            currentClassForNote = className;
+            currentClassNoteDisplay.textContent = `${className} のメモ`;
+            classNoteTextarea.value = Storage.get(CLASS_NOTE_PREFIX + className, '');
+        };
+
+        const init = () => {
+            classNoteTextarea.addEventListener('input', (e) => {
+                if (currentClassForNote) {
+                    saveNote(currentClassForNote, e.target.value);
+                }
+            });
+        };
+
+        return { init, loadNote };
+    })();
+
     // Data Import/Export Management Module
     const DataManager = (() => {
       const exportAsJson = (filename, data) => {
@@ -1949,19 +1990,22 @@
 
       const init = () => {
         document.getElementById('export-records-button').addEventListener('click', () => {
-          const records = Storage.get(RECORDS_KEY, []);
-          exportAsJson(`svwb_records_${new Date().toISOString().slice(0,10)}.json`, records);
+          exportAsJson(`svwb_records_${new Date().toISOString().slice(0,10)}.json`, Storage.get(RECORDS_KEY, []));
         });
 
         document.getElementById('export-cards-button').addEventListener('click', () => {
-          const cards = CardListManager.getAllCardData();
-          exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, cards);
+          exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, CardListManager.getAllCardData());
         });
 
         document.getElementById('export-all-data-button').addEventListener('click', () => {
           const records = Storage.get(RECORDS_KEY, []);
           const cards = CardListManager.getAllCardData();
-          exportAsJson(`svwb_all_${new Date().toISOString().slice(0,10)}.json`, { records, cards });
+          const classNotes = {};
+          CLASS_NAMES.forEach(name => {
+              const note = Storage.get(CLASS_NOTE_PREFIX + name, '');
+              if (note) classNotes[name] = note;
+          });
+          exportAsJson(`svwb_all_${new Date().toISOString().slice(0,10)}.json`, { records, cards, classNotes });
         });
 
         document.getElementById('import-records-file-input').addEventListener('change', (e) => {
@@ -1991,11 +2035,7 @@
               }
             }
             CardListManager.loadAllClassCards();
-            if (importedCount > 0) {
-              await ModalManager.showAlert('カードリストをインポートしました。');
-            } else {
-              await ModalManager.showAlert('インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。');
-            }
+            await ModalManager.showAlert(importedCount > 0 ? 'カードリストをインポートしました。' : 'インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。');
             e.target.value = '';
           });
         });
@@ -2006,11 +2046,8 @@
                 await ModalManager.showAlert('全体データが不正です: ファイルの内容がオブジェクト形式ではありません。');
                 return;
             }
-            if (Array.isArray(data.records)) {
-              Storage.set(RECORDS_KEY, data.records);
-            } else {
-                console.warn('No valid record data found in overall data.');
-            }
+            if (Array.isArray(data.records)) Storage.set(RECORDS_KEY, data.records);
+            else console.warn('No valid record data found in overall data.');
 
             if (typeof data.cards === 'object' && data.cards !== null) {
               let importedCardClassesCount = 0;
@@ -2020,15 +2057,25 @@
                   importedCardClassesCount++;
                 }
               }
-              if (importedCardClassesCount === 0) {
-                console.warn('No valid card classes found in overall data.');
-              }
+              if (importedCardClassesCount === 0) console.warn('No valid card classes found in overall data.');
             } else {
                 console.warn('No valid card data found in overall data.');
             }
 
+            if (typeof data.classNotes === 'object' && data.classNotes !== null) {
+                for (const className in data.classNotes) {
+                    if (typeof data.classNotes[className] === 'string') {
+                        Storage.set(CLASS_NOTE_PREFIX + className, data.classNotes[className]);
+                    }
+                }
+            } else {
+                console.warn('No valid class notes data found in overall data.');
+            }
+
             RecordManager.loadRecords();
             CardListManager.loadAllClassCards();
+            const currentClassActiveButton = document.querySelector('#class-filter-group .active');
+            if (currentClassActiveButton) ClassNoteManager.loadNote(currentClassActiveButton.dataset.class);
             await ModalManager.showAlert('全体データをインポートしました。');
             e.target.value = '';
           });
@@ -2047,7 +2094,7 @@
       return { init };
     })();
 
-    // Tooltip Script (New Module for click behavior)
+    // Tooltip Script
     const TooltipManager = (() => {
         let infoButton;
         let infoTooltip;
@@ -2075,12 +2122,13 @@
 
     // Initialize all modules when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
-      ModalManager.init(); // Initialize custom modal first
-      DarkModeManager.init(); // Initialize dark mode manager
+      ModalManager.init();
+      DarkModeManager.init();
       TabManager.init();
       ToggleButtonGroup.init();
       RecordManager.init();
       CardListManager.init();
+      ClassNoteManager.init();
       DataManager.init();
       TooltipManager.init();
     });
