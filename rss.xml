@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 08 Jul 2025 14:44:37 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 08 Jul 2025 15:12:40 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -478,17 +478,6 @@
 <ul><li>左下のボタンか「Alt+T」で入力画面がポップアップする</li><li>テキストを入力して送信ボタンかEnterを押すとインボックスに現在時刻付きで送信される</li><li>右上の閉じるボタン or 何も入力がない状態でEnter or カーソルが外れる でポップアップが消える</li></ul>]]></description>
           <pubDate>Sat, 15 Mar 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=fFIleKwD9Coz8gxLIs6WcMJN</guid>
-        </item>
-        <item>
-          <title>GitHub Actionsから投稿のテスト</title>
-          <link>https://morvra.github.io/article?id=3nmVLxbckg3fEIBN33Pwr7yj</link>
-          <description><![CDATA[<p>リストの親子関係が</p>
-<ul><li>おや１</li><li>こ１−１</li><li>おや２</li></ul>
-<p>こ２−１</p>
-<p>こ２−２</p>
-<p>維持されてるはず。</p>]]></description>
-          <pubDate>Tue, 08 Jul 2025 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=3nmVLxbckg3fEIBN33Pwr7yj</guid>
         </item>
       </channel>
     </rss>

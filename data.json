@@ -226,13 +226,6 @@
 				"javascript"
 			],
 			"body": "<p>Dynalist上のどこからでもインボックスにメモするためのユーザースクリプト。ObsidianのQuickAddみたいなイメージ。</p>\n<p>コード → <a href=\"https://gist.github.com/morvra/0e899e1cd57f2c2aaa69e328fd9b99f8\" target=\"_blank\">DynalistInboxSender.js</a></p>\n<p>＊APIキーを自分用のものにして使ってください</p>\n<ul><li>左下のボタンか「Alt+T」で入力画面がポップアップする</li><li>テキストを入力して送信ボタンかEnterを押すとインボックスに現在時刻付きで送信される</li><li>右上の閉じるボタン or 何も入力がない状態でEnter or カーソルが外れる でポップアップが消える</li></ul>"
-		},
-		{
-			"id": "3nmVLxbckg3fEIBN33Pwr7yj",
-			"title": "GitHub Actionsから投稿のテスト",
-			"date": "2025-07-08",
-			"tags": [],
-			"body": "<p>リストの親子関係が</p>\n<ul><li>おや１</li><li>こ１−１</li><li>おや２</li></ul>\n<p>こ２−１</p>\n<p>こ２−２</p>\n<p>維持されてるはず。</p>"
 		}
 	],
 	"pieces": [
