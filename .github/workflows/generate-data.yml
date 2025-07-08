@@ -33,4 +33,4 @@ jobs:
         add: 'data.json rss.xml' # コミット対象のファイル
         message: 'feat: Update data.json and rss.xml from Dynalist' # コミットメッセージ
         new_branch: main # または master
-        token: ${{ secrets.GH_TOKEN }} # プッシュ用のGitHub PAT
+        github_token: ${{ secrets.GH_TOKEN }} # プッシュ用のGitHub PAT
