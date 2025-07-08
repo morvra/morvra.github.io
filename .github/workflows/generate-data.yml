@@ -1,0 +1,36 @@
+# .github/workflows/generate-data.yml
+name: Generate Data and Push to GitHub
+
+on:
+  workflow_dispatch: # GitHub ActionsのUIから手動でワークフローを実行できるようにする
+  schedule:
+    # 現在時刻は2025年7月8日21:54:15 JST
+    # 6時間ごとに実行 (例: UTC 0時, 6時, 12時, 18時)
+    # 日本時間(JST)で考えると、UTC+9なので、JST 9時, 15時, 21時, 3時
+    - cron: '0 */6 * * *' 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # 使用するNode.jsのバージョン
+
+    - name: Run script to generate data
+      env:
+        DYNALIST_TOKEN: ${{ secrets.DYNALIST_TOKEN }} # Dynalistトークンを環境変数に設定
+      run: node getData2.js # 修正したJavaScriptスクリプトを実行
+
+    - name: Commit and push changes
+      uses: EndBug/add-and-commit@v9 # 生成されたファイルをコミット・プッシュするアクション
+      with:
+        add: 'data.json rss.xml' # コミット対象のファイル
+        message: 'feat: Update data.json and rss.xml from Dynalist' # コミットメッセージ
+        new_branch: main # または master
+        token: ${{ secrets.GH_TOKEN }} # プッシュ用のGitHub PAT
