@@ -4,10 +4,7 @@ name: Generate Data and Push to GitHub
 on:
   workflow_dispatch: # GitHub ActionsのUIから手動でワークフローを実行できるようにする
   schedule:
-    # 現在時刻は2025年7月8日21:54:15 JST
-    # 6時間ごとに実行 (例: UTC 0時, 6時, 12時, 18時)
-    # 日本時間(JST)で考えると、UTC+9なので、JST 9時, 15時, 21時, 3時
-    - cron: '0 */6 * * *' 
+    - cron: '0 3,15 * * *' # 毎日UTC 3時と15時 (日本時間の12時と0時) に実行
 
 jobs:
   build-and-deploy:
