@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 09 Jul 2025 15:12:42 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 10 Jul 2025 03:48:48 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -489,6 +489,19 @@
 <p><div id="appreach-box" style="text-align: left;"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f6/48/98/f648985e-52bf-40e5-deab-c7d721844c43/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Shadowverse: Worlds Beyond" id="appreach-image" style="float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;"><div class="appreach-info" style="margin: 10px;"><div id="appreach-appname">Shadowverse: Worlds Beyond</div><div id="appreach-developer" style="font-size: 80%; display: inline-block;">開発元:<span id="appreach-developerurl">Cygames, Inc.</span></div><div id="appreach-price" style="font-size: 80%; display: inline-block;">無料</div><div class="appreach-powered" style="font-size: 80%; display: inline-block;">posted with<a href="https://mama-hack.com/app-reach/" title="アプリーチ" target="_blank" rel="nofollow">アプリーチ</a></div><div class="appreach-links" style="float: left;"><div id="appreach-itunes-link" style="display: inline-block;"><a id="appreach-itunes" href="https://apps.apple.com/jp/app/shadowverse-worlds-beyond/id6472019540?uo=4" rel="nofollow"><img src="https://nabettu.github.io/appreach/img/itune_ja.svg" style="height: 40px; width: 135px;"></a></div><div id="appreach-gplay-link" style="display: inline-block;"><a id="appreach-gplay" href="https://play.google.com/store/apps/details?id=jp.co.cygames.ShadowverseWorldsBeyond" rel="nofollow"><img src="https://nabettu.github.io/appreach/img/gplay_ja.png" style="height: 40px; width: 134.5px;"></a></div></div></div><div class="appreach-footer" style="margin-bottom: 10px; clear: left;"></div></div></p>]]></description>
           <pubDate>Wed, 09 Jul 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=fDalpCyltz7AB356i6p9AZkk</guid>
+        </item>
+        <item>
+          <title>シャドバWBの対戦支援ツールを作った</title>
+          <link>https://morvra.github.io/article?id=s48l0AJ9CVFIEHWlEmAg_YLW</link>
+          <description><![CDATA[<ul><li><a href="https://morvra.github.io/wblog">WBログノート | シャドウバースWB 対戦支援</a></li></ul>
+<h2>できること</h2>
+<ul><li>クラス毎の警戒カードリスト＆カウンター</li><li>クラス毎のメモでマリガンやプレイ指針</li><li>自分のデッキ、相手クラス、先後、勝敗、メモを記録して一覧</li><li>デッキや先後でフィルターできて勝率も算出</li><li>データのインポート、エクスポートにも対応</li></ul>
+<hr>
+<p>ほぼChatGPTとGeminiに頼った。</p>
+<p>経緯含めた紹介記事はnoteに投稿してみた→<a href="https://note.com/morvra/n/n42208430550c" target="_blank">シャドウバースWBの対戦支援ツールを作りました｜morvra</a></p>
+<p>この記事投稿時C3サファイアだったけど、これ使ったおかげ？で現在AA0サファイア、ロビー大会優勝、グランプリA進出と上達してるはず。ダイヤ安定してれば上達を確信できたけどそれはまだまだ先かな〜。</p>]]></description>
+          <pubDate>Thu, 10 Jul 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=s48l0AJ9CVFIEHWlEmAg_YLW</guid>
         </item>
       </channel>
     </rss>
