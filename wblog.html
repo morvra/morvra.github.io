@@ -236,7 +236,7 @@
     body.dark-mode { background: #2c3e50; color: #ecf0f1; }
     body.dark-mode h2, body.dark-mode h3, body.dark-mode .data-management-panel > h3, body.dark-mode .filter-controls summary { color: #ecf0f1; }
     body.dark-mode .panel { background: #34495e; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    body.dark-mode .app-form input, body.dark-mode .app-form select, body.dark-mode .app-form textarea, body.dark-mode .data-table td input[type="text"], body.dark-mode .data-table td input[type="number"], body.dark-mode .data-table td textarea, body.dark-mode input#filter-deck-name-input, body.dark-mode input#filter-season-input, body.dark-mode .add-card-form-layout input[type="number"], body.dark-mode .add-card-form-layout input[type="text"] { background: #446688; border-color: #557799; color: #ecf0f1; }
+    body.dark-mode .app-form input, body.dark-mode .app-form select, body.dark-mode .app-form textarea, body.dark-mode .data-table td input[type="text"], body.dark-mode .data-table td input[type="number"], body.dark-mode input#filter-deck-name-input, body.dark-mode input#filter-season-input, body.dark-mode .add-card-form-layout input[type="number"], body.dark-mode .add-card-form-layout input[type="text"] { background: #446688; border-color: #557799; color: #ecf0f1; }
     body.dark-mode .toggle-button-group button { background: #446688; border-color: #557799; color: #ecf0f1; }
     body.dark-mode .toggle-button-group button.active { background: #16a085; border-color: #1abc9c; color: white; }
     body.dark-mode .data-table { background: #34495e; color: #ecf0f1; }
@@ -280,7 +280,7 @@
         .form-field-group:first-child { flex-shrink: 0; }
         .form-field-group:last-child { flex-grow: 1; }
         .form-field-group label { white-space: nowrap; }
-        .form-field-group input[type="number"] { width: 60px; }
+        .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
         .form-field-group input[type="text"] { min-width: 100px; }
     }
   </style>
@@ -303,9 +303,9 @@
                 <button type="button" data-class="ロイヤル">ロイヤル</button>
                 <button type="button" data-class="ウィッチ">ウィッチ</button>
                 <button type="button" data-class="ドラゴン">ドラゴン</button>
-                <button type="button" data-value="ナイトメア">ナイトメア</button>
-                <button type="button" data-value="ビショップ">ビショップ</button>
-                <button type="button" data-value="ネメシス">ネメシス</button>
+                <button type="button" data-class="ナイトメア">ナイトメア</button>
+                <button type="button" data-class="ビショップ">ビショップ</button>
+                <button type="button" data-class="ネメシス">ネメシス</button>
               </div>
               <div class="card-actions">
                 <button type="button" id="reset-card-counts-button" class="form-action-button secondary">カウントをクリア</button>
@@ -1028,7 +1028,7 @@
         if (e.target.tagName !== 'BUTTON') return;
         classFilterGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
         e.target.classList.add('active');
-        currentClass = e.target.dataset.class;
+        currentClass = e.target.dataset.class; // ここを修正
         allCardData[currentClass] = loadCards(currentClass);
         renderCardList();
         ClassNoteManager.loadNote(currentClass);
@@ -1078,7 +1078,7 @@
         const saveNote = debounce((className, noteContent) => { if (className) Storage.set(CLASS_NOTE_PREFIX + className, noteContent); }, 500);
         const loadNote = (className) => {
             currentClassForNote = className;
-            currentClassNoteDisplay.textContent = `${className} のメモ`;
+            currentClassNoteDisplay.textContent = `${className} のメモ`; // ここを修正
             classNoteTextarea.value = Storage.get(CLASS_NOTE_PREFIX + className, '');
         };
         const init = () => {
