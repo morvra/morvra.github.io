@@ -162,7 +162,18 @@
       body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
       #match-record-table-wrapper { display: none; }
       #match-record-cards-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-      .match-record-card { background: white; border-radius: 8px; padding: 12px; border: 1px solid #e0e0e0; display: flex; flex-direction: column; gap: 6px; position: relative; font-size: 14px; transition: background 0.3s, border-color 0.3s; }
+      .match-record-card {
+          background: white;
+          border-radius: 8px;
+          padding: 16px; /* Increased padding */
+          border: 1px solid #e0e0e0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px; /* Increased gap */
+          position: relative;
+          font-size: 14px;
+          transition: background 0.3s, border-color 0.3s;
+      }
       .match-record-card .card-item { display: flex; align-items: flex-start; }
       .match-record-card .card-label { font-weight: bold; min-width: 50px; margin-right: 6px; color: #444; transition: color 0.3s; }
       .match-record-card .card-value { flex-grow: 1; word-break: break-word; font-size: 14px; white-space: normal; }
@@ -172,10 +183,9 @@
       /* モバイルでのテーブルセルパディングを調整 */
       .data-table th, .data-table td { padding: 8px 6px; }
 
-      /* カウント列のtdにflexboxを適用 */
-      #card-data-table td:nth-child(3) { display: flex; align-items: center; justify-content: center; padding: 0; }
 
       /* モバイルでのカウンタボタンの調整 */
+	  #card-data-table th:nth-child(3), #card-data-table td:nth-child(3) { width: 112px; }
       #card-data-table td button { width: 40px; height: 40px; font-size: 22px; padding: 0; box-sizing: border-box; vertical-align: middle; }
       #card-data-table td button:first-child { margin-right: 4px; }
       #card-data-table td button:last-child { margin-left: 4px; }
@@ -1028,7 +1038,7 @@
         if (e.target.tagName !== 'BUTTON') return;
         classFilterGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
         e.target.classList.add('active');
-        currentClass = e.target.dataset.class; // ここを修正
+        currentClass = e.target.dataset.class; 
         allCardData[currentClass] = loadCards(currentClass);
         renderCardList();
         ClassNoteManager.loadNote(currentClass);
@@ -1078,7 +1088,7 @@
         const saveNote = debounce((className, noteContent) => { if (className) Storage.set(CLASS_NOTE_PREFIX + className, noteContent); }, 500);
         const loadNote = (className) => {
             currentClassForNote = className;
-            currentClassNoteDisplay.textContent = `${className} のメモ`; // ここを修正
+            currentClassNoteDisplay.textContent = `${className} のメモ`; 
             classNoteTextarea.value = Storage.get(CLASS_NOTE_PREFIX + className, '');
         };
         const init = () => {
