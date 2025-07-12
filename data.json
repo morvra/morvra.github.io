@@ -457,6 +457,20 @@
 			"date": "2025-07-08",
 			"tags": [],
 			"body": "<p>できた！これで定時に自動で投稿されるようになった。</p>\n<p>一応スマホからでも投稿可能に。最近はCosenseにお熱だったからDynalist経由のここは放置気味だったけどなんとか活用したい。</p>"
+		},
+		{
+			"id": "wOwjhfRujlwfK0xWMBGBklw1",
+			"title": "ダブルヒップ師匠",
+			"date": "2025-07-11",
+			"tags": [],
+			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/mazrTjqG92c?si=WIpe-e7FyYq881GE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>笑った〜。軍団それぞれ色あるけどどっちも好き。</p>"
+		},
+		{
+			"id": "Zzf7gJm4SjsuzbcsrVUmweYO",
+			"title": "WBログノートにシーズン記録を追加",
+			"date": "2025-07-12",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://morvra.github.io/wblog\">WBログノート | シャドウバースWB 対戦支援</a></li></ul>\n<p>フィルターも追加したので拡張ごとの戦績に絞り込むことも可能。</p>\n<p>拡張名を勝手に取得して記録してくれるのがベストなんだけど、その度に更新かけるのは現実的じゃないかなと思い数字でやってくことにした。</p>"
 		}
 	]
 }
