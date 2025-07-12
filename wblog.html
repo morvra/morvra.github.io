@@ -9,149 +9,40 @@
   <title>WBログノート | シャドウバースWB 対戦支援</title>
   <style>
     /* 基本スタイル */
-    body {
-      font-family: sans-serif;
-      background: #f7f9fb;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      transition: background 0.3s, color 0.3s;
-    }
-    main {
-      padding: 8px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    h2, h3 {
-      color: #2c3e50;
-      margin-top: 0;
-      transition: color 0.3s;
-    }
+    body { font-family: sans-serif; background: #f7f9fb; color: #333; margin: 0; padding: 0; transition: background 0.3s, color 0.3s; }
+    main { padding: 8px; max-width: 1200px; margin: auto; }
+    h2, h3 { color: #2c3e50; margin-top: 0; transition: color 0.3s; }
 
     /* レイアウト */
-    .two-column-layout {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-    }
-
-    .flex-column-item {
-      width: 100%;
-      box-sizing: border-box;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-    }
+    .two-column-layout { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+    .flex-column-item { width: 100%; box-sizing: border-box; margin: 0 auto; display: flex; flex-direction: column; flex-shrink: 0; }
 
     /* PCレイアウト */
     @media (min-width: 984px) {
-      .flex-column-item {
-        width: auto;
-        margin: 0;
-        flex-basis: 0;
-        min-width: 370px;
-      }
-
-      .counter-storage-column {
-        flex-grow: 2;
-        max-width: 336px;
-      }
-
-      .record-panel-column {
-        flex-grow: 5;
-        max-width: 840px;
-      }
-
-      .panel {
-        height: fit-content;
-      }
-      .record-panel {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          height: auto;
-          box-sizing: border-box;
-      }
+      .flex-column-item { width: auto; margin: 0; flex-basis: 0; min-width: 370px; }
+      .counter-storage-column { flex-grow: 2; max-width: 336px; }
+      .record-panel-column { flex-grow: 5; max-width: 840px; }
+      .panel { height: fit-content; }
+      .record-panel { display: flex; flex-direction: column; flex-grow: 1; height: auto; box-sizing: border-box; }
     }
 
-    .panel {
-      background: white;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-      margin-bottom: 16px;
-      width: 100%;
-      box-sizing: border-box;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
+    .panel { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); margin-bottom: 16px; width: 100%; box-sizing: border-box; transition: background 0.3s, box-shadow 0.3s; }
+    .record-panel h3, .record-panel .app-form, .record-panel .filter-controls { flex-shrink: 0; }
 
-    .record-panel h3,
-    .record-panel .app-form,
-    .record-panel .filter-controls {
-        flex-shrink: 0;
-    }
-
-    /* カウンターコントロールグループ */
-    .counter-control-group {
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .counter-control-group span.label {
-      width: 200px;
-      font-weight: 600;
-      font-size: 15px;
-    }
-    .counter-control-group button {
-      background: #ecf0f1;
-      border: none;
-      padding: 6px 12px;
-      font-size: 18px;
-      margin: 0 6px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+    /* カウンターコントロール */
+    .counter-control-group { align-items: center; margin-bottom: 12px; }
+    .counter-control-group span.label { width: 200px; font-weight: 600; font-size: 15px; }
+    .counter-control-group button { background: #ecf0f1; border: none; padding: 6px 12px; font-size: 18px; margin: 0 6px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
     .counter-control-group button:hover { background: #d0d7de; }
-    .count-value {
-      font-size: 18px;
-      width: 40px;
-      text-align: center;
-    }
+    .count-value { font-size: 18px; width: 40px; text-align: center; }
 
     /* フォーム要素 */
-    .app-form input, .app-form select, .app-form textarea {
-      width: 100%;
-      max-width: 400px;
-      padding: 8px;
-      margin-top: 6px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-      font-size: 14px;
-      background: white;
-      color: #333;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .app-form label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
+    .app-form input, .app-form select, .app-form textarea { width: 100%; max-width: 400px; padding: 8px; margin: 6px 0 16px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    .app-form label { display: block; font-weight: 500; margin-bottom: 4px; }
     .app-form textarea { resize: vertical; }
 
     /* フォームアクションボタン */
-    .form-action-button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background 0.2s;
-      color: white;
-    }
+    .form-action-button { padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; transition: background 0.2s; color: white; }
     .form-action-button.primary { background: #1abc9c; }
     .form-action-button.primary:hover { background: #16a085; }
     .form-action-button.secondary { background: #F39C12; color: white; }
@@ -162,740 +53,235 @@
     .form-action-button.danger:hover { background: #c0392b; }
 
     /* トグルボタン */
-    .toggle-button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .toggle-button-group button {
-      background: #ecf0f1;
-      border: 1px solid #ccc;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      color: #333;    
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .toggle-button-group button.active {
-      background: #1abc9c;
-      color: white;
-      border-color: #16a085;
-    }
+    .toggle-button-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .toggle-button-group button { background: #ecf0f1; border: 1px solid #ccc; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; color: #333; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+    .toggle-button-group button.active { background: #1abc9c; color: white; border-color: #16a085; }
 
     /* データテーブル */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      overflow: hidden;
-      font-size: 14px;
-      table-layout: fixed;
-      transition: background 0.3s;
-    }
-    .data-table thead {
-      background: #ecf0f1;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .data-table th, .data-table td {
-      text-align: center;
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-      overflow: hidden;
-      white-space: nowrap;
-      transition: border-color 0.3s;
-    }
+    .data-table { width: 100%; border-collapse: collapse; background: #fff; overflow: hidden; font-size: 14px; table-layout: fixed; transition: background 0.3s; }
+    .data-table thead { background: #ecf0f1; font-weight: bold; transition: background 0.3s; }
+    .data-table th, .data-table td { text-align: center; padding: 10px; border-bottom: 1px solid #eee; overflow: hidden; white-space: nowrap; transition: border-color 0.3s; }
     .data-table tr:hover { background: #f9f9f9; }
-    .data-table td:last-child button {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+    .data-table td:last-child button { background: #e74c3c; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
     .data-table td:last-child button:hover { background: #c0392b; }
 
-    /* PP、カード名、メモの入力要素のスタイル */
-    .data-table td input[type="text"],
-    .data-table td input[type="number"],
-    .data-table td textarea {
-        width: 100%;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        padding: 4px;
-        font-size: 14px;
-        line-height: 1.2;
-        display: block;
-        min-width: 0;
-        background: white;
-        color: #333;
-        transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .data-table td textarea {
-        min-height: 40px;
-        resize: vertical;
-        overflow: hidden;
-    }
+    /* PP、カード名、メモ入力スタイル */
+    .data-table td input[type="text"], .data-table td input[type="number"], .data-table td textarea { width: 100%; box-sizing: border-box; border: 1px solid #ccc; padding: 4px; font-size: 14px; line-height: 1.2; display: block; min-width: 0; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    .data-table td textarea { min-height: 40px; resize: vertical; overflow: hidden; }
 
     /* 戦績テーブルのメモ欄 */
-    #match-record-table th:nth-child(6),
-    #match-record-table td:nth-child(6) {
-      word-break: break-word;
-      white-space: normal;
-    }
+    #match-record-table th:nth-child(7), #match-record-table td:nth-child(7) { word-break: break-word; white-space: normal; }
     /* テキスト左寄せ */
-    #match-record-table td:nth-child(6),
-    #card-data-table td:nth-child(2) {
-      text-align: left;
-      word-break: break-word;
-      white-space: normal;
-    }
+    #match-record-table td:nth-child(7), #card-data-table td:nth-child(2) { text-align: left; word-break: break-word; white-space: normal; }
 
-    /* 各テーブルの列幅を定義 */
-    #card-data-table th:nth-child(1),
-    #card-data-table td:nth-child(1) { width: 30px; } /* PP */
-    #card-data-table th:nth-child(2),
-    #card-data-table td:nth-child(2) { width: auto; } /* カード名&メモ */
-    #card-data-table th:nth-child(3),
-    #card-data-table td:nth-child(3) { width: 100px; } /* カウント */
-    #card-data-table th:nth-child(4),
-    #card-data-table td:nth-child(4) { width: 50px; } /* 削除 */
+    /* 各テーブルの列幅 */
+    #card-data-table th:nth-child(1), #card-data-table td:nth-child(1) { width: 30px; } /* PP */
+    #card-data-table th:nth-child(2), #card-data-table td:nth-child(2) { width: auto; } /* カード名&メモ */
+    #card-data-table th:nth-child(3), #card-data-table td:nth-child(3) { width: 100px; } /* カウント */
+    #card-data-table th:nth-child(4), #card-data-table td:nth-child(4) { width: 50px; } /* 削除 */
 
-    #match-record-table th:nth-child(1),
-    #match-record-table td:nth-child(1) { width: 120px; } /* 日時 */
-    #match-record-table th:nth-child(2),
-    #match-record-table td:nth-child(2) { width: 15%; } /* デッキ */
-    #match-record-table th:nth-child(3),
-    #match-record-table td:nth-child(3) { width: 10%; } /* 相手 */
-    #match-record-table th:nth-child(4),
-    #match-record-table td:nth-child(4) { width: 70px; } /* 先後 */
-    #match-record-table th:nth-child(5),
-    #match-record-table td:nth-child(5) { width: 70px; } /* 勝敗 */
-    #match-record-table th:nth-child(6),
-    #match-record-table td:nth-child(6) { width: auto; } /* メモ */
-    #match-record-table th:nth-child(7),
-    #match-record-table td:nth-child(7) { width: 50px; } /* 削除 */
+    #match-record-table th:nth-child(1), #match-record-table td:nth-child(1) { width: 120px; } /* 日時 */
+    #match-record-table th:nth-child(2), #match-record-table td:nth-child(2) { width: 20px; } /* シーズン */
+    #match-record-table th:nth-child(3), #match-record-table td:nth-child(3) { width: 15%; } /* デッキ */
+    #match-record-table th:nth-child(4), #match-record-table td:nth-child(4) { width: 10%; } /* 相手 */
+    #match-record-table th:nth-child(5), #match-record-table td:nth-child(5) { width: 70px; } /* 先後 */
+    #match-record-table th:nth-child(6), #match-record-table td:nth-child(6) { width: 70px; } /* 勝敗 */
+    #match-record-table th:nth-child(7), #match-record-table td:nth-child(7) { width: auto; } /* メモ */
+    #match-record-table th:nth-child(8), #match-record-table td:nth-child(8) { width: 50px; } /* 削除 */
 
     /* カードアクション */
-    .card-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
-    .card-actions .form-action-button {
-      padding: 6px 12px;
-      font-size: 14px;
-    }
+    .card-actions { display: flex; gap: 8px; margin: 12px 0; }
+    .card-actions .form-action-button { padding: 6px 12px; font-size: 14px; }
 
     /* カード削除モード */
     .card-delete-button { display: none; }
     .delete-mode .card-delete-button { display: inline-block; }
-    #card-data-table th:nth-child(4),
-    #card-data-table td:nth-child(4) { display: none; }
-    #counter-section.delete-mode #card-data-table th:nth-child(4),
-    #counter-section.delete-mode #card-data-table td:nth-child(4) { display: table-cell; }
+    #card-data-table th:nth-child(4), #card-data-table td:nth-child(4) { display: none; }
+    #counter-section.delete-mode #card-data-table th:nth-child(4), #counter-section.delete-mode #card-data-table td:nth-child(4) { display: table-cell; }
 
     /* データ管理パネル */
-    .data-management-panel > h3 {
-      color: #2c3e50;
-      margin-top: 0;
-      margin-bottom: 12px;
-      transition: color 0.3s;
-    }
+    .data-management-panel > h3 { color: #2c3e50; margin: 0 0 12px 0; transition: color 0.3s; }
     .data-management-panel .toggle-button-group { margin-bottom: 12px; }
-    .data-management-panel .form-action-button {
-      min-width: 96px;
-      text-align: center;
-    }
+    .data-management-panel .form-action-button { min-width: 96px; text-align: center; }
     .file-input-label { cursor: pointer; }
-    .file-input-button {
-      display: inline-block;
-      background: #ecf0f1;
-      border: 1px solid #ccc;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      color: #333;
-      user-select: none;
-      min-width: 70px;
-      text-align: center;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
+    .file-input-button { display: inline-block; background: #ecf0f1; border: 1px solid #ccc; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: #333; user-select: none; min-width: 70px; text-align: center; transition: background 0.2s, border-color 0.2s, color 0.2s; }
     .file-input-button:hover { background: #d0d7de; }
     .data-management-panel input[type="file"] { display: none; }
 		
 		/* Adsense */
-    #ad {
-		   text-align: center;
-		   color: #aaa;
-	     font-size: 90%;
-			 max-width: 336px;
-			 margin: 40px auto 24px;
-		}
+    #ad { text-align: center; color: #aaa; font-size: 90%; max-width: 336px; margin: 40px auto 24px; }
 
     /* タブナビゲーション */
-    .tab-navigation {
-      display: flex;
-      margin-bottom: 20px;
-      background: #e9ecef;
-      transition: background 0.3s;
-    }
-    .tab-navigation-button {
-      flex: 1;
-      padding: 10px 5px;
-      font-size: 15px;
-      text-align: center;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      transition: background 0.3s, color 0.3s;
-      font-weight: 600;
-      color: #495057;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .tab-navigation { display: flex; margin-bottom: 20px; background: #e9ecef; transition: background 0.3s; }
+    .tab-navigation-button { flex: 1; padding: 10px 5px; font-size: 15px; text-align: center; cursor: pointer; background: transparent; border: none; transition: background 0.3s, color 0.3s; font-weight: 600; color: #495057; -webkit-tap-highlight-color: transparent; }
     .tab-navigation-button:hover { background: #dee2e6; }
-    .tab-navigation-button.active {
-      background: #fff;
-      color: #1abc9c;
-    }
+    .tab-navigation-button.active { background: #fff; color: #1abc9c; }
 
     /* フォームカラム */
-    .form-columns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .form-left, .form-right {
-      flex: 1;
-      min-width: 250px;
-    }
+    .form-columns { display: flex; flex-wrap: wrap; gap: 20px; }
+    .form-left, .form-right { flex: 1; min-width: 250px; }
 
     /* フィルターコントロール */
-    .filter-controls {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding: 0;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      background-color: #fcfcfc;
-      overflow: hidden;
-      transition: background-color 0.3s, border-color 0.3s;
-    }
+    .filter-controls { margin: 20px 0; padding: 0; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fcfcfc; overflow: hidden; transition: background-color 0.3s, border-color 0.3s; }
     .filter-controls details { border: none; }
-    .filter-controls summary {
-      padding: 16px;
-      cursor: pointer;
-      outline: none;
-      font-weight: bold;
-      color: #2c3e50;
-      position: relative;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: color 0.3s;
-    }
-    .filter-controls summary::marker,
-    .filter-controls summary::-webkit-details-marker { display: none; }
+    .filter-controls summary { padding: 16px; cursor: pointer; outline: none; font-weight: bold; color: #2c3e50; position: relative; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: color 0.3s; }
+    .filter-controls summary::marker, .filter-controls summary::-webkit-details-marker { display: none; }
     .filter-controls summary .filter-summary-title { margin: 0; font-size:18px; }
-    .filter-controls summary .toggle-icon {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      transition: transform 0.2s ease-in-out;
-    }
+    .filter-controls summary .toggle-icon { display: inline-block; width: 20px; height: 20px; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center; transition: transform 0.2s ease-in-out; }
     .filter-controls details[open] summary .toggle-icon { transform: rotate(180deg); }
-	input#filter-deck-name-input {
-      margin-top: 4px;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-      background: white;
-      color: #333;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
+	input#filter-deck-name-input, input#filter-season-input { margin-top: 4px; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
 
-    .filter-content-wrapper {
-      padding: 0 16px 16px 16px;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.3s ease-out;
-    }
+    .filter-content-wrapper { padding: 0 16px 16px 16px; overflow: hidden; max-height: 0; transition: max-height 0.3s ease-out; }
     .filter-controls details[open] .filter-content-wrapper { max-height: 500px; }
 
     .filter-content-wrapper .app-form input[type="text"] { margin-bottom: 16px; }
     .filter-content-wrapper .form-action-button { margin-top: 15px; }
 
     /* カード追加フォームのレイアウト */
-    .add-card-form-layout {
-      margin-top:12px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .add-card-form-layout input[type="number"] {
-      width: 60px;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size:14px;
-      background: white;
-      color: #333;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .add-card-form-layout input[type="text"] {
-      flex: 1;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size:14px;
-      background: white;
-      color: #333;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .add-card-form-layout .form-action-button {
-      padding: 4px 16px;
-      margin-top: -10px;
-      font-size: 14px;
-    }
+    .add-card-form-layout { margin-top:12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .add-card-form-layout input[type="number"] { width: 60px; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size:14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    .add-card-form-layout input[type="text"] { flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size:14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    .add-card-form-layout .form-action-button { padding: 4px 16px; margin-top: -10px; font-size: 14px; }
 
     /* カードデータテーブルのボタン (PC用デフォルト) */
-    #card-data-table td button {
-        width: 24px;
-        height: 24px;
-        padding: 0;
-        font-size: 18px;
-	    color: #333;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        background: #ecf0f1;
-        transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
+    #card-data-table td button { width: 24px; height: 24px; padding: 0; font-size: 18px; color: #333; border-radius: 4px; border: 1px solid #ccc; background: #ecf0f1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
     #card-data-table td button:hover { background: #d0d7de; }
     #card-data-table td button:first-child { margin-right: 6px; }
     #card-data-table td button:last-child { margin-left: 6px; }
 
     /* カードデータテーブルのカウント表示 (PC用デフォルト) */
-    #card-data-table td span {
-      display: inline-block;
-      width: 24px;
-      text-align: center;
-    }
+    #card-data-table td span { display: inline-block; width: 24px; text-align: center; }
 
-    .data-table th, .data-table td {
-        padding: 6px;
-        border-bottom: 1px solid #ddd;
-    }
+    .data-table th, .data-table td { padding: 6px; border-bottom: 1px solid #ddd; }
     .data-table thead tr { background:#ecf0f1; }
-    .info-display {
-      font-weight: bold;
-      margin-bottom: 8px;
-      min-height: 24px;
-    }
+    .info-display { font-weight: bold; margin-bottom: 8px; min-height: 24px; }
 
     /* モバイルレイアウト */
     @media (max-width: 983px) {
-      .tab-navigation {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        margin-bottom: 0;
-        border-radius: 0;
-        z-index: 1000;
-        padding-bottom: env(safe-area-inset-bottom, 4px);
-      }
-
-      body {
-        padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
-      }
-
+      .tab-navigation { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; margin-bottom: 0; border-radius: 0; z-index: 1000; padding-bottom: env(safe-area-inset-bottom, 4px); }
+      body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
       #match-record-table-wrapper { display: none; }
-      #match-record-cards-container {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          margin-top: 16px;
-      }
-
-      .match-record-card {
-          background: white;
-          border-radius: 8px;
-          padding: 12px;
-          border: 1px solid #e0e0e0;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          position: relative;
-          font-size: 14px;
-          transition: background 0.3s, border-color 0.3s;
-      }
-
-      .match-record-card .card-item {
-          display: flex;
-          align-items: flex-start;
-      }
-
-      .match-record-card .card-label {
-          font-weight: bold;
-          min-width: 50px;
-          margin-right: 6px;
-          color: #444;
-          transition: color 0.3s;
-      }
-
-      .match-record-card .card-value {
-          flex-grow: 1;
-          word-break: break-word;
-          font-size: 14px;
-          white-space: normal;
-      }
-
-      .match-record-card .delete-card-button {
-          position: absolute;
-          top: 6px;
-          right: 6px;
-          background: transparent;
-          border: none;
-          font-size: 16px;
-          cursor: pointer;
-          color: #e74c3c;
-          padding: 4px;
-          border-radius: 4px;
-      }
-      .match-record-card .delete-card-button:hover {
-          color: #c0392b;
-          background-color: #fce7e7;
-      }
+      #match-record-cards-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+      .match-record-card { background: white; border-radius: 8px; padding: 12px; border: 1px solid #e0e0e0; display: flex; flex-direction: column; gap: 6px; position: relative; font-size: 14px; transition: background 0.3s, border-color 0.3s; }
+      .match-record-card .card-item { display: flex; align-items: flex-start; }
+      .match-record-card .card-label { font-weight: bold; min-width: 50px; margin-right: 6px; color: #444; transition: color 0.3s; }
+      .match-record-card .card-value { flex-grow: 1; word-break: break-word; font-size: 14px; white-space: normal; }
+      .match-record-card .delete-card-button { position: absolute; top: 6px; right: 6px; background: transparent; border: none; font-size: 16px; cursor: pointer; color: #e74c3c; padding: 4px; border-radius: 4px; }
+      .match-record-card .delete-card-button:hover { color: #c0392b; background-color: #fce7e7; }
       
       /* モバイルでのテーブルセルパディングを調整 */
-      .data-table th, .data-table td {
-        padding: 8px 6px;
-      }
+      .data-table th, .data-table td { padding: 8px 6px; }
 
       /* カウント列のtdにflexboxを適用 */
-      #card-data-table td:nth-child(3) {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding-left: 0;
-          padding-right: 0;
-      }
+      #card-data-table td:nth-child(3) { display: flex; align-items: center; justify-content: center; padding: 0; }
 
       /* モバイルでのカウンタボタンの調整 */
-      #card-data-table td button {
-          width: 40px;
-          height: 40px;
-          font-size: 22px;
-          padding: 0;
-          box-sizing: border-box;
-          vertical-align: middle;
-      }
+      #card-data-table td button { width: 40px; height: 40px; font-size: 22px; padding: 0; box-sizing: border-box; vertical-align: middle; }
       #card-data-table td button:first-child { margin-right: 4px; }
       #card-data-table td button:last-child { margin-left: 4px; }
 
       /* モバイルでのカウント数字の表示調整 */
-      #card-data-table td span {
-          font-size: 18px;
-          padding: 0 2px;
-          vertical-align: middle;
-      }
+      #card-data-table td span { font-size: 18px; padding: 0 2px; vertical-align: middle; }
+
+      /* スマホでのシーズンとデッキ名の横並びを維持 */
+      .form-row-flex { flex-direction: row; align-items: flex-end; gap: 8px; width: 100%; }
+      .form-field-group { flex: none; width: auto; }
+      .form-field-group:first-child { flex-shrink: 0; }
+      .form-field-group:last-child { flex-grow: 1; }
+      .form-field-group label { white-space: nowrap; }
+      .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
+      .form-field-group input[type="text"] { min-width: 100px; }
     }
 
     /* PCレイアウト（再定義） */
     @media (min-width: 984px) {
-      .tab-navigation {
-        position: static;
-        margin-bottom: 20px;
-        border-top: none;
-      }
+      .tab-navigation { position: static; margin-bottom: 20px; border-top: none; }
       body { padding-bottom: 0; }
-
-      #match-record-table-wrapper {
-          display: block;
-          height: auto;
-          flex-grow: 1;
-          overflow-y: auto;
-          max-height: 86vh;
-      }
+      #match-record-table-wrapper { display: block; height: auto; flex-grow: 1; overflow-y: auto; max-height: 86vh; }
       #match-record-cards-container { display: none; }
       #load-more-records-button { display: none; }
+
+      /* PCでのシーズンとデッキ名のレイアウト */
+      .form-row-flex { flex-direction: row; align-items: flex-end; gap: 16px; }
+      .form-field-group { flex: auto; min-width: 80px; }
+      .form-field-group:first-child { flex-shrink: 0; }
+      .form-field-group:last-child { flex-grow: 1; }
+      .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
+      .form-field-group input[type="text"] { flex-grow: 1; }
     }
 
     /* インフォメーションボタンとツールチップ */
-    .info-container {
-      display: none;
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 1010;
-    }
-    
-    /* bodyに特定のクラスがある時だけ表示 */
-    body.active-tab-storage-section .info-container {
-      display: block;
-    }
-
-    .info-button {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background-color: #7f8c8d;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: bold;
-      cursor: help;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      transition: background-color 0.2s;
-      user-select: none;
-    }
-
-    .info-button:hover {
-      background-color: #5d6d7e;
-    }
-
-    .info-tooltip {
-      visibility: hidden;
-      opacity: 0;
-      position: absolute;
-      bottom: 120%;
-      right: 0;
-      width: max-content;
-      max-width: 320px;
-      background-color: #2c3e50;
-      color: #fff;
-      text-align: left;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      line-height: 1.6;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      pointer-events: none;
-    }
-
-    .info-tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      right: 15px;
-      border-width: 6px;
-      border-style: solid;
-      border-color: #2c3e50 transparent transparent transparent;
-    }
-
-    /* 新しいスタイル: JavaScriptで追加されるクラス */
-    .info-tooltip.show {
-        visibility: visible;
-        opacity: 1;
-    }
+    .info-container { display: none; position: fixed; right: 24px; bottom: 24px; z-index: 1010; }
+    body.active-tab-storage-section .info-container { display: block; }
+    .info-button { width: 44px; height: 44px; border-radius: 50%; background-color: #7f8c8d; color: white; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; cursor: help; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: background-color 0.2s; user-select: none; }
+    .info-button:hover { background-color: #5d6d7e; }
+    .info-tooltip { visibility: hidden; opacity: 0; position: absolute; bottom: 120%; right: 0; width: max-content; max-width: 320px; background-color: #2c3e50; color: #fff; text-align: left; padding: 12px; border-radius: 8px; font-size: 14px; line-height: 1.6; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: opacity 0.3s ease, visibility 0.3s ease; pointer-events: none; }
+    .info-tooltip::after { content: ''; position: absolute; top: 100%; right: 15px; border-width: 6px; border-style: solid; border-color: #2c3e50 transparent transparent transparent; }
+    .info-tooltip.show { visibility: visible; opacity: 1; }
 
     @media (max-width: 983px) {
-      .info-container {
-        bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 20px);
-        right: 20px;
-      }
-      .info-button {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-      }
-      .info-tooltip {
-         font-size: 13px;
-      }
+      .info-container { bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 20px); right: 20px; }
+      .info-button { width: 40px; height: 40px; font-size: 20px; }
+      .info-tooltip { font-size: 13px; }
     }
 
-    /* 追加スタイル: 統計情報表示用 */
-    .record-summary {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-    }
+    /* 統計情報 */
+    .record-summary { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .record-stats { display: flex; gap: 15px; flex-wrap: wrap; padding: 0; }
+    .stat-item { white-space: nowrap; }
+    .stat-label { font-weight: normal; color: #555; transition: color 0.3s; }
+    .stat-value { font-weight: bold; color: #2c3e50; transition: color 0.3s; }
 
-    .record-stats {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-        padding: 0;
-    }
+    /* ダークモード */
+    body.dark-mode { background: #2c3e50; color: #ecf0f1; }
+    body.dark-mode h2, body.dark-mode h3, body.dark-mode .data-management-panel > h3, body.dark-mode .filter-controls summary { color: #ecf0f1; }
+    body.dark-mode .panel { background: #34495e; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    body.dark-mode .app-form input, body.dark-mode .app-form select, body.dark-mode .app-form textarea, body.dark-mode .data-table td input[type="text"], body.dark-mode .data-table td input[type="number"], body.dark-mode .data-table td textarea, body.dark-mode input#filter-deck-name-input, body.dark-mode input#filter-season-input, body.dark-mode .add-card-form-layout input[type="number"], body.dark-mode .add-card-form-layout input[type="text"] { background: #446688; border-color: #557799; color: #ecf0f1; }
+    body.dark-mode .toggle-button-group button { background: #446688; border-color: #557799; color: #ecf0f1; }
+    body.dark-mode .toggle-button-group button.active { background: #16a085; border-color: #1abc9c; color: white; }
+    body.dark-mode .data-table { background: #34495e; color: #ecf0f1; }
+    body.dark-mode .data-table thead, body.dark-mode .data-table thead tr { background: #4a627a; }
+    body.dark-mode .data-table th, body.dark-mode .data-table td { border-bottom: 1px solid #557799; color: #ecf0f1; }
+    body.dark-mode .data-table tr:hover { background: #507080; }
+    body.dark-mode #card-data-table td button { background: #446688; border-color: #557799; color: #ecf0f1; }
+    body.dark-mode #card-data-table td button:hover { background: #557799; }
+    body.dark-mode .file-input-button { background: #446688; border-color: #557799; color: #ecf0f1; }
+    body.dark-mode .file-input-button:hover { background: #557799; }
+    body.dark-mode .tab-navigation { background: #3a536a; }
+    body.dark-mode .tab-navigation-button { color: #bdc3c7; }
+    body.dark-mode .tab-navigation-button:hover { background: #4a627a; }
+    body.dark-mode .tab-navigation-button.active { background: #34495e; color: #1abc9c; }
+    body.dark-mode .filter-controls { background-color: #3a536a; border-color: #557799; }
+    body.dark-mode .filter-controls summary .toggle-icon { filter: invert(1); }
+    body.dark-mode .match-record-card { background: #34495e; border: 1px solid #557799; }
+    body.dark-mode .match-record-card .card-label { color: #bdc3c7; }
+    body.dark-mode #custom-modal-overlay { background: rgba(0,0,0,0.8); }
+    body.dark-mode #custom-modal-content { background: #34495e !important; color: #ecf0f1; }
+    body.dark-mode .stat-label { color: #bdc3c7; }
+    body.dark-mode .stat-value { color: #ecf0f1; }
 
-    .stat-item {
-        white-space: nowrap;
-    }
+    /* クラスメモ */
+    .class-notes-container { margin-top: 24px; }
+    .class-notes-container textarea { width: 100%; min-height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; line-height: 1.6; box-sizing: border-box; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    body.dark-mode .class-notes-container textarea { background: #446688; border-color: #557799; color: #ecf0f1; }
 
-    .stat-label {
-        font-weight: normal;
-        color: #555;
-        transition: color 0.3s;
-    }
+    /* 入力ペアリングスタイル */
+    .form-row-flex { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 16px; }
+    .form-field-group { display: flex; flex-direction: column; flex: none; min-width: 80px; }
+    .form-field-group label { margin-bottom: 4px; }
+    .form-field-group input[type="text"], .form-field-group input[type="number"] { width: 84%; margin: 0; }
+    .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
+    .form-field-group input[type="text"] { flex-grow: 1; }
 
-    .stat-value {
-        font-weight: bold;
-        color: #2c3e50;
-        transition: color 0.3s;
-    }
-
-    /* Dark Mode Styles */
-    body.dark-mode {
-      background: #2c3e50;
-      color: #ecf0f1;
-    }
-
-    body.dark-mode h2,
-    body.dark-mode h3,
-    body.dark-mode .data-management-panel > h3,
-    body.dark-mode .filter-controls summary {
-      color: #ecf0f1;
-    }
-
-    body.dark-mode .panel {
-      background: #34495e;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    body.dark-mode .app-form input,
-    body.dark-mode .app-form select,
-    body.dark-mode .app-form textarea,
-    body.dark-mode .data-table td input[type="text"],
-    body.dark-mode .data-table td input[type="number"],
-    body.dark-mode .data-table td textarea,
-    body.dark-mode input#filter-deck-name-input,
-    body.dark-mode .add-card-form-layout input[type="number"],
-    body.dark-mode .add-card-form-layout input[type="text"] {
-      background: #446688;
-      border-color: #557799;
-      color: #ecf0f1;
-    }
-
-    body.dark-mode .toggle-button-group button {
-      background: #446688;
-      border-color: #557799;
-      color: #ecf0f1;
-    }
-    body.dark-mode .toggle-button-group button.active {
-      background: #16a085;
-      border-color: #1abc9c;
-      color: white;
-    }
-
-    body.dark-mode .data-table {
-      background: #34495e;
-      color: #ecf0f1;
-    }
-    body.dark-mode .data-table thead,
-    body.dark-mode .data-table thead tr {
-      background: #4a627a;
-    }
-    body.dark-mode .data-table th,
-    body.dark-mode .data-table td {
-      border-bottom: 1px solid #557799;
-      color: #ecf0f1;
-    }
-    body.dark-mode .data-table tr:hover {
-      background: #557799;
-    }
-
-    body.dark-mode #card-data-table td button {
-      background: #446688;
-      border-color: #557799;
-      color: #ecf0f1;
-    }
-    body.dark-mode #card-data-table td button:hover {
-      background: #557799;
-    }
-
-    body.dark-mode .file-input-button {
-      background: #446688;
-      border-color: #557799;
-      color: #ecf0f1;
-    }
-    body.dark-mode .file-input-button:hover {
-      background: #557799;
-    }
-
-    body.dark-mode .tab-navigation {
-      background: #3a536a;
-    }
-    body.dark-mode .tab-navigation-button {
-      color: #bdc3c7;
-    }
-    body.dark-mode .tab-navigation-button:hover {
-      background: #4a627a;
-    }
-    body.dark-mode .tab-navigation-button.active {
-      background: #34495e;
-      color: #1abc9c;
-    }
-
-    body.dark-mode .filter-controls {
-      background-color: #3a536a;
-      border-color: #557799;
-    }
-    body.dark-mode .filter-controls summary .toggle-icon {
-      filter: invert(1);
-    }
-
-    body.dark-mode .match-record-card {
-      background: #34495e;
-      border: 1px solid #557799;
-    }
-    body.dark-mode .match-record-card .card-label {
-      color: #bdc3c7;
-    }
-
-    body.dark-mode #custom-modal-overlay {
-      background: rgba(0,0,0,0.8);
-    }
-    body.dark-mode #custom-modal-content {
-      background: #34495e !important;
-      color: #ecf0f1;
-    }
-
-    body.dark-mode .stat-label {
-        color: #bdc3c7;
-    }
-    body.dark-mode .stat-value {
-        color: #ecf0f1;
-    }
-
-    /* Class Notes Specific Styles */
-    .class-notes-container {
-      margin-top: 24px;
-    }
-
-    .class-notes-container textarea {
-      width: 100%;
-      min-height: 150px;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-      line-height: 1.6;
-      box-sizing: border-box;
-      background: white;
-      color: #333;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
-
-    body.dark-mode .class-notes-container textarea {
-      background: #446688;
-      border-color: #557799;
-      color: #ecf0f1;
+    /* モバイルでの入力ペアリング */
+    @media (max-width: 983px) {
+        .form-row-flex { flex-direction: row; align-items: flex-end; gap: 8px; width: 100%; }
+        .form-field-group { flex: none; width: auto; }
+        .form-field-group:first-child { flex-shrink: 0; }
+        .form-field-group:last-child { flex-grow: 1; }
+        .form-field-group label { white-space: nowrap; }
+        .form-field-group input[type="number"] { width: 60px; }
+        .form-field-group input[type="text"] { min-width: 100px; }
     }
   </style>
 </head>
@@ -917,9 +303,9 @@
                 <button type="button" data-class="ロイヤル">ロイヤル</button>
                 <button type="button" data-class="ウィッチ">ウィッチ</button>
                 <button type="button" data-class="ドラゴン">ドラゴン</button>
-                <button type="button" data-class="ナイトメア">ナイトメア</button>
-                <button type="button" data-class="ビショップ">ビショップ</button>
-                <button type="button" data-class="ネメシス">ネメシス</button>
+                <button type="button" data-value="ナイトメア">ナイトメア</button>
+                <button type="button" data-value="ビショップ">ビショップ</button>
+                <button type="button" data-value="ネメシス">ネメシス</button>
               </div>
               <div class="card-actions">
                 <button type="button" id="reset-card-counts-button" class="form-action-button secondary">カウントをクリア</button>
@@ -1000,8 +386,16 @@
         <form id="add-record-form" class="app-form" style="flex-shrink: 0;">
           <div class="form-columns">
             <div class="form-left">
-              <label for="my-deck-input">自分のデッキ</label>
-              <input type="text" id="my-deck-input" name="deck" required>
+              <div class="form-row-flex">
+                <div class="form-field-group">
+                  <label for="season-input">シーズン</label>
+                  <input type="number" id="season-input" name="season" placeholder="例: 1" min="1" value="1">
+                </div>
+                <div class="form-field-group">
+                  <label for="my-deck-input">自分のデッキ</label>
+                  <input type="text" id="my-deck-input" name="deck" required>
+                </div>
+              </div>
               <label>相手のクラス</label>
               <div class="toggle-button-group" id="opponent-class-selection">
                 <button type="button" data-value="エルフ">エルフ</button>
@@ -1039,9 +433,16 @@
                 <div class="filter-content-wrapper">
                     <div class="form-columns">
                         <div class="form-left">
-                            <label for="filter-deck-name-input">自分のデッキ名で絞り込み</label>
-                            <input type="text" id="filter-deck-name-input" placeholder="デッキ名を入力">
-                            <!-- New filter for turn order -->
+                            <div class="form-row-flex">
+                                <div class="form-field-group">
+                                    <label for="filter-season-input">シーズン</label>
+                                    <input type="number" id="filter-season-input" placeholder="例: 1" min="1">
+                                </div>
+                                <div class="form-field-group">
+                                    <label for="filter-deck-name-input">デッキ名で絞り込み</label>
+                                    <input type="text" id="filter-deck-name-input" placeholder="デッキ名を入力">
+                                </div>
+                            </div>
                             <div style="display: box; margin-top: 8px;"><label style="margin-top: 15px;">先後で絞り込み</label></div>
                             <div class="toggle-button-group" id="filter-turn-order-selection">
                               <button type="button" data-value="">すべて</button>
@@ -1082,6 +483,7 @@
           <thead>
             <tr>
               <th>日時</th>
+              <th>S</th>
               <th>デッキ</th>
               <th>相手</th>
               <th>先後</th>
@@ -1125,35 +527,22 @@
     // Local Storage Utility
     const Storage = {
       get: (key, defaultValue = null) => {
-        try {
-          const item = localStorage.getItem(key);
-          return item ? JSON.parse(item) : defaultValue;
-        } catch (e) {
-          console.error(`Failed to get item from localStorage for key "${key}":`, e);
-          return defaultValue;
-        }
+        try { return JSON.parse(localStorage.getItem(key)) || defaultValue; }
+        catch (e) { console.error(`Failed to get item for "${key}":`, e); return defaultValue; }
       },
       set: (key, value) => {
-        try {
-          localStorage.setItem(key, JSON.stringify(value));
-        } catch (e) {
-          console.error(`Failed to set item to localStorage for key "${key}":`, e);
-        }
+        try { localStorage.setItem(key, JSON.stringify(value)); }
+        catch (e) { console.error(`Failed to set item for "${key}":`, e); }
       },
       remove: (key) => {
-        try {
-          localStorage.removeItem(key);
-        } catch (e) {
-          console.error(`Failed to remove item from localStorage for key "${key}":`, e);
-        }
+        try { localStorage.removeItem(key); }
+        catch (e) { console.error(`Failed to remove item for "${key}":`, e); }
       },
       getAllKeys: (prefix) => {
         const keys = [];
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
-          if (key.startsWith(prefix)) {
-            keys.push(key);
-          }
+          if (key.startsWith(prefix)) keys.push(key);
         }
         return keys;
       }
@@ -1173,9 +562,11 @@
     const LAST_TAB_KEY = 'svwb-last-tab';
     const RECORDS_KEY = 'svwb-records';
     const LAST_DECK_KEY = 'svwb-deck';
+    const LAST_SEASON_KEY = 'svwb-last-season';
     const FILTER_DECK_KEY = 'svwb-filter-deck';
     const FILTER_CLASS_KEY = 'svwb-filter-class';
     const FILTER_TURN_KEY = 'svwb-filter-turn';
+    const FILTER_SEASON_KEY = 'svwb-filter-season';
     const FILTER_OPEN_KEY = 'svwb-filter-open-state';
     const CARD_CLASS_PREFIX = 'svwb-cards-';
     const CLASS_NOTE_PREFIX = 'svwb-class-note-';
@@ -1184,53 +575,34 @@
 
     // Custom Modal Module
     const ModalManager = (() => {
-        let overlay;
-        let messageElement;
-        let okButton;
-        let cancelButton;
-        let resolvePromise = () => {};
+        let overlay, messageElement, okButton, cancelButton, resolvePromise = () => {};
 
         const init = () => {
             overlay = document.getElementById('custom-modal-overlay');
             messageElement = document.getElementById('modal-message');
             okButton = document.getElementById('modal-ok-button');
             cancelButton = document.getElementById('modal-cancel-button');
-
             overlay.style.display = 'none';
 
-            okButton.addEventListener('click', () => {
-                overlay.style.display = 'none';
-                resolvePromise(true);
-                resolvePromise = () => {};
-            });
-
-            cancelButton.addEventListener('click', () => {
-                overlay.style.display = 'none';
-                resolvePromise(false);
-                resolvePromise = () => {};
-            });
+            okButton.addEventListener('click', () => { overlay.style.display = 'none'; resolvePromise(true); resolvePromise = () => {}; });
+            cancelButton.addEventListener('click', () => { overlay.style.display = 'none'; resolvePromise(false); resolvePromise = () => {}; });
         };
 
-        const showAlert = (message) => {
-            return new Promise(resolve => {
-                messageElement.textContent = message;
-                okButton.style.display = 'inline-block';
-                cancelButton.style.display = 'none';
-                overlay.style.display = 'flex';
-                resolvePromise = resolve;
-            });
-        };
+        const showAlert = (message) => new Promise(resolve => {
+            messageElement.textContent = message;
+            okButton.style.display = 'inline-block';
+            cancelButton.style.display = 'none';
+            overlay.style.display = 'flex';
+            resolvePromise = resolve;
+        });
 
-        const showConfirm = (message) => {
-            return new Promise(resolve => {
-                messageElement.textContent = message;
-                okButton.style.display = 'inline-block';
-                cancelButton.style.display = 'inline-block';
-                overlay.style.display = 'flex';
-                resolvePromise = resolve;
-            });
-        };
-
+        const showConfirm = (message) => new Promise(resolve => {
+            messageElement.textContent = message;
+            okButton.style.display = 'inline-block';
+            cancelButton.style.display = 'inline-block';
+            overlay.style.display = 'flex';
+            resolvePromise = resolve;
+        });
         return { init, showAlert, showConfirm };
     })();
 
@@ -1240,25 +612,15 @@
         const body = document.body;
 
         const init = () => {
-            const isDarkMode = Storage.get(DARK_MODE_KEY, false);
-            if (isDarkMode) {
-                body.classList.add('dark-mode');
-            } else {
-                body.classList.remove('dark-mode');
-            }
+            if (Storage.get(DARK_MODE_KEY, false)) body.classList.add('dark-mode');
+            else body.classList.remove('dark-mode');
 
             toggleDarkModeButton.addEventListener('click', () => {
                 const currentMode = body.classList.contains('dark-mode');
-                if (currentMode) {
-                    body.classList.remove('dark-mode');
-                    Storage.set(DARK_MODE_KEY, false);
-                } else {
-                    body.classList.add('dark-mode');
-                    Storage.set(DARK_MODE_KEY, true);
-                }
+                if (currentMode) { body.classList.remove('dark-mode'); Storage.set(DARK_MODE_KEY, false); }
+                else { body.classList.add('dark-mode'); Storage.set(DARK_MODE_KEY, true); }
             });
         };
-
         return { init };
     })();
 
@@ -1270,15 +632,11 @@
       const showTab = (targetPaneId) => {
         document.body.className = document.body.className.replace(/\bactive-tab-[\w-]+\b/g, '');
         document.body.classList.add('active-tab-' + targetPaneId);
-
         Storage.set(LAST_TAB_KEY, targetPaneId);
         const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
 
         panes.forEach(pane => pane.style.display = 'none');
-        tabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-        });
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
 
         if (isLargeScreen && (targetPaneId === 'counter-section' || targetPaneId === 'record-section')) {
           const counterPane = document.getElementById('counter-section');
@@ -1287,34 +645,17 @@
           const recordTabButton = document.querySelector(`.tab-navigation-button[data-tab="record-section"]`);
 
           if (counterPane) counterPane.style.display = 'block';
-          if (recordPane) {
-            recordPane.style.display = 'flex';
-            recordPane.style.flexDirection = 'column';
-          }
-
-          if (counterTabButton) {
-              counterTabButton.classList.add('active');
-              counterTabButton.setAttribute('aria-selected', 'true');
-          }
-          if (recordTabButton) {
-              recordTabButton.classList.add('active');
-              recordTabButton.setAttribute('aria-selected', 'true');
-          }
+          if (recordPane) { recordPane.style.display = 'flex'; recordPane.style.flexDirection = 'column'; }
+          if (counterTabButton) { counterTabButton.classList.add('active'); counterTabButton.setAttribute('aria-selected', 'true'); }
+          if (recordTabButton) { recordTabButton.classList.add('active'); recordTabButton.setAttribute('aria-selected', 'true'); }
         } else {
           const targetPane = document.getElementById(targetPaneId);
           if (targetPane) {
-            if (targetPaneId === 'record-section') {
-              targetPane.style.display = 'flex';
-              targetPane.style.flexDirection = 'column';
-            } else {
-              targetPane.style.display = 'block';
-            }
+            if (targetPaneId === 'record-section') { targetPane.style.display = 'flex'; targetPane.style.flexDirection = 'column'; }
+            else { targetPane.style.display = 'block'; }
           }
           const targetTab = document.querySelector(`.tab-navigation-button[data-tab="${targetPaneId}"]`);
-          if (targetTab) {
-            targetTab.classList.add('active');
-            targetTab.setAttribute('aria-selected', 'true');
-          }
+          if (targetTab) { targetTab.classList.add('active'); targetTab.setAttribute('aria-selected', 'true'); }
         }
 
         // AdSense reload
@@ -1323,37 +664,20 @@
                 try {
                     if (window.adsbygoogle && typeof window.adsbygoogle.push === 'function') {
                         document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
-                            if (ad.offsetParent !== null) {
-                                (window.adsbygoogle = window.adsbygoogle || []).push({});
-                            } else {
-                                console.warn('AdSense slot is not visible, skipping push.');
-                            }
+                            if (ad.offsetParent !== null) { (window.adsbygoogle = window.adsbygoogle || []).push({}); }
+                            else { console.warn('AdSense slot is not visible, skipping push.'); }
                         });
-                    } else {
-                        console.warn('AdSense object not found or push method is missing.');
-                    }
-                } catch (error) {
-                    console.error('Error reloading AdSense:', error);
-                }
+                    } else { console.warn('AdSense object not found or push method is missing.'); }
+                } catch (error) { console.error('Error reloading AdSense:', error); }
             }, 100);
         }
       };
 
       const init = () => {
-        tabs.forEach(tab => {
-          tab.addEventListener('click', () => showTab(tab.dataset.tab));
-        });
-
-        const lastTab = Storage.get(LAST_TAB_KEY, 'counter-section');
-        showTab(lastTab);
-
-        window.addEventListener('resize', () => {
-          const currentActiveTabId = Storage.get(LAST_TAB_KEY, 'counter-section');
-          showTab(currentActiveTabId);
-          RecordManager.applyFilters();
-        });
+        tabs.forEach(tab => { tab.addEventListener('click', () => showTab(tab.dataset.tab)); });
+        showTab(Storage.get(LAST_TAB_KEY, 'counter-section'));
+        window.addEventListener('resize', () => { showTab(Storage.get(LAST_TAB_KEY, 'counter-section')); RecordManager.applyFilters(); });
       };
-
       return { init };
     })();
 
@@ -1366,31 +690,19 @@
               group.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
               e.target.classList.add('active');
               if (group.id.startsWith('filter-')) {
-                  const event = new CustomEvent('filterChange', { detail: { groupId: group.id, value: e.target.dataset.value } });
-                  document.dispatchEvent(event);
+                  document.dispatchEvent(new CustomEvent('filterChange', { detail: { groupId: group.id, value: e.target.dataset.value } }));
               }
             }
           });
         });
       };
-
-      const getSelectedValue = (groupId) => {
-        const active = document.querySelector(`#${groupId} .active`);
-        return active ? active.dataset.value : '';
-      };
-
+      const getSelectedValue = (groupId) => document.querySelector(`#${groupId} .active`)?.dataset.value || '';
       const setActiveButton = (groupId, value) => {
-        const group = document.getElementById(groupId);
-        if (group) {
-          group.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.value === value) {
-              btn.classList.add('active');
-            }
-          });
-        }
+        document.getElementById(groupId)?.querySelectorAll('button').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.value === value) btn.classList.add('active');
+        });
       };
-
       return { init, getSelectedValue, setActiveButton };
     })();
 
@@ -1398,21 +710,20 @@
     const RecordManager = (() => {
       const recordsPerPage = 10;
       let currentDisplayCount = recordsPerPage;
-
       const matchRecordTableBody = document.querySelector('#match-record-table tbody');
       const addRecordForm = document.getElementById('add-record-form');
       const myDeckInput = document.getElementById('my-deck-input');
+      const seasonInput = document.getElementById('season-input');
       const recordMemoInput = document.getElementById('record-memo-input');
       const filterDeckNameInput = document.getElementById('filter-deck-name-input');
+      const filterSeasonInput = document.getElementById('filter-season-input');
       const clearRecordFiltersButton = document.getElementById('clear-record-filters-button');
       const recordFilterDetails = document.getElementById('record-filter-details');
       const matchRecordCardsContainer = document.getElementById('match-record-cards-container');
       const loadMoreButton = document.getElementById('load-more-records-button');
-
       const totalMatchesDisplay = document.getElementById('total-matches-display');
       const totalWinsDisplay = document.getElementById('total-wins-display');
       const winRateDisplay = document.getElementById('win-rate-display');
-
       let allRecords = [];
       let filteredRecordsCache = [];
 
@@ -1420,28 +731,16 @@
         const headers = Array.from(document.querySelectorAll('#match-record-table th')).map(th => th.textContent);
         document.querySelectorAll('#match-record-table tbody tr').forEach(row => {
           Array.from(row.querySelectorAll('td')).forEach((td, index) => {
-            if (headers[index] && index < headers.length -1) {
-              td.dataset.label = headers[index];
-            }
+            if (headers[index] && index < headers.length -1) td.dataset.label = headers[index];
           });
         });
       };
 
-      const saveRecords = () => {
-        const data = allRecords.map(record => ({
-          timestamp: record.timestamp,
-          date: record.date,
-          deck: record.deck,
-          opponent: record.opponent,
-          firstSecond: record.firstSecond,
-          result: record.result,
-          memo: record.memo
-        }));
-        Storage.set(RECORDS_KEY, data);
-      };
+      const saveRecords = () => { Storage.set(RECORDS_KEY, allRecords.map(record => ({ timestamp: record.timestamp, date: record.date, season: record.season, deck: record.deck, opponent: record.opponent, firstSecond: record.firstSecond, result: record.result, memo: record.memo }))); };
 
       const loadRecords = () => {
         allRecords = Storage.get(RECORDS_KEY, []);
+        allRecords.forEach(record => { if (record.season === undefined) record.season = ''; });
         allRecords.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         currentDisplayCount = recordsPerPage;
         applyFilters();
@@ -1451,7 +750,6 @@
           const totalMatches = records.length;
           const totalWins = records.filter(record => record.result === '⭕').length;
           const winRate = totalMatches > 0 ? ((totalWins / totalMatches) * 100).toFixed(2) : '0.00';
-
           totalMatchesDisplay.textContent = totalMatches;
           totalWinsDisplay.textContent = totalWins;
           winRateDisplay.textContent = `${winRate}%`;
@@ -1460,34 +758,27 @@
       const applyFilters = () => {
         matchRecordTableBody.innerHTML = '';
         matchRecordCardsContainer.innerHTML = '';
-
         const filterDeckName = filterDeckNameInput.value.toLowerCase();
         const filterOpponentClass = ToggleButtonGroup.getSelectedValue('filter-opponent-class-selection');
         const filterTurnOrder = ToggleButtonGroup.getSelectedValue('filter-turn-order-selection');
+        const filterSeason = filterSeasonInput.value;
 
-        const filteredRecords = allRecords.filter(record => {
+        filteredRecordsCache = allRecords.filter(record => {
           const matchesDeck = record.deck.toLowerCase().includes(filterDeckName);
           const matchesClass = filterOpponentClass === '' || record.opponent === filterOpponentClass;
           const matchesTurnOrder = filterTurnOrder === '' || record.firstSecond === filterTurnOrder;
-          return matchesDeck && matchesClass && matchesTurnOrder;
+          const matchesSeason = filterSeason === '' || (String(record.season) === filterSeason); 
+          return matchesDeck && matchesClass && matchesTurnOrder && matchesSeason;
         });
-        filteredRecordsCache = filteredRecords;
-
         updateStatistics(filteredRecordsCache);
 
         const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
-
         if (isLargeScreen) {
-            filteredRecordsCache.forEach(entry => {
-                matchRecordTableBody.appendChild(createRecordHtml(entry));
-            });
+            filteredRecordsCache.forEach(entry => { matchRecordTableBody.appendChild(createRecordHtml(entry)); });
             addDataLabelsToRecordTable();
             loadMoreButton.style.display = 'none';
         } else {
-            const recordsToRender = filteredRecordsCache.slice(0, currentDisplayCount);
-            recordsToRender.forEach(entry => {
-                matchRecordCardsContainer.appendChild(createRecordHtml(entry));
-            });
+            filteredRecordsCache.slice(0, currentDisplayCount).forEach(entry => { matchRecordCardsContainer.appendChild(createRecordHtml(entry)); });
             loadMoreButton.style.display = (filteredRecordsCache.length > currentDisplayCount) ? 'block' : 'none';
         }
       };
@@ -1495,70 +786,47 @@
       const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
           if (td.querySelector('input') || td.querySelector('textarea')) return;
-
           const currentValue = entry[fieldName];
           const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
           if (type === 'text') input.type = 'text';
+          if (fieldName === 'season') { input.type = 'number'; input.min = '1'; }
           input.value = currentValue;
           Object.assign(input.style, { fontSize: '14px' });
           input.setAttribute('aria-label', `Edit ${fieldName}`);
-          
           td.textContent = '';
           td.appendChild(input);
           input.focus();
 
           const finalizeEdit = () => {
-            const val = input.value.trim();
-            if (entry[fieldName] !== val) {
-              entry[fieldName] = val;
-              saveRecords();
-            }
+            let val = input.value.trim();
+            if (fieldName === 'season') { val = parseInt(val, 10); if (isNaN(val) || val < 1) val = 1; }
+            if (entry[fieldName] !== val) { entry[fieldName] = val; saveRecords(); }
             td.textContent = val;
             if (input.parentNode === td) input.remove();
           };
-
           input.addEventListener('blur', finalizeEdit);
           input.addEventListener('keydown', (ev) => {
-            if (ev.key === 'Enter') {
-              if (type === 'textarea') {
-                if (!ev.shiftKey) {
-                  ev.preventDefault();
-                  finalizeEdit();
-                }
-              } else {
-                ev.preventDefault();
-                finalizeEdit();
-              }
-            } else if (ev.key === 'Escape') {
-              td.textContent = currentValue;
-              if (input.parentNode === td) input.remove();
-            }
+            if (ev.key === 'Enter') { if (type === 'textarea' && ev.shiftKey) return; ev.preventDefault(); finalizeEdit(); }
+            else if (ev.key === 'Escape') { td.textContent = currentValue; if (input.parentNode === td) input.remove(); }
           });
         });
       };
 
       const createRecordHtml = (entry) => {
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
-          const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', {
-              year: 'numeric', month: '2-digit', day: '2-digit',
-              hour: '2-digit', minute: '2-digit'
-          }).replace(/\//g, '-');
+          const formattedDate = new Date(entry.timestamp).toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-');
 
           if (isLargeScreen) {
               const tr = document.createElement('tr');
-              const fields = ['date', 'deck', 'opponent', 'firstSecond', 'result', 'memo'];
-              fields.forEach(field => {
+              ['date', 'season', 'deck', 'opponent', 'firstSecond', 'result', 'memo'].forEach(field => {
                 const td = document.createElement('td');
                 td.textContent = (field === 'date') ? formattedDate : entry[field];
-                td.dataset.label = (field === 'date') ? '日時' : (field === 'deck' ? 'デッキ' : (field === 'opponent' ? '相手' : (field === 'firstSecond' ? '先後' : (field === 'result' ? '勝敗' : 'メモ'))));
-                if (field === 'memo') {
-                    makeEditableCell(td, entry, field, 'textarea');
-                } else if (field !== 'date') {
-                    makeEditableCell(td, entry, field, 'text');
-                }
+                td.dataset.label = (field === 'date') ? '日時' : (field === 'season' ? 'シーズン' : (field === 'deck' ? 'デッキ' : (field === 'opponent' ? '相手' : (field === 'firstSecond' ? '先後' : 'メモ'))));
+                if (field === 'memo') makeEditableCell(td, entry, field, 'textarea');
+                else if (field === 'season') makeEditableCell(td, entry, field, 'number');
+                else if (field !== 'date') makeEditableCell(td, entry, field, 'text');
                 tr.appendChild(td);
               });
-
               const delTd = document.createElement('td');
               const delBtn = document.createElement('button');
               delBtn.textContent = '🗑️';
@@ -1567,11 +835,7 @@
               delBtn.setAttribute('aria-label', `Delete record for ${formattedDate}`);
               delBtn.onclick = () => {
                 const indexToRemove = allRecords.findIndex(rec => rec.timestamp === entry.timestamp);
-                if (indexToRemove !== -1) {
-                  allRecords.splice(indexToRemove, 1);
-                  saveRecords();
-                  applyFilters();
-                }
+                if (indexToRemove !== -1) { allRecords.splice(indexToRemove, 1); saveRecords(); applyFilters(); }
               };
               delTd.appendChild(delBtn);
               tr.appendChild(delTd);
@@ -1580,41 +844,31 @@
               const cardDiv = document.createElement('div');
               cardDiv.classList.add('match-record-card');
               cardDiv.dataset.timestamp = entry.timestamp;
-
               cardDiv.innerHTML = `
                   <div class="card-item"><span class="card-label">日時:</span> <span class="card-value">${formattedDate}</span></div>
+                  <div class="card-item"><span class="card-label">シーズン:</span> <span class="card-value">${entry.season}</span></div>
                   <div class="card-item"><span class="card-label">デッキ:</span> <span class="card-value">${entry.deck}</span></div>
                   <div class="card-item"><span class="card-label">相手:</span> <span class="card-value">${entry.opponent}</span></div>
                   <div class="card-item"><span class="card-label">先後:</span> <span class="card-value">${entry.firstSecond}</span></div>
                   <div class="card-item"><span class="card-label">勝敗:</span> <span class="card-value">${entry.result}</span></div>
                   <div class="card-item"><span class="card-label">メモ:</span> <span class="card-value">${entry.memo}</span></div>
               `;
-
               const deleteButton = document.createElement('button');
               deleteButton.classList.add('delete-card-button');
               deleteButton.title = '削除';
               deleteButton.textContent = '🗑️';
               deleteButton.setAttribute('aria-label', `Delete record for ${formattedDate}`);
               cardDiv.appendChild(deleteButton);
-
               deleteButton.addEventListener('click', () => {
                   const indexToRemove = allRecords.findIndex(rec => rec.timestamp === cardDiv.dataset.timestamp);
-                  if (indexToRemove !== -1) {
-                      allRecords.splice(indexToRemove, 1);
-                      saveRecords();
-                      applyFilters();
-                  }
+                  if (indexToRemove !== -1) { allRecords.splice(indexToRemove, 1); saveRecords(); applyFilters(); }
               });
               return cardDiv;
           }
       };
 
-      const addRecordEntry = (deck, opponent, firstSecond, result, memo) => {
-        const newRecord = {
-          timestamp: new Date().toISOString(),
-          date: new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-'),
-          deck, opponent, firstSecond, result, memo
-        };
+      const addRecordEntry = (deck, opponent, firstSecond, result, memo, season) => {
+        const newRecord = { timestamp: new Date().toISOString(), date: new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-'), deck, opponent, firstSecond, result, memo, season };
         allRecords.unshift(newRecord);
         saveRecords();
         currentDisplayCount = recordsPerPage;
@@ -1624,86 +878,65 @@
       const handleRecordSubmit = async (e) => {
         e.preventDefault();
         const deck = myDeckInput.value;
+        let season = parseInt(seasonInput.value, 10);
+        if (isNaN(season) || season < 1) season = 1;
         const opponent = ToggleButtonGroup.getSelectedValue('opponent-class-selection');
         const firstSecond = ToggleButtonGroup.getSelectedValue('turn-order-selection');
         const result = ToggleButtonGroup.getSelectedValue('match-result-selection');
         const memo = recordMemoInput.value;
-
-        if (!opponent || !firstSecond || !result) {
-          await ModalManager.showAlert('すべて選択してください');
-          return;
-        }
-
-        addRecordEntry(deck, opponent, firstSecond, result, memo);
+        if (!opponent || !firstSecond || !result) { await ModalManager.showAlert('すべて選択してください'); return; }
+        addRecordEntry(deck, opponent, firstSecond, result, memo, season);
         Storage.set(LAST_DECK_KEY, deck);
+        Storage.set(LAST_SEASON_KEY, season);
         recordMemoInput.value = '';
-        document.querySelectorAll('#opponent-class-selection button.active, #turn-order-selection button.active, #match-result-selection button.active').forEach(btn => {
-          btn.classList.remove('active');
-        });
+        document.querySelectorAll('#opponent-class-selection button.active, #turn-order-selection button.active, #match-result-selection button.active').forEach(btn => { btn.classList.remove('active'); });
       };
 
       const loadMoreRecords = () => {
           const oldDisplayCount = currentDisplayCount;
           currentDisplayCount += recordsPerPage;
           const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
-
           if (!isLargeScreen) {
-              const newRecordsToAppend = filteredRecordsCache.slice(oldDisplayCount, currentDisplayCount);
-              newRecordsToAppend.forEach(entry => {
-                  matchRecordCardsContainer.appendChild(createRecordHtml(entry));
-              });
+              filteredRecordsCache.slice(oldDisplayCount, currentDisplayCount).forEach(entry => { matchRecordCardsContainer.appendChild(createRecordHtml(entry)); });
               loadMoreButton.style.display = (filteredRecordsCache.length > currentDisplayCount) ? 'block' : 'none';
-          } else {
-              applyFilters();
-          }
+          } else { applyFilters(); }
       };
 
       const debouncedLoadRecords = debounce(loadRecords, 300);
 
       const init = () => {
-        const lastDeck = Storage.get(LAST_DECK_KEY);
-        if (lastDeck) myDeckInput.value = lastDeck;
-
+        if (Storage.get(LAST_DECK_KEY)) myDeckInput.value = Storage.get(LAST_DECK_KEY);
+        seasonInput.value = Storage.get(LAST_SEASON_KEY, 1);
         filterDeckNameInput.value = Storage.get(FILTER_DECK_KEY, '');
+        filterSeasonInput.value = Storage.get(FILTER_SEASON_KEY, '');
         ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', Storage.get(FILTER_CLASS_KEY, ''));
         ToggleButtonGroup.setActiveButton('filter-turn-order-selection', Storage.get(FILTER_TURN_KEY, ''));
-
         loadRecords();
 
         addRecordForm.addEventListener('submit', handleRecordSubmit);
-        filterDeckNameInput.addEventListener('input', () => {
-            Storage.set(FILTER_DECK_KEY, filterDeckNameInput.value);
-            debouncedLoadRecords();
-        });
+        filterDeckNameInput.addEventListener('input', () => { Storage.set(FILTER_DECK_KEY, filterDeckNameInput.value); debouncedLoadRecords(); });
+        filterSeasonInput.addEventListener('input', () => { Storage.set(FILTER_SEASON_KEY, filterSeasonInput.value); debouncedLoadRecords(); });
         document.addEventListener('filterChange', (e) => {
-            if (e.detail.groupId === 'filter-opponent-class-selection') {
-                Storage.set(FILTER_CLASS_KEY, e.detail.value);
-                loadRecords();
-            } else if (e.detail.groupId === 'filter-turn-order-selection') {
-                Storage.set(FILTER_TURN_KEY, e.detail.value);
-                loadRecords();
-            }
+            if (e.detail.groupId === 'filter-opponent-class-selection') { Storage.set(FILTER_CLASS_KEY, e.detail.value); loadRecords(); }
+            else if (e.detail.groupId === 'filter-turn-order-selection') { Storage.set(FILTER_TURN_KEY, e.detail.value); loadRecords(); }
         });
         clearRecordFiltersButton.addEventListener('click', () => {
             filterDeckNameInput.value = '';
+            filterSeasonInput.value = '';
             ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', '');
             ToggleButtonGroup.setActiveButton('filter-turn-order-selection', '');
             Storage.remove(FILTER_DECK_KEY);
             Storage.remove(FILTER_CLASS_KEY);
             Storage.remove(FILTER_TURN_KEY);
+            Storage.remove(FILTER_SEASON_KEY);
             loadRecords();
         });
-
         if (recordFilterDetails) {
-          const isFilterOpen = Storage.get(FILTER_OPEN_KEY, false);
-          recordFilterDetails[isFilterOpen ? 'setAttribute' : 'removeAttribute']('open', '');
-          recordFilterDetails.addEventListener('toggle', () => {
-            Storage.set(FILTER_OPEN_KEY, recordFilterDetails.open);
-          });
+          recordFilterDetails[Storage.get(FILTER_OPEN_KEY, false) ? 'setAttribute' : 'removeAttribute']('open', '');
+          recordFilterDetails.addEventListener('toggle', () => { Storage.set(FILTER_OPEN_KEY, recordFilterDetails.open); });
         }
         loadMoreButton.addEventListener('click', loadMoreRecords);
       };
-
       return { init, loadRecords, applyFilters };
     })();
 
@@ -1718,146 +951,75 @@
       const resetCardCountsButton = document.getElementById('reset-card-counts-button');
       const toggleCardDeleteModeButton = document.getElementById('toggle-card-delete-mode-button');
       const counterSection = document.getElementById('counter-section');
-
       let currentClass = '';
       let allCardData = {};
 
-      const saveCards = (className) => {
-        if (!className) return;
-        Storage.set(CARD_CLASS_PREFIX + className, allCardData[className] || []);
-      };
-
-      const loadCards = (className) => {
-        if (!className) return [];
-        return Storage.get(CARD_CLASS_PREFIX + className, []);
-      };
-
-      const loadAllClassCards = () => {
-        CLASS_NAMES.forEach(name => {
-            allCardData[name] = loadCards(name);
-        });
-        if (currentClass) renderCardList();
-      };
-
+      const saveCards = (className) => { if (className) Storage.set(CARD_CLASS_PREFIX + className, allCardData[className] || []); };
+      const loadCards = (className) => className ? Storage.get(CARD_CLASS_PREFIX + className, []) : [];
+      const loadAllClassCards = () => { CLASS_NAMES.forEach(name => { allCardData[name] = loadCards(name); }); if (currentClass) renderCardList(); };
       const sortCards = (cards) => cards.sort((a, b) => a.pp - b.pp);
 
       const renderCardList = () => {
         cardDataTableBody.innerHTML = '';
-        if (!currentClass) {
-          currentClassDisplay.textContent = '';
-          return;
-        }
+        if (!currentClass) { currentClassDisplay.textContent = ''; return; }
         currentClassDisplay.textContent = `クラス: ${currentClass}`;
-
         const cards = allCardData[currentClass] || [];
-        sortCards(cards);
-
-        cards.forEach((card, index) => {
+        sortCards(cards).forEach((card, index) => {
           const tr = document.createElement('tr');
-
           const tdPP = document.createElement('td');
           tdPP.textContent = card.pp;
-          tdPP.style.cursor = 'pointer';
+          Object.assign(tdPP.style, { cursor: 'pointer' });
           tdPP.title = 'クリックで編集';
           tdPP.addEventListener('click', () => {
             if (tdPP.querySelector('input')) return;
             const input = document.createElement('input');
-            input.type = 'number';
-            input.min = '0';
-            input.value = card.pp;
+            input.type = 'number'; input.min = '0'; input.value = card.pp;
             Object.assign(input.style, { fontSize: '14px' });
             input.setAttribute('aria-label', `Edit card PP: ${card.name}`);
-            tdPP.textContent = '';
-            tdPP.appendChild(input);
-            input.focus();
-            const finishEdit = () => {
-              let val = parseInt(input.value, 10);
-              if (isNaN(val) || val < 0) val = 0;
-              card.pp = val;
-              renderCardList();
-              saveCards(currentClass);
-            };
+            tdPP.textContent = ''; tdPP.appendChild(input); input.focus();
+            const finishEdit = () => { let val = parseInt(input.value, 10); if (isNaN(val) || val < 0) val = 0; card.pp = val; renderCardList(); saveCards(currentClass); };
             input.addEventListener('blur', finishEdit);
-            input.addEventListener('keydown', (ev) => {
-              if (ev.key === 'Enter') finishEdit();
-              else if (ev.key === 'Escape') renderCardList();
-            });
+            input.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') finishEdit(); else if (ev.key === 'Escape') renderCardList(); });
           });
           tr.appendChild(tdPP);
 
           const tdName = document.createElement('td');
           tdName.textContent = card.name;
-          tdName.style.cursor = 'pointer';
+          Object.assign(tdName.style, { cursor: 'pointer' });
           tdName.title = 'クリックで編集';
           tdName.addEventListener('click', () => {
             if (tdName.querySelector('input')) return;
             const input = document.createElement('input');
-            input.type = 'text';
-            input.value = card.name;
+            input.type = 'text'; input.value = card.name;
             Object.assign(input.style, { fontSize: '14px' });
             input.setAttribute('aria-label', `Edit card name: ${card.name}`);
-            tdName.textContent = '';
-            tdName.appendChild(input);
-            input.focus();
-            const finishEdit = () => {
-              const val = input.value.trim();
-              card.name = val || '(Unnamed card)';
-              renderCardList();
-              saveCards(currentClass);
-            };
+            tdName.textContent = ''; tdName.appendChild(input); input.focus();
+            const finishEdit = () => { const val = input.value.trim(); card.name = val || '(Unnamed card)'; renderCardList(); saveCards(currentClass); };
             input.addEventListener('blur', finishEdit);
-            input.addEventListener('keydown', (ev) => {
-              if (ev.key === 'Enter') finishEdit();
-              else if (ev.key === 'Escape') renderCardList();
-            });
+            input.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') finishEdit(); else if (ev.key === 'Escape') renderCardList(); });
           });
           tr.appendChild(tdName);
 
           const tdCount = document.createElement('td');
           const btnMinus = document.createElement('button');
-          btnMinus.textContent = '−';
-          btnMinus.setAttribute('aria-label', `Decrease count for ${card.name}`);
-          btnMinus.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (card.count > 0) {
-              card.count--;
-              renderCardList();
-              saveCards(currentClass);
-            }
-          });
+          btnMinus.textContent = '−'; btnMinus.setAttribute('aria-label', `Decrease count for ${card.name}`);
+          btnMinus.addEventListener('click', (e) => { e.preventDefault(); if (card.count > 0) { card.count--; renderCardList(); saveCards(currentClass); } });
           const spanCount = document.createElement('span');
-          spanCount.textContent = card.count;
-          spanCount.setAttribute('aria-live', 'polite');
+          spanCount.textContent = card.count; spanCount.setAttribute('aria-live', 'polite');
           const btnPlus = document.createElement('button');
-          btnPlus.textContent = '+';
-          btnPlus.setAttribute('aria-label', `Increase count for ${card.name}`);
-          btnPlus.addEventListener('click', (e) => {
-            e.preventDefault();
-            card.count++;
-            renderCardList();
-            saveCards(currentClass);
-          });
-          tdCount.appendChild(btnMinus);
-          tdCount.appendChild(spanCount);
-          tdCount.appendChild(btnPlus);
+          btnPlus.textContent = '+'; btnPlus.setAttribute('aria-label', `Increase count for ${card.name}`);
+          btnPlus.addEventListener('click', (e) => { e.preventDefault(); card.count++; renderCardList(); saveCards(currentClass); });
+          tdCount.append(btnMinus, spanCount, btnPlus);
           tr.appendChild(tdCount);
 
           const tdDel = document.createElement('td');
           const btnDel = document.createElement('button');
-          btnDel.classList.add('card-delete-button');
-          btnDel.textContent = '🗑️';
+          btnDel.classList.add('card-delete-button'); btnDel.textContent = '🗑️';
           Object.assign(btnDel.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
-          btnDel.title = '削除';
-          btnDel.setAttribute('aria-label', `Delete ${card.name} from list`);
-          btnDel.addEventListener('click', (e) => {
-            e.preventDefault();
-            allCardData[currentClass].splice(index, 1);
-            renderCardList();
-            saveCards(currentClass);
-          });
+          btnDel.title = '削除'; btnDel.setAttribute('aria-label', `Delete ${card.name} from list`);
+          btnDel.addEventListener('click', (e) => { e.preventDefault(); allCardData[currentClass].splice(index, 1); renderCardList(); saveCards(currentClass); });
           tdDel.appendChild(btnDel);
           tr.appendChild(tdDel);
-
           cardDataTableBody.appendChild(tr);
         });
       };
@@ -1874,37 +1036,20 @@
 
       const handleCardAdd = async (e) => {
         e.preventDefault();
-        if (!currentClass) {
-          await ModalManager.showAlert('まず左上のクラスを選択してください');
-          return;
-        }
+        if (!currentClass) { await ModalManager.showAlert('まず左上のクラスを選択してください'); return; }
         let ppVal = parseInt(newCardPpInput.value, 10);
-        if (isNaN(ppVal) || ppVal < 0) {
-          await ModalManager.showAlert('PPは0以上の整数を入力してください');
-          newCardPpInput.focus();
-          return;
-        }
+        if (isNaN(ppVal) || ppVal < 0) { await ModalManager.showAlert('PPは0以上の整数を入力してください'); newCardPpInput.focus(); return; }
         let nameVal = newCardNameInput.value.trim();
-        if (!nameVal) {
-          await ModalManager.showAlert('カード名を入力してください');
-          newCardNameInput.focus();
-          return;
-        }
+        if (!nameVal) { await ModalManager.showAlert('カード名を入力してください'); newCardNameInput.focus(); return; }
         if (!allCardData[currentClass]) allCardData[currentClass] = [];
         allCardData[currentClass].push({pp: ppVal, name: nameVal, count: 0});
         allCardData[currentClass] = sortCards(allCardData[currentClass]);
-        saveCards(currentClass);
-        renderCardList();
-        addCardForm.reset();
-        newCardPpInput.focus();
+        saveCards(currentClass); renderCardList(); addCardForm.reset(); newCardPpInput.focus();
       };
 
       const resetCounts = () => {
-        allCardData[currentClass].forEach(card => {
-          card.count = 0;
-        });
-        saveCards(currentClass);
-        renderCardList();
+        allCardData[currentClass].forEach(card => { card.count = 0; });
+        saveCards(currentClass); renderCardList();
       };
 
       const toggleDeleteMode = () => {
@@ -1912,22 +1057,16 @@
         toggleCardDeleteModeButton.textContent = isActive ? '削除モード ON' : '削除モード OFF';
         toggleCardDeleteModeButton.setAttribute('aria-pressed', isActive);
       };
-
       const init = () => {
         classFilterGroup.addEventListener('click', handleClassSelection);
         addCardForm.addEventListener('submit', handleCardAdd);
         resetCardCountsButton.addEventListener('click', resetCounts);
         toggleCardDeleteModeButton.addEventListener('click', toggleDeleteMode);
         toggleCardDeleteModeButton.setAttribute('aria-pressed', 'false');
-
         loadAllClassCards();
-
         const firstBtn = classFilterGroup.querySelector('button');
-        if (firstBtn && !classFilterGroup.querySelector('.active')) {
-          firstBtn.click();
-        }
+        if (firstBtn && !classFilterGroup.querySelector('.active')) firstBtn.click();
       };
-
       return { init, getAllCardData: () => allCardData, CLASS_PREFIX: CARD_CLASS_PREFIX, renderCardList, loadAllClassCards };
     })();
 
@@ -1936,25 +1075,15 @@
         const classNoteTextarea = document.getElementById('class-note-textarea');
         const currentClassNoteDisplay = document.getElementById('current-class-note-display');
         let currentClassForNote = '';
-
-        const saveNote = debounce((className, noteContent) => {
-            if (className) Storage.set(CLASS_NOTE_PREFIX + className, noteContent);
-        }, 500);
-
+        const saveNote = debounce((className, noteContent) => { if (className) Storage.set(CLASS_NOTE_PREFIX + className, noteContent); }, 500);
         const loadNote = (className) => {
             currentClassForNote = className;
             currentClassNoteDisplay.textContent = `${className} のメモ`;
             classNoteTextarea.value = Storage.get(CLASS_NOTE_PREFIX + className, '');
         };
-
         const init = () => {
-            classNoteTextarea.addEventListener('input', (e) => {
-                if (currentClassForNote) {
-                    saveNote(currentClassForNote, e.target.value);
-                }
-            });
+            classNoteTextarea.addEventListener('input', (e) => { if (currentClassForNote) saveNote(currentClassForNote, e.target.value); });
         };
-
         return { init, loadNote };
     })();
 
@@ -1964,12 +1093,8 @@
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
       };
 
       const readJsonFile = async (inputEl, callback) => {
@@ -1977,160 +1102,98 @@
         if (!file) return;
         const reader = new FileReader();
         reader.onload = async () => {
-          try {
-            const data = JSON.parse(reader.result);
-            await callback(data);
-          } catch (e) {
-            await ModalManager.showAlert('読み込み失敗：JSONの形式が不正なファイルです。コンソールで詳細を確認してください。');
-            console.error('JSON parse error:', e);
-          }
+          try { await callback(JSON.parse(reader.result)); }
+          catch (e) { await ModalManager.showAlert('読み込み失敗：JSONの形式が不正なファイルです。コンソールで詳細を確認してください。'); console.error('JSON parse error:', e); }
         };
         reader.readAsText(file);
       };
 
       const init = () => {
-        document.getElementById('export-records-button').addEventListener('click', () => {
-          exportAsJson(`svwb_records_${new Date().toISOString().slice(0,10)}.json`, Storage.get(RECORDS_KEY, []));
-        });
-
-        document.getElementById('export-cards-button').addEventListener('click', () => {
-          exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, CardListManager.getAllCardData());
-        });
-
+        document.getElementById('export-records-button').addEventListener('click', () => { exportAsJson(`svwb_records_${new Date().toISOString().slice(0,10)}.json`, Storage.get(RECORDS_KEY, [])); });
+        document.getElementById('export-cards-button').addEventListener('click', () => { exportAsJson(`svwb_cards_${new Date().toISOString().slice(0,10)}.json`, CardListManager.getAllCardData()); });
         document.getElementById('export-all-data-button').addEventListener('click', () => {
           const records = Storage.get(RECORDS_KEY, []);
           const cards = CardListManager.getAllCardData();
           const classNotes = {};
-          CLASS_NAMES.forEach(name => {
-              const note = Storage.get(CLASS_NOTE_PREFIX + name, '');
-              if (note) classNotes[name] = note;
-          });
+          CLASS_NAMES.forEach(name => { const note = Storage.get(CLASS_NOTE_PREFIX + name, ''); if (note) classNotes[name] = note; });
           exportAsJson(`svwb_all_${new Date().toISOString().slice(0,10)}.json`, { records, cards, classNotes });
         });
 
         document.getElementById('import-records-file-input').addEventListener('change', (e) => {
           readJsonFile(e.target, async (data) => {
-            if (!Array.isArray(data)) {
-                await ModalManager.showAlert('戦績データが不正です: ファイルの内容が配列形式ではありません。');
-                return;
-            }
-            Storage.set(RECORDS_KEY, data);
-            RecordManager.loadRecords();
-            await ModalManager.showAlert('戦績をインポートしました。');
-            e.target.value = '';
+            if (!Array.isArray(data)) { await ModalManager.showAlert('戦績データが不正です: ファイルの内容が配列形式ではありません。'); return; }
+            data.forEach(record => {
+                if (record.season === undefined || record.season === null || record.season === '') record.season = 1;
+                else { record.season = parseInt(record.season, 10); if (isNaN(record.season) || record.season < 1) record.season = 1; }
+            });
+            Storage.set(RECORDS_KEY, data); RecordManager.loadRecords(); await ModalManager.showAlert('戦績をインポートしました。'); e.target.value = '';
           });
         });
 
         document.getElementById('import-cards-file-input').addEventListener('change', (e) => {
           readJsonFile(e.target, async (data) => {
-            if (typeof data !== 'object' || data === null) {
-              await ModalManager.showAlert('カードデータが不正です: ファイルの内容がオブジェクト形式ではありません。');
-              return;
-            }
+            if (typeof data !== 'object' || data === null) { await ModalManager.showAlert('カードデータが不正です: ファイルの内容がオブジェクト形式ではありません。'); return; }
             let importedCount = 0;
-            for (const className in data) {
-              if (Array.isArray(data[className])) {
-                Storage.set(CARD_CLASS_PREFIX + className, data[className]);
-                importedCount++;
-              }
-            }
-            CardListManager.loadAllClassCards();
-            await ModalManager.showAlert(importedCount > 0 ? 'カードリストをインポートしました。' : 'インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。');
-            e.target.value = '';
+            for (const className in data) { if (Array.isArray(data[className])) { Storage.set(CARD_CLASS_PREFIX + className, data[className]); importedCount++; } }
+            CardListManager.loadAllClassCards(); await ModalManager.showAlert(importedCount > 0 ? 'カードリストをインポートしました。' : 'インポートする有効なカードデータが見つかりませんでした。ファイル形式を確認してください。'); e.target.value = '';
           });
         });
 
         document.getElementById('import-all-data-file-input').addEventListener('change', (e) => {
           readJsonFile(e.target, async (data) => {
-            if (!data || typeof data !== 'object') {
-                await ModalManager.showAlert('全体データが不正です: ファイルの内容がオブジェクト形式ではありません。');
-                return;
-            }
-            if (Array.isArray(data.records)) Storage.set(RECORDS_KEY, data.records);
-            else console.warn('No valid record data found in overall data.');
+            if (!data || typeof data !== 'object') { await ModalManager.showAlert('全体データが不正です: ファイルの内容がオブジェクト形式ではありません。'); return; }
+            if (Array.isArray(data.records)) {
+                data.records.forEach(record => {
+                    if (record.season === undefined || record.season === null || record.season === '') record.season = 1;
+                    else { record.season = parseInt(record.season, 10); if (isNaN(record.season) || record.season < 1) record.season = 1; }
+                });
+                Storage.set(RECORDS_KEY, data.records);
+            } else console.warn('No valid record data found in overall data.');
 
             if (typeof data.cards === 'object' && data.cards !== null) {
               let importedCardClassesCount = 0;
-              for (const className in data.cards) {
-                if (Array.isArray(data.cards[className])) {
-                  Storage.set(CARD_CLASS_PREFIX + className, data[className]);
-                  importedCardClassesCount++;
-                }
-              }
+              for (const className in data.cards) { if (Array.isArray(data.cards[className])) { Storage.set(CARD_CLASS_PREFIX + className, data[className]); importedCardClassesCount++; } }
               if (importedCardClassesCount === 0) console.warn('No valid card classes found in overall data.');
-            } else {
-                console.warn('No valid card data found in overall data.');
-            }
+            } else console.warn('No valid card data found in overall data.');
 
             if (typeof data.classNotes === 'object' && data.classNotes !== null) {
-                for (const className in data.classNotes) {
-                    if (typeof data.classNotes[className] === 'string') {
-                        Storage.set(CLASS_NOTE_PREFIX + className, data.classNotes[className]);
-                    }
-                }
-            } else {
-                console.warn('No valid class notes data found in overall data.');
-            }
+                for (const className in data.classNotes) { if (typeof data.classNotes[className] === 'string') Storage.set(CLASS_NOTE_PREFIX + className, data.classNotes[className]); }
+            } else console.warn('No valid class notes data found in overall data.');
 
-            RecordManager.loadRecords();
-            CardListManager.loadAllClassCards();
+            RecordManager.loadRecords(); CardListManager.loadAllClassCards();
             const currentClassActiveButton = document.querySelector('#class-filter-group .active');
             if (currentClassActiveButton) ClassNoteManager.loadNote(currentClassActiveButton.dataset.class);
-            await ModalManager.showAlert('全体データをインポートしました。');
-            e.target.value = '';
+            await ModalManager.showAlert('全体データをインポートしました。'); e.target.value = '';
           });
         });
 
         document.getElementById('clear-records-button').addEventListener('click', async () => {
-          const confirmed = await ModalManager.showConfirm('本当に戦績をすべて削除しますか？');
-          if (confirmed) {
-            Storage.remove(RECORDS_KEY);
-            RecordManager.loadRecords();
-            await ModalManager.showAlert('戦績を削除しました。');
+          if (await ModalManager.showConfirm('本当に戦績をすべて削除しますか？')) {
+            Storage.remove(RECORDS_KEY); RecordManager.loadRecords(); await ModalManager.showAlert('戦績を削除しました。');
           }
         });
       };
-
       return { init };
     })();
 
     // Tooltip Script
     const TooltipManager = (() => {
-        let infoButton;
-        let infoTooltip;
-
+        let infoButton, infoTooltip;
         const init = () => {
             infoButton = document.getElementById('info-button-trigger');
             infoTooltip = document.getElementById('info-tooltip-content');
-
             if (infoButton && infoTooltip) {
-                infoButton.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    infoTooltip.classList.toggle('show');
-                });
-
-                document.addEventListener('click', (event) => {
-                    if (!infoButton.contains(event.target) && !infoTooltip.contains(event.target)) {
-                        infoTooltip.classList.remove('show');
-                    }
-                });
+                infoButton.addEventListener('click', (event) => { event.stopPropagation(); infoTooltip.classList.toggle('show'); });
+                document.addEventListener('click', (event) => { if (!infoButton.contains(event.target) && !infoTooltip.contains(event.target)) infoTooltip.classList.remove('show'); });
             }
         };
-
         return { init };
     })();
 
     // Initialize all modules when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
-      ModalManager.init();
-      DarkModeManager.init();
-      TabManager.init();
-      ToggleButtonGroup.init();
-      RecordManager.init();
-      CardListManager.init();
-      ClassNoteManager.init();
-      DataManager.init();
-      TooltipManager.init();
+      ModalManager.init(); DarkModeManager.init(); TabManager.init(); ToggleButtonGroup.init();
+      RecordManager.init(); CardListManager.init(); ClassNoteManager.init(); DataManager.init(); TooltipManager.init();
     });
   </script>
 </body>
