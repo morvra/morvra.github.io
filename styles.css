@@ -197,7 +197,8 @@ ul.nav-icons {
 /* 年ヘッダーのスタイル */
 .year-header {
     cursor: pointer;
-    background-color: #f0f0f0; /* 例として背景色を設定 */
+    background-color: #fafafa;
+    border-radius: 4px;
     padding: 0.5em 1em;
     margin-top: 1em;
     margin-bottom: 0.5em;
@@ -205,12 +206,6 @@ ul.nav-icons {
     align-items: center;
     justify-content: space-between; /* テキストとアイコンを両端に寄せる */
     font-size: 1em;
-}
-
-/* 現在の年のヘッダーに特別なスタイルを適用する場合 */
-.year-header.active-year {
-    background-color: #e0e0e0;
-    color: #333;
 }
 
 /* アイコンのスタイル */
