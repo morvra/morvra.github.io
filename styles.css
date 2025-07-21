@@ -72,16 +72,120 @@ main h2 {
     font-size: 1.1em;
 }
 
-div#top-module {
+/* top-module */
+div#top-module.card-design {
     display: flex;
-    border: 1px solid #aaa;
-    padding: 8px;
-    margin-bottom: 24px;
+    flex-direction: column; /* スマートフォンでは縦並び */
+    align-items: center;
+    background-color: #fafaff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); 
+    padding: 24px;
+    margin-bottom: 32px;
+    gap: 16px;
 }
-img.top-icon {
-    width: 140px;
-    height: 140px;
-    float: left;
+
+@media (min-width: 600px) { /* PCビューでのレイアウト */
+    div#top-module.card-design {
+        flex-direction: row; /* PCでは横並び */
+        align-items: flex-start; /* 上揃え */
+    }
+}
+
+/* プロフィールセクション */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 160px; /* アイコンとナビゲーションの最小幅 */
+    text-align: center;
+}
+
+img.profile-icon {
+    width: 120px; /* アイコンサイズを調整 */
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover; /* 画像の表示方法 */
+    border: 3px solid #eee;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+/* ナビゲーションアイコンリスト */
+ul.nav-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* アイコンを横並びにする */
+    justify-content: center;
+    flex-wrap: wrap; /* 折り返し */
+    gap: 16px;
+}
+
+.nav-item {
+    position: relative; /* ホバー説明の基準位置 */
+}
+
+.nav-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #555;
+    font-size: 0.8em;
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-item a:hover {
+    color: #005aff; /* ホバー時の色 */
+}
+
+.nav-item i {
+    font-size: 1.4em;
+    margin-bottom: 4px;
+}
+
+/* ホバー説明 */
+.nav-description {
+    position: absolute;
+    bottom: -30px; /* アイコンの下に表示 */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap; /* 折り返しを防ぐ */
+    font-size: 0.8em;
+    opacity: 0; /* 初期状態では非表示 */
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    z-index: 10; /* 他の要素の上に表示 */
+}
+
+.nav-item:hover .nav-description {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* コンセプトセクション */
+.concept-section {
+    flex-grow: 1; /* 残りのスペースを埋める */
+    text-align: center; /* スマートフォンでの中央寄せ */
+}
+
+@media (min-width: 600px) { /* PCビューでの調整 */
+    .concept-section {
+        text-align: left; /* PCでは左寄せ */
+    }
+}
+
+.concept-section p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 0.8em;
 }
 
 /* 年ごとのグループのスタイル */
@@ -270,8 +374,10 @@ ul#tag-list {
 .piece {
     margin-bottom: 24px;
     padding: 8px 16px;
-    background-color: #fff;
-    border:1px solid #aaa;
+    background-color: #fafaff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); 
 }
 h2#piece-title {
     margin: 0px;
