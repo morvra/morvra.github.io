@@ -19,6 +19,9 @@ jobs:
       with:
         node-version: '20' # 使用するNode.jsのバージョン
 
+    - name: Install dependencies
+      run: npm install node-fetch
+
     - name: Run script to generate data
       env:
         DYNALIST_TOKEN: ${{ secrets.DYNALIST_TOKEN }} # Dynalistトークンを環境変数に設定
