@@ -10,7 +10,7 @@
     <link href='./bullet_icon.png' rel='icon' type='image/x-icon'/>
     <link href='./bullet_icon.png' rel='shortcut icon'/>
     <link href='./bullet_icon.png' rel='apple-touch-icon'/>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356"
      crossorigin="anonymous"></script>
@@ -22,13 +22,45 @@
     <div id="header"></div>
 
     <main>
-        <div id="top-module">
-            <img class="top-icon" src="https://gyazo.com/821ae163e2ae917475d3dc5fe2b94732/thumb/350#.png">
-            <ul id="top-list">
-                <li><a href="./article?id=uVd0FvsIz5xGXZkp1GR93wB3"><i class="fa fa-info" aria-hidden="true"></i>   About</a><br>　このサイトについて</li>
-                <li><a href="./piece"><i class="fa fa-puzzle-piece" aria-hidden="true"></i>  Piece</a><br>　記事未満のつぶやき</li>
-                <li><a href="./taglist"><i class="fa fa-tags" aria-hidden="true"></i> Taglist</a></li>
-            </ul>
+        <div id="top-module" class="card-design">
+            <div class="profile-section">
+                <!-- プロフィールアイコン -->
+                <img class="profile-icon" src="https://gyazo.com/821ae163e2ae917475d3dc5fe2b94732/thumb/350#.png" alt="morvra lists icon">
+                
+                <!-- ナビゲーションアイコンリスト -->
+                <ul class="nav-icons">
+                    <li class="nav-item">
+                        <a href="./article?id=uVd0FvsIz5xGXZkp1GR93wB3" aria-label="このサイトについて">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                            <span class="nav-description">このサイトについて</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./piece" aria-label="記事未満のつぶやき">
+                            <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+                            <span class="nav-description">記事未満のつぶやき</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./taglist" aria-label="タグ一覧">
+                            <i class="fa fa-tags" aria-hidden="true"></i>
+                            <span class="nav-description">タグ一覧</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./rss.xml" aria-label="RSSフィード">
+                            <i class="fa fa-rss" aria-hidden="true"></i>
+                            <span class="nav-description">RSSフィード</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="concept-section">
+                <!-- サイトのコンセプト文 -->
+                <p>morvra(もーぶら)が考えたこと、調べたこと、作ったものなどなんでも書く場所です。</p>
+                <p>面白がっていただけたら幸いです。</p>
+            </div>
         </div>
         <h2>記事一覧</h2>
         <ul id="article-list">
