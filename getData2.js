@@ -1,7 +1,9 @@
-// getData2.js - タグによる記事・Piece分類とタグ除去機能付き (noteのタグ処理をtag: #hoge1, #hoge2形式に修正)
+// getData2.js
 
 const fs = require('fs'); // Node.jsのfsモジュールをインポート
-const fetch = require('node-fetch'); // node-fetchをインポート（Node.jsでfetchを使うため）
+// fetch関数をより堅牢に定義: Node.jsのネイティブfetchがあればそれを使用し、なければnode-fetchをフォールバックとして使用
+// node-fetchのESM形式に対応するため、.defaultプロパティを参照するように変更
+const fetch = globalThis.fetch || require('node-fetch').default; 
 
 // MarkdownをHTMLに変換する関数
 function markdownToHTML(markdown) {
