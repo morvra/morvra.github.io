@@ -1,4 +1,4 @@
-// getData2.js
+// getData2.js - タグによる記事・Piece分類とタグ除去機能付き (noteのタグ処理をtag: #hoge1, #hoge2形式に修正)
 
 const fs = require('fs'); // Node.jsのfsモジュールをインポート
 // fetch関数をより堅牢に定義: Node.jsのネイティブfetchがあればそれを使用し、なければnode-fetchをフォールバックとして使用
@@ -147,13 +147,22 @@ function getTags(note) {
         return [];
     }
     // "tag: #hoge1, #hoge2" の形式をマッチ
-    const tagsMatch = note.match(/tag:\s*(#[\w\s,]+)/);
-    if (tagsMatch && tagsMatch[1]) {
-        // カンマで分割し、各タグの前後スペースと '#' を除去
-        return tagsMatch[1].split(',')
-                           .map(tag => tag.trim().replace(/^#/, ''))
-                           // 'article' と 'piece' は分類用なので除外
-                           .filter(tag => tag !== 'article' && tag !== 'piece');
+    const tagLineMatch = note.match(/tag:\s*(.*)/); // "tag: " の後に続くすべての文字列をキャプチャ
+    if (tagLineMatch && tagLineMatch[1]) {
+        const tagString = tagLineMatch[1];
+        // キャプチャした文字列から個々のタグを抽出
+        // # の後に続く、文字、数字、ハイフン、アンダースコアの連続にマッチ
+        // \p{L} は任意の言語の文字、\p{N} は任意の数字にマッチ (Unicodeプロパティエスケープ)
+        // uフラグはUnicodeプロパティエスケープを有効にする
+        const individualTags = [];
+        const tagRegex = /#([\p{L}\p{N}\-_]+)/gu; // 個々の #タグ をマッチ
+        let match;
+        while ((match = tagRegex.exec(tagString)) !== null) {
+            individualTags.push(match[1]); // キャプチャグループ1 (タグ名、#なし) を追加
+        }
+        
+        // 'article' と 'piece' は分類用なので除外
+        return individualTags.filter(tag => tag !== 'article' && tag !== 'piece');
     } else {
         return [];
     }
