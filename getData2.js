@@ -1,5 +1,7 @@
-// getData2.js
+// getData2.js - タグによる記事・Piece分類とタグ除去機能付き (noteのタグ処理をtag: #hoge1, #hoge2形式に修正)
+
 const fs = require('fs'); // Node.jsのfsモジュールをインポート
+const fetch = require('node-fetch'); // node-fetchをインポート（Node.jsでfetchを使うため）
 
 // MarkdownをHTMLに変換する関数
 function markdownToHTML(markdown) {
@@ -113,12 +115,17 @@ function replaceDynalistUrls(body) {
     });
 }
 
-// 指定した色のノードを取得する関数
-function getNodesByColor(nodes, num) {
-    return nodes.filter(obj => obj.color && obj.color === num);
+// 指定したタグを持つノードを取得する関数
+function getNodesByTag(nodes, tagName) {
+    return nodes.filter(node => {
+        // contentまたはnoteにタグが含まれているかチェック
+        const hasTagInContent = node.content && node.content.includes(`#${tagName}`);
+        const hasTagInNote = node.note && node.note.includes(`#${tagName}`);
+        return hasTagInContent || hasTagInNote;
+    });
 }
 
-// メタデータを取得する関数
+// メタデータを取得する関数 (日付のみ)
 function getMetadata(note) {
     const lines = note.split('\n');
     let date = '';
@@ -132,19 +139,22 @@ function getMetadata(note) {
     return { date };
 }
 
-// タグを取得する関数
+// タグを取得する関数 (tag: #hoge1, #hoge2 形式)
 function getTags(note) {
-    const lines = note.split('\n');
-    let tags = [];
-
-    lines.forEach(line => {
-        if (line.startsWith('tag:')) {
-            const tagsStr = line.replace('tag:', '').trim();
-            tags = tagsStr.split(',').map(tag => tag.trim().replace(/^#/, ''));
-        }
-    });
-
-    return tags;
+    if (!note) {
+        return [];
+    }
+    // "tag: #hoge1, #hoge2" の形式をマッチ
+    const tagsMatch = note.match(/tag:\s*(#[\w\s,]+)/);
+    if (tagsMatch && tagsMatch[1]) {
+        // カンマで分割し、各タグの前後スペースと '#' を除去
+        return tagsMatch[1].split(',')
+                           .map(tag => tag.trim().replace(/^#/, ''))
+                           // 'article' と 'piece' は分類用なので除外
+                           .filter(tag => tag !== 'article' && tag !== 'piece');
+    } else {
+        return [];
+    }
 }
 
 // 本文を取得する関数
@@ -198,41 +208,54 @@ function generateRSS(articles) {
 }
 
 // Dynalistからデータを取得する部分
-fetch('https://dynalist.io/api/v1/doc/read', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        token: process.env.DYNALIST_TOKEN, // 環境変数からトークンを取得
-        'file_id': 'ihr-nPYa3LhA5ETZ9F0NS9Im', // 対象のファイルID
-    }),
-})
-    .then(response => {
+// main関数として定義し、async/awaitを使用
+async function main() {
+    const DYNALIST_TOKEN = process.env.DYNALIST_TOKEN; // 環境変数からトークンを取得
+    const DYNALIST_FILE_ID = 'ihr-nPYa3LhA5ETZ9F0NS9Im'; // 対象のファイルID
+
+    if (!DYNALIST_TOKEN) {
+        console.error('Error: DYNALIST_TOKEN environment variable is not set.');
+        process.exit(1);
+    }
+
+    try {
+        const response = await fetch('https://dynalist.io/api/v1/doc/read', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: DYNALIST_TOKEN,
+                'file_id': DYNALIST_FILE_ID,
+            }),
+        });
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
-    })
-    .then(data => {
-        // データ処理のロジックを追加
-        const articleNodes = getNodesByColor(data.nodes, 1);
-        const pieceNodes = getNodesByColor(data.nodes, 5);
+        const data = await response.json();
+
+        // #articleタグを持つノードを記事として取得
+        const articleNodes = getNodesByTag(data.nodes, 'article');
+        // #pieceタグを持つノードをpieceとして取得
+        const pieceNodes = getNodesByTag(data.nodes, 'piece');
         
         const articles = articleNodes.map(obj => {
             const id = obj.id;
-            const title = obj.content;
+            // タイトルから#articleタグを削除
+            const title = obj.content.replace(/#article/g, '').trim();
             const { date } = getMetadata(obj.note);
-            const tags = getTags(obj.note);
+            const tags = getTags(obj.note); // noteからタグを取得
             const body = replaceDynalistUrls(getBody(data.nodes, obj));
             return { id, title, date, tags, body };
         });
 
         const pieces = pieceNodes.map(obj => {
             const id = obj.id;
-            const title = obj.content;
+            // タイトルから#pieceタグを削除
+            const title = obj.content.replace(/#piece/g, '').trim();
             const { date } = getMetadata(obj.note);
-            const tags = getTags(obj.note);
+            const tags = getTags(obj.note); // noteからタグを取得
             const body = replaceDynalistUrls(getBody(data.nodes, obj));
             return { id, title, date, tags, body };
         });
@@ -249,5 +272,11 @@ fetch('https://dynalist.io/api/v1/doc/read', {
         const rssFeed = generateRSS(articles);
         fs.writeFileSync('rss.xml', rssFeed);
         console.log('rss.xml generated.');
-    })
-    .catch(error => console.error('Error fetching data:', error));
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        process.exit(1); // エラーが発生した場合は終了コード1で終了
+    }
+}
+
+// main関数を実行
+main();
