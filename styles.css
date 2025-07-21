@@ -84,6 +84,62 @@ img.top-icon {
     float: left;
 }
 
+/* 年ごとのグループのスタイル */
+.year-group {
+    list-style: none; /* デフォルトのリストスタイルをなくす */
+    margin-bottom: 1em;
+}
+
+/* 年ヘッダーのスタイル */
+.year-header {
+    cursor: pointer;
+    background-color: #f0f0f0; /* 例として背景色を設定 */
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+    display: flex; /* アイコンとテキストを横並びにする */
+    align-items: center;
+    justify-content: space-between; /* テキストとアイコンを両端に寄せる */
+    font-size: 1.2em;
+}
+
+/* 現在の年のヘッダーに特別なスタイルを適用する場合 */
+.year-header.active-year {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+/* アイコンのスタイル */
+.year-header i {
+    margin-left: 0.5em;
+    transition: transform 0.2s ease-in-out; /* 開閉時のアニメーション */
+}
+
+/* 折りたたまれた状態の記事リスト */
+.article-sub-list {
+    list-style: none; /* デフォルトのリストスタイルをなくす */
+    padding-left: 0; /* 左のパディングをなくす */
+    margin: 0;
+    overflow: hidden; /* 高さが変わる時に隠れるように */
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* スムーズな開閉アニメーション */
+    max-height: 1000px; /* 開いた時の最大高さを十分に大きく設定 */
+    opacity: 1;
+}
+
+/* 折りたたまれた状態の実際のスタイル */
+.article-sub-list.collapsed {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden; /* 非表示時の要素へのアクセスを完全に防ぐ */
+}
+
+/* 記事個別のスタイル */
+.article-sub-list li {
+    margin-bottom: 0.5em;
+    padding-left: 1em; /* 記事のインデント */
+}
+
 ul {
     list-style: circle;
 }
