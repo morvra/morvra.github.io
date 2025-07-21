@@ -97,11 +97,10 @@ img.top-icon {
     padding: 0.5em 1em;
     margin-top: 1em;
     margin-bottom: 0.5em;
-    border-radius: 4px;
     display: flex; /* アイコンとテキストを横並びにする */
     align-items: center;
     justify-content: space-between; /* テキストとアイコンを両端に寄せる */
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 /* 現在の年のヘッダーに特別なスタイルを適用する場合 */
@@ -114,6 +113,10 @@ img.top-icon {
 .year-header i {
     margin-left: 0.5em;
     transition: transform 0.2s ease-in-out; /* 開閉時のアニメーション */
+}
+
+ul#article-list {
+    padding-left: 0;
 }
 
 /* 折りたたまれた状態の記事リスト */
