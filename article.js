@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const articleTagsElement = document.getElementById('article-tags'); // タグ
     // 記事のコンテンツを表示する要素
     const articleContent = document.getElementById('article-content');
+    const adElement = document.getElementById('ad'); // 広告要素を取得
 
     // JSONファイルを取得して記事のコンテンツを表示
     fetch(jsonPath)
@@ -37,6 +38,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 // 記事が見つかった場合はコンテンツを表示
                 articleContent.innerHTML = article.body;
+
+                // 関連記事の表示
+                const currentArticleTags = article.tags;
+                const relatedArticles = data.articles
+                    .filter(item => item.id !== articleId && // 現在の記事を除外
+                        item.tags.some(tag => currentArticleTags.includes(tag))) // 共通のタグを持つ記事を抽出
+                    .sort(() => 0.5 - Math.random()) // ランダムに並び替え
+                    .slice(0, 3); // 最大3件に制限
+
+                if (relatedArticles.length > 0) {
+                    // 関連記事が見つかった場合にのみセクションを作成し挿入
+                    const relatedArticlesSection = document.createElement('div');
+                    relatedArticlesSection.id = 'related-articles';
+                    relatedArticlesSection.innerHTML = '<h2>関連記事</h2>';
+
+                    const relatedArticlesList = document.createElement('ul');
+                    relatedArticles.forEach(relatedArticle => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `article.html?id=${relatedArticle.id}`;
+                        link.textContent = relatedArticle.title;
+                        listItem.appendChild(link);
+                        relatedArticlesList.appendChild(listItem);
+                    });
+                    relatedArticlesSection.appendChild(relatedArticlesList);
+
+                    // 広告要素の直後に挿入
+                    if (adElement && adElement.parentNode) {
+                        adElement.parentNode.insertBefore(relatedArticlesSection, adElement.nextSibling);
+                    } else {
+                        // 広告要素が見つからない場合のフォールバック（例：記事コンテンツの最後に追加）
+                        articleContent.parentNode.appendChild(relatedArticlesSection);
+                    }
+                }
+
             } else {
                 articleContent.textContent = '記事が見つかりませんでした。';
             }
