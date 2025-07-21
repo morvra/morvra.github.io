@@ -118,8 +118,8 @@ img.top-icon {
 
 /* 折りたたまれた状態の記事リスト */
 .article-sub-list {
-    list-style: none; /* デフォルトのリストスタイルをなくす */
-    padding-left: 0; /* 左のパディングをなくす */
+    list-style: circle; /* デフォルトのリストスタイルをなくす */
+    padding-left: 40px; /* 左のパディングをなくす */
     margin: 0;
     overflow: hidden; /* 高さが変わる時に隠れるように */
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* スムーズな開閉アニメーション */
@@ -137,7 +137,11 @@ img.top-icon {
 /* 記事個別のスタイル */
 .article-sub-list li {
     margin-bottom: 0.5em;
-    padding-left: 1em; /* 記事のインデント */
+}
+.article-date {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 0.5em;
 }
 
 ul {
