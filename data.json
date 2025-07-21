@@ -2,7 +2,7 @@
 	"articles": [
 		{
 			"id": "7LmTlvBllIw4OmoG0exJ4gQ0",
-			"title": "記事テスト",
+			"title": "記事テスト #article ",
 			"date": "2024-03-29",
 			"tags": [
 				"ブログ"
@@ -18,14 +18,14 @@
 		},
 		{
 			"id": "uVd0FvsIz5xGXZkp1GR93wB3",
-			"title": "About",
+			"title": "About #article ",
 			"date": "2024-03-30",
 			"tags": [],
 			"body": "<h2>このサイトについて</h2>\n<p>morvra（もーぶら）がなんでも書く場所です。</p>\n<p>RSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> で発行してます。</p>\n<h2>morvra</h2>\n<p><img src=\"https://gyazo.com/821ae163e2ae917475d3dc5fe2b94732/thumb/350#.png\" alt=\"icon\"></p>\n<p>インターネットとテキストが好きです。アイコンは<a href=\"https://designer.microsoft.com/image-creator\" target=\"_blank\">Microsoft Designer</a>製。</p>\n<h2>お問い合わせ</h2>\n<p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p>\n<h2>Amazonアソシエイト・プログラムに参加しています。</h2>\n<p>morvra listはamazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイト宣伝プログラムである、Amazonアソシエイト・プログラムの参加者です。</p>\n<h2>Google AdSenseに参加しています。</h2>\n<p>morvra listは広告としてGoogle AdSenseを使用しています。 Google Adsenseはデータを収集するために、Cookieやウェブビーコンを使用して広告配信をしています。</p>\n<p>Cookieを使用することにより、インターネットにおけるご自身のサイトや他のサイトへのアクセス情報に基づいてユーザーに広告を配信することが可能になります。</p>\n<p>情報提供を望まない場合は、Googleのポリシーと原則のページより、Cookieオプションを使用しないように設定することができます。</p>"
 		},
 		{
 			"id": "5ZUWNwNzv2znrzOoVJHebkQz",
-			"title": "Hello world!",
+			"title": "Hello world! #article ",
 			"date": "2024-03-30",
 			"tags": [
 				"ブログ"
@@ -34,7 +34,7 @@
 		},
 		{
 			"id": "mswxR_4Gsgxy2JxyXF4vUFis",
-			"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！",
+			"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！ #article ",
 			"date": "2024-04-10",
 			"tags": [
 				"hearthstone"
@@ -43,7 +43,7 @@
 		},
 		{
 			"id": "Wd5eV3mQ6K5BDQFZlXUbPQB9",
-			"title": "Dynalistの構造 Ver.202404",
+			"title": "Dynalistの構造 Ver.202404 #article ",
 			"date": "2024-04-20",
 			"tags": [
 				"dynalist"
@@ -52,7 +52,7 @@
 		},
 		{
 			"id": "dg1tAwAqsiF0TKwY5qoiSjkB",
-			"title": "『ようこそ！FACT（東京S区第二支部）へ』読んだ",
+			"title": "『ようこそ！FACT（東京S区第二支部）へ』読んだ #article ",
 			"date": "2024-04-21",
 			"tags": [
 				"漫画"
@@ -61,7 +61,7 @@
 		},
 		{
 			"id": "BhnDRx9Dezi5UmMjFRmrkac4",
-			"title": "このサイトのRSSフィードを作った",
+			"title": "このサイトのRSSフィードを作った #article ",
 			"date": "2024-06-11",
 			"tags": [
 				"ブログ"
@@ -70,7 +70,7 @@
 		},
 		{
 			"id": "6N_7gocKoNZ2mFlvGv-UNL6i",
-			"title": "学園アイドルマスター雑感",
+			"title": "学園アイドルマスター雑感 #article ",
 			"date": "2024-06-14",
 			"tags": [
 				"ゲーム"
@@ -79,7 +79,7 @@
 		},
 		{
 			"id": "A6kX0EbDqq6dpEEwYHGtLu-8",
-			"title": "『世界は宗教で動いてる』読んだ",
+			"title": "『世界は宗教で動いてる』読んだ #article ",
 			"date": "2024-07-21",
 			"tags": [
 				"本"
@@ -88,7 +88,7 @@
 		},
 		{
 			"id": "udmewyRskBgjPapKb1uu5QbB",
-			"title": "サイトのタイトルとアイコンを変更",
+			"title": "サイトのタイトルとアイコンを変更 #article ",
 			"date": "2024-07-29",
 			"tags": [
 				"ブログ"
@@ -97,7 +97,7 @@
 		},
 		{
 			"id": "cZnOIW2AYuY1VArdBGQXOf2h",
-			"title": "中動態についてメモ",
+			"title": "中動態についてメモ #article ",
 			"date": "2024-10-13",
 			"tags": [
 				"言葉"
@@ -106,7 +106,7 @@
 		},
 		{
 			"id": "8BPLVWIM5hoL6dnKnoBkn6WU",
-			"title": "『考えの育て方: 知的生産のデジタルカード法』読んだ",
+			"title": "『考えの育て方: 知的生産のデジタルカード法』読んだ #article ",
 			"date": "2024-10-27",
 			"tags": [
 				"本"
@@ -115,7 +115,7 @@
 		},
 		{
 			"id": "ShWNfCw0oGHIQDx50MbmcBwx",
-			"title": "DynalistからCosenseに投稿するBookmarklet",
+			"title": "DynalistからCosenseに投稿するBookmarklet #article ",
 			"date": "2024-10-29",
 			"tags": [
 				"dynalist",
@@ -125,7 +125,7 @@
 		},
 		{
 			"id": "smxzQNX17ukXVWQiw9coKleo",
-			"title": "MECE",
+			"title": "MECE #article ",
 			"date": "2024-11-02",
 			"tags": [
 				"言葉"
@@ -134,7 +134,7 @@
 		},
 		{
 			"id": "edY9ji7ctO9ues5WHvchNq3J",
-			"title": "ポケポケ始めた",
+			"title": "ポケポケ始めた #article ",
 			"date": "2024-11-13",
 			"tags": [
 				"ポケポケ",
@@ -144,7 +144,7 @@
 		},
 		{
 			"id": "tm1Ukar5u-W_912rpgKVHYUi",
-			"title": "兵庫県知事選で斎藤元彦元知事が当選",
+			"title": "兵庫県知事選で斎藤元彦元知事が当選 #article ",
 			"date": "2024-11-17",
 			"tags": [
 				"ニュース"
@@ -153,7 +153,7 @@
 		},
 		{
 			"id": "FsPb7PRxbJBPV2fbbKs9_Zel",
-			"title": "アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説",
+			"title": "アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説 #article ",
 			"date": "2024-12-25",
 			"tags": [
 				"考えごと"
@@ -162,7 +162,7 @@
 		},
 		{
 			"id": "4rspIyYQ3Qcq--SxeLMYCqup",
-			"title": "こたけ正義感『弁論』見た",
+			"title": "こたけ正義感『弁論』見た #article ",
 			"date": "2025-01-07",
 			"tags": [
 				"お笑い"
@@ -171,7 +171,7 @@
 		},
 		{
 			"id": "juBSJvLIqrLqHqzhMNpYSwP_",
-			"title": "【アイギス】正月エフネ引けたのでGG編成組んでみた",
+			"title": "【アイギス】正月エフネ引けたのでGG編成組んでみた #article ",
 			"date": "2025-01-06",
 			"tags": [
 				"千年戦争アイギス",
@@ -181,7 +181,7 @@
 		},
 		{
 			"id": "DT6EpVNuNlZJS3ZXY3TkMIvK",
-			"title": "Bappa Shotaさんのスウェーデンの動画を見て移民についてつらつら考えた",
+			"title": "Bappa Shotaさんのスウェーデンの動画を見て移民についてつらつら考えた #article ",
 			"date": "2025-01-19",
 			"tags": [
 				"考えごと"
@@ -190,7 +190,7 @@
 		},
 		{
 			"id": "1f10cHjyNJOsouARiHzixpYD",
-			"title": "DEIとCE、平等とは",
+			"title": "DEIとCE、平等とは #article ",
 			"date": "2025-02-07",
 			"tags": [
 				"考えごと"
@@ -199,7 +199,7 @@
 		},
 		{
 			"id": "JqJHswBZW57XAMdGYli46YtI",
-			"title": "「これ、AIが書いた？」文章の進化と創作の価値の行方",
+			"title": "「これ、AIが書いた？」文章の進化と創作の価値の行方 #article ",
 			"date": "2025-03-12",
 			"tags": [
 				"考えごと",
@@ -209,7 +209,7 @@
 		},
 		{
 			"id": "KuSkt5gDVUaZx2U9TROq3d01",
-			"title": "Dynalistのタスク表示用スクリプト",
+			"title": "Dynalistのタスク表示用スクリプト #article ",
 			"date": "2025-03-13",
 			"tags": [
 				"dynalist",
@@ -219,7 +219,7 @@
 		},
 		{
 			"id": "fFIleKwD9Coz8gxLIs6WcMJN",
-			"title": "Dynalistのインボックスへ送信するスクリプト",
+			"title": "Dynalistのインボックスへ送信するスクリプト #article ",
 			"date": "2025-03-15",
 			"tags": [
 				"dynalist",
@@ -229,7 +229,7 @@
 		},
 		{
 			"id": "fDalpCyltz7AB356i6p9AZkk",
-			"title": "シャドバWB感想",
+			"title": "シャドバWB感想 #article",
 			"date": "2025-07-09",
 			"tags": [
 				"シャドバWB",
@@ -239,7 +239,7 @@
 		},
 		{
 			"id": "s48l0AJ9CVFIEHWlEmAg_YLW",
-			"title": "シャドバWBの対戦支援ツールを作った",
+			"title": "シャドバWBの対戦支援ツールを作った #article",
 			"date": "2025-07-10",
 			"tags": [
 				"シャドバWB"
@@ -250,238 +250,238 @@
 	"pieces": [
 		{
 			"id": "UcjKAvD_DYrM4c9uyH2yAKNp",
-			"title": "Pieceテスト",
+			"title": "Pieceテスト #piece ",
 			"date": "2024-04-30",
 			"tags": [],
 			"body": "<p>動画やリンク、記事になってないメモなどを載せていく予定。</p>\n<p>タイトルはなんなら無くて良いくらいでテキストだけでも投稿可でDynalist上で青のトピックを羅列するって感じにしたい。</p>"
 		},
 		{
 			"id": "pa9TQCb1dmFFM5CDVMbhyJRG",
-			"title": "延々と永遠",
+			"title": "延々と永遠 #piece ",
 			"date": "2024-05-09",
 			"tags": [],
 			"body": "<p>これまでなら「延々と」が使われてたであろうタイミングで「永遠と」とか「永遠に」が使われるケースがかなり増えてきた感触ある。</p>\n<p>おそらく何十年も前からある誤用だと思うんだけど、ここ数年は市民権得てる感じする。若年層で違和感持つ人は少なくなっているのでは？</p>"
 		},
 		{
 			"id": "UeTYlE_1t1ccKy1N5qOS6W-C",
-			"title": "Scrapbox→Cosense",
+			"title": "Scrapbox→Cosense #piece ",
 			"date": "2024-05-21",
 			"tags": [],
 			"body": "<p>ScrapboxがHelpfeel Cosenseに名前が変わった</p>\n<ul><li><a href=\"https://prtimes.jp/main/html/rd/p/000000323.000027275.html\">【サービス名変更のお知らせ】「Scrapbox」は「Helpfeel Cosense（ヘルプフィール コセンス）」に変わります | 株式会社Helpfeelのプレスリリース</a></li></ul>\n<blockquote><p>情報を集めて整理できる「Scrapbox」は、「スクボ」の愛称で親しまれている一方で、名称からは、人とのつながりが想起しにくく、本サービスの本質的な価値を十分に伝えられていないというジレンマを抱えていました。</p></blockquote>\n<blockquote><p>このような背景から、社会問題である情報格差の解消に向けて、本サービスの「ナレッジによって人や組織を豊かにする」というコアバリューをより明確に伝えるために、サービス名を「Helpfeel Cosense（コセンス）」に変更することを決定いたしました。</p></blockquote>\n<p>とのこと。「Scrapbox」は手軽な感じが好きだったけどウケにくい層もいたのかな〜。</p>"
 		},
 		{
 			"id": "BRh88eLD3TalAzIV_6k23Prj",
-			"title": "正反対な君と僕 55話",
+			"title": "正反対な君と僕 55話 #piece ",
 			"date": "2024-05-27",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371864158164556\">[第55話]正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a> </li></ul>\n<p>東の自覚回。阿賀沢さんの漫画はみんな幸せになれ！って思う。</p>\n<p>高校生にして言語化と内省が上手すぎる。そのおかげで読みやすいしそこが肌に合う感じがする。</p>"
 		},
 		{
 			"id": "rY7zMxGt_h_SOn5Frlr7DUgP",
-			"title": "『ふつうの軽音部』のハトノのバンドのメンバー集まったぞ！",
+			"title": "『ふつうの軽音部』のハトノのバンドのメンバー集まったぞ！ #piece ",
 			"date": "2024-06-09",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371867623740984\">[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul>\n<p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p>\n<p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p>\n<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
 		},
 		{
 			"id": "Z1uam7RnBRgRqjeLue-WT2t8",
-			"title": "Little Glee Monster アカペラメドレー 2024",
+			"title": "Little Glee Monster アカペラメドレー 2024 #piece ",
 			"date": "2024-08-10",
 			"tags": [],
 			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/T0NIU8Eum18?si=0fOXxLzpmbmvPN4N\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>年々歌唱力もMIXもめっちゃ向上してる印象。すごい。特にThis is meのハーモニーは痺れた。</p>\n<p>Pentatonix好きでそのイズム感じてかなり刺さった。</p>"
 		},
 		{
 			"id": "YV7LsKjiPnaoLsGSXLWaSp4p",
-			"title": "名曲で草",
+			"title": "名曲で草 #piece ",
 			"date": "2024-08-31",
 			"tags": [],
 			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/JVlAJlvaT0Y?si=5RcWd6lyFduvEo2W\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<ul><li>地下ラップやら誕生日凸待ちやら小ネタ満載で楽しい</li><li>でも詞は激エモ。1COLOR→ANYCOLORとか</li></ul>"
 		},
 		{
 			"id": "qAaF8sYfLzwE45pMblyJRyMo",
-			"title": "豊か",
+			"title": "豊か #piece ",
 			"date": "2024-09-21",
 			"tags": [],
 			"body": "<p>ニューヨークのニューラジオで頻出する概念</p>\n<p>参考：<a href=\"https://www.youtube.com/watch?v=COYp28n4gK0\" target=\"_blank\">【ニューヨーク】2人とも豊かじゃない【切り抜き】 - YouTube</a></p>\n<p>趣味もってるとか私生活の充実とかそのへんなんだけど、他者からの視線は意識せず内的に満足してるかどうかが重要っぽい。言語化するのも野暮って感じの概念でシャバいも似たような言葉。</p>"
 		},
 		{
 			"id": "kopu9tCmsQ-lg0QrwpvzxcXg",
-			"title": "敬意逓減（けいいていげん）の法則",
+			"title": "敬意逓減（けいいていげん）の法則 #piece ",
 			"date": "2024-10-09",
 			"tags": [],
 			"body": "<p>敬語に含まれる敬意が徐々に失われていく現象。</p>\n<p>＊敬意漸減（ぜんげん）とも</p>\n<p>例：御前、貴方、のたまう</p>\n<p>参考</p>\n<ul><li><a href=\"https://x.com/nikkei_kotoba/status/1828373138050011329\">日経 校閲 / X</a></li><li><a href=\"https://www.yomiuri.co.jp/column/henshu/20230317-OYT8T50012/\">「させていただく」を使いすぎ？…言い換えられない理由をベテラン記者が考察 : 読売新聞</a></li><li><a href=\"https://note.com/aaaaayyyymmmmm/n/nc70d5fd24c71\">言葉は生きている～敬意逓減の話～｜くりん◎日本語教師◎勉強垢</a></li></ul>"
 		},
 		{
 			"id": "oPqV59kKJVuEULL-KuubMFbR",
-			"title": "天台声明（てんだいしょうみょう）",
+			"title": "天台声明（てんだいしょうみょう） #piece ",
 			"date": "2024-10-10",
 			"tags": [],
 			"body": "<p><a href=\"https://www.youtube.com/watch?v=4OPCY27QhtU\" target=\"_blank\">その言葉は現実となる！古代インド神秘伝説 〜インダス文明とアーリア人の足跡〜【54-2 COTEN RADIO ムガール帝国編2】 - YouTube</a> きっかけで天台声明を聴いた。</p>\n<ul><li><a href=\"https://www.youtube.com/watch?v=a9yaDU5kbb8\">天台声明　青龍殿　百僧公演　金曼供フルバージョン - YouTube</a></li></ul>\n<p>こういうの中で音浴びてると一種のトランス状態になるんだよな〜。</p>\n<p>リードからの合唱にグレゴリオ聖歌ぽさ感じた。倍音めっちゃくっきりなとこも。</p>\n<p>倍音はキリスト教でも天使の声と呼ばれてたし、宗教儀式において超自然的な現象として重要なパーツだったんじゃないかな？</p>\n<ul><li><a href=\"https://www.tendai.or.jp/shoumyou/\">天台宗 > 天台宗について > 天台声明（てんだいしょうみょう）</a></li></ul>"
 		},
 		{
 			"id": "HLwXNrb7lFU7C3H-Ob1BN8nl",
-			"title": "『愚かで勤勉な私たちは、』読んだ",
+			"title": "『愚かで勤勉な私たちは、』読んだ #piece ",
 			"date": "2024-10-20",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://www.pixiv.net/user/7087222/series/251873\">「愚かで勤勉な私たちは、」/「コガッツオ」のシリーズ [pixiv]</a></li></ul>\n<p>ホッテントリ経由で。面白かった。</p>\n<blockquote><p>愉快な陰謀論まんが</p></blockquote>\n<p>と紹介文あるけどまさにそれ。</p>\n<p>陰謀論関係だと『ようこそ！FACT（東京S区第二支部）へ』も読んだけど、主人公がハマった人のちょい外側でメタ視点もってるから、のめり込む怖さ・しんどさから少し離れておかしみを感じやすかった。</p>\n<p>それでいながら陰謀論や人の意志の恐ろしさも感じられて胸を突かれる要素もあり、完全な他人事ではないよなぁと。</p>\n<p>後半の怒涛の展開もすごくてどんどん引き込まれていった。『愛のむきだし』を思い起こさせるようなひっちゃかめっちゃか感。</p>"
 		},
 		{
 			"id": "r0iOru9Rw8u5Odi5Im5XYwRL",
-			"title": "『ふつうの軽音部』43話、濃い！",
+			"title": "『ふつうの軽音部』43話、濃い！ #piece ",
 			"date": "2024-10-27",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567256216464824\">第４３話 ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul>\n<p>サンボ聴く前のたまき先輩の表情ゾクッときた。</p>\n<p>こんな素敵な3人なのに色恋きっかけでギクシャクしてしまうのも「ふつう」なんだよな。おそらく次回かその次にある回想終えての演奏シーンが楽しみで今からソワソワ。</p>\n<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/KM0SrqFBt38?si=9cs_OWBUuMx_UFX_\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>"
 		},
 		{
 			"id": "5RblOXu1esCyso-gx9Usg4tC",
-			"title": "The King's Singers『Masterpiece』の2024年版が公開",
+			"title": "The King's Singers『Masterpiece』の2024年版が公開 #piece ",
 			"date": "2024-11-03",
 			"tags": [],
 			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Ry3Cnw9D5Ws?si=bbvjOKApMW7N_TuQ\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>自分がThe King's Singersにハマったきっかけの一つでもある、音楽史をメロディに乗せて振り返る『Masterpiece』が新録で公開された。</p>\n<p>やっぱりおもろいね。ただ小芝居が無いのは残念ｗ</p>"
 		},
 		{
 			"id": "93bkfHiqe2_hLWXjyJB16IYF",
-			"title": "GoogleAdsense置いてみた",
+			"title": "GoogleAdsense置いてみた #piece ",
 			"date": "2024-11-15",
 			"tags": [],
 			"body": "<p>ブログサービスを介してない自前のサイトでの申請は初めて。意外といけた。</p>\n<p>いろいろ試して記事の下に1つだけ置くことにした。記事基本的に短いしあんまゴテゴテするのも何だなと。それに合わせてヘッダー周りや記事本文のデザインもちょこちょこ調整。サイトいじるの楽しい😁</p>\n<p>今回久しぶりにAdsenseさわったんだけど、自動で配置できてしかもそれがかなり効果的っぽくて驚いた。推移の際に全画面に広告乗せたり、追尾とかも自動でできてびっくり。そりゃみんなやるよな。</p>"
 		},
 		{
 			"id": "EIF_JsLnhXScLYycjtVzLw9r",
-			"title": "『正反対な君と僕』完結！",
+			"title": "『正反対な君と僕』完結！ #piece ",
 			"date": "2024-11-24",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567261201092262\">第65話 正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a></li></ul>\n<p>最後は谷→鈴木メインで一話とリンクさせつつ大団円。そしてアニメ化も決定！</p>\n<p>なんかしみじみよかったな〜。少女漫画（でもないか、群像劇？）のラストとしてとても気持ちがいい構成だ。</p>"
 		},
 		{
 			"id": "BOf179pEwidxd_RwW3SNen22",
-			"title": "英国で一番多い男児名は「ムハンマド」",
+			"title": "英国で一番多い男児名は「ムハンマド」 #piece ",
 			"date": "2024-12-07",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://www.afpbb.com/articles/-/3552621\">英国で一番人気の男児名は「ムハンマド」　写真1枚　国際ニュース：AFPBB News</a></li></ul>\n<blockquote><p>英国家統計局（ONS）は5日、イングランドとウェールズで2023年の新生児の名前で、最も人気のあった男児名は「ムハンマド（Muhammad）」で、初めて1位を獲得したと発表した。</p></blockquote>\n<p>移民が多いのもイスラム教徒の子がムハンマドと名付けられることが多いのも知ってたけど、こういうデータで示されるとなんか感慨がある。単にイスラム教徒が増えただけでなく（現在6.5%）他の名前が多様化しているという理由もあるらしいけど。</p>\n<p>日本もそうなる未来あるな〜。たくさん来るかはわからないけど潮流的には十分あり得る。</p>"
 		},
 		{
 			"id": "kX1Kl4YphW71wHSDVPH-R9Nm",
-			"title": "ポケポケ連勝イベント",
+			"title": "ポケポケ連勝イベント #piece ",
 			"date": "2024-12-09",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://www.4gamer.net/games/779/G077901/20241209034/\">「ポケポケ」，イベントバトルの連勝数に応じてエンブレムを獲得できる「最強の遺伝子 エンブレムイベント1 SP」を開始</a></li></ul>\n<p>始めてすぐ4連敗くらいして時間かかる覚悟したけどそっから勝ち始めてサクッと5連勝。5連勝済みの人がファンデッキで潜ってくれてるっぽいこともあり早く達成できた。よかった〜。</p>\n<p>ちなみに使ったのはミュウツーデッキ1本。こっからはいろんなデッキで潜ってみよう。</p>"
 		},
 		{
 			"id": "6i2xBU_Phewdnatn2MNHZ0iT",
-			"title": "子項目のない投稿テスト",
+			"title": "子項目のない投稿テスト #piece ",
 			"date": "2024-12-13",
 			"tags": [],
 			"body": ""
 		},
 		{
 			"id": "UY7Lr3b9xahuaRuwBjmLm4_7",
-			"title": "主語がでかい系の投稿に引っ張られない",
+			"title": "主語がでかい系の投稿に引っ張られない #piece ",
 			"date": "2025-01-03",
 			"tags": [],
 			"body": ""
 		},
 		{
 			"id": "3vMnifMiWrUarXmxMUalHFmM",
-			"title": "ウマ娘 LoH開始 初日は30pt欠損 17時時点121位！！！",
+			"title": "ウマ娘 LoH開始 初日は30pt欠損 17時時点121位！！！ #piece ",
 			"date": "2025-02-16",
 			"tags": [],
 			"body": "<p><img src=\"https://gyazo.com/df2452488b81204344280d826558bcbb/thumb/500#.png\" alt=\"Image\"></p>\n<p>瞬間でもランキング乗るの嬉しいねぇ。上位の構成見てるとコンセ積んでない人思ったより多いかも。まぁでもUD中盤〜後半でもそこそこ安定してるのはコンセのおかげ（ということにしよう）</p>\n<p>勝率はカレン>ミラクル>オグリ。中盤力と緑とパワー(サポカ)弱いからプラチナで勝ち切るのは厳しいと思うけどプラ4はいけそう。</p>"
 		},
 		{
 			"id": "azEK8QreJIHr46iF740683me",
-			"title": "短距離LoH 終了 31860pt ぎりぎりプラ4（3万）",
+			"title": "短距離LoH 終了 31860pt ぎりぎりプラ4（3万） #piece ",
 			"date": "2025-02-22",
 			"tags": [],
 			"body": "<p><img src=\"https://gyazo.com/c052dabbb8a34f0df6fdf8a0d86cf2b0/thumb/500#.png\" alt=\"Image\"></p>\n<p>勝率は96.1。複勝率はカレン92%>ミラクル88%>オグリ78.3%</p>\n<p>短距離かつサポカ足りない中プラ4届いたのは良かった。パワー盛れてればもうちょいいけそうだった。</p>"
 		},
 		{
 			"id": "QLpSyNZBkNJZwkw2GVVfaGtW",
-			"title": "花粉やばし",
+			"title": "花粉やばし #piece ",
 			"date": "2025-02-28",
 			"tags": [],
 			"body": ""
 		},
 		{
 			"id": "6dLIi_Hb1cMUDQbCiFPnxchF",
-			"title": "ポケポケ「超克の光」の5連勝イベント3、ギャラドスexで初日クリア！",
+			"title": "ポケポケ「超克の光」の5連勝イベント3、ギャラドスexで初日クリア！ #piece ",
 			"date": "2025-03-06",
 			"tags": [],
 			"body": "<p>リストはアライさんの。つえ〜。</p>\n<p><img src=\"https://gyazo.com/c944025d540d66bd71962c156c74de87/thumb/500#.png\" alt=\"Image\"></p>\n<p>iPhone14にしてスクショが長くなったのがちょい不便かもしれん。</p>"
 		},
 		{
 			"id": "1r1ssPZvFxEZ58At94l_x1uw",
-			"title": "あちこちオードリー シティボーイズ回がおもしろすぎた",
+			"title": "あちこちオードリー シティボーイズ回がおもしろすぎた #piece ",
 			"date": "2025-03-08",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://tver.jp/episodes/epitz7ihws\">芸歴46年レジェンド芸人シティボーイズが初来店！そこには70代おじさん芸人の生き様が！ | TVer</a></li></ul>\n<p>いや〜笑ったわ。若い時代の話、ラジオで口論になった話、2vs1の構図、あちこちで過去一笑ったかもしんない。</p>"
 		},
 		{
 			"id": "TxHRjepBRp3_a3TvvKEgrO-O",
-			"title": "今朝Geminiと話して社会ダーウィニズムについて教えてもらった",
+			"title": "今朝Geminiと話して社会ダーウィニズムについて教えてもらった #piece ",
 			"date": "2025-03-14",
 			"tags": [],
 			"body": "<p>アリストテレス概論→不動の動者→一神教→『沈黙』→神の存在→神は死んだ→ニーチェ→マチズモ？→優生思想・社会ダーウィニズムと話が飛びまくった。</p>\n<p>思考の雑談という感じ。</p>"
 		},
 		{
 			"id": "1yMO4bsCLS0JR9pIPws7-h_W",
-			"title": "サチ録終わるのか😭",
+			"title": "サチ録終わるのか😭 #piece ",
 			"date": "2025-03-14",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567264132035821\">[第四十五話]サチ録～サチの黙示録～ - 茶んた | 少年ジャンプ＋</a></li></ul>\n<p>寂しいけどきれいな終わりにはなりそうだ。結局人間審判がなんなのか分かるのか？明かされないパターンもありそうだけど何か仕掛けあると思ってるので。</p>"
 		},
 		{
 			"id": "Pmg_Io3W7Q2Ntn5p6SR_EAGb",
-			"title": "ウマ娘 桜花チャンミ終了！",
+			"title": "ウマ娘 桜花チャンミ終了！ #piece ",
 			"date": "2025-03-30",
 			"tags": [],
 			"body": "<p>予選は59/80勝。構成＆勝利数はヘリオス45 フライト11 ルビー3→途中からデバフルドルフ。</p>\n<p>決勝Aは優勝！ヘリオスフライトともに出遅れて絶望してたけど対面の前脚質がフライト1体だけでなんとか差せた。</p>\n<p><img src=\"https://gyazo.com/b355cdd113c002c13b3af47d39187de1/thumb/500#.png\" alt=\"Image\"></p>\n<p><img src=\"https://gyazo.com/7a695630165f8fd9a23fedbac1d83714/thumb/500#.png\" alt=\"Image\"></p>"
 		},
 		{
 			"id": "fsKsIzwdWPg4c5FH1bsRVU-T",
-			"title": "テレビでサモエドが「SNSで大人気！」と語られていた",
+			"title": "テレビでサモエドが「SNSで大人気！」と語られていた #piece ",
 			"date": "2025-04-22",
 			"tags": [],
 			"body": "<p>命や生き物の在り方すら評価経済の文脈に組み込まれている感触があり、「ペットすらもいいね数気にする時代ですか」とちょっとグロく感じてしまった。</p>\n<p>でもよく考えたら、自分もまた、動物やら食べ物、ファッションアイテムを見て「高そう」とか考えてたりするわけで。</p>\n<p>貨幣経済のフィルターが、すでに自分の視線にも深く染み込んでいたんだなぁと改めて思ったりするなどした。評価はグロくて貨幣はグロくないなんて無いわけで。</p>\n<p>別に悪いことでもないんだろうけど、本質から離れてる感がなんかヤ。初っ端の感想はその辺のフィルター外せたらいいな。</p>"
 		},
 		{
 			"id": "Cqda9x-nTSmRCNyW1EGaVQeK",
-			"title": "アークナイツのオートチェス風イベント「堅守協定」のハード（核心）クリア！",
+			"title": "アークナイツのオートチェス風イベント「堅守協定」のハード（核心）クリア！ #piece ",
 			"date": "2025-05-11",
 			"tags": [],
 			"body": "<p><img src=\"https://i.gyazo.com/b39a6ae12cb6dbac6ff06de863292337.png\" alt=\"Image\"></p>\n<ul><li>シルバーアッシュで始めてボーナスは術師装備→レベル上げ値引き→装備5種</li><li>術師が都合よく引けてボーナスでもらった装備が噛み合ってなんとかクリアできた</li><li>敵の理解度が低いせいで配置が下手すぎて苦戦した</li></ul>\n<p>端末iPhone14に変えてアークナイツ復帰した。画面下部のバーが邪魔すぎるけど我慢してる。</p>"
 		},
 		{
 			"id": "UVaorZgrGnYkMfVJNNa6JRT2",
-			"title": "GitHub Actionsから投稿のテスト",
+			"title": "GitHub Actionsから投稿のテスト #piece ",
 			"date": "2025-07-08",
 			"tags": [],
 			"body": "<p>できた！これで定時に自動で投稿されるようになった。</p>\n<p>一応スマホからでも投稿可能に。最近はCosenseにお熱だったからDynalist経由のここは放置気味だったけどなんとか活用したい。</p>"
 		},
 		{
 			"id": "wOwjhfRujlwfK0xWMBGBklw1",
-			"title": "ダブルヒップ師匠",
+			"title": "ダブルヒップ師匠 #piece ",
 			"date": "2025-07-11",
 			"tags": [],
 			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/mazrTjqG92c?si=WIpe-e7FyYq881GE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>笑った〜。軍団それぞれ色あるけどどっちも好き。</p>"
 		},
 		{
 			"id": "Zzf7gJm4SjsuzbcsrVUmweYO",
-			"title": "WBログノートにシーズン記録を追加",
+			"title": "WBログノートにシーズン記録を追加 #piece ",
 			"date": "2025-07-12",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://morvra.github.io/wblog\">WBログノート | シャドウバースWB 対戦支援</a></li></ul>\n<p>フィルターも追加したのでシーズンごとの戦績に絞り込むことも可能。</p>\n<p>拡張名やシーズンを自動で取得して記録してくれるのがベストなんだけど、その度に更新かけるのは現実的じゃないかなと思いシンプルな数字でやってくことにした。</p>"
 		},
 		{
 			"id": "X6ApxxtNyavHghQPGtW8KYsv",
-			"title": "参院選投票日せまってる中Xがしんどい",
+			"title": "参院選投票日せまってる中Xがしんどい #piece ",
 			"date": "2025-07-15",
 			"tags": [],
 			"body": "<p>しんどいとしか表現のしようがない。確実に見ないほうがいい。</p>\n<p>けど新しい情報を浴びたい欲が十何年もかけて醸成されてしまったので難しさもある。とりあえずアクセスしにくいようにするとこから。</p>"
 		},
 		{
 			"id": "UUpNJgxy9GFq1fLypl5AwK2O",
-			"title": "I don’t want to manage knowledge. I want to live it.",
+			"title": "I don’t want to manage knowledge. I want to live it. #piece",
 			"date": "2025-07-16",
 			"tags": [],
 			"body": "<ul><li><a href=\"https://www.joanwestenberg.com/p/i-deleted-my-second-brain\">I Deleted My Second Brain</a></li></ul>\n<p>の一節。</p>\n<p>PKMとSecond Brain信仰？に対する疲れと脱却。面白く、そして納得性高い文章だった。</p>"

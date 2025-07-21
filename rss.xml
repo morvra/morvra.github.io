@@ -4,10 +4,10 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sun, 20 Jul 2025 15:11:04 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 21 Jul 2025 03:59:54 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
-          <title>記事テスト</title>
+          <title>記事テスト #article </title>
           <link>https://morvra.github.io/article?id=7LmTlvBllIw4OmoG0exJ4gQ0</link>
           <description><![CDATA[<p>本文</p>
 
@@ -40,7 +40,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh</guid>
         </item>
         <item>
-          <title>About</title>
+          <title>About #article </title>
           <link>https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</link>
           <description><![CDATA[<h2>このサイトについて</h2>
 <p>morvra（もーぶら）がなんでも書く場所です。</p>
@@ -60,7 +60,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=uVd0FvsIz5xGXZkp1GR93wB3</guid>
         </item>
         <item>
-          <title>Hello world!</title>
+          <title>Hello world! #article </title>
           <link>https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</link>
           <description><![CDATA[<p>こんにちは。morvra（もーゔら）と言います。</p>
 <p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p>
@@ -74,7 +74,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=5ZUWNwNzv2znrzOoVJHebkQz</guid>
         </item>
         <item>
-          <title>【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！</title>
+          <title>【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！ #article </title>
           <link>https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</link>
           <description><![CDATA[<p><img src="https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png" alt="legend"></p>
 <p>久々のレジェンドなので記念に投稿。</p>
@@ -105,7 +105,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=mswxR_4Gsgxy2JxyXF4vUFis</guid>
         </item>
         <item>
-          <title>Dynalistの構造 Ver.202404</title>
+          <title>Dynalistの構造 Ver.202404 #article </title>
           <link>https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</link>
           <description><![CDATA[<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p>
 <p>現時点（2024年4月）はこんな感じだよって記録。</p>
@@ -133,7 +133,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=Wd5eV3mQ6K5BDQFZlXUbPQB9</guid>
         </item>
         <item>
-          <title>『ようこそ！FACT（東京S区第二支部）へ』読んだ</title>
+          <title>『ようこそ！FACT（東京S区第二支部）へ』読んだ #article </title>
           <link>https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</link>
           <description><![CDATA[<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p>
 <p><a href="https://amzn.to/4b6auGe"><img width="160px" src="https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ"></a><br/><a href="https://amzn.to/4b6auGe" target="_blank" rel="nofollow">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p>
@@ -158,7 +158,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=dg1tAwAqsiF0TKwY5qoiSjkB</guid>
         </item>
         <item>
-          <title>このサイトのRSSフィードを作った</title>
+          <title>このサイトのRSSフィードを作った #article </title>
           <link>https://morvra.github.io/article?id=BhnDRx9Dezi5UmMjFRmrkac4</link>
           <description><![CDATA[<p>発行しているRSSフィードは <a href="https://morvra.github.io/rss.xml" target="_blank">https://morvra.github.io/rss.xml</a> です。</p>
 <p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p>
@@ -168,7 +168,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=BhnDRx9Dezi5UmMjFRmrkac4</guid>
         </item>
         <item>
-          <title>学園アイドルマスター雑感</title>
+          <title>学園アイドルマスター雑感 #article </title>
           <link>https://morvra.github.io/article?id=6N_7gocKoNZ2mFlvGv-UNL6i</link>
           <description><![CDATA[<p>食指が動いたらとりあえず触ってみる勢。現在実装済み10人TrueEnd（＋5人親愛度10）見れて一段落したので感想書いてみる。</p>
 <h3>ゲーム性</h3>
@@ -187,7 +187,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=6N_7gocKoNZ2mFlvGv-UNL6i</guid>
         </item>
         <item>
-          <title>『世界は宗教で動いてる』読んだ</title>
+          <title>『世界は宗教で動いてる』読んだ #article </title>
           <link>https://morvra.github.io/article?id=A6kX0EbDqq6dpEEwYHGtLu-8</link>
           <description><![CDATA[<p><a href="https://amzn.to/3WglxXi"><img width="160px" src="https://images-na.ssl-images-amazon.com/images/P/4334037488.09.LZZZZZZZ"></a></br><a href="https://amzn.to/3WglxXi" target="_blank" rel="nofollow">世界は宗教で動いてる (光文社新書) 新書 – 2013/6/18</a></p>
 <p>講義の形式で、ユダヤ教・キリスト教・イスラム教・儒教・ヒンドゥー教・仏教（日本式も含めて）・神道など、様々な宗教について、社会とのつながりを主軸として概要が解説されている。</p>
@@ -200,7 +200,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=A6kX0EbDqq6dpEEwYHGtLu-8</guid>
         </item>
         <item>
-          <title>サイトのタイトルとアイコンを変更</title>
+          <title>サイトのタイトルとアイコンを変更 #article </title>
           <link>https://morvra.github.io/article?id=udmewyRskBgjPapKb1uu5QbB</link>
           <description><![CDATA[<p>このサイトの名前を morvra から morvra lists へ変更した。</p>
 <ul><li>ユーザー名だけはシンプルすぎて変えたかった</li><li>テーマを絞らず何でも書きたいので汎用性ある名前に</li><li>箇条書き好き</li></ul>
@@ -213,7 +213,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=udmewyRskBgjPapKb1uu5QbB</guid>
         </item>
         <item>
-          <title>中動態についてメモ</title>
+          <title>中動態についてメモ #article </title>
           <link>https://morvra.github.io/article?id=cZnOIW2AYuY1VArdBGQXOf2h</link>
           <description><![CDATA[<ul><li><a href="https://ja.wikipedia.org/wiki/%E4%B8%AD%E5%8B%95%E6%85%8B">中動態 - Wikipedia</a></li></ul>
 <blockquote><p>動詞の表す行為が、その行為者自身に及ぶ場合にとる形態的特徴のことである。形は能動態であるが、受動態の意味を表わす態を指すとも説明される。以前は、voiceを態でなく、相（そう）とも訳しており、中動相（ちゅうどうそう）とも呼ばれた。</p></blockquote>
@@ -233,7 +233,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=cZnOIW2AYuY1VArdBGQXOf2h</guid>
         </item>
         <item>
-          <title>『考えの育て方: 知的生産のデジタルカード法』読んだ</title>
+          <title>『考えの育て方: 知的生産のデジタルカード法』読んだ #article </title>
           <link>https://morvra.github.io/article?id=8BPLVWIM5hoL6dnKnoBkn6WU</link>
           <description><![CDATA[<p><a href="https://www.amazon.co.jp/dp/B0CLTZYMBR/?tag=morvra-22" target="_blank"><img src="https://m.media-amazon.com/images/I/31zgOPovoBL._SL200_.jpg" alt="B0CLTZYMBR" border="0" /></a><br><a href="https://www.amazon.co.jp/dp/B0CLTZYMBR/?tag=morvra-22" target="_blank">考えの育て方: 知的生産のデジタルカード法 (Knowledge Walkers Books)</a></p>
 <blockquote><p>「いかにすれば、デジタルツールでカード法を実践できるのか？」</p></blockquote>
@@ -257,7 +257,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=8BPLVWIM5hoL6dnKnoBkn6WU</guid>
         </item>
         <item>
-          <title>DynalistからCosenseに投稿するBookmarklet</title>
+          <title>DynalistからCosenseに投稿するBookmarklet #article </title>
           <link>https://morvra.github.io/article?id=ShWNfCw0oGHIQDx50MbmcBwx</link>
           <description><![CDATA[<p>参考：<a href="https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/" target="_blank">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p>
 <p>上のスクリプトを元にChatGPT頼りつつ改造。</p>
@@ -272,7 +272,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=ShWNfCw0oGHIQDx50MbmcBwx</guid>
         </item>
         <item>
-          <title>MECE</title>
+          <title>MECE #article </title>
           <link>https://morvra.github.io/article?id=smxzQNX17ukXVWQiw9coKleo</link>
           <description><![CDATA[<p>ミーシー。</p>
 <p>「MECEになってる、なってない」みたいな表現あるけどちゃんとした意味わかってないので記録がてら投稿。</p>
@@ -286,7 +286,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=smxzQNX17ukXVWQiw9coKleo</guid>
         </item>
         <item>
-          <title>ポケポケ始めた</title>
+          <title>ポケポケ始めた #article </title>
           <link>https://morvra.github.io/article?id=edY9ji7ctO9ues5WHvchNq3J</link>
           <description><![CDATA[<p>DCGとりあえず触る勢。初日からちまちま引いてたんだけどなかなかちゃんとしたデッキ組めなくて対人要素は手を出してなかった。</p>
 <p>我慢できずにサーナイトを2枚交換して、ミュウツーEXデッキを組んでイベントの対人戦回してる。今んとこの雑感をメモ。</p>
@@ -310,7 +310,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=edY9ji7ctO9ues5WHvchNq3J</guid>
         </item>
         <item>
-          <title>兵庫県知事選で斎藤元彦元知事が当選</title>
+          <title>兵庫県知事選で斎藤元彦元知事が当選 #article </title>
           <link>https://morvra.github.io/article?id=tm1Ukar5u-W_912rpgKVHYUi</link>
           <description><![CDATA[<ul><li><a href="https://www.asahi.com/articles/ASSCJ2D9LSCJOXIE010M.html">兵庫県知事選、斎藤元彦氏が再選　議会や職員と「謙虚に丁寧にやる」 [兵庫県]：朝日新聞デジタル</a></li><li><a href="https://mainichi.jp/articles/20241117/k00/00m/010/184000c">斎藤前知事の「劇場型選挙」　支えたSNSの“奇兵隊”　兵庫知事選 | 毎日新聞</a></li><li><a href="https://news.yahoo.co.jp/articles/5f84e72695f3b434575de6ea07e03fe5c3cda66b">斎藤元彦氏が〝秒殺〟で当選確実 兵庫県知事返り咲き N党・立花孝志氏のアシスト大きかった（よろず～ニュース） - Yahoo!ニュース</a></li></ul>
 <p>先日のアメリカの大統領選も踏まえ象徴的な結果になったこともあり、いろいろ考えたり言いたくなる選挙だった。こっからもメディアでいろんな語りがでてくるんだろう。（この記事もその1つである）</p>
@@ -324,7 +324,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=tm1Ukar5u-W_912rpgKVHYUi</guid>
         </item>
         <item>
-          <title>アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説</title>
+          <title>アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説 #article </title>
           <link>https://morvra.github.io/article?id=FsPb7PRxbJBPV2fbbKs9_Zel</link>
           <description><![CDATA[<ul><li><a href="https://anond.hatelabo.jp/20241223225740">鳩野ちひろが歌っている曲は「ちょっと古い」どころではない</a></li></ul>
 <p>このブコメでmori99さんが「過去の意味が世代で違う」と<a href="https://b.hatena.ne.jp/mori99/20241224#bookmark-4763828651127392096" target="_blank">書いてて</a>確かにそうだなと。</p>
@@ -337,7 +337,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=FsPb7PRxbJBPV2fbbKs9_Zel</guid>
         </item>
         <item>
-          <title>こたけ正義感『弁論』見た</title>
+          <title>こたけ正義感『弁論』見た #article </title>
           <link>https://morvra.github.io/article?id=4rspIyYQ3Qcq--SxeLMYCqup</link>
           <description><![CDATA[<ul><li><a href="https://www.youtube.com/watch?v=Ntrx9wTBoBE">【1月15日まで】こたけ正義感の『弁論』 - YouTube</a></li></ul>
 <p>60分の漫談。主題は袴田事件について。</p>
@@ -352,7 +352,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=4rspIyYQ3Qcq--SxeLMYCqup</guid>
         </item>
         <item>
-          <title>【アイギス】正月エフネ引けたのでGG編成組んでみた</title>
+          <title>【アイギス】正月エフネ引けたのでGG編成組んでみた #article </title>
           <link>https://morvra.github.io/article?id=juBSJvLIqrLqHqzhMNpYSwP_</link>
           <description><![CDATA[<p>前から欲しかった正月エフネを11連で引けた。正月の中からとはいえ闇鍋なのにすぐ引けてラッキー！</p>
 <p>ということでGG編成組んでみることに。</p>
@@ -376,7 +376,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=juBSJvLIqrLqHqzhMNpYSwP_</guid>
         </item>
         <item>
-          <title>Bappa Shotaさんのスウェーデンの動画を見て移民についてつらつら考えた</title>
+          <title>Bappa Shotaさんのスウェーデンの動画を見て移民についてつらつら考えた #article </title>
           <link>https://morvra.github.io/article?id=DT6EpVNuNlZJS3ZXY3TkMIvK</link>
           <description><![CDATA[<ul><li><a href="https://www.youtube.com/watch?v=xA_I0T9o0zc">北欧で移民政策大失敗によりギャング天国に没落した国の実態... - YouTube</a></li></ul>
 <p>クリックベイトなタイトルはともかく、日本の未来を予感させるような動画だった。地理的にだいぶ違いはあるけど移民が増えるのは間違いないわけで。</p>
@@ -394,7 +394,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=DT6EpVNuNlZJS3ZXY3TkMIvK</guid>
         </item>
         <item>
-          <title>DEIとCE、平等とは</title>
+          <title>DEIとCE、平等とは #article </title>
           <link>https://morvra.github.io/article?id=1f10cHjyNJOsouARiHzixpYD</link>
           <description><![CDATA[<ul><li><a href="http://finalvent.cocolog-nifty.com/fareastblog/2025/01/post-4342fb.html">DEI否定は単なる反動か？: 極東ブログ</a></li></ul>
 <p>読んだ。</p>
@@ -412,7 +412,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=1f10cHjyNJOsouARiHzixpYD</guid>
         </item>
         <item>
-          <title>「これ、AIが書いた？」文章の進化と創作の価値の行方</title>
+          <title>「これ、AIが書いた？」文章の進化と創作の価値の行方 #article </title>
           <link>https://morvra.github.io/article?id=JqJHswBZW57XAMdGYli46YtI</link>
           <description><![CDATA[<p>最近、ネットの記事を読んでると「これ、AIが書いたんじゃない？」って思うことが増えてきた。文章の構成が整っていて、情報が簡潔でわかりやすい。でも、なんか無機質で、感情が薄いような気もする。AIが文章を書く時代が本格的に来て、<strong>「AIが書いたかどうか」</strong>ってことは、実はそんなに重要じゃないのかもしれない。じゃあ、創作の価値や私たちが求めるものはどう変わるんだろう？</p>
 <h2>AIと創作の関係</h2>
@@ -457,7 +457,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=JqJHswBZW57XAMdGYli46YtI</guid>
         </item>
         <item>
-          <title>Dynalistのタスク表示用スクリプト</title>
+          <title>Dynalistのタスク表示用スクリプト #article </title>
           <link>https://morvra.github.io/article?id=KuSkt5gDVUaZx2U9TROq3d01</link>
           <description><![CDATA[<p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p>
 <p>コード → <a href="https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30" target="_blank">DynalistTaskViewer.js</a></p>
@@ -470,7 +470,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=KuSkt5gDVUaZx2U9TROq3d01</guid>
         </item>
         <item>
-          <title>Dynalistのインボックスへ送信するスクリプト</title>
+          <title>Dynalistのインボックスへ送信するスクリプト #article </title>
           <link>https://morvra.github.io/article?id=fFIleKwD9Coz8gxLIs6WcMJN</link>
           <description><![CDATA[<p>Dynalist上のどこからでもインボックスにメモするためのユーザースクリプト。ObsidianのQuickAddみたいなイメージ。</p>
 <p>コード → <a href="https://gist.github.com/morvra/0e899e1cd57f2c2aaa69e328fd9b99f8" target="_blank">DynalistInboxSender.js</a></p>
@@ -480,7 +480,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=fFIleKwD9Coz8gxLIs6WcMJN</guid>
         </item>
         <item>
-          <title>シャドバWB感想</title>
+          <title>シャドバWB感想 #article</title>
           <link>https://morvra.github.io/article?id=fDalpCyltz7AB356i6p9AZkk</link>
           <description><![CDATA[<p>シャドウバースWB、リリース初日から遊んでるのでこの辺で感想をざっくり。</p>
 <ul><li>進化、超進化とExPPのシステムで先後のバランス取れてそう（突き詰めればどうなるかはわからないけど）でよき</li><li>使ってるデッキはAFネメシスとフェイスドラゴン。中盤の融合と進化のプランニングがむずくて時間切れ頻発中</li><li>初日に無課金はデッキ組めないみたいな文句多かったけど、毎日やってれば1拡張で3~4テーマ組めそう</li><li>ランクはAA0、グループはサファイアとルビー行ったり来たりしつつたま〜にダイヤいけるって感じ</li><li>週末ロビー大会は大会気分（というか大会そのもの）味わえてヒリヒリ。ちなみに2回目で優勝できた！</li><li>負けてもランク上がる影響からか、環境がよくていろんなデッキと戦えて楽しい（上位帯はエルフ一色なのかもしれないけど）</li></ul>
@@ -491,7 +491,7 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=fDalpCyltz7AB356i6p9AZkk</guid>
         </item>
         <item>
-          <title>シャドバWBの対戦支援ツールを作った</title>
+          <title>シャドバWBの対戦支援ツールを作った #article</title>
           <link>https://morvra.github.io/article?id=s48l0AJ9CVFIEHWlEmAg_YLW</link>
           <description><![CDATA[<ul><li><a href="https://morvra.github.io/wblog">WBログノート | シャドウバースWB 対戦支援</a></li></ul>
 <h2>できること</h2>
