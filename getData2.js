@@ -238,25 +238,42 @@ function buildNestedListHtml(node, allNodes) {
 }
 
 // 本文を取得する関数（再帰的にDynalistの階層構造をHTMLに変換）
-// 「li」という特別な項目を見つけたら、その子要素をリストとして処理
-function getBody(allNodes, currentNode) {
+// この関数は、記事/pieceのルートノードの子要素から本文を構築する
+function getBody(allNodes, rootNode) {
     let htmlOutput = '';
+
+    // ルートノードの直接の子要素から処理を開始
+    if (rootNode.children && rootNode.children.length > 0) {
+        rootNode.children.forEach(childId => {
+            const childNode = allNodes.find(node => node.id === childId);
+            if (childNode) {
+                // 各子ノードとそのサブツリーを処理するヘルパー関数
+                htmlOutput += processNodeSubtree(childNode, allNodes);
+            }
+        });
+    }
+    return htmlOutput;
+}
+
+// ヘルパー関数: 個々のノードとそのサブツリーをHTMLに変換
+function processNodeSubtree(currentNode, allNodes) {
+    let nodeHtml = '';
 
     // 現在のノードが「li」マーカーの場合
     if (currentNode.content.trim().toLowerCase() === 'li') {
         if (currentNode.children && currentNode.children.length > 0) {
-            htmlOutput += '<ul>';
+            nodeHtml += '<ul>';
             currentNode.children.forEach(childId => {
                 const childNode = allNodes.find(node => node.id === childId);
                 if (childNode) {
-                    htmlOutput += buildNestedListHtml(childNode, allNodes); // buildNestedListHtmlでリストを構築
+                    nodeHtml += buildNestedListHtml(childNode, allNodes); // buildNestedListHtmlでリストを構築
                 }
             });
-            htmlOutput += '</ul>';
+            nodeHtml += '</ul>';
         }
     } else {
         // 通常のノードの場合、そのコンテンツとノート（メタデータ部分を除く）をMarkdownとして処理
-        htmlOutput += markdownToHTML(currentNode.content);
+        nodeHtml += markdownToHTML(currentNode.content);
         
         if (currentNode.note) {
             // noteからdate:とtag:の行を除外した内容をMarkdown変換
@@ -267,7 +284,7 @@ function getBody(allNodes, currentNode) {
                 .trim();
             
             if (noteContentToRender !== '') {
-                htmlOutput += markdownToHTML(noteContentToRender);
+                nodeHtml += markdownToHTML(noteContentToRender);
             }
         }
 
@@ -277,12 +294,12 @@ function getBody(allNodes, currentNode) {
             currentNode.children.forEach(childId => {
                 const childNode = allNodes.find(node => node.id === childId);
                 if (childNode) {
-                    htmlOutput += getBody(allNodes, childNode); // 再帰呼び出し
+                    nodeHtml += processNodeSubtree(childNode, allNodes); // 再帰呼び出し
                 }
             });
         }
     }
-    return htmlOutput;
+    return nodeHtml;
 }
 
 // RSSフィードを生成する関数
