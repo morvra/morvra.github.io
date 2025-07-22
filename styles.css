@@ -63,6 +63,10 @@ nav ul li a {
     text-decoration: none;
 }
 
+nav ul li a:hover {
+    color: #005aff; /* ホバー時の色 */
+}
+
 main {
     max-width: 640px;
     margin: 16px auto 0;
@@ -386,9 +390,11 @@ h2#piece-title {
 }
 a.next {
     float: right;
+    text-decoration: none;
 }
 a.prev {
     float: left;
+    text-decoration: none;
 }
 
 footer {
