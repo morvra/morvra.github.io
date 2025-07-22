@@ -247,6 +247,13 @@
 				"dynalist"
 			],
 			"body": "<p>Dynalistでタグごとに色を設定する #article </p><p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title=\"Filter #hoge\"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>"
+		},
+		{
+			"id": "m5RbefvT7rV-9cVzShdfY00W",
+			"title": "リストタグテスト",
+			"date": "2025-07-22",
+			"tags": [],
+			"body": "<p>リストタグテスト #article </p><p>通常テキスト</p><p>通常テキスト</p><ul><li>リスト親1<ul><li>子1-1</li><li>子1-2<ul><li>孫1-2-1</li></ul></li></ul></li><li>親2<ul><li>子2-1</li></ul></li></ul><p>通常テキストのはず。</p><blockquote><p>引用</p></blockquote><ul><li>中黒の単純なリスト</li></ul><p>どうなるかな〜</p>"
 		}
 	],
 	"pieces": [
