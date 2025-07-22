@@ -250,10 +250,6 @@ ul#article-list {
     margin-left: 0.5em;
 }
 
-ul {
-    list-style: circle;
-}
-
 ul#top-list {
     list-style: none;
     padding: 0 0 0 18px;
@@ -350,8 +346,11 @@ code {
 }
 
 #article-content ul {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
+    padding-inline-start: 24px;
+}
+
+#article-content li {
+    padding: 2px 0px;
 }
 
 /* tag list */
