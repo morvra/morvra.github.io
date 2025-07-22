@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     .filter(item => item.id !== articleId && // 現在の記事を除外
                         item.tags.some(tag => currentArticleTags.includes(tag))) // 共通のタグを持つ記事を抽出
                     .sort(() => 0.5 - Math.random()) // ランダムに並び替え
-                    .slice(0, 3); // 最大3件に制限
+                    .slice(0, 5); // 最大5件に制限
 
                 if (relatedArticles.length > 0) {
                     // 関連記事が見つかった場合にのみセクションを作成し挿入
