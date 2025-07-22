@@ -1,9 +1,36 @@
-// getData2.js - タグによる記事・Piece分類とタグ除去機能付き (noteのタグ処理をtag: #hoge1, #hoge2形式に修正)
+// getData2.js - Dynalistの「li」項目と「・」項目をHTMLリストとして出力する機能を追加
 
 const fs = require('fs'); // Node.jsのfsモジュールをインポート
 // fetch関数をより堅牢に定義: Node.jsのネイティブfetchがあればそれを使用し、なければnode-fetchをフォールバックとして使用
 // node-fetchのESM形式に対応するため、.defaultプロパティを参照するように変更
 const fetch = globalThis.fetch || require('node-fetch').default; 
+
+// HTMLエスケープ関数
+function escapeHtml(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// ヘルパー関数: HTML文字列から外側の<p>タグを除去
+// リストアイテムのコンテンツが単一の<p>でラップされている場合に適用
+function stripParagraphTags(html) {
+    const trimmedHtml = html.trim();
+    if (trimmedHtml.startsWith('<p>') && trimmedHtml.endsWith('</p>')) {
+        const innerContent = trimmedHtml.substring(3, trimmedHtml.length - 4);
+        // 内側のコンテンツが他のブロックレベル要素を含まない場合にのみ<p>を剥がす
+        // これにより、リストアイテム内に複雑なMarkdownがあっても崩れにくい
+        if (!/<[a-z][\s\S]*>/i.test(innerContent) || // 任意のHTMLタグが含まれていないか
+            (innerContent.includes('<strong>') || innerContent.includes('<em>') || innerContent.includes('<code>') || innerContent.includes('<a>') || innerContent.includes('<img>')) && // インライン要素のみの場合
+            !(innerContent.includes('<p>') || innerContent.includes('<ul>') || innerContent.includes('<ol>') || innerContent.includes('<blockquote>') || innerContent.includes('<pre>') || innerContent.includes('<h1>') || innerContent.includes('<h2>') || innerContent.includes('<h3>') || innerContent.includes('<hr>'))) { // 他のブロック要素が含まれていない
+            return innerContent;
+        }
+    }
+    return html;
+}
 
 // MarkdownをHTMLに変換する関数
 function markdownToHTML(markdown) {
@@ -11,8 +38,8 @@ function markdownToHTML(markdown) {
     let html = '';
 
     let inBlockquote = false;
-    let inList = false;
-    let listItems = [];
+    let inList = false; // 「・」リスト用
+    let listItems = []; // 「・」リスト用
 
     lines.forEach((line, index) => {
         // コメントをスキップする
@@ -21,6 +48,12 @@ function markdownToHTML(markdown) {
         }
         // 引用（blockquote）
         if (line.startsWith('> ')) {
+            // ブロッククォートが始まる前に開いているリストがあれば閉じる
+            if (inList) {
+                html += '</ul>';
+                inList = false;
+                listItems = [];
+            }
             if (!inBlockquote) {
                 html += '<blockquote>';
                 inBlockquote = true;
@@ -32,28 +65,36 @@ function markdownToHTML(markdown) {
                 inBlockquote = false;
             }
 
+            // 「・」によるリスト処理を再導入
             if (line.startsWith('・')) {
                 if (!inList) {
                     html += '<ul>';
                     inList = true;
                 }
-                listItems.push(line.replace(/^・/, ''));
+                // リンクの処理をリストアイテム内で行う
+                const listItemContent = line.replace(/^・/, '').replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+                    // Dynalist内部リンク以外のURLはtarget="_blank"を付ける
+                    if (!url.includes('https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im')) {
+                        return `<a href="${url}" target="_blank">${text}</a>`;
+                    } else {
+                        return `<a href="${url}">${text}</a>`;
+                    }
+                });
+                listItems.push(listItemContent);
+
+                // 次の行がリストアイテムでない、または最終行の場合にリストを閉じる
                 if (!lines[index + 1] || !lines[index + 1].startsWith('・')) {
-                    html += '<li>' + listItems.map(item => {
-                        if (/\[.*?\]\((.*?)\)/.test(item)) {
-                            return item.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
-                                return `<a href="${url}">${text}</a>`;
-                            });
-                        } else {
-                            return item;
-                        }
-                    }).join('</li><li>') + '</li>';
-                    listItems = [];
+                    html += '<li>' + listItems.join('</li><li>') + '</li>'; // 各アイテムを<li>でラップ
+                    html += '</ul>';
+                    inList = false;
+                    listItems = []; // リストアイテムをリセット
                 }
-            } else {
+            } else { // リストアイテムではない場合
+                // 開いているリストがあれば閉じる
                 if (inList) {
                     html += '</ul>';
                     inList = false;
+                    listItems = [];
                 }
 
                 // 他のマークダウンの処理
@@ -63,19 +104,15 @@ function markdownToHTML(markdown) {
                     html += `<h${level}>${text}</h${level}>`;
                 } else if (line === '---') {
                     html += '<hr>';
-                } else if (/\*\*|\`|\*|_/.test(line)) {
-                    html += `<p>${line
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\`(.*?)\`/g, '<code>$1</code>')
-                        .replace(/\*(.*?)\*/g, '<em>$1</em>')}</p>`;
                 } else if (line.startsWith('```')) {
-                    html += '<pre><code>';
-                    const codeLines = lines.slice(index + 1);
-                    const endIndex = codeLines.findIndex((l) => l.startsWith('```'));
-                    codeLines.slice(0, endIndex).forEach((l) => {
-                        html += `${l}\n`;
-                    });
-                    html += '</code></pre>';
+                    let codeBlockContent = '';
+                    let i = index + 1;
+                    while (i < lines.length && !lines[i].startsWith('```')) {
+                        codeBlockContent += lines[i] + '\n';
+                        i++;
+                    }
+                    html += `<pre><code>${escapeHtml(codeBlockContent.trim())}</code></pre>`;
+                    index = i; // ループのインデックスを更新してコードブロックをスキップ
                 } else if (/\!\[.*?\]\((.*?)\)/.test(line)) {
                     const replacedLine = line.replace(/\!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => {
                         if (!alt) alt = 'Image';
@@ -84,31 +121,40 @@ function markdownToHTML(markdown) {
                     html += `<p>${replacedLine}</p>`;
                 } else if (/\[.*?\]\((.*?)\)/.test(line)) {
                     html += `<p>${line.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+                        // Dynalist内部リンク以外のURLはtarget="_blank"を付ける
                         if (!url.includes('https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im')) {
                             return `<a href="${url}" target="_blank">${text}</a>`;
                         } else {
                             return `<a href="${url}">${text}</a>`;
                         }
                     })}</p>`;
-                } else {
+                } else if (/\*\*|\`|\*|_/.test(line)) { // 太字、コードスパン、イタリック
+                    html += `<p>${line
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\`(.*?)\`/g, '<code>$1</code>')
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>')}</p>`;
+                }
+                // 通常のテキスト（空行でない場合）
+                else if (line.trim() !== '') {
                     html += `<p>${line}</p>`;
                 }
             }
         }
     });
 
+    // 閉じタグの残りを処理
     if (inBlockquote) {
         html += '</blockquote>';
     }
-
-    if (inList) {
+    // 最後にリストがまだ開いていれば閉じる
+    if (inList) { 
         html += '</ul>';
     }
 
     return html;
 }
 
-// DynalistのURLを置換する関数
+// DynalistのURLを適切なパスに変換する関数
 function replaceDynalistUrls(body) {
     const dynalistUrlPattern = /https:\/\/dynalist\.io\/d\/[a-zA-Z0-9-_]+#z=([a-zA-Z0-9-_]+)/g;
     const siteUrl = 'https://morvra.github.io/article?id=';
@@ -127,7 +173,7 @@ function getNodesByTag(nodes, tagName) {
     });
 }
 
-// メタデータを取得する関数 (日付のみ)
+// ノードのnoteからメタデータを抽出する関数 (日付のみ)
 function getMetadata(note) {
     const lines = note.split('\n');
     let date = '';
@@ -168,25 +214,75 @@ function getTags(note) {
     }
 }
 
-// 本文を取得する関数
-function getBody(nodes, parent) {
-    const result = [];
-    roop(parent);
+// 再帰ヘルパー関数: ネストされたHTMLリストを構築
+// この関数は、liマーカーの子要素として呼び出され、<ul><li>構造を生成します
+function buildNestedListHtml(node, allNodes) {
+    // ノードのコンテンツをHTMLに変換し、不要な外側の<p>タグを除去
+    let itemContentHtml = stripParagraphTags(markdownToHTML(node.content));
 
-    function roop(node) {
-        if (!node.children) return;
+    let listItemHtml = `<li>${itemContentHtml}`;
 
-        node.children.forEach((id) => {
-            const find = nodes.find((obj) => obj.id === id);
-            if (find) {
-                const html = markdownToHTML(find.content);
-                result.push(html);
-                roop(find);
+    // 子ノードがあれば、さらにネストされた<ul>を生成
+    if (node.children && node.children.length > 0) {
+        listItemHtml += '<ul>';
+        node.children.forEach(childId => {
+            const childNode = allNodes.find(obj => obj.id === childId);
+            if (childNode) {
+                listItemHtml += buildNestedListHtml(childNode, allNodes); // 子ノードを再帰的に処理
             }
         });
+        listItemHtml += '</ul>';
     }
+    listItemHtml += '</li>';
+    return listItemHtml;
+}
 
-    return result.join('\n').replace(/<\/ul>\n<ul>/g, '');
+// 本文を取得する関数（再帰的にDynalistの階層構造をHTMLに変換）
+// 「li」という特別な項目を見つけたら、その子要素をリストとして処理
+function getBody(allNodes, currentNode) {
+    let htmlOutput = '';
+
+    // 現在のノードが「li」マーカーの場合
+    if (currentNode.content.trim().toLowerCase() === 'li') {
+        if (currentNode.children && currentNode.children.length > 0) {
+            htmlOutput += '<ul>';
+            currentNode.children.forEach(childId => {
+                const childNode = allNodes.find(node => node.id === childId);
+                if (childNode) {
+                    htmlOutput += buildNestedListHtml(childNode, allNodes); // buildNestedListHtmlでリストを構築
+                }
+            });
+            htmlOutput += '</ul>';
+        }
+    } else {
+        // 通常のノードの場合、そのコンテンツとノート（メタデータ部分を除く）をMarkdownとして処理
+        htmlOutput += markdownToHTML(currentNode.content);
+        
+        if (currentNode.note) {
+            // noteからdate:とtag:の行を除外した内容をMarkdown変換
+            const noteContentToRender = currentNode.note
+                .split('\n')
+                .filter(line => !line.startsWith('date:') && !line.startsWith('tag:'))
+                .join('\n')
+                .trim();
+            
+            if (noteContentToRender !== '') {
+                htmlOutput += markdownToHTML(noteContentToRender);
+            }
+        }
+
+        // 現在のノードの子要素を再帰的に処理し、本文に追加
+        // これにより、通常の階層構造が本文としてフラットに展開される
+        if (currentNode.children && currentNode.children.length > 0) {
+            currentNode.children.forEach(childId => {
+                const childNode = allNodes.find(node => node.id === childId);
+                if (childNode) {
+                    htmlOutput += getBody(allNodes, childNode); // 再帰呼び出し
+                }
+            });
+        }
+    }
+    return htmlOutput;
 }
 
 // RSSフィードを生成する関数
@@ -219,7 +315,6 @@ function generateRSS(articles) {
 }
 
 // Dynalistからデータを取得する部分
-// main関数として定義し、async/awaitを使用
 async function main() {
     const DYNALIST_TOKEN = process.env.DYNALIST_TOKEN; // 環境変数からトークンを取得
     const DYNALIST_FILE_ID = 'ihr-nPYa3LhA5ETZ9F0NS9Im'; // 対象のファイルID
@@ -257,7 +352,7 @@ async function main() {
             const title = obj.content.replace(/#article/g, '').trim();
             const { date } = getMetadata(obj.note);
             const tags = getTags(obj.note); // noteからタグを取得
-            const body = replaceDynalistUrls(getBody(data.nodes, obj));
+            const body = replaceDynalistUrls(getBody(data.nodes, obj)); // getBodyを修正
             return { id, title, date, tags, body };
         });
 
@@ -267,7 +362,7 @@ async function main() {
             const title = obj.content.replace(/#piece/g, '').trim();
             const { date } = getMetadata(obj.note);
             const tags = getTags(obj.note); // noteからタグを取得
-            const body = replaceDynalistUrls(getBody(data.nodes, obj));
+            const body = replaceDynalistUrls(getBody(data.nodes, obj)); // getBodyを修正
             return { id, title, date, tags, body };
         });
 
