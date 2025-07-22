@@ -346,6 +346,7 @@ code {
 }
 
 #article-content ul {
+    margin: 4px 0;
     padding-inline-start: 24px;
 }
 
