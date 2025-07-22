@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 22 Jul 2025 03:55:57 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 22 Jul 2025 15:13:20 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -121,7 +121,7 @@
         <item>
           <title>アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説</title>
           <link>https://morvra.github.io/article?id=FsPb7PRxbJBPV2fbbKs9_Zel</link>
-          <description><![CDATA[<ul><li><a href="https://anond.hatelabo.jp/20241223225740" target="_blank">鳩野ちひろが歌っている曲は「ちょっと古い」どころではない</a></li></ul><p>このブコメでmori99さんが「過去の意味が世代で違う」と<a href="https://b.hatena.ne.jp/mori99/20241224#bookmark-4763828651127392096" target="_blank">書いてて</a>確かにそうだなと。</p><p>アーカイブが残ってさえいればふとしたきっかけで知れるわけで、そこで琴線に触れるものもある。逆に言えば残っていなかったら知ることすら無い（口伝？）し、残っていたとしてもそこにアクセスするハードルが高かったりテキストが少しあるだけだったら広まらない。</p><p>時代観すら変えうるという意味でもサブスクやらYoutubeの存在の大きさを実感。</p><p>でもスケールを広げるとこのパラダイムシフトって言語以前以後、文字以前以後とかでも起こってるよなと思い浮かんだ。文字が無かったら時代って概念からしておそらく無いし。</p><p>■</p><p>最近昭和の〇〇ランキング系の番組やら記事をいくつか見る機会あって昭和初期がほぼ無視されてるのにモヤモヤしてたんだけど、視聴者の世代に合わせてるというだけじゃなくて単純に資料がないってのもあるなと思ったりした。</p>]]></description>
+          <description><![CDATA[<ul><li><a href="https://anond.hatelabo.jp/20241223225740" target="_blank">鳩野ちひろが歌っている曲は「ちょっと古い」どころではない</a></li></ul><p>このブコメでmori99さんが「過去の意味が世代で違う」と<a href="https://b.hatena.ne.jp/mori99/20241224#bookmark-4763828651127392096" target="_blank">書いてて</a>確かにそうだなと。</p><p>アーカイブが残ってさえいればふとしたきっかけで知れるわけで、そこで琴線に触れるものもある。逆に言えば残っていなかったら知ることすら無い（口伝？）し、残っていたとしてもそこにアクセスするハードルが高かったりテキストが少しあるだけだったら広まらない。</p><p>時代観すら変えうるという意味でもサブスクやらYoutubeの存在の大きさを実感。</p><p>でもスケールを広げるとこのパラダイムシフトって言語以前以後、文字以前以後とかでも起こってるよなと思い浮かんだ。文字が無かったら時代という概念からしておそらく無いし。</p><p>■</p><p>最近昭和の〇〇ランキング系の番組やら記事をいくつか見る機会あって昭和初期がほぼ無視されてるのにモヤモヤしてたんだけど、視聴者の世代に合わせてるというだけじゃなくて単純に資料がないってのもあるなと思ったりした。</p>]]></description>
           <pubDate>Wed, 25 Dec 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=FsPb7PRxbJBPV2fbbKs9_Zel</guid>
         </item>
@@ -194,6 +194,13 @@
           <description><![CDATA[<p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title="Filter #hoge"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>]]></description>
           <pubDate>Mon, 21 Jul 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=84xxKRfqbajQFiXpqgUSlAf1</guid>
+        </item>
+        <item>
+          <title>サイトの運用方法やデザインをアップデート</title>
+          <link>https://morvra.github.io/article?id=cqfGRD5-QaUuMpj25Q92oUmj</link>
+          <description><![CDATA[<p>今月はサイトの外側をあれこれいじったので、何をしたか書いておく。</p><h2>変更点</h2><ul><li>運用<ul><li>Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更<ul><li>タグをつければいいだけなので楽</li></ul></li><li>子要素のあるリストも扱えるように<ul><li>Dynalist上の「li」という項目の子要素はリストとして出力される</li><li>これもそう</li></ul></li><li>更新の自動化（GithubActions）<ul><li>毎日0時と12時くらいにDynalistAPIからJSONとRSSを生成してGithubPagesにデプロイ</li></ul></li></ul></li><li>トップページ<ul><li>モジュールのデザインをカード風にして一言も追加</li><li>記事一覧を年ごとに分けて開閉式に</li></ul></li><li>記事ページ<ul><li>ページ下部に関連記事として同じタグがついた記事をリスト化</li></ul></li><li>piece<ul><li>モジュールのデザインをもとにカード風に</li></ul></li></ul><hr><p>基本的にはGeminiにおんぶにだっこでコードを書いてもらいつつテストと細かい修正は自分でやった。</p><p>これでサイトの立ち上げ時から「こんな風に実装できたらいいな」と考えていたことはだいたい完成した。特に更新の自動化と、リストの階層化ができたのは箇条書き好きとしてだいぶ嬉しい。</p><p>あとはコンテンツが充実してきたら検索機能つけるくらいかな？</p>]]></description>
+          <pubDate>Tue, 22 Jul 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=cqfGRD5-QaUuMpj25Q92oUmj</guid>
         </item>
       </channel>
     </rss>
