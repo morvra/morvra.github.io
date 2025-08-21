@@ -25,10 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('取得したデータ:', data); // 取得したデータをコンソールに表示
 
-            // タグに対応する記事のリストを作成
-            const articlesWithTag = data.articles.filter(article => {
-                console.log('記事のタグ:', article.tags); // 各記事のタグをコンソールに表示
-                return article.tags.includes(tagName);
+            // articles と pieces を統合したリストを作成
+            const allContent = [...data.articles, ...data.pieces];
+
+            // タグに対応するコンテンツのリストを作成
+            const articlesWithTag = allContent.filter(item => {
+                // tagsプロパティが存在し、かつタグ名が含まれているかをチェック
+                return item.tags && item.tags.includes(tagName);
             });
 
             if (articlesWithTag.length > 0) {
@@ -37,17 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 tagListElement.appendChild(tagTitleElement);
 
                 const articleListElement = document.createElement('ul');
-                articlesWithTag.forEach(article => {
+                articlesWithTag.forEach(item => {
                     const articleItem = document.createElement('li');
                     const articleLink = document.createElement('a');
-                    articleLink.textContent = article.title;
-                    articleLink.href = `article?id=${article.id}`;
+                    
+                    articleLink.textContent = item.title;
+                    
+                    articleLink.href = `article?id=${item.id}`; // 記事とpieceでURLを共通化
                     articleItem.appendChild(articleLink);
                     articleListElement.appendChild(articleItem);
                 });
                 tagListElement.appendChild(articleListElement);
             } else {
-                tagListElement.textContent = 'このタグに対応する記事が見つかりませんでした。';
+                tagListElement.textContent = 'このタグに対応するコンテンツが見つかりませんでした。';
             }
         })
         .catch(error => console.error('Error fetching data:', error));
