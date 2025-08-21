@@ -29,34 +29,43 @@
     <div id="header"></div>
 
     <main>
-        <h1 id="tag-list-title">Tag List</h1>
-        <ul id="tag-list"></ul>
+        <h1 id="tag-list-title">タグ一覧</h1>
+        <ul id="tag-list">
+            <!-- JavaScriptでタグリストと記事を追加 -->
+        </ul>
     </main>
 
     <script>
-        fetch('./data.json')
+        // タグと記事リストを表示する要素
+        const tagList = document.getElementById('tag-list');
+        const jsonPath = './data.json';
+
+        // JSONファイルを取得
+        fetch(jsonPath)
             .then(response => response.json())
             .then(data => {
-                const tagList = document.getElementById('tag-list');
-                const tagListTitle = document.getElementById('tag-list-title');
-
-                // タグごとに記事をグループ化するためのオブジェクトを作成
+                // articles と pieces を統合したリストを作成
+                const allContent = [...data.articles, ...data.pieces];
                 const groupedArticles = {};
-                data.articles.forEach(article => {
-                    article.tags.forEach(tag => {
-                        if (!groupedArticles[tag]) {
-                            groupedArticles[tag] = [];
-                        }
-                        groupedArticles[tag].push(article);
-                    });
+
+                allContent.forEach(content => {
+                    if (content.tags && content.tags.length > 0) {
+                        content.tags.forEach(tag => {
+                            if (!groupedArticles[tag]) {
+                                groupedArticles[tag] = [];
+                            }
+                            groupedArticles[tag].push(content);
+                        });
+                    }
                 });
 
-                // タグごとにリストを生成
-                for (const tag in groupedArticles) {
+                // タグ名でソート
+                const sortedTags = Object.keys(groupedArticles).sort();
+
+                sortedTags.forEach(tag => {
                     const tagListItem = document.createElement('li');
-                    const tagHeader = document.createElement('h2');
                     
-                    // #を削除してタグを表示し、id属性として設定
+                    const tagHeader = document.createElement('h2');
                     const cleanTag = tag.replace('#', '');
                     tagHeader.textContent = cleanTag;
                     tagHeader.id = cleanTag; // タグ名をidに設定
@@ -67,7 +76,7 @@
                         const articleListItem = document.createElement('li');
                         const articleLink = document.createElement('a');
                         articleLink.textContent = article.title;
-                        articleLink.href = `article?id=${article.id}`;
+                        articleLink.href = `article?id=${article.id}`; // 記事・つぶやき共通のURL
                         articleListItem.appendChild(articleLink);
                         articleList.appendChild(articleListItem);
                     });
@@ -75,7 +84,7 @@
                     tagListItem.appendChild(articleList);
                     tagList.appendChild(tagListItem);
                     
-                }
+                });
 
             })
             .catch(error => console.error('Error fetching data:', error));
