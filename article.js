@@ -18,14 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(jsonPath)
         .then(response => response.json())
         .then(data => {
-            // data.articles からコンテンツを検索
-            let content = data.articles.find(item => item.id === contentId);
-            const isArticle = !!content; // 記事かどうかを判定
+            // articles と pieces を統合したリストを作成
+            const allContent = [...data.articles, ...data.pieces];
 
-            // 記事が見つからなかった場合、data.pieces からコンテンツを検索
-            if (!content) {
-                content = data.pieces.find(item => item.id === contentId);
-            }
+            // 統合リストからコンテンツを検索
+            const content = allContent.find(item => item.id === contentId);
 
             if (content) {
                 document.title = `${content.title} - morvra lists`; // titleタグを更新
@@ -51,36 +48,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 // コンテンツを表示
                 articleContent.innerHTML = content.body;
 
-                // 記事の場合のみ関連記事を表示
-                if (isArticle) {
-                    const currentArticleTags = content.tags;
-                    const relatedArticles = data.articles
-                        .filter(item => item.id !== contentId && // 現在の記事を除外
-                            item.tags.some(tag => currentArticleTags.includes(tag))) // 共通のタグを持つ記事を抽出
-                        .sort(() => 0.5 - Math.random()) // ランダムに並び替え
-                        .slice(0, 5); // 最大5件に制限
+                // 共通のタグを持つ関連記事（または関連piece）を検索
+                const currentContentTags = content.tags;
+                const relatedArticles = allContent
+                    .filter(item => item.id !== contentId && // 現在のコンテンツを除外
+                        item.tags && // tagsプロパティが存在する場合のみ
+                        item.tags.some(tag => currentContentTags.includes(tag))) // 共通のタグを持つコンテンツを抽出
+                    .sort(() => 0.5 - Math.random()); // ランダムに並び替え
+                    // .slice(0, 5); // 最大5件に制限
 
-                    if (relatedArticles.length > 0) {
-                        const relatedArticlesSection = document.createElement('div');
-                        relatedArticlesSection.id = 'related-articles';
-                        relatedArticlesSection.innerHTML = '<h2>関連記事</h2>';
+                // 関連記事が見つかった場合にのみセクションを作成し挿入
+                if (relatedArticles.length > 0) {
+                    const relatedArticlesSection = document.createElement('div');
+                    relatedArticlesSection.id = 'related-articles';
+                    relatedArticlesSection.innerHTML = '<h2>関連記事</h2>';
 
-                        const relatedArticlesList = document.createElement('ul');
-                        relatedArticles.forEach(relatedArticle => {
-                            const listItem = document.createElement('li');
-                            const link = document.createElement('a');
-                            link.href = `article.html?id=${relatedArticle.id}`;
-                            link.textContent = relatedArticle.title;
-                            listItem.appendChild(link);
-                            relatedArticlesList.appendChild(listItem);
-                        });
-                        relatedArticlesSection.appendChild(relatedArticlesList);
+                    const relatedArticlesList = document.createElement('ul');
+                    relatedArticles.forEach(relatedArticle => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `article?id=${relatedArticle.id}`; // 記事とpieceでURLを共通化
+                        link.textContent = relatedArticle.title;
+                        listItem.appendChild(link);
+                        relatedArticlesList.appendChild(listItem);
+                    });
+                    relatedArticlesSection.appendChild(relatedArticlesList);
 
-                        if (adElement && adElement.parentNode) {
-                            adElement.parentNode.insertBefore(relatedArticlesSection, adElement.nextSibling);
-                        } else {
-                            articleContent.parentNode.appendChild(relatedArticlesSection);
-                        }
+                    if (adElement && adElement.parentNode) {
+                        adElement.parentNode.insertBefore(relatedArticlesSection, adElement.nextSibling);
+                    } else {
+                        articleContent.parentNode.appendChild(relatedArticlesSection);
                     }
                 }
             } else {
