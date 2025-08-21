@@ -383,6 +383,10 @@ h2#piece-title {
     font-size: 1em;
     font-weight: normal;
 }
+h2#piece-title a {
+    color: #333;
+    text-decoration: none;
+}
 
 /* navigation */
 .navigation {
