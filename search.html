@@ -24,7 +24,6 @@
       gtag('js', new Date());
       gtag('config', 'G-0G0NP5Z9M9');
     </script>
-
 </head>
 <body>
 
@@ -125,22 +124,23 @@
                     const listItem = document.createElement('li');
                     listItem.classList.add('search-result-item');
 
+                    // タイトルのハイライト処理はそのまま
                     const titleLink = document.createElement('a');
                     titleLink.href = `article?id=${content.id}`;
                     titleLink.innerHTML = highlightMatch(content.title, query);
                     
                     const dateSpan = document.createElement('span');
                     dateSpan.classList.add('search-result-date');
-                    dateSpan.textContent = `(${content.date})`; // 日付を()で括る
+                    dateSpan.textContent = `(${content.date})`;
                     listItem.appendChild(titleLink);
                     listItem.appendChild(dateSpan);
 
-                    // 検索ワードが本文にある場合、一致する要素を抜き出して表示
                     if (content.body.toLowerCase().includes(query)) {
                         const snippets = extractSnippets(content.body, query);
                         snippets.forEach(snippetHtml => {
                             const snippet = document.createElement('div');
                             snippet.classList.add('search-snippet');
+                            // ここではinnerHTMLではなく、直接HTMLコンテンツを挿入
                             snippet.innerHTML = snippetHtml;
                             listItem.appendChild(snippet);
                         });
@@ -153,18 +153,49 @@
             };
 
             // テキスト内の検索ワードをハイライトするヘルパー関数
+            // この関数はタイトル専用に変更
             const highlightMatch = (text, query) => {
                 const regex = new RegExp(`(${query})`, 'gi');
                 return text.replace(regex, `<span class="highlight">$1</span>`);
+            };
+            
+            // ノードツリーを走査してハイライトする新しいヘルパー関数
+            const highlightTextNodes = (element, query) => {
+                const treeWalker = document.createTreeWalker(
+                    element,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+                
+                let node;
+                const nodesToReplace = [];
+                const regex = new RegExp(query, 'gi');
+
+                while (node = treeWalker.nextNode()) {
+                    if (node.nodeValue.toLowerCase().includes(query.toLowerCase())) {
+                        nodesToReplace.push(node);
+                    }
+                }
+
+                nodesToReplace.forEach(node => {
+                    const parent = node.parentNode;
+                    const tempSpan = document.createElement('span');
+                    tempSpan.innerHTML = node.nodeValue.replace(regex, `<span class="highlight">$&</span>`);
+                    
+                    while (tempSpan.firstChild) {
+                        parent.insertBefore(tempSpan.firstChild, node);
+                    }
+                    parent.removeChild(node);
+                });
             };
 
             // HTMLから検索ワードを含む要素を抜き出す関数
             const extractSnippets = (html, query) => {
                 const doc = parser.parseFromString(html, 'text/html');
-                const snippets = new Set(); // 重複を防ぐためにSetを使用
+                const snippets = new Set();
                 const queryLower = query.toLowerCase();
 
-                // TreeWalkerを使用してテキストノードを効率的に走査
                 const treeWalker = document.createTreeWalker(
                     doc.body,
                     NodeFilter.SHOW_TEXT,
@@ -175,21 +206,40 @@
                 let node;
                 while (node = treeWalker.nextNode()) {
                     if (node.nodeValue.toLowerCase().includes(queryLower)) {
-                        // 検索ワードを含むテキストノードの最も近いブロックレベルの親要素を抽出
                         let parent = node.parentElement;
-                        // 親要素がブロックレベルであるか、または body の直下まで遡る
                         while (parent && parent.tagName.toLowerCase() !== 'body' && !isBlockElement(parent)) {
                             parent = parent.parentElement;
                         }
                         if (parent) {
-                             // 親要素を抜き出し、ハイライトしてSetに追加
-                            snippets.add(highlightMatch(parent.outerHTML, query));
+                            const clonedElement = parent.cloneNode(true);
+                            highlightTextNodes(clonedElement, query);
+                            snippets.add(replaceDynalistUrls(clonedElement.outerHTML));
                         }
                     }
                 }
                 return Array.from(snippets);
             };
             
+            // DynalistのURLを通常のURLに変換するヘルパー関数
+            const replaceDynalistUrls = (html) => {
+                // `getData2.js`のロジックを再現
+                return html.replace(/<a href="([^"]+?)">/g, (match, url) => {
+                    const urlPattern = 'https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im';
+                    const idPattern = 'https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im#z=';
+                    if (url.includes(urlPattern) && !url.includes(idPattern)) {
+                        // これは記事全体へのリンクなので、そのまま変換
+                        return `<a href="${url}">`;
+                    } else if (url.includes(idPattern)) {
+                        // これは記事内の特定箇所へのリンクなので、`article?id=` に変換
+                        const id = url.split('#z=')[1];
+                        return `<a href="article?id=${id}">`;
+                    } else {
+                        // Dynalist内部リンクではないので、target="_blank"を追加
+                        return `<a href="${url}" target="_blank">`;
+                    }
+                });
+            }
+
             // ブロックレベル要素かどうかを判定するヘルパー関数
             const isBlockElement = (el) => {
               const blockTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote', 'div', 'main', 'section', 'article'];
