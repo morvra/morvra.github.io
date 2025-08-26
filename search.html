@@ -51,6 +51,10 @@
             margin-top: 8px;
             font-size: 0.9em;
         }
+        
+        .search-snippet img {
+            max-width: 100%;
+        }
 
         /* 検索フォームのスタイル */
         #search-container {
@@ -215,19 +219,39 @@
             const extractSnippets = (html, query) => {
                 const doc = parser.parseFromString(html, 'text/html');
                 const snippets = new Set(); // 重複を防ぐためにSetを使用
+                const queryLower = query.toLowerCase();
 
-                // すべての要素を走査
-                doc.body.querySelectorAll('*').forEach(element => {
-                    // テキストノードに検索ワードが含まれているかチェック
-                    if (element.textContent.toLowerCase().includes(query.toLowerCase())) {
-                        // 親要素を抜き出してハイライト
-                        let snippetHtml = element.outerHTML;
-                        snippetHtml = highlightMatch(snippetHtml, query);
-                        snippets.add(snippetHtml);
+                // TreeWalkerを使用してテキストノードを効率的に走査
+                const treeWalker = document.createTreeWalker(
+                    doc.body,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+
+                let node;
+                while (node = treeWalker.nextNode()) {
+                    if (node.nodeValue.toLowerCase().includes(queryLower)) {
+                        // 検索ワードを含むテキストノードの最も近いブロックレベルの親要素を抽出
+                        let parent = node.parentElement;
+                        // 親要素がブロックレベルであるか、または body の直下まで遡る
+                        while (parent && parent.tagName.toLowerCase() !== 'body' && !isBlockElement(parent)) {
+                            parent = parent.parentElement;
+                        }
+                        if (parent) {
+                             // 親要素を抜き出し、ハイライトしてSetに追加
+                            snippets.add(highlightMatch(parent.outerHTML, query));
+                        }
                     }
-                });
+                }
                 return Array.from(snippets);
             };
+            
+            // ブロックレベル要素かどうかを判定するヘルパー関数
+            const isBlockElement = (el) => {
+              const blockTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote', 'div', 'main', 'section', 'article'];
+              return blockTags.includes(el.tagName.toLowerCase());
+            }
 
             searchButton.addEventListener('click', performSearch);
 
