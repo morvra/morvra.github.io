@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>検索 - morvra lists</title>
+    
+    <link rel="stylesheet" href="./styles.css">
+    <link href='./bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='./bullet_icon.png' rel='shortcut icon'/>
+    <link href='./bullet_icon.png' rel='apple-touch-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+    
+    <style>
+        .highlight {
+            background-color: #ffff00;
+        }
+
+        .search-result-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .search-result-item {
+            margin-bottom: 24px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 16px;
+        }
+
+        .search-result-item a {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .search-snippet {
+            color: #666;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+
+        /* 検索フォームのスタイル */
+        #search-container {
+            display: flex;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 0 16px;
+        }
+        #search-input {
+            flex-grow: 1;
+            padding: 10px 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+        #search-button {
+            padding: 10px 16px;
+            font-size: 1em;
+            background-color: #005aff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background-color 0.2s;
+        }
+        #search-button:hover {
+            background-color: #0044cc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダーを動的に読み込む要素 -->
+    <div id="header"></div>
+
+    <main>
+        <!-- 検索フォーム -->
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="検索ワードを入力..." aria-label="検索">
+            <button id="search-button">
+                <i class="fa fa-search" aria-hidden="true"></i> 検索
+            </button>
+        </div>
+
+        <!-- 検索結果の表示エリア -->
+        <div id="search-results">
+            <!-- 検索結果をJavaScriptでここに追加 -->
+        </div>
+    </main>
+
+    <!-- フッターを動的に読み込む要素 -->
+    <div id="footer"></div>
+
+    <!-- ヘッダー、フッター、検索ロジック用のスクリプト -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ヘッダーとフッターを読み込む
+            fetch("header.html")
+                .then((response) => response.text())
+                .then((data) => document.querySelector("#header").innerHTML = data)
+                .catch(error => console.error('Error loading header:', error));
+
+            fetch("footer.html")
+                .then((response) => response.text())
+                .then((data) => document.querySelector("#footer").innerHTML = data)
+                .catch(error => console.error('Error loading footer:', error));
+
+            // 検索ロジック
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const searchResults = document.getElementById('search-results');
+            const jsonPath = './data.json';
+            let allContent = [];
+
+            fetch(jsonPath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allContent = [...data.articles, ...data.pieces];
+                    allContent.sort((a, b) => new Date(b.date) - new Date(a.date));
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    searchResults.innerHTML = `<p>データの取得に失敗しました。時間をおいて再度お試しください。</p>`;
+                });
+
+            const performSearch = () => {
+                const query = searchInput.value.trim().toLowerCase();
+                if (query.length === 0) {
+                    searchResults.innerHTML = `<p>検索ワードを入力してください。</p>`;
+                    return;
+                }
+
+                const results = [];
+                allContent.forEach(content => {
+                    const titleMatch = content.title.toLowerCase().includes(query);
+                    const bodyMatch = content.body.toLowerCase().includes(query);
+
+                    if (titleMatch || bodyMatch) {
+                        results.push(content);
+                    }
+                });
+
+                displayResults(results, query);
+            };
+
+            const displayResults = (results, query) => {
+                searchResults.innerHTML = '';
+
+                if (results.length === 0) {
+                    searchResults.innerHTML = `<p>「${query}」に一致する記事は見つかりませんでした。</p>`;
+                    return;
+                }
+
+                const resultList = document.createElement('ul');
+                resultList.classList.add('search-result-list');
+
+                results.forEach(content => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('search-result-item');
+
+                    const titleLink = document.createElement('a');
+                    titleLink.href = `article?id=${content.id}`;
+                    titleLink.innerHTML = highlightMatch(content.title, query);
+                    listItem.appendChild(titleLink);
+
+                    if (content.body.toLowerCase().includes(query)) {
+                        const snippet = document.createElement('p');
+                        snippet.classList.add('search-snippet');
+                        snippet.innerHTML = highlightBody(content.body, query);
+                        listItem.appendChild(snippet);
+                    }
+
+                    resultList.appendChild(listItem);
+                });
+
+                searchResults.appendChild(resultList);
+            };
+
+            const highlightMatch = (text, query) => {
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, `<span class="highlight">$1</span>`);
+            };
+
+            const highlightBody = (body, query) => {
+                const bodyLower = body.toLowerCase();
+                const queryLower = query.toLowerCase();
+                const queryIndex = bodyLower.indexOf(queryLower);
+                const snippetLength = 100;
+
+                if (queryIndex !== -1) {
+                    let startIndex = Math.max(0, queryIndex - 20);
+                    let endIndex = startIndex + snippetLength;
+                    
+                    if (endIndex > body.length) {
+                        endIndex = body.length;
+                    }
+
+                    let snippetText = body.substring(startIndex, endIndex);
+
+                    if (startIndex > 0) {
+                        snippetText = '...' + snippetText;
+                    }
+                    if (endIndex < body.length) {
+                        snippetText = snippetText + '...';
+                    }
+
+                    return highlightMatch(snippetText, query);
+                }
+                return '';
+            };
+
+            searchButton.addEventListener('click', performSearch);
+
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
