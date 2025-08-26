@@ -431,6 +431,12 @@ footer {
     text-decoration: none;
 }
 
+.search-result-date {
+    font-size: 0.8em;
+    color: #888;
+    margin-left: 10px;
+}
+
 .search-snippet {
     color: #666;
     margin-top: 8px;

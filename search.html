@@ -128,7 +128,12 @@
                     const titleLink = document.createElement('a');
                     titleLink.href = `article?id=${content.id}`;
                     titleLink.innerHTML = highlightMatch(content.title, query);
+                    
+                    const dateSpan = document.createElement('span');
+                    dateSpan.classList.add('search-result-date');
+                    dateSpan.textContent = `(${content.date})`; // 日付を()で括る
                     listItem.appendChild(titleLink);
+                    listItem.appendChild(dateSpan);
 
                     // 検索ワードが本文にある場合、一致する要素を抜き出して表示
                     if (content.body.toLowerCase().includes(query)) {
