@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 26 Aug 2025 06:22:28 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 26 Aug 2025 15:25:18 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -229,6 +229,13 @@
           <description><![CDATA[<p>カタログスペックの時点でだいぶ強そう＆サポカはステゴだけ完凸すればいいかなと思い、スティルインラブを引くことに！</p><p>幸いチケット80枚で引けた！もともと持ってたのが86枚だったのでギリ。クロノもチケット分で引けたしキャラガチャはだいぶ上振れてる。</p><h2>初育成</h2><p>適当に組んだハイランダーで初回UA！かなり育てやすい印象。</p><p>それよりエンドが激重なんですが……トレーナーがウマ娘に引っ張られて変わっていく様はいろんなウマ娘で見られたんだけど、こんな風に超常的な感じで狂っていくパターンがあるとは。。</p><p>育成の度にこれくらうのか〜。ノベルゲーのビターエンドっぽいのかな？あんまやったこと無いからわからんけど。</p><p>温泉旅行でどうやらトゥルーエンドのようなものが見れるらしい？次回の秋華賞チャンミでエースとして出走させるので、たくさん育成することになるからそのうち見れると思いたい。</p>]]></description>
           <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=6hCGk30HXHAfmHnsbXGoKm6e</guid>
+        </item>
+        <item>
+          <title>サイト内を検索できるようにした</title>
+          <link>https://morvra.github.io/article?id=bW9jzGBMYNzTeYr5rsTYckxj</link>
+          <description><![CDATA[<p>サイト内検索は前から実装したかったんだけど、コンテンツ少ないし、どんな形式がいいか決めかねてて保留にしていた。</p><p>今日たまたまDave WinerさんのScripting Newsを検索するためのサイト <a href="https://daytona.scripting.com/" target="_blank">DAYTONA 2</a> を見つけて、こんな感じがいいなと思ってGeminiとともに作ったのがこちら。</p><ul><li><a href="https://morvra.github.io/search" target="_blank">検索 - morvra lists</a></li></ul><p>入力フォームで検索したらワードの含まれた記事が一覧できて、記事内の該当部分が抜粋されハイライトになる仕様。</p><p>DynalistとかWorkflowyの検索に近い感触で気に入ってる。</p>]]></description>
+          <pubDate>Tue, 26 Aug 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=bW9jzGBMYNzTeYr5rsTYckxj</guid>
         </item>
       </channel>
     </rss>
