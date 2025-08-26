@@ -12,7 +12,12 @@ body {
     margin: 0;
 }
 a {
-    color: #005aff;
+    color: #0088cc;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: #005580;
+    text-decoration: underline;
 }
 
 header {
@@ -36,7 +41,6 @@ header {
 }
 .container h1 a {
     color: #333;
-    text-decoration: none;
 }
 img.blog-icon {
     height: 18px;
@@ -60,11 +64,10 @@ nav ul li:last-child {
 
 nav ul li a {
     color: #888;
-    text-decoration: none;
 }
 
 nav ul li a:hover {
-    color: #005aff; /* ホバー時の色 */
+    color: #0088cc; /* ホバー時の色 */
 }
 
 main {
@@ -135,14 +138,13 @@ ul.nav-icons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-decoration: none;
     color: #555;
     font-size: 0.8em;
     transition: color 0.2s ease-in-out;
 }
 
 .nav-item a:hover {
-    color: #005aff; /* ホバー時の色 */
+    color: #0088cc; /* ホバー時の色 */
 }
 
 .nav-item i {
@@ -295,7 +297,6 @@ iframe {
     font-size: 0.9em;
 }
 #article-tags a {
-    text-decoration: none;
     color: #888;
 }
 
@@ -333,10 +334,6 @@ iframe {
 code {
     color: #c7254e;
     background-color: #f5f5f5;
-}
-
-#article-content a[href*="morvra.github.io"] {
-    text-decoration: none;
 }
 
 #article-content blockquote {
@@ -385,7 +382,6 @@ h2#piece-title {
 }
 h2#piece-title a {
     color: #333;
-    text-decoration: none;
 }
 
 /* navigation */
@@ -394,11 +390,9 @@ h2#piece-title a {
 }
 a.next {
     float: right;
-    text-decoration: none;
 }
 a.prev {
     float: left;
-    text-decoration: none;
 }
 
 footer {
@@ -425,10 +419,6 @@ footer {
     margin-bottom: 24px;
     border-bottom: 1px dashed #ccc;
     padding-bottom: 16px;
-}
-
-.search-result-item a {
-    text-decoration: none;
 }
 
 .search-result-date {
@@ -466,7 +456,7 @@ footer {
 #search-button {
     padding: 10px 16px;
     font-size: 1em;
-    background-color: #005aff;
+    background-color: #0088cc;
     color: white;
     border: none;
     border-radius: 4px;
