@@ -128,6 +128,9 @@
             const jsonPath = './data.json';
             let allContent = [];
 
+            // DOMParserのインスタンスを作成
+            const parser = new DOMParser();
+
             fetch(jsonPath)
                 .then(response => {
                     if (!response.ok) {
@@ -157,6 +160,7 @@
                     const bodyMatch = content.body.toLowerCase().includes(query);
 
                     if (titleMatch || bodyMatch) {
+                        // 検索ワードにマッチしたコンテンツを結果に追加
                         results.push(content);
                     }
                 });
@@ -184,11 +188,15 @@
                     titleLink.innerHTML = highlightMatch(content.title, query);
                     listItem.appendChild(titleLink);
 
+                    // 検索ワードが本文にある場合、一致する要素を抜き出して表示
                     if (content.body.toLowerCase().includes(query)) {
-                        const snippet = document.createElement('p');
-                        snippet.classList.add('search-snippet');
-                        snippet.innerHTML = highlightBody(content.body, query);
-                        listItem.appendChild(snippet);
+                        const snippets = extractSnippets(content.body, query);
+                        snippets.forEach(snippetHtml => {
+                            const snippet = document.createElement('div');
+                            snippet.classList.add('search-snippet');
+                            snippet.innerHTML = snippetHtml;
+                            listItem.appendChild(snippet);
+                        });
                     }
 
                     resultList.appendChild(listItem);
@@ -197,37 +205,28 @@
                 searchResults.appendChild(resultList);
             };
 
+            // テキスト内の検索ワードをハイライトするヘルパー関数
             const highlightMatch = (text, query) => {
                 const regex = new RegExp(`(${query})`, 'gi');
                 return text.replace(regex, `<span class="highlight">$1</span>`);
             };
 
-            const highlightBody = (body, query) => {
-                const bodyLower = body.toLowerCase();
-                const queryLower = query.toLowerCase();
-                const queryIndex = bodyLower.indexOf(queryLower);
-                const snippetLength = 100;
+            // HTMLから検索ワードを含む要素を抜き出す関数
+            const extractSnippets = (html, query) => {
+                const doc = parser.parseFromString(html, 'text/html');
+                const snippets = new Set(); // 重複を防ぐためにSetを使用
 
-                if (queryIndex !== -1) {
-                    let startIndex = Math.max(0, queryIndex - 20);
-                    let endIndex = startIndex + snippetLength;
-                    
-                    if (endIndex > body.length) {
-                        endIndex = body.length;
+                // すべての要素を走査
+                doc.body.querySelectorAll('*').forEach(element => {
+                    // テキストノードに検索ワードが含まれているかチェック
+                    if (element.textContent.toLowerCase().includes(query.toLowerCase())) {
+                        // 親要素を抜き出してハイライト
+                        let snippetHtml = element.outerHTML;
+                        snippetHtml = highlightMatch(snippetHtml, query);
+                        snippets.add(snippetHtml);
                     }
-
-                    let snippetText = body.substring(startIndex, endIndex);
-
-                    if (startIndex > 0) {
-                        snippetText = '...' + snippetText;
-                    }
-                    if (endIndex < body.length) {
-                        snippetText = snippetText + '...';
-                    }
-
-                    return highlightMatch(snippetText, query);
-                }
-                return '';
+                });
+                return Array.from(snippets);
             };
 
             searchButton.addEventListener('click', performSearch);
