@@ -26,6 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (content) {
                 document.title = `${content.title} - morvra lists`; // titleタグを更新
+
+                // meta descriptionタグを追加または更新
+                let metaDescription = document.querySelector('meta[name="description"]');
+                if (!metaDescription) {
+                    metaDescription = document.createElement('meta');
+                    metaDescription.name = 'description';
+                    document.head.appendChild(metaDescription);
+                }
+                // 記事の本文からHTMLタグを取り除き、最初の約120文字を抜き出して設定
+                const descriptionText = content.body.replace(/<[^>]*>?/gm, '').substring(0, 120) + '...';
+                metaDescription.content = descriptionText;
+
                 articleTitleElement.innerHTML = `<h1>${content.title}</h1>`; // タイトルを表示
                 articleDateElement.textContent = `${content.date}`; // 日付を表示
                 
