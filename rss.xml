@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 03 Sep 2025 15:24:31 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 04 Sep 2025 15:23:54 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -236,6 +236,13 @@
           <description><![CDATA[<p>サイト内検索は前から実装したかったんだけど、コンテンツ少ないし、どんな形式がいいか決めかねてて保留にしていた。</p><p>今日たまたまDave WinerさんのScripting Newsを検索するためのサイト <a href="https://daytona.scripting.com/" target="_blank">DAYTONA 2</a> を見つけて、こんな感じがいいなと思ってGeminiとともに作ったのがこちら。</p><ul><li><a href="https://morvra.github.io/search" target="_blank">検索 - morvra lists</a></li></ul><p>入力フォームで検索したらワードの含まれた記事が一覧できて、記事内の該当部分が抜粋されハイライトになる仕様。</p><p>DynalistとかWorkflowyの検索に近い感触で気に入ってる。</p>]]></description>
           <pubDate>Tue, 26 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=bW9jzGBMYNzTeYr5rsTYckxj</guid>
+        </item>
+        <item>
+          <title>Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</title>
+          <link>https://morvra.github.io/article?id=_1IpsDTi5wmLBnn8En7h_HUn</link>
+          <description><![CDATA[<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href="https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/" target="_blank">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href="https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2" target="_blank">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src="https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500" alt="Image"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>]]></description>
+          <pubDate>Wed, 03 Sep 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=_1IpsDTi5wmLBnn8En7h_HUn</guid>
         </item>
       </channel>
     </rss>

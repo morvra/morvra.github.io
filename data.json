@@ -304,6 +304,16 @@
 				"ブログ"
 			],
 			"body": "<p>サイト内検索は前から実装したかったんだけど、コンテンツ少ないし、どんな形式がいいか決めかねてて保留にしていた。</p><p>今日たまたまDave WinerさんのScripting Newsを検索するためのサイト <a href=\"https://daytona.scripting.com/\" target=\"_blank\">DAYTONA 2</a> を見つけて、こんな感じがいいなと思ってGeminiとともに作ったのがこちら。</p><ul><li><a href=\"https://morvra.github.io/search\" target=\"_blank\">検索 - morvra lists</a></li></ul><p>入力フォームで検索したらワードの含まれた記事が一覧できて、記事内の該当部分が抜粋されハイライトになる仕様。</p><p>DynalistとかWorkflowyの検索に近い感触で気に入ってる。</p>"
+		},
+		{
+			"id": "_1IpsDTi5wmLBnn8En7h_HUn",
+			"title": "Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった",
+			"date": "2025-09-03",
+			"tags": [
+				"dynalist",
+				"javascript"
+			],
+			"body": "<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href=\"https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/\" target=\"_blank\">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href=\"https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2\" target=\"_blank\">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src=\"https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500\" alt=\"Image\"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>"
 		}
 	],
 	"pieces": [
@@ -605,6 +615,15 @@
 				"シャドバWB"
 			],
 			"body": "<p>よっしゃーー💪 2弾にしてグランプリ初優勝！</p><p><img src=\"https://gyazo.com/1645626a47b837e3abfb0abde64e3794/thumb/800\" alt=\"Image\"></p><p>戦績：ナイ先○ ドラ先○ ロイ先○ ビショ後○ ロイ後× ナイ先○</p><p>使ったデッキはスペルウィッチ。<a href=\"https://morvra.github.io/article?id=-d2oBXY_72ZasC9OWTIjBDXK\">昨日の記事</a>の通り、ペネロピー3、イラプションを採用してロイヤルとナイトメアに強いリストにしたつもり。</p><p><img src=\"https://gyazo.com/f836ac92a1f829f798c9e7fb28b3e9fd/thumb/800\" alt=\"Image\"></p><p>＊ピン挿し多いリスト好きじゃないんだけどドロー多いので耐え。AoEのバランスは謎</p><p>最後の一戦はデッキ切れまであと1枚の死闘。0コスODを引いてサタンODアスタロトというシーズンを象徴する勝利に。</p><p>負けたのは重めのロイヤル。中盤まで押せ押せで相手のライフ7まで削れて調子乗って除去札無くなって負けた。打点が無いデッキだから攻めるプランはリーサル見えてないとダメね。</p>"
+		},
+		{
+			"id": "ySQ9XiYNux-k1uMTaSy7OHs_",
+			"title": "シャドバWB マスターサファイア帯12連勝含む15‐5でダイヤモンド帯へ！",
+			"date": "2025-09-04",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><img src=\"https://gyazo.com/2ad0034e713a3106c9daf11b42461bb6/thumb/500\" alt=\"Image\"></p><p>うおおおおお！かなり上振れただけともいう。</p><p>新環境でときめくアーキタイプ無かったので3弾でも相変わらず土スペルウィッチ使ってる。既存デッキとギルネリーゼのシナジーめっちゃあってなんだかんだ楽しい。</p><p>ビショにそこそこ安定して勝てるようになってきたのがデカい。序中盤進化（特に超進化）温存＆クオンは10T以降の打点という意識。相手もぶん回ってたりサタン先に出されると厳しいけど。</p><p>3日前にトパーズ落ちしてダイヤでグラマスとか夢のまた夢という感じだったんだがありえるぞこれ！</p><p>と思ったらダイヤ入って怒涛の4連敗。なんとか連敗止まったけど厳しい。</p><p>最終的にダイヤ帯入ってから6‐9。やっぱみんなうまいわ。こっちが厳しくなるムーブ分かってる。</p>"
 		}
 	]
 }
