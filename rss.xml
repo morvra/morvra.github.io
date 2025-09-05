@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Thu, 04 Sep 2025 15:23:54 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 05 Sep 2025 15:23:22 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -243,6 +243,13 @@
           <description><![CDATA[<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href="https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/" target="_blank">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href="https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2" target="_blank">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src="https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500" alt="Image"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>]]></description>
           <pubDate>Wed, 03 Sep 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=_1IpsDTi5wmLBnn8En7h_HUn</guid>
+        </item>
+        <item>
+          <title>【シャドバWB】グラマス達成！</title>
+          <link>https://morvra.github.io/article?id=iFUfThEJw7TK_oNazeo3cqe4</link>
+          <description><![CDATA[<p>グラマス実装直後のランクマッチで達成！</p><p><img src="https://gyazo.com/38add4e04ba0bbe39f8f7fd5b1f52f02/thumb/500" alt="Image"></p><p>2回目の昇格戦で昇格。なんとダイヤいってから降格なし！できすぎ！</p><p><img src="https://gyazo.com/4b7b4f60e315c036f9103c4af1107d39/thumb/500" alt="Image"></p><p>直近の戦績は16-14でギリ勝ち越しｗ 使用デッキはスペルウィッチ一本。</p><p><img src="https://gyazo.com/9b115914099f3e71ff7cc34502f9dd53/thumb/500" alt="Image"></p><p>継承者出てすぐのEra53さんのリスト（ https://x.com/garbage_er/status/1962042383304171606 ）を使い続けた。慣れたリストを崩したくなくてずっとそのまま使ってたけど、グラマス上がったことだしこっからはリスト弄りつつやってこう。</p><p>マスターランクマ終盤はスノーアウェイク入れたりペネロピー抜いたりしたかったのよね。でもロイヤル多いならペネロピーの価値高くなるからグラマスの環境次第かな〜。</p><hr><p>練度としては自分の動きに少しずつ慣れてきて時間切れの回数がだいぶ減った。</p><p>リーサルまでのプランがハンドで見えてる時や、強いムーブができるターンはそこそこやれてるんだけど、微妙なターンのすごし方はまだまだ謎。</p><p>優勢/劣勢が微妙なラインでのODがめっちゃむずくて、相手からのリーサル無いからと耐えてたら強ムーブされてはっきり劣勢になってODしてもズルズル負けちゃうパターンもありゃあ、確定リーサル無いのに強いターンにしたいからってOD打って引いてきた5枚が噛み合わなくて結局強くpp使えないパターンもある。</p><p>何となくで打つんじゃなくて、デッキに何入ってるか把握して「〇〇か〇〇引けたら強いしそこそこ確率ありそうだ」って感じで打つODが強いんだろうな。</p><p>相手を見ることもまだ全然できてなくて、相手のハンド読もうとし始めたくらいのレベル。</p><p>まだまだ課題は多いんだけど、その課題が具体的に見えてきたのがもう成長だと思うことにする。</p>]]></description>
+          <pubDate>Fri, 05 Sep 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=iFUfThEJw7TK_oNazeo3cqe4</guid>
         </item>
       </channel>
     </rss>
