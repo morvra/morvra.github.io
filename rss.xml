@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sun, 07 Sep 2025 15:20:01 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 08 Sep 2025 15:24:15 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>記事テスト</title>
@@ -250,6 +250,20 @@
           <description><![CDATA[<p>グラマス実装直後のランクマッチで達成！</p><p><img src="https://gyazo.com/38add4e04ba0bbe39f8f7fd5b1f52f02/thumb/500" alt="Image"></p><p>2回目の昇格戦で昇格。なんとダイヤいってから降格なし！できすぎ！</p><p><img src="https://gyazo.com/4b7b4f60e315c036f9103c4af1107d39/thumb/500" alt="Image"></p><p>直近の戦績は16-14でギリ勝ち越しｗ 使用デッキはスペルウィッチ一本。</p><p><img src="https://gyazo.com/9b115914099f3e71ff7cc34502f9dd53/thumb/500" alt="Image"></p><p>継承者出てすぐのEra53さんのリスト（ https://x.com/garbage_er/status/1962042383304171606 ）を使い続けた。慣れたリストを崩したくなくてずっとそのまま使ってたけど、グラマス上がったことだしこっからはリスト弄りつつやってこう。</p><p>マスターランクマ終盤はスノーアウェイク入れたりペネロピー抜いたりしたかったのよね。でもロイヤル多いならペネロピーの価値高くなるからグラマスの環境次第かな〜。</p><hr><p>練度としては自分の動きに少しずつ慣れてきて時間切れの回数がだいぶ減った。</p><p>リーサルまでのプランがハンドで見えてる時や、強いムーブができるターンはそこそこやれてるんだけど、微妙なターンのすごし方はまだまだ謎。</p><p>優勢/劣勢が微妙なラインでのODがめっちゃむずくて、相手からのリーサル無いからと耐えてたら強ムーブされてはっきり劣勢になってODしてもズルズル負けちゃうパターンもありゃあ、確定リーサル無いのに強いターンにしたいからってOD打って引いてきた5枚が噛み合わなくて結局強くpp使えないパターンもある。</p><p>何となくで打つんじゃなくて、デッキに何入ってるか把握して「〇〇か〇〇引けたら強いしそこそこ確率ありそうだ」って感じで打つODが強いんだろうな。</p><p>相手を見ることもまだ全然できてなくて、相手のハンド読もうとし始めたくらいのレベル。</p><p>まだまだ課題は多いんだけど、その課題が具体的に見えてきたのがもう成長だと思うことにする。</p>]]></description>
           <pubDate>Fri, 05 Sep 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=iFUfThEJw7TK_oNazeo3cqe4</guid>
+        </item>
+        <item>
+          <title>Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト</title>
+          <link>https://morvra.github.io/article?id=Qj-JFAD5nMpZ-sTy3Zvj1ts_</link>
+          <description><![CDATA[<p>つくった。</p><p>gist → <a href="https://gist.github.com/morvra/a490a0b6918a700e023b00013d57ee4c" target="_blank">Dynalist Random Tagged Item Viewer</a> / <a href="https://gist.github.com/morvra/eb2ec1cf588c8bf3e143ea86649204f3" target="_blank">Dynalist Random Item Viewer</a></p><ul><li>右下のコンテナに設定した項目がランダムで表示される</li><li>コンテナをクリックでその項目に移動</li><li>ボタンで項目の中からランダムに切り替え</li></ul><p>「今日の名言」「モットーから1要素」「アイディアリストから1つ」「クイズや英単語問題集」などなど見かえしたいもの何でもござれ。</p><p>完成してから思ったけど、Dynalistでデイリーノート書いてるとほぼ日手帳の「日々の言葉」みたいになってて良さげ。</p>]]></description>
+          <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=Qj-JFAD5nMpZ-sTy3Zvj1ts_</guid>
+        </item>
+        <item>
+          <title>Dynalistの連用日記用ビューワーをつくった</title>
+          <link>https://morvra.github.io/article?id=1-aPbcWSLrKeCuuQhwsM4f5f</link>
+          <description><![CDATA[<p>▼ これ</p><p><img src="https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000" alt="Image"></p><ul><li><a href="https://morvra.github.io/dynalistdiary" target="_blank">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>]]></description>
+          <pubDate>Sun, 07 Sep 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=1-aPbcWSLrKeCuuQhwsM4f5f</guid>
         </item>
       </channel>
     </rss>
