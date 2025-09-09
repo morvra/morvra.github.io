@@ -137,9 +137,9 @@
             min-height: calc(100vh - 120px);
             overflow-x: auto;
         }
-
-        .year-column,
-        .search-column {
+        
+        /* 日記表示用 */
+        .year-column {
             flex-shrink: 0;
             width: 400px;
             padding: 16px;
@@ -148,9 +148,41 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        .search-column {
-            width: 400px;
+        /* 検索結果表示用 (Masonryレイアウト) */
+        #search-results-container {
+            column-count: 3;
+            column-gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+
+        @media (max-width: 1200px) {
+            #search-results-container {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #search-results-container {
+                column-count: 1;
+            }
+        }
+        
+        /* 検索結果の各カード */
+        .search-card {
+            display: inline-block;
+            width: 95%;
+            margin-bottom: 20px;
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            break-inside: avoid;
+        }
+		.search-card {
+		    word-break: break-all;
+		}
         
         @media (max-width: 768px) {
             #main-controls-container {
@@ -159,7 +191,7 @@
                 padding: 16px;
             }
             .year-column,
-            .search-column {
+            .search-card {
                 max-width: 85vw;
             }
         }
@@ -230,11 +262,12 @@
                 flex-wrap: wrap; /* モバイルでは縦に並べる */
                 justify-content: center;
                 padding-bottom: 10px;
+				min-height: auto;
             }
 
-            .year-column, .search-column {
-                width: 86vw;
-                max-width: 86vw;
+            .year-column, .search-card {
+                width: 91vw;
+                max-width: 100vw;
             }
         }
 
@@ -248,7 +281,7 @@
         }
         
         .search-column-title {
-            font-size: 1.3em;
+            font-size: 1em;
             font-weight: 500;
             color: #555;
             margin-bottom: 15px;
@@ -319,21 +352,35 @@
             left: 0;
             top: -0.2em;
         }
+        
+        /* 検索結果のカード内のリスト */
+        .search-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        
+        .search-card ul li {
+            position: relative;
+            padding-left: .5em;
+            margin-bottom: 5px;
+            cursor: default;
+        }
 
         /* リンクスタイル */
-        .entry a {
+        .entry a, .search-card a {
             color: #4a90e2;
             text-decoration: none;
             transition: color 0.3s ease;
 			word-break: break-all;
         }
-        .entry a:hover {
+        .entry a:hover, .search-card a:hover {
             color: #357bd9;
             text-decoration: underline;
         }
         
         /* Markdownレンダリング用 */
-        .entry img {
+        .entry img, .search-card img {
             max-width: 100%;
             height: auto;
             border-radius: 6px;
@@ -341,7 +388,7 @@
         }
 
         /* ローディングメッセージ */
-        #entries-container > p {
+        #entries-container > p, #search-results-container > p {
             width: 100%;
             text-align: center;
             font-style: italic;
@@ -349,7 +396,7 @@
             font-size: 1em;
             padding-top: 50px;
         }
-
+        
         .highlight {
             background-color: #ffe893;
             border-radius: 4px;
@@ -384,12 +431,14 @@
         <button id="save-settings">設定を保存</button>
     </div>
     <div id="entries-container"></div>
+    <div id="search-results-container"></div>
 
     <script>
         const apiKeyInput = document.getElementById('api-key');
         const docIdsInput = document.getElementById('doc-ids');
         const saveSettingsButton = document.getElementById('save-settings');
         const entriesContainer = document.getElementById('entries-container');
+        const searchResultsContainer = document.getElementById('search-results-container');
         const settingsContainer = document.getElementById('settings-container');
         const settingsToggleButton = document.getElementById('settings-toggle-button');
 
@@ -433,6 +482,7 @@
 
         async function fetchMultipleDynalistData() {
             entriesContainer.innerHTML = `<p>データの読み込み中...</p>`;
+            searchResultsContainer.style.display = 'none';
             try {
                 const promises = DOCUMENT_IDS.map(id => fetchDynalistData(id));
                 const results = await Promise.all(promises);
@@ -478,8 +528,9 @@
         }
 
         function renderEntries(nodes) {
-            const container = document.getElementById('entries-container');
-            container.innerHTML = '';
+            entriesContainer.style.display = 'flex';
+            searchResultsContainer.style.display = 'none';
+            entriesContainer.innerHTML = '';
             
             const selectedDate = new Date(datePicker.value);
             const monthDay = `${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')}`;
@@ -502,10 +553,10 @@
 
             const sortedYears = Object.keys(years).sort().reverse();
             if (sortedYears.length === 0) {
-                container.innerHTML = `<p>${monthDay} の日記は見つかりませんでした。</p>`;
+                entriesContainer.innerHTML = `<p>${monthDay} の日記は見つかりませんでした。</p>`;
                 return;
             }
-            container.innerHTML = '';
+            entriesContainer.innerHTML = '';
             
             sortedYears.forEach(year => {
                 const yearColumn = document.createElement('div');
@@ -542,7 +593,7 @@
                     entryDiv.appendChild(ul);
                     yearColumn.appendChild(entryDiv);
                 });
-                container.appendChild(yearColumn);
+                entriesContainer.appendChild(yearColumn);
             });
         }
         
@@ -598,31 +649,36 @@
         
         // 検索ロジックを実装する関数
         function searchAndRenderEntries(query) {
-            const container = document.getElementById('entries-container');
-            container.innerHTML = '';
+            entriesContainer.style.display = 'none';
+            searchResultsContainer.style.display = 'block';
+            searchResultsContainer.innerHTML = '';
             
             if (!query) {
                 init();
                 return;
             }
+            
+            const title = document.createElement('div');
+            title.className = 'search-column-title';
+            title.innerHTML = `"${query}" の検索結果`;
+            searchResultsContainer.appendChild(title);
 
-            const searchColumn = document.createElement('div');
-            searchColumn.className = 'search-column';
-            searchColumn.innerHTML = `<div class="search-column-title">"${query}" の検索結果</div>`;
-
-            const ul = document.createElement('ul');
             const nodeMap = createNodeMap(allNodes);
-
             const matchedNodes = allNodes.filter(node => node.content.includes(query));
 
             if (matchedNodes.length === 0) {
-                ul.innerHTML = `<li>検索結果が見つかりませんでした。</li>`;
+                searchResultsContainer.innerHTML = `<p>検索結果が見つかりませんでした。</p>`;
             } else {
                 matchedNodes.forEach(node => {
                     const contentHtml = marked.parse(node.content.replace(new RegExp(query, 'g'), `<span class="highlight">${query}</span>`), { async: false, breaks: true });
                     const link = `https://dynalist.io/d/${node.documentId}#z=${node.id}`;
                     
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'search-card';
+                    
+                    const ul = document.createElement('ul');
                     const li = document.createElement('li');
+                    
                     li.innerHTML = `<a href="${link}" target="_blank">${contentHtml}</a>`;
                     li.addEventListener('click', toggleOutline, false);
                     li.dataset.nodeId = node.id;
@@ -634,11 +690,10 @@
                     }
                     
                     ul.appendChild(li);
+                    cardDiv.appendChild(ul);
+                    searchResultsContainer.appendChild(cardDiv);
                 });
             }
-            
-            searchColumn.appendChild(ul);
-            container.appendChild(searchColumn);
         }
 
         function navigateDay(days) {
@@ -731,9 +786,9 @@
             DOCUMENT_IDS = docIdsInput.value.split(',').map(id => id.trim()).filter(id => id);
 
             if (API_KEY && DOCUMENT_IDS.length > 0) {
+                alert('設定を保存しました！');
                 localStorage.setItem('dynalistApiKey', API_KEY);
                 localStorage.setItem('dynalistDocIds', docIdsInput.value.trim());
-                alert('設定を保存しました！');
                 settingsContainer.classList.remove('open');
                 allNodes = []; // 設定変更に伴いノードをリセット
                 init();
