@@ -668,6 +668,15 @@
 				"シャドバWB"
 			],
 			"body": "<p><img src=\"https://gyazo.com/fa338fdcb8fb5acee101401d33ea9777/thumb/500\" alt=\"Image\"></p><p>まさかの。上振れただけだけどびっくり。</p><p>一応自分のリストでいけたのが嬉しい。</p>"
+		},
+		{
+			"id": "O0yppsDjQR3SzpvSDOv5SXsX",
+			"title": "Dynalist連用日記の検索結果をあれこれいじる",
+			"date": "2025-09-09",
+			"tags": [
+				"dynalist"
+			],
+			"body": "<ul><li>から項目ごとにカードにしてMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></p>"
 		}
 	]
 }
