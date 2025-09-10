@@ -643,7 +643,9 @@
             const ul = document.createElement('ul');
             node.children.forEach(childId => {
                 const childNode = nodeMap.get(childId);
-                if (childNode) {
+                
+                // ノードが存在し、かつ内容が空でない場合のみliタグを生成する
+                if (childNode && childNode.content.trim() !== '') {
                     const contentHtml = marked.parse(childNode.content, { async: false, breaks: true });
                     const li = document.createElement('li');
                     li.innerHTML = contentHtml;
@@ -663,7 +665,14 @@
                     ul.appendChild(li);
                 }
             });
-            return ul;
+
+            // 最終的にulに子要素(li)が一つも追加されなかった場合は、
+            // 空のulを返さずにnullを返す
+            if (ul.hasChildNodes()) {
+                return ul;
+            } else {
+                return null;
+            }
         }
 
         function toggleOutline(event) {
