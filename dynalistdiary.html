@@ -13,53 +13,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
+        /* General styling */
         html, body {
             margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: sans-serif;
             background-color: #f8f5ed;
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            padding: 10px;
         }
-        body {
-            padding: 20px;
-        }
-        
-        /* Settings UI Container */
-        #settings-container {
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 16px;
+
+        /* Container styling */
+        #settings-container, #main-controls-container, .year-column, .day-column, .search-card {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 16px;
         }
 
-        #settings-container.open {
-            display: flex; /* Show when .open class is added */
+        #settings-container {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
         }
+        #settings-container.open { display: flex; }
+        #settings-container label { font-size: 0.9em; color: #555; margin-bottom: -5px; }
+        #settings-container input { padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; font-family: inherit; width: 100%; box-sizing: border-box; }
 
-        #settings-container label {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: -5px;
-        }
-
-        #settings-container input[type="text"] {
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: inherit;
-            width: 100%; /* Full width */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-        }
-        
-        /* Main Controls Container */
         #main-controls-container {
             display: flex;
             flex-wrap: wrap;
@@ -67,28 +49,16 @@
             align-items: center;
             gap: 16px;
             margin-bottom: 20px;
-            padding: 16px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        #date-controls, #search-controls, #utility-controls {
+        #date-controls, #search-controls, #utility-controls, #view-controls {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        /* Base styles for buttons and input fields */
-        #date-picker,
-        #today-button,
-        .nav-button,
-        #search-input,
-        #search-button,
-        #clear-search-button,
-        #random-button,
-        #settings-toggle-button,
-        #save-settings {
+
+        /* Button styling */
+        button, input[type="date"], input[type="text"] {
             padding: 10px 12px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -99,57 +69,23 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
-        /* Hover styles */
-        #today-button:hover,
-        .nav-button:hover,
-        #search-button:hover,
-        #clear-search-button:hover,
-        #random-button:hover,
-        #settings-toggle-button:hover,
-        #save-settings:hover {
-            background-color: #e0e0e0;
-            border-color: #bbb;
-        }
-        
-        #save-settings {
-            background-color: #4a90e2;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        
-        #save-settings:hover {
-             background-color: #357bd9;
-        }
+        button:hover, input[type="date"]:hover { background-color: #e0e0e0; border-color: #bbb; }
+        .view-button.active { background-color: #4a90e2; color: #fff; border-color: #4a90e2; }
+        #save-settings { background-color: #4a90e2; color: #fff; border: none; }
+        #save-settings:hover { background-color: #357bd9; }
+        #search-input { cursor: text; }
 
-        #search-input {
-            cursor: text;
-        }
-
-        /* Containers and column display */
+        /* Content area */
         #entries-container {
             display: flex;
-			align-items: flex-start;
+            align-items: flex-start;
             flex-wrap: nowrap;
             gap: 20px;
             padding-bottom: 20px;
             min-height: calc(100vh - 120px);
             overflow-x: auto;
         }
-        
-        /* Daily view column */
-        .year-column {
-            flex-shrink: 0;
-            width: 400px;
-            padding: 16px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        /* Search results (Masonry layout) */
+
         #search-results-container {
             column-count: 3;
             column-gap: 20px;
@@ -158,266 +94,73 @@
             margin: 0 auto;
         }
 
-        @media (max-width: 1200px) {
-            #search-results-container {
-                column-count: 2;
-            }
-        }
-
-        @media (max-width: 768px) {
-            #search-results-container {
-                column-count: 1;
-            }
-        }
+        .year-column, .day-column { flex-shrink: 0; width: 400px; }
+        .column-title { font-size: 1.3em; font-weight: 500; color: #555; margin-bottom: 15px; text-align: center; }
+        .column-title .day-of-week { font-size: 0.8em; font-weight: 400; color: #888; }
         
-        /* Each search result card */
         .search-card {
             display: inline-block;
             position: relative;
-            width: 95%;
+            width: 92%;
             margin-bottom: 20px;
-            padding: 8px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             break-inside: avoid;
             word-break: break-all;
         }
-        
-        .search-card .parent-context {
-            font-size: 0.7em;
-            color: #888;
-            margin-bottom: 8px;
-            line-height: 1.2;
-            font-style: italic;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
+        .search-card .parent-context { font-size: 0.7em; color: #888; margin-bottom: 8px; line-height: 1.2; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* Mobile adjustments */
+        @media (max-width: 1200px) { #search-results-container { column-count: 2; } }
         @media (max-width: 768px) {
-            #main-controls-container {
-                flex-direction: column;
-                gap: 16px;
-                padding: 16px;
-            }
-            .year-column,
-            .search-card {
-                max-width: 85vw;
-            }
+            #search-results-container { column-count: 1; }
+            #main-controls-container { flex-direction: column; gap: 16px; padding: 16px; }
+            .year-column, .day-column, .search-card { max-width: 85vw; }
         }
-        
-        /* Mobile layout adjustments */
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            
-            #main-controls-container {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                gap: 8px;
-                padding: 10px;
-            }
-
-            #date-controls {
-                flex-grow: 1;
-                justify-content: flex-start;
-                gap: 5px;
-            }
-            
-            #search-controls {
-                flex-grow: 1;
-                justify-content: flex-end;
-                gap: 5px;
-            }
-
-            #utility-controls {
-                flex-shrink: 0;
-            }
-
-            #search-input {
-                width: 120px;
-            }
-            
-            /* Hide button text, show only icons */
-            #today-button, #random-button, #settings-toggle-button {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                padding: 0;
-            }
-            #settings-toggle-button span {
-                display: none;
-            }
-
-            .nav-button {
-                width: 40px;
-                height: 40px;
-                padding: 0;
-                font-size: 1.1em;
-            }
-            
-            #date-picker {
-				appearance: none;
-                flex-grow: 1;
-                max-width: 130px;
-                text-align: center;
-				padding: 10px 0;
-            }
-
-            #entries-container {
-                flex-wrap: wrap; /* Stack columns vertically on mobile */
-                justify-content: center;
-                padding-bottom: 10px;
-				min-height: auto;
-            }
-
-            .year-column, .search-card {
-                width: 86vw;
-                max-width: 100vw;
-            }
+            body { padding: 0px; }
+            #main-controls-container { flex-direction: row; justify-content: space-between; align-items: center; gap: 8px; padding: 10px; }
+            #date-controls, #search-controls { flex-grow: 1; justify-content: flex-start; gap: 5px; }
+            #search-controls { justify-content: flex-end; }
+            #utility-controls { flex-shrink: 0; }
+            #search-input { width: 120px; }
+            #today-button, #random-button, #settings-toggle-button, .nav-button { width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; }
+            #settings-toggle-button span { display: none; }
+            .nav-button { font-size: 1.1em; }
+            #date-picker { appearance: none; flex-grow: 1; max-width: 130px; text-align: center; padding: 10px 0; }
+            #entries-container { flex-wrap: wrap; justify-content: center; padding-bottom: 10px; min-height: auto; }
+            .year-column, .day-column, .search-card { width: 86vw; max-width: 100vw; }
         }
 
-        /* Diary content */
-        .year {
-            font-size: 1.3em;
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 15px;
-            text-align: center;
-        }
+        /* Entry content styling */
+        .search-column-title { font-size: 1em; font-weight: 500; color: #555; margin-bottom: 15px; text-align: center; }
+        .entry { margin-bottom: 15px; }
+        .entry p, .entry h2, .entry h3 { margin: 0; word-break: break-all; font-size: 1em; }
+        .entry ul, .search-card ul { list-style: none; padding-left: 0; margin-bottom: 0; }
+        .entry ul li, .search-card ul li { position: relative; padding-left: 1.1em; margin-bottom: 5px; cursor: default; }
+        .entry ul li::before { content: '\f0d7'; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 0.8em; color: #888; position: absolute; left: 0; top: 0.3em; transform: rotate(-90deg); transition: transform 0.2s ease-in-out; cursor: pointer; }
+        .entry ul li.open::before { transform: rotate(0deg); }
+        .entry ul ul { margin-top: 5px; }
+        .entry ul li:not(.open) > ul { display: none; }
+        .entry ul li:not(:has(ul))::before { content: '•'; font-family: 'Arial'; font-size: 1.2em; color: #888; transform: none; cursor: default; left: 0; top: -0.1em; }
+        .search-card ul li { padding-left: .5em; }
+
+        /* Link & image styling */
+        .entry a, .search-card a, .tag-link { color: #4a90e2; text-decoration: none; transition: color 0.3s ease; word-break: break-all; }
+        .entry a:hover, .search-card a:hover, .tag-link:hover { color: #357bd9; text-decoration: underline; }
+        .entry img, .search-card img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px; }
         
-        .search-column-title {
-            font-size: 1em;
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .entry {
-            margin-bottom: 15px;
-        }
-        
-        .entry p {
-            margin: 0;
-            word-break: break-all;
-        }
-        .entry h2, .entry h3 {
-            font-size: 1em;
-        }
-
-        .entry ul {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-        
-        .entry ul li {
-            position: relative;
-            padding-left: 1.1em;
-            margin-bottom: 5px;
-            cursor: default;
-        }
-        
-        /* Expand/Collapse icon style */
-        .entry ul li::before {
-            content: '\f0d7'; /* Font Awesome icon */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            font-size: 0.8em;
-            color: #888;
-            position: absolute;
-            left: 0;
-            top: 0.1em;
-            transform: rotate(-90deg);
-            transition: transform 0.2s ease-in-out;
-            cursor: pointer;
-        }
-
-        .entry ul li.open::before {
-            transform: rotate(0deg);
-        }
-        
-        .entry ul ul {
-            margin-top: 5px;
-        }
-
-        /* Hide children of collapsed nodes */
-        .entry ul li:not(.open) > ul {
-            display: none;
-        }
-
-        /* Simple dot for nodes without children */
-        .entry ul li:not(:has(ul))::before {
-            content: '•';
-            font-family: 'Arial';
-            font-size: 1.2em;
-            color: #888;
-            transform: none;
-            cursor: default;
-            left: 0;
-            top: -0.2em;
-        }
-        
-        /* List in search cards */
-        .search-card ul {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-        
-        .search-card ul li {
-            position: relative;
-            padding-left: .5em;
-            margin-bottom: 5px;
-            cursor: default;
-        }
-
-        /* Link style */
-        .entry a, .search-card a {
-            color: #4a90e2;
-            text-decoration: none;
-            transition: color 0.3s ease;
-			word-break: break-all;
-        }
-        .entry a:hover, .search-card a:hover {
-            color: #357bd9;
-            text-decoration: underline;
-        }
-        
-        /* Markdown rendering */
-        .entry img, .search-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
-
-        /* Loading message */
-        #entries-container > p, #search-results-container > p {
-            width: 100%;
-            text-align: center;
-            font-style: italic;
-            color: #777;
-            font-size: 1em;
-            padding-top: 50px;
-        }
-        
-        .highlight {
-            background-color: #ffe893;
-            border-radius: 4px;
-            padding: 2px 4px;
-        }
+        #entries-container > p, #search-results-container > p { width: 100%; text-align: center; font-style: italic; color: #777; font-size: 1em; padding-top: 50px; }
+        .highlight { background-color: #ffe893; border-radius: 4px; padding: 2px 4px; }
+        .tag-link { cursor: pointer; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div id="main-controls-container">
+        <div id="view-controls">
+            <button id="daily-view-btn" class="view-button active">日別</button>
+            <button id="weekly-view-btn" class="view-button">週別</button>
+            <button id="monthly-view-btn" class="view-button">月別</button>
+        </div>
         <div id="date-controls">
             <button id="prev-day" class="nav-button"><i class="fas fa-chevron-left"></i></button>
             <input type="date" id="date-picker">
@@ -442,39 +185,27 @@
         <button id="save-settings">設定を保存</button>
     </div>
     <div id="entries-container"></div>
-    <div id="search-results-container"></div>
+    <div id="search-results-container" style="display: none;"></div>
 
     <script>
-        const apiKeyInput = document.getElementById('api-key');
-        const docIdsInput = document.getElementById('doc-ids');
-        const saveSettingsButton = document.getElementById('save-settings');
-        const entriesContainer = document.getElementById('entries-container');
-        const searchResultsContainer = document.getElementById('search-results-container');
-        const settingsContainer = document.getElementById('settings-container');
-        const settingsToggleButton = document.getElementById('settings-toggle-button');
-
-        const datePicker = document.getElementById('date-picker');
-        const todayButton = document.getElementById('today-button');
-        const prevDayButton = document.getElementById('prev-day');
-        const nextDayButton = document.getElementById('next-day');
-        const randomButton = document.getElementById('random-button');
-        const searchInput = document.getElementById('search-input');
-        const searchButton = document.getElementById('search-button');
-        const clearSearchButton = document.getElementById('clear-search-button');
+        const elements = [
+            'api-key', 'doc-ids', 'save-settings', 'entries-container', 'search-results-container',
+            'settings-container', 'settings-toggle-button', 'date-picker', 'today-button', 'prev-day',
+            'next-day', 'random-button', 'search-input', 'search-button', 'clear-search-button',
+            'daily-view-btn', 'weekly-view-btn', 'monthly-view-btn'
+        ].reduce((acc, id) => { acc[id] = document.getElementById(id); return acc; }, {});
 
         let allNodes = [];
         let nodeMap = new Map();
         let dateNodes = {};
         let API_KEY = '';
         let DOCUMENT_IDS = [];
+        let currentView = 'daily';
 
         function setTodayDate() {
             const today = new Date();
-            const year = today.getFullYear();
-            const month = (today.getMonth() + 1).toString().padStart(2, '0');
-            const day = today.getDate().toString().padStart(2, '0');
-            datePicker.value = `${year}-${month}-${day}`;
-            init();
+            elements['date-picker'].value = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+            switchView('daily');
         }
 
         async function fetchDynalistData(documentId) {
@@ -484,8 +215,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token: API_KEY, file_id: documentId }),
                 });
-                const data = await response.json();
-                return data;
+                return await response.json();
             } catch (error) {
                 console.error(`Error with API call for document ${documentId}:`, error);
                 return null;
@@ -493,52 +223,41 @@
         }
 
         async function fetchMultipleDynalistData() {
-            entriesContainer.innerHTML = `<p>データの読み込み中...</p>`;
-            searchResultsContainer.style.display = 'none';
+            elements['entries-container'].innerHTML = `<p>データの読み込み中...</p>`;
+            elements['search-results-container'].style.display = 'none';
             try {
-                const promises = DOCUMENT_IDS.map(id => fetchDynalistData(id));
-                const results = await Promise.all(promises);
-                
+                const results = await Promise.all(DOCUMENT_IDS.map(fetchDynalistData));
                 let combinedNodes = [];
                 results.forEach((data, index) => {
                     if (data && data.nodes) {
-                        data.nodes.forEach(node => {
-                            node.documentId = DOCUMENT_IDS[index];
-                        });
-                        combinedNodes = combinedNodes.concat(data.nodes);
+                        data.nodes.forEach(node => node.documentId = DOCUMENT_IDS[index]);
+                        combinedNodes.push(...data.nodes);
                     }
                 });
                 return combinedNodes;
             } catch (error) {
                 console.error('Failed to load multiple documents:', error);
-                entriesContainer.innerHTML = `<p>データの読み込みに失敗しました。APIキーまたはドキュメントIDを確認してください。</p>`;
+                elements['entries-container'].innerHTML = `<p>データの読み込みに失敗しました。APIキーまたはドキュメントIDを確認してください。</p>`;
                 return [];
             }
         }
         
         function createNodeMap(nodes) {
-            nodeMap = new Map();
+            nodeMap.clear();
             const childToParent = {};
-            
             nodes.forEach(node => {
                 nodeMap.set(node.id, node);
                 if (node.children) {
-                    node.children.forEach(childId => {
-                        childToParent[childId] = node.id;
-                    });
+                    node.children.forEach(childId => childToParent[childId] = node.id);
                 }
             });
-            
-            nodes.forEach(node => {
-                node.parentId = childToParent[node.id] || null;
-            });
+            nodes.forEach(node => node.parentId = childToParent[node.id] || null);
         }
         
         function getParentNodes(nodeId, maxDepth = 2) {
             const parents = [];
             let currentNode = nodeMap.get(nodeId);
             let depth = 0;
-            
             while (currentNode && currentNode.parentId && depth < maxDepth) {
                 const parentNode = nodeMap.get(currentNode.parentId);
                 if (parentNode) {
@@ -554,228 +273,241 @@
 
         function extractDateNodes(nodes) {
             dateNodes = {};
-            const regex = new RegExp(`\\d{4}-\\d{2}-\\d{2}`);
+            const regex = /(\d{4}-\d{2}-\d{2})/;
             nodes.forEach(node => {
-                if (regex.test(node.content)) {
-                    const match = node.content.match(regex);
-                    const year = match[0].substring(0, 4);
-                    const date = match[0];
-                    if (!dateNodes[year]) {
-                        dateNodes[year] = new Set();
-                    }
+                const match = node.content.match(regex);
+                if (match) {
+                    const year = match[1].substring(0, 4);
+                    const date = match[1];
+                    if (!dateNodes[year]) dateNodes[year] = new Set();
                     dateNodes[year].add(date);
                 }
             });
         }
-
-        function renderEntries(nodes) {
-            entriesContainer.style.display = 'flex';
-            searchResultsContainer.style.display = 'none';
-            entriesContainer.innerHTML = '';
+        
+        function renderDailyEntries(nodes) {
+            elements['entries-container'].style.display = 'flex';
+            elements['search-results-container'].style.display = 'none';
+            elements['entries-container'].innerHTML = '';
             
-            const selectedDate = new Date(datePicker.value);
+            const selectedDate = new Date(elements['date-picker'].value);
             const monthDay = `${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')}`;
-            
             const years = {};
-            const regex = new RegExp(`\\d{4}-${monthDay}`);
             
             nodes.forEach(node => {
-                if (regex.test(node.content)) {
-                    const match = node.content.match(regex);
-                    const year = match[0].substring(0, 4);
-
-                    if (!years[year]) {
-                        years[year] = [];
-                    }
+                const match = node.content.match(new RegExp(`(\\d{4})-${monthDay}`));
+                if (match) {
+                    const year = match[1];
+                    if (!years[year]) years[year] = [];
                     years[year].push(node);
                 }
             });
 
             const sortedYears = Object.keys(years).sort().reverse();
             if (sortedYears.length === 0) {
-                entriesContainer.innerHTML = `<p>${monthDay} の日記は見つかりませんでした。</p>`;
+                elements['entries-container'].innerHTML = `<p>${monthDay} の日記は見つかりませんでした。</p>`;
                 return;
             }
-            entriesContainer.innerHTML = '';
             
             sortedYears.forEach(year => {
                 const yearColumn = document.createElement('div');
                 yearColumn.className = 'year-column';
-                yearColumn.innerHTML = `<div class="year">${year}</div>`;
-                
-                const entries = years[year];
-                entries.forEach(entry => {
-                    const parentLink = `https://dynalist.io/d/${entry.documentId}#z=${entry.id}`;
-                    const parentContentHtml = marked.parse(entry.content, { async: false, breaks: true });
-                    
-                    const entryDiv = document.createElement('div');
-                    entryDiv.className = 'entry';
-                    
-                    const ul = document.createElement('ul');
-                    const li = document.createElement('li');
-                    
-                    li.innerHTML = `<a href="${parentLink}" target="_blank">${parentContentHtml}</a>`;
-                    li.addEventListener('click', toggleOutline, false);
-                    li.dataset.nodeId = entry.id;
-
-                    if (entry.children && entry.children.length > 0) {
-                        li.classList.add('open');
-                    }
-
-                    const childrenUl = renderChildren(entry);
-                    if (childrenUl) {
-                        li.appendChild(childrenUl);
-                    }
-                    
-                    ul.appendChild(li);
-                    entryDiv.appendChild(ul);
-                    yearColumn.appendChild(entryDiv);
-                });
-                entriesContainer.appendChild(yearColumn);
+                yearColumn.innerHTML = `<div class="column-title">${year}</div>`;
+                years[year].forEach(entry => yearColumn.appendChild(createEntryElement(entry)));
+                elements['entries-container'].appendChild(yearColumn);
             });
         }
         
-        function renderChildren(node) {
-            if (!node.children || node.children.length === 0) {
-                return null;
+        function renderPeriodEntries(periodType) {
+            elements['entries-container'].style.display = 'flex';
+            elements['search-results-container'].style.display = 'none';
+            elements['entries-container'].innerHTML = '';
+
+            const currentDate = new Date(elements['date-picker'].value + 'T00:00:00');
+            let startDate, endDate;
+            const japaneseDays = ['日', '月', '火', '水', '木', '金', '土'];
+
+            if (periodType === 'weekly') {
+                startDate = new Date(currentDate);
+                const day = startDate.getDay();
+                startDate.setDate(startDate.getDate() - day + (day === 0 ? -6 : 1));
+                endDate = new Date(startDate);
+                endDate.setDate(endDate.getDate() + 6);
+            } else {
+                startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            }
+            
+            const dateRegex = /(\d{4}-\d{2}-\d{2})/;
+            const groupedByDate = allNodes.filter(node => {
+                const match = node.content.match(dateRegex);
+                if (match) {
+                    const nodeDate = new Date(match[1] + 'T00:00:00');
+                    return nodeDate >= startDate && nodeDate <= endDate;
+                }
+                return false;
+            }).reduce((acc, node) => {
+                const date = node.content.match(dateRegex)[1];
+                if (!acc[date]) acc[date] = [];
+                acc[date].push(node);
+                return acc;
+            }, {});
+
+            const sortedDates = Object.keys(groupedByDate).sort();
+            if (sortedDates.length === 0) {
+                const format = d => `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
+                elements['entries-container'].innerHTML = `<p>${format(startDate)} から ${format(endDate)} の日記は見つかりませんでした。</p>`;
+                return;
             }
 
+            sortedDates.forEach(date => {
+                const dayColumn = document.createElement('div');
+                dayColumn.className = 'day-column';
+                const entryDate = new Date(date + 'T00:00:00');
+                const dayOfWeek = japaneseDays[entryDate.getDay()];
+                dayColumn.innerHTML = `<div class="column-title">${date} <span class="day-of-week">(${dayOfWeek})</span></div>`;
+                groupedByDate[date].forEach(entry => dayColumn.appendChild(createEntryElement(entry)));
+                elements['entries-container'].appendChild(dayColumn);
+            });
+        }
+
+        function renderContentWithTags(content) {
+            const tagRegex = /(#[^ ]+)|(@[^ ]+)/g;
+            return content.replace(tagRegex, match => {
+                const sanitizedMatch = match.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return `<span class="tag-link" data-tag="${sanitizedMatch}">${sanitizedMatch}</span>`;
+            });
+        }
+        
+        function createEntryElement(entry) {
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'entry';
+            const ul = document.createElement('ul');
+            const li = document.createElement('li');
+            li.dataset.nodeId = entry.id;
+
+            const contentWithTags = renderContentWithTags(entry.content);
+            const parentContentHtml = marked.parse(contentWithTags, { async: false, breaks: true });
+            
+            li.innerHTML = `<a href="https://dynalist.io/d/${entry.documentId}#z=${entry.id}" target="_blank">${parentContentHtml}</a>`;
+            if (entry.children && entry.children.length > 0) li.classList.add('open');
+
+            const childrenUl = renderChildren(entry);
+            if (childrenUl) li.appendChild(childrenUl);
+            
+            ul.appendChild(li);
+            entryDiv.appendChild(ul);
+            return entryDiv;
+        }
+        
+        function renderChildren(node) {
+            if (!node.children || node.children.length === 0) return null;
             const ul = document.createElement('ul');
             node.children.forEach(childId => {
                 const childNode = nodeMap.get(childId);
-                
-                // ノードが存在し、かつ内容が空でない場合のみliタグを生成する
                 if (childNode && childNode.content.trim() !== '') {
-                    const contentHtml = marked.parse(childNode.content, { async: false, breaks: true });
                     const li = document.createElement('li');
-                    li.innerHTML = contentHtml;
-                    
-                    li.addEventListener('click', toggleOutline, false);
                     li.dataset.nodeId = childNode.id;
-
-                    if (childNode.children && childNode.children.length > 0 && !childNode.collapsed) {
-                        li.classList.add('open');
-                    }
-                    
+                    const contentWithTags = renderContentWithTags(childNode.content);
+                    li.innerHTML = marked.parse(contentWithTags, { async: false, breaks: true });
+                    if (childNode.children && childNode.children.length > 0 && !childNode.collapsed) li.classList.add('open');
                     const childrenUl = renderChildren(childNode);
-                    if (childrenUl) {
-                        li.appendChild(childrenUl);
-                    }
-                    
+                    if (childrenUl) li.appendChild(childrenUl);
                     ul.appendChild(li);
                 }
             });
-
-            // 最終的にulに子要素(li)が一つも追加されなかった場合は、
-            // 空のulを返さずにnullを返す
-            if (ul.hasChildNodes()) {
-                return ul;
-            } else {
-                return null;
-            }
+            return ul.hasChildNodes() ? ul : null;
         }
 
         function toggleOutline(event) {
             const rect = event.currentTarget.getBoundingClientRect();
             const clickX = event.clientX - rect.left;
-            
-            if (event.target.closest('a')) {
-                 return;
-            }
-             if (clickX < 15) {
+            if (event.target.closest('a') || event.target.closest('.tag-link')) return;
+            if (clickX < 15) {
                 event.stopPropagation();
                 const targetLi = event.currentTarget;
-                if (targetLi.querySelector('ul')) {
-                    targetLi.classList.toggle('open');
-                }
+                if (targetLi.querySelector('ul')) targetLi.classList.toggle('open');
             }
         }
         
-        // Search logic function
         function searchAndRenderEntries(query) {
-            entriesContainer.style.display = 'none';
-            searchResultsContainer.style.display = 'block';
-            searchResultsContainer.innerHTML = '';
+            elements['entries-container'].style.display = 'none';
+            elements['search-results-container'].style.display = 'block';
+            elements['search-results-container'].innerHTML = `<div class="search-column-title">"${query}" の検索結果</div>`;
             
             if (!query) {
                 init();
                 return;
             }
             
-            const title = document.createElement('div');
-            title.className = 'search-column-title';
-            title.innerHTML = `"${query}" の検索結果`;
-            searchResultsContainer.appendChild(title);
-
             const matchedNodes = allNodes.filter(node => node.content.includes(query));
-
             if (matchedNodes.length === 0) {
-                searchResultsContainer.innerHTML = `<p>検索結果が見つかりませんでした。</p>`;
-            } else {
-                matchedNodes.forEach(node => {
-                    const parents = getParentNodes(node.id);
-                    const parentContext = parents.map(p => {
-                        let content = p.content.replace(/\*|#|_|`|\[.*?\]\(.*?\)/g, '').trim(); // Remove Markdown syntax
-                        return content.split('\n')[0]; // Take only the first line
-                    }).join(' > ');
-                    
-                    const contentHtml = marked.parse(node.content.replace(new RegExp(query, 'g'), `<span class="highlight">${query}</span>`), { async: false, breaks: true });
-                    const link = `https://dynalist.io/d/${node.documentId}#z=${node.id}`;
-                    
-                    const cardDiv = document.createElement('div');
-                    cardDiv.className = 'search-card';
-                    
-                    if (parentContext) {
-                        const parentContextDiv = document.createElement('div');
-                        parentContextDiv.className = 'parent-context';
-                        parentContextDiv.textContent = parentContext;
-                        cardDiv.appendChild(parentContextDiv);
-                    }
-                    
-                    const ul = document.createElement('ul');
-                    const li = document.createElement('li');
-                    
-                    li.innerHTML = `<a href="${link}" target="_blank">${contentHtml}</a>`;
-                    li.addEventListener('click', toggleOutline, false);
-                    li.dataset.nodeId = node.id;
-                    
-                    const childrenUl = renderChildren(node);
-                    if (childrenUl) {
-                         li.classList.add('open');
-                         li.appendChild(childrenUl);
-                    }
-                    
-                    ul.appendChild(li);
-                    cardDiv.appendChild(ul);
-                    searchResultsContainer.appendChild(cardDiv);
-                });
+                elements['search-results-container'].innerHTML = `<p>検索結果が見つかりませんでした。</p>`;
+                return;
             }
+
+            matchedNodes.forEach(node => {
+                const parents = getParentNodes(node.id);
+                const parentContext = parents.map(p => p.content.replace(/\*|#|_|`|\[.*?\]\(.*?\)|@/g, '').trim().split('\n')[0]).join(' > ');
+                
+                const markedContent = marked.parse(node.content, { async: false, breaks: true });
+                const highlightedContent = markedContent.replace(new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), `<span class="highlight">${query}</span>`);
+                
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'search-card';
+                if (parentContext) {
+                    const parentContextDiv = document.createElement('div');
+                    parentContextDiv.className = 'parent-context';
+                    parentContextDiv.textContent = parentContext;
+                    cardDiv.appendChild(parentContextDiv);
+                }
+                
+                const ul = document.createElement('ul');
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="https://dynalist.io/d/${node.documentId}#z=${node.id}" target="_blank">${highlightedContent}</a>`;
+                li.dataset.nodeId = node.id;
+                
+                const childrenUl = renderChildren(node);
+                if (childrenUl) {
+                     li.classList.add('open');
+                     li.appendChild(childrenUl);
+                }
+                ul.appendChild(li);
+                cardDiv.appendChild(ul);
+                elements['search-results-container'].appendChild(cardDiv);
+            });
         }
 
-        function navigateDay(days) {
-            const currentDate = new Date(datePicker.value);
-            currentDate.setDate(currentDate.getDate() + days);
-            const year = currentDate.getFullYear();
-            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-            const day = currentDate.getDate().toString().padStart(2, '0');
-            datePicker.value = `${year}-${month}-${day}`;
+        function navigatePeriod(direction) {
+            const currentDate = new Date(elements['date-picker'].value + 'T00:00:00');
+            const dayStep = currentView === 'weekly' ? 7 : 1;
+            if (currentView === 'monthly') {
+                currentDate.setMonth(currentDate.getMonth() + direction);
+            } else {
+                currentDate.setDate(currentDate.getDate() + (dayStep * direction));
+            }
+            elements['date-picker'].value = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
             init();
         }
         
         function navigateToRandomDay() {
+            switchView('daily', false);
             const yearsWithEntries = Object.keys(dateNodes);
             if (yearsWithEntries.length === 0) {
-                const container = document.getElementById('entries-container');
-                container.innerHTML = `<p style="text-align: center; color: red;">日記のデータが見つからないため、ランダムな日付に移動できません。</p>`;
+                elements['entries-container'].innerHTML = `<p>日記のデータが見つかりません。</p>`;
                 return;
             }
-            
             const randomYear = yearsWithEntries[Math.floor(Math.random() * yearsWithEntries.length)];
             const datesForYear = Array.from(dateNodes[randomYear]);
-            const randomDate = datesForYear[Math.floor(Math.random() * datesForYear.length)];
-            
-            datePicker.value = randomDate;
+            elements['date-picker'].value = datesForYear[Math.floor(Math.random() * datesForYear.length)];
             init();
+        }
+
+        function switchView(view, doRender = true) {
+            currentView = view;
+            [elements['daily-view-btn'], elements['weekly-view-btn'], elements['monthly-view-btn']].forEach(btn => btn.classList.remove('active'));
+            elements[`${view}-view-btn`].classList.add('active');
+            if (doRender) init();
         }
 
         async function init() {
@@ -788,10 +520,11 @@
                     }
                 }
                 if (allNodes.length > 0) {
-                    renderEntries(allNodes);
+                    if (currentView === 'daily') renderDailyEntries(allNodes);
+                    else renderPeriodEntries(currentView);
                 }
             } else {
-                entriesContainer.innerHTML = `<p style="text-align: center; padding: 20px;">
+                elements['entries-container'].innerHTML = `<p style="text-align: center; padding: 20px;">
                     設定を保存してください。<br>
                     DynalistのAPIトークンとドキュメントIDを入力し、「設定を保存」ボタンを押してください。
                 </p>`;
@@ -799,74 +532,72 @@
         }
         
         function loadSettings() {
-            const storedApiKey = localStorage.getItem('dynalistApiKey');
-            const storedDocIds = localStorage.getItem('dynalistDocIds');
-
-            if (storedApiKey) {
-                apiKeyInput.value = storedApiKey;
-                API_KEY = storedApiKey;
-            }
-            if (storedDocIds) {
-                docIdsInput.value = storedDocIds;
-                DOCUMENT_IDS = storedDocIds.split(',').map(id => id.trim()).filter(id => id);
-            }
+            API_KEY = localStorage.getItem('dynalistApiKey') || '';
+            const storedDocIds = localStorage.getItem('dynalistDocIds') || '';
+            elements['api-key'].value = API_KEY;
+            elements['doc-ids'].value = storedDocIds;
+            DOCUMENT_IDS = storedDocIds.split(',').map(id => id.trim()).filter(id => id);
         }
         
-        // Add keyboard navigation
-        window.addEventListener('keydown', (e) => {
-            const activeElement = document.activeElement;
-            if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
-                return;
-            }
+        document.addEventListener('keydown', (e) => {
+            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+            if (e.key === 'ArrowLeft') { e.preventDefault(); navigatePeriod(-1); }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); navigatePeriod(1); }
+        });
 
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                navigateDay(-1);
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                navigateDay(1);
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.tag-link')) {
+                const tag = e.target.getAttribute('data-tag');
+                elements['search-input'].value = tag;
+                searchAndRenderEntries(tag);
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('li');
+            if (target && !e.target.closest('a') && !e.target.closest('.tag-link')) {
+                const rect = target.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                if (clickX < 15) {
+                    e.stopPropagation();
+                    if (target.querySelector('ul')) target.classList.toggle('open');
+                }
             }
         });
 
-        // Initial view
         loadSettings();
         setTodayDate();
 
-        // Event listeners
-        settingsToggleButton.addEventListener('click', () => {
-            settingsContainer.classList.toggle('open');
-        });
-
-        saveSettingsButton.addEventListener('click', () => {
-            API_KEY = apiKeyInput.value.trim();
-            DOCUMENT_IDS = docIdsInput.value.split(',').map(id => id.trim()).filter(id => id);
-
+        elements['settings-toggle-button'].addEventListener('click', () => elements['settings-container'].classList.toggle('open'));
+        elements['save-settings'].addEventListener('click', () => {
+            API_KEY = elements['api-key'].value.trim();
+            const docIdsValue = elements['doc-ids'].value.trim();
+            DOCUMENT_IDS = docIdsValue.split(',').map(id => id.trim()).filter(id => id);
             if (API_KEY && DOCUMENT_IDS.length > 0) {
-                // Use custom UI instead of alert()
                 localStorage.setItem('dynalistApiKey', API_KEY);
-                localStorage.setItem('dynalistDocIds', docIdsInput.value.trim());
-                settingsContainer.classList.remove('open');
+                localStorage.setItem('dynalistDocIds', docIdsValue);
+                elements['settings-container'].classList.remove('open');
                 allNodes = []; 
                 init();
             } else {
-                // Use custom UI instead of alert()
                 console.error('APIトークンとドキュメントIDを正しく入力してください。');
             }
         });
-
-        datePicker.addEventListener('change', init);
-        todayButton.addEventListener('click', setTodayDate);
-        prevDayButton.addEventListener('click', () => navigateDay(-1));
-        nextDayButton.addEventListener('click', () => navigateDay(1));
-        randomButton.addEventListener('click', navigateToRandomDay);
-        searchButton.addEventListener('click', () => searchAndRenderEntries(searchInput.value));
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchAndRenderEntries(searchInput.value);
-            }
-        });
-        clearSearchButton.addEventListener('click', () => {
-            searchInput.value = '';
+        
+        elements['daily-view-btn'].addEventListener('click', () => switchView('daily'));
+        elements['weekly-view-btn'].addEventListener('click', () => switchView('weekly'));
+        elements['monthly-view-btn'].addEventListener('click', () => switchView('monthly'));
+        elements['date-picker'].addEventListener('change', init);
+        elements['today-button'].addEventListener('click', setTodayDate);
+        elements['prev-day'].addEventListener('click', () => navigatePeriod(-1));
+        elements['next-day'].addEventListener('click', () => navigatePeriod(1));
+        elements['random-button'].addEventListener('click', navigateToRandomDay);
+        elements['search-button'].addEventListener('click', () => searchAndRenderEntries(elements['search-input'].value));
+        elements['search-input'].addEventListener('keypress', (e) => { if (e.key === 'Enter') searchAndRenderEntries(elements['search-input'].value); });
+        elements['clear-search-button'].addEventListener('click', () => {
+            elements['search-input'].value = '';
+            elements['search-results-container'].style.display = 'none';
+            elements['entries-container'].style.display = 'flex';
             init();
         });
     </script>
