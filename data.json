@@ -676,7 +676,7 @@
 			"tags": [
 				"dynalist"
 			],
-			"body": "<ul><li>から項目ごとにカードにしてMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></p>"
+			"body": "<ul><li>検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></p>"
 		}
 	]
 }
