@@ -624,20 +624,20 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Migration from old `tasks` to `dailyTasks`
-        const oldTasks = localStorage.getItem('taskshoot_tasks');
-        const newTasks = localStorage.getItem('taskshoot_dailyTasks');
+        const oldTasks = localStorage.getItem('dtl_tasks');
+        const newTasks = localStorage.getItem('dtl_dailyTasks');
         if (oldTasks && !newTasks) {
             const parsedOldTasks = JSON.parse(oldTasks);
             if (Array.isArray(parsedOldTasks) && parsedOldTasks.length > 0) {
                 const today = getFormattedDate(new Date());
                 state.dailyTasks[today] = parsedOldTasks;
-                localStorage.removeItem('taskshoot_tasks');
+                localStorage.removeItem('dtl_tasks');
                 console.log('Migrated old tasks to new dailyTasks structure.');
             }
         }
         
         Object.keys(defaults).forEach(k => {
-            const saved = localStorage.getItem(`taskshoot_${k}`);
+            const saved = localStorage.getItem(`dtl_${k}`);
             if ((k === 'archivedTasks' || k === 'dailyTasks') && !saved) {
                 state[k] = defaults[k];
             } else {
@@ -654,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function saveState() {
         Object.keys(state).forEach(k => {
             if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
-                localStorage.setItem(`taskshoot_${k}`, JSON.stringify(state[k]));
+                localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
             }
         });
     }
@@ -2082,7 +2082,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `taskshoot_export_${new Date().toISOString().slice(0, 10)}.json`;
+        a.download = `dtl_export_${new Date().toISOString().slice(0, 10)}.json`;
         a.click();
         URL.revokeObjectURL(url);
         
@@ -2129,7 +2129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('最終確認！全てのタスク、プロジェクト、履歴データが削除されます。')) return;
         
         Object.keys(localStorage).forEach(key => {
-            if (key.startsWith('taskshoot_')) localStorage.removeItem(key);
+            if (key.startsWith('dtl_')) localStorage.removeItem(key);
         });
         
         location.reload();
