@@ -2306,21 +2306,23 @@ function gapiLoaded() {
  */
 async function initClient() {
     try {
-        await gapi.client.init({
-            clientId: CLIENT_ID,
-            scope: SCOPES,
-            discoveryDocs: [
-                "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
-                "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
-            ]
+        await gapi.load('client:auth2', async () => {
+            await gapi.client.init({
+                clientId: CLIENT_ID,
+                scope: SCOPES,
+                discoveryDocs: [
+                    "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
+                    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+                ]
+            });
+
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+            document.getElementById('authorize_button').onclick = handleAuthClick;
+            document.getElementById('signout_button').onclick = handleSignoutClick;
+            document.getElementById('manual-sync-button').onclick = manualSync;
         });
-
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
-        document.getElementById('authorize_button').onclick = handleAuthClick;
-        document.getElementById('signout_button').onclick = handleSignoutClick;
-        document.getElementById('manual-sync-button').onclick = manualSync;
 
     } catch (error) {
         console.error("Error initializing Google API client: ", error);
