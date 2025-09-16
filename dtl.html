@@ -2301,33 +2301,6 @@ function gapiLoaded() {
     gapi.load('client:auth2', initClient);
 }
 
-/**
- * Initializes the API client.
- */
-async function initClient() {
-    try {
-        await gapi.load('client:auth2', async () => {
-            await gapi.client.init({
-                clientId: CLIENT_ID,
-                scope: SCOPES,
-                discoveryDocs: [
-                    "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
-                    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
-                ]
-            });
-
-            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
-            document.getElementById('authorize_button').onclick = handleAuthClick;
-            document.getElementById('signout_button').onclick = handleSignoutClick;
-            document.getElementById('manual-sync-button').onclick = manualSync;
-        });
-
-    } catch (error) {
-        console.error("Error initializing Google API client: ", error);
-    }
-}
 
 /**
  * Sign in the user upon button click.
@@ -2629,6 +2602,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+<script>
+  const CLIENT_ID = '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com';
+  const SCOPES = 'https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events';
+
+  function initClient() {
+    gapi.load("client:auth2", () => {
+      gapi.client.init({
+        clientId: CLIENT_ID,
+        scope: SCOPES,
+        discoveryDocs: [
+          "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
+          "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
+        ]
+      }).then(() => {
+        console.log("✅ Google API client initialized");
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+        document.getElementById("authorize_button").onclick = handleAuthClick;
+        document.getElementById("signout_button").onclick = handleSignoutClick;
+        document.getElementById("manual-sync-button").onclick = manualSync;
+      }).catch(err => {
+        console.error("Error initializing Google API client:", err);
+      });
+    });
+  }
+
+  function handleAuthClick() {
+    console.log("🔑 handleAuthClick called");
+    gapi.auth2.getAuthInstance().signIn();
+  }
+
+  function handleSignoutClick() {
+    gapi.auth2.getAuthInstance().signOut();
+  }
+</script>
+
+<script src="https://apis.google.com/js/api.js" async defer onload="initClient()"></script>
+
+	
 </body>
 </html>
 
