@@ -456,7 +456,7 @@
             signoutContainer: document.getElementById('signout_container'),
             authStatusEl: document.getElementById('auth-status'),
             driveStatusEl: document.getElementById('drive-status'),
-            syncDataFab: document.getElementById('sync-data-fab'), // ★同期ボタンの参照を追加
+            syncDataFab: document.getElementById('sync-data-fab'),
 
             // 認証UIの更新
             updateAuthUi: function(isLoggedIn) {
@@ -465,12 +465,12 @@
                 
                 if (isLoggedIn) {
                     this.authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
-                    this.syncDataFab.style.display = 'flex'; // ★ログイン時に同期ボタンを表示
+                    this.syncDataFab.style.display = 'flex';
                 } else {
                     this.authorizeButton.disabled = false;
                     this.authorizeButton.textContent = 'Google ログイン';
                     this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
-                    this.syncDataFab.style.display = 'none'; // ★ログアウト時に同期ボタンを非表示
+                    this.syncDataFab.style.display = 'none';
                 }
             },
 
@@ -674,7 +674,7 @@
                              dailyTaskListApp.updateAuthUi(false);
                         }
                     },
-                     error_callback: (error) => { // ★エラー時もUIを更新
+                     error_callback: (error) => {
                         console.warn('Token client error:', error);
                         dailyTaskListApp.updateAuthUi(false);
                     }
@@ -694,7 +694,6 @@
                     }
                 });
                 
-                // ★ページ読み込み時の自動ログインは行わず、UIを未ログイン状態に設定
                 dailyTaskListApp.updateAuthUi(false);
 
             } catch (error) {
@@ -1076,7 +1075,6 @@
     }
 
     function setupEventListeners() {
-        // ★同期ボタンのイベントリスナーを追加
         document.getElementById('sync-data-fab').addEventListener('click', () => {
             dailyTaskListApp.loadStateFromDrive();
         });
@@ -2547,6 +2545,14 @@
             case 'm': e.preventDefault(); if (state.focusedTaskId) openMemoEditModal(state.focusedTaskId); break;
             case 'd': e.preventDefault(); if (state.focusedTaskId) deleteTask(state.focusedTaskId); break;
             case 'p': e.preventDefault(); if (state.focusedTaskId) postponeTask(state.focusedTaskId); break;
+            // ★ 'r'キーのショートカットを追加
+            case 'r':
+                e.preventDefault();
+                // ログイン中のみ同期を実行
+                if (gapi?.client?.getToken()) {
+                    dailyTaskListApp.loadStateFromDrive();
+                }
+                break;
             case 'arrowdown':
                 e.preventDefault();
                 if (e.ctrlKey || e.metaKey) {
