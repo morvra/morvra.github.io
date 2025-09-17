@@ -99,19 +99,6 @@
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
 
-        @media (max-width: 768px) {
-            .sections-wrapper { padding-bottom:88px; }
-            .task-card-wrapper {
-                space-y: 0.5rem; 
-            }
-            .task-card {
-                border-radius: 0;
-            }
-            .task-card.completed {
-                background-color: #e5e7eb; 
-            }
-        }
-
         .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); }
         .modal.active { display:flex; align-items:center; justify-content:center; }
         .modal-content { background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow-y:auto; }
@@ -154,10 +141,40 @@
 
 		/* search-specific */
         .archive-search-box { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
-        .archive-search-input { flex:1; padding:8px 10px; border-radius:6px; border:1px solid #d1d5db; background:white; }
+        .archive-search-input { flex:1; padding:8px 10px; max-width: 50%; border-radius:6px; border:1px solid #d1d5db; background:white; }
         .archive-search-btn { padding:8px 12px; border-radius:6px; background:#3b82f6; color:white; border:none; cursor:pointer; }
         .archive-clear-btn { padding:8px 10px; border-radius:6px; background:#e5e7eb; color:#374151; border:none; cursor:pointer; }
         .search-result-meta { font-size:0.85rem; color:#6b7280; }
+
+        /* スマホ表示用のスタイル */
+        @media (max-width: 768px) {
+            .sections-wrapper { padding-bottom:88px; }
+            .task-card-wrapper {
+                space-y: 0.5rem; 
+            }
+            .task-card {
+                border-radius: 0;
+            }
+            .task-card.completed {
+                background-color: #e5e7eb; 
+            }
+            
+            /* アーカイブの表を横スクロール可能にする */
+            .archive-table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .archive-table-wrapper > table {
+                min-width: 640px; /* テーブルの最小幅を指定してスクロールを発生させる */
+            }
+            .archive-table-wrapper td, .archive-table-wrapper th {
+                white-space: nowrap; /* セル内のテキストが折り返さないようにする */
+            }
+            .archive-table-wrapper .task-memo-cell {
+                white-space: normal; /* タスク名とメモのセルだけは折り返しを許可 */
+                min-width: 250px;
+            }
+        }
 		
     </style>
 </head>
@@ -206,11 +223,14 @@
         <div id="repeat" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">リピートタスク管理</h2>
+                <!-- 修正：スマホ表示で入力フォームのレイアウトを改善 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 items-end">
                     <input type="text" id="repeat-task-name" placeholder="タスク名" class="md:col-span-2 p-2 border rounded-lg">
-                    <input type="number" id="repeat-task-time" placeholder="見積時間(分)" class="p-2 border rounded-lg">
-                    <select id="repeat-task-project" class="p-2 border rounded-lg bg-white"></select>
-                    <select id="repeat-task-type" class="p-2 border rounded-lg bg-white">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="number" id="repeat-task-time" placeholder="見積時間(分)" class="w-full p-2 border rounded-lg">
+                        <select id="repeat-task-project" class="w-full p-2 border rounded-lg bg-white"></select>
+                    </div>
+                    <select id="repeat-task-type" class="p-2 border rounded-lg bg-white md:col-span-2">
                         <option value="daily">毎日</option>
                         <option value="weekly">毎週</option>
                         <option value="monthly">毎月</option>
@@ -236,21 +256,8 @@
                     <button id="generate-from-repeat-btn" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow">▶ 今日のタスクを生成</button>
                 </div>
 
-                <div class="mt-6 overflow-x-auto">
-                    <table class="min-w-full bg-white">
-                        <thead class="bg-gray-100">
-                            <tr>
-                                <th class="py-2 px-4 border-b w-8"></th>
-                                <th class="py-2 px-4 border-b">タスク名</th>
-                                <th class="py-2 px-4 border-b">プロジェクト</th>
-                                <th class="py-2 px-4 border-b">見積時間</th>
-                                <th class="py-2 px-4 border-b">繰り返し</th>
-                                <th class="py-2 px-4 border-b">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="repeat-tasks-list"></tbody>
-                    </table>
-                </div>
+                <!-- 修正：スマホ表示ではカード形式になるコンテナ -->
+                <div id="repeat-tasks-container" class="mt-6"></div>
             </div>
         </div>
 
@@ -258,24 +265,13 @@
         <div id="projects" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">プロジェクト管理</h2>
-                <div class="space-x-4 mb-4">
+                <div class="flex flex-wrap gap-4 items-center mb-4">
                     <input type="text" id="project-name" placeholder="プロジェクト名" class="flex-grow p-2 border rounded-lg">
-                    <input type="color" id="project-color" value="#4a90e2" class="p-1 my-2 border rounded-lg h-10 w-12">
+                    <input type="color" id="project-color" value="#4a90e2" class="p-1 h-10 w-12 border rounded-lg">
                     <button id="add-project-btn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow">＋ プロジェクトを追加</button>
                 </div>
-                <div class="mt-6 overflow-x-auto">
-                    <table class="min-w-full bg-white">
-                        <thead class="bg-gray-100">
-                            <tr>
-                                <th class="py-2 px-4 border-b w-8"></th>
-                                <th class="py-2 px-4 border-b">プレビュー</th>
-                                <th class="py-2 px-4 border-b">プロジェクト名</th>
-                                <th class="py-2 px-4 border-b">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="projects-list"></tbody>
-                    </table>
-                </div>
+                <!-- 修正：スマホ表示ではカード形式になるコンテナ -->
+                <div id="projects-container" class="mt-6"></div>
             </div>
         </div>
         
@@ -283,8 +279,8 @@
         <div id="archive" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <div class="archive-tabs flex mb-4">
-                    <div class="archive-tab active" data-view="date">日付別</div>
-                    <div class="archive-tab" data-view="project">プロジェクト別</div>
+                    <div class="archive-tab active" data-view="date">日付</div>
+                    <div class="archive-tab" data-view="project">プロジェクト</div>
 					<div class="archive-tab" data-view="search">検索</div>
                 </div>
                 
@@ -294,8 +290,7 @@
                         <h2 id="archive-date" class="font-bold"></h2>
                         <button id="next-archive-day" class="p-2 rounded-md bg-gray-200 hover:bg-gray-300">&gt;</button>
                     </div>
-                    <div id="archive-tasks-list" class="overflow-x-auto">
-                    </div>
+                    <div id="archive-tasks-list"></div>
                 </div>
 
                 <div id="archive-project-view" class="hidden">
@@ -304,20 +299,17 @@
                             <option value="">プロジェクトを選択</option>
                         </select>
                     </div>
-                    <div id="archive-project-tasks" class="overflow-x-auto">
-                    </div>
+                    <div id="archive-project-tasks"></div>
                 </div>
 
 				<!-- 新規：検索ビュー -->
 				<div id="archive-search-view" class="hidden">
-				<div class="archive-search-box">
-				<input id="archive-search-input" class="archive-search-input" type="text" placeholder="タスク名またはメモを検索（部分一致）">
-				<button id="archive-search-btn" class="archive-search-btn">検索</button>
-				<button id="archive-clear-btn" class="archive-clear-btn">クリア</button>
-				</div>
-				<div id="archive-search-results" class="overflow-x-auto">
-				<!-- 検索結果がここに挿入される -->
-				</div>
+    				<div class="archive-search-box">
+        				<input id="archive-search-input" class="archive-search-input" type="text" placeholder="タスク名またはメモを検索">
+        				<button id="archive-search-btn" class="archive-search-btn">検索</button>
+        				<button id="archive-clear-btn" class="archive-clear-btn">クリア</button>
+    				</div>
+    				<div id="archive-search-results"></div>
 				</div>
 				
             </div>
@@ -335,7 +327,8 @@
                     </div>
                     <div class="border p-4 rounded-lg">
                         <h3 class="text-lg font-semibold mb-3">データインポート</h3>
-                        <p class="text-sm text-gray-600 mb-3">JSONファイルからデータを復元します。現在のデータは上書きされます。</p>
+                        <!-- 修正：インポート処理の説明を変更 -->
+                        <p class="text-sm text-gray-600 mb-3">JSONファイルからデータを復元します。IDが重複するデータは上書きされ、存在しないデータは追加されます。</p>
                         <input type="file" id="import-file" accept=".json" class="mb-3 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                         <button id="import-data-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg">データをインポート</button>
                     </div>
@@ -492,10 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         window.addEventListener('resize', () => {
             const activeTab = document.querySelector('.tab-link.active').dataset.tab;
-            if (activeTab === 'today') {
-                renderTodayTasks();
-            } else if (activeTab === 'archive') {
-                renderArchive();
+            if (['today', 'repeat', 'projects', 'archive'].includes(activeTab)) {
+                render();
             }
         });
     }
@@ -664,7 +655,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.lastDate !== today) {
             console.log(`日付が変わりました: ${state.lastDate} -> ${today}`);
 
-            // ★修正点: 前日の未完了タスクを移動
             const yesterdaysTasks = state.dailyTasks[state.lastDate];
             if (yesterdaysTasks && yesterdaysTasks.length > 0) {
                 const leftoverTasks = yesterdaysTasks.filter(t => t.status !== 'completed');
@@ -672,9 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!state.dailyTasks[today]) {
                         state.dailyTasks[today] = [];
                     }
-                    // 今日のタスクリストの先頭に未完了タスクを追加
                     state.dailyTasks[today].unshift(...leftoverTasks);
-                    // 前日のリストからは未完了タスクを削除（完了タスクは残す）
                     state.dailyTasks[state.lastDate] = yesterdaysTasks.filter(t => t.status === 'completed');
                     console.log(`${leftoverTasks.length}件の未完了タスクを ${state.lastDate} から ${today} に移動しました。`);
                 }
@@ -891,26 +879,25 @@ document.addEventListener('DOMContentLoaded', () => {
             renderArchiveProjectView();
         });
 
-		// 検索関連イベント
 		const searchBtn = document.getElementById('archive-search-btn');
 		const searchInput = document.getElementById('archive-search-input');
 		const clearBtn = document.getElementById('archive-clear-btn');
 		if (searchBtn && searchInput && clearBtn) {
-		searchBtn.addEventListener('click', () => {
-		const q = searchInput.value.trim();
-		renderArchiveSearchView(q);
-		});
-		clearBtn.addEventListener('click', () => {
-		searchInput.value = '';
-		renderArchiveSearchView('');
-		});
-		searchInput.addEventListener('keydown', (e) => {
-		if (e.key === 'Enter') {
-		e.preventDefault();
-		const q = searchInput.value.trim();
-		renderArchiveSearchView(q);
-		}
-		});
+    		searchBtn.addEventListener('click', () => {
+        		const q = searchInput.value.trim();
+        		renderArchiveSearchView(q);
+    		});
+    		clearBtn.addEventListener('click', () => {
+        		searchInput.value = '';
+        		renderArchiveSearchView('');
+    		});
+    		searchInput.addEventListener('keydown', (e) => {
+        		if (e.key === 'Enter') {
+            		e.preventDefault();
+            		const q = searchInput.value.trim();
+            		renderArchiveSearchView(q);
+        		}
+    		});
 		}
 
         document.getElementById('export-data-btn').addEventListener('click', exportData);
@@ -927,6 +914,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => positionTooltip(tooltipContainer), 10);
             }
         });
+
+        // 修正：iOS PWAでキーボード表示時にヘッダーがずれる問題を修正
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            const header = document.querySelector('.fixed-header');
+            let lastScrollY = 0;
+            
+            document.addEventListener('focusin', (e) => {
+                if (e.target.matches('input, textarea')) {
+                    // キーボードが開くとき、ヘッダーをabsoluteに切り替えて現在のスクロール位置に固定
+                    lastScrollY = window.scrollY;
+                    header.style.position = 'absolute';
+                    header.style.top = `${lastScrollY}px`;
+                }
+            });
+
+            document.addEventListener('focusout', (e) => {
+                if (e.target.matches('input, textarea')) {
+                    // キーボードが閉じるとき、ヘッダーをfixedに戻す
+                    header.style.position = 'fixed';
+                    header.style.top = '0';
+                }
+            });
+        }
     }
 
     function setupModalEvents() {
@@ -1023,7 +1034,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('view-date-display').textContent = dateLabel;
 
-        // ★修正点: 今日の日付の場合「<」ボタンを非表示にする
         const prevBtn = document.getElementById('prev-day-btn');
         if (state.viewDate <= todayStr) {
             prevBtn.style.visibility = 'hidden';
@@ -1229,22 +1239,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectView = document.getElementById('archive-project-view');
 		const searchView = document.getElementById('archive-search-view');
         
+        dateView.classList.toggle('hidden', state.archiveView !== 'date');
+        projectView.classList.toggle('hidden', state.archiveView !== 'project');
+        searchView.classList.toggle('hidden', state.archiveView !== 'search');
+
         if (state.archiveView === 'date') {
-            dateView.classList.remove('hidden');
-            projectView.classList.add('hidden');
-			searchView.classList.add('hidden');
             renderArchiveDateView();
         } else if (state.archiveView === 'project')  {
-            dateView.classList.add('hidden');
-            projectView.classList.remove('hidden');
-			searchView.classList.add('hidden');
             updateArchiveProjectSelect();
             renderArchiveProjectView();
         } else if (state.archiveView === 'search') {
-			dateView.classList.add('hidden');
-			projectView.classList.add('hidden');
-			searchView.classList.remove('hidden');
-			// 検索ビューは検索語があれば実行、なければ空表示
 			const q = document.getElementById('archive-search-input').value.trim();
 			renderArchiveSearchView(q);
 		}
@@ -1269,8 +1273,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let html = '<table class="min-w-full bg-white">';
-        html += `<thead class="bg-gray-50">
+        let tableHtml = '<table class="min-w-full bg-white">';
+        tableHtml += `<thead class="bg-gray-50">
                     <tr>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">実績時間</th>
@@ -1282,9 +1286,9 @@ document.addEventListener('DOMContentLoaded', () => {
         tasksForDay.forEach(task => {
             const project = state.projects.find(p => p.id === task.projectId) || { name: '', color: '#cccccc' };
             const memoHtml = task.memo ? `<p class="text-xs text-gray-500 mt-1 whitespace-pre-wrap pl-4">${escapeHtml(task.memo)}</p>` : '';
-            html += `
+            tableHtml += `
                 <tr class="border-b">
-                    <td class="py-2 px-3">
+                    <td class="py-2 px-3 task-memo-cell">
                         <div class="flex items-center space-x-2">
                            <span class="inline-block w-2 h-2 rounded-full flex-shrink-0" style="background-color: ${project.color};"></span>
                            <div>
@@ -1303,8 +1307,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 
-        html += '</tbody></table>';
-        listEl.innerHTML = html;
+        tableHtml += '</tbody></table>';
+        listEl.innerHTML = `<div class="archive-table-wrapper">${tableHtml}</div>`;
     }
 
     function updateArchiveProjectSelect() {
@@ -1379,7 +1383,6 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = html;
     }
 
-    // --- 新規：アーカイブ検索機能 ---
     function renderArchiveSearchView(query) {
         const container = document.getElementById('archive-search-results');
         const q = (query || '').trim();
@@ -1388,7 +1391,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 検索（タスク名 or メモに部分一致、大文字小文字無視）
         const normalized = q.toLowerCase();
         const results = [];
 
@@ -1407,49 +1409,46 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // ソート：日付降順（新しいものが上）
         results.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 
-        // テーブル生成
-        let html = '<table class="min-w-full bg-white"><thead class="bg-gray-50"><tr>';
-        html += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">完了日</th>`;
-        html += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>`;
-        html += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">プロジェクト</th>`;
-        html += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">実績時間</th>`;
-        html += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">開始</th>`;
-        html += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">終了</th>`;
-        html += `</tr></thead><tbody>`;
+        let tableHtml = '<table class="min-w-full bg-white"><thead class="bg-gray-50"><tr>';
+        tableHtml += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">完了日</th>`;
+        tableHtml += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>`;
+        tableHtml += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">プロジェクト</th>`;
+        tableHtml += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">実績時間</th>`;
+        tableHtml += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">開始</th>`;
+        tableHtml += `<th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">終了</th>`;
+        tableHtml += `</tr></thead><tbody>`;
 
         results.forEach(({ date, task }) => {
             const project = state.projects.find(p => p.id === task.projectId) || { name: '', color: '#cccccc' };
             const memoHtml = task.memo ? `<div class="text-xs text-gray-500 mt-1 whitespace-pre-wrap">${escapeHtml(task.memo)}</div>` : '';
             const dateLabel = new Date(date).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' });
 
-            html += `<tr class="border-b">`;
-            html += `<td class="py-2 px-3">${dateLabel}</td>`;
-            html += `<td class="py-2 px-3">${formatTaskName(task.name)}${memoHtml}</td>`;
-            html += `<td class="py-2 px-3">${escapeHtml(project.name)}</td>`;
-            html += `<td class="py-2 px-3 font-mono">${formatTime(calculateActualTime(task))}</td>`;
-            html += `<td class="py-2 px-3 font-mono">${task.startTime ? formatClockTime(new Date(task.startTime)) : '--:--'}</td>`;
-            html += `<td class="py-2 px-3 font-mono">${task.endTime ? formatClockTime(new Date(task.endTime)) : '--:--'}</td>`;
-            html += `</tr>`;
+            tableHtml += `<tr class="border-b">`;
+            tableHtml += `<td class="py-2 px-3">${dateLabel}</td>`;
+            tableHtml += `<td class="py-2 px-3 task-memo-cell">${formatTaskName(task.name)}${memoHtml}</td>`;
+            tableHtml += `<td class="py-2 px-3">${escapeHtml(project.name)}</td>`;
+            tableHtml += `<td class="py-2 px-3 font-mono">${formatTime(calculateActualTime(task))}</td>`;
+            tableHtml += `<td class="py-2 px-3 font-mono">${task.startTime ? formatClockTime(new Date(task.startTime)) : '--:--'}</td>`;
+            tableHtml += `<td class="py-2 px-3 font-mono">${task.endTime ? formatClockTime(new Date(task.endTime)) : '--:--'}</td>`;
+            tableHtml += `</tr>`;
         });
 
-        html += '</tbody></table>';
-        container.innerHTML = html;
+        tableHtml += '</tbody></table>';
+        container.innerHTML = `<div class="archive-table-wrapper">${tableHtml}</div>`;
     }
 
     function attachTaskEventListeners() {
         document.querySelectorAll('.task-row, .task-card').forEach(el => {
             el.addEventListener('click', (e) => {
-                // If the click is on a button or a link, don't focus the row
                 if (e.target.closest('button, a, .memo-icon-clickable')) {
                     return;
                 }
                 const taskId = e.currentTarget.dataset.taskId;
                 if (state.focusedTaskId !== taskId) {
                     state.focusedTaskId = taskId;
-                    renderTodayTasks(); // Re-render to apply focused style
+                    renderTodayTasks();
                 }
             });
         });
@@ -1527,7 +1526,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('new-task-time').value = '5';
         document.getElementById('new-task-project').value = '';
         openModal('add-task-modal');
-        setTimeout(() => document.getElementById('new-task-name').focus(), 0);
+        setTimeout(() => document.getElementById('new-task-name').focus(), 10);
     }
     
     function openTaskEditModal(id) {
@@ -1548,7 +1547,7 @@ document.addEventListener('DOMContentLoaded', () => {
         endTimeInput.value = task.endTime ? new Date(task.endTime).toTimeString().slice(0, 5) : '';
 
         openModal('task-edit-modal');
-        setTimeout(() => document.getElementById('edit-task-name').focus(), 0);
+        setTimeout(() => document.getElementById('edit-task-name').focus(), 10);
     }
 
     function openMemoEditModal(id) {
@@ -1559,7 +1558,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const memoTextEl = document.getElementById('edit-memo-text');
         memoTextEl.value = task.memo || '';
         openModal('memo-edit-modal');
-        setTimeout(() => memoTextEl.focus(), 0);
+        setTimeout(() => memoTextEl.focus(), 10);
     }
 
     function saveMemoEdit() {
@@ -1689,6 +1688,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-repeat-interval-options').classList.toggle('hidden', repeatTask.type !== 'interval');
 
         openModal('repeat-edit-modal');
+        setTimeout(() => document.getElementById('edit-repeat-name').focus(), 10);
     }
 
     function saveRepeatEdit() {
@@ -1739,6 +1739,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderProjects() {
+        const container = document.getElementById('projects-container');
+        if (isMobile()) {
+            renderProjectCards(container);
+        } else {
+            renderProjectTable(container);
+        }
+    }
+
+    function renderProjectTable(container) {
+        container.innerHTML = `<div class="overflow-x-auto">
+            <table class="min-w-full bg-white">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 border-b w-8"></th>
+                        <th class="py-2 px-4 border-b">プレビュー</th>
+                        <th class="py-2 px-4 border-b text-left">プロジェクト名</th>
+                        <th class="py-2 px-4 border-b">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="projects-list"></tbody>
+            </table>
+        </div>`;
         const list = document.getElementById('projects-list');
         list.innerHTML = '';
         state.projects.forEach((p, idx) => {
@@ -1749,7 +1771,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.draggable = true;
             tr.innerHTML = `
                 <td class="py-2 px-4 text-center"><span class="drag-handle">⋮⋮</span></td>
-                <td class="pt-2 px-4"><span class="inline-block w-4 h-4 rounded-full" style="background-color: ${p.color};"></span></td>
+                <td class="pt-2 px-4 text-center"><span class="inline-block w-4 h-4 rounded-full" style="background-color: ${p.color};"></span></td>
                 <td class="py-2 px-4">${escapeHtml(p.name)}</td>
                 <td class="py-2 px-4 text-center space-x-1">
                     <button class="edit-project-btn text-gray-400 hover:text-blue-500 p-1" data-id="${p.id}">
@@ -1764,14 +1786,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         setupDragAndDrop('.project-row', state.projects);
-        document.querySelectorAll('.edit-project-btn').forEach(btn => btn.addEventListener('click', (e) => editProject(e.currentTarget.dataset.id)));
-        document.querySelectorAll('.delete-project-btn').forEach(btn => btn.addEventListener('click', (e) => deleteProject(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.edit-project-btn').forEach(btn => btn.addEventListener('click', (e) => editProject(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.delete-project-btn').forEach(btn => btn.addEventListener('click', (e) => deleteProject(e.currentTarget.dataset.id)));
+    }
+
+    function renderProjectCards(container) {
+        container.innerHTML = '';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'space-y-3';
+        state.projects.forEach((p, idx) => {
+            const card = document.createElement('div');
+            card.className = 'bg-white p-3 shadow rounded-lg flex items-center gap-3 project-row';
+            card.dataset.id = p.id;
+            card.dataset.index = idx;
+            card.draggable = true;
+            card.innerHTML = `
+                <span class="drag-handle text-gray-400 hover:text-gray-600 cursor-move">⋮⋮</span>
+                <span class="inline-block w-5 h-5 rounded-full flex-shrink-0" style="background-color: ${p.color};"></span>
+                <span class="flex-1 font-semibold truncate">${escapeHtml(p.name)}</span>
+                <div class="space-x-1">
+                    <button class="edit-project-btn text-gray-400 hover:text-blue-500 p-1" data-id="${p.id}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    </button>
+                    <button class="delete-project-btn text-gray-400 hover:text-red-500 p-1" data-id="${p.id}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                </div>
+            `;
+            wrapper.appendChild(card);
+        });
+        container.appendChild(wrapper);
+        setupDragAndDrop('.project-row', state.projects);
+        container.querySelectorAll('.edit-project-btn').forEach(btn => btn.addEventListener('click', (e) => editProject(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.delete-project-btn').forEach(btn => btn.addEventListener('click', (e) => deleteProject(e.currentTarget.dataset.id)));
     }
 
     function renderRepeatTasks() {
-        const list = document.getElementById('repeat-tasks-list');
-        list.innerHTML = '';
-
+        const container = document.getElementById('repeat-tasks-container');
         const weeklyOptionsContainer = document.getElementById('repeat-weekly-options');
         if (weeklyOptionsContainer.childElementCount === 0) {
             ['日','月','火','水','木','金','土'].forEach((d, i) => {
@@ -1779,6 +1830,32 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        if (isMobile()) {
+            renderRepeatTaskCards(container);
+        } else {
+            renderRepeatTaskTable(container);
+        }
+    }
+
+    function renderRepeatTaskTable(container) {
+        container.innerHTML = `<div class="overflow-x-auto">
+            <table class="min-w-full bg-white">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 border-b w-8"></th>
+                        <th class="py-2 px-4 border-b text-left">タスク名</th>
+                        <th class="py-2 px-4 border-b text-left">プロジェクト</th>
+                        <th class="py-2 px-4 border-b text-left">見積時間</th>
+                        <th class="py-2 px-4 border-b text-left">繰り返し</th>
+                        <th class="py-2 px-4 border-b">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="repeat-tasks-list"></tbody>
+            </table>
+        </div>`;
+        const list = container.querySelector('#repeat-tasks-list');
+        list.innerHTML = '';
+        
         state.repeatTasks.forEach((rt, idx) => {
             const project = state.projects.find(p => p.id === rt.projectId) || { name: 'N/A' };
             let repeatText = '';
@@ -1787,11 +1864,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (rt.type === 'monthly') repeatText = `毎月 ${rt.value}日`;
             else if (rt.type === 'interval') repeatText = `${rt.value}日ごと (基準日: ${rt.startDate || '未設定'})`;
 
-            const memoIcon = rt.memo ? `
-                <span class="tooltip-container memo-icon-clickable" data-task-id="${rt.id}">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 text-gray-400 cursor-pointer hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                    <span class="custom-tooltip">${escapeHtml(rt.memo)}</span>
-                </span>` : '';
+            const memoIcon = rt.memo ? `<span class="tooltip-container"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span class="custom-tooltip">${escapeHtml(rt.memo)}</span></span>` : '';
 
             const tr = document.createElement('tr');
             tr.className = 'border-b repeat-task-row';
@@ -1800,36 +1873,78 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.draggable = true;
             tr.innerHTML = `
                 <td class="py-2 px-4 text-center"><span class="drag-handle">⋮⋮</span></td>
-                <td class="py-2 px-4">
-                    <div class="flex items-center">
-                        ${formatTaskName(rt.name)}
-                        ${memoIcon}
-                    </div>
-                </td>
+                <td class="py-2 px-4"><div class="flex items-center">${formatTaskName(rt.name)}${memoIcon}</div></td>
                 <td class="py-2 px-4">${escapeHtml(project.name)}</td>
                 <td class="py-2 px-4">${rt.estimatedTime} 分</td>
-                <td class="py-2 px-4">${escapeHtml(repeatText)}</td>
-                <td class="py-2 px-4 text-center space-x-1">
-                    <button class="generate-single-repeat-btn text-gray-400 hover:text-green-500 p-1" data-id="${rt.id}" title="今日のタスクとして生成">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
-                    </button>
-                    <button class="edit-repeat-task-btn text-gray-400 hover:text-blue-500 p-1" data-id="${rt.id}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                    </button>
-                    <button class="delete-repeat-task-btn text-gray-400 hover:text-red-500 p-1" data-id="${rt.id}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" /></svg>
-                    </button>
+                <td class="py-2 px-4 text-sm">${escapeHtml(repeatText)}</td>
+                <td class="py-2 px-4 text-center space-x-1 whitespace-nowrap">
+                    <button class="generate-single-repeat-btn text-gray-400 hover:text-green-500 p-1" data-id="${rt.id}" title="今日のタスクとして生成"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg></button>
+                    <button class="edit-repeat-task-btn text-gray-400 hover:text-blue-500 p-1" data-id="${rt.id}"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></button>
+                    <button class="delete-repeat-task-btn text-gray-400 hover:text-red-500 p-1" data-id="${rt.id}"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" /></svg></button>
                 </td>
             `;
             list.appendChild(tr);
         });
         
         setupDragAndDrop('.repeat-task-row', state.repeatTasks);
-
-        document.querySelectorAll('.generate-single-repeat-btn').forEach(btn => btn.addEventListener('click', (e) => generateSingleRepeatTask(e.currentTarget.dataset.id)));
-        document.querySelectorAll('.edit-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => openRepeatEditModal(e.currentTarget.dataset.id)));
-        document.querySelectorAll('.delete-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => deleteRepeatTask(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.generate-single-repeat-btn').forEach(btn => btn.addEventListener('click', (e) => generateSingleRepeatTask(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.edit-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => openRepeatEditModal(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.delete-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => deleteRepeatTask(e.currentTarget.dataset.id)));
     }
+
+    function renderRepeatTaskCards(container) {
+        container.innerHTML = '';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'space-y-3';
+        state.repeatTasks.forEach((rt, idx) => {
+            const project = state.projects.find(p => p.id === rt.projectId) || { name: 'N/A', color: '#cccccc' };
+            let repeatText = '';
+            if (rt.type === 'daily') repeatText = '毎日';
+            else if (rt.type === 'weekly') repeatText = `毎週 ${Array.isArray(rt.value) ? rt.value.map(i => ['日','月','火','水','木','金','土'][i]).join(',') : ''}`;
+            else if (rt.type === 'monthly') repeatText = `毎月 ${rt.value}日`;
+            else if (rt.type === 'interval') repeatText = `${rt.value}日ごと`;
+
+            const card = document.createElement('div');
+            card.className = 'bg-white p-3 shadow border-l-4 repeat-task-row';
+            card.style.borderLeftColor = project.color;
+            card.dataset.id = rt.id;
+            card.dataset.index = idx;
+            card.draggable = true;
+
+            const memoIcon = rt.memo ? `<span class="tooltip-container"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span class="custom-tooltip">${escapeHtml(rt.memo)}</span></span>` : '';
+
+            card.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <span class="drag-handle text-gray-400 hover:text-gray-600 cursor-move pt-1">⋮⋮</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-start">
+                             <h3 class="font-semibold text-base flex items-center pr-2" title="${escapeHtml(rt.name || '')}">
+                               ${formatTaskName(rt.name)} ${memoIcon}
+                            </h3>
+                             <div class="flex space-x-1 flex-shrink-0">
+                                <button class="generate-single-repeat-btn text-gray-400 hover:text-green-500 p-1" data-id="${rt.id}" title="今日のタスクとして生成"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg></button>
+                                <button class="edit-repeat-task-btn text-gray-400 hover:text-blue-500 p-1" data-id="${rt.id}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></button>
+                                <button class="delete-repeat-task-btn text-gray-400 hover:text-red-500 p-1" data-id="${rt.id}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500">${escapeHtml(project.name)}</p>
+                        <div class="flex items-center justify-between text-xs text-gray-600 mt-1">
+                            <span>見積: ${rt.estimatedTime || 0}分</span>
+                            <span>${escapeHtml(repeatText)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            wrapper.appendChild(card);
+        });
+        container.appendChild(wrapper);
+
+        setupDragAndDrop('.repeat-task-row', state.repeatTasks);
+        container.querySelectorAll('.generate-single-repeat-btn').forEach(btn => btn.addEventListener('click', (e) => generateSingleRepeatTask(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.edit-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => openRepeatEditModal(e.currentTarget.dataset.id)));
+        container.querySelectorAll('.delete-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => deleteRepeatTask(e.currentTarget.dataset.id)));
+    }
+
 
     function updateProjectDropdowns() {
         const selects = document.querySelectorAll('#new-task-project, #repeat-task-project, #edit-task-project, #edit-repeat-project');
@@ -2093,18 +2208,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileInput = document.getElementById('import-file');
         const file = fileInput.files[0];
         if (!file) return alert('インポートするファイルを選択してください。');
-        if (!confirm('現在のデータは全て上書きされます。続けますか？')) return;
+        
+        // 修正：確認メッセージを変更
+        if (!confirm('データをインポートします。IDが重複するデータは上書きされます。よろしいですか？')) return;
 
         const reader = new FileReader();
         reader.onload = (e) => {
             try {
                 const importedData = JSON.parse(e.target.result);
                 
-                state.dailyTasks = importedData.dailyTasks || {};
-                state.projects = importedData.projects || [];
-                state.repeatTasks = importedData.repeatTasks || [];
-                state.archivedTasks = importedData.archivedTasks || {};
-                state.lastDate = importedData.lastDate || getFormattedDate(new Date());
+                // 修正：既存のデータを保持し、重複は上書きするマージ処理
+                Object.assign(state.dailyTasks, importedData.dailyTasks || {});
+                Object.assign(state.archivedTasks, importedData.archivedTasks || {});
+
+                if (importedData.projects && Array.isArray(importedData.projects)) {
+                    const projectMap = new Map(state.projects.map(p => [p.id, p]));
+                    importedData.projects.forEach(p => projectMap.set(p.id, p));
+                    state.projects = Array.from(projectMap.values());
+                }
+                
+                if (importedData.repeatTasks && Array.isArray(importedData.repeatTasks)) {
+                    const repeatTaskMap = new Map(state.repeatTasks.map(rt => [rt.id, rt]));
+                    importedData.repeatTasks.forEach(rt => repeatTaskMap.set(rt.id, rt));
+                    state.repeatTasks = Array.from(repeatTaskMap.values());
+                }
+
+                state.lastDate = importedData.lastDate || state.lastDate;
                 
                 stopActiveTimer();
                 state.viewDate = getFormattedDate(new Date());
@@ -2208,7 +2337,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function moveViewDate(direction) {
-        // ★修正点: 今日より前の日付に移動しないようにする
         const todayStr = getFormattedDate(new Date());
         if (direction === -1 && state.viewDate <= todayStr) {
             return;
