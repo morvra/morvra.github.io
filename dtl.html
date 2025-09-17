@@ -202,7 +202,6 @@
 <div class="container mx-auto p-4 max-w-7xl">
 
     <main>
-        <!-- 当日のタスク -->
         <div id="today" class="tab-content space-y-4">
              <div class="flex justify-between items-center">
                  <div id="today-date-nav" class="flex items-center gap-2">
@@ -215,7 +214,6 @@
             <div id="sections-container" class="sections-wrapper"></div>
         </div>
 
-        <!-- リピートタスク -->
         <div id="repeat" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">リピートタスク管理</h2>
@@ -255,7 +253,6 @@
             </div>
         </div>
 
-        <!-- プロジェクト -->
         <div id="projects" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">プロジェクト管理</h2>
@@ -268,7 +265,6 @@
             </div>
         </div>
         
-        <!-- アーカイブ -->
         <div id="archive" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <div class="archive-tabs flex mb-4">
@@ -307,12 +303,10 @@
             </div>
         </div>
 
-        <!-- データ管理 -->
         <div id="data" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">データ管理</h2>
                 <div class="space-y-6">
-                    <!-- Google Drive Sync: START -->
                     <div class="border p-4 rounded-lg">
                         <h3 class="text-lg font-semibold mb-3">Google Drive</h3>
                         <p class="text-sm text-gray-600 mb-3">タスクデータをGoogle Driveに保存し、他のデバイスと同期します(管理者専用)</p>
@@ -325,8 +319,6 @@
                         </div>
                         <p id="drive-status" class="text-sm text-gray-500 mt-2"></p>
                     </div>
-                    <!-- Google Drive Sync: END -->
-
                     <div class="border p-4 rounded-lg">
                         <h3 class="text-lg font-semibold mb-3">データエクスポート</h3>
                         <p class="text-sm text-gray-600 mb-3">現在のデータをJSONファイルとしてダウンロードします。</p>
@@ -349,10 +341,8 @@
     </main>
 </div>
 
-<!-- フローティング追加ボタン -->
 <button id="add-task-fab" class="add-task-fab bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl">＋</button>
 
-<!-- モーダル：タスク追加 -->
 <div id="add-task-modal" class="modal">
     <div class="modal-content p-6 w-full max-w-md">
         <h3 class="text-lg font-bold mb-4">タスクを追加</h3>
@@ -369,7 +359,6 @@
 </div>
 
 
-<!-- モーダル：タスク編集 -->
 <div id="task-edit-modal" class="modal">
     <div class="modal-content p-6 w-full max-w-md">
         <h3 class="text-lg font-bold mb-4">タスクを編集</h3>
@@ -399,7 +388,6 @@
     </div>
 </div>
 
-<!-- モーダル：メモ編集 -->
 <div id="memo-edit-modal" class="modal">
     <div class="modal-content p-6 w-full max-w-md">
         <h3 class="text-lg font-bold mb-4">メモを編集</h3>
@@ -411,7 +399,6 @@
     </div>
 </div>
 
-<!-- モーダル：リピートタスク編集 -->
 <div id="repeat-edit-modal" class="modal">
     <div class="modal-content p-6 w-full max-w-lg">
         <h3 class="text-lg font-bold mb-4">リピートタスクを編集</h3>
@@ -469,9 +456,14 @@
                 if (isLoggedIn) {
                     this.authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
                 } else {
-                    this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
                     this.authorizeButton.disabled = false;
-                    this.authorizeButton.textContent = 'Google ログイン';
+                    if (localStorage.getItem('dtl_google_sync_enabled') === 'true') {
+                        this.authorizeButton.textContent = '再接続';
+                        this.driveStatusEl.textContent = '自動再ログインに失敗しました。';
+                    } else {
+                        this.authorizeButton.textContent = 'Google ログイン';
+                        this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
+                    }
                 }
             },
 
@@ -506,7 +498,6 @@
                 
                 await this.findDriveFile();
                 if (!this.driveFileId) {
-                    // Driveにファイルがない場合、ローカルの初回データをDriveに保存する
                     this.driveStatusEl.textContent = '初回同期を開始します...';
                     await this.saveStateToDrive();
                     return;
@@ -617,7 +608,6 @@
                     this.driveStatusEl.textContent = `保存エラー: ${err.result?.error?.message || 'Unknown error'}`;
                     if (err.result && (err.result.error.code === 404 || err.result.error.code === 401)) {
                         this.driveFileId = null; 
-                        // トークンが無効なら再ログインを促す
                         if (err.result.error.code === 401) {
                            this.updateAuthUi(false);
                            this.driveStatusEl.textContent = '認証が切れました。再ログインしてください。';
@@ -655,58 +645,52 @@
             try {
                 await loadGoogleApiScripts();
 
-                // 1. GAPI Clientの初期化
                 await new Promise((resolve, reject) => {
-                    gapi.load('client', async () => {
-                        try {
-                            await gapi.client.init({
-                                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-                            });
-                            resolve();
-                        } catch (error) {
-                            reject(error);
-                        }
-                    });
+                    gapi.load('client', () => gapi.client.init({
+                        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+                    }).then(resolve, reject));
                 });
 
-                // 2. GIS Client (TokenClient) の初期化
                 dailyTaskListApp.tokenClient = google.accounts.oauth2.initTokenClient({
                     client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
                     scope: 'https://www.googleapis.com/auth/drive.appdata',
                     callback: (tokenResponse) => {
                         if (tokenResponse && tokenResponse.access_token) {
                             gapi.client.setToken(tokenResponse);
+                            localStorage.setItem('dtl_google_sync_enabled', 'true');
                             dailyTaskListApp.updateAuthUi(true);
                             dailyTaskListApp.loadStateFromDrive();
                         } else {
-                            console.error('Authentication failed: No access token received.');
-                            dailyTaskListApp.driveStatusEl.textContent = '認証に失敗しました。';
-                            dailyTaskListApp.updateAuthUi(false);
+                            console.error('Auth failed: No access token', tokenResponse);
+                             dailyTaskListApp.updateAuthUi(false);
                         }
                     },
                     error_callback: (error) => {
-                         console.log('Silent login failed or user dismissed consent:', error);
-                         dailyTaskListApp.updateAuthUi(false);
+                        console.warn('Token client error:', error);
+                        dailyTaskListApp.updateAuthUi(false);
                     }
                 });
 
-                // 3. ログイン・ログアウトボタンのイベントリスナー設定
                 dailyTaskListApp.authorizeButton.addEventListener('click', () => {
                     dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'consent' });
                 });
+                
                 dailyTaskListApp.signoutButton.addEventListener('click', () => {
                     const token = gapi.client.getToken();
                     if (token !== null) {
-                        google.accounts.oauth2.revoke(token.access_token, () => {
-                            gapi.client.setToken('');
-                            dailyTaskListApp.driveFileId = null;
-                            dailyTaskListApp.updateAuthUi(false);
-                        });
+                        google.accounts.oauth2.revoke(token.access_token);
+                        gapi.client.setToken('');
+                        localStorage.removeItem('dtl_google_sync_enabled');
+                        dailyTaskListApp.driveFileId = null;
+                        dailyTaskListApp.updateAuthUi(false);
                     }
                 });
                 
-                // 4. サイレントログインの試行
-                dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'none' });
+                if (localStorage.getItem('dtl_google_sync_enabled') === 'true') {
+                    dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'none' });
+                } else {
+                    dailyTaskListApp.updateAuthUi(false);
+                }
 
             } catch (error) {
                 console.error('Failed to initialize Google Sync:', error);
@@ -750,7 +734,7 @@
             state.viewDate = getFormattedDate(new Date());
             loadState();
             setupEventListeners();
-            initializeGoogleSync(); // ★修正：新しい同期初期化関数を呼び出す
+            initializeGoogleSync();
             checkDayChange();
             setInterval(checkDayChange, 1000 * 60); 
             updateTitle();
@@ -912,7 +896,6 @@
             }
         });
         
-        // Driveへの保存は遅延実行
         const app = window.dailyTaskListApp;
         if (gapi?.client?.getToken()) {
             if (app.saveTimeout) clearTimeout(app.saveTimeout);
