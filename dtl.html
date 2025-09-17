@@ -446,104 +446,21 @@
     </div>
 </div>
 
-<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-
 <script>
-    // --- Google API Initializers (Global Scope) ---
-    // これらの関数は、scriptタグのonload属性から呼び出されるため、グローバルスコープに配置する必要があります。
-    
-    // Google API Clientライブラリが読み込まれたときに呼び出される
-    function gapiLoaded() {
-        gapi.load('client', initializeGapiClient);
-    }
-
-    // Google Identity Services (GIS)ライブラリが読み込まれたときに呼び出される
-    function gisLoaded() {
-        const tokenClient = google.accounts.oauth2.initTokenClient({
-            client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
-            scope: 'https://www.googleapis.com/auth/drive.appdata',
-            callback: (tokenResponse) => {
-                const app = window.dailyTaskListApp; // DOMContentLoadedで初期化されたアプリインスタンスを取得
-                if (tokenResponse && tokenResponse.access_token) {
-                    gapi.client.setToken(tokenResponse);
-                    app.updateAuthUi(true);
-                    app.loadStateFromDrive();
-                } else {
-                    console.error('No access token received.');
-                    app.driveStatusEl.textContent = '認証に失敗しました。';
-                }
-            },
-        });
-        // アプリケーションからアクセスできるように、tokenClientをグローバルに保存
-        window.dailyTaskListApp = window.dailyTaskListApp || {};
-        window.dailyTaskListApp.tokenClient = tokenClient;
-    }
-
-    // gapi.clientの初期化を行う
-    async function initializeGapiClient() {
-        await gapi.client.init({
-            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-        });
-        // アプリケーションに準備完了を通知
-        if (window.dailyTaskListApp && window.dailyTaskListApp.onGapiReady) {
-            window.dailyTaskListApp.onGapiReady();
-        }
-    }
-
-
-    // --- Main Application Logic ---
-    // DOMの読み込みが完了してからアプリケーション全体を初期化する
     document.addEventListener('DOMContentLoaded', () => {
 
         // --- GOOGLE DRIVE SYNC START ---
-        // グローバルなアプリケーションオブジェクトを作成し、関連する要素や関数を格納する
-        window.dailyTaskListApp = {
+        const dailyTaskListApp = window.dailyTaskListApp = {
             driveFileId: null,
             saveTimeout: null,
+            tokenClient: null,
+            // DOM Elements
             authorizeButton: document.getElementById('authorize_button'),
             signoutButton: document.getElementById('signout_button'),
             authContainer: document.getElementById('auth-container'),
             signoutContainer: document.getElementById('signout_container'),
             authStatusEl: document.getElementById('auth-status'),
             driveStatusEl: document.getElementById('drive-status'),
-
-            // gapiの準備が完了したときに呼び出されるコールバック
-            onGapiReady: function() {
-                this.isGapiReady = true;
-                this.checkApisReady();
-            },
-
-            // GISの準備が完了したときに呼び出される
-            onGisReady: function() {
-                this.isGisReady = true;
-                this.checkApisReady();
-            },
-            
-            // 両方のAPIが準備完了したかチェック
-            checkApisReady: function() {
-                 if (this.isGapiReady && this.isGisReady) {
-                    this.authorizeButton.disabled = false;
-                    this.authorizeButton.textContent = 'Google ログイン';
-                }
-            },
-            
-            // 同期機能のイベントリスナーを設定
-            setupGoogleSync: function() {
-                this.authorizeButton.addEventListener('click', () => this.tokenClient.requestAccessToken({prompt: 'consent'}));
-                this.signoutButton.addEventListener('click', () => {
-                    const token = gapi.client.getToken();
-                    if (token !== null) {
-                        google.accounts.oauth2.revoke(token.access_token, () => {
-                            gapi.client.setToken('');
-                            this.driveFileId = null;
-                            this.updateAuthUi(false);
-                        });
-                    }
-                });
-                // gisLoadedは非同期に実行されるため、準備完了をここでマークする
-                this.onGisReady();
-            },
 
             // 認証UIの更新
             updateAuthUi: function(isLoggedIn) {
@@ -553,6 +470,8 @@
                     this.authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
                 } else {
                     this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
+                    this.authorizeButton.disabled = false;
+                    this.authorizeButton.textContent = 'Google ログイン';
                 }
             },
 
@@ -576,7 +495,7 @@
                     }
                 } catch (err) {
                     console.error('Error finding file:', err);
-                    this.driveStatusEl.textContent = `エラー: ${err.result.error.message}`;
+                    this.driveStatusEl.textContent = `エラー: ${err.result?.error?.message || 'Unknown error'}`;
                     return null;
                 }
             },
@@ -586,7 +505,12 @@
                 if (!gapi.client.getToken()) return;
                 
                 await this.findDriveFile();
-                if (!this.driveFileId) return;
+                if (!this.driveFileId) {
+                    // Driveにファイルがない場合、ローカルの初回データをDriveに保存する
+                    this.driveStatusEl.textContent = '初回同期を開始します...';
+                    await this.saveStateToDrive();
+                    return;
+                };
 
                 this.driveStatusEl.textContent = 'Driveからデータを読み込み中...';
                 try {
@@ -651,7 +575,7 @@
                     multipartRequestBody =
                         delimiter +
                         'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                        JSON.stringify({}) + // 更新時はメタデータは空でよい
+                        JSON.stringify({}) + 
                         delimiter +
                         'Content-Type: application/json\r\n\r\n' +
                         fileContent +
@@ -691,13 +615,106 @@
                 } catch (err) {
                     console.error('Error saving state to Drive:', err);
                     this.driveStatusEl.textContent = `保存エラー: ${err.result?.error?.message || 'Unknown error'}`;
-                    if (err.result && err.result.error.code === 404) {
-                        this.driveFileId = null;
-                        this.saveStateToDrive(); 
+                    if (err.result && (err.result.error.code === 404 || err.result.error.code === 401)) {
+                        this.driveFileId = null; 
+                        // トークンが無効なら再ログインを促す
+                        if (err.result.error.code === 401) {
+                           this.updateAuthUi(false);
+                           this.driveStatusEl.textContent = '認証が切れました。再ログインしてください。';
+                        } else {
+                           this.saveStateToDrive(); 
+                        }
                     }
                 }
             }
         };
+
+        // Google API スクリプトを動的に読み込む関数
+        function loadGoogleApiScripts() {
+            return new Promise((resolve, reject) => {
+                const scriptGapi = document.createElement('script');
+                scriptGapi.src = 'https://apis.google.com/js/api.js';
+                scriptGapi.async = true;
+                scriptGapi.defer = true;
+                scriptGapi.onload = () => {
+                    const scriptGis = document.createElement('script');
+                    scriptGis.src = 'https://accounts.google.com/gsi/client';
+                    scriptGis.async = true;
+                    scriptGis.defer = true;
+                    scriptGis.onload = resolve;
+                    scriptGis.onerror = () => reject(new Error('Failed to load Google Identity Services script.'));
+                    document.head.appendChild(scriptGis);
+                };
+                scriptGapi.onerror = () => reject(new Error('Failed to load Google API script.'));
+                document.head.appendChild(scriptGapi);
+            });
+        }
+
+        // Google Drive 同期機能の初期化
+        async function initializeGoogleSync() {
+            try {
+                await loadGoogleApiScripts();
+
+                // 1. GAPI Clientの初期化
+                await new Promise((resolve, reject) => {
+                    gapi.load('client', async () => {
+                        try {
+                            await gapi.client.init({
+                                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+                            });
+                            resolve();
+                        } catch (error) {
+                            reject(error);
+                        }
+                    });
+                });
+
+                // 2. GIS Client (TokenClient) の初期化
+                dailyTaskListApp.tokenClient = google.accounts.oauth2.initTokenClient({
+                    client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
+                    scope: 'https://www.googleapis.com/auth/drive.appdata',
+                    callback: (tokenResponse) => {
+                        if (tokenResponse && tokenResponse.access_token) {
+                            gapi.client.setToken(tokenResponse);
+                            dailyTaskListApp.updateAuthUi(true);
+                            dailyTaskListApp.loadStateFromDrive();
+                        } else {
+                            console.error('Authentication failed: No access token received.');
+                            dailyTaskListApp.driveStatusEl.textContent = '認証に失敗しました。';
+                            dailyTaskListApp.updateAuthUi(false);
+                        }
+                    },
+                    error_callback: (error) => {
+                         console.log('Silent login failed or user dismissed consent:', error);
+                         dailyTaskListApp.updateAuthUi(false);
+                    }
+                });
+
+                // 3. ログイン・ログアウトボタンのイベントリスナー設定
+                dailyTaskListApp.authorizeButton.addEventListener('click', () => {
+                    dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'consent' });
+                });
+                dailyTaskListApp.signoutButton.addEventListener('click', () => {
+                    const token = gapi.client.getToken();
+                    if (token !== null) {
+                        google.accounts.oauth2.revoke(token.access_token, () => {
+                            gapi.client.setToken('');
+                            dailyTaskListApp.driveFileId = null;
+                            dailyTaskListApp.updateAuthUi(false);
+                        });
+                    }
+                });
+                
+                // 4. サイレントログインの試行
+                dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'none' });
+
+            } catch (error) {
+                console.error('Failed to initialize Google Sync:', error);
+                dailyTaskListApp.authorizeButton.textContent = 'API Error';
+                dailyTaskListApp.authorizeButton.disabled = true;
+                dailyTaskListApp.driveStatusEl.textContent = 'Google APIの読み込みに失敗しました。';
+            }
+        }
         // --- GOOGLE DRIVE SYNC END ---
 
 
@@ -733,7 +750,7 @@
             state.viewDate = getFormattedDate(new Date());
             loadState();
             setupEventListeners();
-            window.dailyTaskListApp.setupGoogleSync(); // Drive連携のイベントリスナーを設定
+            initializeGoogleSync(); // ★修正：新しい同期初期化関数を呼び出す
             checkDayChange();
             setInterval(checkDayChange, 1000 * 60); 
             updateTitle();
@@ -888,20 +905,20 @@
         });
     }
 
-        function saveState() {
-            Object.keys(state).forEach(k => {
-                if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
-                    localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
-                }
-            });
-            
-            // 修正: グローバルオブジェクトの関数を呼び出す
-            const app = window.dailyTaskListApp;
-            if (gapi?.client?.getToken()) {
-                if (app.saveTimeout) clearTimeout(app.saveTimeout);
-                app.saveTimeout = setTimeout(() => app.saveStateToDrive(), 2000);
+    function saveState() {
+        Object.keys(state).forEach(k => {
+            if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
+                localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
             }
+        });
+        
+        // Driveへの保存は遅延実行
+        const app = window.dailyTaskListApp;
+        if (gapi?.client?.getToken()) {
+            if (app.saveTimeout) clearTimeout(app.saveTimeout);
+            app.saveTimeout = setTimeout(() => app.saveStateToDrive(), 2000);
         }
+    }
     
     function checkDayChange() {
         const today = getFormattedDate(new Date());
