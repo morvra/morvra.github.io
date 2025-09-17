@@ -107,7 +107,6 @@
         .custom-tooltip { visibility: hidden; opacity: 0; background-color: #2d3748; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 10; bottom: 150%; left: 50%; transform: translateX(-50%); transition: opacity 0.1s, visibility 0.1s; width: max-content; max-width: 300px; font-size: 0.875rem; font-weight: normal; line-height: 1.4; white-space: pre-wrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
         .custom-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #2d3748 transparent transparent transparent; }
         
-        /* Enhanced tooltip positioning to prevent overflow */
         .tooltip-container:hover .custom-tooltip { 
             visibility: visible; 
             opacity: 1; 
@@ -139,14 +138,12 @@
 
         .time-input { width: 80px; text-align: center; border: 1px solid #d1d5db; border-radius: 4px; padding: 2px 4px; }
 
-		/* search-specific */
-        .archive-search-box { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+		.archive-search-box { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
         .archive-search-input { flex:1; padding:8px 10px; max-width: 50%; border-radius:6px; border:1px solid #d1d5db; background:white; }
         .archive-search-btn { padding:8px 12px; border-radius:6px; background:#3b82f6; color:white; border:none; cursor:pointer; }
         .archive-clear-btn { padding:8px 10px; border-radius:6px; background:#e5e7eb; color:#374151; border:none; cursor:pointer; }
         .search-result-meta { font-size:0.85rem; color:#6b7280; }
 
-        /* スマホ表示用のスタイル */
         @media (max-width: 768px) {
             .sections-wrapper { padding-bottom:88px; }
             .task-card-wrapper {
@@ -159,19 +156,18 @@
                 background-color: #e5e7eb; 
             }
             
-            /* アーカイブの表を横スクロール可能にする */
             .archive-table-wrapper {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
             }
             .archive-table-wrapper > table {
-                min-width: 640px; /* テーブルの最小幅を指定してスクロールを発生させる */
+                min-width: 640px; 
             }
             .archive-table-wrapper td, .archive-table-wrapper th {
-                white-space: nowrap; /* セル内のテキストが折り返さないようにする */
+                white-space: nowrap; 
             }
             .archive-table-wrapper .task-memo-cell {
-                white-space: normal; /* タスク名とメモのセルだけは折り返しを許可 */
+                white-space: normal;
                 min-width: 250px;
             }
         }
@@ -223,7 +219,6 @@
         <div id="repeat" class="tab-content">
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">リピートタスク管理</h2>
-                <!-- 修正：スマホ表示で入力フォームのレイアウトを改善 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 items-end">
                     <input type="text" id="repeat-task-name" placeholder="タスク名" class="md:col-span-2 p-2 border rounded-lg">
                     <div class="grid grid-cols-2 gap-4">
@@ -256,7 +251,6 @@
                     <button id="generate-from-repeat-btn" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow">▶ 今日のタスクを生成</button>
                 </div>
 
-                <!-- 修正：スマホ表示ではカード形式になるコンテナ -->
                 <div id="repeat-tasks-container" class="mt-6"></div>
             </div>
         </div>
@@ -270,7 +264,6 @@
                     <input type="color" id="project-color" value="#4a90e2" class="p-1 h-10 w-12 border rounded-lg">
                     <button id="add-project-btn" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 shadow">＋ プロジェクトを追加</button>
                 </div>
-                <!-- 修正：スマホ表示ではカード形式になるコンテナ -->
                 <div id="projects-container" class="mt-6"></div>
             </div>
         </div>
@@ -302,7 +295,6 @@
                     <div id="archive-project-tasks"></div>
                 </div>
 
-				<!-- 新規：検索ビュー -->
 				<div id="archive-search-view" class="hidden">
     				<div class="archive-search-box">
         				<input id="archive-search-input" class="archive-search-input" type="text" placeholder="タスク名またはメモを検索">
@@ -320,6 +312,21 @@
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">データ管理</h2>
                 <div class="space-y-6">
+                    <!-- Google Drive Sync: START -->
+                    <div class="border p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-3">Google Drive 同期</h3>
+                        <p class="text-sm text-gray-600 mb-3">タスクデータをGoogle Driveに保存し、他のデバイスと同期します。</p>
+                        <div id="auth-container">
+                            <button id="authorize_button" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg" disabled>API Loading...</button>
+                        </div>
+                        <div id="signout_container" class="hidden">
+                            <p id="auth-status" class="text-sm text-green-600 mb-2"></p>
+                            <button id="signout_button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">ログアウト</button>
+                        </div>
+                        <p id="drive-status" class="text-sm text-gray-500 mt-2"></p>
+                    </div>
+                    <!-- Google Drive Sync: END -->
+
                     <div class="border p-4 rounded-lg">
                         <h3 class="text-lg font-semibold mb-3">データエクスポート</h3>
                         <p class="text-sm text-gray-600 mb-3">現在のデータをJSONファイルとしてダウンロードします。</p>
@@ -327,7 +334,6 @@
                     </div>
                     <div class="border p-4 rounded-lg">
                         <h3 class="text-lg font-semibold mb-3">データインポート</h3>
-                        <!-- 修正：インポート処理の説明を変更 -->
                         <p class="text-sm text-gray-600 mb-3">JSONファイルからデータを復元します。IDが重複するデータは上書きされ、存在しないデータは追加されます。</p>
                         <input type="file" id="import-file" accept=".json" class="mb-3 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                         <button id="import-data-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg">データをインポート</button>
@@ -440,16 +446,240 @@
     </div>
 </div>
 
+<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- GOOGLE DRIVE SYNC START ---
+    const CLIENT_ID = '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com';
+    const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
+    const FILENAME = 'DailyTaskListData.json';
+
+    let tokenClient;
+    let driveFileId = null;
+    let isGapiReady = false;
+    let isGisReady = false;
+    let saveTimeout = null;
+
+    const authorizeButton = document.getElementById('authorize_button');
+    const signoutButton = document.getElementById('signout_button');
+    const authContainer = document.getElementById('auth-container');
+    const signoutContainer = document.getElementById('signout_container');
+    const authStatusEl = document.getElementById('auth-status');
+    const driveStatusEl = document.getElementById('drive-status');
+
+    window.gapiLoaded = function() {
+        gapi.load('client', initializeGapiClient);
+    };
+
+    window.gisLoaded = function() {
+        tokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: CLIENT_ID,
+            scope: SCOPES,
+            callback: (tokenResponse) => {
+                if (tokenResponse && tokenResponse.access_token) {
+                    gapi.client.setToken(tokenResponse);
+                    updateAuthUi(true);
+                    loadStateFromDrive();
+                } else {
+                    console.error('No access token received.');
+                    driveStatusEl.textContent = '認証に失敗しました。';
+                }
+            },
+        });
+        isGisReady = true;
+        checkApisReady();
+    };
+
+    async function initializeGapiClient() {
+        await gapi.client.init({
+            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+        });
+        isGapiReady = true;
+        checkApisReady();
+    }
+    
+    function checkApisReady() {
+        if (isGapiReady && isGisReady) {
+            authorizeButton.disabled = false;
+            authorizeButton.textContent = 'Google ログイン';
+        }
+    }
+
+    function setupGoogleSync() {
+        authorizeButton.addEventListener('click', () => tokenClient.requestAccessToken({prompt: 'consent'}));
+        signoutButton.addEventListener('click', () => {
+             const token = gapi.client.getToken();
+            if (token !== null) {
+                google.accounts.oauth2.revoke(token.access_token, () => {
+                    gapi.client.setToken('');
+                    driveFileId = null;
+                    updateAuthUi(false);
+                });
+            }
+        });
+    }
+
+    function updateAuthUi(isLoggedIn) {
+        authContainer.classList.toggle('hidden', isLoggedIn);
+        signoutContainer.classList.toggle('hidden', !isLoggedIn);
+        if (isLoggedIn) {
+            authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
+        } else {
+            driveStatusEl.textContent = 'ログインするとデータを同期できます。';
+        }
+    }
+
+    async function findDriveFile() {
+        driveStatusEl.textContent = 'Driveファイルを検索中...';
+        try {
+            const response = await gapi.client.drive.files.list({
+                spaces: 'appDataFolder',
+                fields: 'files(id, name)',
+                q: `name='${FILENAME}'`
+            });
+            if (response.result.files && response.result.files.length > 0) {
+                driveFileId = response.result.files[0].id;
+                driveStatusEl.textContent = 'データファイルが見つかりました。';
+                return driveFileId;
+            } else {
+                driveFileId = null;
+                driveStatusEl.textContent = 'データファイルが見つかりません。初回保存時に作成されます。';
+                return null;
+            }
+        } catch (err) {
+            console.error('Error finding file:', err);
+            driveStatusEl.textContent = `エラー: ${err.result.error.message}`;
+            return null;
+        }
+    }
+
+    async function loadStateFromDrive() {
+        if (!gapi.client.getToken()) return;
+        
+        await findDriveFile();
+        if (!driveFileId) return;
+
+        driveStatusEl.textContent = 'Driveからデータを読み込み中...';
+        try {
+            const response = await gapi.client.drive.files.get({
+                fileId: driveFileId,
+                alt: 'media'
+            });
+
+            const importedData = response.result;
+            
+            Object.assign(state.dailyTasks, importedData.dailyTasks || {});
+            Object.assign(state.archivedTasks, importedData.archivedTasks || {});
+            if (importedData.projects) state.projects = importedData.projects;
+            if (importedData.repeatTasks) state.repeatTasks = importedData.repeatTasks;
+            state.lastDate = importedData.lastDate || state.lastDate;
+            
+            stopActiveTimer();
+            state.viewDate = getFormattedDate(new Date());
+            const tasksToday = getTasksForViewDate();
+            state.focusedTaskId = tasksToday.length > 0 ? tasksToday[0].id : null;
+            
+            Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
+            
+            render();
+            driveStatusEl.textContent = `Driveからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
+            alert('Driveからデータを読み込み、ローカルデータとマージしました。');
+
+        } catch (err) {
+            console.error('Error loading state from Drive:', err);
+            driveStatusEl.textContent = `読み込みエラー: ${err.result?.error?.message || 'Unknown error'}`;
+        }
+    }
+    
+    async function saveStateToDrive() {
+        if (!gapi.client.getToken()) return;
+        
+        driveStatusEl.textContent = 'Driveへ保存準備中...';
+
+        const dataToSave = {
+            dailyTasks: state.dailyTasks,
+            projects: state.projects,
+            repeatTasks: state.repeatTasks,
+            archivedTasks: state.archivedTasks,
+            lastDate: state.lastDate,
+            updatedAt: new Date().toISOString()
+        };
+
+        const boundary = '-------314159265358979323846';
+        const delimiter = "\r\n--" + boundary + "\r\n";
+        const close_delim = "\r\n--" + boundary + "--";
+
+        const metadata = {
+            'name': FILENAME,
+            'mimeType': 'application/json'
+        };
+        
+        const fileContent = JSON.stringify(dataToSave);
+
+        let multipartRequestBody;
+        if(driveFileId) {
+             multipartRequestBody =
+                delimiter +
+                'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+                JSON.stringify({}) + // Empty metadata for update
+                delimiter +
+                'Content-Type: application/json\r\n\r\n' +
+                fileContent +
+                close_delim;
+        } else {
+             metadata.parents = ['appDataFolder'];
+             multipartRequestBody =
+                delimiter +
+                'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+                JSON.stringify(metadata) +
+                delimiter +
+                'Content-Type: application/json\r\n\r\n' +
+                fileContent +
+                close_delim;
+        }
+
+        const path = driveFileId 
+            ? `/upload/drive/v3/files/${driveFileId}?uploadType=multipart` 
+            : '/upload/drive/v3/files?uploadType=multipart';
+        const method = driveFileId ? 'PATCH' : 'POST';
+        
+        driveStatusEl.textContent = 'Driveへ保存中...';
+        try {
+            const response = await gapi.client.request({
+                'path': path,
+                'method': method,
+                'headers': {
+                    'Content-Type': 'multipart/related; boundary="' + boundary + '"'
+                },
+                'body': multipartRequestBody
+            });
+
+            if (!driveFileId) {
+                 driveFileId = response.result.id;
+            }
+            driveStatusEl.textContent = `Driveに保存しました (${new Date().toLocaleTimeString()})。`;
+        } catch (err) {
+            console.error('Error saving state to Drive:', err);
+            driveStatusEl.textContent = `保存エラー: ${err.result?.error?.message || 'Unknown error'}`;
+            if (err.result && err.result.error.code === 404) {
+                driveFileId = null;
+                saveStateToDrive(); 
+            }
+        }
+    }
+    // --- GOOGLE DRIVE SYNC END ---
+
+
     // State
     const state = {
-        dailyTasks: {},    // { 'YYYY-MM-DD': [tasks] }
+        dailyTasks: {}, 
         projects: [],
         repeatTasks: [],
         archivedTasks: {},
-        viewDate: null,   // YYYY-MM-DD
+        viewDate: null, 
         lastDate: null,
         archiveViewDate: null,
         archiveView: 'date',
@@ -475,6 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
         state.viewDate = getFormattedDate(new Date());
         loadState();
         setupEventListeners();
+        setupGoogleSync(); // Setup Drive listeners
         checkDayChange();
         setInterval(checkDayChange, 1000 * 60); 
 		updateTitle();
@@ -518,7 +749,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/\//g, '-');
     }
 
-    // Task status determination based on start and end times
     function getTaskStatus(task) {
         if (task.startTime && task.endTime) {
             return 'completed';
@@ -547,17 +777,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskIndex = tasks.findIndex(t => t.id === taskId);
         if (taskIndex === -1) return;
 
-        // タスクを配列から一旦削除
         const [task] = tasks.splice(taskIndex, 1);
         
-        // 残りのタスクの中で、最後の完了済みタスクのインデックスを探す
         const lastCompletedIndex = tasks.map(t => t.status === 'completed').lastIndexOf(true);
         
-        // 挿入位置を決定する
-        // 他に完了済みタスクがあればその直後、なければ配列の先頭
         const insertIndex = lastCompletedIndex === -1 ? 0 : lastCompletedIndex + 1;
 
-        // 新しく完了したタスクを正しい位置に挿入
         tasks.splice(insertIndex, 0, task);
         setTasksForViewDate(tasks);
     }
@@ -569,7 +794,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	        const task = tasks[taskIndex];
 	        const uncompletedTasks = tasks.filter(t => t.status !== 'completed' && t.id !== taskId);
 	
-	        // 未完了タスクが他に存在しない場合は移動しない
 	        if (uncompletedTasks.length === 0) {
 	            return;
 	        }
@@ -577,7 +801,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	        const [movedTask] = tasks.splice(taskIndex, 1);
 	        const firstUncompletedIndex = tasks.findIndex(t => t.status !== 'completed');
 	        
-	        // 未完了タスクの先頭に移動
 	        const insertIndex = firstUncompletedIndex !== -1 ? firstUncompletedIndex : 0;
 	        
 	        tasks.splice(insertIndex, 0, movedTask);
@@ -585,7 +808,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	    }
 	}
 
-    // Enhanced tooltip positioning
     function positionTooltip(tooltipContainer) {
         const tooltip = tooltipContainer.querySelector('.custom-tooltip');
         const rect = tooltipContainer.getBoundingClientRect();
@@ -600,7 +822,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Persistence
     function loadState() {
         const defaults = {
             dailyTasks: {},
@@ -614,7 +835,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lastDate: getFormattedDate(new Date()),
         };
 
-        // Migration from old `tasks` to `dailyTasks`
         const oldTasks = localStorage.getItem('dtl_tasks');
         const newTasks = localStorage.getItem('dtl_dailyTasks');
         if (oldTasks && !newTasks) {
@@ -623,7 +843,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const today = getFormattedDate(new Date());
                 state.dailyTasks[today] = parsedOldTasks;
                 localStorage.removeItem('dtl_tasks');
-                console.log('Migrated old tasks to new dailyTasks structure.');
             }
         }
         
@@ -636,7 +855,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Update task statuses based on start/end times
         Object.values(state.dailyTasks).flat().forEach(task => {
             updateTaskStatus(task);
         });
@@ -648,12 +866,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
             }
         });
+
+        // Debounced save to Google Drive if logged in
+        if (gapi?.client?.getToken()) {
+            if (saveTimeout) clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveStateToDrive, 2000); // 2 second delay
+        }
     }
     
     function checkDayChange() {
         const today = getFormattedDate(new Date());
         if (state.lastDate !== today) {
-            console.log(`日付が変わりました: ${state.lastDate} -> ${today}`);
+            console.log(`Date changed: ${state.lastDate} -> ${today}`);
 
             const yesterdaysTasks = state.dailyTasks[state.lastDate];
             if (yesterdaysTasks && yesterdaysTasks.length > 0) {
@@ -664,14 +888,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     state.dailyTasks[today].unshift(...leftoverTasks);
                     state.dailyTasks[state.lastDate] = yesterdaysTasks.filter(t => t.status === 'completed');
-                    console.log(`${leftoverTasks.length}件の未完了タスクを ${state.lastDate} から ${today} に移動しました。`);
                 }
             }
             
             archiveCompletedTasks(state.lastDate);
             generateTasksFromRepeatAuto(today);
             state.lastDate = today;
-            state.viewDate = today; // 表示を新しい日に移動
+            state.viewDate = today; 
             state.focusedTaskId = (state.dailyTasks[today] && state.dailyTasks[today][0]?.id) || null;
             saveAndRender();
         }
@@ -687,7 +910,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             state.archivedTasks[dateKey].push(...completedTasks);
             state.dailyTasks[dateKey] = state.dailyTasks[dateKey].filter(t => t.status !== 'completed');
-            console.log(`${dateKey} の ${completedTasks.length}件のタスクをアーカイブしました。`);
         }
     }
 
@@ -819,7 +1041,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('今日のタスクとして追加しました。');
     }
 
-    // Event listeners
     function setupEventListeners() {
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -915,7 +1136,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 修正：iOS PWAでキーボード表示時にヘッダーがずれる問題を修正
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         if (isIOS) {
             const header = document.querySelector('.fixed-header');
@@ -923,7 +1143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.addEventListener('focusin', (e) => {
                 if (e.target.matches('input, textarea')) {
-                    // キーボードが開くとき、ヘッダーをabsoluteに切り替えて現在のスクロール位置に固定
                     lastScrollY = window.scrollY;
                     header.style.position = 'absolute';
                     header.style.top = `${lastScrollY}px`;
@@ -932,7 +1151,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.addEventListener('focusout', (e) => {
                 if (e.target.matches('input, textarea')) {
-                    // キーボードが閉じるとき、ヘッダーをfixedに戻す
                     header.style.position = 'fixed';
                     header.style.top = '0';
                 }
@@ -1012,7 +1230,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById(modalId).classList.remove('active');
     }
 
-    // Render
     function render() {
         const activeTab = document.querySelector('.tab-link.active').dataset.tab;
         if (activeTab === 'today') renderTodayTasks();
@@ -2209,7 +2426,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = fileInput.files[0];
         if (!file) return alert('インポートするファイルを選択してください。');
         
-        // 修正：確認メッセージを変更
         if (!confirm('データをインポートします。IDが重複するデータは上書きされます。よろしいですか？')) return;
 
         const reader = new FileReader();
@@ -2217,7 +2433,6 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const importedData = JSON.parse(e.target.result);
                 
-                // 修正：既存のデータを保持し、重複は上書きするマージ処理
                 Object.assign(state.dailyTasks, importedData.dailyTasks || {});
                 Object.assign(state.archivedTasks, importedData.archivedTasks || {});
 
