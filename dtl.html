@@ -450,277 +450,305 @@
 <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- GOOGLE DRIVE SYNC START ---
-    const CLIENT_ID = '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com';
-    const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
-    const FILENAME = 'DailyTaskListData.json';
-
-    let tokenClient;
-    let driveFileId = null;
-    let isGapiReady = false;
-    let isGisReady = false;
-    let saveTimeout = null;
-
-    const authorizeButton = document.getElementById('authorize_button');
-    const signoutButton = document.getElementById('signout_button');
-    const authContainer = document.getElementById('auth-container');
-    const signoutContainer = document.getElementById('signout_container');
-    const authStatusEl = document.getElementById('auth-status');
-    const driveStatusEl = document.getElementById('drive-status');
-
-    window.gapiLoaded = function() {
+    // --- Google API Initializers (Global Scope) ---
+    // これらの関数は、scriptタグのonload属性から呼び出されるため、グローバルスコープに配置する必要があります。
+    
+    // Google API Clientライブラリが読み込まれたときに呼び出される
+    function gapiLoaded() {
         gapi.load('client', initializeGapiClient);
-    };
+    }
 
-    window.gisLoaded = function() {
-        tokenClient = google.accounts.oauth2.initTokenClient({
-            client_id: CLIENT_ID,
-            scope: SCOPES,
+    // Google Identity Services (GIS)ライブラリが読み込まれたときに呼び出される
+    function gisLoaded() {
+        const tokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
+            scope: 'https://www.googleapis.com/auth/drive.appdata',
             callback: (tokenResponse) => {
+                const app = window.dailyTaskListApp; // DOMContentLoadedで初期化されたアプリインスタンスを取得
                 if (tokenResponse && tokenResponse.access_token) {
                     gapi.client.setToken(tokenResponse);
-                    updateAuthUi(true);
-                    loadStateFromDrive();
+                    app.updateAuthUi(true);
+                    app.loadStateFromDrive();
                 } else {
                     console.error('No access token received.');
-                    driveStatusEl.textContent = '認証に失敗しました。';
+                    app.driveStatusEl.textContent = '認証に失敗しました。';
                 }
             },
         });
-        isGisReady = true;
-        checkApisReady();
-    };
+        // アプリケーションからアクセスできるように、tokenClientをグローバルに保存
+        window.dailyTaskListApp = window.dailyTaskListApp || {};
+        window.dailyTaskListApp.tokenClient = tokenClient;
+    }
 
+    // gapi.clientの初期化を行う
     async function initializeGapiClient() {
         await gapi.client.init({
             discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
         });
-        isGapiReady = true;
-        checkApisReady();
-    }
-    
-    function checkApisReady() {
-        if (isGapiReady && isGisReady) {
-            authorizeButton.disabled = false;
-            authorizeButton.textContent = 'Google ログイン';
+        // アプリケーションに準備完了を通知
+        if (window.dailyTaskListApp && window.dailyTaskListApp.onGapiReady) {
+            window.dailyTaskListApp.onGapiReady();
         }
     }
 
-    function setupGoogleSync() {
-        authorizeButton.addEventListener('click', () => tokenClient.requestAccessToken({prompt: 'consent'}));
-        signoutButton.addEventListener('click', () => {
-             const token = gapi.client.getToken();
-            if (token !== null) {
-                google.accounts.oauth2.revoke(token.access_token, () => {
-                    gapi.client.setToken('');
-                    driveFileId = null;
-                    updateAuthUi(false);
+
+    // --- Main Application Logic ---
+    // DOMの読み込みが完了してからアプリケーション全体を初期化する
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- GOOGLE DRIVE SYNC START ---
+        // グローバルなアプリケーションオブジェクトを作成し、関連する要素や関数を格納する
+        window.dailyTaskListApp = {
+            driveFileId: null,
+            saveTimeout: null,
+            authorizeButton: document.getElementById('authorize_button'),
+            signoutButton: document.getElementById('signout_button'),
+            authContainer: document.getElementById('auth-container'),
+            signoutContainer: document.getElementById('signout_container'),
+            authStatusEl: document.getElementById('auth-status'),
+            driveStatusEl: document.getElementById('drive-status'),
+
+            // gapiの準備が完了したときに呼び出されるコールバック
+            onGapiReady: function() {
+                this.isGapiReady = true;
+                this.checkApisReady();
+            },
+
+            // GISの準備が完了したときに呼び出される
+            onGisReady: function() {
+                this.isGisReady = true;
+                this.checkApisReady();
+            },
+            
+            // 両方のAPIが準備完了したかチェック
+            checkApisReady: function() {
+                 if (this.isGapiReady && this.isGisReady) {
+                    this.authorizeButton.disabled = false;
+                    this.authorizeButton.textContent = 'Google ログイン';
+                }
+            },
+            
+            // 同期機能のイベントリスナーを設定
+            setupGoogleSync: function() {
+                this.authorizeButton.addEventListener('click', () => this.tokenClient.requestAccessToken({prompt: 'consent'}));
+                this.signoutButton.addEventListener('click', () => {
+                    const token = gapi.client.getToken();
+                    if (token !== null) {
+                        google.accounts.oauth2.revoke(token.access_token, () => {
+                            gapi.client.setToken('');
+                            this.driveFileId = null;
+                            this.updateAuthUi(false);
+                        });
+                    }
                 });
-            }
-        });
-    }
+                // gisLoadedは非同期に実行されるため、準備完了をここでマークする
+                this.onGisReady();
+            },
 
-    function updateAuthUi(isLoggedIn) {
-        authContainer.classList.toggle('hidden', isLoggedIn);
-        signoutContainer.classList.toggle('hidden', !isLoggedIn);
-        if (isLoggedIn) {
-            authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
-        } else {
-            driveStatusEl.textContent = 'ログインするとデータを同期できます。';
-        }
-    }
+            // 認証UIの更新
+            updateAuthUi: function(isLoggedIn) {
+                this.authContainer.classList.toggle('hidden', isLoggedIn);
+                this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
+                if (isLoggedIn) {
+                    this.authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
+                } else {
+                    this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
+                }
+            },
 
-    async function findDriveFile() {
-        driveStatusEl.textContent = 'Driveファイルを検索中...';
-        try {
-            const response = await gapi.client.drive.files.list({
-                spaces: 'appDataFolder',
-                fields: 'files(id, name)',
-                q: `name='${FILENAME}'`
-            });
-            if (response.result.files && response.result.files.length > 0) {
-                driveFileId = response.result.files[0].id;
-                driveStatusEl.textContent = 'データファイルが見つかりました。';
-                return driveFileId;
-            } else {
-                driveFileId = null;
-                driveStatusEl.textContent = 'データファイルが見つかりません。初回保存時に作成されます。';
-                return null;
-            }
-        } catch (err) {
-            console.error('Error finding file:', err);
-            driveStatusEl.textContent = `エラー: ${err.result.error.message}`;
-            return null;
-        }
-    }
+            // Drive上のファイル検索
+            findDriveFile: async function() {
+                this.driveStatusEl.textContent = 'Driveファイルを検索中...';
+                try {
+                    const response = await gapi.client.drive.files.list({
+                        spaces: 'appDataFolder',
+                        fields: 'files(id, name)',
+                        q: `name='DailyTaskListData.json'`
+                    });
+                    if (response.result.files && response.result.files.length > 0) {
+                        this.driveFileId = response.result.files[0].id;
+                        this.driveStatusEl.textContent = 'データファイルが見つかりました。';
+                        return this.driveFileId;
+                    } else {
+                        this.driveFileId = null;
+                        this.driveStatusEl.textContent = 'データファイルが見つかりません。初回保存時に作成されます。';
+                        return null;
+                    }
+                } catch (err) {
+                    console.error('Error finding file:', err);
+                    this.driveStatusEl.textContent = `エラー: ${err.result.error.message}`;
+                    return null;
+                }
+            },
 
-    async function loadStateFromDrive() {
-        if (!gapi.client.getToken()) return;
-        
-        await findDriveFile();
-        if (!driveFileId) return;
+            // Driveからのデータ読み込み
+            loadStateFromDrive: async function() {
+                if (!gapi.client.getToken()) return;
+                
+                await this.findDriveFile();
+                if (!this.driveFileId) return;
 
-        driveStatusEl.textContent = 'Driveからデータを読み込み中...';
-        try {
-            const response = await gapi.client.drive.files.get({
-                fileId: driveFileId,
-                alt: 'media'
-            });
+                this.driveStatusEl.textContent = 'Driveからデータを読み込み中...';
+                try {
+                    const response = await gapi.client.drive.files.get({
+                        fileId: this.driveFileId,
+                        alt: 'media'
+                    });
 
-            const importedData = response.result;
+                    const importedData = response.result;
+                    
+                    Object.assign(state.dailyTasks, importedData.dailyTasks || {});
+                    Object.assign(state.archivedTasks, importedData.archivedTasks || {});
+                    if (importedData.projects) state.projects = importedData.projects;
+                    if (importedData.repeatTasks) state.repeatTasks = importedData.repeatTasks;
+                    state.lastDate = importedData.lastDate || state.lastDate;
+                    
+                    stopActiveTimer();
+                    state.viewDate = getFormattedDate(new Date());
+                    const tasksToday = getTasksForViewDate();
+                    state.focusedTaskId = tasksToday.length > 0 ? tasksToday[0].id : null;
+                    
+                    Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
+                    
+                    render();
+                    this.driveStatusEl.textContent = `Driveからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
+                    alert('Driveからデータを読み込み、ローカルデータとマージしました。');
+
+                } catch (err) {
+                    console.error('Error loading state from Drive:', err);
+                    this.driveStatusEl.textContent = `読み込みエラー: ${err.result?.error?.message || 'Unknown error'}`;
+                }
+            },
             
-            Object.assign(state.dailyTasks, importedData.dailyTasks || {});
-            Object.assign(state.archivedTasks, importedData.archivedTasks || {});
-            if (importedData.projects) state.projects = importedData.projects;
-            if (importedData.repeatTasks) state.repeatTasks = importedData.repeatTasks;
-            state.lastDate = importedData.lastDate || state.lastDate;
-            
-            stopActiveTimer();
+            // Driveへのデータ保存
+            saveStateToDrive: async function() {
+                if (!gapi.client.getToken()) return;
+                
+                this.driveStatusEl.textContent = 'Driveへ保存準備中...';
+
+                const dataToSave = {
+                    dailyTasks: state.dailyTasks,
+                    projects: state.projects,
+                    repeatTasks: state.repeatTasks,
+                    archivedTasks: state.archivedTasks,
+                    lastDate: state.lastDate,
+                    updatedAt: new Date().toISOString()
+                };
+
+                const boundary = '-------314159265358979323846';
+                const delimiter = "\r\n--" + boundary + "\r\n";
+                const close_delim = "\r\n--" + boundary + "--";
+
+                const metadata = {
+                    'name': 'DailyTaskListData.json',
+                    'mimeType': 'application/json'
+                };
+                
+                const fileContent = JSON.stringify(dataToSave);
+
+                let multipartRequestBody;
+                if(this.driveFileId) {
+                    multipartRequestBody =
+                        delimiter +
+                        'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+                        JSON.stringify({}) + // 更新時はメタデータは空でよい
+                        delimiter +
+                        'Content-Type: application/json\r\n\r\n' +
+                        fileContent +
+                        close_delim;
+                } else {
+                    metadata.parents = ['appDataFolder'];
+                    multipartRequestBody =
+                        delimiter +
+                        'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
+                        JSON.stringify(metadata) +
+                        delimiter +
+                        'Content-Type: application/json\r\n\r\n' +
+                        fileContent +
+                        close_delim;
+                }
+
+                const path = this.driveFileId 
+                    ? `/upload/drive/v3/files/${this.driveFileId}?uploadType=multipart` 
+                    : '/upload/drive/v3/files?uploadType=multipart';
+                const method = this.driveFileId ? 'PATCH' : 'POST';
+                
+                this.driveStatusEl.textContent = 'Driveへ保存中...';
+                try {
+                    const response = await gapi.client.request({
+                        'path': path,
+                        'method': method,
+                        'headers': {
+                            'Content-Type': 'multipart/related; boundary="' + boundary + '"'
+                        },
+                        'body': multipartRequestBody
+                    });
+
+                    if (!this.driveFileId) {
+                        this.driveFileId = response.result.id;
+                    }
+                    this.driveStatusEl.textContent = `Driveに保存しました (${new Date().toLocaleTimeString()})。`;
+                } catch (err) {
+                    console.error('Error saving state to Drive:', err);
+                    this.driveStatusEl.textContent = `保存エラー: ${err.result?.error?.message || 'Unknown error'}`;
+                    if (err.result && err.result.error.code === 404) {
+                        this.driveFileId = null;
+                        this.saveStateToDrive(); 
+                    }
+                }
+            }
+        };
+        // --- GOOGLE DRIVE SYNC END ---
+
+
+        // State (ここから下は元のコードとほぼ同じ)
+        const state = {
+            dailyTasks: {}, 
+            projects: [],
+            repeatTasks: [],
+            archivedTasks: {},
+            viewDate: null, 
+            lastDate: null,
+            archiveViewDate: null,
+            archiveView: 'date',
+            selectedArchiveProject: '',
+            settings: {
+                dayChangeHour: 4, 
+            },
+            activeTimerId: null,
+            activeTaskId: null,
+            focusedTaskId: null,
+            editingTaskId: null,
+            editingRepeatId: null,
+            editingMemoTaskId: null
+        };
+
+        // DOM refs
+        const tabs = document.querySelectorAll('.tab-link');
+        const currentDateEl = document.getElementById('current-date');
+        const totalEstimatedEndTimeEl = document.getElementById('total-estimated-end-time');
+
+        // Init
+        function init() {
             state.viewDate = getFormattedDate(new Date());
-            const tasksToday = getTasksForViewDate();
-            state.focusedTaskId = tasksToday.length > 0 ? tasksToday[0].id : null;
-            
-            Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
+            loadState();
+            setupEventListeners();
+            window.dailyTaskListApp.setupGoogleSync(); // Drive連携のイベントリスナーを設定
+            checkDayChange();
+            setInterval(checkDayChange, 1000 * 60); 
+            updateTitle();
             
             render();
-            driveStatusEl.textContent = `Driveからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
-            alert('Driveからデータを読み込み、ローカルデータとマージしました。');
-
-        } catch (err) {
-            console.error('Error loading state from Drive:', err);
-            driveStatusEl.textContent = `読み込みエラー: ${err.result?.error?.message || 'Unknown error'}`;
-        }
-    }
-    
-    async function saveStateToDrive() {
-        if (!gapi.client.getToken()) return;
-        
-        driveStatusEl.textContent = 'Driveへ保存準備中...';
-
-        const dataToSave = {
-            dailyTasks: state.dailyTasks,
-            projects: state.projects,
-            repeatTasks: state.repeatTasks,
-            archivedTasks: state.archivedTasks,
-            lastDate: state.lastDate,
-            updatedAt: new Date().toISOString()
-        };
-
-        const boundary = '-------314159265358979323846';
-        const delimiter = "\r\n--" + boundary + "\r\n";
-        const close_delim = "\r\n--" + boundary + "--";
-
-        const metadata = {
-            'name': FILENAME,
-            'mimeType': 'application/json'
-        };
-        
-        const fileContent = JSON.stringify(dataToSave);
-
-        let multipartRequestBody;
-        if(driveFileId) {
-             multipartRequestBody =
-                delimiter +
-                'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                JSON.stringify({}) + // Empty metadata for update
-                delimiter +
-                'Content-Type: application/json\r\n\r\n' +
-                fileContent +
-                close_delim;
-        } else {
-             metadata.parents = ['appDataFolder'];
-             multipartRequestBody =
-                delimiter +
-                'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                JSON.stringify(metadata) +
-                delimiter +
-                'Content-Type: application/json\r\n\r\n' +
-                fileContent +
-                close_delim;
-        }
-
-        const path = driveFileId 
-            ? `/upload/drive/v3/files/${driveFileId}?uploadType=multipart` 
-            : '/upload/drive/v3/files?uploadType=multipart';
-        const method = driveFileId ? 'PATCH' : 'POST';
-        
-        driveStatusEl.textContent = 'Driveへ保存中...';
-        try {
-            const response = await gapi.client.request({
-                'path': path,
-                'method': method,
-                'headers': {
-                    'Content-Type': 'multipart/related; boundary="' + boundary + '"'
-                },
-                'body': multipartRequestBody
+            updateTimeDisplays();
+            setInterval(updateTimeDisplays, 1000*30);
+            
+            window.addEventListener('resize', () => {
+                const activeTab = document.querySelector('.tab-link.active').dataset.tab;
+                if (['today', 'repeat', 'projects', 'archive'].includes(activeTab)) {
+                    render();
+                }
             });
-
-            if (!driveFileId) {
-                 driveFileId = response.result.id;
-            }
-            driveStatusEl.textContent = `Driveに保存しました (${new Date().toLocaleTimeString()})。`;
-        } catch (err) {
-            console.error('Error saving state to Drive:', err);
-            driveStatusEl.textContent = `保存エラー: ${err.result?.error?.message || 'Unknown error'}`;
-            if (err.result && err.result.error.code === 404) {
-                driveFileId = null;
-                saveStateToDrive(); 
-            }
         }
-    }
-    // --- GOOGLE DRIVE SYNC END ---
-
-
-    // State
-    const state = {
-        dailyTasks: {}, 
-        projects: [],
-        repeatTasks: [],
-        archivedTasks: {},
-        viewDate: null, 
-        lastDate: null,
-        archiveViewDate: null,
-        archiveView: 'date',
-        selectedArchiveProject: '',
-        settings: {
-            dayChangeHour: 4, 
-        },
-        activeTimerId: null,
-        activeTaskId: null,
-        focusedTaskId: null,
-        editingTaskId: null,
-        editingRepeatId: null,
-        editingMemoTaskId: null
-    };
-
-    // DOM refs
-    const tabs = document.querySelectorAll('.tab-link');
-    const currentDateEl = document.getElementById('current-date');
-    const totalEstimatedEndTimeEl = document.getElementById('total-estimated-end-time');
-
-    // Init
-    function init() {
-        state.viewDate = getFormattedDate(new Date());
-        loadState();
-        setupEventListeners();
-        setupGoogleSync(); // Setup Drive listeners
-        checkDayChange();
-        setInterval(checkDayChange, 1000 * 60); 
-		updateTitle();
-        
-        render();
-        updateTimeDisplays();
-        setInterval(updateTimeDisplays, 1000*30);
-        
-        window.addEventListener('resize', () => {
-            const activeTab = document.querySelector('.tab-link.active').dataset.tab;
-            if (['today', 'repeat', 'projects', 'archive'].includes(activeTab)) {
-                render();
-            }
-        });
-    }
 
     function getTasksForViewDate() {
         return state.dailyTasks[state.viewDate] || [];
@@ -860,19 +888,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function saveState() {
-        Object.keys(state).forEach(k => {
-            if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
-                localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
+        function saveState() {
+            Object.keys(state).forEach(k => {
+                if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
+                    localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
+                }
+            });
+            
+            // 修正: グローバルオブジェクトの関数を呼び出す
+            const app = window.dailyTaskListApp;
+            if (gapi?.client?.getToken()) {
+                if (app.saveTimeout) clearTimeout(app.saveTimeout);
+                app.saveTimeout = setTimeout(() => app.saveStateToDrive(), 2000);
             }
-        });
-
-        // Debounced save to Google Drive if logged in
-        if (gapi?.client?.getToken()) {
-            if (saveTimeout) clearTimeout(saveTimeout);
-            saveTimeout = setTimeout(saveStateToDrive, 2000); // 2 second delay
         }
-    }
     
     function checkDayChange() {
         const today = getFormattedDate(new Date());
