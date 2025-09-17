@@ -96,6 +96,7 @@
         
         .small-btn { min-height:44px; min-width:44px; display:inline-flex; align-items:center; justify-content:center; }
         .add-task-fab { display:block; position:fixed; right:16px; bottom:16px; z-index:60; }
+        .sync-data-fab { display:none; position:fixed; left:16px; bottom:16px; z-index:60; }
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
 
@@ -343,6 +344,13 @@
 
 <button id="add-task-fab" class="add-task-fab bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl">＋</button>
 
+<button id="sync-data-fab" class="sync-data-fab bg-green-600 hover:bg-green-700 text-white w-14 h-14 rounded-full shadow-lg items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+    </svg>
+</button>
+
+
 <div id="add-task-modal" class="modal">
     <div class="modal-content p-6 w-full max-w-md">
         <h3 class="text-lg font-bold mb-4">タスクを追加</h3>
@@ -448,22 +456,21 @@
             signoutContainer: document.getElementById('signout_container'),
             authStatusEl: document.getElementById('auth-status'),
             driveStatusEl: document.getElementById('drive-status'),
+            syncDataFab: document.getElementById('sync-data-fab'), // ★同期ボタンの参照を追加
 
             // 認証UIの更新
             updateAuthUi: function(isLoggedIn) {
                 this.authContainer.classList.toggle('hidden', isLoggedIn);
                 this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
+                
                 if (isLoggedIn) {
                     this.authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
+                    this.syncDataFab.style.display = 'flex'; // ★ログイン時に同期ボタンを表示
                 } else {
                     this.authorizeButton.disabled = false;
-                    if (localStorage.getItem('dtl_google_sync_enabled') === 'true') {
-                        this.authorizeButton.textContent = '再接続';
-                        this.driveStatusEl.textContent = '自動再ログインに失敗しました。';
-                    } else {
-                        this.authorizeButton.textContent = 'Google ログイン';
-                        this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
-                    }
+                    this.authorizeButton.textContent = 'Google ログイン';
+                    this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
+                    this.syncDataFab.style.display = 'none'; // ★ログアウト時に同期ボタンを非表示
                 }
             },
 
@@ -494,7 +501,10 @@
 
             // Driveからのデータ読み込み
             loadStateFromDrive: async function() {
-                if (!gapi.client.getToken()) return;
+                if (!gapi.client.getToken()) {
+                    alert('Googleアカウントにログインしてください。');
+                    return;
+                }
                 
                 await this.findDriveFile();
                 if (!this.driveFileId) {
@@ -657,7 +667,6 @@
                     callback: (tokenResponse) => {
                         if (tokenResponse && tokenResponse.access_token) {
                             gapi.client.setToken(tokenResponse);
-                            localStorage.setItem('dtl_google_sync_enabled', 'true');
                             dailyTaskListApp.updateAuthUi(true);
                             dailyTaskListApp.loadStateFromDrive();
                         } else {
@@ -665,7 +674,7 @@
                              dailyTaskListApp.updateAuthUi(false);
                         }
                     },
-                    error_callback: (error) => {
+                     error_callback: (error) => { // ★エラー時もUIを更新
                         console.warn('Token client error:', error);
                         dailyTaskListApp.updateAuthUi(false);
                     }
@@ -680,17 +689,13 @@
                     if (token !== null) {
                         google.accounts.oauth2.revoke(token.access_token);
                         gapi.client.setToken('');
-                        localStorage.removeItem('dtl_google_sync_enabled');
                         dailyTaskListApp.driveFileId = null;
                         dailyTaskListApp.updateAuthUi(false);
                     }
                 });
                 
-                if (localStorage.getItem('dtl_google_sync_enabled') === 'true') {
-                    dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'none' });
-                } else {
-                    dailyTaskListApp.updateAuthUi(false);
-                }
+                // ★ページ読み込み時の自動ログインは行わず、UIを未ログイン状態に設定
+                dailyTaskListApp.updateAuthUi(false);
 
             } catch (error) {
                 console.error('Failed to initialize Google Sync:', error);
@@ -702,7 +707,7 @@
         // --- GOOGLE DRIVE SYNC END ---
 
 
-        // State (ここから下は元のコードとほぼ同じ)
+        // State
         const state = {
             dailyTasks: {}, 
             projects: [],
@@ -1071,6 +1076,11 @@
     }
 
     function setupEventListeners() {
+        // ★同期ボタンのイベントリスナーを追加
+        document.getElementById('sync-data-fab').addEventListener('click', () => {
+            dailyTaskListApp.loadStateFromDrive();
+        });
+
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
