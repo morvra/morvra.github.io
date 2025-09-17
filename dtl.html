@@ -15,29 +15,18 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; padding-top: 120px; }
         
-        /* Fixed header for desktop */
+        /* header for desktop */
         @media (min-width: 769px) {
-            .fixed-header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
+            .header {
                 background: white;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
-            body { padding-top: 132px; }
 			.sections-wrapper { padding-bottom:88px; }
         }
         
-        /* Compact fixed header for mobile */
+        /* Compact header for mobile */
         @media (max-width: 768px) {
-            .fixed-header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
+            .header {
                 background: white;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
@@ -63,8 +52,6 @@
                 padding: 6px 12px !important;
                 font-size: 0.8rem !important;
             }
-            body { padding-top: 100px; }
-			main { padding-top: 40px; }
         }
         
         .tab-link.active { border-color: #3b82f6; background-color:#3b82f6; color:white; }
@@ -177,7 +164,7 @@
 </head>
 <body class="antialiased text-gray-800">
 
-<div class="fixed-header">
+<div class="header">
     <div class="container mx-auto max-w-7xl">
         <header class="mobile-compact-header bg-white p-4 pb-1 flex flex-col md:flex-row justify-between items-center header-content">
             <div class="flex-1">
@@ -1172,27 +1159,6 @@
                 setTimeout(() => positionTooltip(tooltipContainer), 10);
             }
         });
-
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if (isIOS) {
-            const header = document.querySelector('.fixed-header');
-            let lastScrollY = 0;
-            
-            document.addEventListener('focusin', (e) => {
-                if (e.target.matches('input, textarea')) {
-                    lastScrollY = window.scrollY;
-                    header.style.position = 'absolute';
-                    header.style.top = `${lastScrollY}px`;
-                }
-            });
-
-            document.addEventListener('focusout', (e) => {
-                if (e.target.matches('input, textarea')) {
-                    header.style.position = 'fixed';
-                    header.style.top = '0';
-                }
-            });
-        }
     }
 
     function setupModalEvents() {
@@ -2545,7 +2511,6 @@
             case 'm': e.preventDefault(); if (state.focusedTaskId) openMemoEditModal(state.focusedTaskId); break;
             case 'd': e.preventDefault(); if (state.focusedTaskId) deleteTask(state.focusedTaskId); break;
             case 'p': e.preventDefault(); if (state.focusedTaskId) postponeTask(state.focusedTaskId); break;
-            // ★ 'r'キーのショートカットを追加
             case 'r':
                 e.preventDefault();
                 // ログイン中のみ同期を実行
