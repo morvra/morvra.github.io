@@ -689,6 +689,20 @@
                 dailyTaskListApp.authorizeButton.disabled = true;
                 dailyTaskListApp.driveStatusEl.textContent = 'Google APIの読み込みに失敗しました。';
             }
+			// サイレントログインを試す
+			dailyTaskListApp.tokenClient.requestAccessToken({
+			  prompt: '',   // UIを出さずにトークン取得を試みる
+			  callback: (tokenResponse) => {
+			    if (tokenResponse && tokenResponse.access_token) {
+			      gapi.client.setToken(tokenResponse);
+			      dailyTaskListApp.updateAuthUi(true);
+			      dailyTaskListApp.loadStateFromDrive();
+			    } else {
+			      // 失敗したらログインボタンで明示的に consent を促す
+			      dailyTaskListApp.updateAuthUi(false);
+			    }
+			  }
+			});
         }
         // --- GOOGLE DRIVE SYNC END ---
 
