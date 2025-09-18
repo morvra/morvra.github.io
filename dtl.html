@@ -1741,13 +1741,14 @@
         });
     }
 
-    function openAddTaskModal() {
-        document.getElementById('new-task-name').value = '';
-        document.getElementById('new-task-time').value = '5';
-        document.getElementById('new-task-project').value = '';
-        openModal('add-task-modal');
-        setTimeout(() => document.getElementById('new-task-name').focus(), 10);
-    }
+	function openAddTaskModal() {
+	    document.getElementById('new-task-name').value = '';
+	    document.getElementById('new-task-time').value = '5';
+	    document.getElementById('new-task-project').value = '';
+	    openModal('add-task-modal');
+		const input = document.getElementById('new-task-name');
+	    input.focus();
+	}
     
     function openTaskEditModal(id) {
         const task = getTasksForViewDate().find(t => t.id === id);
@@ -1767,19 +1768,21 @@
         endTimeInput.value = task.endTime ? new Date(task.endTime).toTimeString().slice(0, 5) : '';
 
         openModal('task-edit-modal');
-        setTimeout(() => document.getElementById('edit-task-name').focus(), 10);
+		const input = document.getElementById('edit-task-name');
+        input.focus();
     }
 
-    function openMemoEditModal(id) {
-        const task = getTasksForViewDate().find(t => t.id === id);
-        if (!task) return;
+	function openMemoEditModal(id) {
+	    const task = getTasksForViewDate().find(t => t.id === id);
+	    if (!task) return;
+	
+	    state.editingMemoTaskId = id;
+	    const memoTextEl = document.getElementById('edit-memo-text');
+	    memoTextEl.value = task.memo || '';
+	    openModal('memo-edit-modal');
+	    memoTextEl.focus();
+	}
 
-        state.editingMemoTaskId = id;
-        const memoTextEl = document.getElementById('edit-memo-text');
-        memoTextEl.value = task.memo || '';
-        openModal('memo-edit-modal');
-        setTimeout(() => memoTextEl.focus(), 10);
-    }
 
     function saveMemoEdit() {
         const task = getTasksForViewDate().find(t => t.id === state.editingMemoTaskId);
@@ -1906,9 +1909,10 @@
         document.getElementById('edit-repeat-weekly-options').classList.toggle('hidden', repeatTask.type !== 'weekly');
         document.getElementById('edit-repeat-monthly-options').classList.toggle('hidden', repeatTask.type !== 'monthly');
         document.getElementById('edit-repeat-interval-options').classList.toggle('hidden', repeatTask.type !== 'interval');
-
         openModal('repeat-edit-modal');
-        setTimeout(() => document.getElementById('edit-repeat-name').focus(), 10);
+
+		const input = document.getElementById('edit-repeat-name');
+		input.focus();
     }
 
     function saveRepeatEdit() {
