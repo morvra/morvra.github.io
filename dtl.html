@@ -638,87 +638,58 @@
         }
 
 		// Google Drive 同期機能の初期化
-		async function initializeGoogleSync() {
-		    try {
-		        await loadGoogleApiScripts();
-		
-		        // One Tap UI のための初期化
-		        google.accounts.id.initialize({
-		            client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
-		            callback: (response) => {
-		                if (response.credential) {
-		                    // One Tap UIでの認証が成功した場合
-		                    // トークンクライアントを使ってアクセストークンを取得
-		                    dailyTaskListApp.tokenClient.requestAccessToken({
-		                        prompt: '', // サイレント認証
-		                        callback: (tokenResponse) => {
-		                            if (tokenResponse && tokenResponse.access_token) {
-		                                gapi.client.setToken(tokenResponse);
-		                                dailyTaskListApp.updateAuthUi(true);
-		                                dailyTaskListApp.loadStateFromDrive();
-		                            } else {
-		                                console.error('Token acquisition failed from One Tap');
-		                                dailyTaskListApp.updateAuthUi(false);
-		                            }
-		                        }
-		                    });
-		                }
-		            }
-		        });
-		
-		        await new Promise((resolve, reject) => {
-		            gapi.load('client', () => gapi.client.init({
-		                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-		            }).then(resolve, reject));
-		        });
-		
-		        dailyTaskListApp.tokenClient = google.accounts.oauth2.initTokenClient({
-		            client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
-		            scope: 'https://www.googleapis.com/auth/drive.appdata',
-		            callback: (tokenResponse) => {
-		                // 手動ログインボタンクリック時など、明示的な認証時に使われる
-		                if (tokenResponse && tokenResponse.access_token) {
-		                    gapi.client.setToken(tokenResponse);
-		                    dailyTaskListApp.updateAuthUi(true);
-		                    dailyTaskListApp.loadStateFromDrive();
-		                } else {
-		                    console.error('Auth failed: No access token', tokenResponse);
-		                    dailyTaskListApp.updateAuthUi(false);
-		                }
-		            },
-		            error_callback: (error) => {
-		                console.warn('Token client error:', error);
-		                dailyTaskListApp.updateAuthUi(false);
-		            }
-		        });
-		
-		        dailyTaskListApp.authorizeButton.addEventListener('click', () => {
-		            // 手動ログインボタンが押されたら consent プロンプトを表示
-		            dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'consent' });
-		        });
-		
-		        dailyTaskListApp.signoutButton.addEventListener('click', () => {
-		            const token = gapi.client.getToken();
-		            if (token !== null) {
-		                google.accounts.oauth2.revoke(token.access_token);
-		                gapi.client.setToken('');
-		                dailyTaskListApp.driveFileId = null;
-		                dailyTaskListApp.updateAuthUi(false);
-		            }
-		        });
-		
-		        dailyTaskListApp.updateAuthUi(false);
-		
-		        // ページロード時に One Tap UI を表示して自動ログインを試みる
-		        google.accounts.id.prompt();
-		
-		    } catch (error) {
-		        console.error('Failed to initialize Google Sync:', error);
-		        dailyTaskListApp.authorizeButton.textContent = 'API Error';
-		        dailyTaskListApp.authorizeButton.disabled = true;
-		        dailyTaskListApp.driveStatusEl.textContent = 'Google APIの読み込みに失敗しました。';
-		    }
-		}
+        async function initializeGoogleSync() {
+            try {
+                await loadGoogleApiScripts();
+
+                await new Promise((resolve, reject) => {
+                    gapi.load('client', () => gapi.client.init({
+                        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+                    }).then(resolve, reject));
+                });
+
+                dailyTaskListApp.tokenClient = google.accounts.oauth2.initTokenClient({
+                    client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
+                    scope: 'https://www.googleapis.com/auth/drive.appdata',
+                    callback: (tokenResponse) => {
+                        if (tokenResponse && tokenResponse.access_token) {
+                            gapi.client.setToken(tokenResponse);
+                            dailyTaskListApp.updateAuthUi(true);
+                            dailyTaskListApp.loadStateFromDrive();
+                        } else {
+                            console.error('Auth failed: No access token', tokenResponse);
+                             dailyTaskListApp.updateAuthUi(false);
+                        }
+                    },
+                     error_callback: (error) => {
+                        console.warn('Token client error:', error);
+                        dailyTaskListApp.updateAuthUi(false);
+                    }
+                });
+
+                dailyTaskListApp.authorizeButton.addEventListener('click', () => {
+                    dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'consent' });
+                });
+                
+                dailyTaskListApp.signoutButton.addEventListener('click', () => {
+                    const token = gapi.client.getToken();
+                    if (token !== null) {
+                        google.accounts.oauth2.revoke(token.access_token);
+                        gapi.client.setToken('');
+                        dailyTaskListApp.driveFileId = null;
+                        dailyTaskListApp.updateAuthUi(false);
+                    }
+                });
+                
+                dailyTaskListApp.updateAuthUi(false);
+
+            } catch (error) {
+                console.error('Failed to initialize Google Sync:', error);
+                dailyTaskListApp.authorizeButton.textContent = 'API Error';
+                dailyTaskListApp.authorizeButton.disabled = true;
+                dailyTaskListApp.driveStatusEl.textContent = 'Google APIの読み込みに失敗しました。';
+            }
+        }
         // --- GOOGLE DRIVE SYNC END ---
 
 
