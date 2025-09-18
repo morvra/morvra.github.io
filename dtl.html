@@ -509,7 +509,51 @@
 
                     const importedData = response.result;
                     
-                    Object.assign(state.dailyTasks, importedData.dailyTasks || {});
+                    // --- Custom Merge Logic for dailyTasks to prevent duplicates ---
+                    const driveDailyTasks = importedData.dailyTasks || {};
+                    const localDailyTasks = state.dailyTasks;
+
+                    const allDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
+
+                    allDates.forEach(date => {
+                        const localTasksForDate = localDailyTasks[date] || [];
+                        const driveTasksForDate = driveDailyTasks[date] || [];
+                        
+                        const combinedTasks = [...localTasksForDate, ...driveTasksForDate];
+                        const taskMap = new Map(); // Use a map to handle deduplication
+
+                        for (const task of combinedTasks) {
+                            // For repeat tasks on the same day, the key is originRepeatId. For others, it's the task id.
+                            const key = task.originRepeatId ? `repeat-${task.originRepeatId}` : `task-${task.id}`;
+
+                            if (taskMap.has(key)) {
+                                // Conflict detected for a repeat task
+                                const existingTask = taskMap.get(key);
+                                
+                                // Priority: completed > running > pending. Higher number is better.
+                                const getTaskPriority = (t) => {
+                                    if (t.status === 'completed') return 2;
+                                    if (t.status === 'running') return 1;
+                                    return 0;
+                                };
+
+                                const existingPriority = getTaskPriority(existingTask);
+                                const currentPriority = getTaskPriority(task);
+
+                                // Keep the task with higher priority. If priorities are equal, the later one (from Drive) wins.
+                                if (currentPriority >= existingPriority) {
+                                    taskMap.set(key, task);
+                                }
+                            } else {
+                                // First time seeing this ID or repeat task origin
+                                taskMap.set(key, task);
+                            }
+                        }
+                        state.dailyTasks[date] = Array.from(taskMap.values());
+                    });
+                    // --- End of Custom Merge Logic ---
+
+                    // Merge other data
                     Object.assign(state.archivedTasks, importedData.archivedTasks || {});
                     if (importedData.projects) state.projects = importedData.projects;
                     if (importedData.repeatTasks) state.repeatTasks = importedData.repeatTasks;
@@ -522,9 +566,10 @@
                     
                     Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
                     
+                    saveState(); 
                     render();
                     this.driveStatusEl.textContent = `Driveからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
-                    alert('Driveからデータを読み込み、ローカルデータとマージしました。');
+                    alert('Driveからデータを読み込み、重複タスクを解決しました。');
 
                 } catch (err) {
                     console.error('Error loading state from Drive:', err);
@@ -711,6 +756,7 @@
             activeTaskId: null,
             focusedTaskId: null,
             editingTaskId: null,
+            editingTaskDateKey: null, // [NEW] アーカイブタスク編集用の日付キー
             editingRepeatId: null,
             editingMemoTaskId: null
         };
@@ -946,6 +992,7 @@
 
         state.repeatTasks.forEach(rt => {
             let shouldAdd = false;
+            
             if (rt.type === 'daily') shouldAdd = true;
             else if (rt.type === 'weekly' && Array.isArray(rt.value) && rt.value.includes(dayOfWeek)) shouldAdd = true;
             else if (rt.type === 'monthly' && rt.value == dayOfMonth) shouldAdd = true;
@@ -958,20 +1005,24 @@
             }
 
             if (shouldAdd) {
-                state.dailyTasks[dateStr].push({
-                    id: 't' + Date.now() + Math.random(),
-                    name: rt.name,
-                    projectId: rt.projectId || null,
-                    estimatedTime: rt.estimatedTime || 0,
-                    actualTime: 0,
-                    status: 'pending',
-                    isInterrupt: false,
-                    memo: rt.memo || '',
-                    originRepeatId: rt.id,
-                    createdDate: dateStr,
-                    startTime: null,
-                    endTime: null,
-                });
+                // 重複チェックは同期時に行うため、ここでは単純に追加する
+                const isAlreadyAdded = state.dailyTasks[dateStr].some(task => task.originRepeatId === rt.id);
+                if (!isAlreadyAdded) {
+                    state.dailyTasks[dateStr].push({
+                        id: 't' + Date.now() + Math.random(),
+                        name: rt.name,
+                        projectId: rt.projectId || null,
+                        estimatedTime: rt.estimatedTime || 0,
+                        actualTime: 0,
+                        status: 'pending',
+                        isInterrupt: false,
+                        memo: rt.memo || '',
+                        originRepeatId: rt.id,
+                        createdDate: dateStr,
+                        startTime: null,
+                        endTime: null,
+                    });
+                }
             }
         });
     }
@@ -984,31 +1035,18 @@
         }
         let tasksForToday = state.dailyTasks[todayStr];
 
-        let added = 0;
-        const tempTasksBefore = tasksForToday.length;
+        let addedCount = 0;
+        const tasksBefore = tasksForToday.length;
+        
         generateTasksFromRepeatAuto(todayStr);
-        const tempTasksAfter = tasksForToday.length;
-        added = tempTasksAfter - tempTasksBefore;
 
-        if (added > 0) {
-            const uniqueTasks = [];
-            const taskSignatures = new Set();
-            for (let i = tasksForToday.length - 1; i >= 0; i--) {
-                const task = tasksForToday[i];
-                const signature = `${task.name}-${task.originRepeatId}`;
-                if (task.createdDate !== todayStr || !task.originRepeatId || !taskSignatures.has(signature)) {
-                     uniqueTasks.unshift(task);
-                     if(task.originRepeatId) taskSignatures.add(signature);
-                } else {
-                    added--;
-                }
-            }
-            tasksForToday = uniqueTasks;
-            setTasksForViewDate(tasksForToday);
+        const tasksAfter = state.dailyTasks[todayStr].length;
+        addedCount = tasksAfter - tasksBefore;
 
+        if (addedCount > 0) {
             state.focusedTaskId = tasksForToday.length > 0 ? tasksForToday[tasksForToday.length-1].id : null;
             saveAndRender();
-            alert(added + ' 件のタスクを生成しました。');
+            alert(addedCount + ' 件のタスクを生成しました。');
         } else {
             alert('今日生成できるリピートタスクはありません（既に生成済みか該当なし）。');
         }
@@ -1231,6 +1269,11 @@
 
     function closeModal(modalId) {
         document.getElementById(modalId).classList.remove('active');
+        // [FIX] モーダルを閉じる際に編集中の状態をリセット
+        if (modalId === 'task-edit-modal') {
+            state.editingTaskDateKey = null;
+            state.editingTaskId = null;
+        }
     }
 
     function render() {
@@ -1494,18 +1537,21 @@
         }
 
         let tableHtml = '<table class="min-w-full bg-white">';
+        // [FIX] テーブルヘッダーに「操作」列を追加
         tableHtml += `<thead class="bg-gray-50">
                     <tr>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">実績時間</th>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">開始</th>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">終了</th>
+                        <th class="py-2 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
                     </tr>
                  </thead><tbody>`;
 
         tasksForDay.forEach(task => {
             const project = state.projects.find(p => p.id === task.projectId) || { name: '', color: '#cccccc' };
             const memoHtml = task.memo ? `<p class="text-xs text-gray-500 mt-1 whitespace-pre-wrap pl-4">${escapeHtml(task.memo)}</p>` : '';
+            // [FIX] タスク行に編集・削除ボタンを追加
             tableHtml += `
                 <tr class="border-b">
                     <td class="py-2 px-3 task-memo-cell">
@@ -1523,12 +1569,21 @@
                     </td>
                     <td class="py-2 px-3 text-sm font-mono whitespace-nowrap">${task.startTime ? formatClockTime(new Date(task.startTime)) : '--:--'}</td>
                     <td class="py-2 px-3 text-sm font-mono whitespace-nowrap">${task.endTime ? formatClockTime(new Date(task.endTime)) : '--:--'}</td>
+                    <td class="py-2 px-3 text-center space-x-1">
+                        <button class="edit-archived-task-btn text-gray-400 hover:text-blue-500 p-1" data-task-id="${task.id}" data-date-key="${state.archiveViewDate}" title="編集">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        </button>
+                        <button class="delete-archived-task-btn text-gray-400 hover:text-red-500 p-1" data-task-id="${task.id}" data-date-key="${state.archiveViewDate}" title="削除">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </td>
                 </tr>
             `;
         });
 
         tableHtml += '</tbody></table>';
         listEl.innerHTML = `<div class="archive-table-wrapper">${tableHtml}</div>`;
+        attachArchiveEventListeners();
     }
 
     function updateArchiveProjectSelect() {
@@ -1693,6 +1748,16 @@
             })
         );
     }
+
+    // [NEW] アーカイブタスク用のイベントリスナー
+    function attachArchiveEventListeners() {
+        document.querySelectorAll('.edit-archived-task-btn').forEach(btn => 
+            btn.addEventListener('click', (e) => openArchivedTaskEditModal(e.currentTarget.dataset.dateKey, e.currentTarget.dataset.taskId))
+        );
+        document.querySelectorAll('.delete-archived-task-btn').forEach(btn => 
+            btn.addEventListener('click', (e) => deleteArchivedTask(e.currentTarget.dataset.dateKey, e.currentTarget.dataset.taskId))
+        );
+    }
     
     function setupDragAndDrop(selector, list) {
         const elements = document.querySelectorAll(selector);
@@ -1771,6 +1836,34 @@
 		const input = document.getElementById('edit-task-name');
         input.focus();
     }
+    
+    // [NEW] アーカイブ済みタスクの編集モーダルを開く
+    function openArchivedTaskEditModal(dateKey, taskId) {
+        if (!state.archivedTasks[dateKey]) return;
+        const task = state.archivedTasks[dateKey].find(t => t.id === taskId);
+        if (!task) return;
+
+        state.editingTaskId = taskId;
+        state.editingTaskDateKey = dateKey; // 日付キーを保持
+
+        document.getElementById('edit-task-name').value = task.name || '';
+        document.getElementById('edit-task-time').value = task.estimatedTime || 0;
+        updateProjectDropdowns();
+        document.getElementById('edit-task-project').value = task.projectId || '';
+        document.getElementById('edit-task-memo').value = task.memo || '';
+        
+        const startTimeInput = document.getElementById('edit-task-startTime');
+        const endTimeInput = document.getElementById('edit-task-endTime');
+        
+        startTimeInput.value = task.startTime ? new Date(task.startTime).toTimeString().slice(0, 5) : '';
+        endTimeInput.value = task.endTime ? new Date(task.endTime).toTimeString().slice(0, 5) : '';
+        
+        document.getElementById('create-repeat-from-task').style.display = 'none';
+        openModal('task-edit-modal');
+		const input = document.getElementById('edit-task-name');
+        input.focus();
+    }
+
 
 	function openMemoEditModal(id) {
 	    const task = getTasksForViewDate().find(t => t.id === id);
@@ -1796,8 +1889,21 @@
     }
 
     function saveTaskEdit() {
-        const task = getTasksForViewDate().find(t => t.id === state.editingTaskId);
-        if (!task) return;
+        // [FIX] アーカイブと当日のタスクを動的に切り替え
+        const tasks = state.editingTaskDateKey 
+            ? state.archivedTasks[state.editingTaskDateKey] 
+            : getTasksForViewDate();
+        
+        if (!tasks) {
+            closeModal('task-edit-modal');
+            return;
+        }
+
+        const task = tasks.find(t => t.id === state.editingTaskId);
+        if (!task) {
+            closeModal('task-edit-modal');
+            return;
+        }
 
         const name = document.getElementById('edit-task-name').value.trim();
         const time = parseInt(document.getElementById('edit-task-time').value, 10);
@@ -1836,7 +1942,11 @@
         }
         
         task.actualTime = calculateActualTime(task);
-        updateTaskStatus(task);
+        
+        // 当日のタスクの場合のみステータス更新を実行
+        if (!state.editingTaskDateKey) {
+            updateTaskStatus(task);
+        }
 
         closeModal('task-edit-modal');
         saveAndRender();
@@ -2237,6 +2347,19 @@
         if (state.focusedTaskId === id) {
             const newFocusIndex = Math.min(idx, tasks.length - 1);
             state.focusedTaskId = tasks[newFocusIndex]?.id || null;
+        }
+        saveAndRender();
+    }
+    
+    // [NEW] アーカイブ済みタスクの削除
+    function deleteArchivedTask(dateKey, taskId) {
+        if (!confirm('このアーカイブ済みタスクを削除しますか？この操作は元に戻せません。')) return;
+        if (state.archivedTasks[dateKey]) {
+            state.archivedTasks[dateKey] = state.archivedTasks[dateKey].filter(t => t.id !== taskId);
+            // 日付キーにタスクがなくなったら、そのキー自体を削除
+            if (state.archivedTasks[dateKey].length === 0) {
+                delete state.archivedTasks[dateKey];
+            }
         }
         saveAndRender();
     }
@@ -2643,3 +2766,4 @@
 
 </body>
 </html>
+
