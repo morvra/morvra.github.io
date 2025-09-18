@@ -779,7 +779,7 @@
         const oldStatus = task.status;
         task.status = getTaskStatus(task);
         if (oldStatus !== 'completed' && task.status === 'completed') moveTaskToCompletedSection(task.id);
-        else if (oldStatus !== 'running' && task.status === 'running') moveTaskToTop(task.id);
+        else if (oldStatus !== 'running' && task.status === 'running') moveRunningTaskIntoPosition(task.id);
     }
 
     function moveTaskToCompletedSection(taskId) {
@@ -792,13 +792,20 @@
         setTasksForViewDate(tasks);
     }
 
-	function moveTaskToTop(taskId) {
+	function moveRunningTaskIntoPosition(taskId) {
 	    const tasks = getTasksForViewDate();
 	    const taskIndex = tasks.findIndex(t => t.id === taskId);
 	    if (taskIndex === -1) return;
         const [movedTask] = tasks.splice(taskIndex, 1);
-        const firstUncompletedIndex = tasks.findIndex(t => t.status !== 'completed');
-        tasks.splice(firstUncompletedIndex !== -1 ? firstUncompletedIndex : 0, 0, movedTask);
+        
+        // Find the index of the last completed task.
+        const lastCompletedIndex = tasks.map(t => t.status === 'completed').lastIndexOf(true);
+        
+        // The new task should be inserted right after the last completed task.
+        // If no tasks are completed, lastCompletedIndex is -1, so insertIndex becomes 0 (the top).
+        const insertIndex = lastCompletedIndex + 1;
+
+        tasks.splice(insertIndex, 0, movedTask);
         setTasksForViewDate(tasks);
 	}
 
