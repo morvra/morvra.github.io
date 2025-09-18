@@ -509,52 +509,54 @@
 
                     const importedData = response.result;
                     
-                    // --- Custom Merge Logic for dailyTasks to prevent duplicates ---
+                    // --- Custom Merge Logic for dailyTasks ---
                     const driveDailyTasks = importedData.dailyTasks || {};
                     const localDailyTasks = state.dailyTasks;
+                    const allDailyDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
 
-                    const allDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
-
-                    allDates.forEach(date => {
+                    allDailyDates.forEach(date => {
                         const localTasksForDate = localDailyTasks[date] || [];
                         const driveTasksForDate = driveDailyTasks[date] || [];
-                        
                         const combinedTasks = [...localTasksForDate, ...driveTasksForDate];
-                        const taskMap = new Map(); // Use a map to handle deduplication
+                        const taskMap = new Map();
 
                         for (const task of combinedTasks) {
-                            // For repeat tasks on the same day, the key is originRepeatId. For others, it's the task id.
-                            const key = task.originRepeatId ? `repeat-${task.originRepeatId}` : `task-${task.id}`;
-
+                            const key = task.originRepeatId ? `repeat-${date}-${task.originRepeatId}` : `task-${task.id}`;
                             if (taskMap.has(key)) {
-                                // Conflict detected for a repeat task
                                 const existingTask = taskMap.get(key);
-                                
-                                // Priority: completed > running > pending. Higher number is better.
                                 const getTaskPriority = (t) => {
-                                    if (t.status === 'completed') return 2;
-                                    if (t.status === 'running') return 1;
+                                    if (getTaskStatus(t) === 'completed') return 2;
+                                    if (getTaskStatus(t) === 'running') return 1;
                                     return 0;
                                 };
-
-                                const existingPriority = getTaskPriority(existingTask);
-                                const currentPriority = getTaskPriority(task);
-
-                                // Keep the task with higher priority. If priorities are equal, the later one (from Drive) wins.
-                                if (currentPriority >= existingPriority) {
+                                if (getTaskPriority(task) >= getTaskPriority(existingTask)) {
                                     taskMap.set(key, task);
                                 }
                             } else {
-                                // First time seeing this ID or repeat task origin
                                 taskMap.set(key, task);
                             }
                         }
                         state.dailyTasks[date] = Array.from(taskMap.values());
                     });
-                    // --- End of Custom Merge Logic ---
+                    // --- End of dailyTasks Merge Logic ---
 
-                    // Merge other data
-                    Object.assign(state.archivedTasks, importedData.archivedTasks || {});
+                    // --- Custom Merge Logic for archivedTasks ---
+                    const driveArchivedTasks = importedData.archivedTasks || {};
+                    const localArchivedTasks = state.archivedTasks;
+                    const allArchiveDates = new Set([...Object.keys(localArchivedTasks), ...Object.keys(driveArchivedTasks)]);
+
+                    allArchiveDates.forEach(date => {
+                        const localTasks = localArchivedTasks[date] || [];
+                        const driveTasks = driveArchivedTasks[date] || [];
+                        const taskMap = new Map();
+                        
+                        for (const task of [...localTasks, ...driveTasks]) {
+                            taskMap.set(task.id, task);
+                        }
+                        state.archivedTasks[date] = Array.from(taskMap.values());
+                    });
+                    // --- End of archivedTasks Merge Logic ---
+
                     if (importedData.projects) state.projects = importedData.projects;
                     if (importedData.repeatTasks) state.repeatTasks = importedData.repeatTasks;
                     state.lastDate = importedData.lastDate || state.lastDate;
@@ -756,7 +758,7 @@
             activeTaskId: null,
             focusedTaskId: null,
             editingTaskId: null,
-            editingTaskDateKey: null, // [NEW] アーカイブタスク編集用の日付キー
+            editingTaskDateKey: null, 
             editingRepeatId: null,
             editingMemoTaskId: null
         };
@@ -1005,7 +1007,6 @@
             }
 
             if (shouldAdd) {
-                // 重複チェックは同期時に行うため、ここでは単純に追加する
                 const isAlreadyAdded = state.dailyTasks[dateStr].some(task => task.originRepeatId === rt.id);
                 if (!isAlreadyAdded) {
                     state.dailyTasks[dateStr].push({
@@ -1269,7 +1270,6 @@
 
     function closeModal(modalId) {
         document.getElementById(modalId).classList.remove('active');
-        // [FIX] モーダルを閉じる際に編集中の状態をリセット
         if (modalId === 'task-edit-modal') {
             state.editingTaskDateKey = null;
             state.editingTaskId = null;
@@ -1537,7 +1537,6 @@
         }
 
         let tableHtml = '<table class="min-w-full bg-white">';
-        // [FIX] テーブルヘッダーに「操作」列を追加
         tableHtml += `<thead class="bg-gray-50">
                     <tr>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>
@@ -1551,7 +1550,6 @@
         tasksForDay.forEach(task => {
             const project = state.projects.find(p => p.id === task.projectId) || { name: '', color: '#cccccc' };
             const memoHtml = task.memo ? `<p class="text-xs text-gray-500 mt-1 whitespace-pre-wrap pl-4">${escapeHtml(task.memo)}</p>` : '';
-            // [FIX] タスク行に編集・削除ボタンを追加
             tableHtml += `
                 <tr class="border-b">
                     <td class="py-2 px-3 task-memo-cell">
@@ -1749,7 +1747,6 @@
         );
     }
 
-    // [NEW] アーカイブタスク用のイベントリスナー
     function attachArchiveEventListeners() {
         document.querySelectorAll('.edit-archived-task-btn').forEach(btn => 
             btn.addEventListener('click', (e) => openArchivedTaskEditModal(e.currentTarget.dataset.dateKey, e.currentTarget.dataset.taskId))
@@ -1831,20 +1828,20 @@
         
         startTimeInput.value = task.startTime ? new Date(task.startTime).toTimeString().slice(0, 5) : '';
         endTimeInput.value = task.endTime ? new Date(task.endTime).toTimeString().slice(0, 5) : '';
-
+        
+        document.getElementById('create-repeat-from-task').style.display = 'block';
         openModal('task-edit-modal');
 		const input = document.getElementById('edit-task-name');
         input.focus();
     }
     
-    // [NEW] アーカイブ済みタスクの編集モーダルを開く
     function openArchivedTaskEditModal(dateKey, taskId) {
         if (!state.archivedTasks[dateKey]) return;
         const task = state.archivedTasks[dateKey].find(t => t.id === taskId);
         if (!task) return;
 
         state.editingTaskId = taskId;
-        state.editingTaskDateKey = dateKey; // 日付キーを保持
+        state.editingTaskDateKey = dateKey; 
 
         document.getElementById('edit-task-name').value = task.name || '';
         document.getElementById('edit-task-time').value = task.estimatedTime || 0;
@@ -1889,7 +1886,6 @@
     }
 
     function saveTaskEdit() {
-        // [FIX] アーカイブと当日のタスクを動的に切り替え
         const tasks = state.editingTaskDateKey 
             ? state.archivedTasks[state.editingTaskDateKey] 
             : getTasksForViewDate();
@@ -1943,7 +1939,6 @@
         
         task.actualTime = calculateActualTime(task);
         
-        // 当日のタスクの場合のみステータス更新を実行
         if (!state.editingTaskDateKey) {
             updateTaskStatus(task);
         }
@@ -2351,12 +2346,10 @@
         saveAndRender();
     }
     
-    // [NEW] アーカイブ済みタスクの削除
     function deleteArchivedTask(dateKey, taskId) {
         if (!confirm('このアーカイブ済みタスクを削除しますか？この操作は元に戻せません。')) return;
         if (state.archivedTasks[dateKey]) {
             state.archivedTasks[dateKey] = state.archivedTasks[dateKey].filter(t => t.id !== taskId);
-            // 日付キーにタスクがなくなったら、そのキー自体を削除
             if (state.archivedTasks[dateKey].length === 0) {
                 delete state.archivedTasks[dateKey];
             }
