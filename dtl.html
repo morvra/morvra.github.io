@@ -296,10 +296,10 @@
                 <h2 class="text-xl font-bold mb-4">データ管理</h2>
                 <div class="space-y-6">
                     <div class="border p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-3">Google Drive</h3>
-                        <p class="text-sm text-gray-600 mb-3">タスクデータをGoogle Driveに保存し、他のデバイスと同期します(管理者専用)</p>
+                        <h3 class="text-lg font-semibold mb-3">Dropbox</h3>
+                        <p class="text-sm text-gray-600 mb-3">タスクデータをDropboxに保存し、他のデバイスと同期します。</p>
                         <div id="auth-container">
-                            <button id="authorize_button" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg" disabled>API Loading...</button>
+                            <button id="authorize_button" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg">Dropbox ログイン</button>
                         </div>
                         <div id="signout_container" class="hidden">
                             <p id="auth-status" class="text-sm text-green-600 mb-2"></p>
@@ -428,14 +428,16 @@
     </div>
 </div>
 
+<script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- GOOGLE DRIVE SYNC START ---
+        // --- DROPBOX SYNC START ---
         const dailyTaskListApp = window.dailyTaskListApp = {
-            driveFileId: null,
+            dropboxFilePath: '/DailyTaskListData.json', // Dropbox App Folder内のパス
+            dbx: null,
             saveTimeout: null,
-            tokenClient: null,
             // DOM Elements
             authorizeButton: document.getElementById('authorize_button'),
             signoutButton: document.getElementById('signout_button'),
@@ -445,81 +447,39 @@
             driveStatusEl: document.getElementById('drive-status'),
             syncDataFab: document.getElementById('sync-data-fab'),
 
-            // 認証UIの更新
             updateAuthUi: function(isLoggedIn) {
                 this.authContainer.classList.toggle('hidden', isLoggedIn);
                 this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
                 
                 if (isLoggedIn) {
-                    this.authStatusEl.textContent = 'Googleアカウントにログイン済みです。';
+                    this.authStatusEl.textContent = 'Dropboxにログイン済みです。';
                     this.syncDataFab.style.display = 'flex';
                 } else {
-                    this.authorizeButton.disabled = false;
-                    this.authorizeButton.textContent = 'Google ログイン';
                     this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
                     this.syncDataFab.style.display = 'none';
                 }
             },
 
-            // Drive上のファイル検索
-            findDriveFile: async function() {
-                this.driveStatusEl.textContent = 'Driveファイルを検索中...';
-                try {
-                    const response = await gapi.client.drive.files.list({
-                        spaces: 'appDataFolder',
-                        fields: 'files(id, name)',
-                        q: `name='DailyTaskListData.json'`
-                    });
-                    if (response.result.files && response.result.files.length > 0) {
-                        this.driveFileId = response.result.files[0].id;
-                        this.driveStatusEl.textContent = 'データファイルが見つかりました。';
-                        return this.driveFileId;
-                    } else {
-                        this.driveFileId = null;
-                        this.driveStatusEl.textContent = 'データファイルが見つかりません。初回保存時に作成されます。';
-                        return null;
-                    }
-                } catch (err) {
-                    console.error('Error finding file:', err);
-                    this.driveStatusEl.textContent = `エラー: ${err.result?.error?.message || 'Unknown error'}`;
-                    return null;
-                }
-            },
-
-            // Driveからのデータ読み込み
-            loadStateFromDrive: async function() {
-                if (!gapi.client.getToken()) {
-                    alert('Googleアカウントにログインしてください。');
+            loadStateFromDropbox: async function() {
+                if (!this.dbx) {
+                    alert('Dropboxにログインしてください。');
                     return;
                 }
-                
-                await this.findDriveFile();
-                if (!this.driveFileId) {
-                    this.driveStatusEl.textContent = '初回同期を開始します...';
-                    await this.saveStateToDrive();
-                    return;
-                };
-
-                this.driveStatusEl.textContent = 'Driveからデータを読み込み中...';
+                this.driveStatusEl.textContent = 'Dropboxからデータを読み込み中...';
                 try {
-                    const response = await gapi.client.drive.files.get({
-                        fileId: this.driveFileId,
-                        alt: 'media'
-                    });
+                    const response = await this.dbx.filesDownload({ path: this.dropboxFilePath });
+                    const fileContent = await response.result.fileBlob.text();
+                    const importedData = JSON.parse(fileContent);
 
-                    const importedData = response.result;
-                    
                     // --- Custom Merge Logic for dailyTasks ---
                     const driveDailyTasks = importedData.dailyTasks || {};
                     const localDailyTasks = state.dailyTasks;
                     const allDailyDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
-
                     allDailyDates.forEach(date => {
                         const localTasksForDate = localDailyTasks[date] || [];
                         const driveTasksForDate = driveDailyTasks[date] || [];
                         const combinedTasks = [...localTasksForDate, ...driveTasksForDate];
                         const taskMap = new Map();
-
                         for (const task of combinedTasks) {
                             const key = task.originRepeatId ? `repeat-${date}-${task.originRepeatId}` : `task-${task.id}`;
                             if (taskMap.has(key)) {
@@ -544,12 +504,10 @@
                     const driveArchivedTasks = importedData.archivedTasks || {};
                     const localArchivedTasks = state.archivedTasks;
                     const allArchiveDates = new Set([...Object.keys(localArchivedTasks), ...Object.keys(driveArchivedTasks)]);
-
                     allArchiveDates.forEach(date => {
                         const localTasks = localArchivedTasks[date] || [];
                         const driveTasks = driveArchivedTasks[date] || [];
                         const taskMap = new Map();
-                        
                         for (const task of [...localTasks, ...driveTasks]) {
                             taskMap.set(task.id, task);
                         }
@@ -565,26 +523,28 @@
                     state.viewDate = getFormattedDate(new Date());
                     const tasksToday = getTasksForViewDate();
                     state.focusedTaskId = tasksToday.length > 0 ? tasksToday[0].id : null;
-                    
                     Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
                     
                     saveState(); 
                     render();
-                    this.driveStatusEl.textContent = `Driveからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
-                    alert('Driveからデータを読み込み、重複タスクを解決しました。');
+                    this.driveStatusEl.textContent = `Dropboxからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
+                    alert('Dropboxからデータを読み込み、重複タスクを解決しました。');
 
-                } catch (err) {
-                    console.error('Error loading state from Drive:', err);
-                    this.driveStatusEl.textContent = `読み込みエラー: ${err.result?.error?.message || 'Unknown error'}`;
+                } catch (error) {
+                    if (error.status === 409) { // 409: path not found
+                         this.driveStatusEl.textContent = 'データファイルが見つかりません。初回同期を開始します...';
+                         await this.saveStateToDropbox(); // 初回保存
+                    } else {
+                        console.error('Error loading state from Dropbox:', error);
+                        this.driveStatusEl.textContent = `読み込みエラー: ${error.error?.error_summary || 'Unknown error'}`;
+                    }
                 }
             },
             
-            // Driveへのデータ保存
-            saveStateToDrive: async function() {
-                if (!gapi.client.getToken()) return;
+            saveStateToDropbox: async function() {
+                if (!this.dbx) return;
                 
-                this.driveStatusEl.textContent = 'Driveへ保存準備中...';
-
+                this.driveStatusEl.textContent = 'Dropboxへ保存準備中...';
                 const dataToSave = {
                     dailyTasks: state.dailyTasks,
                     projects: state.projects,
@@ -593,152 +553,97 @@
                     lastDate: state.lastDate,
                     updatedAt: new Date().toISOString()
                 };
-
-                const boundary = '-------314159265358979323846';
-                const delimiter = "\r\n--" + boundary + "\r\n";
-                const close_delim = "\r\n--" + boundary + "--";
-
-                const metadata = {
-                    'name': 'DailyTaskListData.json',
-                    'mimeType': 'application/json'
-                };
                 
-                const fileContent = JSON.stringify(dataToSave);
-
-                let multipartRequestBody;
-                if(this.driveFileId) {
-                    multipartRequestBody =
-                        delimiter +
-                        'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                        JSON.stringify({}) + 
-                        delimiter +
-                        'Content-Type: application/json\r\n\r\n' +
-                        fileContent +
-                        close_delim;
-                } else {
-                    metadata.parents = ['appDataFolder'];
-                    multipartRequestBody =
-                        delimiter +
-                        'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                        JSON.stringify(metadata) +
-                        delimiter +
-                        'Content-Type: application/json\r\n\r\n' +
-                        fileContent +
-                        close_delim;
-                }
-
-                const path = this.driveFileId 
-                    ? `/upload/drive/v3/files/${this.driveFileId}?uploadType=multipart` 
-                    : '/upload/drive/v3/files?uploadType=multipart';
-                const method = this.driveFileId ? 'PATCH' : 'POST';
-                
-                this.driveStatusEl.textContent = 'Driveへ保存中...';
+                this.driveStatusEl.textContent = 'Dropboxへ保存中...';
                 try {
-                    const response = await gapi.client.request({
-                        'path': path,
-                        'method': method,
-                        'headers': {
-                            'Content-Type': 'multipart/related; boundary="' + boundary + '"'
-                        },
-                        'body': multipartRequestBody
+                    await this.dbx.filesUpload({
+                        path: this.dropboxFilePath,
+                        contents: JSON.stringify(dataToSave, null, 2),
+                        mode: 'overwrite'
                     });
-
-                    if (!this.driveFileId) {
-                        this.driveFileId = response.result.id;
-                    }
-                    this.driveStatusEl.textContent = `Driveに保存しました (${new Date().toLocaleTimeString()})。`;
-                } catch (err) {
-                    console.error('Error saving state to Drive:', err);
-                    this.driveStatusEl.textContent = `保存エラー: ${err.result?.error?.message || 'Unknown error'}`;
-                    if (err.result && (err.result.error.code === 404 || err.result.error.code === 401)) {
-                        this.driveFileId = null; 
-                        if (err.result.error.code === 401) {
+                    this.driveStatusEl.textContent = `Dropboxに保存しました (${new Date().toLocaleTimeString()})。`;
+                } catch (error) {
+                    console.error('Error saving state to Dropbox:', error);
+                    this.driveStatusEl.textContent = `保存エラー: ${error.error?.error_summary || 'Unknown error'}`;
+                     if (error.status === 401) { // 認証エラー
                            this.updateAuthUi(false);
                            this.driveStatusEl.textContent = '認証が切れました。再ログインしてください。';
-                        } else {
-                           this.saveStateToDrive(); 
-                        }
                     }
                 }
             }
         };
+        
+        // Dropbox 同期機能の初期化
+        async function initializeDropboxSync() {
+            // ここにDropboxアプリのクライアントIDを設定してください
+            const DROPBOX_CLIENT_ID = '0fno7q10xgfdyki';
+            
+            if (DROPBOX_CLIENT_ID === 'YOUR_CLIENT_ID') {
+                console.warn("DropboxのクライアントIDが設定されていません。");
+                dailyTaskListApp.authorizeButton.textContent = '設定が必要です';
+                dailyTaskListApp.authorizeButton.disabled = true;
+                return;
+            }
 
-        // Google API スクリプトを動的に読み込む関数
-        function loadGoogleApiScripts() {
-            return new Promise((resolve, reject) => {
-                const scriptGapi = document.createElement('script');
-                scriptGapi.src = 'https://apis.google.com/js/api.js';
-                scriptGapi.async = true;
-                scriptGapi.defer = true;
-                scriptGapi.onload = () => {
-                    const scriptGis = document.createElement('script');
-                    scriptGis.src = 'https://accounts.google.com/gsi/client';
-                    scriptGis.async = true;
-                    scriptGis.defer = true;
-                    scriptGis.onload = resolve;
-                    scriptGis.onerror = () => reject(new Error('Failed to load Google Identity Services script.'));
-                    document.head.appendChild(scriptGis);
-                };
-                scriptGapi.onerror = () => reject(new Error('Failed to load Google API script.'));
-                document.head.appendChild(scriptGapi);
+            const dbx = new Dropbox.Dropbox({ clientId: DROPBOX_CLIENT_ID });
+
+            // URLにアクセストークンがあるか確認 (OAuthリダイレクト後)
+            const accessToken = new URL(window.location.href).hash.split('&')
+                .find(p => p.startsWith('#access_token='))
+                ?.split('=')[1];
+
+            if (accessToken) {
+                // URLからトークンを削除してクリーンにする
+                window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+                localStorage.setItem('dropbox_access_token', accessToken);
+                dbx.setAccessToken(accessToken);
+                dailyTaskListApp.dbx = dbx;
+                dailyTaskListApp.updateAuthUi(true);
+                dailyTaskListApp.loadStateFromDropbox();
+            } else {
+                // ローカルストレージにトークンがあるか確認
+                const storedToken = localStorage.getItem('dropbox_access_token');
+                if (storedToken) {
+                    dbx.setAccessToken(storedToken);
+                    dailyTaskListApp.dbx = dbx;
+                    // トークンの有効性を確認
+                    try {
+                        await dbx.usersGetCurrentAccount();
+                        dailyTaskListApp.updateAuthUi(true);
+                        dailyTaskListApp.loadStateFromDropbox();
+                    } catch (error) {
+                        // トークンが無効だった場合
+                        localStorage.removeItem('dropbox_access_token');
+                        dailyTaskListApp.dbx = null;
+                        dailyTaskListApp.updateAuthUi(false);
+                    }
+                } else {
+                    dailyTaskListApp.updateAuthUi(false);
+                }
+            }
+
+            dailyTaskListApp.authorizeButton.addEventListener('click', async () => {
+                // PKCEフローのための準備
+                const auth = await dbx.auth.getAuthenticationUrl(
+                    window.location.href, // Redirect URI
+                    undefined, 'token', undefined, undefined, undefined, true);
+                // ユーザーをDropboxの認証ページへリダイレクト
+                window.location.href = auth;
+            });
+
+            dailyTaskListApp.signoutButton.addEventListener('click', async () => {
+                try {
+                    await dailyTaskListApp.dbx.authTokenRevoke();
+                } catch (error) {
+                    console.error('Failed to revoke token', error);
+                } finally {
+                    localStorage.removeItem('dropbox_access_token');
+                    dailyTaskListApp.dbx = null;
+                    dailyTaskListApp.updateAuthUi(false);
+                }
             });
         }
-
-		// Google Drive 同期機能の初期化
-        async function initializeGoogleSync() {
-            try {
-                await loadGoogleApiScripts();
-
-                await new Promise((resolve, reject) => {
-                    gapi.load('client', () => gapi.client.init({
-                        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-                    }).then(resolve, reject));
-                });
-
-                dailyTaskListApp.tokenClient = google.accounts.oauth2.initTokenClient({
-                    client_id: '134193775188-svab18grq6f1g3vt3fk0oaqdvknha5ru.apps.googleusercontent.com',
-                    scope: 'https://www.googleapis.com/auth/drive.appdata',
-                    callback: (tokenResponse) => {
-                        if (tokenResponse && tokenResponse.access_token) {
-                            gapi.client.setToken(tokenResponse);
-                            dailyTaskListApp.updateAuthUi(true);
-                            dailyTaskListApp.loadStateFromDrive();
-                        } else {
-                            console.error('Auth failed: No access token', tokenResponse);
-                             dailyTaskListApp.updateAuthUi(false);
-                        }
-                    },
-                     error_callback: (error) => {
-                        console.warn('Token client error:', error);
-                        dailyTaskListApp.updateAuthUi(false);
-                    }
-                });
-
-                dailyTaskListApp.authorizeButton.addEventListener('click', () => {
-                    dailyTaskListApp.tokenClient.requestAccessToken({ prompt: 'consent' });
-                });
-                
-                dailyTaskListApp.signoutButton.addEventListener('click', () => {
-                    const token = gapi.client.getToken();
-                    if (token !== null) {
-                        google.accounts.oauth2.revoke(token.access_token);
-                        gapi.client.setToken('');
-                        dailyTaskListApp.driveFileId = null;
-                        dailyTaskListApp.updateAuthUi(false);
-                    }
-                });
-                
-                dailyTaskListApp.updateAuthUi(false);
-
-            } catch (error) {
-                console.error('Failed to initialize Google Sync:', error);
-                dailyTaskListApp.authorizeButton.textContent = 'API Error';
-                dailyTaskListApp.authorizeButton.disabled = true;
-                dailyTaskListApp.driveStatusEl.textContent = 'Google APIの読み込みに失敗しました。';
-            }
-        }
-        // --- GOOGLE DRIVE SYNC END ---
-
+        // --- DROPBOX SYNC END ---
 
         // State
         const state = {
@@ -773,7 +678,7 @@
             state.viewDate = getFormattedDate(new Date());
             loadState();
             setupEventListeners();
-            initializeGoogleSync();
+            initializeDropboxSync();
             checkDayChange();
             setInterval(checkDayChange, 1000 * 60); 
             updateTitle();
@@ -928,19 +833,18 @@
         });
     }
 
-    function saveState() {
-        Object.keys(state).forEach(k => {
-            if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
-                localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
-            }
-        });
-        
-        const app = window.dailyTaskListApp;
-        if (gapi?.client?.getToken()) {
-            if (app.saveTimeout) clearTimeout(app.saveTimeout);
-            app.saveTimeout = setTimeout(() => app.saveStateToDrive(), 2000);
-        }
-    }
+	function saveState() {
+		Object.keys(state).forEach(k => {
+			if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
+				localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
+			}
+		});
+		const app = window.dailyTaskListApp;
+		if (app.dbx) { // Dropboxインスタンスの有無で判定
+			if (app.saveTimeout) clearTimeout(app.saveTimeout);
+			app.saveTimeout = setTimeout(() => app.saveStateToDropbox(), 2000);
+		}
+	}
     
     function checkDayChange() {
         const today = getFormattedDate(new Date());
@@ -1102,7 +1006,7 @@
 
     function setupEventListeners() {
         document.getElementById('sync-data-fab').addEventListener('click', () => {
-            dailyTaskListApp.loadStateFromDrive();
+            dailyTaskListApp.loadStateFromDropbox();
         });
 
         tabs.forEach(tab => {
@@ -2634,8 +2538,8 @@
             case 'r':
                 e.preventDefault();
                 // ログイン中のみ同期を実行
-                if (gapi?.client?.getToken()) {
-                    dailyTaskListApp.loadStateFromDrive();
+               if (dailyTaskListApp.dbx) {
+                    dailyTaskListApp.loadStateFromDropbox();
                 }
                 break;
             case 'arrowdown':
