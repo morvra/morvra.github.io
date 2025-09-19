@@ -13,7 +13,7 @@
     <link href='./dtlicon.png' rel='apple-touch-icon'/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
         
         /* header for desktop */
         @media (min-width: 769px) {
@@ -1249,7 +1249,7 @@
         wrapper.className = 'bg-white rounded-lg shadow-md overflow-x-auto';
         wrapper.appendChild(table);
         container.appendChild(wrapper);
-        setupDragAndDrop('.task-row', tasks);
+        setupDragAndDrop(wrapper.firstElementChild, '.task-row', tasks);
     }
     
     function renderTaskTableRow(task, index) {
@@ -1290,7 +1290,7 @@
         wrapper.className = 'task-card-wrapper';
         wrapper.innerHTML = tasks.map((task, index) => renderTaskCard(task, index)).join('');
         container.appendChild(wrapper);
-        setupDragAndDrop('.task-card', tasks);
+        setupDragAndDrop(wrapper, '.task-card', tasks);
     }
     
     function renderTaskCard(task, index) {
@@ -1456,21 +1456,28 @@
         </tbody></table></div>`;
     }
 
-    function setupDragAndDrop(selector, list) {
+    function setupDragAndDrop(container, selector, list) {
         let draggedIndex = null;
-        const container = q(selector).parentElement;
+        let draggedEl = null;
 
+        // --- Mouse Events (for Desktop) ---
         container.addEventListener('dragstart', e => {
-            const el = e.target.closest(selector);
-            if (!el) return;
-            draggedIndex = parseInt(el.dataset.index, 10);
-            setTimeout(() => el.classList.add('dragging'), 0);
+            // Only start drag if the handle is the target
+            if (!e.target.closest('.drag-handle')) {
+                e.preventDefault();
+                return;
+            }
+            draggedEl = e.target.closest(selector);
+            if (!draggedEl) return;
+            draggedIndex = parseInt(draggedEl.dataset.index, 10);
+            // Delay to allow browser to render drag image
+            setTimeout(() => draggedEl.classList.add('dragging'), 0);
         });
 
         container.addEventListener('dragend', e => {
-            const el = e.target.closest(selector);
-            if (!el) return;
-            el.classList.remove('dragging');
+            if (!draggedEl) return;
+            draggedEl.classList.remove('dragging');
+            draggedEl = null;
             draggedIndex = null;
             qa('.drag-over').forEach(item => item.classList.remove('drag-over'));
         });
@@ -1478,7 +1485,7 @@
         container.addEventListener('dragover', e => {
             e.preventDefault();
             const target = e.target.closest(selector);
-            if (target && parseInt(target.dataset.index, 10) !== draggedIndex) {
+            if (target && target !== draggedEl) {
                 qa('.drag-over').forEach(item => item.classList.remove('drag-over'));
                 target.classList.add('drag-over');
             }
@@ -1501,7 +1508,52 @@
                 saveAndRender();
             }
         });
+
+        // --- Touch Events (for Mobile) ---
+        container.addEventListener('touchstart', e => {
+            if (!e.target.closest('.drag-handle')) return;
+            draggedEl = e.target.closest(selector);
+            if (!draggedEl) return;
+            draggedIndex = parseInt(draggedEl.dataset.index, 10);
+            draggedEl.classList.add('dragging');
+        }, { passive: true });
+
+        container.addEventListener('touchmove', e => {
+            if (draggedIndex === null) return;
+            e.preventDefault(); // Prevent scrolling while dragging
+            
+            const touch = e.touches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY)?.closest(selector);
+            
+            qa('.drag-over').forEach(item => item.classList.remove('drag-over'));
+            if (target && target !== draggedEl) {
+                target.classList.add('drag-over');
+            }
+        }, { passive: false });
+
+        container.addEventListener('touchend', e => {
+            if (draggedIndex === null) return;
+
+            const dropTarget = q('.drag-over');
+            if (dropTarget) {
+                const toIndex = parseInt(dropTarget.dataset.index, 10);
+                if (draggedIndex !== toIndex) {
+                    const [movedItem] = list.splice(draggedIndex, 1);
+                    list.splice(toIndex, 0, movedItem);
+                    saveAndRender();
+                }
+            }
+            
+            // Cleanup
+            if (draggedEl) {
+                draggedEl.classList.remove('dragging');
+            }
+            qa('.drag-over').forEach(item => item.classList.remove('drag-over'));
+            draggedEl = null;
+            draggedIndex = null;
+        });
     }
+
 
 	function openAddTaskModal() {
 	    el('new-task-name').value = '';
@@ -1704,7 +1756,7 @@
     }
 
     function renderProjectTable(container) {
-        container.innerHTML = `<div class="overflow-x-auto"><table class="min-w-full bg-white">
+        const tableHtml = `<div class="overflow-x-auto"><table class="min-w-full bg-white">
             <thead class="bg-gray-100"><tr>
                 <th class="py-2 px-4 border-b w-8"></th>
                 <th class="py-2 px-4 border-b">プレビュー</th>
@@ -1719,18 +1771,20 @@
                     <td class="py-2 px-4 text-center space-x-1">${createProjectActionButtons(false)}</td>
                 </tr>`).join('')}
             </tbody></table></div>`;
-        setupDragAndDrop('.project-row', state.projects);
+        container.innerHTML = tableHtml;
+        setupDragAndDrop(container.firstElementChild.firstElementChild, '.project-row', state.projects);
     }
 
     function renderProjectCards(container) {
-        container.innerHTML = `<div class="space-y-3">${state.projects.map((p, idx) => `
+        const cardsHtml = `<div class="space-y-3">${state.projects.map((p, idx) => `
             <div class="bg-white p-3 shadow rounded-lg flex items-center gap-3 project-row" data-id="${p.id}" data-index="${idx}" draggable="true">
                 <span class="drag-handle text-gray-400 hover:text-gray-600 cursor-move">⋮⋮</span>
                 <span class="inline-block w-5 h-5 rounded-full flex-shrink-0" style="background-color: ${p.color};"></span>
                 <span class="flex-1 font-semibold truncate">${escapeHtml(p.name)}</span>
                 <div class="space-x-1">${createProjectActionButtons(true)}</div>
             </div>`).join('')}</div>`;
-        setupDragAndDrop('.project-row', state.projects);
+        container.innerHTML = cardsHtml;
+        setupDragAndDrop(container.firstElementChild, '.project-row', state.projects);
     }
 
     function renderRepeatTasks() {
@@ -1746,7 +1800,7 @@
     }
 
     function renderRepeatTaskTable(container) {
-        container.innerHTML = `<div class="overflow-x-auto"><table class="min-w-full bg-white">
+        const tableHtml = `<div class="overflow-x-auto"><table class="min-w-full bg-white">
             <thead class="bg-gray-100"><tr>
                 <th class="py-2 px-4 border-b w-8"></th>
                 <th class="py-2 px-4 border-b text-left">タスク名</th>
@@ -1773,11 +1827,12 @@
                 </tr>`;
             }).join('')}
             </tbody></table></div>`;
-        setupDragAndDrop('.repeat-task-row', state.repeatTasks);
+        container.innerHTML = tableHtml;
+        setupDragAndDrop(container.firstElementChild.firstElementChild, '.repeat-task-row', state.repeatTasks);
     }
 
     function renderRepeatTaskCards(container) {
-        container.innerHTML = `<div class="space-y-3">${state.repeatTasks.map((rt, idx) => {
+        const cardsHtml = `<div class="space-y-3">${state.repeatTasks.map((rt, idx) => {
             const project = state.projects.find(p => p.id === rt.projectId) || { name: 'N/A', color: '#cccccc' };
             let repeatText = '';
             if (rt.type === 'daily') repeatText = '毎日';
@@ -1802,7 +1857,8 @@
                 </div>
             </div>`;
         }).join('')}</div>`;
-        setupDragAndDrop('.repeat-task-row', state.repeatTasks);
+        container.innerHTML = cardsHtml;
+        setupDragAndDrop(container.firstElementChild, '.repeat-task-row', state.repeatTasks);
     }
 
 
