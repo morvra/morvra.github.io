@@ -593,23 +593,35 @@
             const authCode = urlParams.get('code');
 
             if (authCode) {
-                try {
-                    // 認証コードをアクセストークンに交換
-			        const response = await dbx.auth.tokenAccessTokenFromCode(REDIRECT_URI, authCode);
-			        const { access_token: accessToken } = response.result;
-
-                    // URLから認証コードを削除してクリーンにする
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                    localStorage.setItem('dropbox_access_token', accessToken);
-                    dbx.setAccessToken(accessToken);
-                    dailyTaskListApp.dbx = dbx;
-                    dailyTaskListApp.updateAuthUi(true);
-                    dailyTaskListApp.loadStateFromDropbox();
-                } catch (error) {
-                    console.error('Error getting access token from code:', error);
-                    alert('Dropboxの認証に失敗しました。');
-                }
-            } else {
+	            try {
+	                // PKCE: 認証開始時に保存した code_verifier を復元して SDK にセットする
+	                // （sessionStorage に保存してある前提）
+	                const savedVerifier = sessionStorage.getItem('dropbox_pkce_code_verifier');
+	                if (savedVerifier && dbx && dbx.auth) {
+	                    try { dbx.auth.codeVerifier = savedVerifier; } catch (e) { /* ignore */ }
+	                }
+	
+	                // 認証コードをアクセストークンに交換（SDKのメソッド）
+	                const response = await dbx.auth.getAccessTokenFromCode(REDIRECT_URI, authCode);
+	                const accessToken = response.result && (response.result.access_token || response.result.accessToken) || response.accessToken;
+	
+	                // 交換が成功したら、保存しておいた verifier は削除しておく
+	                sessionStorage.removeItem('dropbox_pkce_code_verifier');
+	
+	                // URLから認証コードを削除してクリーンにする
+	                window.history.replaceState({}, document.title, window.location.pathname);
+	                localStorage.setItem('dropbox_access_token', accessToken);
+	                dbx.setAccessToken(accessToken);
+	                dailyTaskListApp.dbx = dbx;
+	                dailyTaskListApp.updateAuthUi(true);
+	                dailyTaskListApp.loadStateFromDropbox();
+	            } catch (error) {
+	                // 詳細を表示して原因追跡しやすくする
+	                console.error('Error getting access token from code:', error);
+	                const detail = (error && (error.error_summary || error.error || error.error_description)) || JSON.stringify(error);
+	                dailyTaskListApp.driveStatusEl.textContent = `認証交換エラー: ${detail}`;
+	                alert('Dropboxの認証に失敗しました。詳細はコンソールを確認してください。');
+	            } else {
                 // ローカルストレージにトークンがあるか確認
                 const storedToken = localStorage.getItem('dropbox_access_token');
                 if (storedToken) {
@@ -632,19 +644,29 @@
             }
 
             dailyTaskListApp.authorizeButton.addEventListener('click', async () => {
-                // PKCEフローのための認証URLを生成
-                const authUrl = await dbx.auth.getAuthenticationUrl(
-                    REDIRECT_URI, // Redirect URI
-                    undefined,    // state
-                    'code',       // authType (response_type)
-                    undefined,    // tokenAccessType
-                    undefined,    // scope
-                    undefined,    // includeGrantedScopes
-                    true          // usePKCE
-                );
-                // ユーザーをDropboxの認証ページへリダイレクト
-                window.location.href = authUrl;
-            });
+			    // PKCEフローのための認証URLを生成（usePKCE = true）
+			    const authUrl = await dbx.auth.getAuthenticationUrl(
+			        REDIRECT_URI,
+			        undefined,
+			        'code',
+			        undefined,
+			        undefined,
+			        undefined,
+			        true
+			    );
+			    // --- 重要 --- SDKが内部で生成した code_verifier を取り出して保存する
+			    // Dropbox SDK は dbx.auth.codeVerifier に生成済みの verifier を保持する実装になっています。
+			    try {
+			        const codeVerifier = dbx.auth && dbx.auth.codeVerifier;
+			        if (codeVerifier) {
+			            sessionStorage.setItem('dropbox_pkce_code_verifier', codeVerifier);
+			        }
+			    } catch (e) {
+			        console.warn('Failed to store Dropbox PKCE code_verifier:', e);
+			    }
+			    // ユーザーをDropboxの認証ページへリダイレクト
+			    window.location.href = authUrl;
+			});
 
             dailyTaskListApp.signoutButton.addEventListener('click', async () => {
                 if (!dailyTaskListApp.dbx) return;
