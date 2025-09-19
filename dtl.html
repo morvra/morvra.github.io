@@ -588,63 +588,75 @@
 
             const dbx = new Dropbox.Dropbox({ clientId: DROPBOX_CLIENT_ID });
             
-            // URLに認証コードがあるか確認 (OAuthリダイレクト後)
-            const urlParams = new URLSearchParams(window.location.search);
-            const authCode = urlParams.get('code');
-
-            if (authCode) {
-                try {
-                    // 認証コードをアクセストークンに交換
-                    const response = await dbx.auth.getAccessTokenFromCode(REDIRECT_URI, authCode);
-                    const accessToken = response.result.access_token;
-
-                    // URLから認証コードを削除してクリーンにする
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                    localStorage.setItem('dropbox_access_token', accessToken);
-                    dbx.setAccessToken(accessToken);
-                    dailyTaskListApp.dbx = dbx;
-                    dailyTaskListApp.updateAuthUi(true);
-                    dailyTaskListApp.loadStateFromDropbox();
-                } catch (error) {
-                    console.error('Error getting access token from code:', error);
-                    alert('Dropboxの認証に失敗しました。');
-                }
-            } else {
-                // ローカルストレージにトークンがあるか確認
-                const storedToken = localStorage.getItem('dropbox_access_token');
-                if (storedToken) {
-                    dbx.setAccessToken(storedToken);
-                    dailyTaskListApp.dbx = dbx;
-                    // トークンの有効性を確認
-                    try {
-                        await dbx.usersGetCurrentAccount();
-                        dailyTaskListApp.updateAuthUi(true);
-                        dailyTaskListApp.loadStateFromDropbox();
-                    } catch (error) {
-                        // トークンが無効だった場合
-                        localStorage.removeItem('dropbox_access_token');
-                        dailyTaskListApp.dbx = null;
-                        dailyTaskListApp.updateAuthUi(false);
-                    }
-                } else {
-                    dailyTaskListApp.updateAuthUi(false);
-                }
-            }
-
-            dailyTaskListApp.authorizeButton.addEventListener('click', async () => {
-                // PKCEフローのための認証URLを生成
-                const authUrl = await dbx.auth.getAuthenticationUrl(
-                    REDIRECT_URI, // Redirect URI
-                    undefined,    // state
-                    'code',       // authType (response_type)
-                    undefined,    // tokenAccessType
-                    undefined,    // scope
-                    undefined,    // includeGrantedScopes
-                    true          // usePKCE
-                );
-                // ユーザーをDropboxの認証ページへリダイレクト
-                window.location.href = authUrl;
-            });
+			// URLに認証コードがあるか確認 (OAuthリダイレクト後)
+			const urlParams = new URLSearchParams(window.location.search);
+			const authCode = urlParams.get('code');
+			const storedVerifier = localStorage.getItem('dropbox_pkce_verifier'); // ローカルストレージからverifierを取得
+			
+			if (authCode && storedVerifier) { // 認証コードとverifierの両方があるか確認
+			    try {
+			        // 認証コードとverifierを使ってアクセストークンに交換
+			        const response = await dbx.auth.getAccessTokenFromCode(REDIRECT_URI, authCode, storedVerifier);
+			        const accessToken = response.result.access_token;
+			
+			        // URLからクエリパラメータを削除してクリーンにする
+			        window.history.replaceState({}, document.title, window.location.pathname);
+			        
+			        // ローカルストレージにトークンを保存し、verifierを削除
+			        localStorage.setItem('dropbox_access_token', accessToken);
+			        localStorage.removeItem('dropbox_pkce_verifier');
+			        
+			        dbx.setAccessToken(accessToken);
+			        dailyTaskListApp.dbx = dbx;
+			        dailyTaskListApp.updateAuthUi(true);
+			        dailyTaskListApp.loadStateFromDropbox();
+			
+			    } catch (error) {
+			        console.error('Error getting access token from code:', error);
+			        alert('Dropboxの認証に失敗しました。');
+			    }
+			} else {
+			    // ローカルストレージにトークンがあるか確認
+			    const storedToken = localStorage.getItem('dropbox_access_token');
+			    if (storedToken) {
+			        dbx.setAccessToken(storedToken);
+			        dailyTaskListApp.dbx = dbx;
+			        // トークンの有効性を確認
+			        try {
+			            await dbx.usersGetCurrentAccount();
+			            dailyTaskListApp.updateAuthUi(true);
+			            dailyTaskListApp.loadStateFromDropbox();
+			        } catch (error) {
+			            // トークンが無効だった場合
+			            localStorage.removeItem('dropbox_access_token');
+			            localStorage.removeItem('dropbox_pkce_verifier');
+			            dailyTaskListApp.dbx = null;
+			            dailyTaskListApp.updateAuthUi(false);
+			        }
+			    } else {
+			        dailyTaskListApp.updateAuthUi(false);
+			    }
+			}
+			
+			dailyTaskListApp.authorizeButton.addEventListener('click', async () => {
+			    // PKCEフローのための認証URLを生成
+			    const pkce = new Dropbox.DropboxAuth.PKCE();
+			    const verifier = pkce.generateVerifier();
+			    localStorage.setItem('dropbox_pkce_verifier', verifier); // verifierを保存
+			
+			    const authUrl = await dbx.auth.getAuthenticationUrl(
+			        REDIRECT_URI,
+			        undefined,
+			        'code',
+			        'offline',
+			        undefined,
+			        undefined,
+			        true,
+			        verifier // verifierを渡す
+			    );
+			    // ユーザーをDropboxの認証ページへリダイレクト
+			    window.location.href = authUrl;
+			});
 
             dailyTaskListApp.signoutButton.addEventListener('click', async () => {
                 if (!dailyTaskListApp.dbx) return;
