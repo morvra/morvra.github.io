@@ -595,8 +595,8 @@
             if (authCode) {
                 try {
                     // 認証コードをアクセストークンに交換
-                    const response = await dbx.auth.getAccessTokenFromCode(REDIRECT_URI, authCode);
-                    const accessToken = response.result.access_token;
+			        const response = await dbx.auth.tokenAccessTokenFromCode(REDIRECT_URI, authCode);
+			        const { access_token: accessToken } = response.result;
 
                     // URLから認証コードを削除してクリーンにする
                     window.history.replaceState({}, document.title, window.location.pathname);
