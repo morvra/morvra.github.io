@@ -613,7 +613,7 @@
 		            // URLから認証コードを削除してクリーンにする
 		            window.history.replaceState({}, document.title, window.location.pathname);
 		            localStorage.setItem('dropbox_access_token', accessToken);
-		            dbx.setAccessToken(accessToken);
+		            dbx.auth.setAccessToken(accessToken);
 		            dailyTaskListApp.dbx = dbx;
 		            dailyTaskListApp.updateAuthUi(true);
 		            dailyTaskListApp.loadStateFromDropbox();
@@ -629,7 +629,7 @@
 		        // ローカルストレージにトークンがあるか確認
 		        const storedToken = localStorage.getItem('dropbox_access_token');
 		        if (storedToken) {
-		            dbx.setAccessToken(storedToken);
+					dbx.auth.setAccessToken(storedToken);
 		            dailyTaskListApp.dbx = dbx;
 		            // トークンの有効性を確認
 		            try {
