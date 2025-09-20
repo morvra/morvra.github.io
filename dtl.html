@@ -90,6 +90,8 @@
         .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); }
         .modal.active { display:flex; align-items:center; justify-content:center; }
         .modal-content { background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow-y:auto; }
+		
+		#floating-task-bar { display: none; }
 
         .tooltip-container { position: relative; display: inline-flex; align-items: center; }
         .custom-tooltip { visibility: hidden; opacity: 0; background-color: #2d3748; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 10; bottom: 150%; left: 50%; transform: translateX(-50%); transition: opacity 0.1s, visibility 0.1s; width: max-content; max-width: 300px; font-size: 0.875rem; font-weight: normal; line-height: 1.4; white-space: pre-wrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
@@ -143,6 +145,15 @@
             .task-card.completed {
                 background-color: #e5e7eb; 
             }
+			#floating-task-bar.active {
+			    display: flex;
+			    transform: translateY(0);
+				width: 60%;
+                justify-self: center;
+			}
+			.add-task-fab, .sync-data-fab {
+			    transition: bottom 0.3s ease-in-out;
+			}
             
             .archive-table-wrapper {
                 overflow-x: auto;
@@ -329,9 +340,12 @@
     </main>
 </div>
 
-<button id="add-task-fab" class="add-task-fab bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl">＋</button>
+<button id="add-task-fab" class="add-task-fab bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl">＋</button>
 
-<button id="sync-data-fab" class="sync-data-fab bg-green-600 hover:bg-green-700 text-white w-14 h-14 rounded-full shadow-lg items-center justify-center">
+<div id="floating-task-bar" class="fixed bottom-3 inset-x-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-2.5 z-50 items-center justify-between gap-3 transition-transform duration-300 transform translate-y-24">
+</div>
+	
+<button id="sync-data-fab" class="sync-data-fab bg-green-600 hover:bg-green-700 text-white w-12 h-12 rounded-full shadow-lg items-center justify-center">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
     </svg>
@@ -497,6 +511,22 @@
                             }
                         }
                         state.dailyTasks[date] = Array.from(taskMap.values());
+						state.dailyTasks[date].sort((a, b) => {
+						    const statusA = getTaskStatus(a);
+						    const statusB = getTaskStatus(b);
+						    const statusOrder = { running: 0, pending: 1, completed: 2 };
+						    const orderA = statusOrder[statusA];
+						    const orderB = statusOrder[statusB];
+						
+						    if (orderA !== orderB) {
+						        return orderA - orderB;
+						    }
+						    
+						    // ステータスが同じ場合、開始時刻の昇順でソート
+						    const startTimeA = a.startTime ? new Date(a.startTime).getTime() : Infinity;
+						    const startTimeB = b.startTime ? new Date(b.startTime).getTime() : Infinity;
+						    return startTimeA - startTimeB;
+						});
                     });
                     // --- End of dailyTasks Merge Logic ---
 
@@ -740,6 +770,7 @@
                 if (['today', 'repeat', 'projects', 'archive'].includes(activeTab)) {
                     render();
                 }
+				renderFloatingTaskBar();
             });
         }
 
@@ -919,6 +950,24 @@
             saveAndRender();
         }
     }
+
+	// ページ読み込み時に実行中のタスクがあればタイマーを復元
+	const tasksOnLoad = getTasksForViewDate();
+	const runningTaskOnLoad = tasksOnLoad.find(t => t.status === 'running');
+	if (runningTaskOnLoad) {
+	    state.activeTaskId = runningTaskOnLoad.id;
+	    state.activeTimerId = setInterval(() => {
+	        const currentActualTime = calculateActualTime(runningTaskOnLoad);
+	        const timeEl = document.querySelector(`[data-task-id="${runningTaskOnLoad.id}"] .time-actual`);
+	        if (timeEl) {
+	            timeEl.textContent = formatTime(currentActualTime);
+	        }
+	        const floatingTimeEl = document.getElementById('floating-elapsed-time');
+	        if (floatingTimeEl) {
+	            floatingTimeEl.textContent = formatTime(currentActualTime);
+	        }
+	    }, 1000);
+	}
 
     function archiveCompletedTasks(dateKey) {
         if (!state.dailyTasks[dateKey]) return;
@@ -1218,6 +1267,7 @@
 
     function openModal(modalId) {
         document.getElementById(modalId).classList.add('active');
+		renderFloatingTaskBar();
     }
 
     function closeModal(modalId) {
@@ -1226,6 +1276,7 @@
             state.editingTaskDateKey = null;
             state.editingTaskId = null;
         }
+		renderFloatingTaskBar();
     }
 
     function render() {
@@ -1237,6 +1288,7 @@
         updateProjectDropdowns();
         calculateAllEstimates();
 		updateTitle();
+		renderFloatingTaskBar();
     }
 
     function renderTodayTasks() {
@@ -2390,6 +2442,10 @@
                     if (timeEl) {
                         timeEl.textContent = formatTime(calculateActualTime(task));
                     }
+					const floatingTimeEl = document.getElementById('floating-elapsed-time');
+				    if (floatingTimeEl) {
+				        floatingTimeEl.textContent = formatTime(currentActualTime);
+				    }
                 }, 1000);
             }
         }
@@ -2561,6 +2617,64 @@
         totalEstimatedEndTimeEl.textContent = totalRemainingMinutes > 0 ? formatClockTime(new Date(now.getTime() + totalRemainingMinutes * 60 * 1000)) : '完了';
     }
 
+	function renderFloatingTaskBar() {
+	    const bar = document.getElementById('floating-task-bar');
+	    if (!bar) return;
+	
+	    if (!isMobile() || document.querySelector('.modal.active')) {
+	        bar.classList.remove('active');
+	        return;
+	    }
+	
+	    const tasks = getTasksForViewDate();
+	    const activeTask = tasks.find(t => t.id === state.activeTaskId);
+	
+	    let barContent = '';
+	    let shouldShowBar = false;
+	
+		// 実行中タスクの表示部分
+		if (activeTask) {
+		    shouldShowBar = true;
+		    const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
+		    barContent = `
+		        <button id="floating-timer-btn" class="timer-btn rounded-full bg-red-500 hover:bg-red-600 text-white flex-shrink-0" title="停止">■</button>
+		        <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${activeTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
+		            <p class="text-sm font-bold truncate cursor-pointer hover:text-blue-600" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
+		            <div class="text-xs text-gray-600 flex justify-between font-mono">
+		                <span id="floating-elapsed-time">${formatTime(calculateActualTime(activeTask))}</span>
+		                <span><span class="hidden sm:inline">終了予定: </span>${formatClockTime(estimatedEndTime)}</span>
+		            </div>
+		        </div>
+		    `;
+		} else {
+		    // 次のタスクの表示部分
+		    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
+		    if (nextTask) {
+		        shouldShowBar = true;
+		        barContent = `
+		            <button id="floating-timer-btn" class="timer-btn rounded-full bg-green-500 hover:bg-green-600 text-white flex-shrink-0" title="開始">▶</button>
+		            <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${nextTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
+		                <p class="text-sm text-gray-500 cursor-pointer hover:text-blue-600">Next: <span class="font-bold text-gray-800 truncate" title="${escapeHtml(nextTask.name)}">${formatTaskName(nextTask.name)}</span></p>
+		            </div>
+		        `;
+		    }
+		}
+	
+	    if (shouldShowBar) {
+	        bar.innerHTML = barContent;
+	        bar.classList.add('active');
+	        const timerBtn = document.getElementById('floating-timer-btn');
+	        if (timerBtn) {
+	            timerBtn.addEventListener('click', () => {
+	                const targetTaskId = activeTask ? activeTask.id : tasks.find(t => getTaskStatus(t) !== 'completed')?.id;
+	                if (targetTaskId) toggleTimer(targetTaskId);
+	            });
+	        }
+	    } else {
+	        bar.classList.remove('active');
+	    }
+	}
+
     function handleKeyboardShortcuts(e) {
         if (document.querySelector('input:focus, select:focus, textarea:focus, .modal.active')) return;
         
@@ -2709,5 +2823,6 @@
 });
 </script>
 
+	
 </body>
 </html>
