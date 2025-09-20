@@ -514,7 +514,7 @@
 						state.dailyTasks[date].sort((a, b) => {
 						    const statusA = getTaskStatus(a);
 						    const statusB = getTaskStatus(b);
-						    const statusOrder = { running: 0, pending: 1, completed: 2 };
+						    const statusOrder = { completed: 0, running: 1, pending: 2 };
 						    const orderA = statusOrder[statusA];
 						    const orderB = statusOrder[statusB];
 						
