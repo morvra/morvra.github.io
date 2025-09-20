@@ -962,10 +962,6 @@
 	        if (timeEl) {
 	            timeEl.textContent = formatTime(currentActualTime);
 	        }
-	        const floatingTimeEl = document.getElementById('floating-elapsed-time');
-	        if (floatingTimeEl) {
-	            floatingTimeEl.textContent = formatTime(currentActualTime);
-	        }
 	    }, 1000);
 	}
 
@@ -2442,10 +2438,6 @@
                     if (timeEl) {
                         timeEl.textContent = formatTime(calculateActualTime(task));
                     }
-					const floatingTimeEl = document.getElementById('floating-elapsed-time');
-				    if (floatingTimeEl) {
-				        floatingTimeEl.textContent = formatTime(currentActualTime);
-				    }
                 }, 1000);
             }
         }
@@ -2636,16 +2628,12 @@
 		if (activeTask) {
 		    shouldShowBar = true;
 		    const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
-		    barContent = `
-		        <button id="floating-timer-btn" class="timer-btn rounded-full bg-red-500 hover:bg-red-600 text-white flex-shrink-0" title="停止">■</button>
-		        <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${activeTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
-		            <p class="text-sm font-bold truncate cursor-pointer hover:text-blue-600" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
-		            <div class="text-xs text-gray-600 flex justify-between font-mono">
-		                <span id="floating-elapsed-time">${formatTime(calculateActualTime(activeTask))}</span>
-		                <span><span class="hidden sm:inline">終了予定: </span>${formatClockTime(estimatedEndTime)}</span>
-		            </div>
-		        </div>
-		    `;
+			barContent = `
+			    <button id="floating-timer-btn" class="timer-btn rounded-full bg-red-500 hover:bg-red-600 text-white flex-shrink-0" title="停止">■</button>
+			    <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${activeTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
+			        <p class="text-sm font-bold truncate cursor-pointer hover:text-blue-600" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
+			    </div>
+			`;
 		} else {
 		    // 次のタスクの表示部分
 		    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
