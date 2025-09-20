@@ -342,7 +342,7 @@
 
 <button id="add-task-fab" class="add-task-fab bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl">＋</button>
 
-<div id="floating-task-bar" class="fixed bottom-3 inset-x-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-2.5 z-50 items-center justify-between gap-3 transition-transform duration-300 transform translate-y-24">
+<div id="floating-task-bar" class="fixed bottom-3 inset-x-4 bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-2.5 z-50 items-center justify-between gap-3 transition-transform duration-300 transform translate-y-24">
 </div>
 	
 <button id="sync-data-fab" class="sync-data-fab bg-green-600 hover:bg-green-700 text-white w-12 h-12 rounded-full shadow-lg items-center justify-center">
@@ -2438,6 +2438,10 @@
                     if (timeEl) {
                         timeEl.textContent = formatTime(calculateActualTime(task));
                     }
+					const floatingTimeEl = document.getElementById('floating-elapsed-time');
+				    if (floatingTimeEl) {
+				        floatingTimeEl.textContent = formatTime(currentActualTime);
+				    }
                 }, 1000);
             }
         }
@@ -2628,12 +2632,15 @@
 		if (activeTask) {
 		    shouldShowBar = true;
 		    const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
-			barContent = `
-			    <button id="floating-timer-btn" class="timer-btn rounded-full bg-red-500 hover:bg-red-600 text-white flex-shrink-0" title="停止">■</button>
-			    <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${activeTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
-			        <p class="text-sm font-bold truncate cursor-pointer hover:text-blue-600" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
-			    </div>
-			`;
+		    barContent = `
+		        <button id="floating-timer-btn" class="timer-btn rounded-full bg-red-500 hover:bg-red-600 text-white flex-shrink-0" title="停止">■</button>
+		        <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${activeTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
+		            <p class="text-sm font-bold truncate cursor-pointer hover:text-blue-600" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
+		            <div class="text-xs text-gray-600 flex justify-between font-mono">
+		                <span><span class="sm:inline">終了予定: </span>${formatClockTime(estimatedEndTime)}</span>
+		            </div>
+		        </div>
+		    `;
 		} else {
 		    // 次のタスクの表示部分
 		    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
