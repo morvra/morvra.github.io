@@ -442,7 +442,7 @@
     </div>
 </div>
 
-<div id="toast-notification" class="fixed top-5 right-1 bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-500 ease-in-out transform -translate-y-20 opacity-0 z-[2000]"></div>
+<div id="toast-notification" class="fixed top-5 right-1 bg-green-600 text-white mx-2 py-2 px-4 rounded-lg shadow-md transition-all duration-500 ease-in-out transform -translate-y-20 opacity-0 z-[2000]"></div>
 
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 
@@ -577,7 +577,7 @@
                     saveState(); 
                     render();
                     this.driveStatusEl.textContent = `Dropboxからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
-                    showToast('Dropboxからデータを読み込み、マージしました。');
+                    showToast('Dropboxからデータを読み込みました。');
 
                 } catch (error) {
                     if (error.status === 409) { // 409: path not found
