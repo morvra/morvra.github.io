@@ -2313,17 +2313,21 @@
         if (isInterrupt) {
             const firstPendingIndex = tasks.findIndex(t => t.status !== 'completed');
             insertIndex = firstPendingIndex === -1 ? 0 : firstPendingIndex;
-        } else {
-            const lastPendingIndex = tasks.map(t => t.status).lastIndexOf('pending');
-            const lastRunningIndex = tasks.map(t => t.status).lastIndexOf('running');
-            const lastUncompletedIndex = Math.max(lastPendingIndex, lastRunningIndex);
-            
-            if (lastUncompletedIndex !== -1) {
-                insertIndex = lastUncompletedIndex + 1;
-            } else {
-                insertIndex = tasks.length;
-            }
-        }
+		} else {
+		        // 未実行(pending)タスクの最初の位置を探す
+		        const firstPendingIndex = tasks.findIndex(t => t.status === 'pending');
+		
+		        if (firstPendingIndex !== -1) {
+		            insertIndex = firstPendingIndex;
+		        } else {
+		            const lastRunningIndex = tasks.map(t => t.status).lastIndexOf('running');
+		            if (lastRunningIndex !== -1) {
+		                insertIndex = lastRunningIndex + 1;
+		            } else {
+		                insertIndex = tasks.length;
+		            }
+		        }
+		  }
         tasks.splice(insertIndex, 0, newTask);
         setTasksForViewDate(tasks);
 
