@@ -1369,7 +1369,7 @@
                     <th class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-8"></th>
                     <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>
                     <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">見積</th>
-                    <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-28">実績</th>
+                    <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">実績</th>
                     <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">開始</th>
                     <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">終了</th>
                     <th class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-28">操作</th>
@@ -2840,10 +2840,9 @@
     }
     function formatTime(seconds) {
         const s = parseInt(seconds, 10) || 0;
-        const h = Math.floor(s / 3600).toString().padStart(2,'0');
         const m = Math.floor((s % 3600) / 60).toString().padStart(2,'0');
         const sec = (s % 60).toString().padStart(2,'0');
-        return `${h}:${m}:${sec}`;
+        return `${m}:${sec}`;
     }
     function formatClockTime(date) {
         if (!date) return '--:--';
