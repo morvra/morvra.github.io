@@ -65,10 +65,10 @@
         ::-webkit-scrollbar-thumb:hover { background:#555; }
 
         .timer-btn {
-            height: 30px;
-            width: 30px;
-            min-height: 30px;
-            min-width: 30px;
+            height: 31px;
+            width: 31px;
+            min-height: 31px;
+            min-width: 31px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1404,7 +1404,7 @@
 
             const memoIcon = task.memo ? `
                 <span class="tooltip-container memo-icon-clickable" data-task-id="${task.id}">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 text-gray-400 cursor-pointer hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mb-1 ml-1 text-gray-400 cursor-pointer hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     <span class="custom-tooltip">${escapeHtml(task.memo)}</span>
                 </span>` : '';
             
