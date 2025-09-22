@@ -442,6 +442,8 @@
     </div>
 </div>
 
+<div id="toast-notification" class="fixed top-5 right-5 bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition-all duration-500 ease-in-out transform -translate-y-20 opacity-0 z-[2000]"></div>
+
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 
 <script>
@@ -498,13 +500,29 @@
                             const key = task.originRepeatId ? `repeat-${date}-${task.originRepeatId}` : `task-${task.id}`;
                             if (taskMap.has(key)) {
                                 const existingTask = taskMap.get(key);
-                                const getTaskPriority = (t) => {
-                                    if (getTaskStatus(t) === 'completed') return 2;
-                                    if (getTaskStatus(t) === 'running') return 1;
-                                    return 0;
-                                };
-                                if (getTaskPriority(task) >= getTaskPriority(existingTask)) {
-                                    taskMap.set(key, task);
+                                // 開始/終了時間が異なるかチェック
+                                const timesAreDifferent = (
+                                    (task.startTime || null) !== (existingTask.startTime || null) ||
+                                    (task.endTime || null) !== (existingTask.endTime || null)
+                                );
+                                // 手動タスク（リピート由来でない）で、かつ時間が異なる場合
+                                if (!task.originRepeatId && timesAreDifferent) {
+                                    // 新しい方のタスクのIDを振り直し、別タスクとして追加
+                                    const newTask = { ...task, id: task.id + '_dup_' + Date.now() };
+                                    const newKey = `task-${newTask.id}`;
+                                    taskMap.set(newKey, newTask);
+                                    // 既存のタスクはマップに残したままにする
+                                } else {
+                                    // 時間が同じか、リピートタスクの場合は、従来の優先度比較で上書き
+                                    const getTaskPriority = (t) => {
+                                        if (getTaskStatus(t) === 'completed') return 2;
+                                        if (getTaskStatus(t) === 'running') return 1;
+                                        return 0;
+                                    };
+                                    // より状態が進んでいるタスクを優先する
+                                    if (getTaskPriority(task) >= getTaskPriority(existingTask)) {
+                                        taskMap.set(key, task);
+                                    }
                                 }
                             } else {
                                 taskMap.set(key, task);
@@ -559,7 +577,7 @@
                     saveState(); 
                     render();
                     this.driveStatusEl.textContent = `Dropboxからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
-                    alert('Dropboxからデータを読み込み、重複タスクを解決しました。');
+                    showToast('Dropboxからデータを読み込み、マージしました。');
 
                 } catch (error) {
                     if (error.status === 409) { // 409: path not found
@@ -723,6 +741,19 @@
 		    });
 		}
 		// --- DROPBOX SYNC END ---
+
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast-notification');
+            if (!toast) return;
+
+            toast.textContent = message;
+            toast.classList.remove('-translate-y-20', 'opacity-0');
+
+            // 一定時間後に非表示
+            setTimeout(() => {
+                toast.classList.add('-translate-y-20', 'opacity-0');
+            }, duration);
+        }
 
         // State
         const state = {
