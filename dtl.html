@@ -552,7 +552,8 @@
                     stopActiveTimer();
                     state.viewDate = getFormattedDate(new Date());
                     const tasksToday = getTasksForViewDate();
-                    state.focusedTaskId = tasksToday.length > 0 ? tasksToday[0].id : null;
+                    const firstUncompletedTask = tasksToday.find(t => getTaskStatus(t) !== 'completed');
+					state.focusedTaskId = firstUncompletedTask ? firstUncompletedTask.id : (tasksToday.length > 0 ? tasksToday[0].id : null);
                     Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
                     
                     saveState(); 
