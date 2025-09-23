@@ -813,9 +813,10 @@
         return tasks.filter(task => !task.isDeleted);
     }
 
-    function setTasksForViewDate(tasks) {
-        state.dailyTasks[state.viewDate] = tasks;
-    }
+	function setTasksForViewDate(tasks) {
+	    const deletedTasks = (state.dailyTasks[state.viewDate] || []).filter(task => task.isDeleted);
+	    state.dailyTasks[state.viewDate] = [...tasks, ...deletedTasks];
+	}
 
 	function updateTitle() {
         const activeTask = getTasksForViewDate().find(t => t.id === state.activeTaskId);
@@ -1838,7 +1839,7 @@
                 if (fromIndex !== null && fromIndex !== toIndex) {
                     const movedItem = list.splice(fromIndex, 1)[0];
                     list.splice(toIndex, 0, movedItem);
-                    // The saveAndRender() call will handle the update.
+					setTasksForViewDate(list);
                     saveAndRender();
                 }
             });
