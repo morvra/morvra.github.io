@@ -488,67 +488,45 @@
                     const fileContent = await response.result.fileBlob.text();
                     const importedData = JSON.parse(fileContent);
 
-                    // --- Custom Merge Logic for dailyTasks ---
+					// --- Custom Merge Logic for dailyTasks ---
                     const driveDailyTasks = importedData.dailyTasks || {};
                     const localDailyTasks = state.dailyTasks;
                     const allDailyDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
+
                     allDailyDates.forEach(date => {
                         const localTasksForDate = localDailyTasks[date] || [];
                         const driveTasksForDate = driveDailyTasks[date] || [];
                         const combinedTasks = [...localTasksForDate, ...driveTasksForDate];
                         const taskMap = new Map();
+
                         for (const task of combinedTasks) {
-                            const key = task.originRepeatId ? `repeat-${date}-${task.originRepeatId}` : `task-${task.id}`;
-                            if (taskMap.has(key)) {
-                                const existingTask = taskMap.get(key);
-                                // 開始/終了時間が異なるかチェック
-                                const timesAreDifferent = (
-                                    (task.startTime || null) !== (existingTask.startTime || null) ||
-                                    (task.endTime || null) !== (existingTask.endTime || null)
-                                );
-                                // 手動タスク（リピート由来でない）で、かつ時間が異なる場合
-                                if (!task.originRepeatId && timesAreDifferent) {
-                                    // 新しい方のタスクのIDを振り直し、別タスクとして追加
-                                    const newTask = { ...task, id: task.id + '_dup_' + Date.now() };
-                                    const newKey = `task-${newTask.id}`;
-                                    taskMap.set(newKey, newTask);
-                                    // 既存のタスクはマップに残したままにする
-                                } else {
-                                    // 時間が同じか、リピートタスクの場合は、従来の優先度比較で上書き
-                                    const getTaskPriority = (t) => {
-                                        if (getTaskStatus(t) === 'completed') return 2;
-                                        if (getTaskStatus(t) === 'running') return 1;
-                                        return 0;
-                                    };
-                                    // より状態が進んでいるタスクを優先する
-                                    if (getTaskPriority(task) >= getTaskPriority(existingTask)) {
-                                        taskMap.set(key, task);
-                                    }
-                                }
-                            } else {
+                            // All tasks are now keyed by their unique ID.
+                            const key = `task-${task.id}`;
+
+                            if (!taskMap.has(key)) {
                                 taskMap.set(key, task);
+                            } else {
+                                const existingTask = taskMap.get(key);
+                                
+                                // Conflict Resolution: The most recently updated task wins.
+                                const existingTimestamp = existingTask.updatedAt || '1970-01-01T00:00:00.000Z';
+                                const newTimestamp = task.updatedAt || '1970-01-01T00:00:00.000Z';
+
+                                if (newTimestamp >= existingTimestamp) {
+                                    taskMap.set(key, task);
+                                }
                             }
                         }
-                        state.dailyTasks[date] = Array.from(taskMap.values());
-						state.dailyTasks[date].sort((a, b) => {
-						    const statusA = getTaskStatus(a);
-						    const statusB = getTaskStatus(b);
-						    const statusOrder = { completed: 0, running: 1, pending: 2 };
-						    const orderA = statusOrder[statusA];
-						    const orderB = statusOrder[statusB];
-						
-						    if (orderA !== orderB) {
-						        return orderA - orderB;
-						    }
-						    
-						    // ステータスが同じ場合、開始時刻の昇順でソート
-						    const startTimeA = a.startTime ? new Date(a.startTime).getTime() : Infinity;
-						    const startTimeB = b.startTime ? new Date(b.startTime).getTime() : Infinity;
-						    return startTimeA - startTimeB;
-						});
+                        
+                        let mergedTasks = Array.from(taskMap.values());
+
+                        // Sort the final list based on the saved sortOrder.
+                        // Fallback to 0 for older tasks that don't have the property.
+                        mergedTasks.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+                        
+                        state.dailyTasks[date] = mergedTasks;
                     });
                     // --- End of dailyTasks Merge Logic ---
-
                     // --- Custom Merge Logic for archivedTasks ---
                     const driveArchivedTasks = importedData.archivedTasks || {};
                     const localArchivedTasks = state.archivedTasks;
@@ -784,6 +762,19 @@
         const currentDateEl = document.getElementById('current-date');
         const totalEstimatedEndTimeEl = document.getElementById('total-estimated-end-time');
 
+		function updateSortOrderAndTimestamps(dateKey) {
+			const tasks = state.dailyTasks[dateKey] || [];
+			const now = new Date().toISOString();
+			tasks.forEach((task, index) => {
+				task.sortOrder = index;
+				// Only update the timestamp if the order actually changed
+				// to avoid unnecessary saves during simple reads.
+				if (!task.updatedAt || task.sortOrder !== index) {
+					task.updatedAt = now;
+				}
+			});
+		}
+		
         // Init
         function init() {
             state.viewDate = getFormattedDate(new Date());
@@ -1819,7 +1810,7 @@
                 e.target.closest(selector)?.classList.remove('drag-over');
             });
 
-            el.addEventListener('drop', (e) => {
+			el.addEventListener('drop', (e) => {
                 e.preventDefault();
                 const target = e.target.closest(selector);
                 target?.classList.remove('drag-over');
@@ -1830,6 +1821,7 @@
                 if (fromIndex !== null && fromIndex !== toIndex) {
                     const movedItem = list.splice(fromIndex, 1)[0];
                     list.splice(toIndex, 0, movedItem);
+                    // The saveAndRender() call will handle the update.
                     saveAndRender();
                 }
             });
@@ -1915,6 +1907,7 @@
         task.memo = memo;
 
         closeModal('memo-edit-modal');
+		task.updatedAt = new Date().toISOString();
         saveAndRender();
     }
 
@@ -1977,6 +1970,7 @@
         }
 
         closeModal('task-edit-modal');
+		task.updatedAt = new Date().toISOString();
         saveAndRender();
     }
 
@@ -2339,6 +2333,7 @@
             startTime: null,
             endTime: null,
             createdDate: state.viewDate,
+			updatedAt: new Date().toISOString(),
             ...options
         };
 
@@ -2459,6 +2454,7 @@
                         toggleTimer(newTask.id);
                         return;
                     } else {
+						 task.updatedAt = new Date().toISOString();
                          saveAndRender();
                          return;
                     }
@@ -2834,7 +2830,7 @@
         return task.actualTime || 0;
     }
 
-    function saveAndRender() { saveState(); render(); updateTitle(); }
+    function saveAndRender() { updateSortOrderAndTimestamps(state.viewDate); saveState(); render(); updateTitle(); }
     function updateTimeDisplays() {
         currentDateEl.textContent = new Date().toLocaleString('ja-JP', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
         calculateAllEstimates();
