@@ -573,8 +573,18 @@
                 if (!this.dbx) return;
                 
                 this.driveStatusEl.textContent = 'Dropboxへ保存準備中...';
+				const cleanedDailyTasks = {};
+                const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+
+                for (const dateKey in state.dailyTasks) {
+                    cleanedDailyTasks[dateKey] = state.dailyTasks[dateKey].filter(task => {
+                        // isDeletedフラグがないか、あっても30日以内のものだけを残す
+                        return !task.isDeleted || (task.updatedAt && task.updatedAt > thirtyDaysAgo);
+                    });
+                }
+				
                 const dataToSave = {
-                    dailyTasks: state.dailyTasks,
+                    dailyTasks: cleanedDailyTasks,
                     projects: state.projects,
                     repeatTasks: state.repeatTasks,
                     archivedTasks: state.archivedTasks,
@@ -799,7 +809,8 @@
         }
 
     function getTasksForViewDate() {
-        return state.dailyTasks[state.viewDate] || [];
+        const tasks = state.dailyTasks[state.viewDate] || [];
+        return tasks.filter(task => !task.isDeleted);
     }
 
     function setTasksForViewDate(tasks) {
@@ -954,15 +965,17 @@
         if (state.lastDate !== today) {
             console.log(`Date changed: ${state.lastDate} -> ${today}`);
 
-            const yesterdaysTasks = state.dailyTasks[state.lastDate];
+			const yesterdaysTasks = state.dailyTasks[state.lastDate];
             if (yesterdaysTasks && yesterdaysTasks.length > 0) {
-                const leftoverTasks = yesterdaysTasks.filter(t => t.status !== 'completed');
+                // isDeletedでない未完了タスクのみを抽出
+                const leftoverTasks = yesterdaysTasks.filter(t => t.status !== 'completed' && !t.isDeleted);
                 if (leftoverTasks.length > 0) {
                     if (!state.dailyTasks[today]) {
                         state.dailyTasks[today] = [];
                     }
                     state.dailyTasks[today].unshift(...leftoverTasks);
-                    state.dailyTasks[state.lastDate] = yesterdaysTasks.filter(t => t.status === 'completed');
+                    // 昨日分のタスクリストからは、持ち越したタスクと完了済みタスク以外（論理削除済みも含む）を更新
+                    state.dailyTasks[state.lastDate] = yesterdaysTasks.filter(t => t.status === 'completed' || t.isDeleted);
                 }
             }
             
@@ -989,16 +1002,20 @@
 	    }, 1000);
 	}
 
-    function archiveCompletedTasks(dateKey) {
+	function archiveCompletedTasks(dateKey) {
         if (!state.dailyTasks[dateKey]) return;
-
-        const completedTasks = state.dailyTasks[dateKey].filter(t => t.status === 'completed');
+        // isDeletedでない完了タスクのみをアーカイブ対象とする
+        const completedTasks = state.dailyTasks[dateKey].filter(t => t.status === 'completed' && !t.isDeleted);
         if (completedTasks.length > 0) {
             if (!state.archivedTasks[dateKey]) {
                 state.archivedTasks[dateKey] = [];
             }
-            state.archivedTasks[dateKey].push(...completedTasks);
-            state.dailyTasks[dateKey] = state.dailyTasks[dateKey].filter(t => t.status !== 'completed');
+            // 既にアーカイブにあるタスクは追加しないようにチェック
+            const existingIds = new Set(state.archivedTasks[dateKey].map(t => t.id));
+            const newTasksToArchive = completedTasks.filter(t => !existingIds.has(t.id));
+            state.archivedTasks[dateKey].push(...newTasksToArchive);
+            // isDeletedフラグが立っているタスクか、未完了のタスクのみを残す
+            state.dailyTasks[dateKey] = state.dailyTasks[dateKey].filter(t => t.isDeleted || t.status !== 'completed');
         }
     }
 
@@ -2364,17 +2381,30 @@
         return newTask;
     }
 
-    function deleteTask(id) {
+	function deleteTask(id) {
         if (!confirm('このタスクを削除しますか？')) return;
-        let tasks = getTasksForViewDate();
-        const idx = tasks.findIndex(t => t.id === id);
-        tasks = tasks.filter(t => t.id !== id);
-        setTasksForViewDate(tasks);
+        // isDeletedされたものも含む、生のタスクリストを取得
+        let allTasksForDate = state.dailyTasks[state.viewDate] || [];
+        const taskToDelete = allTasksForDate.find(t => t.id === id);
+        
+        if (!taskToDelete) return;
+        // 論理削除フラグとタイムスタンプを設定
+        taskToDelete.isDeleted = true;
+        taskToDelete.updatedAt = new Date().toISOString();
+        // フォーカスを移動するロジック
         if (state.activeTaskId === id) stopActiveTimer();
         if (state.focusedTaskId === id) {
-            const newFocusIndex = Math.min(idx, tasks.length - 1);
-            state.focusedTaskId = tasks[newFocusIndex]?.id || null;
+            // 削除後の「表示される」タスクリスト
+            const visibleTasksAfterDelete = allTasksForDate.filter(t => !t.isDeleted);
+            // 削除前の「表示される」タスクリストでのインデックス
+            const currentIndexInVisibleTasks = getTasksForViewDate().findIndex(t => t.id === id);
+            // 新しいフォーカス位置を決定
+            const newFocusIndex = Math.min(currentIndexInVisibleTasks, visibleTasksAfterDelete.length - 1);
+            state.focusedTaskId = visibleTasksAfterDelete.length > 0 ? (visibleTasksAfterDelete[newFocusIndex]?.id || visibleTasksAfterDelete[0].id) : null;
         }
+        
+        // state.dailyTasks[state.viewDate] は既に参照で更新されているので、
+        // そのまま保存・再描画すればOK
         saveAndRender();
     }
     
