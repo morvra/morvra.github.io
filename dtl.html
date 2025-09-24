@@ -2447,7 +2447,6 @@
         saveAndRender();
     }
 
-
     function toggleTimer(id, forceStop = false) {
         const tasks = getTasksForViewDate();
         const task = tasks.find(t => t.id === id);
@@ -2460,6 +2459,7 @@
             stopActiveTimer();
             const nextTask = tasks.find(t => t.status !== 'completed');
             state.focusedTaskId = nextTask ? nextTask.id : null;
+            task.updatedAt = new Date().toISOString();
         } 
         else {
             if (state.activeTaskId) {
@@ -2468,6 +2468,7 @@
                     runningTask.endTime = new Date().toISOString();
                     runningTask.actualTime = calculateActualTime(runningTask);
                     updateTaskStatus(runningTask);
+                    runningTask.updatedAt = new Date().toISOString();
                 }
                 stopActiveTimer();
             }
@@ -2482,6 +2483,7 @@
                         task.endTime = task.endTime || new Date().toISOString();
                         task.actualTime = calculateActualTime(task);
                         updateTaskStatus(task);
+                        task.updatedAt = new Date().toISOString();
                         
                         toggleTimer(newTask.id);
                         return;
@@ -2497,6 +2499,7 @@
                 updateTaskStatus(task);
                 state.activeTaskId = id;
                 state.focusedTaskId = id;
+                task.updatedAt = new Date().toISOString();
                 
                 state.activeTimerId = setInterval(() => {
                     const timeEl = document.querySelector(`[data-task-id="${id}"] .time-actual`);
