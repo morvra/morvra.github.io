@@ -500,9 +500,9 @@
                         const taskMap = new Map();
 
                         for (const task of combinedTasks) {
-                            const key = (task.originRepeatId && getTaskStatus(task) !== 'completed')
-                                ? `repeat-${task.originRepeatId}`
-                                : `task-${task.id}`;
+							const key = task.originRepeatId
+							    ? `repeat-${task.originRepeatId}-${task.createdDate || ''}`
+							    : `task-${task.id}`;
 
                             if (!taskMap.has(key)) {
                                 taskMap.set(key, task);
