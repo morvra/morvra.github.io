@@ -1221,7 +1221,14 @@
                 
                 if (tab.dataset.tab === 'today') {
                     const tasks = getTasksForViewDate();
-                    state.focusedTaskId = tasks.find(t => t.status !== 'completed')?.id || tasks[0]?.id || null;
+                    const firstUncompletedTask = tasks.find(t => getTaskStatus(t) !== 'completed');
+                    if (firstUncompletedTask) {
+                        state.focusedTaskId = firstUncompletedTask.id;
+                    } else if (tasks.length > 0) {
+                        state.focusedTaskId = tasks[tasks.length - 1].id;
+                    } else {
+                        state.focusedTaskId = null;
+                    }
                 } else if (tab.dataset.tab === 'archive') {
                     if (!state.archiveViewDate) {
                         const yesterday = new Date();
