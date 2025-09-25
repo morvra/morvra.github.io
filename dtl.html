@@ -574,8 +574,14 @@
                     stopActiveTimer();
                     state.viewDate = getFormattedDate(new Date());
                     const tasksToday = getTasksForViewDate();
-                    const firstUncompletedTask = tasksToday.find(t => getTaskStatus(t) !== 'completed');
-					state.focusedTaskId = firstUncompletedTask ? firstUncompletedTask.id : (tasksToday.length > 0 ? tasksToday[0].id : null);
+	                const firstUncompletedTask = tasksToday.find(t => getTaskStatus(t) !== 'completed');
+	                if (firstUncompletedTask) {
+	                    state.focusedTaskId = firstUncompletedTask.id;
+	                } else if (tasksToday.length > 0) {
+	                    state.focusedTaskId = tasksToday[tasksToday.length - 1].id;
+	                } else {
+	                    state.focusedTaskId = null;
+	                }
                     Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
                     
                     restoreRunningTaskState();
@@ -1052,8 +1058,16 @@
             generateTasksFromRepeatAuto(today);
             state.lastDate = today;
             state.viewDate = today; 
-            state.focusedTaskId = (state.dailyTasks[today] && state.dailyTasks[today][0]?.id) || null;
-            saveAndRender();
+            const tasksToday = state.dailyTasks[today] || [];
+            const firstUncompletedTaskOnDayChange = tasksToday.find(t => getTaskStatus(t) !== 'completed');
+            if (firstUncompletedTaskOnDayChange) {
+                state.focusedTaskId = firstUncompletedTaskOnDayChange.id;
+            } else if (tasksToday.length > 0) {
+                state.focusedTaskId = tasksToday[tasksToday.length - 1].id;
+            } else {
+                state.focusedTaskId = null;
+            }
+			saveAndRender();
         }
     }
 
@@ -2701,8 +2715,19 @@
                 stopActiveTimer();
                 state.viewDate = getFormattedDate(new Date());
                 const tasksToday = getTasksForViewDate();
-                state.focusedTaskId = tasksToday.length > 0 ? tasksToday[0].id : null;
-                
+ 
+				const firstUncompletedTask = tasksToday.find(t => getTaskStatus(t) !== 'completed');
+				if (firstUncompletedTask) {
+					// 未完了タスクがあれば、その最初のタスクを選択
+					state.focusedTaskId = firstUncompletedTask.id;
+				} else if (tasksToday.length > 0) {
+					// 未完了タスクがなく、タスクが1件以上あれば、リストの最後のタスクを選択
+					state.focusedTaskId = tasksToday[tasksToday.length - 1].id;
+				} else {
+					// タスクがなければ選択しない
+					state.focusedTaskId = null;
+				}
+			
                 Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
                 
                 saveAndRender();
