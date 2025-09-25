@@ -554,7 +554,8 @@
 					state.focusedTaskId = firstUncompletedTask ? firstUncompletedTask.id : (tasksToday.length > 0 ? tasksToday[0].id : null);
                     Object.values(state.dailyTasks).flat().forEach(task => updateTaskStatus(task));
                     
-                    saveState(); 
+                    restoreRunningTaskState();
+					saveState(); 
                     render();
                     this.driveStatusEl.textContent = `Dropboxからデータを読み込みました (${new Date().toLocaleTimeString()})。`;
                     showToast('Dropboxからデータを読み込みました。');
@@ -790,6 +791,7 @@
         function init() {
             state.viewDate = getFormattedDate(new Date());
             loadState();
+            restoreRunningTaskState();
             setupEventListeners();
             initializeDropboxSync();
             checkDayChange();
@@ -961,7 +963,35 @@
 			app.saveTimeout = setTimeout(() => app.saveStateToDropbox(), 2000);
 		}
 	}
-    
+
+    function restoreRunningTaskState() {
+        // 既に動いているタイマーがあれば止める
+        stopActiveTimer();
+
+        const tasks = getTasksForViewDate();
+        const runningTask = tasks.find(t => t.status === 'running');
+        
+        if (runningTask) {
+            state.activeTaskId = runningTask.id;
+            state.activeTimerId = setInterval(() => {
+                // 実行中のタスクの最新の状態を取得
+                const currentTask = getTasksForViewDate().find(t => t.id === state.activeTaskId);
+                // タスクが存在し、かつ実行中であることを確認
+                if (!currentTask || currentTask.status !== 'running') {
+                    stopActiveTimer(); // 状態が変化していればタイマーを停止
+                    updateTitle();
+                    renderFloatingTaskBar();
+                    return;
+                }
+                const currentActualTime = calculateActualTime(currentTask);
+                const timeEl = document.querySelector(`[data-task-id="${currentTask.id}"] .time-actual`);
+                if (timeEl) {
+                    timeEl.textContent = formatTime(currentActualTime);
+                }
+            }, 1000);
+        }
+    }
+		
     function checkDayChange() {
         const today = getFormattedDate(new Date());
         if (state.lastDate !== today) {
@@ -989,20 +1019,6 @@
             saveAndRender();
         }
     }
-
-	// ページ読み込み時に実行中のタスクがあればタイマーを復元
-	const tasksOnLoad = getTasksForViewDate();
-	const runningTaskOnLoad = tasksOnLoad.find(t => t.status === 'running');
-	if (runningTaskOnLoad) {
-	    state.activeTaskId = runningTaskOnLoad.id;
-	    state.activeTimerId = setInterval(() => {
-	        const currentActualTime = calculateActualTime(runningTaskOnLoad);
-	        const timeEl = document.querySelector(`[data-task-id="${runningTaskOnLoad.id}"] .time-actual`);
-	        if (timeEl) {
-	            timeEl.textContent = formatTime(currentActualTime);
-	        }
-	    }, 1000);
-	}
 
 	function archiveCompletedTasks(dateKey) {
         if (!state.dailyTasks[dateKey]) return;
