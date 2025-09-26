@@ -834,6 +834,7 @@
         function init() {
             state.viewDate = getFormattedDate(new Date());
             loadState();
+			handleUrlScheme();
             restoreRunningTaskState();
             setupEventListeners();
             initializeDropboxSync();
@@ -853,6 +854,50 @@
 				renderFloatingTaskBar();
             });
         }
+
+	function handleUrlScheme() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const taskNameParam = urlParams.get('addtask');
+
+        if (taskNameParam) {
+            try {
+                // URLパラメータをデコードして日本語や絵文字に対応
+                const taskName = decodeURIComponent(taskNameParam);
+                const estimatedTime = urlParams.get('estimated') || 5; // 指定がなければデフォルト5分
+                const projectName = urlParams.get('project') ? decodeURIComponent(urlParams.get('project')) : null;
+
+                let projectId = null;
+                if (projectName) {
+                    // プロジェクト名からプロジェクトIDを検索（大文字・小文字を区別しない）
+                    const project = state.projects.find(p => p.name.toLowerCase() === projectName.toLowerCase());
+                    if (project) {
+                        projectId = project.id;
+                    }
+                }
+
+                // 「当日のタスク」タブを強制的に開く
+                document.querySelector('.tab-link[data-tab="today"]').click();
+                
+                // viewDateを今日に設定
+                state.viewDate = getFormattedDate(new Date());
+
+                // 既存のaddTask関数を使ってタスクを追加
+                const newTask = addTask(taskName, estimatedTime, projectId);
+                
+                if (newTask) {
+                    showToast(`「${taskName}」を追加しました。`);
+                }
+
+                // ページリロードによるタスクの重複追加を防ぐため、URLからクエリパラメータを削除
+                const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+
+            } catch (e) {
+                console.error("URLスキームからのタスク追加に失敗しました:", e);
+                alert("URLからのタスク追加に失敗しました。");
+            }
+    	}
+	}
 
     function getTasksForViewDate() {
         const tasks = state.dailyTasks[state.viewDate] || [];
