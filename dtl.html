@@ -2519,43 +2519,45 @@
 
 	function deleteTask(id) {
 	    if (!confirm('このタスクを削除しますか？')) return;
-	    // isDeletedされたものも含む、生のタスクリストを取得
+	
 	    let allTasksForDate = state.dailyTasks[state.viewDate] || [];
-	    const taskToDelete = allTasksForDate.find(t => t.id === id);
-	    
-	    if (!taskToDelete) return;
-	    // 論理削除フラグとタイムスタンプを設定
-	    taskToDelete.isDeleted = true;
-	    taskToDelete.updatedAt = new Date().toISOString();
+	    const index = allTasksForDate.findIndex(t => t.id === id);
+	    if (index === -1) return;
 	
-	    // フォーカスを移動するロジック
-	    if (state.activeTaskId === id) stopActiveTimer();
-	    if (state.focusedTaskId === id) {
-	        const visibleTasksBeforeDelete = getTasksForViewDate(); // 削除前の表示リスト
-	        const currentIndexInVisibleTasks = visibleTasksBeforeDelete.findIndex(t => t.id === id);
+	    // 削除フラグを立てる
+	    allTasksForDate[index].isDeleted = true;
+	    setTasksForViewDate(allTasksForDate);
+	    saveAndRender();
 	
-	        // 削除後の表示リスト
-	        const visibleTasksAfterDelete = allTasksForDate.filter(t => !t.isDeleted);
-	
-	        let newFocusId = null;
-	        if (currentIndexInVisibleTasks !== -1) {
-	            // 下のタスクがあればそれを優先
-	            if (currentIndexInVisibleTasks < visibleTasksAfterDelete.length) {
-	                newFocusId = visibleTasksAfterDelete[currentIndexInVisibleTasks].id;
-	            }
-	            // 下がなければ上
-	            else if (currentIndexInVisibleTasks - 1 >= 0) {
-	                newFocusId = visibleTasksAfterDelete[currentIndexInVisibleTasks - 1].id;
+	    // 削除後に選択するタスクを決定
+	    let nextTask = null;
+	    // 下のタスクを探す
+	    for (let i = index + 1; i < allTasksForDate.length; i++) {
+	        if (!allTasksForDate[i].isDeleted) {
+	            nextTask = allTasksForDate[i];
+	            break;
+	        }
+	    }
+	    // 下が無ければ上を探す
+	    if (!nextTask) {
+	        for (let i = index - 1; i >= 0; i--) {
+	            if (!allTasksForDate[i].isDeleted) {
+	                nextTask = allTasksForDate[i];
+	                break;
 	            }
 	        }
-	
-	        state.focusedTaskId = newFocusId;
 	    }
-	    
+	
+	    // 選択状態を更新
+	    if (nextTask) {
+	        state.selectedTaskId = nextTask.id;
+	    } else {
+	        state.selectedTaskId = null;
+	    }
+	
 	    saveAndRender();
 	}
 
-    
     function deleteArchivedTask(dateKey, taskId) {
         if (!confirm('このアーカイブ済みタスクを削除しますか？この操作は元に戻せません。')) return;
         if (state.archivedTasks[dateKey]) {
