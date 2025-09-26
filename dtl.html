@@ -1925,53 +1925,61 @@
         );
     }
     
-    function setupDragAndDrop(selector, list) {
-        const elements = document.querySelectorAll(selector);
-        let draggedIndex = null;
-        
-        elements.forEach(el => {
-            el.addEventListener('dragstart', (e) => {
-                draggedIndex = parseInt(el.dataset.index, 10);
-                e.dataTransfer.setData('text/plain', draggedIndex);
-                setTimeout(() => el.classList.add('dragging'), 0);
-            });
-
-            el.addEventListener('dragend', (e) => {
-                el.classList.remove('dragging');
-                draggedIndex = null;
-                 document.querySelectorAll('.drag-over').forEach(item => item.classList.remove('drag-over'));
-            });
-
-            el.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                const target = e.target.closest(selector);
-                if (target && parseInt(target.dataset.index, 10) !== draggedIndex) {
-                    document.querySelectorAll('.drag-over').forEach(item => item.classList.remove('drag-over'));
-                    target.classList.add('drag-over');
-                }
-            });
-
-            el.addEventListener('dragleave', (e) => {
-                e.target.closest(selector)?.classList.remove('drag-over');
-            });
-
-			el.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const target = e.target.closest(selector);
-                target?.classList.remove('drag-over');
-                
-                const fromIndex = draggedIndex;
-                const toIndex = parseInt(target.dataset.index, 10);
-                
-                if (fromIndex !== null && fromIndex !== toIndex) {
-                    const movedItem = list.splice(fromIndex, 1)[0];
-                    list.splice(toIndex, 0, movedItem);
-					setTasksForViewDate(list);
-                    saveAndRender();
-                }
-            });
-        });
-    }
+	function setupDragAndDrop(selector, list, type = 'daily') {
+	    const elements = document.querySelectorAll(selector);
+	    let draggedIndex = null;
+	
+	    elements.forEach(el => {
+	        el.addEventListener('dragstart', (e) => {
+	            draggedIndex = parseInt(el.dataset.index, 10);
+	            e.dataTransfer.setData('text/plain', draggedIndex);
+	            setTimeout(() => el.classList.add('dragging'), 0);
+	        });
+	
+	        el.addEventListener('dragend', () => {
+	            el.classList.remove('dragging');
+	            draggedIndex = null;
+	            document.querySelectorAll('.drag-over').forEach(item => item.classList.remove('drag-over'));
+	        });
+	
+	        el.addEventListener('dragover', (e) => {
+	            e.preventDefault();
+	            const target = e.target.closest(selector);
+	            if (target && parseInt(target.dataset.index, 10) !== draggedIndex) {
+	                document.querySelectorAll('.drag-over').forEach(item => item.classList.remove('drag-over'));
+	                target.classList.add('drag-over');
+	            }
+	        });
+	
+	        el.addEventListener('dragleave', (e) => {
+	            e.target.closest(selector)?.classList.remove('drag-over');
+	        });
+	
+	        el.addEventListener('drop', (e) => {
+	            e.preventDefault();
+	            const target = e.target.closest(selector);
+	            target?.classList.remove('drag-over');
+	
+	            const fromIndex = draggedIndex;
+	            const toIndex = parseInt(target.dataset.index, 10);
+	
+	            if (fromIndex !== null && fromIndex !== toIndex) {
+	                const movedItem = list.splice(fromIndex, 1)[0];
+	                list.splice(toIndex, 0, movedItem);
+	
+	                if (type === 'daily') {
+	                    setTasksForViewDate(list);
+	                } else if (type === 'repeat') {
+	                    state.repeatTasks = list;
+	                } else if (type === 'project') {
+	                    state.projects = list;
+	                }
+	
+	                saveAndRender();
+	            }
+	        });
+	    });
+	}
 
 	function openAddTaskModal() {
 	    document.getElementById('new-task-name').value = '';
@@ -2286,7 +2294,7 @@
             list.appendChild(tr);
         });
 
-        setupDragAndDrop('.project-row', state.projects);
+        setupDragAndDrop('.project-row', state.projects, 'project');
         container.querySelectorAll('.edit-project-btn').forEach(btn => btn.addEventListener('click', (e) => editProject(e.currentTarget.dataset.id)));
         container.querySelectorAll('.delete-project-btn').forEach(btn => btn.addEventListener('click', (e) => deleteProject(e.currentTarget.dataset.id)));
     }
@@ -2317,7 +2325,7 @@
             wrapper.appendChild(card);
         });
         container.appendChild(wrapper);
-        setupDragAndDrop('.project-row', state.projects);
+        setupDragAndDrop('.project-row', state.projects, 'project');
         container.querySelectorAll('.edit-project-btn').forEach(btn => btn.addEventListener('click', (e) => editProject(e.currentTarget.dataset.id)));
         container.querySelectorAll('.delete-project-btn').forEach(btn => btn.addEventListener('click', (e) => deleteProject(e.currentTarget.dataset.id)));
     }
@@ -2387,7 +2395,7 @@
             list.appendChild(tr);
         });
         
-        setupDragAndDrop('.repeat-task-row', state.repeatTasks);
+        setupDragAndDrop('.repeat-task-row', state.repeatTasks, 'repeat');
         container.querySelectorAll('.generate-single-repeat-btn').forEach(btn => btn.addEventListener('click', (e) => generateSingleRepeatTask(e.currentTarget.dataset.id)));
         container.querySelectorAll('.edit-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => openRepeatEditModal(e.currentTarget.dataset.id)));
         container.querySelectorAll('.delete-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => deleteRepeatTask(e.currentTarget.dataset.id)));
@@ -2440,7 +2448,7 @@
         });
         container.appendChild(wrapper);
 
-        setupDragAndDrop('.repeat-task-row', state.repeatTasks);
+        setupDragAndDrop('.repeat-task-row', state.repeatTasks, 'repeat');
         container.querySelectorAll('.generate-single-repeat-btn').forEach(btn => btn.addEventListener('click', (e) => generateSingleRepeatTask(e.currentTarget.dataset.id)));
         container.querySelectorAll('.edit-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => openRepeatEditModal(e.currentTarget.dataset.id)));
         container.querySelectorAll('.delete-repeat-task-btn').forEach(btn => btn.addEventListener('click', (e) => deleteRepeatTask(e.currentTarget.dataset.id)));
