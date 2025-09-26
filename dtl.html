@@ -2520,41 +2520,38 @@
 	function deleteTask(id) {
 	    if (!confirm('このタスクを削除しますか？')) return;
 	
-	    let allTasksForDate = state.dailyTasks[state.viewDate] || [];
+	    const allTasksForDate = state.dailyTasks[state.viewDate] || [];
 	    const index = allTasksForDate.findIndex(t => t.id === id);
 	    if (index === -1) return;
 	
-	    // 削除フラグを立てる
-	    allTasksForDate[index].isDeleted = true;
-	    setTasksForViewDate(allTasksForDate);
-	    saveAndRender();
+	    // 1. タスクに削除フラグを立てる（論理削除）
+	    const taskToDelete = allTasksForDate[index];
+	    taskToDelete.isDeleted = true;
+	    taskToDelete.updatedAt = new Date().toISOString();
 	
-	    // 削除後に選択するタスクを決定
-	    let nextTask = null;
-	    // 下のタスクを探す
+	    // 2. 削除後にフォーカスする次のタスクを決定する
+	    let nextFocusedTask = null;
+	    // まず、削除したタスクより下にある未削除のタスクを探す
 	    for (let i = index + 1; i < allTasksForDate.length; i++) {
 	        if (!allTasksForDate[i].isDeleted) {
-	            nextTask = allTasksForDate[i];
+	            nextFocusedTask = allTasksForDate[i];
 	            break;
 	        }
 	    }
-	    // 下が無ければ上を探す
-	    if (!nextTask) {
+	    // 下に見つからなければ、上にある未削除のタスクを探す
+	    if (!nextFocusedTask) {
 	        for (let i = index - 1; i >= 0; i--) {
 	            if (!allTasksForDate[i].isDeleted) {
-	                nextTask = allTasksForDate[i];
+	                nextFocusedTask = allTasksForDate[i];
 	                break;
 	            }
 	        }
 	    }
 	
-	    // 選択状態を更新
-	    if (nextTask) {
-	        state.selectedTaskId = nextTask.id;
-	    } else {
-	        state.selectedTaskId = null;
-	    }
+	    // 3. stateのフォーカスIDを更新する
+	    state.focusedTaskId = nextFocusedTask ? nextFocusedTask.id : null;
 	
+	    // 4. 状態を保存し、画面を再描画する
 	    saveAndRender();
 	}
 
