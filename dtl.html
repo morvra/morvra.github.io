@@ -880,24 +880,30 @@
 	        console.warn('URL クリーンアップに失敗しました（続行します）:', e);
 	    }
 	
-	    try {
-	        document.querySelector('.tab-link[data-tab="today"]')?.click();
-	        state.viewDate = getFormattedDate(new Date());
-	
-	        if (typeof addTask !== 'function') {
-	            console.warn('addTask 関数が見つかりません。URL追加をスキップします。');
-	            return;
-	        }
-	
-	        const newTask = addTask(taskName, estimatedTime, projectId);
-	
-	        if (newTask) {
-	            showToast(`「${taskName}」を追加しました。`);
-	        }
-	    } catch (err) {
-	        console.error('URL からのタスク追加で一部処理が失敗しました:', err);
-	        showToast('URLからのタスク追加中に一部処理が失敗しました（詳細はコンソール）。', 5000);
-	    }
+    // タスク追加処理を「1フレーム遅らせて」実行する
+    setTimeout(() => {
+        try {
+            // 「当日のタスク」タブを強制的に開く（存在チェック）
+            document.querySelector('.tab-link[data-tab="today"]')?.click();
+
+            // 表示日を今日にする
+            state.viewDate = getFormattedDate(new Date());
+
+            if (typeof addTask !== 'function') {
+                console.warn('addTask 関数が見つかりません。URL追加をスキップします。');
+                return;
+            }
+
+            const newTask = addTask(taskName, estimatedTime, projectId);
+
+            if (newTask) {
+                showToast(`「${taskName}」を追加しました。`);
+            }
+        } catch (err) {
+            console.error('URL からのタスク追加で一部処理が失敗しました:', err);
+            showToast('URLからのタスク追加中に一部処理が失敗しました（詳細はコンソール）。', 5000);
+        }
+    }, 0);
 	}
 
     function getTasksForViewDate() {
