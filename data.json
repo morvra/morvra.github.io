@@ -342,6 +342,13 @@
 				"dynalist"
 			],
 			"body": "<p>▼ これ</p><p><img src=\"https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000\" alt=\"Image\"></p><ul><li><a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>"
+		},
+		{
+			"id": "TZEv6QkahhaBZ84MeEgtEsJo",
+			"title": "シャドバWB 初の能力調整が発表",
+			"date": "2025-09-26",
+			"tags": [],
+			"body": "<p><blockquote class=\"twitter-tweet\"><p lang=\"ja\" dir=\"ltr\">【カード能力変更】<br>9/29のメンテナンス時に「栄弦の天宮・リュウフウ」「狂気の創造者・リーアム」「パペットキャット」「シンフォニアハート・ツヴァイ」のカード能力を変更いたします。<br><br>▼詳細はこちら<a href=\"https://t.co/GKXWAM72Ni\">https://t.co/GKXWAM72Ni</a><a href=\"https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&amp;ref_src=twsrc%5Etfw\">#シャドバWB</a> <a href=\"https://t.co/Su8iIjxAVo\">pic.twitter.com/Su8iIjxAVo</a></p>&mdash; Shadowverse: Worlds Beyond公式 (@shadowverse_jp) <a href=\"https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw\">September 26, 2025</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></p><h2>調整内容</h2><ul><li>リュウフウ 4PP→3PP</li><li>パペットキャット 2/2/2→1/1/1 突進</li><li>リーアム 10/8/8→9/7/7</li><li>ツヴァイ 進化時改良型操り人形出す</li></ul><p>アッパーのみでナーフは無し！できたことできなくなるのは嫌だもんね。なるべくこの形がいいと思う。</p><p>CRで苦戦してるドラネメに順当な強化って感じ。3弾強化ではないのはマゼルベインの影響もあるのかな？破壊軸に強化が無いのは不遇かも。</p><p>環境にどれくらいインパクトがあるのかは謎。2クラスのCR底上げは間違いないけど。</p><p>ドラ強化で増えたらウィッチは減りそう。</p><p>ネメは何に強いのか謎。人形が戦えてない＆破壊にとってパペットキャットがどんくらいありがたいかわからんので。</p><p>人形がロイに（環境における立ち位置的な意味で）勝てるのであれば環境がかなり動きそう。具体的にはウィッチ・モードメア・クレビショにどれくらい抗えるか。</p><p>次は財宝ロイヤルか人形ネメシスで</p>"
 		}
 	],
 	"pieces": [
