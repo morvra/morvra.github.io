@@ -614,10 +614,14 @@
                 const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
                 for (const dateKey in state.dailyTasks) {
-                    cleanedDailyTasks[dateKey] = state.dailyTasks[dateKey].filter(task => {
+                    const filteredTasks = state.dailyTasks[dateKey].filter(task => {
                         // isDeletedフラグがないか、あっても30日以内のものだけを残す
                         return !task.isDeleted || (task.updatedAt && task.updatedAt > thirtyDaysAgo);
                     });
+                    // フィルタリングした結果、タスクが1件以上残っている場合のみ、その日付のデータを保存する
+                    if (filteredTasks.length > 0) {
+                        cleanedDailyTasks[dateKey] = filteredTasks;
+                    }
                 }
 				
                 const dataToSave = {
