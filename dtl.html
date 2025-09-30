@@ -1662,7 +1662,7 @@
             const project = state.projects.find(p => p.id === task.projectId) || { name: '', color: '#cccccc' };
             const card = document.createElement('div');
             const isCompleted = task.status === 'completed';
-            card.className = `task-card bg-white p-3 mt-2 shadow border-l-4 ${isCompleted ? 'completed' : ''} ${task.status === 'running' ? 'bg-blue-50' : ''} ${task.id === state.focusedTaskId ? 'focused' : ''}`;
+            card.className = `task-card bg-white px-3 py-2 mt-2 shadow border-l-4 ${isCompleted ? 'completed' : ''} ${task.status === 'running' ? 'bg-blue-50' : ''} ${task.id === state.focusedTaskId ? 'focused' : ''}`;
             card.style.borderLeftColor = project.color;
             card.dataset.taskId = task.id;
             card.dataset.index = index;
@@ -1691,7 +1691,6 @@
                 <div class="flex items-center gap-3">
                     <div class="flex flex-col items-center">
                         ${timerButtonHtml}
-						<div class="drag-handle text-gray-400 hover:text-gray-600 cursor-move mt-1">⋮⋮</div>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-start">
@@ -1711,7 +1710,6 @@
 								</button>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-500">${escapeHtml(project.name)}</p>
                         <div class="flex items-center justify-between text-xs text-gray-600 mt-1">
                             <div class="flex space-x-3">
                                 <span>見積: ${task.estimatedTime || 0}分</span>
