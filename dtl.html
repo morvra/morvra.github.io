@@ -2568,33 +2568,60 @@
             }
         }
         saveAndRender();
-    }
-    
-    function postponeTask(id) {
-        let tasks = getTasksForViewDate();
-        const taskIndex = tasks.findIndex(t => t.id === id);
-        if (taskIndex === -1) return;
-        
-        const [taskToMove] = tasks.splice(taskIndex, 1);
-        setTasksForViewDate(tasks);
-
-        const nextDay = new Date(state.viewDate);
-        nextDay.setDate(nextDay.getDate() + 1);
-        const nextDateStr = getFormattedDate(nextDay);
-        
-        if (!state.dailyTasks[nextDateStr]) {
-            state.dailyTasks[nextDateStr] = [];
-        }
-        state.dailyTasks[nextDateStr].unshift(taskToMove);
-
-        if (state.activeTaskId === id) stopActiveTimer();
-        if (state.focusedTaskId === id) {
-            const newFocusIndex = Math.min(taskIndex, tasks.length - 1);
-            state.focusedTaskId = tasks[newFocusIndex]?.id || null;
-        }
-        
-        saveAndRender();
-    }
+    }    
+	
+	function postponeTask(id) {
+	    // isDeletedフラグを持つタスクも含めた、その日の全タスクリストを取得します
+	    const allTasksForDate = state.dailyTasks[state.viewDate] || [];
+	    const taskIndex = allTasksForDate.findIndex(t => t.id === id);
+	    if (taskIndex === -1) return;
+	
+	    const taskToMove = { ...allTasksForDate[taskIndex] }; // 元のタスクをコピー	
+	    const nextDay = new Date(state.viewDate);
+	    nextDay.setDate(nextDay.getDate() + 1);
+	    const nextDateStr = getFormattedDate(nextDay);
+	    
+	    if (!state.dailyTasks[nextDateStr]) {
+	        state.dailyTasks[nextDateStr] = [];
+	    }
+	    
+	    taskToMove.status = 'pending';
+	    taskToMove.startTime = null;
+	    taskToMove.endTime = null;
+	    taskToMove.actualTime = 0;
+	    delete taskToMove.isDeleted; // もしisDeletedフラグが存在すれば削除
+	    taskToMove.updatedAt = new Date().toISOString(); // 更新日時を最新に
+	
+	    state.dailyTasks[nextDateStr].unshift(taskToMove);
+	
+	    const originalTask = allTasksForDate[taskIndex];
+	    originalTask.isDeleted = true;
+	    originalTask.updatedAt = new Date().toISOString(); // 更新日時を記録して同期の競合を防ぎます
+	
+	    if (state.activeTaskId === id) stopActiveTimer();
+	    
+	    if (state.focusedTaskId === id) {
+	        let nextFocusedTask = null;
+	        for (let i = taskIndex + 1; i < allTasksForDate.length; i++) {
+	            if (!allTasksForDate[i].isDeleted) {
+	                nextFocusedTask = allTasksForDate[i];
+	                break;
+	            }
+	        }
+	        if (!nextFocusedTask) {
+	            for (let i = taskIndex - 1; i >= 0; i--) {
+	                if (!allTasksForDate[i].isDeleted) {
+	                    nextFocusedTask = allTasksForDate[i];
+	                    break;
+	                }
+	            }
+	        }
+	        state.focusedTaskId = nextFocusedTask ? nextFocusedTask.id : null;
+	    }
+	    
+	    saveAndRender();
+	    showToast(`タスクを翌日に先送りしました。`);
+	}
 
     function toggleTimer(id, forceStop = false) {
         const tasks = getTasksForViewDate();
