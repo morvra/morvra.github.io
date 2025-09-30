@@ -110,24 +110,28 @@
         .floating-bar-btn:active {
             transform: scale(0.95);
         }
-		
-		/* ヘッダーに移動した同期ボタンのスタイル */
-		#sync-data-btn-header {
-		    height: 40px;
-		    width: 40px;
-		    border-radius: 12px;
+		#sync-data-btn-floating {
+		    height: 56px;
+		    width: 56px;
+		    border-radius: 50%;
 		    display: flex;
 		    align-items: center;
 		    justify-content: center;
-		    color: #4b5563; /* gray-600 */
-		    background-color: #f3f4f6; /* gray-100 */
-		    transition: background-color 0.2s;
+		    background-color: #fff;
+		    color: #3b82f6;
+		    border: 1px solid #e5e7eb;
+		    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+		    transition: all 0.2s;
 		}
-		#sync-data-btn-header:hover {
-		    background-color: #e5e7eb; /* gray-200 */
+		#sync-data-btn-floating:hover {
+		    background-color: #f3f4f6;
+            transform: translateY(-2px);
 		}
-        
-        .small-btn { min-height:44px; min-width:44px; display:inline-flex; align-items:center; justify-content:center; }
+        #sync-data-btn-floating:active {
+            transform: scale(0.95);
+        }
+
+		.small-btn { min-height:44px; min-width:44px; display:inline-flex; align-items:center; justify-content:center; }
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
 
@@ -220,7 +224,6 @@
                     <p class="text-gray-600">全体の終了予測</p>
                     <p id="total-estimated-end-time" class="text-2xl font-semibold text-blue-600">--:--</p>
                 </div>
-                <div id="sync-button-header-container" class="ml-2 md:ml-4"></div>
             </div>
         </header>
 
@@ -376,6 +379,8 @@
     </main>
 </div>
 
+<div id="sync-button-floating-container" class="fixed bottom-24 right-4 z-40"></div>
+
 <div id="floating-task-bar" class="fixed bottom-0 inset-x-0 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] h-20 px-4 z-50">
 </div>
 
@@ -492,7 +497,7 @@
             signoutContainer: document.getElementById('signout_container'),
             authStatusEl: document.getElementById('auth-status'),
             driveStatusEl: document.getElementById('drive-status'),
-			syncDataFab: document.getElementById('sync-button-header-container'), 
+			syncDataFab: document.getElementById('sync-button-floating-container'),
 		    reauthNotification: document.getElementById('reauth-notification'),
 		    reauthButton: document.getElementById('reauth-button'),
             updateReauthUi: function(show) {
@@ -513,23 +518,23 @@
                 }
             },
 			
-			updateAuthUi: function(isLoggedIn) {
+            updateAuthUi: function(isLoggedIn) {
 		        this.authContainer.classList.toggle('hidden', isLoggedIn);
 		        this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
 		        
 		        if (isLoggedIn) {
 		            this.authStatusEl.textContent = 'Dropboxにログイン済みです。';
-		            // 新しい同期ボタンをヘッダーに生成
+		            // 新しいフローティング同期ボタンを生成
 		            this.syncDataFab.innerHTML = `
-		                <button id="sync-data-btn-header" class="tooltip-container">
-		                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-		                    </svg>
-                            <span class="custom-tooltip tooltip-bottom">Dropboxからデータを取得します</span>
+		                <button id="sync-data-btn-floating" class="tooltip-container">
+		                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.667 0l3.181-3.183m-4.991 0l-3.182-3.182a8.25 8.25 0 00-11.667 0l-3.182 3.182" />
+                            </svg>
+                            <span class="custom-tooltip tooltip-top">Dropboxからデータを取得します</span>
 		                </button>
 		            `;
 		            // 動的に生成したボタンにイベントリスナーを追加
-		            this.syncDataFab.querySelector('#sync-data-btn-header').addEventListener('click', () => {
+		            this.syncDataFab.querySelector('#sync-data-btn-floating').addEventListener('click', () => {
 		                this.loadStateFromDropbox();
 		            });
 		
