@@ -21,7 +21,7 @@
                 background: white;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
-			.sections-wrapper { padding-bottom:88px; }
+			.sections-wrapper { padding-bottom: 88px; }
 			main { max-width: 980px; margin: 0 auto; }
         }
         
@@ -205,7 +205,7 @@
         .search-result-meta { font-size:0.85rem; color:#6b7280; }
 
         @media (max-width: 768px) {
-            .sections-wrapper { padding-bottom:88px; }
+            .sections-wrapper { padding-bottom:140px; }
             .task-card-wrapper {
                 space-y: 0.5rem; 
             }
@@ -2939,33 +2939,43 @@
         totalEstimatedEndTimeEl.textContent = totalRemainingMinutes > 0 ? formatClockTime(new Date(now.getTime() + totalRemainingMinutes * 60 * 1000)) : '完了';
     }
 	
-	function renderFloatingTaskBar() {
+function renderFloatingTaskBar() {
 	    const bar = document.getElementById('floating-task-bar');
 	    if (!bar) return;
-	
+
 	    // スマホ以外、またはモーダル表示中はバーを隠す
 	    if (!isMobile() || document.querySelector('.modal.active')) {
 	        bar.classList.remove('active');
 	        return;
 	    }
-	
+
 	    const tasks = getTasksForViewDate();
 	    const activeTask = tasks.find(t => t.id === state.activeTaskId);
 	    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
-        const taskToDisplay = activeTask || nextTask;
+	    const taskToDisplay = activeTask || nextTask;
+
+		// 常に表示するタスク追加ボタンのHTML
+		const addTaskButtonHtml = `
+            <button id="add-task-btn-bar" class="floating-bar-btn bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
+                ＋
+            </button>`;
 
 	    if (!taskToDisplay) {
-            bar.classList.remove('active');
-	        return;
+			// 表示するタスクがない場合でも、バーと追加ボタンは表示する
+			bar.innerHTML = `
+				<div class="flex-1 px-3 min-w-0 flex items-center">
+					<p class="text-gray-500">全てのタスクが完了しました 🎉</p>
+				</div>
+				${addTaskButtonHtml}
+			`;
+			bar.classList.add('active');
+			bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
+			return; // これ以降の処理は不要
         }
 
         const isTaskRunning = !!activeTask;
-        const buttonIcon = isTaskRunning 
-            ? '■' // Stop icon
-            : '▶'; // Start icon
-        const buttonColor = isTaskRunning 
-            ? 'bg-red-500 hover:bg-red-600'
-            : 'bg-green-500 hover:bg-green-600';
+        const buttonIcon = isTaskRunning ? '■' : '▶';
+        const buttonColor = isTaskRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600';
 
         let taskInfoHtml = '';
         if (isTaskRunning) {
@@ -2986,12 +2996,6 @@
                 ${buttonIcon}
             </button>`;
 
-        const addTaskButtonHtml = `
-            <button id="add-task-btn-bar" class="floating-bar-btn bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
-                ＋
-            </button>`;
-        
-        // バーの中身を構築
 	    bar.innerHTML = `
             ${timerButtonHtml}
             <div class="flex-1 px-3 min-w-0 cursor-pointer" 
@@ -3001,10 +3005,7 @@
             ${addTaskButtonHtml}
         `;
 
-        // バーを表示
 	    bar.classList.add('active');
-
-        // 動的に生成したボタンにイベントリスナーを付与
         bar.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
         bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
 	}
