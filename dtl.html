@@ -81,10 +81,53 @@
              padding-left: 0.5rem;
              padding-right: 0.5rem;
         }
+
+		/* 新しいフローティングバーの基本スタイル */
+		#floating-task-bar {
+		    transform: translateY(100%); /* 初期状態では画面下に隠す */
+		    transition: transform 0.3s ease-in-out;
+		    display: none; /* JSでflexに切り替え */
+		    align-items: center;
+		    justify-content: space-between;
+		}
+		#floating-task-bar.active {
+		    transform: translateY(0); /* activeクラスで表示位置へ */
+		    display: flex; /* 表示 */
+		}
+
+        /* フローティングバー内の左右のボタン共通スタイル */
+        .floating-bar-btn {
+            height: 56px;
+            width: 56px;
+            min-width: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.15s;
+        }
+        .floating-bar-btn:active {
+            transform: scale(0.95);
+        }
+		
+		/* ヘッダーに移動した同期ボタンのスタイル */
+		#sync-data-btn-header {
+		    height: 40px;
+		    width: 40px;
+		    border-radius: 12px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    color: #4b5563; /* gray-600 */
+		    background-color: #f3f4f6; /* gray-100 */
+		    transition: background-color 0.2s;
+		}
+		#sync-data-btn-header:hover {
+		    background-color: #e5e7eb; /* gray-200 */
+		}
         
         .small-btn { min-height:44px; min-width:44px; display:inline-flex; align-items:center; justify-content:center; }
-        .add-task-fab { display:block; position:fixed; right:16px; bottom:16px; z-index:60; }
-        .sync-data-fab { display:none; position:fixed; left:16px; bottom:16px; z-index:60; }
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
 
@@ -92,8 +135,6 @@
         .modal.active { display:flex; align-items:center; justify-content:center; }
         .modal-content { background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow-y:auto; }
 		
-		#floating-task-bar { display: none; }
-
         .tooltip-container { position: relative; display: inline-flex; align-items: center; }
         .custom-tooltip { visibility: hidden; opacity: 0; background-color: #2d3748; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 10; bottom: 150%; left: 50%; transform: translateX(-50%); transition: opacity 0.1s, visibility 0.1s; width: max-content; max-width: 300px; font-size: 0.875rem; font-weight: normal; line-height: 1.4; white-space: pre-wrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
         .custom-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #2d3748 transparent transparent transparent; }
@@ -146,15 +187,6 @@
             .task-card.completed {
                 background-color: #e5e7eb; 
             }
-			#floating-task-bar.active {
-			    display: flex;
-			    transform: translateY(0);
-				width: 60%;
-                justify-self: center;
-			}
-			.add-task-fab, .sync-data-fab {
-			    transition: bottom 0.3s ease-in-out;
-			}
             
             .archive-table-wrapper {
                 overflow-x: auto;
@@ -178,14 +210,17 @@
 
 <div class="header">
     <div class="container mx-auto">
-        <header class="mobile-compact-header bg-white p-4 pb-1 flex flex-col md:flex-row justify-between items-center header-content">
+		<header class="mobile-compact-header bg-white p-4 pb-1 flex flex-col md:flex-row justify-between items-center header-content">
             <div class="flex-1">
                 <h1 class="text-xl font-bold text-gray-700">DailyTaskList</h1>
                 <p id="current-date" class="text-sm text-gray-500"></p>
             </div>
-            <div class="mt-2 md:mt-0 text-center md:text-right header-stats">
-                <p class="text-gray-600">全体の終了予測</p>
-                <p id="total-estimated-end-time" class="text-2xl font-semibold text-blue-600">--:--</p>
+            <div class="flex items-center">
+                <div class="mt-2 md:mt-0 text-center md:text-right header-stats">
+                    <p class="text-gray-600">全体の終了予測</p>
+                    <p id="total-estimated-end-time" class="text-2xl font-semibold text-blue-600">--:--</p>
+                </div>
+                <div id="sync-button-header-container" class="ml-2 md:ml-4"></div>
             </div>
         </header>
 
@@ -341,17 +376,8 @@
     </main>
 </div>
 
-<button id="add-task-fab" class="add-task-fab bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl">＋</button>
-
-<div id="floating-task-bar" class="fixed bottom-3 inset-x-4 bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-lg p-2.5 z-50 items-center justify-between gap-3 transition-transform duration-300 transform translate-y-24">
+<div id="floating-task-bar" class="fixed bottom-0 inset-x-0 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] h-20 px-4 z-50">
 </div>
-	
-<button id="sync-data-fab" class="sync-data-fab bg-green-600 hover:bg-green-700 text-white w-12 h-12 rounded-full shadow-lg items-center justify-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-    </svg>
-</button>
-
 
 <div id="add-task-modal" class="modal">
     <div class="modal-content p-6 w-full max-w-md">
@@ -466,10 +492,9 @@
             signoutContainer: document.getElementById('signout_container'),
             authStatusEl: document.getElementById('auth-status'),
             driveStatusEl: document.getElementById('drive-status'),
-            syncDataFab: document.getElementById('sync-data-fab'),
-            reauthNotification: document.getElementById('reauth-notification'),
-            reauthButton: document.getElementById('reauth-button'),
-
+			syncDataFab: document.getElementById('sync-button-header-container'), 
+		    reauthNotification: document.getElementById('reauth-notification'),
+		    reauthButton: document.getElementById('reauth-button'),
             updateReauthUi: function(show) {
                 if (show) {
                     this.reauthNotification.classList.remove('hidden');
@@ -488,18 +513,32 @@
                 }
             },
 			
-            updateAuthUi: function(isLoggedIn) {
-                this.authContainer.classList.toggle('hidden', isLoggedIn);
-                this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
-                
-                if (isLoggedIn) {
-                    this.authStatusEl.textContent = 'Dropboxにログイン済みです。';
-                    this.syncDataFab.style.display = 'flex';
-                } else {
-                    this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
-                    this.syncDataFab.style.display = 'none';
-                }
-            },
+			updateAuthUi: function(isLoggedIn) {
+		        this.authContainer.classList.toggle('hidden', isLoggedIn);
+		        this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
+		        
+		        if (isLoggedIn) {
+		            this.authStatusEl.textContent = 'Dropboxにログイン済みです。';
+		            // 新しい同期ボタンをヘッダーに生成
+		            this.syncDataFab.innerHTML = `
+		                <button id="sync-data-btn-header" title="Dropboxからデータを取得" class="tooltip-container">
+		                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+		                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5V4H4zm0 0l7 7m0 0l7-7m-7 7v5h5v-5h-5z" transform="translate(1 1) scale(0.9)" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+		                    </svg>
+                            <span class="custom-tooltip tooltip-bottom">Dropboxから最新のデータを取得します</span>
+		                </button>
+		            `;
+		            // 動的に生成したボタンにイベントリスナーを追加
+		            this.syncDataFab.querySelector('#sync-data-btn-header').addEventListener('click', () => {
+		                this.loadStateFromDropbox();
+		            });
+		
+		        } else {
+		            this.driveStatusEl.textContent = 'ログインするとデータを同期できます。';
+		            this.syncDataFab.innerHTML = '';
+		        }
+		    },
 
             loadStateFromDropbox: async function() {
                 if (!this.dbx) {
@@ -1264,10 +1303,6 @@
     }
 
     function setupEventListeners() {
-        document.getElementById('sync-data-fab').addEventListener('click', () => {
-            dailyTaskListApp.loadStateFromDropbox();
-        });
-
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
@@ -1297,7 +1332,6 @@
         });
         document.querySelector('.tab-link[data-tab="today"]').click();
 
-        document.getElementById('add-task-fab').addEventListener('click', openAddTaskModal);
         document.getElementById('add-project-btn').addEventListener('click', addProject);
         document.getElementById('add-repeat-task-btn').addEventListener('click', addRepeatTask);
         document.getElementById('generate-from-repeat-btn').addEventListener('click', generateTasksFromRepeatManual);
@@ -2568,15 +2602,17 @@
             }
         }
         saveAndRender();
-    }    
-	
+    }
+    
 	function postponeTask(id) {
 	    // isDeletedフラグを持つタスクも含めた、その日の全タスクリストを取得します
 	    const allTasksForDate = state.dailyTasks[state.viewDate] || [];
 	    const taskIndex = allTasksForDate.findIndex(t => t.id === id);
 	    if (taskIndex === -1) return;
 	
-	    const taskToMove = { ...allTasksForDate[taskIndex] }; // 元のタスクをコピー	
+	    // 1. 翌日にタスクのコピーを追加します
+	    const taskToMove = { ...allTasksForDate[taskIndex] }; // 元のタスクをコピー
+	
 	    const nextDay = new Date(state.viewDate);
 	    nextDay.setDate(nextDay.getDate() + 1);
 	    const nextDateStr = getFormattedDate(nextDay);
@@ -2585,6 +2621,7 @@
 	        state.dailyTasks[nextDateStr] = [];
 	    }
 	    
+	    // 実行状態などをリセットし、クリーンな状態で翌日に追加します
 	    taskToMove.status = 'pending';
 	    taskToMove.startTime = null;
 	    taskToMove.endTime = null;
@@ -2594,20 +2631,25 @@
 	
 	    state.dailyTasks[nextDateStr].unshift(taskToMove);
 	
+	    // 2. 元の日のタスクを物理削除せず、「論理削除」の状態にします
 	    const originalTask = allTasksForDate[taskIndex];
 	    originalTask.isDeleted = true;
 	    originalTask.updatedAt = new Date().toISOString(); // 更新日時を記録して同期の競合を防ぎます
 	
+	    // 実行中のタスクだった場合はタイマーを停止します
 	    if (state.activeTaskId === id) stopActiveTimer();
 	    
+	    // 3. フォーカスを次の適切なタスクに移動させます
 	    if (state.focusedTaskId === id) {
 	        let nextFocusedTask = null;
+	        // 先送りしたタスクより下にある、削除されていないタスクを探します
 	        for (let i = taskIndex + 1; i < allTasksForDate.length; i++) {
 	            if (!allTasksForDate[i].isDeleted) {
 	                nextFocusedTask = allTasksForDate[i];
 	                break;
 	            }
 	        }
+	        // 見つからなければ、上にあるタスクを探します
 	        if (!nextFocusedTask) {
 	            for (let i = taskIndex - 1; i >= 0; i--) {
 	                if (!allTasksForDate[i].isDeleted) {
@@ -2620,6 +2662,7 @@
 	    }
 	    
 	    saveAndRender();
+	    // ユーザーへのフィードバックを追加
 	    showToast(`タスクを翌日に先送りしました。`);
 	}
 
@@ -2867,11 +2910,12 @@
         const totalRemainingMinutes = unfinishedTasks.reduce((sum, task) => sum + (task.estimatedTime || 0), 0);
         totalEstimatedEndTimeEl.textContent = totalRemainingMinutes > 0 ? formatClockTime(new Date(now.getTime() + totalRemainingMinutes * 60 * 1000)) : '完了';
     }
-
+	
 	function renderFloatingTaskBar() {
 	    const bar = document.getElementById('floating-task-bar');
 	    if (!bar) return;
 	
+	    // スマホ以外、またはモーダル表示中はバーを隠す
 	    if (!isMobile() || document.querySelector('.modal.active')) {
 	        bar.classList.remove('active');
 	        return;
@@ -2879,50 +2923,62 @@
 	
 	    const tasks = getTasksForViewDate();
 	    const activeTask = tasks.find(t => t.id === state.activeTaskId);
-	
-	    let barContent = '';
-	    let shouldShowBar = false;
-	
-		// 実行中タスクの表示部分
-		if (activeTask) {
-		    shouldShowBar = true;
-		    const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
-		    barContent = `
-		        <button id="floating-timer-btn" class="timer-btn rounded-full bg-red-500 hover:bg-red-600 text-white flex-shrink-0" title="停止">■</button>
-		        <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${activeTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
-		            <p class="text-sm font-bold truncate cursor-pointer hover:text-blue-600" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
-		            <div class="text-xs text-gray-600 flex justify-between font-mono">
-		                <span><span class="sm:inline">終了予定: </span>${formatClockTime(estimatedEndTime)}</span>
-		            </div>
-		        </div>
-		    `;
-		} else {
-		    // 次のタスクの表示部分
-		    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
-		    if (nextTask) {
-		        shouldShowBar = true;
-		        barContent = `
-		            <button id="floating-timer-btn" class="timer-btn rounded-full bg-green-500 hover:bg-green-600 text-white flex-shrink-0" title="開始">▶</button>
-		            <div class="flex-1 min-w-0" onclick="document.querySelector('[data-task-id=\\'${nextTask.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
-		                <p class="text-sm text-gray-500 cursor-pointer hover:text-blue-600">Next: <span class="font-bold text-gray-800 truncate" title="${escapeHtml(nextTask.name)}">${formatTaskName(nextTask.name)}</span></p>
-		            </div>
-		        `;
-		    }
-		}
-	
-	    if (shouldShowBar) {
-	        bar.innerHTML = barContent;
-	        bar.classList.add('active');
-	        const timerBtn = document.getElementById('floating-timer-btn');
-	        if (timerBtn) {
-	            timerBtn.addEventListener('click', () => {
-	                const targetTaskId = activeTask ? activeTask.id : tasks.find(t => getTaskStatus(t) !== 'completed')?.id;
-	                if (targetTaskId) toggleTimer(targetTaskId);
-	            });
-	        }
-	    } else {
-	        bar.classList.remove('active');
-	    }
+	    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
+        const taskToDisplay = activeTask || nextTask;
+
+	    if (!taskToDisplay) {
+            bar.classList.remove('active');
+	        return;
+        }
+
+        const isTaskRunning = !!activeTask;
+        const buttonIcon = isTaskRunning 
+            ? '■' // Stop icon
+            : '▶'; // Start icon
+        const buttonColor = isTaskRunning 
+            ? 'bg-red-500 hover:bg-red-600'
+            : 'bg-green-500 hover:bg-green-600';
+
+        let taskInfoHtml = '';
+        if (isTaskRunning) {
+            const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
+            taskInfoHtml = `
+                <p class="text-base font-bold text-gray-800 truncate" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
+	            <p class="text-gray-500 font-mono">終了予定: ${formatClockTime(estimatedEndTime)}</p>
+            `;
+        } else {
+            taskInfoHtml = `
+                <p class="text-gray-500">Next: <span class="font-bold text-gray-800 truncate" title="${escapeHtml(nextTask.name)}">${formatTaskName(nextTask.name)}</span></p>
+	            <p class="text-sm text-gray-500">${nextTask.estimatedTime || 0}分</p>
+            `;
+        }
+
+        const timerButtonHtml = `
+            <button id="floating-timer-btn" class="floating-bar-btn ${buttonColor} text-white text-2xl">
+                ${buttonIcon}
+            </button>`;
+
+        const addTaskButtonHtml = `
+            <button id="add-task-btn-bar" class="floating-bar-btn bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
+                ＋
+            </button>`;
+        
+        // バーの中身を構築
+	    bar.innerHTML = `
+            ${timerButtonHtml}
+            <div class="flex-1 px-3 min-w-0 cursor-pointer" 
+                 onclick="document.querySelector('[data-task-id=\\'${taskToDisplay.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
+                ${taskInfoHtml}
+            </div>
+            ${addTaskButtonHtml}
+        `;
+
+        // バーを表示
+	    bar.classList.add('active');
+
+        // 動的に生成したボタンにイベントリスナーを付与
+        bar.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
+        bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
 	}
 
     function handleKeyboardShortcuts(e) {
