@@ -110,26 +110,50 @@
         .floating-bar-btn:active {
             transform: scale(0.95);
         }
-		#sync-data-btn-floating {
-		    height: 56px;
-		    width: 56px;
-		    border-radius: 50%;
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		    background-color: #fff;
-		    color: #3b82f6;
-		    border: 1px solid #e5e7eb;
-		    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-		    transition: all 0.2s;
-		}
-		#sync-data-btn-floating:hover {
-		    background-color: #f3f4f6;
-		}
-        #sync-data-btn-floating:active {
-            transform: scale(0.95);
+		
+		.fab {
+            height: 56px;
+            width: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s ease-in-out;
+        }
+        .fab:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
 
+        /* 同期ボタンコンテナのスタイル */
+        #sync-button-floating-container {
+            position: fixed;
+            bottom: 96px;
+            left: 16px;
+            z-index: 40;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* タスク追加ボタンコンテナのスタイル (スマホでは非表示) */
+        #add-task-floating-container {
+            display: none;
+            position: fixed;
+            z-index: 40;
+        }
+        
+        /* PC表示用の調整 (画面幅が769px以上の場合) */
+        @media (min-width: 769px) {
+            #sync-button-floating-container {
+                bottom: 24px;
+                left: 24px;
+            }
+
+            #add-task-floating-container {
+                display: block;
+                bottom: 24px;
+                right: 24px;
+            }
+        }
 		.small-btn { min-height:44px; min-width:44px; display:inline-flex; align-items:center; justify-content:center; }
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
@@ -379,6 +403,7 @@
 </div>
 
 <div id="sync-button-floating-container" class="fixed bottom-24 left-4 z-40"></div>
+<div id="add-task-floating-container"></div>
 
 <div id="floating-task-bar" class="fixed bottom-0 inset-x-0 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] h-20 px-4 z-50">
 </div>
@@ -517,21 +542,20 @@
                 }
             },
 			
+// 修正箇所 1: updateAuthUi 関数内
             updateAuthUi: function(isLoggedIn) {
 		        this.authContainer.classList.toggle('hidden', isLoggedIn);
 		        this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
 		        
 		        if (isLoggedIn) {
 		            this.authStatusEl.textContent = 'Dropboxにログイン済みです。';
-		            // 新しいフローティング同期ボタンを生成
 		            this.syncDataFab.innerHTML = `
-		                <button id="sync-data-btn-floating">
+		                <button id="sync-data-btn-floating" class="fab bg-white text-blue-60"> 
 		                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                             </svg>
 		                </button>
 		            `;
-		            // 動的に生成したボタンにイベントリスナーを追加
 		            this.syncDataFab.querySelector('#sync-data-btn-floating').addEventListener('click', () => {
 		                this.loadStateFromDropbox();
 		            });
@@ -883,6 +907,7 @@
             restoreRunningTaskState();
             setupEventListeners();
             initializeDropboxSync();
+			renderPcAddTaskButton();
             checkDayChange();
             setInterval(checkDayChange, 1000 * 60); 
             updateTitle();
@@ -3124,6 +3149,20 @@
     function formatClockTime(date) {
         if (!date) return '--:--';
         return date.toLocaleTimeString('ja-JP', { hour:'2-digit', minute:'2-digit' });
+    }
+
+    function renderPcAddTaskButton() {
+        const container = document.getElementById('add-task-floating-container');
+        if (!container) return;
+
+        // ボタンのHTMLをコンテナに一度だけ設定
+        container.innerHTML = `
+            <button id="add-task-btn-floating" class="fab bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
+                ＋
+            </button>`;
+        
+        // ボタンにイベントリスナーを付与
+        container.querySelector('#add-task-btn-floating').addEventListener('click', openAddTaskModal);
     }
 
     init();
