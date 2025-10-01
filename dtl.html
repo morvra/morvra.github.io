@@ -597,32 +597,32 @@
                             if (!taskMap.has(key)) {
                                 taskMap.set(key, task);
                             } else {
-                                // ▼▼▼▼▼ ここからが修正箇所です ▼▼▼▼▼
                                 const existingTask = taskMap.get(key);
                                 const newTask = task;
 
-                                // Conflict Resolution: Prioritize completed tasks, then fall back to the most recent update.
+                                // 競合解決ロジック: 完了状態を優先し、それ以外は更新日時が新しい方を採用する
                                 const existingIsCompleted = getTaskStatus(existingTask) === 'completed';
                                 const newIsCompleted = getTaskStatus(newTask) === 'completed';
 
-                                let taskToKeep = existingTask; // Default to keeping the existing task
+                                let taskToKeep = existingTask; // デフォルトは既存のタスクを維持
 
-                                // 1. Prioritize completion status
+                                // 1. 完了状態を優先
                                 if (newIsCompleted && !existingIsCompleted) {
-                                    // If the new task is completed and the old one is not, keep the new one.
+                                    // 新しいタスクが完了していて、既存が未完了なら新しい方を採用
                                     taskToKeep = newTask;
                                 } else if (!newIsCompleted && existingIsCompleted) {
-                                    // If the old task is completed and the new one is not, keep the old one (do nothing).
+                                    // 既存のタスクが完了していて、新しい方が未完了なら既存を維持 (何もしない)
                                 } else {
-                                    // 2. Fallback to timestamp if statuses are the same (both completed or both not)
+                                    // 2. 完了状態が同じ場合は、更新日時で比較
+                                    // updatedAtが存在しない古いデータのために、フォールバック値を設定
                                     const existingTimestamp = existingTask.updatedAt || '1970-01-01T00:00:00.000Z';
                                     const newTimestamp = newTask.updatedAt || '1970-01-01T00:00:00.000Z';
+                                    
                                     if (newTimestamp >= existingTimestamp) {
                                         taskToKeep = newTask;
                                     }
                                 }
                                 taskMap.set(key, taskToKeep);
-                                // ▲▲▲▲▲ ここまでが修正箇所です ▲▲▲▲▲
                             }
                         }
                         
@@ -750,7 +750,18 @@
 		        return;
 		    }
 		
-		    const dbx = new Dropbox.Dropbox({ clientId: DROPBOX_CLIENT_ID });
+            // localStorageからトークンを読み込み、インスタンス作成時に渡す
+            const accessToken = localStorage.getItem('dropbox_access_token');
+            const refreshToken = localStorage.getItem('dropbox_refresh_token');
+
+		    const dbx = new Dropbox.Dropbox({ 
+                clientId: DROPBOX_CLIENT_ID,
+                accessToken,
+                refreshToken
+            });
+
+			dailyTaskListApp.dbx = dbx; // アプリケーションオブジェクトにインスタンスをセット
+
 			dailyTaskListApp.reauthButton.addEventListener('click', () => {
                 dailyTaskListApp.authorizeButton.click();
             });
@@ -767,23 +778,32 @@
 		                try { dbx.auth.codeVerifier = savedVerifier; } catch (e) { /* ignore */ }
 		            }
 		
-		            // 認証コードをアクセストークンに交換
+		            // 認証コードをアクセストークンとリフレッシュトークンに交換
 		            const response = await dbx.auth.getAccessTokenFromCode(REDIRECT_URI, authCode);
-		            const accessToken =
-		                (response.result && (response.result.access_token || response.result.accessToken)) ||
-		                response.accessToken;
+                    
+		            const { result } = response;
+                    const newAccessToken = result.access_token;
+                    const newRefreshToken = result.refresh_token;
 		
 		            // 交換が成功したら、保存しておいた verifier は削除
 		            sessionStorage.removeItem('dropbox_pkce_code_verifier');
 		
 		            // URLから認証コードを削除してクリーンにする
 		            window.history.replaceState({}, document.title, window.location.pathname);
-		            localStorage.setItem('dropbox_access_token', accessToken);
-		            dbx.auth.setAccessToken(accessToken);
-		            dailyTaskListApp.dbx = dbx;
+                    
+		            localStorage.setItem('dropbox_access_token', newAccessToken);
+                    if (newRefreshToken) {
+		                localStorage.setItem('dropbox_refresh_token', newRefreshToken);
+                    }
+		            dbx.auth.setAccessToken(newAccessToken);
+                    if (newRefreshToken) {
+		                dbx.auth.setRefreshToken(newRefreshToken);
+                    }
+
 		            dailyTaskListApp.updateAuthUi(true);
 					dailyTaskListApp.updateReauthUi(false);
 		            dailyTaskListApp.loadStateFromDropbox();
+
 		        } catch (error) {
 		            console.error('Error getting access token from code:', error);
 		            const detail =
@@ -794,20 +814,18 @@
 		        }
 		    } else {
 		        // ローカルストレージにトークンがあるか確認
-		        const storedToken = localStorage.getItem('dropbox_access_token');
-		        if (storedToken) {
-					dbx.auth.setAccessToken(storedToken);
-		            dailyTaskListApp.dbx = dbx;
-		            // トークンの有効性を確認
+		        if (accessToken) {
+		            // トークンの有効性を確認（このAPI呼び出しにより、期限切れならSDKが自動でリフレッシュを試みる）
 		            try {
 		                await dbx.usersGetCurrentAccount();
 		                dailyTaskListApp.updateAuthUi(true);
 						dailyTaskListApp.updateReauthUi(false);
 		                dailyTaskListApp.loadStateFromDropbox();
 		            } catch (error) {
-		                // トークンが無効だった場合
+		                // トークンが無効だった場合（リフレッシュも失敗した場合）
 		                console.error('Stored token invalid:', error);
 		                localStorage.removeItem('dropbox_access_token');
+		                localStorage.removeItem('dropbox_refresh_token');
 		                dailyTaskListApp.dbx = null;
 		                dailyTaskListApp.updateAuthUi(false);
 						dailyTaskListApp.updateReauthUi(true);
@@ -821,13 +839,13 @@
 		    dailyTaskListApp.authorizeButton.addEventListener('click', async () => {
 		        try {
 		            const authUrl = await dbx.auth.getAuthenticationUrl(
-		                REDIRECT_URI, // Redirect URI
-		                undefined,    // state
-		                'code',       // authType
-		                undefined,    // tokenAccessType
-		                undefined,    // scope
-		                undefined,    // includeGrantedScopes
-		                true          // usePKCE
+		                REDIRECT_URI,         // Redirect URI
+		                undefined,            // state
+		                'code',               // authType
+		                'offline',            // 'offline'を指定してリフレッシュトークンを要求
+		                undefined,            // scope
+		                undefined,            // includeGrantedScopes
+		                true                  // usePKCE
 		            );
 		            // SDKが生成した code_verifier を sessionStorage に保存
 		            try {
@@ -855,6 +873,7 @@
 		            console.error('Failed to revoke token', error);
 		        } finally {
 		            localStorage.removeItem('dropbox_access_token');
+		            localStorage.removeItem('dropbox_refresh_token');
 		            dailyTaskListApp.dbx = null;
 		            dailyTaskListApp.updateAuthUi(false);
 					dailyTaskListApp.updateReauthUi(false);
