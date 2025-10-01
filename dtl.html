@@ -1730,7 +1730,9 @@
                         </div>
                         <div class="flex items-center justify-between text-xs text-gray-600 mt-1">
                             <div class="flex space-x-3">
-                                <span>見積: ${task.estimatedTime || 0}分</span>
+								<div class="min-w-20">
+                                    <span>見積: ${task.estimatedTime || 0}分</span>
+                                </div>
 								${actualTimeHtml}
                             </div>
                             <div class="font-mono text-gray-400">
