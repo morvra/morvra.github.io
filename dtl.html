@@ -567,7 +567,7 @@
 		        }
 		    },
 
-            loadStateFromDropbox: async function() {
+			loadStateFromDropbox: async function() {
                 if (!this.dbx) {
                     alert('Dropboxにログインしてください。');
                     return;
@@ -597,15 +597,32 @@
                             if (!taskMap.has(key)) {
                                 taskMap.set(key, task);
                             } else {
+                                // ▼▼▼▼▼ ここからが修正箇所です ▼▼▼▼▼
                                 const existingTask = taskMap.get(key);
-                                
-                                // Conflict Resolution: The most recently updated task wins.
-                                const existingTimestamp = existingTask.updatedAt || '1970-01-01T00:00:00.000Z';
-                                const newTimestamp = task.updatedAt || '1970-01-01T00:00:00.000Z';
+                                const newTask = task;
 
-                                if (newTimestamp >= existingTimestamp) {
-                                    taskMap.set(key, task);
+                                // Conflict Resolution: Prioritize completed tasks, then fall back to the most recent update.
+                                const existingIsCompleted = getTaskStatus(existingTask) === 'completed';
+                                const newIsCompleted = getTaskStatus(newTask) === 'completed';
+
+                                let taskToKeep = existingTask; // Default to keeping the existing task
+
+                                // 1. Prioritize completion status
+                                if (newIsCompleted && !existingIsCompleted) {
+                                    // If the new task is completed and the old one is not, keep the new one.
+                                    taskToKeep = newTask;
+                                } else if (!newIsCompleted && existingIsCompleted) {
+                                    // If the old task is completed and the new one is not, keep the old one (do nothing).
+                                } else {
+                                    // 2. Fallback to timestamp if statuses are the same (both completed or both not)
+                                    const existingTimestamp = existingTask.updatedAt || '1970-01-01T00:00:00.000Z';
+                                    const newTimestamp = newTask.updatedAt || '1970-01-01T00:00:00.000Z';
+                                    if (newTimestamp >= existingTimestamp) {
+                                        taskToKeep = newTask;
+                                    }
                                 }
+                                taskMap.set(key, taskToKeep);
+                                // ▲▲▲▲▲ ここまでが修正箇所です ▲▲▲▲▲
                             }
                         }
                         
