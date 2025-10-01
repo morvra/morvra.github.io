@@ -1703,7 +1703,8 @@
                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 text-gray-400 cursor-pointer hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     <span class="custom-tooltip">${escapeHtml(task.memo)}</span>
                 </span>` : '';
-
+			
+			const actualTimeHtml = isCompleted ? `<span class="text-gray-600">実績: ${formatTime(calculateActualTime(task))}</span>` : '';
             card.innerHTML = `
                 <div class="flex items-center gap-3">
                     <div class="flex flex-col items-center">
@@ -1730,6 +1731,7 @@
                         <div class="flex items-center justify-between text-xs text-gray-600 mt-1">
                             <div class="flex space-x-3">
                                 <span>見積: ${task.estimatedTime || 0}分</span>
+								${actualTimeHtml}
                             </div>
                             <div class="font-mono text-gray-400">
                                 ${task.startTime ? formatClockTime(new Date(task.startTime)) : ''}
