@@ -58,7 +58,7 @@
         .tab-link.active { border-color: #3b82f6; background-color:#3b82f6; color:white; }
         .tab-content { display:none; }
         .tab-content.active { display:block; }
-        .task-row.focused { background-color: #fef9c3; }
+        .task-row.focused, .subtask-item.focused { background-color: #fef9c3; }
         .task-card.focused { background-color: #fef9c3; border-color: #eab308; }
         ::-webkit-scrollbar { width:8px; height:0px; }
         ::-webkit-scrollbar-track { background:#f1f1f1; border-radius:10px; }
@@ -163,9 +163,11 @@
         .modal.active { display:flex; align-items:center; justify-content:center; }
         .modal-content { background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow-y:auto; }
 		
-        .tooltip-container { position: relative; display: inline-flex; align-items: center; }
-        .custom-tooltip { visibility: hidden; opacity: 0; background-color: #2d3748; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 10; bottom: 150%; left: 50%; transform: translateX(-50%); transition: opacity 0.1s, visibility 0.1s; width: max-content; max-width: 300px; font-size: 0.875rem; font-weight: normal; line-height: 1.4; white-space: pre-wrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
-        .custom-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #2d3748 transparent transparent transparent; }
+		.tooltip-container { position: relative; display: inline-block; vertical-align: middle; }
+		.custom-tooltip { visibility: hidden; opacity: 0; background-color: #2d3748; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 10; bottom: 150%; left: 50%; transform: translateX(-50%); transition: opacity 0.1s, visibility 0.1s; width: max-content; max-width: 300px; font-size: 0.875rem; font-weight: normal; line-height: 1.4; white-space: pre-wrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
+		
+		.dragging .custom-tooltip { position: static; transform: none; }
+		.custom-tooltip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #2d3748 transparent transparent transparent; }
         
         .tooltip-container:hover .custom-tooltip { 
             visibility: visible; 
@@ -186,7 +188,13 @@
             border-color: transparent transparent #2d3748 transparent; 
         }
 
-        .dragging { opacity: 0.5; background-color: #fef9c3; }
+        .dragging { opacity: 0.5; background-color: #fef9c3; transform: translate(0, 0); }
+		.dragging .custom-tooltip,
+		.dragging .tooltip-container:hover .custom-tooltip {
+		    visibility: hidden !important;
+		    opacity: 0 !important;
+		    display: none !important;
+		}
         .drag-over { background-color: #e0f2fe; }
         .drag-handle { cursor: move; color: #9ca3af; }
         .drag-handle:hover { color: #6b7280; }
@@ -231,7 +239,68 @@
                 min-width: 250px;
             }
         }
+		/* サブタスク */
+		.subtask-toggle-icon {
+		    cursor: pointer;
+		    display: inline-flex;
+		    align-items: center;
+		    gap: 2px;
+		    font-size: 0.75rem;
+		    color: #9ca3af;
+		    padding: 0px 4px 2px;
+		}
+		.subtask-toggle-icon:hover {
+		    color: #4b5563;
+		}
+		.subtask-container {
+		    display: none; /* 初期状態は非表示 */
+		    padding-left: 3.5rem; /* PC表示でのインデント */
+		    background-color: #f9fafb;
+		}
+		.task-row.dragging + .subtask-container-row {
+		    display: none;
+		}
+		.subtask-container-row td {
+		    padding: 0;
+		}
+		.subtask-container.open {
+		    display: block; /* 表示状態 */
+		}
+		.subtask-item {
+		    display: flex;
+		    align-items: center;
+		    padding: 0.3rem 0.5rem;
+		    border-bottom: 1px solid #f3f4f6;
+		}
+		.subtask-item:last-child {
+		    border-bottom: none;
+		}
+		.subtask-item.completed span {
+		    text-decoration: line-through;
+		    color: #9ca3af;
+		}
+		.subtask-item .drag-handle {
+		    margin-right: 0.5rem;
+		}
 		
+		/* スマホ表示用の調整 */
+		@media (max-width: 768px) {
+		    .subtask-container {
+		        padding-left: 0rem;
+		        margin-left: .75rem;
+		    }
+		}
+		
+		/* 編集モーダル内のサブタスクスタイル */
+		#edit-task-subtasks, #edit-repeat-subtasks { max-height: 200px; overflow-y: auto; }
+		.subtask-edit-item {
+		    display: flex;
+		    align-items: center;
+		    gap: 0.5rem;
+		    padding: 0.5rem;
+		    background-color: #f9fafb;
+		    border-radius: 6px;
+		}
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -435,6 +504,14 @@
                  <select id="edit-task-project" class="w-full p-2 border rounded-lg bg-white"></select>
             </div>
             <textarea id="edit-task-memo" placeholder="メモ" class="w-full p-2 border rounded-lg h-20"></textarea>
+			<div class="mt-4">
+			    <label class="text-sm font-medium text-gray-700">サブタスク</label>
+			    <div id="edit-task-subtasks" class="space-y-2 mt-1 p-2 border rounded-lg bg-gray-50"></div>
+			    <div class="flex gap-2 mt-2">
+			        <input type="text" id="new-subtask-name" placeholder="新しいサブタスク名" class="flex-1 p-2 border rounded-lg">
+			        <button id="add-subtask-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">追加</button>
+			    </div>
+			</div>
             <div class="grid grid-cols-2 gap-4">
                  <div>
                     <label for="edit-task-startTime" class="text-sm font-medium text-gray-700">開始時刻</label>
@@ -475,6 +552,14 @@
                 <select id="edit-repeat-project" class="w-full p-2 border rounded-lg bg-white"></select>
             </div>
             <textarea id="edit-repeat-memo" placeholder="メモ" class="w-full p-2 border rounded-lg h-20"></textarea>
+			<div class="mt-4">
+			    <label class="text-sm font-medium text-gray-700">サブタスク</label>
+			    <div id="edit-repeat-subtasks" class="space-y-2 mt-1 p-2 border rounded-lg bg-gray-50"></div>
+			    <div class="flex gap-2 mt-2">
+			        <input type="text" id="new-repeat-subtask-name" placeholder="新しいサブタスク名" class="flex-1 p-2 border rounded-lg">
+			        <button id="add-repeat-subtask-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">追加</button>
+			    </div>
+			</div>
             <select id="edit-repeat-type" class="w-full p-2 border rounded-lg bg-white">
                 <option value="daily">毎日</option>
                 <option value="weekly">毎週</option>
@@ -912,6 +997,8 @@
             activeTimerId: null,
             activeTaskId: null,
             focusedTaskId: null,
+			focusedSubtaskId: null,
+			openTaskIds: new Set(),
             editingTaskId: null,
             editingTaskDateKey: null, 
             editingRepeatId: null,
@@ -935,7 +1022,165 @@
 				}
 			});
 		}
-		
+
+		// サブタスク関連
+	    function toggleSubtaskView(taskId) {
+            if (state.openTaskIds.has(taskId)) {
+                state.openTaskIds.delete(taskId);
+            } else {
+                state.openTaskIds.add(taskId);
+            }
+            saveAndRender();
+	    }
+
+	
+		function toggleSubtaskCompletion(taskId, subtaskId, isCompleted) {
+			const task = getTasksForViewDate().find(t => t.id === taskId);
+			if (task && task.subtasks) {
+				const subtask = task.subtasks.find(st => st.id === subtaskId);
+				if (subtask) {
+					subtask.completed = isCompleted;
+					task.updatedAt = new Date().toISOString();
+
+                    Array.from(document.querySelectorAll(`.subtask-item [data-subtask-id="${subtaskId}"]`)).forEach(checkbox => {
+                        const item = checkbox.closest('.subtask-item');
+                        if (item) {
+                            item.classList.toggle('completed', isCompleted);
+                            checkbox.checked = isCompleted;
+                        }
+                    });
+
+					saveState();
+				}
+			}
+		}
+	
+	    function renderSubtasksInModal(type, taskId) {
+	        const isRepeat = type === 'repeat';
+	        const container = document.getElementById(isRepeat ? 'edit-repeat-subtasks' : 'edit-task-subtasks');
+	        const task = isRepeat ? state.repeatTasks.find(t => t.id === taskId) : getTasksForViewDate().find(t => t.id === taskId);
+	        
+	        container.innerHTML = '';
+	        if (!task || !task.subtasks) return;
+	
+	        task.subtasks.forEach((st, index) => {
+	            const item = document.createElement('div');
+	            item.className = 'subtask-edit-item';
+	            item.dataset.subtaskId = st.id;
+	            item.dataset.index = index;
+	            item.draggable = true;
+	
+	            item.innerHTML = `
+	                <span class="drag-handle cursor-move text-gray-400">⋮⋮</span>
+	                <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" ${st.completed ? 'checked' : ''} ${isRepeat ? 'disabled' : ''}>
+	                <input type="text" class="flex-1 p-1 border rounded-md" value="${escapeHtml(st.name)}">
+	                <button class="subtask-delete-btn text-gray-400 hover:text-red-500 p-1">
+	                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+	                </button>
+	            `;
+	            container.appendChild(item);
+	        });
+	
+	        container.querySelectorAll('.subtask-delete-btn').forEach(btn => {
+	            btn.addEventListener('click', (e) => {
+	                e.currentTarget.closest('.subtask-edit-item').remove();
+	            });
+	        });
+	        
+	        // モーダル内サブタスクのドラッグ＆ドロップ設定
+	        setupModalSubtaskDragDrop(container);
+	
+	        // モーダル内サブタスクのキーボード並び替え
+	        container.addEventListener('keydown', (e) => {
+	            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+	                 if (e.ctrlKey || e.metaKey) {
+	                    e.preventDefault();
+	                    const currentItem = e.target.closest('.subtask-edit-item');
+	                    if (!currentItem) return;
+	                    
+	                    if (e.key === 'ArrowUp' && currentItem.previousElementSibling) {
+	                        currentItem.parentElement.insertBefore(currentItem, currentItem.previousElementSibling);
+	                        e.target.focus();
+	                    } else if (e.key === 'ArrowDown' && currentItem.nextElementSibling) {
+	                        currentItem.parentElement.insertBefore(currentItem.nextElementSibling, currentItem);
+	                        e.target.focus();
+	                    }
+	                }
+	            }
+	        });
+	    }
+	    
+	    function addSubtaskToModal(type, name) {
+	        const isRepeat = type === 'repeat';
+	        const container = document.getElementById(isRepeat ? 'edit-repeat-subtasks' : 'edit-task-subtasks');
+	        
+	        const item = document.createElement('div');
+	        item.className = 'subtask-edit-item';
+	        item.dataset.subtaskId = 'new-st-' + Date.now();
+	        item.draggable = true;
+	        
+	        item.innerHTML = `
+	            <span class="drag-handle cursor-move text-gray-400">⋮⋮</span>
+	            <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" ${isRepeat ? 'disabled' : ''}>
+	            <input type="text" class="flex-1 p-1 border rounded-md" value="${escapeHtml(name)}">
+	            <button class="subtask-delete-btn text-gray-400 hover:text-red-500 p-1">
+	                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+	            </button>
+	        `;
+	        container.appendChild(item);
+	        item.querySelector('.subtask-delete-btn').addEventListener('click', (e) => {
+	            e.currentTarget.closest('.subtask-edit-item').remove();
+	        });
+	        item.querySelector('input[type="text"]').focus();
+	    }
+	
+	    function getSubtasksFromModal(type) {
+	        const isRepeat = type === 'repeat';
+	        const container = document.getElementById(isRepeat ? 'edit-repeat-subtasks' : 'edit-task-subtasks');
+	        const subtaskItems = container.querySelectorAll('.subtask-edit-item');
+	        const subtasks = [];
+	        subtaskItems.forEach(item => {
+	            const name = item.querySelector('input[type="text"]').value.trim();
+	            if (name) {
+	                subtasks.push({
+	                    id: item.dataset.subtaskId.startsWith('new-st-') ? 'st' + Date.now() + Math.random() : item.dataset.subtaskId,
+	                    name: name,
+	                    completed: isRepeat ? false : item.querySelector('input[type="checkbox"]').checked
+	                });
+	            }
+	        });
+	        return subtasks;
+	    }
+	
+	    function setupModalSubtaskDragDrop(container) {
+	        let draggedItem = null;
+	        container.addEventListener('dragstart', (e) => {
+	            draggedItem = e.target.closest('.subtask-edit-item');
+	            if(draggedItem) {
+	                setTimeout(() => draggedItem.classList.add('dragging'), 0);
+	            }
+	        });
+	        container.addEventListener('dragend', (e) => {
+	            if(draggedItem) {
+	                draggedItem.classList.remove('dragging');
+	                draggedItem = null;
+	            }
+	        });
+	        container.addEventListener('dragover', (e) => {
+	            e.preventDefault();
+	            const target = e.target.closest('.subtask-edit-item');
+	            if (target && target !== draggedItem) {
+	                const rect = target.getBoundingClientRect();
+	                const next = (e.clientY - rect.top) / rect.height > 0.5;
+	                if (next) {
+	                    container.insertBefore(draggedItem, target.nextSibling);
+	                } else {
+	                    container.insertBefore(draggedItem, target);
+	                }
+	            }
+	        });
+	    }
+
         // Init
         function init() {
             state.viewDate = getFormattedDate(new Date());
@@ -1156,9 +1401,18 @@
 	function saveState() {
 		Object.keys(state).forEach(k => {
 			if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
-				localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
+                if (k === 'openTaskIds') {
+                    localStorage.setItem(`dtl_${k}`, JSON.stringify(Array.from(state[k])));
+                } else {
+				    localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
+                }
 			}
 		});
+
+        const savedOpenTaskIds = localStorage.getItem('dtl_openTaskIds');
+        if (savedOpenTaskIds) {
+            state.openTaskIds = new Set(JSON.parse(savedOpenTaskIds));
+        }
 		const app = window.dailyTaskListApp;
 		if (app.dbx) { // Dropboxインスタンスの有無で判定
 			if (app.saveTimeout) clearTimeout(app.saveTimeout);
@@ -1275,6 +1529,8 @@
             if (shouldAdd) {
                 const isAlreadyAdded = state.dailyTasks[dateStr].some(task => task.originRepeatId === rt.id);
                 if (!isAlreadyAdded) {
+					const newSubtasks = (rt.subtasks || []).map(st => ({...st, completed: false}));
+					
                     state.dailyTasks[dateStr].push({
                         id: 't' + Date.now() + Math.random(),
                         name: rt.name,
@@ -1284,6 +1540,7 @@
                         status: 'pending',
                         isInterrupt: false,
                         memo: rt.memo || '',
+						subtasks: newSubtasks,
                         originRepeatId: rt.id,
                         createdDate: dateStr,
                         startTime: null,
@@ -1336,6 +1593,7 @@
             alert('このリピートタスクは既に今日のタスクとして存在します。');
             return;
         }
+		const newSubtasks = (rt.subtasks || []).map(st => ({...st, completed: false}));
 
         const newTask = {
             id: 't' + Date.now() + Math.random(),
@@ -1346,6 +1604,7 @@
             status: 'pending',
             isInterrupt: false,
             memo: rt.memo || '',
+			subtasks: newSubtasks,
             originRepeatId: rt.id,
             createdDate: today,
             startTime: null,
@@ -1640,6 +1899,19 @@
                     ${isRunning ? '■' : '▶'}
                 </button>`;
             }
+            
+            const subtasks = task.subtasks || [];
+            let subtaskIconHtml = '';
+            if (subtasks.length > 0) {
+                const completedCount = subtasks.filter(st => st.completed).length;
+                subtaskIconHtml = `
+                <span class="subtask-toggle-icon" data-task-id="${task.id}" title="サブタスク (S)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mb-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" />
+                    </svg>
+                </span>`;
+            }
 
             const memoIcon = task.memo ? `
                 <span class="tooltip-container memo-icon-clickable" data-task-id="${task.id}">
@@ -1657,7 +1929,7 @@
                         <div class="flex items-center space-x-1 min-w-0">
                             <span class="inline-block w-2 h-2 rounded-full flex-shrink-0" style="background-color: ${project.color};"></span>
                             <span class="pl-1 font-semibold text-sm truncate" title="${escapeHtml(task.name || '')}">${formatTaskName(task.name)}</span>
-                            ${memoIcon}
+                            ${subtaskIconHtml} ${memoIcon}
                         </div>
                         <span class="text-xs text-gray-400 ml-2 whitespace-nowrap flex-shrink-0 project-label">${escapeHtml(project.name)}</span>
                     </div>
@@ -1679,6 +1951,42 @@
                 </td>
             `;
             tbody.appendChild(tr);
+
+            if (subtasks.length > 0) {
+                const subtaskTr = document.createElement('tr');
+                subtaskTr.className = 'subtask-container-row';
+                subtaskTr.dataset.parentTaskId = task.id;
+                
+                const subtaskTd = document.createElement('td');
+                subtaskTd.colSpan = 8;
+                
+                const subtaskContainer = document.createElement('div');
+                subtaskContainer.id = `subtasks-${task.id}`;
+                subtaskContainer.className = `subtask-container ${state.openTaskIds.has(task.id) ? 'open' : ''}`;
+                
+                subtasks.forEach(st => {
+                    const item = document.createElement('div');
+                    item.className = `subtask-item ${st.completed ? 'completed' : ''} ${st.id === state.focusedSubtaskId ? 'focused' : ''}`;
+                    item.innerHTML = `
+                        <input type="checkbox" class="subtask-checkbox form-checkbox h-4 w-4 text-blue-600" data-subtask-id="${st.id}" ${st.completed ? 'checked' : ''}>
+                        <span class="ml-3 text-sm flex-1">${formatTaskName(st.name)}</span>
+                    `;
+                    item.addEventListener('click', (e) => {
+						if (e.target.matches('.subtask-checkbox')) {
+                            return;
+                        }
+                        e.stopPropagation();
+                        state.focusedTaskId = task.id;
+                        state.focusedSubtaskId = st.id;
+                        render();
+                    });
+                    subtaskContainer.appendChild(item);
+                });
+                
+                subtaskTd.appendChild(subtaskContainer);
+                subtaskTr.appendChild(subtaskTd);
+                tbody.appendChild(subtaskTr);
+            }
         });
 
         tableContainer.appendChild(table);
@@ -1689,13 +1997,14 @@
         setupDragAndDrop('.task-row', tasks);
     }
 
-    function renderTaskCards(container) {
+	function renderTaskCards(container) {
         const tasks = getTasksForViewDate();
         const wrapper = document.createElement('div');
         wrapper.className = 'task-card-wrapper';
 
         tasks.forEach((task, index) => {
             const project = state.projects.find(p => p.id === task.projectId) || { name: '', color: '#cccccc' };
+            const cardWrapper = document.createElement('div');
             const card = document.createElement('div');
             const isCompleted = task.status === 'completed';
             card.className = `task-card bg-white px-3 py-2 mt-2 shadow border-l-4 ${isCompleted ? 'completed' : ''} ${task.status === 'running' ? 'bg-blue-50' : ''} ${task.id === state.focusedTaskId ? 'focused' : ''}`;
@@ -1717,9 +2026,19 @@
                 </button>`;
             }
 
+            const subtasks = task.subtasks || [];
+            let subtaskIconHtml = '';
+            if (subtasks.length > 0) {
+                const completedCount = subtasks.filter(st => st.completed).length;
+                subtaskIconHtml = `
+                <span class="subtask-toggle-icon ml-1" data-task-id="${task.id}" title="サブタスク (S)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
+                </span>`;
+            }
+
             const memoIcon = task.memo ? `
                  <span class="tooltip-container memo-icon-clickable" data-task-id="${task.id}">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 text-gray-400 cursor-pointer hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1 mb-0.5 text-gray-400 cursor-pointer hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     <span class="custom-tooltip">${escapeHtml(task.memo)}</span>
                 </span>` : '';
 			
@@ -1733,7 +2052,7 @@
                         <div class="flex justify-between items-start">
                              <h3 class="font-semibold text-base truncate flex items-center pr-2" title="${escapeHtml(task.name || '')}">
                                ${formatTaskName(task.name)}
-                               ${memoIcon}
+                               ${subtaskIconHtml} ${memoIcon}
                             </h3>
                              <div class="flex space-x-1 flex-shrink-0">
                                 <button class="edit-task-btn text-gray-400 hover:text-blue-500 p-1">
@@ -1748,7 +2067,7 @@
                             </div>
                         </div>
                         <div class="flex items-center justify-between text-xs text-gray-600 mt-1">
-                            <div class="flex space-x-3">
+                            <div class="flex items-center space-x-3">
 								<div class="min-w-20">
                                     <span>見積: ${task.estimatedTime || 0}分</span>
                                 </div>
@@ -1762,7 +2081,33 @@
                     </div>
                 </div>
             `;
-            wrapper.appendChild(card);
+            cardWrapper.appendChild(card);
+            
+            if (subtasks.length > 0) {
+                const subtaskContainer = document.createElement('div');
+                subtaskContainer.id = `subtasks-${task.id}`;
+                subtaskContainer.className = `subtask-container ${state.openTaskIds.has(task.id) ? 'open' : ''}`;
+                subtasks.forEach(st => {
+                    const item = document.createElement('div');
+                    item.className = `subtask-item ${st.completed ? 'completed' : ''} ${st.id === state.focusedSubtaskId ? 'focused' : ''}`;
+                    item.innerHTML = `
+                        <input type="checkbox" class="subtask-checkbox form-checkbox h-4 w-4 text-blue-600" data-subtask-id="${st.id}" ${st.completed ? 'checked' : ''}>
+                        <span class="ml-3 text-sm flex-1">${formatTaskName(st.name)}</span>
+                    `;
+                    item.addEventListener('click', (e) => {
+						if (e.target.matches('.subtask-checkbox')) {
+                            return;
+                        }
+                        e.stopPropagation();
+                        state.focusedTaskId = task.id;
+                        state.focusedSubtaskId = st.id;
+                        render();
+                    });
+                    subtaskContainer.appendChild(item);
+                });
+                cardWrapper.appendChild(subtaskContainer);
+            }
+            wrapper.appendChild(cardWrapper);
         });
 
         container.appendChild(wrapper);
@@ -1988,12 +2333,13 @@
     function attachTaskEventListeners() {
         document.querySelectorAll('.task-row, .task-card').forEach(el => {
             el.addEventListener('click', (e) => {
-                if (e.target.closest('button, a, .memo-icon-clickable')) {
+                if (e.target.closest('button, a, .memo-icon-clickable, .subtask-toggle-icon, .subtask-checkbox')) {
                     return;
                 }
                 const taskId = e.currentTarget.dataset.taskId;
-                if (state.focusedTaskId !== taskId) {
+                if (state.focusedTaskId !== taskId || state.focusedSubtaskId !== null) {
                     state.focusedTaskId = taskId;
+                    state.focusedSubtaskId = null;
                     renderTodayTasks();
                 }
             });
@@ -2018,6 +2364,33 @@
                 openMemoEditModal(e.currentTarget.dataset.taskId);
             })
         );
+        
+        document.querySelectorAll('.subtask-toggle-icon').forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleSubtaskView(e.currentTarget.dataset.taskId);
+            });
+        });
+        
+        document.querySelectorAll('.subtask-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const subtaskId = e.target.dataset.subtaskId;
+                const subtaskRow = e.target.closest('[data-parent-task-id]');
+                const cardWrapper = e.target.closest('.task-card-wrapper > div');
+                let taskId = null;
+                if (subtaskRow) {
+                    taskId = subtaskRow.dataset.parentTaskId;
+                } else if (cardWrapper) {
+                    const card = cardWrapper.querySelector('[data-task-id]');
+                    if(card) taskId = card.dataset.taskId;
+                }
+                if(taskId) {
+                    toggleSubtaskCompletion(taskId, subtaskId, e.target.checked);
+                } else {
+                    console.error("Could not find parent task ID for subtask.");
+                }
+            });
+        });
     }
 
     function attachArchiveEventListeners() {
@@ -2037,7 +2410,54 @@
 	        el.addEventListener('dragstart', (e) => {
 	            draggedIndex = parseInt(el.dataset.index, 10);
 	            e.dataTransfer.setData('text/plain', draggedIndex);
-	            setTimeout(() => el.classList.add('dragging'), 0);
+	
+	            const rect = el.getBoundingClientRect();
+	
+	            const pointerX = (typeof e.clientX === 'number') ? e.clientX : (rect.left + rect.width / 2);
+	            const pointerY = (typeof e.clientY === 'number') ? e.clientY : (rect.top + rect.height / 2);
+	            let offsetX = Math.round(pointerX - rect.left);
+	            let offsetY = Math.round(pointerY - rect.top);
+	
+	            const dragImage = el.cloneNode(true);
+	            dragImage.style.position = 'absolute';
+	            dragImage.style.top = '-9999px';
+	            dragImage.style.left = '-9999px';
+	            dragImage.style.width = el.offsetWidth + 'px';
+	            dragImage.style.boxSizing = 'border-box';
+				dragImage.style.background = '#ffffff';
+	
+	            const originalCells = el.querySelectorAll('td, th');
+	            const clonedCells = dragImage.querySelectorAll('td, th');
+	            originalCells.forEach((cell, index) => {
+	                if (clonedCells[index]) {
+	                    clonedCells[index].style.width = cell.offsetWidth + 'px';
+	                    clonedCells[index].style.minWidth = cell.offsetWidth + 'px';
+	                    clonedCells[index].style.maxWidth = cell.offsetWidth + 'px';
+	                    clonedCells[index].style.boxSizing = 'border-box';
+	                }
+	            });
+	
+	            dragImage.querySelectorAll('.custom-tooltip').forEach(tip => tip.remove());
+	            document.body.appendChild(dragImage);
+	
+	            const imgWidth = dragImage.offsetWidth || rect.width;
+	            const imgHeight = dragImage.offsetHeight || rect.height;
+	
+	            if (offsetX < 0) offsetX = 0;
+	            if (offsetY < 0) offsetY = 0;
+	            if (offsetX > imgWidth) offsetX = imgWidth;
+	            if (offsetY > imgHeight) offsetY = imgHeight;
+	
+	            try {
+	                e.dataTransfer.setDragImage(dragImage, offsetX, offsetY);
+	            } catch (err) {
+	                e.dataTransfer.setDragImage(dragImage, 0, 0);
+	            }
+	
+	            setTimeout(() => {
+	                el.classList.add('dragging');
+	                if (dragImage.parentElement) document.body.removeChild(dragImage);
+	            }, 0);
 	        });
 	
 	        el.addEventListener('dragend', () => {
@@ -2085,6 +2505,7 @@
 	    });
 	}
 
+
 	function openAddTaskModal() {
 	    document.getElementById('new-task-name').value = '';
 	    document.getElementById('new-task-time').value = '5';
@@ -2105,6 +2526,28 @@
         document.getElementById('edit-task-project').value = task.projectId || '';
         document.getElementById('edit-task-memo').value = task.memo || '';
         
+        renderSubtasksInModal('task', task.id);
+        const newSubtaskInput = document.getElementById('new-subtask-name');
+        const addSubtaskBtn = document.getElementById('add-subtask-btn');
+        newSubtaskInput.value = '';
+        const addSubtaskHandler = () => {
+            const subtaskName = newSubtaskInput.value.trim();
+            if (subtaskName) {
+                addSubtaskToModal('task', subtaskName);
+                newSubtaskInput.value = '';
+                newSubtaskInput.focus();
+            }
+        };
+        addSubtaskBtn.replaceWith(addSubtaskBtn.cloneNode(true));
+        document.getElementById('add-subtask-btn').addEventListener('click', addSubtaskHandler);
+        newSubtaskInput.addEventListener('keydown', (e) => {
+             if(e.key === 'Enter') {
+                e.preventDefault();
+                addSubtaskHandler();
+             }
+        });
+
+
         const startTimeInput = document.getElementById('edit-task-startTime');
         const endTimeInput = document.getElementById('edit-task-endTime');
         
@@ -2198,6 +2641,8 @@
         task.estimatedTime = time;
         task.projectId = projectId;
         task.memo = memo;
+        
+        task.subtasks = getSubtasksFromModal('task');
 
         const startTimeValue = document.getElementById('edit-task-startTime').value;
         const endTimeValue = document.getElementById('edit-task-endTime').value;
@@ -2250,6 +2695,7 @@
             estimatedTime: time,
             projectId: projectId,
             memo: task.memo || '',
+			subtasks: JSON.parse(JSON.stringify(task.subtasks || [])),
             type: 'daily',
             value: null,
             startDate: null
@@ -2271,6 +2717,28 @@
         document.getElementById('edit-repeat-project').value = repeatTask.projectId || '';
         document.getElementById('edit-repeat-memo').value = repeatTask.memo || '';
         document.getElementById('edit-repeat-type').value = repeatTask.type || 'daily';
+        
+        renderSubtasksInModal('repeat', repeatTask.id);
+        const newSubtaskInput = document.getElementById('new-repeat-subtask-name');
+        const addSubtaskBtn = document.getElementById('add-repeat-subtask-btn');
+        newSubtaskInput.value = '';
+        const addSubtaskHandler = () => {
+            const subtaskName = newSubtaskInput.value.trim();
+            if (subtaskName) {
+                addSubtaskToModal('repeat', subtaskName);
+                newSubtaskInput.value = '';
+                newSubtaskInput.focus();
+            }
+        };
+        addSubtaskBtn.replaceWith(addSubtaskBtn.cloneNode(true));
+        document.getElementById('add-repeat-subtask-btn').addEventListener('click', addSubtaskHandler);
+        newSubtaskInput.addEventListener('keydown', (e) => {
+             if(e.key === 'Enter') {
+                e.preventDefault();
+                addSubtaskHandler();
+             }
+        });
+
 
         const weeklyContainer = document.getElementById('edit-repeat-weekly-options');
         if (weeklyContainer.childElementCount === 0) {
@@ -2346,6 +2814,7 @@
         repeatTask.type = type;
         repeatTask.value = value;
         repeatTask.startDate = startDate;
+        repeatTask.subtasks = getSubtasksFromModal('repeat');
 
         closeModal('repeat-edit-modal');
         saveAndRender();
@@ -2587,6 +3056,7 @@
             status: 'pending',
             isInterrupt: !!isInterrupt,
             memo: '',
+			subtasks: [],
             startTime: null,
             endTime: null,
             createdDate: state.viewDate,
@@ -2831,7 +3301,7 @@
             startDate = startDateInput ? startDateInput : new Date().toISOString().slice(0,10);
         }
 
-        state.repeatTasks.push({ id: 'rt' + Date.now(), name, estimatedTime: time, projectId, memo, type, value, startDate });
+        state.repeatTasks.push({ id: 'rt' + Date.now(), name, estimatedTime: time, projectId, memo, type, value, startDate, subtasks: [] });
 
         document.getElementById('repeat-task-name').value = '';
         document.getElementById('repeat-task-time').value = '';
@@ -2992,7 +3462,6 @@ function renderFloatingTaskBar() {
 	    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
 	    const taskToDisplay = activeTask || nextTask;
 
-		// 常に表示するタスク追加ボタンのHTML
 		const addTaskButtonHtml = `
             <button id="add-task-btn-bar" class="floating-bar-btn bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
                 ＋
@@ -3008,7 +3477,7 @@ function renderFloatingTaskBar() {
 			`;
 			bar.classList.add('active');
 			bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
-			return; // これ以降の処理は不要
+			return;
         }
 
         const isTaskRunning = !!activeTask;
@@ -3062,54 +3531,139 @@ function renderFloatingTaskBar() {
 
     function handleTodayShortcuts(e) {
         const tasks = getTasksForViewDate();
-        const currentIndex = tasks.findIndex(t => t.id === state.focusedTaskId);
+        if (tasks.length === 0 && !['n', 'r'].includes(e.key.toLowerCase())) return;
 
-        switch(e.key.toLowerCase()) {
+        const currentTaskIndex = tasks.findIndex(t => t.id === state.focusedTaskId);
+        const currentTask = (currentTaskIndex !== -1) ? tasks[currentTaskIndex] : null;
+
+        // --- サブタスクがフォーカスされている場合の処理 ---
+        if (currentTask && state.focusedSubtaskId) {
+            const subtasks = currentTask.subtasks || [];
+            const currentSubtaskIndex = subtasks.findIndex(st => st.id === state.focusedSubtaskId);
+
+            if (currentSubtaskIndex !== -1) {
+                switch (e.key.toLowerCase()) {
+                    case 'arrowup':
+                        e.preventDefault();
+                        if (e.ctrlKey || e.metaKey) { // 並び替え
+                            if (currentSubtaskIndex > 0) {
+                                [subtasks[currentSubtaskIndex - 1], subtasks[currentSubtaskIndex]] = [subtasks[currentSubtaskIndex], subtasks[currentSubtaskIndex - 1]];
+                                currentTask.updatedAt = new Date().toISOString();
+                                saveAndRender();
+                            }
+                        } else { // 選択移動
+                            if (currentSubtaskIndex > 0) {
+                                state.focusedSubtaskId = subtasks[currentSubtaskIndex - 1].id;
+                            } else {
+                                state.focusedSubtaskId = null; // 親タスクに戻る
+                            }
+                            render();
+                        }
+                        return;
+                    case 'arrowdown':
+                        e.preventDefault();
+                        if (e.ctrlKey || e.metaKey) { // 並び替え
+                            if (currentSubtaskIndex < subtasks.length - 1) {
+                                [subtasks[currentSubtaskIndex + 1], subtasks[currentSubtaskIndex]] = [subtasks[currentSubtaskIndex], subtasks[currentSubtaskIndex + 1]];
+                                currentTask.updatedAt = new Date().toISOString();
+                                saveAndRender();
+                            }
+                        } else { // 選択移動
+                            if (currentSubtaskIndex < subtasks.length - 1) {
+                                state.focusedSubtaskId = subtasks[currentSubtaskIndex + 1].id;
+                            } else { // 最後のサブタスクから次のタスクへ
+                                state.focusedSubtaskId = null;
+                                if (currentTaskIndex < tasks.length - 1) {
+                                    state.focusedTaskId = tasks[currentTaskIndex + 1].id;
+                                    render();
+                                }
+                            }
+                            render();
+                        }
+                        return;
+                    case ' ':
+                        e.preventDefault();
+                        const subtask = subtasks[currentSubtaskIndex];
+                        toggleSubtaskCompletion(currentTask.id, subtask.id, !subtask.completed);
+                        return;
+                }
+            }
+        }
+
+        // --- 親タスクがフォーカスされている場合の処理 ---
+        switch (e.key.toLowerCase()) {
             case 'n': e.preventDefault(); openAddTaskModal(); break;
             case 'e': e.preventDefault(); if (state.focusedTaskId) openTaskEditModal(state.focusedTaskId); break;
             case 'm': e.preventDefault(); if (state.focusedTaskId) openMemoEditModal(state.focusedTaskId); break;
             case 'd': e.preventDefault(); if (state.focusedTaskId) deleteTask(state.focusedTaskId); break;
             case 'p': e.preventDefault(); if (state.focusedTaskId) postponeTask(state.focusedTaskId); break;
+            case 's': e.preventDefault(); if (state.focusedTaskId) toggleSubtaskView(state.focusedTaskId); break;
             case 'r':
                 e.preventDefault();
-                // ログイン中のみ同期を実行
-               if (dailyTaskListApp.dbx) {
+                if (dailyTaskListApp.dbx) {
                     dailyTaskListApp.loadStateFromDropbox();
                 }
                 break;
             case 'arrowdown':
                 e.preventDefault();
-                if (e.ctrlKey || e.metaKey) {
-                    if (currentIndex >= 0 && currentIndex < tasks.length - 1) {
-                        [tasks[currentIndex], tasks[currentIndex + 1]] = [tasks[currentIndex + 1], tasks[currentIndex]];
+                if (!currentTask) {
+                    if (tasks.length > 0) state.focusedTaskId = tasks[0].id;
+                    render();
+                    break;
+                }
+
+                // 開いているサブタスクがあれば、最初のサブタスクに移動
+                const subtaskContainer = document.getElementById(`subtasks-${currentTask.id}`);
+                const hasOpenSubtasks = state.openTaskIds.has(currentTask.id) && currentTask.subtasks && currentTask.subtasks.length > 0;
+                if (hasOpenSubtasks) {
+                    state.focusedSubtaskId = currentTask.subtasks[0].id;
+                    render();
+                    break;
+                }
+                
+                if (e.ctrlKey || e.metaKey) { // 親タスクの並び替え
+                    if (currentTaskIndex < tasks.length - 1) {
+                        [tasks[currentTaskIndex], tasks[currentTaskIndex + 1]] = [tasks[currentTaskIndex + 1], tasks[currentTaskIndex]];
                         setTasksForViewDate(tasks);
                         saveAndRender();
                     }
-                } else {
-                    if (currentIndex < tasks.length - 1) {
-                        state.focusedTaskId = tasks[currentIndex + 1].id;
+                } else { // 次の親タスクへ移動
+                    if (currentTaskIndex < tasks.length - 1) {
+                        state.focusedTaskId = tasks[currentTaskIndex + 1].id;
                         render();
                     }
                 }
                 break;
             case 'arrowup':
-                 e.preventDefault();
-                 if (e.ctrlKey || e.metaKey) {
-                     if (currentIndex > 0) {
-                        [tasks[currentIndex], tasks[currentIndex - 1]] = [tasks[currentIndex - 1], tasks[currentIndex]];
+                e.preventDefault();
+                if (!currentTask) break;
+
+                if (e.ctrlKey || e.metaKey) { // 親タスクの並び替え
+                    if (currentTaskIndex > 0) {
+                        [tasks[currentTaskIndex], tasks[currentTaskIndex - 1]] = [tasks[currentTaskIndex - 1], tasks[currentTaskIndex]];
                         setTasksForViewDate(tasks);
                         saveAndRender();
                     }
-                 } else {
-                     if (currentIndex > 0) {
-                        state.focusedTaskId = tasks[currentIndex - 1].id;
+                } else { // 前の親タスクへ移動
+                    if (currentTaskIndex > 0) {
+                        const prevTask = tasks[currentTaskIndex - 1];
+                        const prevSubtaskContainer = document.getElementById(`subtasks-${prevTask.id}`);
+                        const prevHasOpenSubtasks = prevSubtaskContainer && prevSubtaskContainer.classList.contains('open') && prevTask.subtasks && prevTask.subtasks.length > 0;
+                        
+                        // 前タスクに開いているサブタスクがあれば、その最後のサブタスクに移動
+                        if (prevHasOpenSubtasks) {
+                            state.focusedTaskId = prevTask.id;
+                            state.focusedSubtaskId = prevTask.subtasks[prevTask.subtasks.length - 1].id;
+                        } else {
+                            state.focusedTaskId = prevTask.id;
+                        }
                         render();
                     }
-                 }
+                }
                 break;
             case 'arrowleft': e.preventDefault(); moveViewDate(-1); break;
             case 'arrowright': e.preventDefault(); moveViewDate(1); break;
-            case ' ': e.preventDefault(); if(state.focusedTaskId) toggleTimer(state.focusedTaskId); break;
+            case ' ': e.preventDefault(); if (state.focusedTaskId) toggleTimer(state.focusedTaskId); break;
         }
     }
 
@@ -3195,13 +3749,11 @@ function renderFloatingTaskBar() {
         const container = document.getElementById('add-task-floating-container');
         if (!container) return;
 
-        // ボタンのHTMLをコンテナに一度だけ設定
         container.innerHTML = `
             <button id="add-task-btn-floating" class="fab bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
                 ＋
             </button>`;
         
-        // ボタンにイベントリスナーを付与
         container.querySelector('#add-task-btn-floating').addEventListener('click', openAddTaskModal);
     }
 
