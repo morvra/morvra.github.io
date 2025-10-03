@@ -351,7 +351,7 @@
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">リピートタスク管理</h2>
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4 items-end">
-                    <input type="text" id="repeat-task-name" placeholder="タスク名" class="md:col-span-2 p-2 border rounded-lg">
+                    <input type="text" id="repeat-task-name" placeholder="タスク名" class="md:col-span-2 p-2 border rounded-lg"  autocomplete="off">
                     <div class="grid grid-cols-2 gap-4">
                         <input type="number" id="repeat-task-time" placeholder="見積時間(分)" class="w-full p-2 border rounded-lg">
                         <select id="repeat-task-project" class="w-full p-2 border rounded-lg bg-white"></select>
@@ -365,7 +365,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <textarea id="repeat-task-memo" placeholder="メモ (任意)" class="w-full p-2 border rounded-lg h-20"></textarea>
+                    <textarea id="repeat-task-memo" placeholder="メモ (任意)" class="w-full p-2 border rounded-lg h-11"></textarea>
                 </div>
 
                 <div id="repeat-weekly-options" class="hidden flex flex-wrap gap-x-4 gap-y-2 mb-4 p-3 bg-gray-50 rounded-lg"></div>
@@ -484,7 +484,7 @@
     <div class="modal-content p-6 w-full max-w-md">
         <h3 class="text-lg font-bold mb-4">タスクを追加</h3>
         <div class="space-y-4">
-            <input type="text" id="new-task-name" placeholder="タスク名" class="w-full p-2 border rounded-lg">
+            <input type="text" id="new-task-name" placeholder="タスク名" class="w-full p-2 border rounded-lg" autocomplete="off" >
             <input type="number" id="new-task-time" placeholder="見積時間(分)" class="w-full p-2 border rounded-lg" value="5">
             <select id="new-task-project" class="w-full p-2 border rounded-lg bg-white"></select>
         </div>
@@ -500,20 +500,30 @@
     <div class="modal-content p-6 w-full max-w-md">
         <h3 class="text-lg font-bold mb-4">タスクを編集</h3>
         <div class="space-y-4">
-            <input type="text" id="edit-task-name" placeholder="タスク名" class="w-full p-2 border rounded-lg">
+            <input type="text" id="edit-task-name" placeholder="タスク名" class="w-full p-2 border rounded-lg" autocomplete="off">
             <div class="grid grid-cols-2 gap-4">
                  <input type="number" id="edit-task-time" placeholder="見積時間(分)" class="w-full p-2 border rounded-lg">
                  <select id="edit-task-project" class="w-full p-2 border rounded-lg bg-white"></select>
             </div>
-            <textarea id="edit-task-memo" placeholder="メモ" class="w-full p-2 border rounded-lg h-20"></textarea>
-			<div class="mt-4">
-			    <label class="text-sm font-medium text-gray-700">サブタスク</label>
-			    <div id="edit-task-subtasks" class="space-y-2 mt-1 p-2 border rounded-lg bg-gray-50"></div>
-			    <div class="flex gap-2 mt-2">
-			        <input type="text" id="new-subtask-name" placeholder="新しいサブタスク名" class="flex-1 p-2 border rounded-lg">
-			        <button id="add-subtask-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">追加</button>
-			    </div>
-			</div>
+            <textarea id="edit-task-memo" placeholder="メモ" class="w-full p-2 border rounded-lg" rows="1"></textarea>
+			
+            <div class="mt-2">
+                <div class="flex items-center justify-between">
+                    <label class="text-sm font-medium text-gray-700">サブタスク</label>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="task-subtask-toggle" class="sr-only peer">
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                <div id="task-subtask-content" class="hidden mt-2">
+                    <div id="edit-task-subtasks" class="space-y-2 p-2 border rounded-lg bg-gray-50"></div>
+                    <div class="flex gap-2 mt-2">
+                        <input type="text" id="new-subtask-name" placeholder="新しいサブタスク名" class="flex-1 p-2 border rounded-lg" autocomplete="off">
+                        <button id="add-subtask-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">追加</button>
+                    </div>
+                </div>
+            </div>
+			
             <div class="grid grid-cols-2 gap-4">
                  <div>
                     <label for="edit-task-startTime" class="text-sm font-medium text-gray-700">開始時刻</label>
@@ -548,20 +558,30 @@
     <div class="modal-content p-6 w-full max-w-lg">
         <h3 class="text-lg font-bold mb-4">リピートタスクを編集</h3>
         <div class="space-y-4">
-            <input type="text" id="edit-repeat-name" placeholder="タスク名" class="w-full p-2 border rounded-lg">
+            <input type="text" id="edit-repeat-name" placeholder="タスク名" class="w-full p-2 border rounded-lg" autocomplete="off">
              <div class="grid grid-cols-2 gap-4">
                 <input type="number" id="edit-repeat-time" placeholder="見積時間(分)" class="w-full p-2 border rounded-lg">
                 <select id="edit-repeat-project" class="w-full p-2 border rounded-lg bg-white"></select>
             </div>
-            <textarea id="edit-repeat-memo" placeholder="メモ" class="w-full p-2 border rounded-lg h-20"></textarea>
-			<div class="mt-4">
-			    <label class="text-sm font-medium text-gray-700">サブタスク</label>
-			    <div id="edit-repeat-subtasks" class="space-y-2 mt-1 p-2 border rounded-lg bg-gray-50"></div>
-			    <div class="flex gap-2 mt-2">
-			        <input type="text" id="new-repeat-subtask-name" placeholder="新しいサブタスク名" class="flex-1 p-2 border rounded-lg">
-			        <button id="add-repeat-subtask-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">追加</button>
-			    </div>
-			</div>
+            <textarea id="edit-repeat-memo" placeholder="メモ" class="w-full p-2 border rounded-lg" rows="1"></textarea>
+			
+            <div class="mt-2">
+                <div class="flex items-center justify-between">
+                    <label class="text-sm font-medium text-gray-700">サブタスク</label>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="repeat-subtask-toggle" class="sr-only peer">
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+                <div id="repeat-subtask-content" class="hidden mt-2">
+                    <div id="edit-repeat-subtasks" class="space-y-2 mt-1 p-2 border rounded-lg bg-gray-50"></div>
+                    <div class="flex gap-2 mt-2">
+                        <input type="text" id="new-repeat-subtask-name" placeholder="新しいサブタスク名" class="flex-1 p-2 border rounded-lg" autocomplete="off">
+                        <button id="add-repeat-subtask-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-lg">追加</button>
+                    </div>
+                </div>
+            </div>
+			
             <select id="edit-repeat-type" class="w-full p-2 border rounded-lg bg-white">
                 <option value="daily">毎日</option>
                 <option value="weekly">毎週</option>
@@ -1723,6 +1743,15 @@
 
         setupModalEvents();
 
+		function autoHeightListener(event) {
+            // 高さを一度リセットしてからスクロール量に合わせて再設定
+            event.target.style.height = 'auto';
+            event.target.style.height = (event.target.scrollHeight) + 'px';
+        }
+        document.getElementById('edit-task-memo').addEventListener('input', autoHeightListener);
+        document.getElementById('edit-repeat-memo').addEventListener('input', autoHeightListener);
+
+
         document.addEventListener('keydown', handleKeyboardShortcuts);
         
         document.addEventListener('mouseover', (e) => {
@@ -2539,7 +2568,25 @@
         updateProjectDropdowns();
         document.getElementById('edit-task-project').value = task.projectId || '';
         document.getElementById('edit-task-memo').value = task.memo || '';
+		
+        setTimeout(() => {
+            const memoTextarea = document.getElementById('edit-task-memo');
+            memoTextarea.style.height = 'auto';
+            memoTextarea.style.height = (memoTextarea.scrollHeight) + 'px';
+        }, 0);
         
+        const subtaskToggle = document.getElementById('task-subtask-toggle');
+        const subtaskContent = document.getElementById('task-subtask-content');
+        const hasSubtasks = task.subtasks && task.subtasks.length > 0;
+        subtaskToggle.checked = hasSubtasks;
+        subtaskContent.classList.toggle('hidden', !hasSubtasks);
+        
+        const newToggle = subtaskToggle.cloneNode(true);
+        subtaskToggle.parentNode.replaceChild(newToggle, subtaskToggle);
+        newToggle.addEventListener('change', () => {
+            subtaskContent.classList.toggle('hidden', !newToggle.checked);
+        });
+
         renderSubtasksInModal('task', task.id);
         const newSubtaskInput = document.getElementById('new-subtask-name');
         const addSubtaskBtn = document.getElementById('add-subtask-btn');
@@ -2731,6 +2778,24 @@
         document.getElementById('edit-repeat-project').value = repeatTask.projectId || '';
         document.getElementById('edit-repeat-memo').value = repeatTask.memo || '';
         document.getElementById('edit-repeat-type').value = repeatTask.type || 'daily';
+
+		setTimeout(() => {
+            const memoTextarea = document.getElementById('edit-repeat-memo');
+            memoTextarea.style.height = 'auto';
+            memoTextarea.style.height = (memoTextarea.scrollHeight) + 'px';
+        }, 0);
+
+        const subtaskToggle = document.getElementById('repeat-subtask-toggle');
+        const subtaskContent = document.getElementById('repeat-subtask-content');
+        const hasSubtasks = repeatTask.subtasks && repeatTask.subtasks.length > 0;
+        subtaskToggle.checked = hasSubtasks;
+        subtaskContent.classList.toggle('hidden', !hasSubtasks);
+        
+        const newToggle = subtaskToggle.cloneNode(true);
+        subtaskToggle.parentNode.replaceChild(newToggle, subtaskToggle);
+        newToggle.addEventListener('change', () => {
+            subtaskContent.classList.toggle('hidden', !newToggle.checked);
+        });
         
         renderSubtasksInModal('repeat', repeatTask.id);
         const newSubtaskInput = document.getElementById('new-repeat-subtask-name');
