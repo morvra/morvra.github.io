@@ -288,6 +288,8 @@
 		    .subtask-container {
 		        padding-left: 0rem;
 		        margin-left: .75rem;
+				margin-top: 2px;
+				box-shadow: 0px 3px 4px #ccc;
 		    }
 		}
 		
@@ -2092,7 +2094,7 @@
                     item.className = `subtask-item ${st.completed ? 'completed' : ''} ${st.id === state.focusedSubtaskId ? 'focused' : ''}`;
                     item.innerHTML = `
                         <input type="checkbox" class="subtask-checkbox form-checkbox h-4 w-4 text-blue-600" data-subtask-id="${st.id}" ${st.completed ? 'checked' : ''}>
-                        <span class="ml-3 text-sm flex-1">${formatTaskName(st.name)}</span>
+                        <span class="ml-3 flex-1">${formatTaskName(st.name)}</span>
                     `;
                     item.addEventListener('click', (e) => {
 						if (e.target.matches('.subtask-checkbox')) {
