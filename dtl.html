@@ -3525,9 +3525,10 @@ function renderFloatingTaskBar() {
         }
     }
 
-    function handleTodayShortcuts(e) {
+	function handleTodayShortcuts(e) {
         const tasks = getTasksForViewDate();
-        if (tasks.length === 0 && !['n', 'r'].includes(e.key.toLowerCase())) return;
+        // 修正箇所: タスクが0件の場合でも、左右キーでの日付移動を許可するリストに 'arrowleft' と 'arrowright' を追加
+        if (tasks.length === 0 && !['n', 'r', 'arrowleft', 'arrowright'].includes(e.key.toLowerCase())) return;
 
         const currentTaskIndex = tasks.findIndex(t => t.id === state.focusedTaskId);
         const currentTask = (currentTaskIndex !== -1) ? tasks[currentTaskIndex] : null;
