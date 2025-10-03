@@ -650,7 +650,6 @@
                 }
             },
 			
-// 修正箇所 1: updateAuthUi 関数内
             updateAuthUi: function(isLoggedIn) {
 		        this.authContainer.classList.toggle('hidden', isLoggedIn);
 		        this.signoutContainer.classList.toggle('hidden', !isLoggedIn);
@@ -686,62 +685,113 @@
                     const importedData = JSON.parse(fileContent);
 
 					// --- Custom Merge Logic for dailyTasks ---
-                    const driveDailyTasks = importedData.dailyTasks || {};
-                    const localDailyTasks = state.dailyTasks;
-                    const allDailyDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
-
-                    allDailyDates.forEach(date => {
-                        const localTasksForDate = localDailyTasks[date] || [];
-                        const driveTasksForDate = driveDailyTasks[date] || [];
-                        const combinedTasks = [...localTasksForDate, ...driveTasksForDate];
-                        const taskMap = new Map();
-
-                        for (const task of combinedTasks) {
-							const key = task.originRepeatId
-							    ? `repeat-${task.originRepeatId}-${task.createdDate || ''}`
-							    : `task-${task.id}`;
-
-                            if (!taskMap.has(key)) {
-                                taskMap.set(key, task);
-                            } else {
-                                const existingTask = taskMap.get(key);
-                                const newTask = task;
-
-                                // 競合解決ロジック: 完了状態を優先し、それ以外は更新日時が新しい方を採用する
-                                const existingIsCompleted = getTaskStatus(existingTask) === 'completed';
-                                const newIsCompleted = getTaskStatus(newTask) === 'completed';
-
-                                let taskToKeep = existingTask; // デフォルトは既存のタスクを維持
-
-                                // 1. 完了状態を優先
-                                if (newIsCompleted && !existingIsCompleted) {
-                                    // 新しいタスクが完了していて、既存が未完了なら新しい方を採用
-                                    taskToKeep = newTask;
-                                } else if (!newIsCompleted && existingIsCompleted) {
-                                    // 既存のタスクが完了していて、新しい方が未完了なら既存を維持 (何もしない)
-                                } else {
-                                    // 2. 完了状態が同じ場合は、更新日時で比較
-                                    // updatedAtが存在しない古いデータのために、フォールバック値を設定
-                                    const existingTimestamp = existingTask.updatedAt || '1970-01-01T00:00:00.000Z';
-                                    const newTimestamp = newTask.updatedAt || '1970-01-01T00:00:00.000Z';
-                                    
-                                    if (newTimestamp >= existingTimestamp) {
-                                        taskToKeep = newTask;
-                                    }
-                                }
-                                taskMap.set(key, taskToKeep);
-                            }
-                        }
-                        
-                        let mergedTasks = Array.from(taskMap.values());
-
-                        // Sort the final list based on the saved sortOrder.
-                        // Fallback to 0 for older tasks that don't have the property.
-                        mergedTasks.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-                        
-                        state.dailyTasks[date] = mergedTasks;
-                    });
-                    // --- End of dailyTasks Merge Logic ---
+					const driveDailyTasks = importedData.dailyTasks || {};
+					const localDailyTasks = state.dailyTasks;
+					const allDailyDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
+					
+					allDailyDates.forEach(date => {
+					    const localTasksForDate = localDailyTasks[date] || [];
+					    const driveTasksForDate = driveDailyTasks[date] || [];
+					    const combinedTasks = [...localTasksForDate, ...driveTasksForDate];
+					    const taskMap = new Map();
+					
+					    for (const task of combinedTasks) {
+					        const key = task.originRepeatId
+					            ? `repeat-${task.originRepeatId}-${task.createdDate || ''}`
+					            : `task-${task.id}`;
+					
+					        if (!taskMap.has(key)) {
+					            taskMap.set(key, task);
+					        } else {
+					            const existingTask = taskMap.get(key);
+					            const newTask = task;
+					
+					            // 競合解決ロジック: 完了状態を優先し、それ以外は更新日時が新しい方を採用する
+					            const existingIsCompleted = getTaskStatus(existingTask) === 'completed';
+					            const newIsCompleted = getTaskStatus(newTask) === 'completed';
+					
+					            let taskToKeep = existingTask; // デフォルトは既存のタスクを維持
+					
+					            // 1. 完了状態を優先
+					            if (newIsCompleted && !existingIsCompleted) {
+					                // 新しいタスクが完了していて、既存が未完了なら新しい方を採用
+					                taskToKeep = newTask;
+					            } else if (!newIsCompleted && existingIsCompleted) {
+					                // 既存のタスクが完了していて、新しい方が未完了なら既存を維持 (何もしない)
+					            } else {
+					                // 2. 完了状態が同じ場合は、更新日時で比較
+					                // updatedAtが存在しない古いデータのために、フォールバック値を設定
+					                const existingTimestamp = existingTask.updatedAt || '1970-01-01T00:00:00.000Z';
+					                const newTimestamp = newTask.updatedAt || '1970-01-01T00:00:00.000Z';
+					                
+					                if (newTimestamp >= existingTimestamp) {
+					                    taskToKeep = newTask;
+					                }
+					            }
+					            taskMap.set(key, taskToKeep);
+					        }
+					    }
+					    
+					    let mergedTasks = Array.from(taskMap.values());
+					
+					    // Sort the final list based on the saved sortOrder.
+					    // Fallback to 0 for older tasks that don't have the property.
+					    mergedTasks.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+					    
+					    state.dailyTasks[date] = mergedTasks;
+					});
+					
+					// リピートタスク由来のタスクについて、古い日付で完了済みなら新しい日付の未完了コピーを削除
+					const sortedDates = Array.from(allDailyDates).sort();
+					const repeatTaskCompletionMap = new Map(); // key: originRepeatId, value: 完了した最新の日付
+					
+					// まず、各リピートタスクの完了状態を収集
+					sortedDates.forEach(date => {
+					    const tasks = state.dailyTasks[date] || [];
+					    tasks.forEach(task => {
+					        if (task.originRepeatId && getTaskStatus(task) === 'completed') {
+					            const existing = repeatTaskCompletionMap.get(task.originRepeatId);
+					            if (!existing || date > existing) {
+					                repeatTaskCompletionMap.set(task.originRepeatId, date);
+					            }
+					        }
+					    });
+					});
+					
+					// 次に、完了日より後の日付にある同じリピートタスク由来の未完了タスクを削除
+					sortedDates.forEach(date => {
+					    const tasks = state.dailyTasks[date] || [];
+					    state.dailyTasks[date] = tasks.filter(task => {
+					        if (!task.originRepeatId) return true; // リピートタスク由来でなければ保持
+					        
+					        const completedDate = repeatTaskCompletionMap.get(task.originRepeatId);
+					        if (!completedDate) return true; // 完了記録がなければ保持
+					        
+					        // このタスクの作成日が完了日以前で、かつ未完了なら削除候補
+					        const taskCreatedDate = task.createdDate || date;
+					        if (taskCreatedDate > completedDate) {
+					            // 完了日より後に作成されたタスク = 新しい日のリピート生成なので保持
+					            return true;
+					        }
+					        
+					        if (getTaskStatus(task) === 'completed') {
+					            // 完了済みなら保持
+					            return true;
+					        }
+					        
+					        // ここに到達するのは: 完了日以前に作成され、未完了のタスク
+					        // = 日をまたぐ際にコピーされたが、元が完了済みだったタスク
+					        // ただし、同じ日付内での重複は除外(毎日リピートの当日分は保持)
+					        if (taskCreatedDate === date) {
+					            return true; // 当日作成のタスクは保持
+					        }
+					        
+					        console.log(`Removing duplicate uncompleted task: ${task.name} (created: ${taskCreatedDate}, date: ${date})`);
+					        return false; // 削除
+					    });
+					});
+					// --- End of dailyTasks Merge Logic ---
+					
 					// --- Custom Merge Logic for archivedTasks ---
                     const driveArchivedTasks = importedData.archivedTasks || {};
                     const localArchivedTasks = state.archivedTasks;
