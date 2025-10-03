@@ -1986,6 +1986,10 @@
                         state.focusedSubtaskId = st.id;
                         render();
                     });
+					item.addEventListener('dblclick', (e) => {
+                        e.preventDefault(); // ダブルクリック時のテキスト選択を防止
+                        toggleSubtaskCompletion(task.id, st.id, !st.completed);
+                    });
                     subtaskContainer.appendChild(item);
                 });
                 
@@ -2108,6 +2112,10 @@
                         state.focusedTaskId = task.id;
                         state.focusedSubtaskId = st.id;
                         render();
+                    });
+					item.addEventListener('dblclick', (e) => {
+                        e.preventDefault(); // ダブルタップ時のテキスト選択を防止
+                        toggleSubtaskCompletion(task.id, st.id, !st.completed);
                     });
                     subtaskContainer.appendChild(item);
                 });
