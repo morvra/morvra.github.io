@@ -1026,13 +1026,23 @@
 		}
 
 		// サブタスク関連
-	    function toggleSubtaskView(taskId) {
-            if (state.openTaskIds.has(taskId)) {
-                state.openTaskIds.delete(taskId);
-            } else {
-                state.openTaskIds.add(taskId);
-            }
-            saveAndRender();
+		function toggleSubtaskView(taskId) {
+            // stateの更新（どのタスクが開いているかの情報を更新）
+		    if (state.openTaskIds.has(taskId)) {
+		        state.openTaskIds.delete(taskId);
+		    } else {
+		        state.openTaskIds.add(taskId);
+		    }
+
+		    if (taskId === state.focusedTaskId) {
+		        saveAndRender();
+		    } else {
+		        const subtaskContainer = document.getElementById(`subtasks-${taskId}`);
+		        if (subtaskContainer) {
+		            subtaskContainer.classList.toggle('open', state.openTaskIds.has(taskId));
+		        }
+		        saveState();
+		    }
 	    }
 
 	
