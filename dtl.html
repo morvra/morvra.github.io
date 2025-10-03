@@ -846,51 +846,55 @@
                 }
             },
             
-            saveStateToDropbox: async function() {
-                if (!this.dbx) return;
-                
-                this.driveStatusEl.textContent = 'Dropboxへ保存準備中...';
-				const cleanedDailyTasks = {};
-                const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-
-                for (const dateKey in state.dailyTasks) {
-                    const filteredTasks = state.dailyTasks[dateKey].filter(task => {
-                        // isDeletedフラグがないか、あっても30日以内のものだけを残す
-                        return !task.isDeleted || (task.updatedAt && task.updatedAt > thirtyDaysAgo);
-                    });
-                    // フィルタリングした結果、タスクが1件以上残っている場合のみ、その日付のデータを保存する
-                    if (filteredTasks.length > 0) {
-                        cleanedDailyTasks[dateKey] = filteredTasks;
-                    }
-                }
-				
-                const dataToSave = {
-                    dailyTasks: cleanedDailyTasks,
-                    projects: state.projects,
-                    repeatTasks: state.repeatTasks,
-                    archivedTasks: state.archivedTasks,
-                    lastDate: state.lastDate,
-                    updatedAt: new Date().toISOString()
-                };
-                
-                this.driveStatusEl.textContent = 'Dropboxへ保存中...';
-                try {
-                    await this.dbx.filesUpload({
-                        path: this.dropboxFilePath,
-                        contents: JSON.stringify(dataToSave, null, 2),
-                        mode: 'overwrite'
-                    });
-                    this.driveStatusEl.textContent = `Dropboxに保存しました (${new Date().toLocaleTimeString()})。`;
-                } catch (error) {
-                    console.error('Error saving state to Dropbox:', error);
-                    this.driveStatusEl.textContent = `保存エラー: ${error.error?.error_summary || 'Unknown error'}`;
-                     if (error.status === 401) { // 認証エラー
-                           this.updateAuthUi(false);
-                           this.driveStatusEl.textContent = '認証が切れました。再ログインしてください。';
-						   this.updateReauthUi(true);
-                    }
-                }
-            }
+			saveStateToDropbox: async function() {
+			    const accessToken = localStorage.getItem('dropbox_access_token');
+			    if (!this.dbx || !accessToken) {
+			        console.log('Dropbox not authenticated, skipping cloud save');
+			        return;
+			    }
+			    
+			    this.driveStatusEl.textContent = 'Dropboxへ保存準備中...';
+			    const cleanedDailyTasks = {};
+			    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+			
+			    for (const dateKey in state.dailyTasks) {
+			        const filteredTasks = state.dailyTasks[dateKey].filter(task => {
+			            // isDeletedフラグがないか、あっても30日以内のものだけを残す
+			            return !task.isDeleted || (task.updatedAt && task.updatedAt > thirtyDaysAgo);
+			        });
+			        // フィルタリングした結果、タスクが1件以上残っている場合のみ、その日付のデータを保存する
+			        if (filteredTasks.length > 0) {
+			            cleanedDailyTasks[dateKey] = filteredTasks;
+			        }
+			    }
+			    
+			    const dataToSave = {
+			        dailyTasks: cleanedDailyTasks,
+			        projects: state.projects,
+			        repeatTasks: state.repeatTasks,
+			        archivedTasks: state.archivedTasks,
+			        lastDate: state.lastDate,
+			        updatedAt: new Date().toISOString()
+			    };
+			    
+			    this.driveStatusEl.textContent = 'Dropboxへ保存中...';
+			    try {
+			        await this.dbx.filesUpload({
+			            path: this.dropboxFilePath,
+			            contents: JSON.stringify(dataToSave, null, 2),
+			            mode: 'overwrite'
+			        });
+			        this.driveStatusEl.textContent = `Dropboxに保存しました (${new Date().toLocaleTimeString()})。`;
+			    } catch (error) {
+			        console.error('Error saving state to Dropbox:', error);
+			        this.driveStatusEl.textContent = `保存エラー: ${error.error?.error_summary || 'Unknown error'}`;
+			        if (error.status === 401) { // 認証エラー
+			            this.updateAuthUi(false);
+			            this.driveStatusEl.textContent = '認証が切れました。再ログインしてください。';
+			            this.updateReauthUi(true);
+			        }
+			    }
+			}
         };
         
 		// Dropbox 同期機能の初期化
@@ -1475,25 +1479,27 @@
     }
 
 	function saveState() {
-		Object.keys(state).forEach(k => {
-			if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
-                if (k === 'openTaskIds') {
-                    localStorage.setItem(`dtl_${k}`, JSON.stringify(Array.from(state[k])));
-                } else {
-				    localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
-                }
-			}
-		});
-
-        const savedOpenTaskIds = localStorage.getItem('dtl_openTaskIds');
-        if (savedOpenTaskIds) {
-            state.openTaskIds = new Set(JSON.parse(savedOpenTaskIds));
-        }
-		const app = window.dailyTaskListApp;
-		if (app.dbx) { // Dropboxインスタンスの有無で判定
-			if (app.saveTimeout) clearTimeout(app.saveTimeout);
-			app.saveTimeout = setTimeout(() => app.saveStateToDropbox(), 2000);
-		}
+	    Object.keys(state).forEach(k => {
+	        if (k !== 'settings' && k !== 'archiveView' && k !== 'selectedArchiveProject') {
+	            if (k === 'openTaskIds') {
+	                localStorage.setItem(`dtl_${k}`, JSON.stringify(Array.from(state[k])));
+	            } else {
+	                localStorage.setItem(`dtl_${k}`, JSON.stringify(state[k]));
+	            }
+	        }
+	    });
+	
+	    const savedOpenTaskIds = localStorage.getItem('dtl_openTaskIds');
+	    if (savedOpenTaskIds) {
+	        state.openTaskIds = new Set(JSON.parse(savedOpenTaskIds));
+	    }
+	    
+	    const app = window.dailyTaskListApp;
+	    const accessToken = localStorage.getItem('dropbox_access_token');
+	    if (app.dbx && accessToken) { // Dropboxインスタンスとトークンの両方が存在する場合のみ
+	        if (app.saveTimeout) clearTimeout(app.saveTimeout);
+	        app.saveTimeout = setTimeout(() => app.saveStateToDropbox(), 2000);
+	    }
 	}
 
     function restoreRunningTaskState() {
