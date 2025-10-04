@@ -1891,58 +1891,51 @@
         });
     }
 
-function openModal(modalId) {
-    // 現在のスクロール位置を保存
-    const scrollY = window.scrollY;
-    document.body.dataset.scrollY = scrollY;
-    
-    // フローティングバーを先に非表示
-    const bar = document.getElementById('floating-task-bar');
-    if (bar) bar.classList.remove('active');
-    
-    // bodyを固定
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    
-    document.getElementById(modalId).classList.add('active');
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.remove('active');
-    
-    if (modalId === 'task-edit-modal') {
-        state.editingTaskDateKey = null;
-        state.editingTaskId = null;
-    }
-    
-    // 保存したスクロール位置を取得
-    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-    
-    // bodyのスタイルをすべてクリア
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
-    
-    // 強制的にレイアウトを再計算させる
-    void document.body.offsetHeight;
-    
-    // スクロール位置を復元
-    window.scrollTo(0, scrollY);
-    
-    // 次のフレームでフローティングバーを再表示
-    setTimeout(() => {
-        // もう一度スクロール位置を確認・修正
-        if (window.scrollY !== scrollY) {
-            window.scrollTo(0, scrollY);
-        }
-        renderFloatingTaskBar();
-    }, 50); // 50msの遅延を入れる
-}
+	function openModal(modalId) {
+	    // 現在のスクロール位置を保存
+	    const scrollY = window.scrollY;
+	    document.body.dataset.scrollY = scrollY;
+	    
+	    // フローティングバーを先に非表示
+	    const bar = document.getElementById('floating-task-bar');
+	    if (bar) bar.classList.remove('active');
+	    
+	    // bodyを固定
+	    document.body.style.position = 'fixed';
+	    document.body.style.top = `-${scrollY}px`;
+	    document.body.style.left = '0';
+	    document.body.style.right = '0';
+	    document.body.style.width = '100%';
+	    
+	    document.getElementById(modalId).classList.add('active');
+	}
+	
+	function closeModal(modalId) {
+	    document.getElementById(modalId).classList.remove('active');
+	    
+	    if (modalId === 'task-edit-modal') {
+	        state.editingTaskDateKey = null;
+	        state.editingTaskId = null;
+	    }
+	    
+	    const scrollY = parseInt(document.body.dataset.scrollY || '0');
+	    
+	    // bodyのスタイルをクリア
+	    document.body.style.position = '';
+	    document.body.style.top = '';
+	    document.body.style.left = '';
+	    document.body.style.right = '';
+	    document.body.style.width = '';
+	    
+	    // iOSのバグ回避：一度別の位置にスクロールしてから戻す
+	    window.scrollTo(0, scrollY + 1);
+	    requestAnimationFrame(() => {
+	        window.scrollTo(0, scrollY);
+	        requestAnimationFrame(() => {
+	            renderFloatingTaskBar();
+	        });
+	    });
+	}
 
     function render() {
         const activeTab = document.querySelector('.tab-link.active').dataset.tab;
