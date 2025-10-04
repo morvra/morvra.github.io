@@ -85,11 +85,16 @@
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
 		    transform: translateY(100%); /* 初期状態では画面下に隠す */
-		    transition: transform 0.3s ease-in-out;
 		    display: none; /* JSでflexに切り替え */
 		    align-items: center;
 		    justify-content: space-between;
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 0; /* デフォルトは0だが、JSが上書きする */
+			transition: bottom 0.15s ease-out, transform 0.25s ease-in-out;
 		}
+
 		#floating-task-bar.active {
 		    transform: translateY(0); /* activeクラスで表示位置へ */
 		    display: flex; /* 表示 */
@@ -615,6 +620,25 @@
 <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
 
 <script>
+
+	// --- フローティングバーのキーボード追従対策 ---
+	function setupFloatingBarViewportFix() {
+	    if (!window.visualViewport) return;
+	
+	    const bar = document.getElementById('floating-task-bar');
+	
+	    function updateBarPosition() {
+	        const vv = window.visualViewport;
+	        // 画面下端との差を計算して bottom に反映
+	        const bottomInset = vv.height + vv.offsetTop - window.innerHeight;
+	        bar.style.bottom = `${Math.max(bottomInset, 0)}px`;
+	    }
+	
+	    updateBarPosition();
+	    window.visualViewport.addEventListener('resize', updateBarPosition);
+	    window.visualViewport.addEventListener('scroll', updateBarPosition);
+	}
+	
     document.addEventListener('DOMContentLoaded', () => {
 
         // --- DROPBOX SYNC START ---
@@ -3581,8 +3605,10 @@
         const totalRemainingMinutes = unfinishedTasks.reduce((sum, task) => sum + (task.estimatedTime || 0), 0);
         totalEstimatedEndTimeEl.textContent = totalRemainingMinutes > 0 ? formatClockTime(new Date(now.getTime() + totalRemainingMinutes * 60 * 1000)) : '完了';
     }
-	
-function renderFloatingTaskBar() {
+
+	setupFloatingBarViewportFix();
+
+	function renderFloatingTaskBar() {
 	    const bar = document.getElementById('floating-task-bar');
 	    if (!bar) return;
 
