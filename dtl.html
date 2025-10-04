@@ -84,18 +84,9 @@
 
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
-		    position: fixed; /* fixedに戻す */
-		    bottom: 0;
-		    left: 0;
-		    right: 0;
-		    background: white;
-		    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-		    height: 80px;
-		    padding: 0 16px;
-		    z-index: 50;
-		    transform: translateY(100%);
+		    transform: translateY(100%); /* 初期状態では画面下に隠す */
 		    transition: transform 0.3s ease-in-out;
-		    display: none;
+		    display: none; /* JSでflexに切り替え */
 		    align-items: center;
 		    justify-content: space-between;
 		}
@@ -1891,51 +1882,19 @@
         });
     }
 
-	function openModal(modalId) {
-	    // 現在のスクロール位置を保存
-	    const scrollY = window.scrollY;
-	    document.body.dataset.scrollY = scrollY;
-	    
-	    // フローティングバーを先に非表示
-	    const bar = document.getElementById('floating-task-bar');
-	    if (bar) bar.classList.remove('active');
-	    
-	    // bodyを固定
-	    document.body.style.position = 'fixed';
-	    document.body.style.top = `-${scrollY}px`;
-	    document.body.style.left = '0';
-	    document.body.style.right = '0';
-	    document.body.style.width = '100%';
-	    
-	    document.getElementById(modalId).classList.add('active');
-	}
-	
-	function closeModal(modalId) {
-	    document.getElementById(modalId).classList.remove('active');
-	    
-	    if (modalId === 'task-edit-modal') {
-	        state.editingTaskDateKey = null;
-	        state.editingTaskId = null;
-	    }
-	    
-	    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-	    
-	    // bodyのスタイルをクリア
-	    document.body.style.position = '';
-	    document.body.style.top = '';
-	    document.body.style.left = '';
-	    document.body.style.right = '';
-	    document.body.style.width = '';
-	    
-	    // iOSのバグ回避：一度別の位置にスクロールしてから戻す
-	    window.scrollTo(0, scrollY + 1);
-	    requestAnimationFrame(() => {
-	        window.scrollTo(0, scrollY);
-	        requestAnimationFrame(() => {
-	            renderFloatingTaskBar();
-	        });
-	    });
-	}
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+		renderFloatingTaskBar();
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+        if (modalId === 'task-edit-modal') {
+            state.editingTaskDateKey = null;
+            state.editingTaskId = null;
+        }
+		renderFloatingTaskBar();
+    }
 
     function render() {
         const activeTab = document.querySelector('.tab-link.active').dataset.tab;
