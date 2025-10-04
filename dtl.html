@@ -636,32 +636,55 @@
 		
 		    let ticking = false;
 		
-		    function updateElementsPosition() {
-		        if (!isMobile()) {
-		            // PC表示では固定位置なので何もしない
-					bar.style.position = 'fixed';
-		            bar.style.bottom = '0';
-		            bar.style.top = 'auto';
-		            syncButtonContainer.style.position = 'fixed';
-		            syncButtonContainer.style.bottom = '24px';
-		            syncButtonContainer.style.top = 'auto';
-		            return;
-		        }
+		function updateElementsPosition() {
+		    const bar = document.getElementById('floating-task-bar');
+		    const syncButtonContainer = document.getElementById('sync-button-floating-container');
+		    if (!bar || !syncButtonContainer) return;
 		
-		        // スマホ表示時の処理
-		        // visualViewportではなく、window.scrollYとwindow.innerHeightを使用
-		        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-		        const viewportHeight = window.innerHeight;
-		        const scrollBottom = scrollY + viewportHeight;
-		        
-		        // フローティングバーの位置計算
-		        const barHeight = bar.offsetHeight;
-		        bar.style.top = (scrollBottom - barHeight) + 'px';
-		        
-		        // 同期ボタンの位置計算
-		        const syncButtonHeight = syncButtonContainer.offsetHeight;
-		        syncButtonContainer.style.top = (scrollBottom - barHeight - syncButtonHeight - 16) + 'px';
+		    // PC表示時の処理 (変更なし)
+		    if (!isMobile()) {
+		        bar.style.position = 'fixed';
+		        bar.style.bottom = '0';
+		        bar.style.top = 'auto';
+		        syncButtonContainer.style.position = 'fixed';
+		        syncButtonContainer.style.bottom = '96px';
+		        syncButtonContainer.style.top = 'auto';
+		        return;
 		    }
+		
+		    // モバイル表示時の処理 (absolute + 無限スクロール制限)
+		    const scrollY = window.scrollY || 0;
+		    const viewportHeight = window.innerHeight;
+		    const barHeight = bar.offsetHeight;
+		
+		    const documentHeight = Math.max(
+		        document.body.scrollHeight, 
+		        document.documentElement.scrollHeight,
+		        document.body.offsetHeight, 
+		        document.documentElement.offsetHeight
+		    );
+		    
+		    const maxScroll = documentHeight - viewportHeight;
+		    const absoluteBottomTop = documentHeight - barHeight; 
+		
+		    let newBarTop;
+		    let newSyncButtonTop;
+		    
+		    if (scrollY >= maxScroll) {
+		        newBarTop = absoluteBottomTop;
+		        
+		    } 
+		    else {
+		        const scrollBottom = scrollY + viewportHeight;
+		        newBarTop = scrollBottom - barHeight;
+		    }
+		    bar.style.position = 'absolute';
+		    bar.style.top = newBarTop + 'px';
+		    const syncButtonHeight = syncButtonContainer.offsetHeight;
+		    newSyncButtonTop = newBarTop - syncButtonHeight - 16;
+		    syncButtonContainer.style.position = 'absolute';
+		    syncButtonContainer.style.top = newSyncButtonTop + 'px';		    
+		}
 		
 		    function requestTick() {
 		        if (!ticking) {
