@@ -167,18 +167,7 @@
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
 
-        .modal { 
-		    display:none; 
-		    position:fixed; 
-		    z-index:1000; 
-		    left:0; 
-		    top:0; 
-		    width:100%; 
-		    height:100%; 
-		    background-color:rgba(0,0,0,0.5);
-		    overflow-y: auto; /* スクロール可能にする */
-		    -webkit-overflow-scrolling: touch; /* iOSでのスムーススクロール */
-		}
+        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); }
         .modal.active { display:flex; align-items:center; justify-content:center; }
         .modal-content { background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow-y:auto; }
 		
@@ -321,28 +310,6 @@
 		    padding: 0.5rem;
 		    background-color: #f9fafb;
 		    border-radius: 6px;
-		}
-		/* iOSでのビューポート固定問題への対応 */
-		body.modal-open {
-		    position: fixed;
-		    overflow: hidden;
-		    width: 100%;
-		    height: 100%;
-		    top: 0;
-		    left: 0;
-		}
-		
-		/* モーダル表示時のフローティングバーの固定 */
-		body.modal-open #floating-task-bar {
-		    position: absolute;
-		    bottom: 0;
-		}
-		
-		/* iOSでのSafariの100vh問題への対応 */
-		@supports (-webkit-touch-callout: none) {
-		    #floating-task-bar {
-		        bottom: env(safe-area-inset-bottom, 0);
-		    }
 		}
     </style>
 </head>
@@ -1923,57 +1890,19 @@
         });
     }
 
-	function openModal(modalId) {
-	    // 現在のスクロール位置とビューポート高さを保存
-	    const scrollY = window.scrollY;
-	    const viewportHeight = window.innerHeight;
-	    
-	    document.body.dataset.scrollY = scrollY;
-	    document.body.dataset.viewportHeight = viewportHeight;
-	    
-	    // bodyを固定し、高さも固定
-	    document.body.style.position = 'fixed';
-	    document.body.style.top = `-${scrollY}px`;
-	    document.body.style.left = '0';
-	    document.body.style.right = '0';
-	    document.body.style.height = `${viewportHeight}px`;
-	    document.body.style.overflow = 'hidden';
-	    
-	    document.getElementById(modalId).classList.add('active');
-	    
-	    // フローティングバーを非表示にする
-	    const bar = document.getElementById('floating-task-bar');
-	    if (bar) bar.classList.remove('active');
-	}
-	
-	function closeModal(modalId) {
-	    document.getElementById(modalId).classList.remove('active');
-	    
-	    if (modalId === 'task-edit-modal') {
-	        state.editingTaskDateKey = null;
-	        state.editingTaskId = null;
-	    }
-	    
-	    // 保存した値を取得
-	    const scrollY = parseInt(document.body.dataset.scrollY || '0');
-	    
-	    // bodyのスタイルをクリア
-	    document.body.style.position = '';
-	    document.body.style.top = '';
-	    document.body.style.left = '';
-	    document.body.style.right = '';
-	    document.body.style.height = '';
-	    document.body.style.overflow = '';
-	    
-	    // 遅延なしでスクロール位置を復元
-	    window.scrollTo(0, scrollY);
-	    
-	    // さらに念押しでもう一度復元
-	    setTimeout(() => {
-	        window.scrollTo(0, scrollY);
-	        renderFloatingTaskBar();
-	    }, 0);
-	}
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+		renderFloatingTaskBar();
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+        if (modalId === 'task-edit-modal') {
+            state.editingTaskDateKey = null;
+            state.editingTaskId = null;
+        }
+		renderFloatingTaskBar();
+    }
 
     function render() {
         const activeTab = document.querySelector('.tab-link.active').dataset.tab;
