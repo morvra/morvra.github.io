@@ -84,15 +84,22 @@
 
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
-		    transform: translateY(100%); /* 初期状態では画面下に隠す */
-		    transition: transform 0.3s ease-in-out;
-		    display: none; /* JSでflexに切り替え */
+		    position: fixed;
+		    left: 0;
+		    right: 0;
+		    /* iOSのセーフエリア対応 */
+		    bottom: calc(env(safe-area-inset-bottom, 0px));
+		    transform: translateY(100%);
+		    transition: transform 0.25s ease-in-out;
+		    display: none;
 		    align-items: center;
 		    justify-content: space-between;
+		    will-change: transform;
+		    /* 少し高めの z-index は既にあるので上書きしないでください */
 		}
 		#floating-task-bar.active {
-		    transform: translateY(0); /* activeクラスで表示位置へ */
-		    display: flex; /* 表示 */
+		    transform: translateY(0);
+		    display: flex;
 		}
 
         /* フローティングバー内の左右のボタン共通スタイル */
@@ -159,10 +166,35 @@
         .inline-input, .inline-select { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:6px; border:1px solid #d1d5db; }
         .small-btn { padding:6px 8px; border-radius:6px; font-size:0.9rem; }
 
-        .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); }
-        .modal.active { display:flex; align-items:center; justify-content:center; }
-        .modal-content { background:white; border-radius:8px; max-width:90vw; max-height:90vh; overflow-y:auto; }
+		.modal {
+		    display: none;
+		    position: fixed;
+		    z-index: 1000;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-color: rgba(0,0,0,0.5);
+		    -webkit-overflow-scrolling: touch; /* iOSでスムースな内側スクロールを許可 */
+		    touch-action: manipulation;
+		}
+		.modal.active {
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		}
 		
+		/* modal-content の max-height に vh だけを使うと iOS の visual viewport に影響されやすいので safe-area も混ぜる */
+		.modal-content {
+		    background: white;
+		    border-radius: 8px;
+		    max-width: 90vw;
+		    /* iOS の安全域・キーボードの影響を考慮した高さ */
+		    max-height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 40px);
+		    overflow-y: auto;
+		    -webkit-overflow-scrolling: touch;
+		}
+				
 		.tooltip-container { position: relative; display: inline-block; vertical-align: middle; }
 		.custom-tooltip { visibility: hidden; opacity: 0; background-color: #2d3748; color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px; position: absolute; z-index: 10; bottom: 150%; left: 50%; transform: translateX(-50%); transition: opacity 0.1s, visibility 0.1s; width: max-content; max-width: 300px; font-size: 0.875rem; font-weight: normal; line-height: 1.4; white-space: pre-wrap; box-shadow: 0 4px 6px rgba(0,0,0,0.1); pointer-events: none; }
 		
@@ -1882,19 +1914,75 @@
         });
     }
 
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.add('active');
-		renderFloatingTaskBar();
-    }
 
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-        if (modalId === 'task-edit-modal') {
-            state.editingTaskDateKey = null;
-            state.editingTaskId = null;
-        }
-		renderFloatingTaskBar();
-    }
+	let __modalLockedScrollY = 0;
+	
+	function _lockBodyScrollForModal() {
+	    // 現在のスクロール位置を保持して body を固定する（iOS の visual viewport 変化対策）
+	    __modalLockedScrollY = window.scrollY || window.pageYOffset || 0;
+	    // 過去の値が残っている場合は再設定しない
+	    document.body.style.position = 'fixed';
+	    document.body.style.top = `-${__modalLockedScrollY}px`;
+	    document.body.style.left = '0';
+	    document.body.style.right = '0';
+	    document.body.style.width = '100%';
+	    // 禁止したいなら overflow: hidden も追加可能だが position: fixed で十分
+	}
+	
+	function _unlockBodyScrollForModal() {
+	    // body の固定を解除して、保持していたスクロール位置へ復帰
+	    document.body.style.position = '';
+	    document.body.style.top = '';
+	    document.body.style.left = '';
+	    document.body.style.right = '';
+	    document.body.style.width = '';
+	    // 復元は一度の repaint 後に行う（iOS のキーボードアニメーションを待ってから）
+	    const restoreY = __modalLockedScrollY || 0;
+	    __modalLockedScrollY = 0;
+	    // 少しだけ遅延を置くことで、キーボードの閉じアニメーション後に確実に復元
+	    setTimeout(() => {
+	        window.scrollTo(0, restoreY);
+	        // 強制再描画を誘発して fixed 要素の位置を安定させる
+	        void document.body.offsetHeight;
+	    }, 60);
+	}
+	
+	function openModal(modalId) {
+	    const modal = document.getElementById(modalId);
+	    if (!modal) return;
+	    // 表示前に body をロック
+	    _lockBodyScrollForModal();
+	    modal.classList.add('active');
+	
+	    // フローティングバーは renderFloatingTaskBar() の判定で非表示になるはずだが、
+	    // 念のため描画更新を依頼
+	    renderFloatingTaskBar();
+	
+	    // 小さな遅延で最初の入力要素にフォーカス（キーボードを即出さない場合の安定化）
+	    setTimeout(() => {
+	        const firstInput = modal.querySelector('input, textarea, select, button');
+	        try { firstInput?.focus?.(); } catch (e) { /* ignore */ }
+	    }, 50);
+	}
+	
+	function closeModal(modalId) {
+	    const modal = document.getElementById(modalId);
+	    if (!modal) return;
+	    modal.classList.remove('active');
+	
+	    if (modalId === 'task-edit-modal') {
+	        state.editingTaskDateKey = null;
+	        state.editingTaskId = null;
+	    }
+	
+	    // キーボードのクローズ／ビューポートアニメーションを待ってからアンロック
+	    setTimeout(() => {
+	        _unlockBodyScrollForModal();
+	        // フローティングバーの再描画を明示
+	        renderFloatingTaskBar();
+	    }, 80);
+	}
+
 
     function render() {
         const activeTab = document.querySelector('.tab-link.active').dataset.tab;
