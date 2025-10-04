@@ -84,7 +84,8 @@
 
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
-		    position: absolute; /* fixedからabsoluteに変更 */
+		    position: fixed; /* fixedに戻す */
+		    bottom: 0;
 		    left: 0;
 		    right: 0;
 		    background: white;
@@ -1890,19 +1891,58 @@
         });
     }
 
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.add('active');
-		renderFloatingTaskBar();
-    }
+function openModal(modalId) {
+    // 現在のスクロール位置を保存
+    const scrollY = window.scrollY;
+    document.body.dataset.scrollY = scrollY;
+    
+    // フローティングバーを先に非表示
+    const bar = document.getElementById('floating-task-bar');
+    if (bar) bar.classList.remove('active');
+    
+    // bodyを固定
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    
+    document.getElementById(modalId).classList.add('active');
+}
 
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-        if (modalId === 'task-edit-modal') {
-            state.editingTaskDateKey = null;
-            state.editingTaskId = null;
-        }
-		renderFloatingTaskBar();
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+    
+    if (modalId === 'task-edit-modal') {
+        state.editingTaskDateKey = null;
+        state.editingTaskId = null;
     }
+    
+    // 保存したスクロール位置を取得
+    const scrollY = parseInt(document.body.dataset.scrollY || '0');
+    
+    // bodyのスタイルをすべてクリア
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    
+    // 強制的にレイアウトを再計算させる
+    void document.body.offsetHeight;
+    
+    // スクロール位置を復元
+    window.scrollTo(0, scrollY);
+    
+    // 次のフレームでフローティングバーを再表示
+    setTimeout(() => {
+        // もう一度スクロール位置を確認・修正
+        if (window.scrollY !== scrollY) {
+            window.scrollTo(0, scrollY);
+        }
+        renderFloatingTaskBar();
+    }, 50); // 50msの遅延を入れる
+}
 
     function render() {
         const activeTab = document.querySelector('.tab-link.active').dataset.tab;
@@ -3591,100 +3631,74 @@
     }
 	
 function renderFloatingTaskBar() {
-    const bar = document.getElementById('floating-task-bar');
-    if (!bar) return;
+	    const bar = document.getElementById('floating-task-bar');
+	    if (!bar) return;
 
-    // スマホ以外、またはモーダル表示中はバーを隠す
-    if (!isMobile() || document.querySelector('.modal.active')) {
-        bar.classList.remove('active');
-        return;
-    }
+	    // スマホ以外、またはモーダル表示中はバーを隠す
+	    if (!isMobile() || document.querySelector('.modal.active')) {
+	        bar.classList.remove('active');
+	        return;
+	    }
 
-    const tasks = getTasksForViewDate();
-    const activeTask = tasks.find(t => t.id === state.activeTaskId);
-    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
-    const taskToDisplay = activeTask || nextTask;
+	    const tasks = getTasksForViewDate();
+	    const activeTask = tasks.find(t => t.id === state.activeTaskId);
+	    const nextTask = tasks.find(t => getTaskStatus(t) !== 'completed');
+	    const taskToDisplay = activeTask || nextTask;
 
-    const addTaskButtonHtml = `
-        <button id="add-task-btn-bar" class="floating-bar-btn bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
-            ＋
-        </button>`;
+		const addTaskButtonHtml = `
+            <button id="add-task-btn-bar" class="floating-bar-btn bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold">
+                ＋
+            </button>`;
 
-    if (!taskToDisplay) {
-        bar.innerHTML = `
-            <div class="flex-1 px-3 min-w-0 flex items-center">
-                <p class="text-gray-500">全てのタスクが完了しました 🎉</p>
+	    if (!taskToDisplay) {
+			// 表示するタスクがない場合でも、バーと追加ボタンは表示する
+			bar.innerHTML = `
+				<div class="flex-1 px-3 min-w-0 flex items-center">
+					<p class="text-gray-500">全てのタスクが完了しました 🎉</p>
+				</div>
+				${addTaskButtonHtml}
+			`;
+			bar.classList.add('active');
+			bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
+			return;
+        }
+
+        const isTaskRunning = !!activeTask;
+        const buttonIcon = isTaskRunning ? '■' : '▶';
+        const buttonColor = isTaskRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600';
+
+        let taskInfoHtml = '';
+        if (isTaskRunning) {
+            const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
+            taskInfoHtml = `
+                <p class="text-base font-bold text-gray-800 truncate" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
+	            <p class="text-gray-500 font-mono">終了予定: ${formatClockTime(estimatedEndTime)}</p>
+            `;
+        } else {
+            taskInfoHtml = `
+                <p class="text-gray-500">Next: <span class="font-bold text-gray-800 truncate" title="${escapeHtml(nextTask.name)}">${formatTaskName(nextTask.name)}</span></p>
+	            <p class="text-sm text-gray-500">${nextTask.estimatedTime || 0}分</p>
+            `;
+        }
+
+        const timerButtonHtml = `
+            <button id="floating-timer-btn" class="floating-bar-btn ${buttonColor} text-white text-2xl">
+                ${buttonIcon}
+            </button>`;
+
+	    bar.innerHTML = `
+            ${timerButtonHtml}
+            <div class="flex-1 px-3 min-w-0 cursor-pointer" 
+                 onclick="document.querySelector('[data-task-id=\\'${taskToDisplay.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
+                ${taskInfoHtml}
             </div>
             ${addTaskButtonHtml}
         `;
-        bar.classList.add('active');
+
+	    bar.classList.add('active');
+        bar.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
         bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
-        
-        // 位置を強制的に再計算
-        updateFloatingBarPosition();
-        return;
-    }
-
-    const isTaskRunning = !!activeTask;
-    const buttonIcon = isTaskRunning ? '■' : '▶';
-    const buttonColor = isTaskRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600';
-
-    let taskInfoHtml = '';
-    if (isTaskRunning) {
-        const estimatedEndTime = new Date(new Date(activeTask.startTime).getTime() + (activeTask.estimatedTime * 60 * 1000));
-        taskInfoHtml = `
-            <p class="text-base font-bold text-gray-800 truncate" title="${escapeHtml(activeTask.name)}">${formatTaskName(activeTask.name)}</p>
-            <p class="text-gray-500 font-mono">終了予定: ${formatClockTime(estimatedEndTime)}</p>
-        `;
-    } else {
-        taskInfoHtml = `
-            <p class="text-gray-500">Next: <span class="font-bold text-gray-800 truncate" title="${escapeHtml(nextTask.name)}">${formatTaskName(nextTask.name)}</span></p>
-            <p class="text-sm text-gray-500">${nextTask.estimatedTime || 0}分</p>
-        `;
-    }
-
-    const timerButtonHtml = `
-        <button id="floating-timer-btn" class="floating-bar-btn ${buttonColor} text-white text-2xl">
-            ${buttonIcon}
-        </button>`;
-
-    bar.innerHTML = `
-        ${timerButtonHtml}
-        <div class="flex-1 px-3 min-w-0 cursor-pointer" 
-             onclick="document.querySelector('[data-task-id=\\'${taskToDisplay.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
-            ${taskInfoHtml}
-        </div>
-        ${addTaskButtonHtml}
-    `;
-
-    bar.classList.add('active');
-    bar.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
-    bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
-    
-    // 位置を強制的に再計算
-    updateFloatingBarPosition();
-}
-
-// 新しい関数を追加
-function updateFloatingBarPosition() {
-    const bar = document.getElementById('floating-task-bar');
-    if (!bar || !bar.classList.contains('active')) return;
-    
-    // ビューポートの実際の高さを取得
-    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    const barHeight = bar.offsetHeight;
-    
-    // バーを画面の最下部に配置
-    bar.style.top = `${viewportHeight - barHeight}px`;
-}
-
-// ビューポートのリサイズやスクロール時に位置を更新
-if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', updateFloatingBarPosition);
-    window.visualViewport.addEventListener('scroll', updateFloatingBarPosition);
-}
-window.addEventListener('scroll', updateFloatingBarPosition);
-window.addEventListener('resize', updateFloatingBarPosition);
+	}
 
     function handleKeyboardShortcuts(e) {
         if (document.querySelector('input:focus, select:focus, textarea:focus, .modal.active')) return;
