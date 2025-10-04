@@ -643,19 +643,20 @@
 		
 		    // PC表示時の処理 (変更なし)
 		    if (!isMobile()) {
-		        bar.style.position = 'fixed';
-		        bar.style.bottom = '0';
-		        bar.style.top = 'auto';
-		        syncButtonContainer.style.position = 'fixed';
-		        syncButtonContainer.style.bottom = '96px';
-		        syncButtonContainer.style.top = 'auto';
+				bar.style.position = ''; 
+	            bar.style.bottom = '';
+		        bar.style.top = '';
+		        syncButtonContainer.style.position = '';
+		        syncButtonContainer.style.bottom = '';
+		        syncButtonContainer.style.top = '';
 		        return;
 		    }
 		
 		    // モバイル表示時の処理 (absolute + 無限スクロール制限)
 		    const scrollY = window.scrollY || 0;
 		    const viewportHeight = window.innerHeight;
-		    const barHeight = bar.offsetHeight;
+		    const actualBarHeight = bar.offsetHeight;
+		    const barHeight = actualBarHeight > 0 ? actualBarHeight : 80;
 		
 		    const documentHeight = Math.max(
 		        document.body.scrollHeight, 
@@ -665,7 +666,7 @@
 		    );
 		    
 		    const maxScroll = documentHeight - viewportHeight;
-		    const absoluteBottomTop = documentHeight - barHeight; 
+		    const absoluteBottomTop = documentHeight - barHeight;
 		
 		    let newBarTop;
 		    let newSyncButtonTop;
