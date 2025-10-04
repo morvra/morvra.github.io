@@ -1916,16 +1916,26 @@
     }
 
 	function openModal(modalId) {
-	    // スクロール位置を保存
+	    // 現在のスクロール位置とビューポート高さを保存
 	    const scrollY = window.scrollY;
-	    document.body.dataset.scrollY = scrollY;
+	    const viewportHeight = window.innerHeight;
 	    
-	    // bodyを固定
-	    document.body.classList.add('modal-open');
+	    document.body.dataset.scrollY = scrollY;
+	    document.body.dataset.viewportHeight = viewportHeight;
+	    
+	    // bodyを固定し、高さも固定
+	    document.body.style.position = 'fixed';
 	    document.body.style.top = `-${scrollY}px`;
+	    document.body.style.left = '0';
+	    document.body.style.right = '0';
+	    document.body.style.height = `${viewportHeight}px`;
+	    document.body.style.overflow = 'hidden';
 	    
 	    document.getElementById(modalId).classList.add('active');
-	    renderFloatingTaskBar();
+	    
+	    // フローティングバーを非表示にする
+	    const bar = document.getElementById('floating-task-bar');
+	    if (bar) bar.classList.remove('active');
 	}
 	
 	function closeModal(modalId) {
@@ -1936,21 +1946,25 @@
 	        state.editingTaskId = null;
 	    }
 	    
-	    // 少し遅延させてからbodyの固定を解除とスクロール復元を実行
-	    requestAnimationFrame(() => {
-	        // bodyの固定を解除
-	        document.body.classList.remove('modal-open');
-	        const scrollY = document.body.dataset.scrollY || '0';
-	        document.body.style.top = '';
-	        
-	        // スクロール位置を復元
-	        window.scrollTo(0, parseInt(scrollY));
-	        
-	        // スクロール復元後にフローティングバーを再描画
-	        requestAnimationFrame(() => {
-	            renderFloatingTaskBar();
-	        });
-	    });
+	    // 保存した値を取得
+	    const scrollY = parseInt(document.body.dataset.scrollY || '0');
+	    
+	    // bodyのスタイルをクリア
+	    document.body.style.position = '';
+	    document.body.style.top = '';
+	    document.body.style.left = '';
+	    document.body.style.right = '';
+	    document.body.style.height = '';
+	    document.body.style.overflow = '';
+	    
+	    // 遅延なしでスクロール位置を復元
+	    window.scrollTo(0, scrollY);
+	    
+	    // さらに念押しでもう一度復元
+	    setTimeout(() => {
+	        window.scrollTo(0, scrollY);
+	        renderFloatingTaskBar();
+	    }, 0);
 	}
 
     function render() {
