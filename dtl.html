@@ -629,14 +629,23 @@
 	
 	    function updateBarPosition() {
 	        const vv = window.visualViewport;
-	        // 画面下端との差を計算して bottom に反映
+	        // キーボード開閉で変動する bottom の補正値
 	        const bottomInset = vv.height + vv.offsetTop - window.innerHeight;
-	        bar.style.bottom = `${Math.max(bottomInset, 0)}px`;
-	    }
 	
+	        if (bottomInset > 0) {
+	            // キーボードが出ている → バーを上にずらす
+	            bar.style.bottom = `${bottomInset}px`;
+	        } else {
+	            // キーボードが閉じた → 最下部に固定
+	            bar.style.bottom = `0px`;
+	        }
+	    }
+	    // 初回呼び出し
 	    updateBarPosition();
+	    // visual viewport 変化に追従
 	    window.visualViewport.addEventListener('resize', updateBarPosition);
 	    window.visualViewport.addEventListener('scroll', updateBarPosition);
+	    window.addEventListener('scroll', updateBarPosition, { passive: true });
 	}
 	
     document.addEventListener('DOMContentLoaded', () => {
