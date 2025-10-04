@@ -700,6 +700,11 @@
 		
 		    // 初期実行
 		    updateElementsPosition();
+		    if (isMobile()) {
+		        // スクロール位置を0にしてから、requestAnimationFrameで強制的に再計算させる
+		        window.scrollTo(0, 0); 
+		        requestTick();
+		    }
 		
 		    // イベントリスナー
 		    window.addEventListener('scroll', requestTick, { passive: true });
