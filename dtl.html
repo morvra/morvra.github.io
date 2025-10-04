@@ -319,7 +319,9 @@
 		    position: fixed;
 		    overflow: hidden;
 		    width: 100%;
-		    height: 100vh;
+		    height: 100%;
+		    top: 0;
+		    left: 0;
 		}
 		
 		/* モーダル表示時のフローティングバーの固定 */
@@ -1929,19 +1931,26 @@
 	function closeModal(modalId) {
 	    document.getElementById(modalId).classList.remove('active');
 	    
-	    // bodyの固定を解除
-	    document.body.classList.remove('modal-open');
-	    const scrollY = document.body.dataset.scrollY || '0';
-	    document.body.style.top = '';
-	    
-	    // スクロール位置を復元
-	    window.scrollTo(0, parseInt(scrollY));
-	    
 	    if (modalId === 'task-edit-modal') {
 	        state.editingTaskDateKey = null;
 	        state.editingTaskId = null;
 	    }
-	    renderFloatingTaskBar();
+	    
+	    // 少し遅延させてからbodyの固定を解除とスクロール復元を実行
+	    requestAnimationFrame(() => {
+	        // bodyの固定を解除
+	        document.body.classList.remove('modal-open');
+	        const scrollY = document.body.dataset.scrollY || '0';
+	        document.body.style.top = '';
+	        
+	        // スクロール位置を復元
+	        window.scrollTo(0, parseInt(scrollY));
+	        
+	        // スクロール復元後にフローティングバーを再描画
+	        requestAnimationFrame(() => {
+	            renderFloatingTaskBar();
+	        });
+	    });
 	}
 
     function render() {
