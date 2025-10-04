@@ -84,11 +84,9 @@
 
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
-		    transform: translateY(100%); /* 初期状態では画面下に隠す */
-		    display: none; /* JSでflexに切り替え */
 		    align-items: center;
 		    justify-content: space-between;
-			position: fixed;
+			position: absolute;
 			left: 0;
 			right: 0;
 			bottom: 0; /* デフォルトは0だが、JSが上書きする */
@@ -622,32 +620,42 @@
 <script>
 
 	// --- フローティングバーのキーボード追従対策 ---
-	function setupFloatingBarViewportFix() {
-	    if (!window.visualViewport) return;
-	
+	function setupFloatingBarStick() {
 	    const bar = document.getElementById('floating-task-bar');
+	    if (!bar) return;
 	
-	    function updateBarPosition() {
-	        const vv = window.visualViewport;
-	        // キーボード開閉で変動する bottom の補正値
-	        const bottomInset = vv.height + vv.offsetTop - window.innerHeight;
+	    let ticking = false; // rAF中に多重呼び出しを防ぐ
 	
-	        if (bottomInset > 0) {
-	            // キーボードが出ている → バーを上にずらす
-	            bar.style.bottom = `${bottomInset}px`;
-	        } else {
-	            // キーボードが閉じた → 最下部に固定
-	            bar.style.bottom = `0px`;
+	    function updateBar() {
+	        const scrollBottom = window.scrollY + window.innerHeight;
+	        const barHeight = bar.offsetHeight;
+	        // 画面最下部にバーを吸着させる
+	        bar.style.top = (scrollBottom - barHeight) + "px";
+	    }
+	
+	    function requestTick() {
+	        if (!ticking) {
+	            requestAnimationFrame(() => {
+	                updateBar();
+	                ticking = false;
+	            });
+	            ticking = true;
 	        }
 	    }
-	    // 初回呼び出し
-	    updateBarPosition();
-	    // visual viewport 変化に追従
-	    window.visualViewport.addEventListener('resize', updateBarPosition);
-	    window.visualViewport.addEventListener('scroll', updateBarPosition);
-	    window.addEventListener('scroll', updateBarPosition, { passive: true });
-	}
 	
+	    // 初期実行
+	    updateBar();
+	
+	    // イベント発生ごとに requestTick() を呼ぶ
+	    window.addEventListener('scroll', requestTick, { passive: true });
+	    window.addEventListener('resize', requestTick);
+	    if (window.visualViewport) {
+	        window.visualViewport.addEventListener('resize', requestTick);
+	        window.visualViewport.addEventListener('scroll', requestTick);
+	    }
+	}
+
+
     document.addEventListener('DOMContentLoaded', () => {
 
         // --- DROPBOX SYNC START ---
@@ -3615,7 +3623,7 @@
         totalEstimatedEndTimeEl.textContent = totalRemainingMinutes > 0 ? formatClockTime(new Date(now.getTime() + totalRemainingMinutes * 60 * 1000)) : '完了';
     }
 
-	setupFloatingBarViewportFix();
+	setupFloatingBarStick();
 
 	function renderFloatingTaskBar() {
 	    const bar = document.getElementById('floating-task-bar');
