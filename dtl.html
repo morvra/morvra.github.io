@@ -13,6 +13,7 @@
     <link href='./dtlicon.png' rel='apple-touch-icon'/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+		html, body { overscroll-behavior-y: contain; }
         body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
         
         /* header for desktop */
@@ -84,6 +85,7 @@
 
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
+			display: none;
 		    align-items: center;
 		    justify-content: space-between;
 			position: absolute;
