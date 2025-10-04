@@ -85,19 +85,18 @@
 
 		/* 新しいフローティングバーの基本スタイル */
 		#floating-task-bar {
-			display: none;
+		    display: none;
 		    align-items: center;
 		    justify-content: space-between;
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			will-change: transform;
-			transition: transform 80ms linear, opacity 0.25s ease-in-out; 
+		    position: absolute;
+		    left: 0;
+		    right: 0;
+		    top: 0;
+		    will-change: transform;
+		    transition: transform 80ms linear, opacity 0.25s ease-in-out;
 		}
 
 		#floating-task-bar.active {
-		    transform: translateY(0); /* activeクラスで表示位置へ */
 		    display: flex; /* 表示 */
 		}
 
@@ -132,13 +131,13 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
 
-        /* 同期ボタンコンテナのスタイル */
+		/* 同期ボタンコンテナのスタイル */
 		#sync-button-floating-container {
-		    position: absolute; /* fixedからabsoluteに変更し、JSで制御 */
+		    position: absolute;
 		    left: 16px;
+		    top: 0;
 		    z-index: 40;
-		    will-change: transform; /* 描画パフォーマンスを最適化 */
-		    /* スクロール追従を滑らかにするためのtransition */
+		    will-change: transform;
 		    transition: transform 80ms linear, opacity 0.3s ease-in-out;
 		}
 
@@ -483,10 +482,11 @@
     </main>
 </div>
 
-<div id="sync-button-floating-container" class="fixed bottom-24 left-4 z-40"></div>
+<div id="sync-button-floating-container"></div>
 <div id="add-task-floating-container"></div>
 
-<div id="floating-task-bar" class="fixed bottom-0 inset-x-0 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] h-20 px-4 z-50">
+<div id="floating-task-bar" class="bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] h-20 px-4 z-50">
+    <div id="floating-task-bar-content" class="flex items-center justify-between w-full h-full"></div>
 </div>
 
 <div id="add-task-modal" class="modal">
@@ -625,65 +625,70 @@
 
 <script>
 
-	// --- フローティング要素のキーボード追従と滑らかスクロール対策 ---
-	function setupFloatingElementsStick() {
-	    const bar = document.getElementById('floating-task-bar');
-	    const syncButtonContainer = document.getElementById('sync-button-floating-container');
-
-	    if (!bar || !syncButtonContainer) return;
-
-	    let ticking = false;
-
-	    function updateElementsPosition() {
-	        // visualViewport APIを優先的に使い、キーボード表示時のビューポートサイズ変更に対応
-	        const viewport = window.visualViewport || {
-	            height: window.innerHeight,
-	            offsetTop: window.scrollY
-	        };
-
-	        const viewportTop = viewport.offsetTop;
-	        const viewportHeight = viewport.height;
-
-	        // フローティングバーの位置計算 (transform: translateYを使用)
-	        const barHeight = bar.offsetHeight;
-	        const barY = viewportTop + viewportHeight - barHeight;
-	        bar.style.transform = `translateY(${barY}px)`;
-	        
-	        // 同期ボタンの位置計算 (スマホ表示時のみ)
-	        if (isMobile()) {
-	            const syncButtonHeight = syncButtonContainer.offsetHeight;
-	            // フローティングバーの上、16pxのマージンを空けて配置
-	            const syncButtonY = viewportTop + viewportHeight - barHeight - syncButtonHeight - 16;
-	            syncButtonContainer.style.transform = `translateY(${syncButtonY}px)`;
-	        } else {
-	             // PC表示ではtransformをリセット（CSSでfixedになるため）
-	             syncButtonContainer.style.transform = 'none';
-	        }
-	    }
-
-	    function requestTick() {
-	        if (!ticking) {
-	            requestAnimationFrame(() => {
-	                updateElementsPosition();
-	                ticking = false;
-	            });
-	            ticking = true;
-	        }
-	    }
-
-	    // 初期実行
-	    updateElementsPosition();
-
-	    // イベントリスナー
-	    window.addEventListener('scroll', requestTick, { passive: true });
-	    window.addEventListener('resize', requestTick);
-	    if (window.visualViewport) {
-	        window.visualViewport.addEventListener('resize', requestTick);
-	        window.visualViewport.addEventListener('scroll', requestTick);
-	    }
-	}
-
     document.addEventListener('DOMContentLoaded', () => {
+
+        // --- フローティング要素のキーボード追従と滑らかスクロール対策 ---
+		function setupFloatingElementsStick() {
+		    const bar = document.getElementById('floating-task-bar');
+		    const syncButtonContainer = document.getElementById('sync-button-floating-container');
+		
+		    if (!bar || !syncButtonContainer) return;
+		
+		    let ticking = false;
+		
+		    function updateElementsPosition() {
+		        if (!isMobile()) {
+		            // PC表示では固定位置なので何もしない
+		            bar.style.position = 'fixed';
+		            bar.style.bottom = '0';
+		            bar.style.transform = 'none';
+		            syncButtonContainer.style.transform = 'none';
+		            return;
+		        }
+		
+		        // スマホ表示時の処理
+		        const viewport = window.visualViewport || window;
+		        const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+		        const viewportHeight = viewport.height || window.innerHeight;
+		        
+		        // フローティングバーの位置計算
+		        const barHeight = bar.offsetHeight;
+		        const barY = scrollY + viewportHeight - barHeight;
+		        bar.style.position = 'absolute';
+		        bar.style.bottom = 'auto';
+		        bar.style.top = '0';
+		        bar.style.transform = `translateY(${barY}px)`;
+		        
+		        // 同期ボタンの位置計算
+		        const syncButtonHeight = syncButtonContainer.offsetHeight;
+		        const syncButtonY = scrollY + viewportHeight - barHeight - syncButtonHeight - 16;
+		        syncButtonContainer.style.position = 'absolute';
+		        syncButtonContainer.style.bottom = 'auto';
+		        syncButtonContainer.style.top = '0';
+		        syncButtonContainer.style.transform = `translateY(${syncButtonY}px)`;
+		    }
+
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        updateElementsPosition();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+
+            // 初期実行
+            updateElementsPosition();
+
+            // イベントリスナー
+            window.addEventListener('scroll', requestTick, { passive: true });
+            window.addEventListener('resize', requestTick);
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', requestTick);
+                window.visualViewport.addEventListener('scroll', requestTick);
+            }
+        }
 
         // --- DROPBOX SYNC START ---
         const dailyTaskListApp = window.dailyTaskListApp = {
@@ -3653,7 +3658,8 @@
 
 	function renderFloatingTaskBar() {
 	    const bar = document.getElementById('floating-task-bar');
-	    if (!bar) return;
+	    const barContent = document.getElementById('floating-task-bar-content'); 
+	    if (!bar || !barContent) return;
 
 	    // スマホ以外、またはモーダル表示中はバーを隠す
 	    if (!isMobile() || document.querySelector('.modal.active')) {
@@ -3673,14 +3679,14 @@
 
 	    if (!taskToDisplay) {
 			// 表示するタスクがない場合でも、バーと追加ボタンは表示する
-			bar.innerHTML = `
+			barContent.innerHTML = `
 				<div class="flex-1 px-3 min-w-0 flex items-center">
 					<p class="text-gray-500">全てのタスクが完了しました 🎉</p>
 				</div>
 				${addTaskButtonHtml}
 			`;
-			bar.classList.add('active');
-			bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
+			bar.classList.add('active'); // activeクラスは外側のバーに設定
+			barContent.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
 			return;
         }
 
@@ -3707,7 +3713,7 @@
                 ${buttonIcon}
             </button>`;
 
-	    bar.innerHTML = `
+	    barContent.innerHTML = `
             ${timerButtonHtml}
             <div class="flex-1 px-3 min-w-0 cursor-pointer" 
                  onclick="document.querySelector('[data-task-id=\\'${taskToDisplay.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
@@ -3716,9 +3722,9 @@
             ${addTaskButtonHtml}
         `;
 
-	    bar.classList.add('active');
-        bar.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
-        bar.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
+	    bar.classList.add('active'); // activeクラスは外側のバーに設定
+        barContent.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
+        barContent.querySelector('#add-task-btn-bar').addEventListener('click', openAddTaskModal);
 	}
 
     function handleKeyboardShortcuts(e) {
