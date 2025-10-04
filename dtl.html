@@ -639,56 +639,53 @@
 		    function updateElementsPosition() {
 		        if (!isMobile()) {
 		            // PC表示では固定位置なので何もしない
-		            bar.style.position = 'fixed';
+					bar.style.position = 'fixed';
 		            bar.style.bottom = '0';
-		            bar.style.transform = 'none';
-		            syncButtonContainer.style.transform = 'none';
+		            bar.style.top = 'auto';
+		            syncButtonContainer.style.position = 'fixed';
+		            syncButtonContainer.style.bottom = '24px';
+		            syncButtonContainer.style.top = 'auto';
 		            return;
 		        }
 		
 		        // スマホ表示時の処理
-		        const viewport = window.visualViewport || window;
-		        const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-		        const viewportHeight = viewport.height || window.innerHeight;
+		        // visualViewportではなく、window.scrollYとwindow.innerHeightを使用
+		        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+		        const viewportHeight = window.innerHeight;
+		        const scrollBottom = scrollY + viewportHeight;
 		        
 		        // フローティングバーの位置計算
 		        const barHeight = bar.offsetHeight;
-		        const barY = scrollY + viewportHeight - barHeight;
-		        bar.style.position = 'absolute';
-		        bar.style.bottom = 'auto';
-		        bar.style.top = '0';
-		        bar.style.transform = `translateY(${barY}px)`;
+		        bar.style.top = (scrollBottom - barHeight) + 'px';
 		        
 		        // 同期ボタンの位置計算
 		        const syncButtonHeight = syncButtonContainer.offsetHeight;
-		        const syncButtonY = scrollY + viewportHeight - barHeight - syncButtonHeight - 16;
-		        syncButtonContainer.style.position = 'absolute';
-		        syncButtonContainer.style.bottom = 'auto';
-		        syncButtonContainer.style.top = '0';
-		        syncButtonContainer.style.transform = `translateY(${syncButtonY}px)`;
+		        syncButtonContainer.style.top = (scrollBottom - barHeight - syncButtonHeight - 16) + 'px';
 		    }
-
-            function requestTick() {
-                if (!ticking) {
-                    requestAnimationFrame(() => {
-                        updateElementsPosition();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }
-
-            // 初期実行
-            updateElementsPosition();
-
-            // イベントリスナー
-            window.addEventListener('scroll', requestTick, { passive: true });
-            window.addEventListener('resize', requestTick);
-            if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', requestTick);
-                window.visualViewport.addEventListener('scroll', requestTick);
-            }
-        }
+		
+		    function requestTick() {
+		        if (!ticking) {
+		            requestAnimationFrame(() => {
+		                updateElementsPosition();
+		                ticking = false;
+		            });
+		            ticking = true;
+		        }
+		    }
+		
+		    // 初期実行
+		    updateElementsPosition();
+		
+		    // イベントリスナー
+		    window.addEventListener('scroll', requestTick, { passive: true });
+		    window.addEventListener('resize', requestTick);
+		    
+		    // visualViewportのイベントも追加（キーボード表示時の対応）
+		    if (window.visualViewport) {
+		        window.visualViewport.addEventListener('resize', requestTick);
+		        window.visualViewport.addEventListener('scroll', requestTick);
+		    }
+		}
 
         // --- DROPBOX SYNC START ---
         const dailyTaskListApp = window.dailyTaskListApp = {
