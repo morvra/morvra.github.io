@@ -788,6 +788,12 @@
 					const driveDailyTasks = importedData.dailyTasks || {};
 					const localDailyTasks = state.dailyTasks;
 					const allDailyDates = new Set([...Object.keys(localDailyTasks), ...Object.keys(driveDailyTasks)]);
+
+					const sortedDates = Array.from(new Set([
+					    ...Object.keys(state.dailyTasks), 
+					    ...Object.keys(state.archivedTasks)
+					])).sort();
+					const repeatTaskCompletionMap = new Map();
 					
 					allDailyDates.forEach(date => {
 					    const localTasksForDate = localDailyTasks[date] || [];
@@ -901,11 +907,6 @@
                         state.archivedTasks[date] = Array.from(taskMap.values());
                     });
                     // --- End of archivedTasks Merge Logic ---
-
-					// --- リピートタスク重複削除処理（archivedTasksも考慮） ---
-					const allDates = new Set([...Object.keys(state.dailyTasks), ...Object.keys(state.archivedTasks)]);
-					const sortedDates = Array.from(allDates).sort();
-					const repeatTaskCompletionMap = new Map(); // key: originRepeatId, value: 完了した最新の日付
 					
 					// 各リピートタスクの完了状態を収集
 					sortedDates.forEach(date => {
