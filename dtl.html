@@ -3792,14 +3792,51 @@
                 ${buttonIcon}
             </button>`;
 
-	    barContent.innerHTML = `
-            ${timerButtonHtml}
-            <div class="flex-1 px-3 min-w-0 cursor-pointer" 
-                 onclick="document.querySelector('[data-task-id=\\'${taskToDisplay.id}\\']')?.scrollIntoView({behavior: 'smooth', block: 'center'})">
-                ${taskInfoHtml}
-            </div>
-            ${addTaskButtonHtml}
-        `;
+		barContent.innerHTML = `
+		    ${timerButtonHtml}
+		    <div class="flex-1 px-3 min-w-0 cursor-pointer" 
+		         id="floating-task-info"
+		         data-task-id="${taskToDisplay.id}">
+		        ${taskInfoHtml}
+		    </div>
+		    ${addTaskButtonHtml}
+		`;
+		
+		// タップイベントのハンドリングを追加
+		const taskInfoArea = barContent.querySelector('#floating-task-info');
+		if (taskInfoArea) {
+		    let tapCount = 0;
+		    let tapTimer = null;
+		    
+		    taskInfoArea.addEventListener('click', (e) => {
+		        e.preventDefault();
+		        tapCount++;
+		        
+		        if (tapCount === 1) {
+		            tapTimer = setTimeout(() => {
+		                // シングルタップ: スクロール
+		                const taskElement = document.querySelector(`[data-task-id='${taskToDisplay.id}']`);
+		                if (taskElement) {
+		                    taskElement.scrollIntoView({behavior: 'smooth', block: 'center'});
+		                }
+		                tapCount = 0;
+		            }, 300); // ダブルタップ判定のための待機時間
+		        } else if (tapCount === 2) {
+		            // ダブルタップ: メモ編集モーダルを開く
+		            clearTimeout(tapTimer);
+		            openMemoEditModal(taskToDisplay.id);
+		            tapCount = 0;
+		        }
+		    });
+		    
+		    // タッチイベントでの処理も追加（モバイル対応）
+		    taskInfoArea.addEventListener('touchend', (e) => {
+		        // clickイベントと重複しないように制御
+		        if (e.cancelable) {
+		            e.preventDefault();
+		        }
+		    });
+		}
 
 	    bar.classList.add('active'); // activeクラスは外側のバーに設定
         barContent.querySelector('#floating-timer-btn').addEventListener('click', () => toggleTimer(taskToDisplay.id));
