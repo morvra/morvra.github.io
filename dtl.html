@@ -3802,39 +3802,36 @@
 		    ${addTaskButtonHtml}
 		`;
 		
-		// タップイベントのハンドリングを追加
+		// タップイベントのハンドリング
 		const taskInfoArea = barContent.querySelector('#floating-task-info');
 		if (taskInfoArea) {
-		    let tapCount = 0;
-		    let tapTimer = null;
-		    
+		    let clickTimer = null;
+		    const delay = 250; // ダブルタップの待機時間 (ミリ秒)
+
 		    taskInfoArea.addEventListener('click', (e) => {
 		        e.preventDefault();
-		        tapCount++;
-		        
-		        if (tapCount === 1) {
-		            tapTimer = setTimeout(() => {
-		                // シングルタップ: スクロール
+		        // ダブルタップでないことを確認するため、タイマーを設定
+		        if (clickTimer === null) {
+		            clickTimer = setTimeout(() => {
+		                clickTimer = null;
+		                // タイマーが実行されたらシングルタップと判断し、スクロール処理を実行
 		                const taskElement = document.querySelector(`[data-task-id='${taskToDisplay.id}']`);
 		                if (taskElement) {
-		                    taskElement.scrollIntoView({behavior: 'smooth', block: 'center'});
+		                    taskElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		                }
-		                tapCount = 0;
-		            }, 300); // ダブルタップ判定のための待機時間
-		        } else if (tapCount === 2) {
-		            // ダブルタップ: メモ編集モーダルを開く
-		            clearTimeout(tapTimer);
-		            openMemoEditModal(taskToDisplay.id);
-		            tapCount = 0;
+		            }, delay);
 		        }
 		    });
-		    
-		    // タッチイベントでの処理も追加（モバイル対応）
-		    taskInfoArea.addEventListener('touchend', (e) => {
-		        // clickイベントと重複しないように制御
-		        if (e.cancelable) {
-		            e.preventDefault();
+
+		    taskInfoArea.addEventListener('dblclick', (e) => {
+		        e.preventDefault();
+		        // シングルタップ用のタイマーが設定されていれば、それを解除
+		        if (clickTimer) {
+		            clearTimeout(clickTimer);
+		            clickTimer = null;
 		        }
+		        // ダブルタップの処理（メモ編集モーダル表示）を実行
+		        openMemoEditModal(taskToDisplay.id);
 		    });
 		}
 
