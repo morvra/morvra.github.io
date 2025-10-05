@@ -222,7 +222,7 @@
         .search-result-meta { font-size:0.85rem; color:#6b7280; }
 
         @media (max-width: 768px) {
-            .sections-wrapper { padding-bottom:140px; }
+            .tab-content.active { padding-bottom:160px; }
             .task-card-wrapper {
                 space-y: 0.5rem; 
             }
@@ -2409,10 +2409,10 @@
         tableHtml += `<thead class="bg-gray-50">
                     <tr>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">タスク</th>
-                        <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">実績時間</th>
+                        <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-20">実績時間</th>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">開始</th>
                         <th class="py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">終了</th>
-                        <th class="py-2 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                        <th class="py-2 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-24">操作</th>
                     </tr>
                  </thead><tbody>`;
 
@@ -3122,7 +3122,7 @@
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="py-2 px-4 border-b w-8"></th>
-                        <th class="py-2 px-4 border-b">プレビュー</th>
+                        <th class="py-2 px-4 border-b w-20">色</th>
                         <th class="py-2 px-4 border-b text-left">プロジェクト名</th>
                         <th class="py-2 px-4 border-b">操作</th>
                     </tr>
