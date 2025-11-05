@@ -24,8 +24,8 @@ jobs:
 
     - name: Run script to generate data
       env:
-        DYNALIST_TOKEN: ${{ secrets.DYNALIST_TOKEN }} # Dynalistトークンを環境変数に設定
-      run: node getData2.js # 修正したJavaScriptスクリプトを実行
+        DYNALIST_TOKEN: ${{ secrets.WORKFLOWY_API_KEY }} # WorkflowyのKeyを環境変数に設定
+      run: node getDataWf.js # JavaScriptスクリプトを実行
 
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9 # 生成されたファイルをコミット・プッシュするアクション
