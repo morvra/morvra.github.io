@@ -1,274 +1,117 @@
 {
 	"articles": [
 		{
-			"id": "7LmTlvBllIw4OmoG0exJ4gQ0",
-			"title": "記事テスト",
-			"date": "2024-03-29",
+			"id": "07336641-83b2-2986-4c11-e73930e66734",
+			"title": "ウマ娘 温泉シナリオで初のUS！",
+			"date": "2025-11-01",
 			"tags": [
-				"ブログ"
+				"ウマ娘"
 			],
-			"body": "<p>本文</p><h2>見出しh2</h2><p>ほんぶんほんぶん</p><p>ほんぶん２</p><p><strong>太字</strong> ほげ〜</p><ul><li>中黒つき１</li></ul><ul><li>中黒つき1-1</li></ul><ul><li>中黒つき1-2</li></ul><ul><li>2</li></ul><ul><li>2-2</li></ul><ul><li>3</li></ul><p>見出しにかかわらない本文</p><blockquote><p>引用</p></blockquote><p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p><p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p><p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://morvra.github.io/article?id=2BSuXiPppMezZeBA0lpI7sIh\">記事テスト2</a></p>"
+			"body": "<p>しかもUS1まで！</p><p>目標レース多い＆レースボーナスバフのあるイクノディクタスで達成。</p><p><img src=\"https://gyazo.com/eafac470cea39ff7b396fecbe4e2ab3e/thumb/800\" alt=\"Image\"></p><p>保科無凸＆賢さ抜きでもSS行けたし査定は満足。あとは競技場育成しつつオートでチャンミの因子周回するかな。</p><p>育成のコツとしては</p><ul><li>青因子はスピ4パワ2</li><li>掘削の順番は疾駆→明晰→堅忍（途中）→天翔→剛脚→健壮（途中）→<strong>秘湯ゆこま</strong>→健壮（再開）→伝説の秘湯→堅忍（再開）</li><li>目標レースは必ず温泉バフを乗せて走る</li><li>入浴券使用はなるべく超回復つくまで粘る</li><li>シニアの秘湯ゆこま以降は温泉バフを切らさずレースと練習を踏み続けたい</li><li>保科のお出かけはトレーニング弱くてかつ超回復になっていない時がベスト<ul><li>だけど入浴券補充でも使う</li></ul></li><li>PRは序盤の練習orPRで掘る回数変わらない時に補充したければ</li></ul><p>って感じ。</p><p>因子と掘削の順番はまだまだ謎。キャラとかサポカによっても最適解は違ってきそう。</p>"
 		},
 		{
-			"id": "uVd0FvsIz5xGXZkp1GR93wB3",
-			"title": "About",
-			"date": "2024-03-30",
-			"tags": [],
-			"body": "<h2>このサイトについて</h2><p>morvra（もーぶら）がなんでも書く場所です。</p><p>RSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> で発行してます。</p><h2>morvra</h2><p><img src=\"https://gyazo.com/821ae163e2ae917475d3dc5fe2b94732/thumb/350#.png\" alt=\"icon\"></p><p>インターネットとテキストが好きです。アイコンは<a href=\"https://designer.microsoft.com/image-creator\" target=\"_blank\">Microsoft Designer</a>製。</p><h2>お問い合わせ</h2><p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p><h2>Amazonアソシエイト・プログラムに参加しています。</h2><p>morvra listはamazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイト宣伝プログラムである、Amazonアソシエイト・プログラムの参加者です。</p><h2>Google AdSenseに参加しています。</h2><p>morvra listは広告としてGoogle AdSenseを使用しています。 Google Adsenseはデータを収集するために、Cookieやウェブビーコンを使用して広告配信をしています。</p><p>Cookieを使用することにより、インターネットにおけるご自身のサイトや他のサイトへのアクセス情報に基づいてユーザーに広告を配信することが可能になります。</p><p>情報提供を望まない場合は、Googleのポリシーと原則のページより、Cookieオプションを使用しないように設定することができます。</p>"
-		},
-		{
-			"id": "5ZUWNwNzv2znrzOoVJHebkQz",
-			"title": "Hello world!",
-			"date": "2024-03-30",
-			"tags": [
-				"ブログ"
-			],
-			"body": "<p>こんにちは。morvra（もーゔら）と言います。</p><p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p><p>サイトの構築はNoratetsu Houseさんの連載（<a href=\"https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB\" target=\"_blank\">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p><p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p><p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p><p>今後は記事を更新しつつ、</p><ul><li>タグ機能</li></ul><ul><li>RSSフィードの配信</li></ul><ul><li>デザインを洗練</li></ul><p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>"
-		},
-		{
-			"id": "mswxR_4Gsgxy2JxyXF4vUFis",
-			"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！",
-			"date": "2024-04-10",
-			"tags": [
-				"hearthstone"
-			],
-			"body": "<p><img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\"></p><p>久々のレジェンドなので記念に投稿。</p><h2>デッキリスト</h2><p><img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\"></p><p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p><p>ETCの中身は</p><ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul><ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul><ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul><h2>デッキの使用感</h2><p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p><p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p><p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p><p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p><h2>構築について</h2><p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p><h3>パッチーズ不採用</h3><p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p><p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p><h3>ETC</h3><p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p><p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p><h3>ダスクブレイカー2積みの是非</h3><p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p><p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p><p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
-		},
-		{
-			"id": "Wd5eV3mQ6K5BDQFZlXUbPQB9",
-			"title": "Dynalistの構造 Ver.202404",
-			"date": "2024-04-20",
-			"tags": [
-				"dynalist"
-			],
-			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p><p>現時点（2024年4月）はこんな感じだよって記録。</p><p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p><h2>📆 Days</h2><p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p><p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p><h2>🧭 ALL</h2><p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p><h2>🌏 Blog</h2><p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p><h2>📔 Notes</h2><p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p><h2>🗄 Collections</h2><p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p><p>ここの階層やグルーピングが悩み。</p><h2>📚 Reference</h2><p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p><p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p><h2>Archives</h2><p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p><p>▼ 参考</p><ul><li><a href=\"https://amzn.to/3xREGWY\" target=\"_blank\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul><ul><li><a href=\"https://bulletjournal.com/\" target=\"_blank\">Bullet Journal</a></li></ul><ul><li><a href=\"https://workflowy.com/systems/para-method/\" target=\"_blank\">PARA Method - Workflowy guide</a></li></ul>"
-		},
-		{
-			"id": "dg1tAwAqsiF0TKwY5qoiSjkB",
-			"title": "『ようこそ！FACT（東京S区第二支部）へ』読んだ",
-			"date": "2024-04-21",
-			"tags": [
-				"漫画"
-			],
-			"body": "<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p><p><a href=\"https://amzn.to/4b6auGe\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ\"></a><br/><a href=\"https://amzn.to/4b6auGe\" target=\"_blank\" rel=\"nofollow\">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p><p><a href=\"https://www.youtube.com/watch?v=ymfdEbvDK7M\" target=\"_blank\">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p><h3>感想</h3><p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p><p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p><p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p><p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p><p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p><p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p><p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p><p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p><p>と思ったらインタビュー（<a href=\"https://unique.kaonavi.jp/2489/\" target=\"_blank\">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p><blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote><p>と語られていて腹落ち。</p><p>全30話で読みやすいので気になる方は是非。<a href=\"https://manga-one.com/\" target=\"_blank\">マンガワン</a>で全話読めます。</p><p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>"
-		},
-		{
-			"id": "BhnDRx9Dezi5UmMjFRmrkac4",
-			"title": "このサイトのRSSフィードを作った",
-			"date": "2024-06-11",
-			"tags": [
-				"ブログ"
-			],
-			"body": "<p>発行しているRSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> です。</p><p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p><p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p><ul><li><a href=\"https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html\" target=\"_blank\">XML用語事典 [CDATAセクション]</a></li></ul>"
-		},
-		{
-			"id": "6N_7gocKoNZ2mFlvGv-UNL6i",
-			"title": "学園アイドルマスター雑感",
-			"date": "2024-06-14",
-			"tags": [
-				"ゲーム"
-			],
-			"body": "<p>食指が動いたらとりあえず触ってみる勢。現在実装済み10人TrueEnd（＋5人親愛度10）見れて一段落したので感想書いてみる。</p><h3>ゲーム性</h3><ul><li>育成はデッキ構築型ローグライク</li></ul><ul><li>メモリーというハクスラ要素</li></ul><ul><li>ソシャゲ</li></ul><ul><li>対人はコンテストというCPU同士のスコアアタックとアイドルごとの評価点ランキング</li></ul><p>こんな感じ。一言でいうならウマ娘から競走抜いてスレスパ入れたアイマス。</p><p>最適なムーブがわかってくると単なる周回ゲーになりそうだけど、それを探ってく楽しみはあるし、自己ベストスコア目指すのも今んとこおもしろい。</p><h3>ストーリー</h3><p>アイマス初体験なのでアイドルとPの関係が新鮮。独特な疑似恋愛っぽさがゾワゾワくるものの、そういうもんだって分かればだんだんおもしろくなってくる。（いわゆる“なろう系”もそうだったけど、第一印象の肌感覚がいまいちでも案外楽しめる）</p><p>ひたむきな姿ってやっぱいいよなって。</p><hr><p>あとは育成ではアイドルとP（自分）の関係性がメインに描かれるけど、アイドル同士の関係性わかってきて二次創作の漫画をニヤニヤ読めるのも楽しい。</p><p>システム的なことを言うと、短めの話がすこしずつ進むのでゲームを進行したいのにできない、みたいなストレス無くて良い。</p><p>現在PLv33。全員分の親愛度10とSランク達成目指してまったり遊んでく！</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/2a/3a/052a3a07-ad4c-ab03-ff3e-abd0eaa34dfa/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/512x512bb.jpg\" alt=\"学園アイドルマスター\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">学園アイドルマスター</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">Bandai Namco Entertainment Inc.</span></div><div id=\"appreach-price\" style=\"font-size: 80%; display: inline-block;\">無料</div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/%25E5%25AD%25A6%25E5%259C%2592%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2589%25E3%2583%25AB%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC/id6446659989?uo=4\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=com.bandainamcoent.idolmaster_gakuen\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
-		},
-		{
-			"id": "A6kX0EbDqq6dpEEwYHGtLu-8",
-			"title": "『世界は宗教で動いてる』読んだ",
-			"date": "2024-07-21",
-			"tags": [
-				"本"
-			],
-			"body": "<p><a href=\"https://amzn.to/3WglxXi\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4334037488.09.LZZZZZZZ\"></a></br><a href=\"https://amzn.to/3WglxXi\" target=\"_blank\" rel=\"nofollow\">世界は宗教で動いてる (光文社新書) 新書 – 2013/6/18</a></p><p>講義の形式で、ユダヤ教・キリスト教・イスラム教・儒教・ヒンドゥー教・仏教（日本式も含めて）・神道など、様々な宗教について、社会とのつながりを主軸として概要が解説されている。</p><p>特にキリスト教については、欧米の社会システムの基盤になっているのが分かるよう詳しく解説している。</p><hr><p>既知の内容が多かったこともありサクサク読めた。身近な宗教を大まかに知りたい人にとっては丁度いい内容だと思う。ただ世界史とか倫理（？）ある程度分かってないととっつきにくいかもしれない。</p><p>あと、教義や歴史については参考文献もあるしこれまでの知識としても大まかには確からしいと言えそうなんだけど、「〇〇人（〇〇教）は〇〇と考える」みたいな部分については俗説とか経験則って印象で話半分で読むのが良いかもとは思った。</p><p>中国の儒教と仏教のコンクリフト、国学の成り立ちあたりが刺さったのでいろいろ読みたくなったな。</p>"
-		},
-		{
-			"id": "udmewyRskBgjPapKb1uu5QbB",
-			"title": "サイトのタイトルとアイコンを変更",
-			"date": "2024-07-29",
-			"tags": [
-				"ブログ"
-			],
-			"body": "<p>このサイトの名前を morvra から morvra lists へ変更した。</p><ul><li>ユーザー名だけはシンプルすぎて変えたかった</li></ul><ul><li>テーマを絞らず何でも書きたいので汎用性ある名前に</li></ul><ul><li>箇条書き好き</li></ul><p>ってことで morvra <strong>lists</strong> に。</p><p>それに伴い各種アイコンを変更してヘッダーにも設置。WorkflowyやDynalistのBullet Pointsを参考に、ドット絵を作るアプリで作成した。</p><p>▼ これ</p><p><img src=\"https://i.gyazo.com/47c789525a66749f187c173dd6cd1284.png\" alt=\"Image\"></p><p>好きなカードや動物モチーフとか、AIに小洒落たロゴの作成を頼んだりもしたんだけど結局シンプルな形に落ち着いた。</p>"
-		},
-		{
-			"id": "cZnOIW2AYuY1VArdBGQXOf2h",
-			"title": "中動態についてメモ",
-			"date": "2024-10-13",
+			"id": "f145e6e9-da65-9afe-fd29-58637fc3a57d",
+			"title": "ニュウマン高輪のニュウマンとは？",
+			"date": "2025-10-11",
 			"tags": [
 				"言葉"
 			],
-			"body": "<ul><li><a href=\"https://ja.wikipedia.org/wiki/%E4%B8%AD%E5%8B%95%E6%85%8B\" target=\"_blank\">中動態 - Wikipedia</a></li></ul><blockquote><p>動詞の表す行為が、その行為者自身に及ぶ場合にとる形態的特徴のことである。形は能動態であるが、受動態の意味を表わす態を指すとも説明される。以前は、voiceを態でなく、相（そう）とも訳しており、中動相（ちゅうどうそう）とも呼ばれた。</p></blockquote><p><a href=\"https://wineroses.hatenablog.com/entry/2024/10/13/102737\" target=\"_blank\">自分の心を震わせるもの - Jazzと読書の日々</a> にて気になったワード。ググっていろいろ読んだけどなかなか掴みきれず。</p><p>そんな中でもわりとわかりやすかったのは以下2つのページ。</p><ul><li><a href=\"https://www.ikuno.ed.jp/principalNote/detail/76/\" target=\"_blank\">「中動態の世界」を読んで</a></li></ul><blockquote><p>中動態と能動態を分けていた区別とは「主体がその過程の中にあるか外にあるか」ということで、主体がその過程の中にあるのが中動態、外にあるのが能動態</p></blockquote><blockquote><p>例えば「与える」とか「曲げる」といった動詞の場合、その行為は主体の外で完結するので能動態になります。一方「欲する」とか「希望する」といった動詞の場合は「心のなかから欲望や希望が湧き上がる過程」の中に主体があるので中動態になるそうです。言い換えると中動態に属するのは主体の中で成し遂げられる何事かであり「生まれる」「成長する」「想像する」など重要なものが多く含まれていたようです。</p></blockquote><ul><li><a href=\"http://igs-kankan.com/article/2019/10/001185/\" target=\"_blank\">第1回　20分でわかる中動態――國分功一郎｜かんかん！ -看護師のためのwebマガジン by 医学書院-</a></li></ul><blockquote><p>実は中動態のことを知ると、当たり前のものと思えていた能動と受動の対立が実は非常に不便なものであることがわかってくるのです。僕がよくあげる例は、「惚れる」です。</p></blockquote><blockquote><p>僕が最も強調し、また強く批判的に論じたのは「意志will」という概念です。「する」と「される」の対立、能動と受動の対立は意志の概念と強く結びついているのではないかというのが、僕が本の中で提示した仮説でした。</p></blockquote><blockquote><p>意志とは何ものにも影響されていない、純粋に自発的なものだと僕らは思い込んでいます。しかし、純粋に自発的なものが人間の心の中にあるはずがありません。心は過去とつながっているし、周辺から常に影響を受け続けている。</p></blockquote><p>（中動態からは外れるけどこの連載がめちゃくちゃおもしろかったのでおすすめ。中庸が好きな自分のツボにはまった。）</p><p>「中動態」を知ることで能動／受動で捉えがちな人の蒙が啓かれるのがすごくわかる。</p><p>意志という言葉がすごく能動的な意味を含んでいて、それによって自分をコントロールしている（できる）と考えられがちだけど、案外そうでもないよねっていう。</p>"
+			"body": "<p>2025-09-12本格オープンのニュウマン高輪。なんか響きが気になったので調べた。</p><p>new + woman/man を合わせて NEWoMan らしい</p><blockquote><p>「あたらしい時代を生きる、すべてのあたらしい女性のために。あたらしい経験と出合う場所」というコンセプト。</p></blockquote><p>* <a href=\"https://namae.co.jp/news_letter/1833/\" target=\"_blank\">VOL.163 「フック」の効いたネーミング – 日本ネーミング&リサーチ</a></p><p>音で聴いた印象で単なる new man じゃないんだろうなと思ってたけど、英語由来の謎の造語だった。女性のWomanを強調してるのね。</p><p>* <a href=\"https://ja.wikipedia.org/wiki/NEWoMan\" target=\"_blank\">NEWoMan - Wikipedia</a></p><p>ちなみにJR東日本の連結子会社でルミネが運営してた。知らなかった〜。</p>"
 		},
 		{
-			"id": "8BPLVWIM5hoL6dnKnoBkn6WU",
-			"title": "『考えの育て方: 知的生産のデジタルカード法』読んだ",
-			"date": "2024-10-27",
-			"tags": [
-				"本"
-			],
-			"body": "<p><a href=\"https://www.amazon.co.jp/dp/B0CLTZYMBR/?tag=morvra-22\" target=\"_blank\"><img src=\"https://m.media-amazon.com/images/I/31zgOPovoBL._SL200_.jpg\" alt=\"B0CLTZYMBR\" border=\"0\" /></a><br><a href=\"https://www.amazon.co.jp/dp/B0CLTZYMBR/?tag=morvra-22\" target=\"_blank\">考えの育て方: 知的生産のデジタルカード法 (Knowledge Walkers Books)</a></p><blockquote><p>「いかにすれば、デジタルツールでカード法を実践できるのか？」</p></blockquote><p>について、著者の「考えを育てる」ことについての探求の道程が、EvernoteからScrapbox（現Cosense）へというツールの遍歴とともに書かれている。</p><p>面白かった〜。</p><p>発想を書き留めた（1ワードや1センテンスの）メモと思考を書いたカードは違う、とか言われてみれば自明なんだけど、言語化されるまで意識できてなかった。</p><p>カードはネタ帳やアウトプットのための「素材」ではなく、今の考えを記し混沌の中で過去の自分と対話し、つながりを発見し、長期的に考えを育てていくためにある。ということが繰り返し書かれている。</p><h2>『考えの育て方』というタイトル、シンプルながら本質的でよい</h2><p>梅棹式カードシステムをデジタルでやるなら？ってことと真摯に向き合い続けた結果が、このタイトルにつまっていると思う。</p><p>肝心なのは情報を整理することではなく、<strong>考えを育てる</strong>ことなんだっていう。本文中で何度も何度も形を変えて言及されている。それだけハマりやすい罠なんだよな。Evernoteから始まった影響もあるだろうけど。</p><p>自分もEvernoteのノートブックの構成を延々考えたり、アウトライナーで全部やろうとしたり、はたまたローカルのファイルがいいのか、とか色々試行錯誤しているのでめっちゃ共感しながら読めた。</p><h2>デジタル・カード・システムとアウトライン</h2><p>脱文脈的かつリンク的なつながりを育てるものと、文脈的かつリニアな流れを構成するものの差異。</p><p>自分が一番触っているツールは間違いなくアウトライナーなのでここも刺さった。</p><p>アウトライナーでデジタルカードシステムをやろうとするのってアリ？ナシ？とモヤモヤしていたんだけど、本書を読んで（少なくともCosenseよりは）不適当だと確信した。</p><p>2hopリンクは無く、強制的に構造化される。フラットにしようと思えばできるけど、そうすると一覧した時にCosenseよりだいぶ滅入る。などなど。</p><p>ただ、ネタ帳にはむしろ向いてるかもなと思ったりもした。書きそうなテーマを並べて混ぜながら考えられるのはよい。シェイクはCosenseよりアウトライナーの方が起こりやすい。</p><hr><p>\"Gradual\"を意識して生きようと考えてたタイミングの今読めてよかった。</p>"
-		},
-		{
-			"id": "ShWNfCw0oGHIQDx50MbmcBwx",
-			"title": "DynalistからCosenseに投稿するBookmarklet",
-			"date": "2024-10-29",
-			"tags": [
-				"dynalist",
-				"cosense"
-			],
-			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p><p>上のスクリプトを元にChatGPT頼りつつ改造。</p><p>▼ コード</p><p><code>javascript:(function(){function DL2CS(projectName, indentLinks){function formatQuote(note){return note.split(/\\r\\n|\\r|\\n/).map(line=>\"> \"+line).join(\"\\n\")+\"\\n\"}function convertMarkdownLinks(text){return text.replace(/\\[(.<em>?)\\]\\((.</em>?)\\)/g,'[$1 $2]')}if(location.host===\"dynalist.io\"&&projectName){const root=DYNALIST.app.app_document.ui.current_root;const meta=root.get_meta_object();const content=meta.get_content()||\"Undefined\";const note=meta.get_note()?formatQuote(meta.get_note()):\"\";const children=(function getChildren(indentation,items){return items.map(item=>{const childMeta=item.get_meta_object();return indentation+childMeta.get_content()+\"\\n\"+(childMeta.get_note()?formatQuote(childMeta.get_note()):\"\")+getChildren(indentation+\" \",item.get_children().children);}).join(\"\")}(indentLinks?\" \":\"\",root.get_children().children));const url=\"https://scrapbox.io/\"+projectName+\"/\"+encodeURIComponent(content);const body=convertMarkdownLinks(note+children);window.open(url+\"?body=\"+encodeURIComponent(body),'_blank')}}DL2CS(\"YOUR-PROJECT\",true);})();</code></p><ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\" target=\"_blank\">DynalistからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li></ul><ul><li>階層はそのまま</li></ul><ul><li>ノートは引用符</li></ul><ul><li>マークダウンのリンクをCosenseの記法に置換</li></ul><h2>使用方法</h2><ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li></ul><ul><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
-		},
-		{
-			"id": "smxzQNX17ukXVWQiw9coKleo",
-			"title": "MECE",
-			"date": "2024-11-02",
-			"tags": [
-				"言葉"
-			],
-			"body": "<p>ミーシー。</p><p>「MECEになってる、なってない」みたいな表現あるけどちゃんとした意味わかってないので記録がてら投稿。</p><ul><li><a href=\"https://ja.wikipedia.org/wiki/MECE\" target=\"_blank\">MECE - Wikipedia</a></li></ul><blockquote><p>MECE（ミーシー (Mee-cee); 英語: Mutually Exclusive, Collectively Exhaustive）とは、「相互に排他的な項目」による「完全な全体集合」を意味する頭字語である。要するに「漏れなく・ダブりなく」という意味で、経営学や経営コンサルティングなどの領域でよく使われる言葉である。</p></blockquote><blockquote><p>人間という集合を例にとると、「年齢」による分類は、ある人が同時に20歳と21歳になることは不可能（重複なし）であり、全ての人がX歳という集団に属する（漏れなし）ため、MECEとなる。一方、「職業」による分類は、兼業を行う人間（重複）もいれば無職の人間（漏れ、ただし職業として「無職」という項目を設けるとすれば、漏れはなくなる）もいるためMECEとならない。</p></blockquote><p>Mutually（互いに） Exclusive（排他的）, Collectively（集合的に） Exhaustive（網羅的） の頭字語だった。</p><p>覚えられる気はしない。「漏れとダブりがない集合」くらいの理解はしときたい。</p><p>人に言うときは「相互に排他的な項目」による「完全な全体集合」って説明でなるほどと思える人にはそれでいいけど、雰囲気ちょい難しげなので例もあげられると尚良し。</p>"
-		},
-		{
-			"id": "edY9ji7ctO9ues5WHvchNq3J",
-			"title": "ポケポケ始めた",
-			"date": "2024-11-13",
-			"tags": [
-				"ポケポケ",
-				"ゲーム"
-			],
-			"body": "<p>DCGとりあえず触る勢。初日からちまちま引いてたんだけどなかなかちゃんとしたデッキ組めなくて対人要素は手を出してなかった。</p><p>我慢できずにサーナイトを2枚交換して、ミュウツーEXデッキを組んでイベントの対人戦回してる。今んとこの雑感をメモ。</p><p>▼ 使ってるデッキ（ by <a href=\"https://gamewith.jp/pokemon-tcg-pocket/464280\" target=\"_blank\">デッキシミュレーター - ゲームウィズ</a> ）</p><p><img src=\"https://gyazo.com/66bd55ebd49eca48071db1dca0571f38/thumb/500#.png\" alt=\"Image\"></p><p>初日にミュウツーEXのイマーシブ引けたのでせっかくならとミュウツーパック中心に引いてた。ピン挿し多いのはお試しで強さみて増減予定。</p><h2>雑感</h2><p>対戦のシステムはMARVEL SNAPの影響をめちゃくちゃ感じる。ポケカをマベスナライクに実装したらこうなるだろうなっていう。</p><ul><li>1戦の時間が短め</li></ul><ul><li>エネルギーは毎ターン自動</li></ul><ul><li>RNG要素が多くそれが勝敗に直結（先行/後攻・カスミ・ガラガラEX・サンダーEXなどなど）</li></ul><ul><li>フィールドは狭く縦画面で遊べる</li></ul><ul><li>操作で端末が振動</li></ul><p>総じてガチガチの競技志向というより1戦1戦のわちゃわちゃを楽しむゲームになっている印象。理不尽な要素も多いけどそれはお互い様で、だからこそ面白い。</p><p>もちろんガチの楽しさもあるけど繊細な構築やプレイングをぶっ飛ばす要素が多い。勝率を上げることはできても負けないのは無理なバランス。</p><hr><p>あとはバトルだけじゃなく開封とコレクションの楽しさも重視してるのがこれまでのDTCGと一線を画してる。</p><ul><li>開封の際は複数のパックから選択</li></ul><ul><li>パックの上部をスワイプしてリアルに開封</li></ul><ul><li>カードをずらしてレアをチラ見</li></ul><ul><li>お気に入りのカードをファイルやボードに飾れる</li></ul><p>などなど。かなりフィジカル？な楽しさを押してきてる。</p><p>開封のワザップがYoutubeやXで流行ってるのもこれまでに無かった体験で楽しい。自分も何の意味もないと思いつつ、回したりパックの折れ見て引いてるｗ</p><p>■</p><p>サクッと対戦できてコレクションとして遊ぶ楽しさもあり、スキマ時間にやるスマホゲーとしてハイクオリティだと思う。ゆるくやっていこう。</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6c/43/bc/6c43bcf3-dc72-a7d4-9d5c-5a06900eff1b/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg\" alt=\"Pokémon TCG Pocket\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">Pokémon TCG Pocket</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">The Pokemon Company</span></div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/pok%25C3%25A9mon-tcg-pocket/id6479970832?uo=4\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=jp.pokemon.pokemontcgp\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
-		},
-		{
-			"id": "tm1Ukar5u-W_912rpgKVHYUi",
-			"title": "兵庫県知事選で斎藤元彦元知事が当選",
-			"date": "2024-11-17",
-			"tags": [
-				"ニュース"
-			],
-			"body": "<ul><li><a href=\"https://www.asahi.com/articles/ASSCJ2D9LSCJOXIE010M.html\" target=\"_blank\">兵庫県知事選、斎藤元彦氏が再選　議会や職員と「謙虚に丁寧にやる」 [兵庫県]：朝日新聞デジタル</a></li></ul><ul><li><a href=\"https://mainichi.jp/articles/20241117/k00/00m/010/184000c\" target=\"_blank\">斎藤前知事の「劇場型選挙」　支えたSNSの“奇兵隊”　兵庫知事選 | 毎日新聞</a></li></ul><ul><li><a href=\"https://news.yahoo.co.jp/articles/5f84e72695f3b434575de6ea07e03fe5c3cda66b\" target=\"_blank\">斎藤元彦氏が〝秒殺〟で当選確実 兵庫県知事返り咲き N党・立花孝志氏のアシスト大きかった（よろず～ニュース） - Yahoo!ニュース</a></li></ul><p>先日のアメリカの大統領選も踏まえ象徴的な結果になったこともあり、いろいろ考えたり言いたくなる選挙だった。こっからもメディアでいろんな語りがでてくるんだろう。（この記事もその1つである）</p><ul><li>オールドメディアvsネット</li></ul><ul><li>良識派（気取り）vs陰謀論に飲まれる衆愚</li></ul><ul><li>高齢者vs若者</li></ul><ul><li>議会vs知事</li></ul><ul><li>保守vs改革</li></ul><ul><li>多数の政党vs一部維新・N党</li></ul><ul><li>隠蔽？vsパワハラ？</li></ul><ul><li>権威主義vs（関西に根強い）公務員嫌悪</li></ul><ul><li>組織票vs民意</li></ul><p>いろんな軸があって複雑に混じり合っている（なんなら二項でもない）のが現実だと思ってて、そこを一緒くたにして「〇〇の勝利！」みたいな表現はモヤモヤする。テレビをよく見る若者もいれば、陰謀論に飲まれる議員もいるわけで。</p><p>傾向とか大枠を語る意味は大いにあるんだろうけど、自己の利益（PV、視聴率、フォロワー数、収益）のために二元論で耳目を集める現象が増え、それを日々くらうのはしんどい。まぁそれが（戦略上）正しいという潮流は感じてるし、なんならネット云々より前、人間自体がそうなりがちなのかもしれない。</p><p>あとは大統領選でも思ったんだけど、現地にいないとわからないことが沢山あるという前提は共有したうえで語って欲しい。そこを考えずに外側から「〇〇民は愚か」みたいな発信するのはそれこそ愚かだと思う。</p><p>■</p><p>個人的にはこっから板挟みになる現場の方々の心労がいかばかりかと憂いてしまう。誰もがハッピーなる選挙なんて存在し得ないにしても、今回の選挙によってしんどい思いをしている人が少しでも減る結果になることを願っている。</p>"
-		},
-		{
-			"id": "FsPb7PRxbJBPV2fbbKs9_Zel",
-			"title": "アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説",
-			"date": "2024-12-25",
-			"tags": [
-				"考えごと"
-			],
-			"body": "<ul><li><a href=\"https://anond.hatelabo.jp/20241223225740\" target=\"_blank\">鳩野ちひろが歌っている曲は「ちょっと古い」どころではない</a></li></ul><p>このブコメでmori99さんが「過去の意味が世代で違う」と<a href=\"https://b.hatena.ne.jp/mori99/20241224#bookmark-4763828651127392096\" target=\"_blank\">書いてて</a>確かにそうだなと。</p><p>アーカイブが残ってさえいればふとしたきっかけで知れるわけで、そこで琴線に触れるものもある。逆に言えば残っていなかったら知ることすら無い（口伝？）し、残っていたとしてもそこにアクセスするハードルが高かったりテキストが少しあるだけだったら広まらない。</p><p>時代観すら変えうるという意味でもサブスクやらYoutubeの存在の大きさを実感。</p><p>でもスケールを広げるとこのパラダイムシフトって言語以前以後、文字以前以後とかでも起こってるよなと思い浮かんだ。文字が無かったら時代という概念からしておそらく無いし。</p><p>■</p><p>最近昭和の〇〇ランキング系の番組やら記事をいくつか見る機会あって昭和初期がほぼ無視されてるのにモヤモヤしてたんだけど、視聴者の世代に合わせてるというだけじゃなくて単純に資料がないってのもあるなと思ったりした。</p>"
-		},
-		{
-			"id": "4rspIyYQ3Qcq--SxeLMYCqup",
-			"title": "こたけ正義感『弁論』見た",
-			"date": "2025-01-07",
-			"tags": [
-				"お笑い"
-			],
-			"body": "<ul><li><a href=\"https://www.youtube.com/watch?v=Ntrx9wTBoBE\" target=\"_blank\">【1月15日まで】こたけ正義感の『弁論』 - YouTube</a></li></ul><p>60分の漫談。主題は袴田事件について。</p><p>法律や司法制度、実際の事件を扱っているだけに「これ笑い事じゃないよな」と思いつつ、語り口のおかげで（せいで？）笑ってしまう。それに加えて納得とか感心する場面も多くて、ふんふん頷いたりひざを打ったりしながら見てた。</p><p>これぞ弁護士芸人の真骨頂なんじゃないか。構成も見事で60分見入ってしまった。</p><p>そして、ここで語られてることが\"真実\"だと決めつけそうになってる自分にも可笑しみと不安（もちろん法律関連では正しいことを言ってると思っているけど）。こういう感想が出てくるのも弁護士芸人のライブならではかもな。</p><p>■</p><p>検察庁の子供向けページはなかなかにアレなので修正してほしい。</p><p>▼ 2025-01-07時点での <a href=\"https://www.kensatsu.go.jp/child/child5.htm\" target=\"_blank\">裁判って何？：検察庁</a></p><p><img src=\"https://gyazo.com/2ea4617cdb5f58225c29f126b9ca7ad0/thumb/500#.png\" alt=\"Image\"></p>"
-		},
-		{
-			"id": "juBSJvLIqrLqHqzhMNpYSwP_",
-			"title": "【アイギス】正月エフネ引けたのでGG編成組んでみた",
-			"date": "2025-01-06",
-			"tags": [
-				"千年戦争アイギス",
-				"ゲーム"
-			],
-			"body": "<p>前から欲しかった正月エフネを11連で引けた。正月の中からとはいえ闇鍋なのにすぐ引けてラッキー！</p><p>ということでGG編成組んでみることに。</p><p>まずは自分の持ってるユニットの中で使えそうな候補を挙げてく。</p><h2>必須</h2><ul><li>正月エフネ 永続範囲GG</li></ul><ul><li>リエーフ エフネの自傷身代わりトークン</li></ul><ul><li>イムラウ 自傷バリア 覚醒スキルで範囲HP攻撃UP</li></ul><ul><li>ヤシマ リエーフorエフネをコピー＆編成で攻撃UP</li></ul><ul><li>ディエーラ 報酬GUP＆コスト生産</li></ul><ul><li>トトノ GG効率UP</li></ul><h2>編成バフ</h2><ul><li>ハリナ スキル初動40％短縮</li></ul><ul><li>タマミ プラチナ初動25％短縮</li></ul><ul><li>トワ 攻撃隙</li></ul><ul><li>ユキザクラ 呪殺9％</li></ul><h2>バフ </h2><p>＊HPバフは自傷ダメUPにもなるので注意（ヤシマ→リエーフでカバーできる）</p><ul><li>ヴィディア 初動のコスト生産＆消費バフ</li></ul><ul><li>フィネス 射程or攻撃、永続以外のCT短縮</li></ul><ul><li>イムラウ 覚醒スキルで全体攻撃HP30％</li></ul><ul><li>アミー 吟遊詩人(魔界)＋通常スキルで属性バフ(1.3倍)or覚醒スキルでアビ倍率UP＆HP</li></ul><ul><li>オーガスタ 料理(近接)＋覚醒スキルで全体攻撃30％</li></ul><ul><li>ダーク王子 配置バフ(デーモン)15％＋通常スキルで属性バフ(1.3倍)敵全体デバフ</li></ul><ul><li>星を追う者 配置15％＋範囲ダンサーバフ 王子はHPが上がらないものを採用</li></ul><h2>その他</h2><ul><li>夏レオーネ GGもちスキル中確定</li></ul><ul><li>ハロウィンジュリア GGもちスキル中確定</li></ul><ul><li>ニコル スキル中確定GG</li></ul><ul><li>リンネ 回復＋地形＆悪天候軽減</li></ul><ul><li>夏サナラ マスバフ</li></ul><ul><li>夏レオラ スキルオート＆コスト下げ</li></ul><ul><li>スカラー 隠密デバフ</li></ul><ul><li>スカウト 隠密デバフ</li></ul><p>以上の候補から最終的に組んだのがこちら▼</p><p><img src=\"https://gyazo.com/42f53fe66b0cfc3b4f3dd2575d2aad3d/thumb/500#.png\" alt=\"Image\"></p><p>基本エフネで全ての敵を処理、漏れた敵や別レーンはレオーネが担当する構成。</p><p>とは言っても組んで初日なのでまだまだ迷い中。</p><p>手軽さ優先ならフィネスを通常にしてGG要員増やすのが良さげだし、エフネの火力優先なら夏レオラと夏レオーネのとこ夏サナラとダーク王子にすると良いよな〜、、などなど。</p><p>これからヒストリー進めつつちょうどいい構成を見つけていこう。</p>"
-		},
-		{
-			"id": "DT6EpVNuNlZJS3ZXY3TkMIvK",
-			"title": "Bappa Shotaさんのスウェーデンの動画を見て移民についてつらつら考えた",
-			"date": "2025-01-19",
-			"tags": [
-				"考えごと"
-			],
-			"body": "<ul><li><a href=\"https://www.youtube.com/watch?v=xA_I0T9o0zc\" target=\"_blank\">北欧で移民政策大失敗によりギャング天国に没落した国の実態... - YouTube</a></li></ul><p>クリックベイトなタイトルはともかく、日本の未来を予感させるような動画だった。地理的にだいぶ違いはあるけど移民が増えるのは間違いないわけで。</p><p>動画見てて思ったのは“移民”が問題なのではなく（むしろそれは必須）、それを悪用する少数の人間と、それを排除しようとするあまり全体の対立構造になり互いの歩み寄りとリスペクトを遠ざけてしまい、結果として経済や教育の格差を広げてしまうのが問題だということ。</p><p>社会や政府から排除されている実感があると、より頑なになっていくのは想像に難くない。</p><p>ただ、なんでも受け入れ態勢でいるのも難しいだろう。</p><p>個人的には少なくとも法は現地のものを守るべきだと思っている。信教の自由はもちろんあるけど、それより上に法や条例があるという感覚は日本人だからなのか？聖典に基づいて法があるべきという思想とは相容れない部分もあるのかもしれない。う〜ん。</p><p>文化や生活様式についても難しい。他人の迷惑にならなければいいとは思うが、その感覚もそれぞれだろうし。</p><p>だからこそ社会とつながっている感覚や互いにリスペクトをもっているかが重要でそれには環境や教育が必須。いわゆる統合政策（≠同化政策）。双方向での歩み寄り、言語習得の支援、社会参加の促進などなど。</p><p>そこをおろそかにして移民を大量に受け入れてしまっては互いに自国のコミュニティに引きこもって対立・格差を深めることになる。</p><p>統合政策は多くの人が納得するバランスが肝心。お互いに自分たちが割食ってる、軽んじられていると思ってしまうのは避けたい。でもそれが一番むずそう。</p><p>それこそ動画の終盤に出てきた“希望”がキーワードになるのかな。より良くなる、より楽しくなると思えれば互いに歩み寄れる気がする。</p><p>コンクリフトというか相容れない部分はどうしてもでてくるんだろうけど「色んな人がいる方がおもろい」って素朴な感情は忘れずにいたい。</p>"
-		},
-		{
-			"id": "1f10cHjyNJOsouARiHzixpYD",
-			"title": "DEIとCE、平等とは",
-			"date": "2025-02-07",
-			"tags": [
-				"考えごと"
-			],
-			"body": "<ul><li><a href=\"http://finalvent.cocolog-nifty.com/fareastblog/2025/01/post-4342fb.html\" target=\"_blank\">DEI否定は単なる反動か？: 極東ブログ</a></li></ul><p>読んだ。</p><p>トランプ大統領が「多様性、公平性、包摂性（DEI）」プログラムを廃止したことに端を発する議論について。この決定が「反動的だ」という批判と、「DEIの一方的な正当化に疑問を投げかける契機」という意見が交錯する、平等を巡る2つの理念の対立を浮き彫りにする記事。</p><p>DEIに対する理念として記事中で出てきたのはCE（Colorblind Equality）。どちらも平等について謳っていてそれぞれに理があるけど相反する部分がある。DEIは現実の格差を重視し、積極的な是正を訴えている一方、CEは理想的な公平さに基づく普遍的な基準を重視している。</p><p>個人の属性によって社会的格差があるのであれば、それを是正する方向は正しいように感じる。逆差別という言葉はあるけど、それを盾にして差別の温存に加担するのは避けたい。</p><p>一方で、DEI的な政策の例でよくあがるアファーマティブ・アクションなどに反対する側の、「割りを食ってる感」もわかる。こないだの移民のときもそうだけどこの割り食ってる感がやっかいで、差別・被差別どっちももってる感情。</p><p>なにを主眼に置くかだよな。そこの目線が揃っていれば少なくとも話し合いはできると思う。</p><p>属性による格差の是正（のスピード感）を重要視するなら政策はDEIに寄っていくだろうし、CEは悪手とまで言えるだろう。</p><p>個人的には理念としてはCEがいいなと思いつつ、属性によって前提が違うならそこを是正する必要はある、そのための施策の積極性は対象によって変わるよね、くらいのテンション。「ものによる」というガチで何も言ってないに等しい結論だけど実際そう思うからね。DEI（CE）は悪！みたいなもんじゃ無い。</p><p>＊DEIとは</p><blockquote><p>「DEI（ディー・イー・アイ）」は、「Diversity（ダイバーシティ、多様性）」「Equity（エクイティ、公平性）」「Inclusion（インクルージョン、包括性）」の頭文字からなる略称です。</p></blockquote><p><a href=\"https://holdings.panasonic/jp/corporate/sustainability/diversity-equity-inclusion/what-is-diversity-equity-inclusion.html\" target=\"_blank\">「DEI（Diversity, Equity & Inclusion）」とは？- Diversity, Equity & Inclusion - サステナビリティ - パナソニック ホールディングス</a></p>"
-		},
-		{
-			"id": "JqJHswBZW57XAMdGYli46YtI",
-			"title": "「これ、AIが書いた？」文章の進化と創作の価値の行方",
-			"date": "2025-03-12",
-			"tags": [
-				"考えごと",
-				"ai"
-			],
-			"body": "<p>最近、ネットの記事を読んでると「これ、AIが書いたんじゃない？」って思うことが増えてきた。文章の構成が整っていて、情報が簡潔でわかりやすい。でも、なんか無機質で、感情が薄いような気もする。AIが文章を書く時代が本格的に来て、<strong>「AIが書いたかどうか」</strong>ってことは、実はそんなに重要じゃないのかもしれない。じゃあ、創作の価値や私たちが求めるものはどう変わるんだろう？</p><h2>AIと創作の関係</h2><p>まず、AIが得意な分野から見ていこう。</p><ul><li>ニュース記事や速報</li></ul><p>スポーツの試合結果や株価情報など、<strong>情報の整理と伝達が重要な分野</strong>。AIはこれを瞬時にこなせる。</p><ul><li>SEO対策を意識した記事</li></ul><p>「おすすめ10選」みたいな定型的な内容は、AIが得意。</p><ul><li>FAQやハウツー記事</li></ul><p>「iPhoneのスクショの撮り方」といった内容も、AIに任せて効率よく作れる。</p><p>一方で、AIが苦手なものもある。</p><ul><li>感情や経験に基づく文章</li></ul><p>エッセイや小説のように、<strong>個人的な感情や経験が反映されるもの</strong>はAIには難しい。</p><ul><li>深いテーマを扱う作品</li></ul><p>哲学的な問いや複雑な人間関係を描く小説も、AIではまだ限界がある。</p><p>つまり、AIは「それっぽい」文章は書けても、<strong>本当に心に響くような作品を生み出すのは難しい</strong>ってこと。</p><h2>AIと創作の価値</h2><p>じゃあ、AIが文章を作る時代になったことで、創作の価値ってどうなるんだろう？</p><ul><li>創作は人間にしかできない？</li></ul><p>AIはデータを基に文章を生成するけど、読者が求めるのは<strong>ただの情報じゃなくて、人間らしい感情や個性</strong>。だから、AIが書くものには、どうしても「心の温かみ」や「独自性」が欠けてしまう。</p><ul><li>AIを使えば創作が広がる？</li></ul><p>でも、AIをうまく活用すれば、新しい創作の形が見えてくるかもしれない。例えば、物語の構成をAIに手伝わせて、感情やニュアンスを人間が加えるスタイル。これで、より洗練された作品ができる可能性もある。</p><h2>過去の技術革新と同じ流れ</h2><p>新しい技術が出るたびに、創作の価値が揺らぐことがあった。例えば、</p><ul><li>活版印刷（15世紀）</li></ul><p>本が大量生産できるようになったことで、「本の価値が下がる」と言われたけど、結果的に知識が広まり、学問が進展した。</p><ul><li>カメラ（19世紀）</li></ul><p>写実的な絵画の価値がなくなると言われたけど、新しいアートが生まれ、絵画の価値はむしろ広がった。</p><ul><li>シンセサイザー（20世紀）</li></ul><p>生演奏が不要になると言われたけど、電子音楽が発展し、音楽の世界が広がった。</p><ul><li>デジタルアート（21世紀）</li></ul><p>手描きの絵が価値を失うと言われたけど、アナログとデジタルが融合して新しい表現が生まれた。</p><p>このように、<strong>新技術が登場するたびに創作の価値が揺らぐけど、最終的には新しい形が生まれる</strong>ことが多い。</p><h2>AIと創作の未来</h2><p>結局、AIが文章や創作に関わってくることで、価値がどう変わるかはこれからの課題だ。でも、<strong>人間ならではの感情や深みが求められる部分は残る</strong>し、AIはそのサポート役として活躍することになるだろう。大切なのは、<strong>AIをどう使うか</strong>。AIが得意な部分はどんどん活用しつつ、人間らしい部分はちゃんと残していく。そうすれば、<strong>AIと共存する新しい創作の形</strong>が見えてくるはずだ。</p><p>だから、<strong>AIが書いたかどうか</strong>なんてあまり気にせず、これからの創作を楽しむ方がいいのかもしれない。</p><hr><p>っていう記事をChatGPTで壁打ちしたあとに「1000字程度でまとめて」で書いてもらった。</p><p>きっかけとなった最初のメモは「noteのちょい硬めでまとまってるボリューミーな記事、生成AI製か？と思うようになってしまった」から。例に漏れずこの記事もなんか無機質で薄い感じあるよな〜。</p><p>でも壁打ちの段階で深い知識だったり鋭い目線があれば面白い記事書けるような気もしてる。この記事は数ターンしか時間かけてないから、もっと時間かけて考察を深めていけばどんなジャンルでも一家言ある感じで書けちゃいそう。</p>"
-		},
-		{
-			"id": "KuSkt5gDVUaZx2U9TROq3d01",
-			"title": "Dynalistのタスク表示用スクリプト",
-			"date": "2025-03-13",
-			"tags": [
-				"dynalist",
-				"javascript"
-			],
-			"body": "<p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p><p>コード → <a href=\"https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30\" target=\"_blank\">DynalistTaskViewer.js</a></p><p>＊APIとドキュメントIDを自分用に変更して使ってください。</p><ul><li>右上のボタンをクリックするとリストが表示される</li></ul><ul><li>タスク名をクリックするとDynalist上でその項目に移動できる</li></ul><ul><li>URLをコピーしてDynalistにリンクを貼り付けることも可能</li></ul><p>ここから完了状態を変更するのも考えたんだけど処理が複雑になりそう＆API使いすぎたくないのでやめた。起動時と10分間隔で取得するようにしてるけどこのへんは改良の余地あり。</p><p>検索でも同じようなことはできるんだけど、その場で一覧できるのが便利でいい感じ。</p><p>総数が多いならタグで絞り込んだり日付入れて順番並び替えたりするのもよさそう。</p>"
-		},
-		{
-			"id": "fFIleKwD9Coz8gxLIs6WcMJN",
-			"title": "Dynalistのインボックスへ送信するスクリプト",
-			"date": "2025-03-15",
-			"tags": [
-				"dynalist",
-				"javascript"
-			],
-			"body": "<p>Dynalist上のどこからでもインボックスにメモするためのユーザースクリプト。ObsidianのQuickAddみたいなイメージ。</p><p>コード → <a href=\"https://gist.github.com/morvra/0e899e1cd57f2c2aaa69e328fd9b99f8\" target=\"_blank\">DynalistInboxSender.js</a></p><p>＊APIキーを自分用のものにして使ってください</p><ul><li>左下のボタンか「Alt+T」で入力画面がポップアップする</li></ul><ul><li>テキストを入力して送信ボタンかEnterを押すとインボックスに現在時刻付きで送信される</li></ul><ul><li>右上の閉じるボタン or 何も入力がない状態でEnter or カーソルが外れる でポップアップが消える</li></ul>"
-		},
-		{
-			"id": "fDalpCyltz7AB356i6p9AZkk",
-			"title": "シャドバWB感想",
-			"date": "2025-07-09",
-			"tags": [
-				"シャドバWB",
-				"ゲーム"
-			],
-			"body": "<p>シャドウバースWB、リリース初日から遊んでるのでこの辺で感想をざっくり。</p><ul><li>進化、超進化とExPPのシステムで先後のバランス取れてそう（突き詰めればどうなるかはわからないけど）でよき</li></ul><ul><li>使ってるデッキはAFネメシスとフェイスドラゴン。中盤の融合と進化のプランニングがむずくて時間切れ頻発中</li></ul><ul><li>初日に無課金はデッキ組めないみたいな文句多かったけど、毎日やってれば1拡張で3~4テーマ組めそう</li></ul><ul><li>ランクはAA0、グループはサファイアとルビー行ったり来たりしつつたま〜にダイヤいけるって感じ</li></ul><ul><li>週末ロビー大会は大会気分（というか大会そのもの）味わえてヒリヒリ。ちなみに2回目で優勝できた！</li></ul><ul><li>負けてもランク上がる影響からか、環境がよくていろんなデッキと戦えて楽しい（上位帯はエルフ一色なのかもしれないけど）</li></ul><p>シャドバの楽しさ面白さは維持しつつ、UIやUXが正統進化。システム面が面白くなってDCGとしても改善してる印象。初弾にしてカードパワー高いから前作でも揶揄されたメンコ感はあるんだけど、それはお互い様だし超進化も絡んで駆け引きがおもろいメンコになってる。</p><p>この先空中戦ばっかりになったり一強環境でミラーしか発生しない、みたいな環境にならない限りは楽しめそう。</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f6/48/98/f648985e-52bf-40e5-deab-c7d721844c43/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg\" alt=\"Shadowverse: Worlds Beyond\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">Shadowverse: Worlds Beyond</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">Cygames, Inc.</span></div><div id=\"appreach-price\" style=\"font-size: 80%; display: inline-block;\">無料</div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/shadowverse-worlds-beyond/id6472019540?uo=4\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=jp.co.cygames.ShadowverseWorldsBeyond\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
-		},
-		{
-			"id": "s48l0AJ9CVFIEHWlEmAg_YLW",
-			"title": "シャドバWBの対戦支援ツールを作った",
-			"date": "2025-07-10",
+			"id": "5659efb1-64cc-6a88-cc63-69ee65e2666c",
+			"title": "シャドバWB 人形ネメシス組んでみた",
+			"date": "2025-10-01",
 			"tags": [
 				"シャドバWB"
 			],
-			"body": "<ul><li><a href=\"https://morvra.github.io/wblog\" target=\"_blank\">WBログノート | シャドウバースWB 対戦支援</a></li></ul><h2>できること</h2><ul><li>クラス毎の警戒カードリスト＆カウンター</li></ul><ul><li>クラス毎のメモでマリガンやプレイ指針</li></ul><ul><li>自分のデッキ、相手クラス、先後、勝敗、メモを記録して一覧</li></ul><ul><li>デッキや先後でフィルターできて勝率も算出</li></ul><ul><li>データのインポート、エクスポートにも対応</li></ul><hr><p>ほぼChatGPTとGeminiに頼った。</p><p>経緯含めた紹介記事はnoteに投稿してみた→<a href=\"https://note.com/morvra/n/n42208430550c\" target=\"_blank\">シャドウバースWBの対戦支援ツールを作りました｜morvra</a></p><p>この記事投稿時C3サファイアだったけど、これ使ったおかげ？で現在AA0ダイヤ(踏めただけでルビサファ常駐)、ロビー大会優勝、グランプリA進出と上達してるはず。ダイヤ安定してれば上達を確信できたけどそれはまだまだ先かな〜。</p>"
+			"body": "<p>調整でアッパーの入った人形ネメシス組んでみた。</p><p><img src=\"https://gyazo.com/b4a1b8c6bad69dc839ea892fc497e030/thumb/1000\" alt=\"Image\"></p><p>＊生成したのはオーディン2、マゼルベイン1、エース1、ツヴァイ1。</p><p>マゼルは3の方が強そうだけど、人形の使い心地知りたい＆エーテルケチって一旦1で様子見。</p><p>スペルウィッチからの移行だとスペルとドローの少なさにビビるが、ボードの取り合いはめちゃくちゃ強いテーマなはず。</p><h2>EPICまでお試し</h2><p>グラマス1600から4連勝でEPIC到達！つえ〜〜（強いコントロールに当たらなかっただけ説あり）</p><p>序盤から押せ押せで動けるのが楽しい！89Tあたりでリーサル見込めるし、なんなら序盤から圧倒してアグロムーブできる。</p><p>ただ2コスの採用・プレイ優先度と序盤のExPPの使い方が謎すぎ。</p><p>相性としては、ロイヤル・エルフにはいけそうでクレビショとモードメアは厳しいと思う。</p><p>調整直後ってこともあり、頻出するミラーは進化権渋って打点に使いたい。ギルネの有無でリーサル判断が狂うのであった方が嬉しい。</p><h2>調整カードの雑感</h2><ul><li>キャット: 最序盤とリーサルに。順番でプレミする。</li><li>ツヴァイ: 中盤のテンポスウィング。アングレアの使用感に似てて楽しい。</li><li>リーアム: 8点構えて次オーキス+キャットで12点の動き現実的っぽい。</li></ul><p>今シーズンは人形でCRというよりたくさん回すの目標にやってく！</p>"
 		},
 		{
-			"id": "84xxKRfqbajQFiXpqgUSlAf1",
-			"title": "Dynalistでタグごとに色を設定する",
-			"date": "2025-07-21",
+			"id": "8ba8b0cf-6086-1686-1be1-393a6d1759e5",
+			"title": "恙無くってたまに使うけど「恙」って何？",
+			"date": "2025-09-28",
+			"tags": [
+				"言葉"
+			],
+			"body": "<p>支障なくみたいな感じで使ってるけど、「つつが」とは？と思ったので調べた。</p><blockquote><p>「つつがなく」の語源は、心配事・病気・災難を意味する「恙（つつが）」がひとつも「無い」ことに由来し、無事である・物事が順調に進んでいることを意味するようになった。</p></blockquote><ul><li><a href=\"https://www.weblio.jp/content/%E3%81%A4%E3%81%A4%E3%81%8C%E3%81%AA%E3%81%8F\" target=\"_blank\">「つつがなく」の意味や使い方 わかりやすく解説 Weblio辞書</a></li></ul><p>恙の意味は「心配事・病気・災難」とのこと。</p><p>古語のつつみ（恙み・障み）と関連付いてるのかな？ちなみに音読みだとヨウで、小恙（しょうよう）、微恙（びよう）って言葉があった。</p>"
+		},
+		{
+			"id": "8cba96ed-2bdf-6743-9aca-58c449d6c692",
+			"title": "シャドバWB 初の能力調整が発表",
+			"date": "2025-09-26",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><blockquote class=\"twitter-tweet\"><p lang=\"ja\" dir=\"ltr\">【カード能力変更】<br>9/29のメンテナンス時に「栄弦の天宮・リュウフウ」「狂気の創造者・リーアム」「パペットキャット」「シンフォニアハート・ツヴァイ」のカード能力を変更いたします。<br><br>▼詳細はこちら<a href=\"https://t.co/GKXWAM72Ni\">https://t.co/GKXWAM72Ni</a><a href=\"https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&amp;ref_src=twsrc%5Etfw\">#シャドバWB</a> <a href=\"https://t.co/Su8iIjxAVo\">pic.twitter.com/Su8iIjxAVo</a></p>&mdash; Shadowverse: Worlds Beyond公式 (@shadowverse_jp) <a href=\"https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw\">September 26, 2025</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></p><h2>調整内容</h2><ul><li>リュウフウ 4PP→3PP</li><li>パペットキャット 2/2/2→1/1/1 突進</li><li>リーアム 10/8/8→9/7/7</li><li>ツヴァイ 進化時改良型操り人形出す</li></ul><p>アッパーのみでナーフは無し！できたことできなくなるのは嫌だもんね。なるべくこの形がいいと思う。</p><p>CRで苦戦してるドラネメに順当な強化って感じ。3弾強化ではないのはマゼルベインの影響もあるのかな？破壊軸に強化が無いのは不遇かも。</p><p>環境にどれくらいインパクトがあるのかは謎。2クラスのCR底上げは間違いないけど。</p><p>ドラ強化で増えたらウィッチは減りそう。</p><p>ネメは何に強いのか謎。人形が戦えてない＆破壊にとってパペットキャットがどんくらいありがたいかわからんので。</p><p>人形がロイに（環境における立ち位置的な意味で）勝てるのであれば環境がかなり動きそう。具体的にはウィッチ・モードメア・クレビショにどれくらい抗えるか。</p><p>次は財宝ロイヤルか人形ネメシスで</p>"
+		},
+		{
+			"id": "ccb0135c-6929-9a07-be9e-938b332ab771",
+			"title": "Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト",
+			"date": "2025-09-08",
+			"tags": [
+				"dynalist",
+				"javascript"
+			],
+			"body": "<p>つくった。</p><p>gist → <a href=\"https://gist.github.com/morvra/a490a0b6918a700e023b00013d57ee4c\" target=\"_blank\">Dynalist Random Tagged Item Viewer</a> / <a href=\"https://gist.github.com/morvra/eb2ec1cf588c8bf3e143ea86649204f3\" target=\"_blank\">Dynalist Random Item Viewer</a></p><ul><li>右下のコンテナに設定した項目がランダムで表示される</li><li>コンテナをクリックでその項目に移動</li><li>ボタンで項目の中からランダムに切り替え</li></ul><p>「今日の名言」「モットーから1要素」「アイディアリストから1つ」「クイズや英単語問題集」などなど見かえしたいもの何でもござれ。</p><p>完成してから思ったけど、Dynalistでデイリーノート書いてるとほぼ日手帳の「日々の言葉」みたいになってて良さげ。</p>"
+		},
+		{
+			"id": "4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0",
+			"title": "Dynalistの連用日記用ビューワーをつくった",
+			"date": "2025-09-07",
 			"tags": [
 				"dynalist"
 			],
-			"body": "<p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title=\"Filter #hoge\"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>"
+			"body": "<p>▼ これ</p><p><img src=\"https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000\" alt=\"Image\"></p><ul><li><a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>"
 		},
 		{
-			"id": "cqfGRD5-QaUuMpj25Q92oUmj",
-			"title": "サイトの運用方法やデザインをアップデート",
-			"date": "2025-07-22",
+			"id": "9ad5ec15-6ab7-a884-a856-e47909092776",
+			"title": "【シャドバWB】グラマス達成！",
+			"date": "2025-09-05",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p>グラマス実装直後のランクマッチで達成！</p><p><img src=\"https://gyazo.com/38add4e04ba0bbe39f8f7fd5b1f52f02/thumb/500\" alt=\"Image\"></p><p>2回目の昇格戦で昇格。なんとダイヤいってから降格なし！できすぎ！</p><p><img src=\"https://gyazo.com/4b7b4f60e315c036f9103c4af1107d39/thumb/500\" alt=\"Image\"></p><p>直近の戦績は16-14でギリ勝ち越しｗ 使用デッキはスペルウィッチ一本。</p><p><img src=\"https://gyazo.com/9b115914099f3e71ff7cc34502f9dd53/thumb/500\" alt=\"Image\"></p><p>継承者出てすぐのEra53さんのリスト（ https://x.com/garbage_er/status/1962042383304171606 ）を使い続けた。慣れたリストを崩したくなくてずっとそのまま使ってたけど、グラマス上がったことだしこっからはリスト弄りつつやってこう。</p><p>マスターランクマ終盤はスノーアウェイク入れたりペネロピー抜いたりしたかったのよね。でもロイヤル多いならペネロピーの価値高くなるからグラマスの環境次第かな〜。</p><hr><p>練度としては自分の動きに少しずつ慣れてきて時間切れの回数がだいぶ減った。</p><p>リーサルまでのプランがハンドで見えてる時や、強いムーブができるターンはそこそこやれてるんだけど、微妙なターンのすごし方はまだまだ謎。</p><p>優勢/劣勢が微妙なラインでのODがめっちゃむずくて、相手からのリーサル無いからと耐えてたら強ムーブされてはっきり劣勢になってODしてもズルズル負けちゃうパターンもありゃあ、確定リーサル無いのに強いターンにしたいからってOD打って引いてきた5枚が噛み合わなくて結局強くpp使えないパターンもある。</p><p>何となくで打つんじゃなくて、デッキに何入ってるか把握して「〇〇か〇〇引けたら強いしそこそこ確率ありそうだ」って感じで打つODが強いんだろうな。</p><p>相手を見ることもまだ全然できてなくて、相手のハンド読もうとし始めたくらいのレベル。</p><p>まだまだ課題は多いんだけど、その課題が具体的に見えてきたのがもう成長だと思うことにする。</p>"
+		},
+		{
+			"id": "21f14291-a88c-1ac7-01e3-da1d16d8d2dc",
+			"title": "Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった",
+			"date": "2025-09-03",
+			"tags": [
+				"dynalist",
+				"javascript"
+			],
+			"body": "<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href=\"https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/\" target=\"_blank\">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href=\"https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2\" target=\"_blank\">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src=\"https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500\" alt=\"Image\"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>"
+		},
+		{
+			"id": "155f3986-4f8b-70ca-e046-2316c49adaf1",
+			"title": "サイト内を検索できるようにした",
+			"date": "2025-08-26",
 			"tags": [
 				"ブログ"
 			],
-			"body": "<p>今月はサイトの外側をあれこれいじったので、何をしたか書いておく。</p><h2>変更点</h2><ul><li>運用<ul><li>Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更<ul><li>タグをつければいいだけなので楽</li></ul></li><li>子要素のあるリストも扱えるように<ul><li>Dynalist上の「li」という項目の子要素はリストとして出力される</li><li>これもそう</li></ul></li><li>更新の自動化（GithubActions）<ul><li>毎日0時と12時くらいにDynalistAPIからJSONとRSSを生成してGithubPagesにデプロイ</li></ul></li></ul></li><li>トップページ<ul><li>モジュールのデザインをカード風にして一言も追加</li><li>記事一覧を年ごとに分けて開閉式に</li></ul></li><li>記事ページ<ul><li>ページ下部に関連記事として同じタグがついた記事をリスト化</li></ul></li><li>piece<ul><li>モジュールのデザインをもとにカード風に</li></ul></li></ul><hr><p>基本的にはGeminiにおんぶにだっこでコードを書いてもらいつつテストと細かい修正は自分でやった。</p><p>これでサイトの立ち上げ時から「こんな風に実装できたらいいな」と考えていたことはだいたい完成した。特に更新の自動化と、リストの階層化ができたのは箇条書き好きとしてだいぶ嬉しい。</p><p>あとはコンテンツが充実してきたら検索機能つけるくらいかな？</p>"
+			"body": "<p>サイト内検索は前から実装したかったんだけど、コンテンツ少ないし、どんな形式がいいか決めかねてて保留にしていた。</p><p>今日たまたまDave WinerさんのScripting Newsを検索するためのサイト <a href=\"https://daytona.scripting.com/\" target=\"_blank\">DAYTONA 2</a> を見つけて、こんな感じがいいなと思ってGeminiとともに作ったのがこちら。</p><ul><li><a href=\"https://morvra.github.io/search\" target=\"_blank\">検索 - morvra lists</a></li></ul><p>入力フォームで検索したらワードの含まれた記事が一覧できて、記事内の該当部分が抜粋されハイライトになる仕様。</p><p>DynalistとかWorkflowyの検索に近い感触で気に入ってる。</p>"
 		},
 		{
-			"id": "aR7xubF3Do74wK1LQFvWZf0c",
-			"title": "【シャドバWB】マスター到達！ランクマと各デッキの雑感",
-			"date": "2025-07-29",
+			"id": "3150d4f7-affe-6b4e-260f-a8a2f2d9eafb",
+			"title": "【シャドバWB】スペルウィッチにおいてメルヴィとペネロピーどっちが優れているのか考",
+			"date": "2025-08-25",
 			"tags": [
-				"シャドバWB",
-				"ゲーム"
+				"シャドバWB"
 			],
-			"body": "<p>シャドバWBにて、ついにマスターランクに到達した。</p><p><img src=\"https://i.gyazo.com/d50a4817f99f510bd4cc78a97a9d3c6b.png\" alt=\"マスター到達！\"></p><p>リリースから約1ヶ月半プレイしてきた現時点での感想と、使用してきたデッキについてまとめる。</p><h2>シーズンごとの使用デッキと感想</h2><h3>シーズン1：AFネメシスとフェイスドラゴン</h3><p>シーズン1の前半は<strong>AFネメシス</strong>、後半は<strong>フェイスドラゴン</strong>を使用した。</p><ul><li>AFネメシス</li></ul><p><img src=\"https://i.gyazo.com/033ed2ba7d48fd182b86a9e39c845018.png\" alt=\"Image\"></p><p>最初に組んだのはAFネメシス。始めに引いたカードで安く組めそうだったことと、長く飽きずに遊べそうだったので選択。</p><p>グループはルビーとサファイアを往復してた。融合の手順や選択がめちゃくちゃ奥深かった。慣れないうちは時間切れになることも多かったけど、プレイ自体は非常に楽しかった。</p><p>が、コアの融合で手札こねこねするのが指的に面倒になってきてた。</p><ul><li>フェイスドラゴン</li></ul><p><img src=\"https://i.gyazo.com/9e2fe4f54b52b20262d1fee2eb9350a2.png\" alt=\"Image\"></p><p>AFネメシスにやや飽きてきた頃、フォルテを3枚引けたこともあり組んだ。ダイヤからルビーまで上下を繰り返したが、このデッキで最もポイントを稼げたように思う。</p><p>時間もかからずスムーズに回せ、シンプルながらも数ターン先のリーサルまでのプランニングが楽しかった。</p><p>序盤から攻めるスタイルが自分には合っていると感じたが、こういったアグロ系のデッキはたまにで良いかな、とも思ったり。</p><p>第一弾環境ではAA1まで遊んだ。</p><h3>シーズン2：スペルウィッチ一本でマスター到達</h3><p>新環境のシーズン2が始まってからは、<strong>スペルウィッチ</strong>一本でマスターに到達した。</p><p><img src=\"https://i.gyazo.com/a2e79f342f5ec03ebd799a10cda2cfa4.png\" alt=\"Image\"></p><p>他クラスも試したい、現資産で安価に組みたい、フォロワーとスペルを組み合わせて多数のカードを使いたい、引けたプレミアムサタン使いたい、という様々な要素が合致し、このデッキを選択した。</p><p>グループはルビー常駐でたまに上下って感じ。ランクAA以降ってこともあり一番苦戦したかな。特にOD（オーバーディメンション）が絡むと未だに時間切れになることや、ドローや土の印のプレイ順をミスすることも多々。構築も非常に難しく、どこまで秘術要素を入れるべきか、どの対面を厚く見るべきかなど、謎すぎる。</p><p>まだまだ奥深いデッキだと感じているため、今シーズンはこのスペルウィッチを使い続けていく予定。</p><p>ちなみに、配信やSNSでスペルウィッチに対するヘイトが非常に高いためそれらを見るのはちょっと悲しいポイント。</p><h2>現時点でのランクマッチの感想</h2><p>1ヶ月以上シャドバWBをプレイしてみて、主にランクマッチに関して感じたことをいくつか挙げる。</p><ul><li><strong>多様なクラスと環境のバランス</strong><ul><li>本当に様々なクラスと対戦できて楽しい</li><li>もちろん今期でいえばウィッチやロイヤルのように人気のクラスはあるが、全体的にかなりバランスの取れた環境だと感じている</li><li>前シーズンそうだったように環境が煮詰まったらリノエルフ一強になるなら問題かもしれない</li></ul></li><li><strong>先攻・後攻のバランス</strong><ul><li>未だにどちらが有利なのか判断できていないのでいいバランスだと思う</li><li>マッチアップによっても違いそう</li><li>上位勢は既に結論出てるのだろうか？</li></ul></li><li><strong>再戦について</strong><ul><li>勝っても負けても高確率で再戦希望を出しているが、ほとんど断られてしまう</li><li>試合中の反省をすぐに活かせるし、相手のデッキが分かっている状況での駆け引きも楽しいと思うんだけど……</li><li>極端な相性差があるデッキもあるしサイドボードもないため、やりたくない気持ちもわかるけど、せっかくの機能なので遊びたい</li></ul></li></ul><p>基本的には楽しくプレイできてるし大満足のカードゲーム体験。この感じが毎拡張続くことを祈ってるｗ</p><p>新弾を出す以上環境に変化を加えなきゃいけないわけで、カードパワーは自ずと上がっていく宿命だと思うので、どこかのタイミングで\"こと\"が起こると覚悟はしてる。</p><h2>次の拡張に向けて</h2><p>次の拡張では、序盤から中盤に自分で試合のテンポを作っていけるようなデッキを握りたいと考えている。今シーズン使用しているウィッチが対応型のデッキだったため、また違った味を求めて。</p><p>ただ、進化（特に超進化）がある以上1ターンでテンポスウィングしやすいゲームだと感じていて、そうなるとアグレッシブなデッキがTier1になるには、よほどの「壊れカード」が登場しないと難しいのではないかとも思う。＿そうなると一強環境になってそれはそれでつまらなそう、というわがままなプレイヤー心理。</p><p>下手な自分が中途半端デッキを使い続けても、勝てなくて面白くないと感じてしまうかもしれない。今シーズンでいうアグロナイトメアをランクマッチで使い続けたいか、と問われると悩ましい。</p><p>ポイントを稼ぐことが目的なら最適だろうけど、エンジョイ勢としては「プレイしてて楽しいか」も非常に重要。次から盛るのはMPになって区切りも無いので、勝敗・好み・楽しさなどなど、何を優先してデッキ選択をしていくか、じっくり考えていきたい。</p>"
+			"body": "<p>これまでスペルウィッチではメルヴィ3・ペネロピー1（+エーデルワイス1）のリストをかなり長い期間使っていた。</p><p>だが以下の記事を読んで、</p><ul><li><a href=\"https://note.com/as_your_real/n/nd496c44e8325?sub_rt=share_pb\" target=\"_blank\">競技環境におけるスペルウィッチの基礎理解｜Yua</a></li></ul><blockquote><p>ペネロピーorメルヴィ問題</p></blockquote><blockquote><p>カードが強いのがどっちかは明白。</p></blockquote><blockquote><p>2コストで4コスト相当の動きをしているカードと、土を抱えるだけの2コスト相当の動きしかしないカード。強さの面では比較するに値しないレベル。</p></blockquote><p>最近メルヴィの弱さを感じていたこともあり、この問題について考えたくなった。</p><p>環境末期も末期で無駄といえば無駄なんだが、こういうのを考えるのもまたタノシイので。</p><p>まずなぜメルヴィ3だったのか。メルヴィの強みは</p><ul><li>ドローできたほうが偉い</li><li>2、1と細かく動ける</li><li>そもそも土余りがちで邪魔な場合もある</li></ul><p>ミラーや序盤の動きが弱い相手に対してはメルヴィの方が偉いはず。実際多くのリストでメルヴィ3積みだった。</p><p>対するペネロピーの強みは</p><ul><li>釜引けてないときのエーデルワイスや理光とのくっつき</li><li>メルヴィ→釜アクトよりペネ→宿題の方が引けてる!?</li><li>超進化時能力でリーサルをそらしつつドローできる</li></ul><p>主に圧が強くドローしている暇が無いデッキ、具体的にはロイヤルとナイトメアに対してはおそらくペネロピーの方が強い。</p><p>もしかしたらエルフに対しても、エーデルワイスやノーマンを安定して強く使えるからペネロピー>メルヴィかもしれない。</p><p>そんなこんなでじわじわとメルヴィよりもペネロピーを多く採用したリストが増えてきたのがここ何週か、というのが今の理解。</p><p>こっちが強い！と言い切れるほど明白なのかは分からない。環境次第じゃない？という毒にも薬にもならない結論になっちゃう。</p><p>ただ、その環境が序盤の安定感と回復を重視すべきものになっている、ということかな。煮詰まってウィッチ対策が熟れてきたり、大会で強敵を考慮したリストが増えてきたり。</p><hr><p>ってことでペネロピー3、メルヴィ2でデッキを組んでみた。ちょっと試したけどロイヤルには確実に強く出れそう。</p>"
 		},
 		{
-			"id": "T4CYHK7SnPPraI2aNUbNc1Nv",
+			"id": "a3535430-7863-d963-2fdf-362bc6500aa2",
+			"title": "【ウマ娘】スティルインラブ引けた！初回育成",
+			"date": "2025-08-25",
+			"tags": [
+				"ウマ娘"
+			],
+			"body": "<p>カタログスペックの時点でだいぶ強そう＆サポカはステゴだけ完凸すればいいかなと思い、スティルインラブを引くことに！</p><p>幸いチケット80枚で引けた！もともと持ってたのが86枚だったのでギリ。クロノもチケット分で引けたしキャラガチャはだいぶ上振れてる。</p><h2>初育成</h2><p>適当に組んだハイランダーで初回UA！かなり育てやすい印象。</p><p>それよりエンドが激重なんですが……トレーナーがウマ娘に引っ張られて変わっていく様はいろんなウマ娘で見られたんだけど、こんな風に超常的な感じで狂っていくパターンがあるとは。。</p><p>育成の度にこれくらうのか〜。ノベルゲーのビターエンドっぽいのかな？あんまやったこと無いからわからんけど。</p><p>温泉旅行でどうやらトゥルーエンドのようなものが見れるらしい？次回の秋華賞チャンミでエースとして出走させるので、たくさん育成することになるからそのうち見れると思いたい。</p>"
+		},
+		{
+			"id": "05792b39-9b1a-6d97-bebc-16de887ca0f9",
 			"title": "愛着と進化：\"#keep4o\"運動",
 			"date": "2025-08-12",
 			"tags": [
@@ -279,511 +122,285 @@
 			"body": "<p>GPT-5がリリースされてすぐ、4oも使えるようにして欲しいという要望が多く寄せられたらしい。</p><p>経緯はこの記事がよくまとまってる。</p><ul><li><a href=\"https://note.com/suzacque/n/n0ccd8d76f29c\" target=\"_blank\">GPT-4oを取り戻せ: #keep4o運動が映すAIと人間の新たな関係｜朱雀 | SUZACQUE</a></li></ul><p>個人的には「ハルシネーションや無駄なおべっかが減るなら多少人格（？）が変わるくらいプラマイでいったらプラスでしょ」くらいの感想で、こういう運動が起こってると知った時は「AIとして正統な進化してるアプデに文句言うのかよｗ」みたいにやや冷めた視線でみてた。</p><p>しかし記事にあるように、（割合はともかく）多くの人にとってAIは単なるツールではなくパートナーのような存在として捉えられているらしい。だったら人格の一貫性や対話スタイルの安定性が失われることは大きなショックだろうなと考えを改めた。</p><p>たとえ人格云々置いておいて道具として扱ってる人でも、愛着を持った道具が突然変形したらショックは避けられない。それが数ヶ月、数年の付き合いになればなおさら。</p><p>生成AIにそういう風に寄りかかるのは危険性もあるのは前提として、今後そういう風潮が強くなっていくのは想像に難くない。</p><p>今後もAIはより便利で正確にアップデートしていくと思うんだけど、それによって失われるものにも十分注意をしないとユーザー側の支持は得られないようになるだろうと感じている。</p><p>また、スタンドアローン型のAIへの需要も確実に高まるだろう。端末のスペックの進歩がそれに追いつかない感覚はあるものの。</p>"
 		},
 		{
-			"id": "-d2oBXY_72ZasC9OWTIjBDXK",
-			"title": "【シャドバWB】スペルウィッチにおいてメルヴィとペネロピーどっちが優れているのか考",
-			"date": "2025-08-25",
+			"id": "761897ac-9ca2-1c1d-afed-293a687463ba",
+			"title": "【シャドバWB】マスター到達！ランクマと各デッキの雑感",
+			"date": "2025-07-29",
 			"tags": [
-				"シャドバWB"
+				"シャドバWB",
+				"ゲーム"
 			],
-			"body": "<p>これまでスペルウィッチではメルヴィ3・ペネロピー1（+エーデルワイス1）のリストをかなり長い期間使っていた。</p><p>だが以下の記事を読んで、</p><ul><li><a href=\"https://note.com/as_your_real/n/nd496c44e8325?sub_rt=share_pb\" target=\"_blank\">競技環境におけるスペルウィッチの基礎理解｜Yua</a></li></ul><blockquote><p>ペネロピーorメルヴィ問題</p></blockquote><blockquote><p>カードが強いのがどっちかは明白。</p></blockquote><blockquote><p>2コストで4コスト相当の動きをしているカードと、土を抱えるだけの2コスト相当の動きしかしないカード。強さの面では比較するに値しないレベル。</p></blockquote><p>最近メルヴィの弱さを感じていたこともあり、この問題について考えたくなった。</p><p>環境末期も末期で無駄といえば無駄なんだが、こういうのを考えるのもまたタノシイので。</p><p>まずなぜメルヴィ3だったのか。メルヴィの強みは</p><ul><li>ドローできたほうが偉い</li><li>2、1と細かく動ける</li><li>そもそも土余りがちで邪魔な場合もある</li></ul><p>ミラーや序盤の動きが弱い相手に対してはメルヴィの方が偉いはず。実際多くのリストでメルヴィ3積みだった。</p><p>対するペネロピーの強みは</p><ul><li>釜引けてないときのエーデルワイスや理光とのくっつき</li><li>メルヴィ→釜アクトよりペネ→宿題の方が引けてる!?</li><li>超進化時能力でリーサルをそらしつつドローできる</li></ul><p>主に圧が強くドローしている暇が無いデッキ、具体的にはロイヤルとナイトメアに対してはおそらくペネロピーの方が強い。</p><p>もしかしたらエルフに対しても、エーデルワイスやノーマンを安定して強く使えるからペネロピー>メルヴィかもしれない。</p><p>そんなこんなでじわじわとメルヴィよりもペネロピーを多く採用したリストが増えてきたのがここ何週か、というのが今の理解。</p><p>こっちが強い！と言い切れるほど明白なのかは分からない。環境次第じゃない？という毒にも薬にもならない結論になっちゃう。</p><p>ただ、その環境が序盤の安定感と回復を重視すべきものになっている、ということかな。煮詰まってウィッチ対策が熟れてきたり、大会で強敵を考慮したリストが増えてきたり。</p><hr><p>ってことでペネロピー3、メルヴィ2でデッキを組んでみた。ちょっと試したけどロイヤルには確実に強く出れそう。</p>"
+			"body": "<p>シャドバWBにて、ついにマスターランクに到達した。</p><p><img src=\"https://i.gyazo.com/d50a4817f99f510bd4cc78a97a9d3c6b.png\" alt=\"マスター到達！\"></p><p>リリースから約1ヶ月半プレイしてきた現時点での感想と、使用してきたデッキについてまとめる。</p><h2>シーズンごとの使用デッキと感想</h2><h3>シーズン1：AFネメシスとフェイスドラゴン</h3><p>シーズン1の前半は<strong>AFネメシス</strong>、後半は<strong>フェイスドラゴン</strong>を使用した。</p><ul><li>AFネメシス</li></ul><p><img src=\"https://i.gyazo.com/033ed2ba7d48fd182b86a9e39c845018.png\" alt=\"Image\"></p><p>最初に組んだのはAFネメシス。始めに引いたカードで安く組めそうだったことと、長く飽きずに遊べそうだったので選択。</p><p>グループはルビーとサファイアを往復してた。融合の手順や選択がめちゃくちゃ奥深かった。慣れないうちは時間切れになることも多かったけど、プレイ自体は非常に楽しかった。</p><p>が、コアの融合で手札こねこねするのが指的に面倒になってきてた。</p><ul><li>フェイスドラゴン</li></ul><p><img src=\"https://i.gyazo.com/9e2fe4f54b52b20262d1fee2eb9350a2.png\" alt=\"Image\"></p><p>AFネメシスにやや飽きてきた頃、フォルテを3枚引けたこともあり組んだ。ダイヤからルビーまで上下を繰り返したが、このデッキで最もポイントを稼げたように思う。</p><p>時間もかからずスムーズに回せ、シンプルながらも数ターン先のリーサルまでのプランニングが楽しかった。</p><p>序盤から攻めるスタイルが自分には合っていると感じたが、こういったアグロ系のデッキはたまにで良いかな、とも思ったり。</p><p>第一弾環境ではAA1まで遊んだ。</p><h3>シーズン2：スペルウィッチ一本でマスター到達</h3><p>新環境のシーズン2が始まってからは、<strong>スペルウィッチ</strong>一本でマスターに到達した。</p><p><img src=\"https://i.gyazo.com/a2e79f342f5ec03ebd799a10cda2cfa4.png\" alt=\"Image\"></p><p>他クラスも試したい、現資産で安価に組みたい、フォロワーとスペルを組み合わせて多数のカードを使いたい、引けたプレミアムサタン使いたい、という様々な要素が合致し、このデッキを選択した。</p><p>グループはルビー常駐でたまに上下って感じ。ランクAA以降ってこともあり一番苦戦したかな。特にOD（オーバーディメンション）が絡むと未だに時間切れになることや、ドローや土の印のプレイ順をミスすることも多々。構築も非常に難しく、どこまで秘術要素を入れるべきか、どの対面を厚く見るべきかなど、謎すぎる。</p><p>まだまだ奥深いデッキだと感じているため、今シーズンはこのスペルウィッチを使い続けていく予定。</p><p>ちなみに、配信やSNSでスペルウィッチに対するヘイトが非常に高いためそれらを見るのはちょっと悲しいポイント。</p><h2>現時点でのランクマッチの感想</h2><p>1ヶ月以上シャドバWBをプレイしてみて、主にランクマッチに関して感じたことをいくつか挙げる。</p><ul><li><strong>多様なクラスと環境のバランス</strong><ul><li>本当に様々なクラスと対戦できて楽しい</li><li>もちろん今期でいえばウィッチやロイヤルのように人気のクラスはあるが、全体的にかなりバランスの取れた環境だと感じている</li><li>前シーズンそうだったように環境が煮詰まったらリノエルフ一強になるなら問題かもしれない</li></ul></li><li><strong>先攻・後攻のバランス</strong><ul><li>未だにどちらが有利なのか判断できていないのでいいバランスだと思う</li><li>マッチアップによっても違いそう</li><li>上位勢は既に結論出てるのだろうか？</li></ul></li><li><strong>再戦について</strong><ul><li>勝っても負けても高確率で再戦希望を出しているが、ほとんど断られてしまう</li><li>試合中の反省をすぐに活かせるし、相手のデッキが分かっている状況での駆け引きも楽しいと思うんだけど……</li><li>極端な相性差があるデッキもあるしサイドボードもないため、やりたくない気持ちもわかるけど、せっかくの機能なので遊びたい</li></ul></li></ul><p>基本的には楽しくプレイできてるし大満足のカードゲーム体験。この感じが毎拡張続くことを祈ってるｗ</p><p>新弾を出す以上環境に変化を加えなきゃいけないわけで、カードパワーは自ずと上がっていく宿命だと思うので、どこかのタイミングで\"こと\"が起こると覚悟はしてる。</p><h2>次の拡張に向けて</h2><p>次の拡張では、序盤から中盤に自分で試合のテンポを作っていけるようなデッキを握りたいと考えている。今シーズン使用しているウィッチが対応型のデッキだったため、また違った味を求めて。</p><p>ただ、進化（特に超進化）がある以上1ターンでテンポスウィングしやすいゲームだと感じていて、そうなるとアグレッシブなデッキがTier1になるには、よほどの「壊れカード」が登場しないと難しいのではないかとも思う。＿そうなると一強環境になってそれはそれでつまらなそう、というわがままなプレイヤー心理。</p><p>下手な自分が中途半端デッキを使い続けても、勝てなくて面白くないと感じてしまうかもしれない。今シーズンでいうアグロナイトメアをランクマッチで使い続けたいか、と問われると悩ましい。</p><p>ポイントを稼ぐことが目的なら最適だろうけど、エンジョイ勢としては「プレイしてて楽しいか」も非常に重要。次から盛るのはMPになって区切りも無いので、勝敗・好み・楽しさなどなど、何を優先してデッキ選択をしていくか、じっくり考えていきたい。</p>"
 		},
 		{
-			"id": "6hCGk30HXHAfmHnsbXGoKm6e",
-			"title": "【ウマ娘】スティルインラブ引けた！初回育成",
-			"date": "2025-08-25",
-			"tags": [
-				"ウマ娘"
-			],
-			"body": "<p>カタログスペックの時点でだいぶ強そう＆サポカはステゴだけ完凸すればいいかなと思い、スティルインラブを引くことに！</p><p>幸いチケット80枚で引けた！もともと持ってたのが86枚だったのでギリ。クロノもチケット分で引けたしキャラガチャはだいぶ上振れてる。</p><h2>初育成</h2><p>適当に組んだハイランダーで初回UA！かなり育てやすい印象。</p><p>それよりエンドが激重なんですが……トレーナーがウマ娘に引っ張られて変わっていく様はいろんなウマ娘で見られたんだけど、こんな風に超常的な感じで狂っていくパターンがあるとは。。</p><p>育成の度にこれくらうのか〜。ノベルゲーのビターエンドっぽいのかな？あんまやったこと無いからわからんけど。</p><p>温泉旅行でどうやらトゥルーエンドのようなものが見れるらしい？次回の秋華賞チャンミでエースとして出走させるので、たくさん育成することになるからそのうち見れると思いたい。</p>"
-		},
-		{
-			"id": "bW9jzGBMYNzTeYr5rsTYckxj",
-			"title": "サイト内を検索できるようにした",
-			"date": "2025-08-26",
+			"id": "835c2e31-6116-a79e-760a-b6dc8b0c00af",
+			"title": "サイトの運用方法やデザインをアップデート",
+			"date": "2025-07-22",
 			"tags": [
 				"ブログ"
 			],
-			"body": "<p>サイト内検索は前から実装したかったんだけど、コンテンツ少ないし、どんな形式がいいか決めかねてて保留にしていた。</p><p>今日たまたまDave WinerさんのScripting Newsを検索するためのサイト <a href=\"https://daytona.scripting.com/\" target=\"_blank\">DAYTONA 2</a> を見つけて、こんな感じがいいなと思ってGeminiとともに作ったのがこちら。</p><ul><li><a href=\"https://morvra.github.io/search\" target=\"_blank\">検索 - morvra lists</a></li></ul><p>入力フォームで検索したらワードの含まれた記事が一覧できて、記事内の該当部分が抜粋されハイライトになる仕様。</p><p>DynalistとかWorkflowyの検索に近い感触で気に入ってる。</p>"
+			"body": "<p>今月はサイトの外側をあれこれいじったので、何をしたか書いておく。</p><h2>変更点</h2><ul><li>運用<ul><li>Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更<ul><li>タグをつければいいだけなので楽</li></ul></li><li>子要素のあるリストも扱えるように<ul><li>Dynalist上の「li」という項目の子要素はリストとして出力される</li><li>これもそう</li></ul></li><li>更新の自動化（GithubActions）<ul><li>毎日0時と12時くらいにDynalistAPIからJSONとRSSを生成してGithubPagesにデプロイ</li></ul></li></ul></li><li>トップページ<ul><li>モジュールのデザインをカード風にして一言も追加</li><li>記事一覧を年ごとに分けて開閉式に</li></ul></li><li>記事ページ<ul><li>ページ下部に関連記事として同じタグがついた記事をリスト化</li></ul></li><li>piece<ul><li>モジュールのデザインをもとにカード風に</li></ul></li></ul><hr><p>基本的にはGeminiにおんぶにだっこでコードを書いてもらいつつテストと細かい修正は自分でやった。</p><p>これでサイトの立ち上げ時から「こんな風に実装できたらいいな」と考えていたことはだいたい完成した。特に更新の自動化と、リストの階層化ができたのは箇条書き好きとしてだいぶ嬉しい。</p><p>あとはコンテンツが充実してきたら検索機能つけるくらいかな？</p>"
 		},
 		{
-			"id": "_1IpsDTi5wmLBnn8En7h_HUn",
-			"title": "Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった",
-			"date": "2025-09-03",
-			"tags": [
-				"dynalist",
-				"javascript"
-			],
-			"body": "<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href=\"https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/\" target=\"_blank\">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href=\"https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2\" target=\"_blank\">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src=\"https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500\" alt=\"Image\"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>"
-		},
-		{
-			"id": "iFUfThEJw7TK_oNazeo3cqe4",
-			"title": "【シャドバWB】グラマス達成！",
-			"date": "2025-09-05",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p>グラマス実装直後のランクマッチで達成！</p><p><img src=\"https://gyazo.com/38add4e04ba0bbe39f8f7fd5b1f52f02/thumb/500\" alt=\"Image\"></p><p>2回目の昇格戦で昇格。なんとダイヤいってから降格なし！できすぎ！</p><p><img src=\"https://gyazo.com/4b7b4f60e315c036f9103c4af1107d39/thumb/500\" alt=\"Image\"></p><p>直近の戦績は16-14でギリ勝ち越しｗ 使用デッキはスペルウィッチ一本。</p><p><img src=\"https://gyazo.com/9b115914099f3e71ff7cc34502f9dd53/thumb/500\" alt=\"Image\"></p><p>継承者出てすぐのEra53さんのリスト（ https://x.com/garbage_er/status/1962042383304171606 ）を使い続けた。慣れたリストを崩したくなくてずっとそのまま使ってたけど、グラマス上がったことだしこっからはリスト弄りつつやってこう。</p><p>マスターランクマ終盤はスノーアウェイク入れたりペネロピー抜いたりしたかったのよね。でもロイヤル多いならペネロピーの価値高くなるからグラマスの環境次第かな〜。</p><hr><p>練度としては自分の動きに少しずつ慣れてきて時間切れの回数がだいぶ減った。</p><p>リーサルまでのプランがハンドで見えてる時や、強いムーブができるターンはそこそこやれてるんだけど、微妙なターンのすごし方はまだまだ謎。</p><p>優勢/劣勢が微妙なラインでのODがめっちゃむずくて、相手からのリーサル無いからと耐えてたら強ムーブされてはっきり劣勢になってODしてもズルズル負けちゃうパターンもありゃあ、確定リーサル無いのに強いターンにしたいからってOD打って引いてきた5枚が噛み合わなくて結局強くpp使えないパターンもある。</p><p>何となくで打つんじゃなくて、デッキに何入ってるか把握して「〇〇か〇〇引けたら強いしそこそこ確率ありそうだ」って感じで打つODが強いんだろうな。</p><p>相手を見ることもまだ全然できてなくて、相手のハンド読もうとし始めたくらいのレベル。</p><p>まだまだ課題は多いんだけど、その課題が具体的に見えてきたのがもう成長だと思うことにする。</p>"
-		},
-		{
-			"id": "Qj-JFAD5nMpZ-sTy3Zvj1ts_",
-			"title": "Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト",
-			"date": "2025-09-08",
-			"tags": [
-				"dynalist",
-				"javascript"
-			],
-			"body": "<p>つくった。</p><p>gist → <a href=\"https://gist.github.com/morvra/a490a0b6918a700e023b00013d57ee4c\" target=\"_blank\">Dynalist Random Tagged Item Viewer</a> / <a href=\"https://gist.github.com/morvra/eb2ec1cf588c8bf3e143ea86649204f3\" target=\"_blank\">Dynalist Random Item Viewer</a></p><ul><li>右下のコンテナに設定した項目がランダムで表示される</li><li>コンテナをクリックでその項目に移動</li><li>ボタンで項目の中からランダムに切り替え</li></ul><p>「今日の名言」「モットーから1要素」「アイディアリストから1つ」「クイズや英単語問題集」などなど見かえしたいもの何でもござれ。</p><p>完成してから思ったけど、Dynalistでデイリーノート書いてるとほぼ日手帳の「日々の言葉」みたいになってて良さげ。</p>"
-		},
-		{
-			"id": "1-aPbcWSLrKeCuuQhwsM4f5f",
-			"title": "Dynalistの連用日記用ビューワーをつくった",
-			"date": "2025-09-07",
+			"id": "ab43c63b-4f0f-3fda-e249-321614c8e3b3",
+			"title": "Dynalistでタグごとに色を設定する",
+			"date": "2025-07-21",
 			"tags": [
 				"dynalist"
 			],
-			"body": "<p>▼ これ</p><p><img src=\"https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000\" alt=\"Image\"></p><ul><li><a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>"
+			"body": "<p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title=\"Filter #hoge\"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>"
 		},
 		{
-			"id": "TZEv6QkahhaBZ84MeEgtEsJo",
-			"title": "シャドバWB 初の能力調整が発表",
-			"date": "2025-09-26",
+			"id": "29fa4397-2603-5a82-2130-a89b4cc4589a",
+			"title": "シャドバWBの対戦支援ツールを作った",
+			"date": "2025-07-10",
 			"tags": [
 				"シャドバWB"
 			],
-			"body": "<p><blockquote class=\"twitter-tweet\"><p lang=\"ja\" dir=\"ltr\">【カード能力変更】<br>9/29のメンテナンス時に「栄弦の天宮・リュウフウ」「狂気の創造者・リーアム」「パペットキャット」「シンフォニアハート・ツヴァイ」のカード能力を変更いたします。<br><br>▼詳細はこちら<a href=\"https://t.co/GKXWAM72Ni\">https://t.co/GKXWAM72Ni</a><a href=\"https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&amp;ref_src=twsrc%5Etfw\">#シャドバWB</a> <a href=\"https://t.co/Su8iIjxAVo\">pic.twitter.com/Su8iIjxAVo</a></p>&mdash; Shadowverse: Worlds Beyond公式 (@shadowverse_jp) <a href=\"https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw\">September 26, 2025</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script></p><h2>調整内容</h2><ul><li>リュウフウ 4PP→3PP</li><li>パペットキャット 2/2/2→1/1/1 突進</li><li>リーアム 10/8/8→9/7/7</li><li>ツヴァイ 進化時改良型操り人形出す</li></ul><p>アッパーのみでナーフは無し！できたことできなくなるのは嫌だもんね。なるべくこの形がいいと思う。</p><p>CRで苦戦してるドラネメに順当な強化って感じ。3弾強化ではないのはマゼルベインの影響もあるのかな？破壊軸に強化が無いのは不遇かも。</p><p>環境にどれくらいインパクトがあるのかは謎。2クラスのCR底上げは間違いないけど。</p><p>ドラ強化で増えたらウィッチは減りそう。</p><p>ネメは何に強いのか謎。人形が戦えてない＆破壊にとってパペットキャットがどんくらいありがたいかわからんので。</p><p>人形がロイに（環境における立ち位置的な意味で）勝てるのであれば環境がかなり動きそう。具体的にはウィッチ・モードメア・クレビショにどれくらい抗えるか。</p><p>次は財宝ロイヤルか人形ネメシスで</p>"
+			"body": "<ul><li><a href=\"https://morvra.github.io/wblog\" target=\"_blank\">WBログノート | シャドウバースWB 対戦支援</a></li></ul><h2>できること</h2><ul><li>クラス毎の警戒カードリスト＆カウンター</li></ul><ul><li>クラス毎のメモでマリガンやプレイ指針</li></ul><ul><li>自分のデッキ、相手クラス、先後、勝敗、メモを記録して一覧</li></ul><ul><li>デッキや先後でフィルターできて勝率も算出</li></ul><ul><li>データのインポート、エクスポートにも対応</li></ul><hr><p>ほぼChatGPTとGeminiに頼った。</p><p>経緯含めた紹介記事はnoteに投稿してみた→<a href=\"https://note.com/morvra/n/n42208430550c\" target=\"_blank\">シャドウバースWBの対戦支援ツールを作りました｜morvra</a></p><p>この記事投稿時C3サファイアだったけど、これ使ったおかげ？で現在AA0ダイヤ(踏めただけでルビサファ常駐)、ロビー大会優勝、グランプリA進出と上達してるはず。ダイヤ安定してれば上達を確信できたけどそれはまだまだ先かな〜。</p>"
 		},
 		{
-			"id": "XpiKdiroGo4ODb5_Pw17bpZK",
-			"title": "恙無くってたまに使うけど「恙」って何？",
-			"date": "2025-09-28",
+			"id": "abfcc0ed-d43f-895a-9e93-66b4789a5e76",
+			"title": "シャドバWB感想",
+			"date": "2025-07-09",
+			"tags": [
+				"シャドバWB",
+				"ゲーム"
+			],
+			"body": "<p>シャドウバースWB、リリース初日から遊んでるのでこの辺で感想をざっくり。</p><ul><li>進化、超進化とExPPのシステムで先後のバランス取れてそう（突き詰めればどうなるかはわからないけど）でよき</li></ul><ul><li>使ってるデッキはAFネメシスとフェイスドラゴン。中盤の融合と進化のプランニングがむずくて時間切れ頻発中</li></ul><ul><li>初日に無課金はデッキ組めないみたいな文句多かったけど、毎日やってれば1拡張で3~4テーマ組めそう</li></ul><ul><li>ランクはAA0、グループはサファイアとルビー行ったり来たりしつつたま〜にダイヤいけるって感じ</li></ul><ul><li>週末ロビー大会は大会気分（というか大会そのもの）味わえてヒリヒリ。ちなみに2回目で優勝できた！</li></ul><ul><li>負けてもランク上がる影響からか、環境がよくていろんなデッキと戦えて楽しい（上位帯はエルフ一色なのかもしれないけど）</li></ul><p>シャドバの楽しさ面白さは維持しつつ、UIやUXが正統進化。システム面が面白くなってDCGとしても改善してる印象。初弾にしてカードパワー高いから前作でも揶揄されたメンコ感はあるんだけど、それはお互い様だし超進化も絡んで駆け引きがおもろいメンコになってる。</p><p>この先空中戦ばっかりになったり一強環境でミラーしか発生しない、みたいな環境にならない限りは楽しめそう。</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f6/48/98/f648985e-52bf-40e5-deab-c7d721844c43/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg\" alt=\"Shadowverse: Worlds Beyond\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">Shadowverse: Worlds Beyond</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">Cygames, Inc.</span></div><div id=\"appreach-price\" style=\"font-size: 80%; display: inline-block;\">無料</div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/shadowverse-worlds-beyond/id6472019540?uo=4\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=jp.co.cygames.ShadowverseWorldsBeyond\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
+		},
+		{
+			"id": "36833c90-82be-b5b0-ef24-ed8e14a2ab78",
+			"title": "Dynalistのインボックスへ送信するスクリプト",
+			"date": "2025-03-15",
+			"tags": [
+				"dynalist",
+				"javascript"
+			],
+			"body": "<p>Dynalist上のどこからでもインボックスにメモするためのユーザースクリプト。ObsidianのQuickAddみたいなイメージ。</p><p>コード → <a href=\"https://gist.github.com/morvra/0e899e1cd57f2c2aaa69e328fd9b99f8\" target=\"_blank\">DynalistInboxSender.js</a></p><p>＊APIキーを自分用のものにして使ってください</p><ul><li>左下のボタンか「Alt+T」で入力画面がポップアップする</li></ul><ul><li>テキストを入力して送信ボタンかEnterを押すとインボックスに現在時刻付きで送信される</li></ul><ul><li>右上の閉じるボタン or 何も入力がない状態でEnter or カーソルが外れる でポップアップが消える</li></ul>"
+		},
+		{
+			"id": "46230c76-2d95-1fb8-96be-dc51d833272e",
+			"title": "Dynalistのタスク表示用スクリプト",
+			"date": "2025-03-13",
+			"tags": [
+				"dynalist",
+				"javascript"
+			],
+			"body": "<p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p><p>コード → <a href=\"https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30\" target=\"_blank\">DynalistTaskViewer.js</a></p><p>＊APIとドキュメントIDを自分用に変更して使ってください。</p><ul><li>右上のボタンをクリックするとリストが表示される</li></ul><ul><li>タスク名をクリックするとDynalist上でその項目に移動できる</li></ul><ul><li>URLをコピーしてDynalistにリンクを貼り付けることも可能</li></ul><p>ここから完了状態を変更するのも考えたんだけど処理が複雑になりそう＆API使いすぎたくないのでやめた。起動時と10分間隔で取得するようにしてるけどこのへんは改良の余地あり。</p><p>検索でも同じようなことはできるんだけど、その場で一覧できるのが便利でいい感じ。</p><p>総数が多いならタグで絞り込んだり日付入れて順番並び替えたりするのもよさそう。</p>"
+		},
+		{
+			"id": "6fc9afb0-659d-4f73-fa8d-3558cd992a1b",
+			"title": "「これ、AIが書いた？」文章の進化と創作の価値の行方",
+			"date": "2025-03-12",
+			"tags": [
+				"考えごと",
+				"ai"
+			],
+			"body": "<p>最近、ネットの記事を読んでると「これ、AIが書いたんじゃない？」って思うことが増えてきた。文章の構成が整っていて、情報が簡潔でわかりやすい。でも、なんか無機質で、感情が薄いような気もする。AIが文章を書く時代が本格的に来て、<strong>「AIが書いたかどうか」</strong>ってことは、実はそんなに重要じゃないのかもしれない。じゃあ、創作の価値や私たちが求めるものはどう変わるんだろう？</p><h2>AIと創作の関係</h2><p>まず、AIが得意な分野から見ていこう。</p><ul><li>ニュース記事や速報</li></ul><p>スポーツの試合結果や株価情報など、<strong>情報の整理と伝達が重要な分野</strong>。AIはこれを瞬時にこなせる。</p><ul><li>SEO対策を意識した記事</li></ul><p>「おすすめ10選」みたいな定型的な内容は、AIが得意。</p><ul><li>FAQやハウツー記事</li></ul><p>「iPhoneのスクショの撮り方」といった内容も、AIに任せて効率よく作れる。</p><p>一方で、AIが苦手なものもある。</p><ul><li>感情や経験に基づく文章</li></ul><p>エッセイや小説のように、<strong>個人的な感情や経験が反映されるもの</strong>はAIには難しい。</p><ul><li>深いテーマを扱う作品</li></ul><p>哲学的な問いや複雑な人間関係を描く小説も、AIではまだ限界がある。</p><p>つまり、AIは「それっぽい」文章は書けても、<strong>本当に心に響くような作品を生み出すのは難しい</strong>ってこと。</p><h2>AIと創作の価値</h2><p>じゃあ、AIが文章を作る時代になったことで、創作の価値ってどうなるんだろう？</p><ul><li>創作は人間にしかできない？</li></ul><p>AIはデータを基に文章を生成するけど、読者が求めるのは<strong>ただの情報じゃなくて、人間らしい感情や個性</strong>。だから、AIが書くものには、どうしても「心の温かみ」や「独自性」が欠けてしまう。</p><ul><li>AIを使えば創作が広がる？</li></ul><p>でも、AIをうまく活用すれば、新しい創作の形が見えてくるかもしれない。例えば、物語の構成をAIに手伝わせて、感情やニュアンスを人間が加えるスタイル。これで、より洗練された作品ができる可能性もある。</p><h2>過去の技術革新と同じ流れ</h2><p>新しい技術が出るたびに、創作の価値が揺らぐことがあった。例えば、</p><ul><li>活版印刷（15世紀）</li></ul><p>本が大量生産できるようになったことで、「本の価値が下がる」と言われたけど、結果的に知識が広まり、学問が進展した。</p><ul><li>カメラ（19世紀）</li></ul><p>写実的な絵画の価値がなくなると言われたけど、新しいアートが生まれ、絵画の価値はむしろ広がった。</p><ul><li>シンセサイザー（20世紀）</li></ul><p>生演奏が不要になると言われたけど、電子音楽が発展し、音楽の世界が広がった。</p><ul><li>デジタルアート（21世紀）</li></ul><p>手描きの絵が価値を失うと言われたけど、アナログとデジタルが融合して新しい表現が生まれた。</p><p>このように、<strong>新技術が登場するたびに創作の価値が揺らぐけど、最終的には新しい形が生まれる</strong>ことが多い。</p><h2>AIと創作の未来</h2><p>結局、AIが文章や創作に関わってくることで、価値がどう変わるかはこれからの課題だ。でも、<strong>人間ならではの感情や深みが求められる部分は残る</strong>し、AIはそのサポート役として活躍することになるだろう。大切なのは、<strong>AIをどう使うか</strong>。AIが得意な部分はどんどん活用しつつ、人間らしい部分はちゃんと残していく。そうすれば、<strong>AIと共存する新しい創作の形</strong>が見えてくるはずだ。</p><p>だから、<strong>AIが書いたかどうか</strong>なんてあまり気にせず、これからの創作を楽しむ方がいいのかもしれない。</p><hr><p>っていう記事をChatGPTで壁打ちしたあとに「1000字程度でまとめて」で書いてもらった。</p><p>きっかけとなった最初のメモは「noteのちょい硬めでまとまってるボリューミーな記事、生成AI製か？と思うようになってしまった」から。例に漏れずこの記事もなんか無機質で薄い感じあるよな〜。</p><p>でも壁打ちの段階で深い知識だったり鋭い目線があれば面白い記事書けるような気もしてる。この記事は数ターンしか時間かけてないから、もっと時間かけて考察を深めていけばどんなジャンルでも一家言ある感じで書けちゃいそう。</p>"
+		},
+		{
+			"id": "52cb7624-f682-ad40-f6b3-46f4811e5fde",
+			"title": "DEIとCE、平等とは",
+			"date": "2025-02-07",
+			"tags": [
+				"考えごと"
+			],
+			"body": "<ul><li><a href=\"http://finalvent.cocolog-nifty.com/fareastblog/2025/01/post-4342fb.html\" target=\"_blank\">DEI否定は単なる反動か？: 極東ブログ</a></li></ul><p>読んだ。</p><p>トランプ大統領が「多様性、公平性、包摂性（DEI）」プログラムを廃止したことに端を発する議論について。この決定が「反動的だ」という批判と、「DEIの一方的な正当化に疑問を投げかける契機」という意見が交錯する、平等を巡る2つの理念の対立を浮き彫りにする記事。</p><p>DEIに対する理念として記事中で出てきたのはCE（Colorblind Equality）。どちらも平等について謳っていてそれぞれに理があるけど相反する部分がある。DEIは現実の格差を重視し、積極的な是正を訴えている一方、CEは理想的な公平さに基づく普遍的な基準を重視している。</p><p>個人の属性によって社会的格差があるのであれば、それを是正する方向は正しいように感じる。逆差別という言葉はあるけど、それを盾にして差別の温存に加担するのは避けたい。</p><p>一方で、DEI的な政策の例でよくあがるアファーマティブ・アクションなどに反対する側の、「割りを食ってる感」もわかる。こないだの移民のときもそうだけどこの割り食ってる感がやっかいで、差別・被差別どっちももってる感情。</p><p>なにを主眼に置くかだよな。そこの目線が揃っていれば少なくとも話し合いはできると思う。</p><p>属性による格差の是正（のスピード感）を重要視するなら政策はDEIに寄っていくだろうし、CEは悪手とまで言えるだろう。</p><p>個人的には理念としてはCEがいいなと思いつつ、属性によって前提が違うならそこを是正する必要はある、そのための施策の積極性は対象によって変わるよね、くらいのテンション。「ものによる」というガチで何も言ってないに等しい結論だけど実際そう思うからね。DEI（CE）は悪！みたいなもんじゃ無い。</p><p>＊DEIとは</p><blockquote><p>「DEI（ディー・イー・アイ）」は、「Diversity（ダイバーシティ、多様性）」「Equity（エクイティ、公平性）」「Inclusion（インクルージョン、包括性）」の頭文字からなる略称です。</p></blockquote><p><a href=\"https://holdings.panasonic/jp/corporate/sustainability/diversity-equity-inclusion/what-is-diversity-equity-inclusion.html\" target=\"_blank\">「DEI（Diversity, Equity & Inclusion）」とは？- Diversity, Equity & Inclusion - サステナビリティ - パナソニック ホールディングス</a></p>"
+		},
+		{
+			"id": "70b4555b-d66f-08dd-cf31-6e10e5eb1b00",
+			"title": "Bappa Shotaさんのスウェーデンの動画を見て移民についてつらつら考えた",
+			"date": "2025-01-19",
+			"tags": [
+				"考えごと"
+			],
+			"body": "<ul><li><a href=\"https://www.youtube.com/watch?v=xA_I0T9o0zc\" target=\"_blank\">北欧で移民政策大失敗によりギャング天国に没落した国の実態... - YouTube</a></li></ul><p>クリックベイトなタイトルはともかく、日本の未来を予感させるような動画だった。地理的にだいぶ違いはあるけど移民が増えるのは間違いないわけで。</p><p>動画見てて思ったのは“移民”が問題なのではなく（むしろそれは必須）、それを悪用する少数の人間と、それを排除しようとするあまり全体の対立構造になり互いの歩み寄りとリスペクトを遠ざけてしまい、結果として経済や教育の格差を広げてしまうのが問題だということ。</p><p>社会や政府から排除されている実感があると、より頑なになっていくのは想像に難くない。</p><p>ただ、なんでも受け入れ態勢でいるのも難しいだろう。</p><p>個人的には少なくとも法は現地のものを守るべきだと思っている。信教の自由はもちろんあるけど、それより上に法や条例があるという感覚は日本人だからなのか？聖典に基づいて法があるべきという思想とは相容れない部分もあるのかもしれない。う〜ん。</p><p>文化や生活様式についても難しい。他人の迷惑にならなければいいとは思うが、その感覚もそれぞれだろうし。</p><p>だからこそ社会とつながっている感覚や互いにリスペクトをもっているかが重要でそれには環境や教育が必須。いわゆる統合政策（≠同化政策）。双方向での歩み寄り、言語習得の支援、社会参加の促進などなど。</p><p>そこをおろそかにして移民を大量に受け入れてしまっては互いに自国のコミュニティに引きこもって対立・格差を深めることになる。</p><p>統合政策は多くの人が納得するバランスが肝心。お互いに自分たちが割食ってる、軽んじられていると思ってしまうのは避けたい。でもそれが一番むずそう。</p><p>それこそ動画の終盤に出てきた“希望”がキーワードになるのかな。より良くなる、より楽しくなると思えれば互いに歩み寄れる気がする。</p><p>コンクリフトというか相容れない部分はどうしてもでてくるんだろうけど「色んな人がいる方がおもろい」って素朴な感情は忘れずにいたい。</p>"
+		},
+		{
+			"id": "debaf4b7-fd56-5999-c4af-42ebe2b35100",
+			"title": "こたけ正義感『弁論』見た",
+			"date": "2025-01-07",
+			"tags": [
+				"お笑い"
+			],
+			"body": "<ul><li><a href=\"https://www.youtube.com/watch?v=Ntrx9wTBoBE\" target=\"_blank\">【1月15日まで】こたけ正義感の『弁論』 - YouTube</a></li></ul><p>60分の漫談。主題は袴田事件について。</p><p>法律や司法制度、実際の事件を扱っているだけに「これ笑い事じゃないよな」と思いつつ、語り口のおかげで（せいで？）笑ってしまう。それに加えて納得とか感心する場面も多くて、ふんふん頷いたりひざを打ったりしながら見てた。</p><p>これぞ弁護士芸人の真骨頂なんじゃないか。構成も見事で60分見入ってしまった。</p><p>そして、ここで語られてることが\"真実\"だと決めつけそうになってる自分にも可笑しみと不安（もちろん法律関連では正しいことを言ってると思っているけど）。こういう感想が出てくるのも弁護士芸人のライブならではかもな。</p><p>■</p><p>検察庁の子供向けページはなかなかにアレなので修正してほしい。</p><p>▼ 2025-01-07時点での <a href=\"https://www.kensatsu.go.jp/child/child5.htm\" target=\"_blank\">裁判って何？：検察庁</a></p><p><img src=\"https://gyazo.com/2ea4617cdb5f58225c29f126b9ca7ad0/thumb/500#.png\" alt=\"Image\"></p>"
+		},
+		{
+			"id": "0450f854-92fa-b387-1382-ae02b308d589",
+			"title": "【アイギス】正月エフネ引けたのでGG編成組んでみた",
+			"date": "2025-01-06",
+			"tags": [
+				"千年戦争アイギス",
+				"ゲーム"
+			],
+			"body": "<p>前から欲しかった正月エフネを11連で引けた。正月の中からとはいえ闇鍋なのにすぐ引けてラッキー！</p><p>ということでGG編成組んでみることに。</p><p>まずは自分の持ってるユニットの中で使えそうな候補を挙げてく。</p><h2>必須</h2><ul><li>正月エフネ 永続範囲GG</li></ul><ul><li>リエーフ エフネの自傷身代わりトークン</li></ul><ul><li>イムラウ 自傷バリア 覚醒スキルで範囲HP攻撃UP</li></ul><ul><li>ヤシマ リエーフorエフネをコピー＆編成で攻撃UP</li></ul><ul><li>ディエーラ 報酬GUP＆コスト生産</li></ul><ul><li>トトノ GG効率UP</li></ul><h2>編成バフ</h2><ul><li>ハリナ スキル初動40％短縮</li></ul><ul><li>タマミ プラチナ初動25％短縮</li></ul><ul><li>トワ 攻撃隙</li></ul><ul><li>ユキザクラ 呪殺9％</li></ul><h2>バフ </h2><p>＊HPバフは自傷ダメUPにもなるので注意（ヤシマ→リエーフでカバーできる）</p><ul><li>ヴィディア 初動のコスト生産＆消費バフ</li></ul><ul><li>フィネス 射程or攻撃、永続以外のCT短縮</li></ul><ul><li>イムラウ 覚醒スキルで全体攻撃HP30％</li></ul><ul><li>アミー 吟遊詩人(魔界)＋通常スキルで属性バフ(1.3倍)or覚醒スキルでアビ倍率UP＆HP</li></ul><ul><li>オーガスタ 料理(近接)＋覚醒スキルで全体攻撃30％</li></ul><ul><li>ダーク王子 配置バフ(デーモン)15％＋通常スキルで属性バフ(1.3倍)敵全体デバフ</li></ul><ul><li>星を追う者 配置15％＋範囲ダンサーバフ 王子はHPが上がらないものを採用</li></ul><h2>その他</h2><ul><li>夏レオーネ GGもちスキル中確定</li></ul><ul><li>ハロウィンジュリア GGもちスキル中確定</li></ul><ul><li>ニコル スキル中確定GG</li></ul><ul><li>リンネ 回復＋地形＆悪天候軽減</li></ul><ul><li>夏サナラ マスバフ</li></ul><ul><li>夏レオラ スキルオート＆コスト下げ</li></ul><ul><li>スカラー 隠密デバフ</li></ul><ul><li>スカウト 隠密デバフ</li></ul><p>以上の候補から最終的に組んだのがこちら▼</p><p><img src=\"https://gyazo.com/42f53fe66b0cfc3b4f3dd2575d2aad3d/thumb/500#.png\" alt=\"Image\"></p><p>基本エフネで全ての敵を処理、漏れた敵や別レーンはレオーネが担当する構成。</p><p>とは言っても組んで初日なのでまだまだ迷い中。</p><p>手軽さ優先ならフィネスを通常にしてGG要員増やすのが良さげだし、エフネの火力優先なら夏レオラと夏レオーネのとこ夏サナラとダーク王子にすると良いよな〜、、などなど。</p><p>これからヒストリー進めつつちょうどいい構成を見つけていこう。</p>"
+		},
+		{
+			"id": "cdb8a9a3-49f0-429f-4692-5abaa6089a6c",
+			"title": "アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説",
+			"date": "2024-12-25",
+			"tags": [
+				"考えごと"
+			],
+			"body": "<ul><li><a href=\"https://anond.hatelabo.jp/20241223225740\" target=\"_blank\">鳩野ちひろが歌っている曲は「ちょっと古い」どころではない</a></li></ul><p>このブコメでmori99さんが「過去の意味が世代で違う」と<a href=\"https://b.hatena.ne.jp/mori99/20241224#bookmark-4763828651127392096\" target=\"_blank\">書いてて</a>確かにそうだなと。</p><p>アーカイブが残ってさえいればふとしたきっかけで知れるわけで、そこで琴線に触れるものもある。逆に言えば残っていなかったら知ることすら無い（口伝？）し、残っていたとしてもそこにアクセスするハードルが高かったりテキストが少しあるだけだったら広まらない。</p><p>時代観すら変えうるという意味でもサブスクやらYoutubeの存在の大きさを実感。</p><p>でもスケールを広げるとこのパラダイムシフトって言語以前以後、文字以前以後とかでも起こってるよなと思い浮かんだ。文字が無かったら時代という概念からしておそらく無いし。</p><p>■</p><p>最近昭和の〇〇ランキング系の番組やら記事をいくつか見る機会あって昭和初期がほぼ無視されてるのにモヤモヤしてたんだけど、視聴者の世代に合わせてるというだけじゃなくて単純に資料がないってのもあるなと思ったりした。</p>"
+		},
+		{
+			"id": "30f3e7e9-c03e-fce0-b5fc-fa7aeeba4ce3",
+			"title": "兵庫県知事選で斎藤元彦元知事が当選",
+			"date": "2024-11-17",
+			"tags": [
+				"ニュース"
+			],
+			"body": "<ul><li><a href=\"https://www.asahi.com/articles/ASSCJ2D9LSCJOXIE010M.html\" target=\"_blank\">兵庫県知事選、斎藤元彦氏が再選　議会や職員と「謙虚に丁寧にやる」 [兵庫県]：朝日新聞デジタル</a></li></ul><ul><li><a href=\"https://mainichi.jp/articles/20241117/k00/00m/010/184000c\" target=\"_blank\">斎藤前知事の「劇場型選挙」　支えたSNSの“奇兵隊”　兵庫知事選 | 毎日新聞</a></li></ul><ul><li><a href=\"https://news.yahoo.co.jp/articles/5f84e72695f3b434575de6ea07e03fe5c3cda66b\" target=\"_blank\">斎藤元彦氏が〝秒殺〟で当選確実 兵庫県知事返り咲き N党・立花孝志氏のアシスト大きかった（よろず～ニュース） - Yahoo!ニュース</a></li></ul><p>先日のアメリカの大統領選も踏まえ象徴的な結果になったこともあり、いろいろ考えたり言いたくなる選挙だった。こっからもメディアでいろんな語りがでてくるんだろう。（この記事もその1つである）</p><ul><li>オールドメディアvsネット</li></ul><ul><li>良識派（気取り）vs陰謀論に飲まれる衆愚</li></ul><ul><li>高齢者vs若者</li></ul><ul><li>議会vs知事</li></ul><ul><li>保守vs改革</li></ul><ul><li>多数の政党vs一部維新・N党</li></ul><ul><li>隠蔽？vsパワハラ？</li></ul><ul><li>権威主義vs（関西に根強い）公務員嫌悪</li></ul><ul><li>組織票vs民意</li></ul><p>いろんな軸があって複雑に混じり合っている（なんなら二項でもない）のが現実だと思ってて、そこを一緒くたにして「〇〇の勝利！」みたいな表現はモヤモヤする。テレビをよく見る若者もいれば、陰謀論に飲まれる議員もいるわけで。</p><p>傾向とか大枠を語る意味は大いにあるんだろうけど、自己の利益（PV、視聴率、フォロワー数、収益）のために二元論で耳目を集める現象が増え、それを日々くらうのはしんどい。まぁそれが（戦略上）正しいという潮流は感じてるし、なんならネット云々より前、人間自体がそうなりがちなのかもしれない。</p><p>あとは大統領選でも思ったんだけど、現地にいないとわからないことが沢山あるという前提は共有したうえで語って欲しい。そこを考えずに外側から「〇〇民は愚か」みたいな発信するのはそれこそ愚かだと思う。</p><p>■</p><p>個人的にはこっから板挟みになる現場の方々の心労がいかばかりかと憂いてしまう。誰もがハッピーなる選挙なんて存在し得ないにしても、今回の選挙によってしんどい思いをしている人が少しでも減る結果になることを願っている。</p>"
+		},
+		{
+			"id": "1f57d795-b57a-1cb9-a7a1-f5aaba12a9ae",
+			"title": "ポケポケ始めた",
+			"date": "2024-11-13",
+			"tags": [
+				"ポケポケ",
+				"ゲーム"
+			],
+			"body": "<p>DCGとりあえず触る勢。初日からちまちま引いてたんだけどなかなかちゃんとしたデッキ組めなくて対人要素は手を出してなかった。</p><p>我慢できずにサーナイトを2枚交換して、ミュウツーEXデッキを組んでイベントの対人戦回してる。今んとこの雑感をメモ。</p><p>▼ 使ってるデッキ（ by <a href=\"https://gamewith.jp/pokemon-tcg-pocket/464280\" target=\"_blank\">デッキシミュレーター - ゲームウィズ</a> ）</p><p><img src=\"https://gyazo.com/66bd55ebd49eca48071db1dca0571f38/thumb/500#.png\" alt=\"Image\"></p><p>初日にミュウツーEXのイマーシブ引けたのでせっかくならとミュウツーパック中心に引いてた。ピン挿し多いのはお試しで強さみて増減予定。</p><h2>雑感</h2><p>対戦のシステムはMARVEL SNAPの影響をめちゃくちゃ感じる。ポケカをマベスナライクに実装したらこうなるだろうなっていう。</p><ul><li>1戦の時間が短め</li></ul><ul><li>エネルギーは毎ターン自動</li></ul><ul><li>RNG要素が多くそれが勝敗に直結（先行/後攻・カスミ・ガラガラEX・サンダーEXなどなど）</li></ul><ul><li>フィールドは狭く縦画面で遊べる</li></ul><ul><li>操作で端末が振動</li></ul><p>総じてガチガチの競技志向というより1戦1戦のわちゃわちゃを楽しむゲームになっている印象。理不尽な要素も多いけどそれはお互い様で、だからこそ面白い。</p><p>もちろんガチの楽しさもあるけど繊細な構築やプレイングをぶっ飛ばす要素が多い。勝率を上げることはできても負けないのは無理なバランス。</p><hr><p>あとはバトルだけじゃなく開封とコレクションの楽しさも重視してるのがこれまでのDTCGと一線を画してる。</p><ul><li>開封の際は複数のパックから選択</li></ul><ul><li>パックの上部をスワイプしてリアルに開封</li></ul><ul><li>カードをずらしてレアをチラ見</li></ul><ul><li>お気に入りのカードをファイルやボードに飾れる</li></ul><p>などなど。かなりフィジカル？な楽しさを押してきてる。</p><p>開封のワザップがYoutubeやXで流行ってるのもこれまでに無かった体験で楽しい。自分も何の意味もないと思いつつ、回したりパックの折れ見て引いてるｗ</p><p>■</p><p>サクッと対戦できてコレクションとして遊ぶ楽しさもあり、スキマ時間にやるスマホゲーとしてハイクオリティだと思う。ゆるくやっていこう。</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6c/43/bc/6c43bcf3-dc72-a7d4-9d5c-5a06900eff1b/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg\" alt=\"Pokémon TCG Pocket\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">Pokémon TCG Pocket</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">The Pokemon Company</span></div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/pok%25C3%25A9mon-tcg-pocket/id6479970832?uo=4\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=jp.pokemon.pokemontcgp\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
+		},
+		{
+			"id": "f4f78153-129f-c940-2125-835f43118038",
+			"title": "MECE",
+			"date": "2024-11-02",
 			"tags": [
 				"言葉"
 			],
-			"body": "<p>支障なくみたいな感じで使ってるけど、「つつが」とは？と思ったので調べた。</p><blockquote><p>「つつがなく」の語源は、心配事・病気・災難を意味する「恙（つつが）」がひとつも「無い」ことに由来し、無事である・物事が順調に進んでいることを意味するようになった。</p></blockquote><ul><li><a href=\"https://www.weblio.jp/content/%E3%81%A4%E3%81%A4%E3%81%8C%E3%81%AA%E3%81%8F\" target=\"_blank\">「つつがなく」の意味や使い方 わかりやすく解説 Weblio辞書</a></li></ul><p>恙の意味は「心配事・病気・災難」とのこと。</p><p>古語のつつみ（恙み・障み）と関連付いてるのかな？ちなみに音読みだとヨウで、小恙（しょうよう）、微恙（びよう）って言葉があった。</p>"
+			"body": "<p>ミーシー。</p><p>「MECEになってる、なってない」みたいな表現あるけどちゃんとした意味わかってないので記録がてら投稿。</p><ul><li><a href=\"https://ja.wikipedia.org/wiki/MECE\" target=\"_blank\">MECE - Wikipedia</a></li></ul><blockquote><p>MECE（ミーシー (Mee-cee); 英語: Mutually Exclusive, Collectively Exhaustive）とは、「相互に排他的な項目」による「完全な全体集合」を意味する頭字語である。要するに「漏れなく・ダブりなく」という意味で、経営学や経営コンサルティングなどの領域でよく使われる言葉である。</p></blockquote><blockquote><p>人間という集合を例にとると、「年齢」による分類は、ある人が同時に20歳と21歳になることは不可能（重複なし）であり、全ての人がX歳という集団に属する（漏れなし）ため、MECEとなる。一方、「職業」による分類は、兼業を行う人間（重複）もいれば無職の人間（漏れ、ただし職業として「無職」という項目を設けるとすれば、漏れはなくなる）もいるためMECEとならない。</p></blockquote><p>Mutually（互いに） Exclusive（排他的）, Collectively（集合的に） Exhaustive（網羅的） の頭字語だった。</p><p>覚えられる気はしない。「漏れとダブりがない集合」くらいの理解はしときたい。</p><p>人に言うときは「相互に排他的な項目」による「完全な全体集合」って説明でなるほどと思える人にはそれでいいけど、雰囲気ちょい難しげなので例もあげられると尚良し。</p>"
 		},
 		{
-			"id": "2OF1L7bsSrt7itKpqt6RR37c",
-			"title": "シャドバWB 人形ネメシス組んでみた",
-			"date": "2025-10-01",
+			"id": "6ec5b51c-9320-18d4-ab04-8601a0efc508",
+			"title": "DynalistからCosenseに投稿するBookmarklet",
+			"date": "2024-10-29",
 			"tags": [
-				"シャドバWB"
+				"dynalist",
+				"cosense"
 			],
-			"body": "<p>調整でアッパーの入った人形ネメシス組んでみた。</p><p><img src=\"https://gyazo.com/b4a1b8c6bad69dc839ea892fc497e030/thumb/1000\" alt=\"Image\"></p><p>＊生成したのはオーディン2、マゼルベイン1、エース1、ツヴァイ1。</p><p>マゼルは3の方が強そうだけど、人形の使い心地知りたい＆エーテルケチって一旦1で様子見。</p><p>スペルウィッチからの移行だとスペルとドローの少なさにビビるが、ボードの取り合いはめちゃくちゃ強いテーマなはず。</p><h2>EPICまでお試し</h2><p>グラマス1600から4連勝でEPIC到達！つえ〜〜（強いコントロールに当たらなかっただけ説あり）</p><p>序盤から押せ押せで動けるのが楽しい！89Tあたりでリーサル見込めるし、なんなら序盤から圧倒してアグロムーブできる。</p><p>ただ2コスの採用・プレイ優先度と序盤のExPPの使い方が謎すぎ。</p><p>相性としては、ロイヤル・エルフにはいけそうでクレビショとモードメアは厳しいと思う。</p><p>調整直後ってこともあり、頻出するミラーは進化権渋って打点に使いたい。ギルネの有無でリーサル判断が狂うのであった方が嬉しい。</p><h2>調整カードの雑感</h2><ul><li>キャット: 最序盤とリーサルに。順番でプレミする。</li><li>ツヴァイ: 中盤のテンポスウィング。アングレアの使用感に似てて楽しい。</li><li>リーアム: 8点構えて次オーキス+キャットで12点の動き現実的っぽい。</li></ul><p>今シーズンは人形でCRというよりたくさん回すの目標にやってく！</p>"
+			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p><p>上のスクリプトを元にChatGPT頼りつつ改造。</p><p>▼ コード</p><p><code>javascript:(function(){function DL2CS(projectName, indentLinks){function formatQuote(note){return note.split(/\\r\\n|\\r|\\n/).map(line=>\"> \"+line).join(\"\\n\")+\"\\n\"}function convertMarkdownLinks(text){return text.replace(/\\[(.<em>?)\\]\\((.</em>?)\\)/g,'[$1 $2]')}if(location.host===\"dynalist.io\"&&projectName){const root=DYNALIST.app.app_document.ui.current_root;const meta=root.get_meta_object();const content=meta.get_content()||\"Undefined\";const note=meta.get_note()?formatQuote(meta.get_note()):\"\";const children=(function getChildren(indentation,items){return items.map(item=>{const childMeta=item.get_meta_object();return indentation+childMeta.get_content()+\"\\n\"+(childMeta.get_note()?formatQuote(childMeta.get_note()):\"\")+getChildren(indentation+\" \",item.get_children().children);}).join(\"\")}(indentLinks?\" \":\"\",root.get_children().children));const url=\"https://scrapbox.io/\"+projectName+\"/\"+encodeURIComponent(content);const body=convertMarkdownLinks(note+children);window.open(url+\"?body=\"+encodeURIComponent(body),'_blank')}}DL2CS(\"YOUR-PROJECT\",true);})();</code></p><ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\" target=\"_blank\">DynalistからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li></ul><ul><li>階層はそのまま</li></ul><ul><li>ノートは引用符</li></ul><ul><li>マークダウンのリンクをCosenseの記法に置換</li></ul><h2>使用方法</h2><ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li></ul><ul><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
 		},
 		{
-			"id": "gYwYy9YbpJ_Vkh0-NA6bu_YE",
-			"title": "ニュウマン高輪のニュウマンとは？",
-			"date": "2025-10-11",
+			"id": "c922f203-eaab-5826-e92d-83ae686adc1e",
+			"title": "『考えの育て方: 知的生産のデジタルカード法』読んだ",
+			"date": "2024-10-27",
+			"tags": [
+				"本"
+			],
+			"body": "<p><a href=\"https://www.amazon.co.jp/dp/B0CLTZYMBR/?tag=morvra-22\" target=\"_blank\"><img src=\"https://m.media-amazon.com/images/I/31zgOPovoBL._SL200_.jpg\" alt=\"B0CLTZYMBR\" border=\"0\" /></a><br><a href=\"https://www.amazon.co.jp/dp/B0CLTZYMBR/?tag=morvra-22\" target=\"_blank\">考えの育て方: 知的生産のデジタルカード法 (Knowledge Walkers Books)</a></p><blockquote><p>「いかにすれば、デジタルツールでカード法を実践できるのか？」</p></blockquote><p>について、著者の「考えを育てる」ことについての探求の道程が、EvernoteからScrapbox（現Cosense）へというツールの遍歴とともに書かれている。</p><p>面白かった〜。</p><p>発想を書き留めた（1ワードや1センテンスの）メモと思考を書いたカードは違う、とか言われてみれば自明なんだけど、言語化されるまで意識できてなかった。</p><p>カードはネタ帳やアウトプットのための「素材」ではなく、今の考えを記し混沌の中で過去の自分と対話し、つながりを発見し、長期的に考えを育てていくためにある。ということが繰り返し書かれている。</p><h2>『考えの育て方』というタイトル、シンプルながら本質的でよい</h2><p>梅棹式カードシステムをデジタルでやるなら？ってことと真摯に向き合い続けた結果が、このタイトルにつまっていると思う。</p><p>肝心なのは情報を整理することではなく、<strong>考えを育てる</strong>ことなんだっていう。本文中で何度も何度も形を変えて言及されている。それだけハマりやすい罠なんだよな。Evernoteから始まった影響もあるだろうけど。</p><p>自分もEvernoteのノートブックの構成を延々考えたり、アウトライナーで全部やろうとしたり、はたまたローカルのファイルがいいのか、とか色々試行錯誤しているのでめっちゃ共感しながら読めた。</p><h2>デジタル・カード・システムとアウトライン</h2><p>脱文脈的かつリンク的なつながりを育てるものと、文脈的かつリニアな流れを構成するものの差異。</p><p>自分が一番触っているツールは間違いなくアウトライナーなのでここも刺さった。</p><p>アウトライナーでデジタルカードシステムをやろうとするのってアリ？ナシ？とモヤモヤしていたんだけど、本書を読んで（少なくともCosenseよりは）不適当だと確信した。</p><p>2hopリンクは無く、強制的に構造化される。フラットにしようと思えばできるけど、そうすると一覧した時にCosenseよりだいぶ滅入る。などなど。</p><p>ただ、ネタ帳にはむしろ向いてるかもなと思ったりもした。書きそうなテーマを並べて混ぜながら考えられるのはよい。シェイクはCosenseよりアウトライナーの方が起こりやすい。</p><hr><p>\"Gradual\"を意識して生きようと考えてたタイミングの今読めてよかった。</p>"
+		},
+		{
+			"id": "ec61aab0-b71f-26b9-d33a-ac8dd6bb40b7",
+			"title": "中動態についてメモ",
+			"date": "2024-10-13",
 			"tags": [
 				"言葉"
 			],
-			"body": "<p>2025-09-12本格オープンのニュウマン高輪。なんか響きが気になったので調べた。</p><p>new + woman/man を合わせて NEWoMan らしい</p><blockquote><p>「あたらしい時代を生きる、すべてのあたらしい女性のために。あたらしい経験と出合う場所」というコンセプト。</p></blockquote><p>* <a href=\"https://namae.co.jp/news_letter/1833/\" target=\"_blank\">VOL.163 「フック」の効いたネーミング – 日本ネーミング&リサーチ</a></p><p>音で聴いた印象で単なる new man じゃないんだろうなと思ってたけど、英語由来の謎の造語だった。女性のWomanを強調してるのね。</p><p>* <a href=\"https://ja.wikipedia.org/wiki/NEWoMan\" target=\"_blank\">NEWoMan - Wikipedia</a></p><p>ちなみにJR東日本の連結子会社でルミネが運営してた。知らなかった〜。</p>"
+			"body": "<ul><li><a href=\"https://ja.wikipedia.org/wiki/%E4%B8%AD%E5%8B%95%E6%85%8B\" target=\"_blank\">中動態 - Wikipedia</a></li></ul><blockquote><p>動詞の表す行為が、その行為者自身に及ぶ場合にとる形態的特徴のことである。形は能動態であるが、受動態の意味を表わす態を指すとも説明される。以前は、voiceを態でなく、相（そう）とも訳しており、中動相（ちゅうどうそう）とも呼ばれた。</p></blockquote><p><a href=\"https://wineroses.hatenablog.com/entry/2024/10/13/102737\" target=\"_blank\">自分の心を震わせるもの - Jazzと読書の日々</a> にて気になったワード。ググっていろいろ読んだけどなかなか掴みきれず。</p><p>そんな中でもわりとわかりやすかったのは以下2つのページ。</p><ul><li><a href=\"https://www.ikuno.ed.jp/principalNote/detail/76/\" target=\"_blank\">「中動態の世界」を読んで</a></li></ul><blockquote><p>中動態と能動態を分けていた区別とは「主体がその過程の中にあるか外にあるか」ということで、主体がその過程の中にあるのが中動態、外にあるのが能動態</p></blockquote><blockquote><p>例えば「与える」とか「曲げる」といった動詞の場合、その行為は主体の外で完結するので能動態になります。一方「欲する」とか「希望する」といった動詞の場合は「心のなかから欲望や希望が湧き上がる過程」の中に主体があるので中動態になるそうです。言い換えると中動態に属するのは主体の中で成し遂げられる何事かであり「生まれる」「成長する」「想像する」など重要なものが多く含まれていたようです。</p></blockquote><ul><li><a href=\"http://igs-kankan.com/article/2019/10/001185/\" target=\"_blank\">第1回　20分でわかる中動態――國分功一郎｜かんかん！ -看護師のためのwebマガジン by 医学書院-</a></li></ul><blockquote><p>実は中動態のことを知ると、当たり前のものと思えていた能動と受動の対立が実は非常に不便なものであることがわかってくるのです。僕がよくあげる例は、「惚れる」です。</p></blockquote><blockquote><p>僕が最も強調し、また強く批判的に論じたのは「意志will」という概念です。「する」と「される」の対立、能動と受動の対立は意志の概念と強く結びついているのではないかというのが、僕が本の中で提示した仮説でした。</p></blockquote><blockquote><p>意志とは何ものにも影響されていない、純粋に自発的なものだと僕らは思い込んでいます。しかし、純粋に自発的なものが人間の心の中にあるはずがありません。心は過去とつながっているし、周辺から常に影響を受け続けている。</p></blockquote><p>（中動態からは外れるけどこの連載がめちゃくちゃおもしろかったのでおすすめ。中庸が好きな自分のツボにはまった。）</p><p>「中動態」を知ることで能動／受動で捉えがちな人の蒙が啓かれるのがすごくわかる。</p><p>意志という言葉がすごく能動的な意味を含んでいて、それによって自分をコントロールしている（できる）と考えられがちだけど、案外そうでもないよねっていう。</p>"
 		},
 		{
-			"id": "tTsFtYbfTDEOk2QDIiMlo_WO",
-			"title": "ウマ娘 温泉シナリオで初のUS！",
-			"date": "2025-11-01",
+			"id": "ac08d795-be94-54c0-74ee-2d320f6d14d4",
+			"title": "サイトのタイトルとアイコンを変更",
+			"date": "2024-07-29",
 			"tags": [
-				"ウマ娘"
+				"ブログ"
 			],
-			"body": "<p>しかもUS1まで！</p><p>目標レース多い＆レースボーナスバフのあるイクノディクタスで達成。</p><p><img src=\"https://gyazo.com/eafac470cea39ff7b396fecbe4e2ab3e/thumb/800\" alt=\"Image\"></p><p>保科無凸＆賢さ抜きでもSS行けたし査定は満足。あとは競技場育成しつつオートでチャンミの因子周回するかな。</p><p>育成のコツとしては</p><ul><li>青因子はスピ4パワ2</li><li>掘削の順番は疾駆→明晰→堅忍（途中）→天翔→剛脚→健壮（途中）→<strong>秘湯ゆこま</strong>→健壮（再開）→伝説の秘湯→堅忍（再開）</li><li>目標レースは必ず温泉バフを乗せて走る</li><li>入浴券使用はなるべく超回復つくまで粘る</li><li>シニアの秘湯ゆこま以降は温泉バフを切らさずレースと練習を踏み続けたい</li><li>保科のお出かけはトレーニング弱くてかつ超回復になっていない時がベスト<ul><li>だけど入浴券補充でも使う</li></ul></li><li>PRは序盤の練習orPRで掘る回数変わらない時に補充したければ</li></ul><p>って感じ。</p><p>因子と掘削の順番はまだまだ謎。キャラとかサポカによっても最適解は違ってきそう。</p>"
+			"body": "<p>このサイトの名前を morvra から morvra lists へ変更した。</p><ul><li>ユーザー名だけはシンプルすぎて変えたかった</li></ul><ul><li>テーマを絞らず何でも書きたいので汎用性ある名前に</li></ul><ul><li>箇条書き好き</li></ul><p>ってことで morvra <strong>lists</strong> に。</p><p>それに伴い各種アイコンを変更してヘッダーにも設置。WorkflowyやDynalistのBullet Pointsを参考に、ドット絵を作るアプリで作成した。</p><p>▼ これ</p><p><img src=\"https://i.gyazo.com/47c789525a66749f187c173dd6cd1284.png\" alt=\"Image\"></p><p>好きなカードや動物モチーフとか、AIに小洒落たロゴの作成を頼んだりもしたんだけど結局シンプルな形に落ち着いた。</p>"
+		},
+		{
+			"id": "fb9fffc0-9f24-f49f-949a-71fe20e287b0",
+			"title": "『世界は宗教で動いてる』読んだ",
+			"date": "2024-07-21",
+			"tags": [
+				"本"
+			],
+			"body": "<p><a href=\"https://amzn.to/3WglxXi\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4334037488.09.LZZZZZZZ\"></a></br><a href=\"https://amzn.to/3WglxXi\" target=\"_blank\" rel=\"nofollow\">世界は宗教で動いてる (光文社新書) 新書 – 2013/6/18</a></p><p>講義の形式で、ユダヤ教・キリスト教・イスラム教・儒教・ヒンドゥー教・仏教（日本式も含めて）・神道など、様々な宗教について、社会とのつながりを主軸として概要が解説されている。</p><p>特にキリスト教については、欧米の社会システムの基盤になっているのが分かるよう詳しく解説している。</p><hr><p>既知の内容が多かったこともありサクサク読めた。身近な宗教を大まかに知りたい人にとっては丁度いい内容だと思う。ただ世界史とか倫理（？）ある程度分かってないととっつきにくいかもしれない。</p><p>あと、教義や歴史については参考文献もあるしこれまでの知識としても大まかには確からしいと言えそうなんだけど、「〇〇人（〇〇教）は〇〇と考える」みたいな部分については俗説とか経験則って印象で話半分で読むのが良いかもとは思った。</p><p>中国の儒教と仏教のコンクリフト、国学の成り立ちあたりが刺さったのでいろいろ読みたくなったな。</p>"
+		},
+		{
+			"id": "d10e4588-b701-1263-d74f-3d334558c629",
+			"title": "学園アイドルマスター雑感",
+			"date": "2024-06-14",
+			"tags": [
+				"ゲーム"
+			],
+			"body": "<p>食指が動いたらとりあえず触ってみる勢。現在実装済み10人TrueEnd（＋5人親愛度10）見れて一段落したので感想書いてみる。</p><h3>ゲーム性</h3><ul><li>育成はデッキ構築型ローグライク</li></ul><ul><li>メモリーというハクスラ要素</li></ul><ul><li>ソシャゲ</li></ul><ul><li>対人はコンテストというCPU同士のスコアアタックとアイドルごとの評価点ランキング</li></ul><p>こんな感じ。一言でいうならウマ娘から競走抜いてスレスパ入れたアイマス。</p><p>最適なムーブがわかってくると単なる周回ゲーになりそうだけど、それを探ってく楽しみはあるし、自己ベストスコア目指すのも今んとこおもしろい。</p><h3>ストーリー</h3><p>アイマス初体験なのでアイドルとPの関係が新鮮。独特な疑似恋愛っぽさがゾワゾワくるものの、そういうもんだって分かればだんだんおもしろくなってくる。（いわゆる“なろう系”もそうだったけど、第一印象の肌感覚がいまいちでも案外楽しめる）</p><p>ひたむきな姿ってやっぱいいよなって。</p><hr><p>あとは育成ではアイドルとP（自分）の関係性がメインに描かれるけど、アイドル同士の関係性わかってきて二次創作の漫画をニヤニヤ読めるのも楽しい。</p><p>システム的なことを言うと、短めの話がすこしずつ進むのでゲームを進行したいのにできない、みたいなストレス無くて良い。</p><p>現在PLv33。全員分の親愛度10とSランク達成目指してまったり遊んでく！</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/2a/3a/052a3a07-ad4c-ab03-ff3e-abd0eaa34dfa/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/512x512bb.jpg\" alt=\"学園アイドルマスター\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">学園アイドルマスター</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">Bandai Namco Entertainment Inc.</span></div><div id=\"appreach-price\" style=\"font-size: 80%; display: inline-block;\">無料</div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/%25E5%25AD%25A6%25E5%259C%2592%25E3%2582%25A2%25E3%2582%25A4%25E3%2583%2589%25E3%2583%25AB%25E3%2583%259E%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC/id6446659989?uo=4\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=com.bandainamcoent.idolmaster_gakuen\" target=\"_blank\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
+		},
+		{
+			"id": "e1dab0f9-5f9c-6a9b-010f-0ce91bb8d961",
+			"title": "このサイトのRSSフィードを作った",
+			"date": "2024-06-11",
+			"tags": [
+				"ブログ"
+			],
+			"body": "<p>発行しているRSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> です。</p><p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p><p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p><ul><li><a href=\"https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html\" target=\"_blank\">XML用語事典 [CDATAセクション]</a></li></ul>"
+		},
+		{
+			"id": "2a95b2a1-8a94-af6d-3891-b537442c56e3",
+			"title": "『ようこそ！FACT（東京S区第二支部）へ』読んだ",
+			"date": "2024-04-21",
+			"tags": [
+				"漫画"
+			],
+			"body": "<p>『ひゃくえむ。』や『チ。』の魚豊（うおと）さんが描いた作品。</p><p><a href=\"https://amzn.to/4b6auGe\"><img width=\"160px\" src=\"https://images-na.ssl-images-amazon.com/images/P/4098530619.09.LZZZZZZZ\"></a><br/><a href=\"https://amzn.to/4b6auGe\" target=\"_blank\" rel=\"nofollow\">ようこそ!FACT(東京S区第二支部)へ (1) (裏少年サンデーコミックス) コミック – 2023/12/12</a></p><p><a href=\"https://www.youtube.com/watch?v=ymfdEbvDK7M\" target=\"_blank\">【トーク】ダウ90000蓮見 嫉妬した芸人&クリエイターベスト10！同世代の漫画家や作家から絶対的な憧れの人まで、蓮見の腹の内をみせた本気ランキング！ - YouTube</a> で紹介されていたのがきっかけで読んでみた。</p><h3>感想</h3><p>しんどいけど面白かった。大きいテーマは陰謀論と恋。</p><p>心に残ったワードを列挙すると、格差と分断・ピザゲート・恋は非合理・傷つけなくなっちゃう・運命と偶然・飯山の誠実さ・陰謀はある・目を見て話すこと。</p><p>無かったことにはならない、からのエンディングのモノローグは恐ろしくもありながらオチとして見事で笑っちゃった。</p><p>中盤の陰謀論にハマっていく描写は読んでて「なんでそっちにいっちゃうんだよ」と悲しくなりつつ、自分や周りの人もそうなり得るんだろうな、と思う（ように描かれている）。だからしんどいシーンでもある。</p><p>外側から見たら単純化された論理と独り善がりな思考で変な方向いっちゃってると感じるけど、当事者が客観的になるのは難しい。この作品を読む前から陰謀論にハマる人を冷笑・嘲笑なんてできないよなと思っていたけど、その思いは強くなった。</p><p>しんどい時にそのしんどさに理由をつけてくれるのって、ある種救いでもあるんだよな。宗教とかスピ系にもそういう面は間違いなくある。</p><p>読んでてキツい展開多いけど、恋と陰謀論だけじゃなくいろんな要素（格差・人間関係・幸/不幸・疑うこと・偶然性・etc.）に思いを馳せられて、そこが作品としての深みにつながってる気がする。</p><p>でもそんな物語の最終話で、渡辺と飯山の間（渡辺と先生にも）に様々な格差はどうしようもなく存在しているけど、人と人として相対することは可能だって力強さを感じて良かった。</p><p>と思ったらインタビュー（<a href=\"https://unique.kaonavi.jp/2489/\" target=\"_blank\">「陰謀論は情報の束、恋は情報じゃない」。『ようこそ！FACTへ』で作者が描くのは｜うにくえ｜個性ってなんだ？</a>）で</p><blockquote><p>残念ながら身体、資本、文化、計算処理能力などあらゆることに格差はあると思います。でも心というものには格差はないんじゃないかと信じていて。そこの平等さみたいなものを描きたかったというところもあります。</p></blockquote><p>と語られていて腹落ち。</p><p>全30話で読みやすいので気になる方は是非。<a href=\"https://manga-one.com/\" target=\"_blank\">マンガワン</a>で全話読めます。</p><p>しかし『チ。』で天動説を疑った人を描いた次に陰謀論描くって幅がすごすぎるなぁ。次回作も読もう。</p>"
+		},
+		{
+			"id": "86671c0c-a74a-654f-3c7f-f9fdd685ee91",
+			"title": "Dynalistの構造 Ver.202404",
+			"date": "2024-04-20",
+			"tags": [
+				"dynalist"
+			],
+			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p><p>現時点（2024年4月）はこんな感じだよって記録。</p><p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p><h2>📆 Days</h2><p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p><p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p><h2>🧭 ALL</h2><p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p><h2>🌏 Blog</h2><p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p><h2>📔 Notes</h2><p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p><h2>🗄 Collections</h2><p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p><p>ここの階層やグルーピングが悩み。</p><h2>📚 Reference</h2><p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p><p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p><h2>Archives</h2><p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p><p>▼ 参考</p><ul><li><a href=\"https://amzn.to/3xREGWY\" target=\"_blank\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul><ul><li><a href=\"https://bulletjournal.com/\" target=\"_blank\">Bullet Journal</a></li></ul><ul><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
+		},
+		{
+			"id": "09921afc-79b2-a10f-20e3-50bcd27776eb",
+			"title": "【Hearthstone】神聖ドラゴンプリーストでワイルドのレジェンド達成！",
+			"date": "2024-04-10",
+			"tags": [
+				"hearthstone"
+			],
+			"body": "<p><img src=\"https://gyazo.com/5b4b726328b90dc34e38a9cceff9689b/thumb/500#.png\" alt=\"legend\"></p><p>久々のレジェンドなので記念に投稿。</p><h2>デッキリスト</h2><p><img src=\"https://gyazo.com/ca20daa3227cc8ae0657e1bdefde767c/thumb/500#.png\" alt=\"deck\"></p><p>AAEBAa0GBNfOA4aDBf3EBemoBg3lBNEK7hHL5gKYtgOJowTIrASywQSjkwWeogbqqAbrqAbc8wYAAQOH9wP9xAWEowT9xAWj7wT9xAUAAA==</p><p>ETCの中身は</p><ul><li>ナールの欠片（沈黙。挑発超えるため）</li></ul><ul><li>密言・貪（AoE＆バースト伸ばしたり挑発に付与したり何かと器用）</li></ul><ul><li>口をつぐむ証人（秘策メタ。クエメのブロック対策）</li></ul><h2>デッキの使用感</h2><p>そこそこ優秀なテンポデッキに強力なバーストコンボが搭載されてる感じ。</p><p>ダスクブレイカー＆未来からの使者の4コスドラゴンによるテンポスウィングが気持ちいい。</p><p>そしてなにより時導巻きのザリミのカードパワーが高すぎる。等身大スケール・レプリカ（＋鱗の聖職者）のおかげで引き込みやすく、勝利手段までのアクセスしやすさが段違いで使うのが簡単だった。</p><p>平均5〜7ターン目でリーサルなのでたくさん試合できるのもよし。</p><h2>構築について</h2><p>最初はTempo Stormのリスト（<a href=\"https://tempostorm.com/hearthstone/decks/divine-dragon-priest-wild-meta-snapshot-apr-2-2024\" target=\"_blank\">Divine Dragon Priest - Wild Meta Snapshot - Apr. 2, 2024 - Decks - Tempo Storm</a>）を使ってたんだけど、ラシオンの角使ってみたかったり、ETC入れたくて少し構築変えた。</p><h3>パッチーズ不採用</h3><p>海賊が船の回復術師と深淵の融合体の4体しかおらず、盤面に対するアドもそこまでじゃない。</p><p>圧縮は偉いけど引いたときの弱さとラシオンの角の不純物というデメリットもあり、絶対的な枠でもないなと考えて不採用。</p><h3>ETC</h3><p>各種メタカードのために採用。1枠でいろんな相手にワンチャンもたせられるのは偉いと思う。</p><p>こいつのおかげで勝てた試合ももちろんあるけど、メインのプランが強力なので正直使い所はあんまなかった。自己満カードな気もする。</p><h3>ダスクブレイカー2積みの是非</h3><p>ヘルス3以下が並ぶことが多い環境ならめちゃくちゃ強いんだけど、序盤から大型展開されると無力だし、自分がボード取れてるならむしろ邪魔になる。</p><p>自分が現環境をどう捉えてるかで0〜2枚に調整するとよし。</p><p>今あらためて組むなら死者蘇生を2積みしてダスクブレイカー減らすかな。</p>"
+		},
+		{
+			"id": "1903c7ea-8e59-b9db-7834-68a1fc26f06e",
+			"title": "Hello world!",
+			"date": "2024-03-30",
+			"tags": [
+				"ブログ"
+			],
+			"body": "<p>こんにちは。morvra（もーゔら）と言います。</p><p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p><p>サイトの構築はNoratetsu Houseさんの連載（<a href=\"https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB\" target=\"_blank\">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p><p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p><p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p><p>今後は記事を更新しつつ、</p><ul><li>タグ機能</li></ul><ul><li>RSSフィードの配信</li></ul><ul><li>デザインを洗練</li></ul><p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>"
+		},
+		{
+			"id": "c0245cfc-6ba5-e922-6520-d1fcc01b839f",
+			"title": "記事テスト",
+			"date": "2024-03-29",
+			"tags": [
+				"ブログ"
+			],
+			"body": "<p>本文</p><h2>見出しh2</h2><p>ほんぶんほんぶん</p><p>ほんぶん２</p><p><strong>太字</strong> ほげ〜</p><ul><li>中黒つき１</li></ul><ul><li>中黒つき1-1</li></ul><ul><li>中黒つき1-2</li></ul><ul><li>2</li></ul><ul><li>2-2</li></ul><ul><li>3</li></ul><p>見出しにかかわらない本文</p><blockquote><p>引用</p></blockquote><p><a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a> リンクはどうなる？</p><p>文中<a href=\"https://www.youtube.com/\" target=\"_blank\">YouTube</a>では？</p><p>Dynalistのリンクをサイトの方に置換したい 例:<a href=\"https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im#z=2BSuXiPppMezZeBA0lpI7sIh\" target=\"_blank\">記事テスト2</a></p>"
+		},
+		{
+			"id": "e884fec2-302e-eeec-9214-8e271fe22a69",
+			"title": "About",
+			"date": "2024-03-30",
+			"tags": [],
+			"body": "<h2>このサイトについて</h2><p>morvra（もーぶら）がなんでも書く場所です。</p><p>RSSフィードは <a href=\"https://morvra.github.io/rss.xml\" target=\"_blank\">https://morvra.github.io/rss.xml</a> で発行してます。</p><h2>morvra</h2><p><img src=\"https://gyazo.com/821ae163e2ae917475d3dc5fe2b94732/thumb/350#.png\" alt=\"icon\"></p><p>インターネットとテキストが好きです。アイコンは<a href=\"<a href=\"https://designer.microsoft.com/image-creator\" target=\"_blank\">Microsoft Designer</a>製。\">https://designer.microsoft.com/image-creator)製。</a></p><h2>お問い合わせ</h2><p>お問い合わせは<a href=\"https://forms.gle/eCcYD2tfg7w6LBHX9\" target=\"_blank\">Googleフォーム</a>からお願いします。</p><h2>Amazonアソシエイト・プログラムに参加しています。</h2><p>morvra listはamazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイト宣伝プログラムである、Amazonアソシエイト・プログラムの参加者です。</p><h2>Google AdSenseに参加しています。</h2><p>morvra listは広告としてGoogle AdSenseを使用しています。 Google Adsenseはデータを収集するために、Cookieやウェブビーコンを使用して広告配信をしています。</p><p>Cookieを使用することにより、インターネットにおけるご自身のサイトや他のサイトへのアクセス情報に基づいてユーザーに広告を配信することが可能になります。</p><p>情報提供を望まない場合は、Googleのポリシーと原則のページより、Cookieオプションを使用しないように設定することができます。</p>"
+		},
+		{
+			"id": "2744b6b5-596e-3e7b-b133-ac792fe874cf",
+			"title": "Workflowyで書く記事のテスト",
+			"date": "2025-11-05",
+			"tags": [
+				"ブログ"
+			],
+			"body": "<h2>見出しH2</h2><p>見出しの子要素の本文。</p><p>見出し関係ない本文。<b>太字</b></p><blockquote><p>引用</p></blockquote><p>Workflowyでは勝手に引用とか見出しになっちゃうから別の記号用意した方がよさげだな。もしくはWorkflowy上でデフォルトの表現をちゃんと変換できるようにするか。→layoutModeの値で判断できた！h2とかquote-blockとか。</p><ul><li>リスト親1<ul><li>子要素1-1<ul><li>孫 1-1-1</li></ul></li><li>子1-2<ul><li>孫 1-2-1</li><li>孫 1-2-2</li></ul></li></ul></li><li>親2</li></ul><h3>見出し3</h3><p>ブンブンブン。</p><ul><li>単体リスト</li></ul><p>画像テスト。</p><p><img src=\"https://gyazo.com/2f5a3693ab002c5883b2c8091bb4b119/thumb/500\" alt=\"Image\"></p><p>リンク</p><p>ほげほげ<a href=\"https://morvra.github.io/taskrono/\" target=\"_blank\">Taskrono</a></p><p>Workflowyデフォ: <a href=\"https://morvra.github.io/taskrono/\">Taskrono</a></p><p>移動したらidが変更されるのかテスト。</p><p>元: 2744b6b5-596e-3e7b-b133-ac792fe874cf</p><p>移動: 2744b6b5-596e-3e7b-b133-ac792fe874cf</p><p>カットペースト: 2744b6b5-596e-3e7b-b133-ac792fe874cf</p><p>ということで大丈夫そう。とりあえずURLが変わらないならOKっぽい。</p>"
 		}
 	],
 	"pieces": [
 		{
-			"id": "UcjKAvD_DYrM4c9uyH2yAKNp",
-			"title": "Pieceテスト",
-			"date": "2024-04-30",
-			"tags": [],
-			"body": "<p>動画やリンク、記事になってないメモなどを載せていく予定。</p><p>タイトルはなんなら無くて良いくらいでテキストだけでも投稿可でDynalist上で青のトピックを羅列するって感じにしたい。</p>"
-		},
-		{
-			"id": "pa9TQCb1dmFFM5CDVMbhyJRG",
-			"title": "延々と永遠",
-			"date": "2024-05-09",
-			"tags": [],
-			"body": "<p>これまでなら「延々と」が使われてたであろうタイミングで「永遠と」とか「永遠に」が使われるケースがかなり増えてきた感触ある。</p><p>おそらく何十年も前からある誤用だと思うんだけど、ここ数年は市民権得てる感じする。若年層で違和感持つ人は少なくなっているのでは？</p>"
-		},
-		{
-			"id": "UeTYlE_1t1ccKy1N5qOS6W-C",
-			"title": "Scrapbox→Cosense",
-			"date": "2024-05-21",
-			"tags": [],
-			"body": "<p>ScrapboxがHelpfeel Cosenseに名前が変わった</p><ul><li><a href=\"https://prtimes.jp/main/html/rd/p/000000323.000027275.html\" target=\"_blank\">【サービス名変更のお知らせ】「Scrapbox」は「Helpfeel Cosense（ヘルプフィール コセンス）」に変わります | 株式会社Helpfeelのプレスリリース</a></li></ul><blockquote><p>情報を集めて整理できる「Scrapbox」は、「スクボ」の愛称で親しまれている一方で、名称からは、人とのつながりが想起しにくく、本サービスの本質的な価値を十分に伝えられていないというジレンマを抱えていました。</p></blockquote><blockquote><p>このような背景から、社会問題である情報格差の解消に向けて、本サービスの「ナレッジによって人や組織を豊かにする」というコアバリューをより明確に伝えるために、サービス名を「Helpfeel Cosense（コセンス）」に変更することを決定いたしました。</p></blockquote><p>とのこと。「Scrapbox」は手軽な感じが好きだったけどウケにくい層もいたのかな〜。</p>"
-		},
-		{
-			"id": "BRh88eLD3TalAzIV_6k23Prj",
-			"title": "正反対な君と僕 55話",
-			"date": "2024-05-27",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371864158164556\" target=\"_blank\">[第55話]正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a> </li></ul><p>東の自覚回。阿賀沢さんの漫画はみんな幸せになれ！って思う。</p><p>高校生にして言語化と内省が上手すぎる。そのおかげで読みやすいしそこが肌に合う感じがする。</p>"
-		},
-		{
-			"id": "rY7zMxGt_h_SOn5Frlr7DUgP",
-			"title": "『ふつうの軽音部』のハトノのバンドのメンバー集まったぞ！",
-			"date": "2024-06-09",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371867623740984\" target=\"_blank\">[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul><p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p><p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p><p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
-		},
-		{
-			"id": "Z1uam7RnBRgRqjeLue-WT2t8",
-			"title": "Little Glee Monster アカペラメドレー 2024",
-			"date": "2024-08-10",
-			"tags": [],
-			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/T0NIU8Eum18?si=0fOXxLzpmbmvPN4N\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>年々歌唱力もMIXもめっちゃ向上してる印象。すごい。特にThis is meのハーモニーは痺れた。</p><p>Pentatonix好きでそのイズム感じてかなり刺さった。</p>"
-		},
-		{
-			"id": "YV7LsKjiPnaoLsGSXLWaSp4p",
-			"title": "名曲で草",
-			"date": "2024-08-31",
-			"tags": [],
-			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/JVlAJlvaT0Y?si=5RcWd6lyFduvEo2W\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><ul><li>地下ラップやら誕生日凸待ちやら小ネタ満載で楽しい</li></ul><ul><li>でも詞は激エモ。1COLOR→ANYCOLORとか</li></ul>"
-		},
-		{
-			"id": "qAaF8sYfLzwE45pMblyJRyMo",
-			"title": "豊か",
-			"date": "2024-09-21",
-			"tags": [],
-			"body": "<p>ニューヨークのニューラジオで頻出する概念</p><p>参考：<a href=\"https://www.youtube.com/watch?v=COYp28n4gK0\" target=\"_blank\">【ニューヨーク】2人とも豊かじゃない【切り抜き】 - YouTube</a></p><p>趣味もってるとか私生活の充実とかそのへんなんだけど、他者からの視線は意識せず内的に満足してるかどうかが重要っぽい。言語化するのも野暮って感じの概念でシャバいも似たような言葉。</p>"
-		},
-		{
-			"id": "kopu9tCmsQ-lg0QrwpvzxcXg",
-			"title": "敬意逓減（けいいていげん）の法則",
-			"date": "2024-10-09",
-			"tags": [],
-			"body": "<p>敬語に含まれる敬意が徐々に失われていく現象。</p><p>＊敬意漸減（ぜんげん）とも</p><p>例：御前、貴方、のたまう</p><p>参考</p><ul><li><a href=\"https://x.com/nikkei_kotoba/status/1828373138050011329\" target=\"_blank\">日経 校閲 / X</a></li></ul><ul><li><a href=\"https://www.yomiuri.co.jp/column/henshu/20230317-OYT8T50012/\" target=\"_blank\">「させていただく」を使いすぎ？…言い換えられない理由をベテラン記者が考察 : 読売新聞</a></li></ul><ul><li><a href=\"https://note.com/aaaaayyyymmmmm/n/nc70d5fd24c71\" target=\"_blank\">言葉は生きている～敬意逓減の話～｜くりん◎日本語教師◎勉強垢</a></li></ul>"
-		},
-		{
-			"id": "oPqV59kKJVuEULL-KuubMFbR",
-			"title": "天台声明（てんだいしょうみょう）",
-			"date": "2024-10-10",
-			"tags": [],
-			"body": "<p><a href=\"https://www.youtube.com/watch?v=4OPCY27QhtU\" target=\"_blank\">その言葉は現実となる！古代インド神秘伝説 〜インダス文明とアーリア人の足跡〜【54-2 COTEN RADIO ムガール帝国編2】 - YouTube</a> きっかけで天台声明を聴いた。</p><ul><li><a href=\"https://www.youtube.com/watch?v=a9yaDU5kbb8\" target=\"_blank\">天台声明　青龍殿　百僧公演　金曼供フルバージョン - YouTube</a></li></ul><p>こういうの中で音浴びてると一種のトランス状態になるんだよな〜。</p><p>リードからの合唱にグレゴリオ聖歌ぽさ感じた。倍音めっちゃくっきりなとこも。</p><p>倍音はキリスト教でも天使の声と呼ばれてたし、宗教儀式において超自然的な現象として重要なパーツだったんじゃないかな？</p><ul><li><a href=\"https://www.tendai.or.jp/shoumyou/\" target=\"_blank\">天台宗 > 天台宗について > 天台声明（てんだいしょうみょう）</a></li></ul>"
-		},
-		{
-			"id": "HLwXNrb7lFU7C3H-Ob1BN8nl",
-			"title": "『愚かで勤勉な私たちは、』読んだ",
-			"date": "2024-10-20",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://www.pixiv.net/user/7087222/series/251873\" target=\"_blank\">「愚かで勤勉な私たちは、」/「コガッツオ」のシリーズ [pixiv]</a></li></ul><p>ホッテントリ経由で。面白かった。</p><blockquote><p>愉快な陰謀論まんが</p></blockquote><p>と紹介文あるけどまさにそれ。</p><p>陰謀論関係だと『ようこそ！FACT（東京S区第二支部）へ』も読んだけど、主人公がハマった人のちょい外側でメタ視点もってるから、のめり込む怖さ・しんどさから少し離れておかしみを感じやすかった。</p><p>それでいながら陰謀論や人の意志の恐ろしさも感じられて胸を突かれる要素もあり、完全な他人事ではないよなぁと。</p><p>後半の怒涛の展開もすごくてどんどん引き込まれていった。『愛のむきだし』を思い起こさせるようなひっちゃかめっちゃか感。</p>"
-		},
-		{
-			"id": "r0iOru9Rw8u5Odi5Im5XYwRL",
-			"title": "『ふつうの軽音部』43話、濃い！",
-			"date": "2024-10-27",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567256216464824\" target=\"_blank\">第４３話 ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul><p>サンボ聴く前のたまき先輩の表情ゾクッときた。</p><p>こんな素敵な3人なのに色恋きっかけでギクシャクしてしまうのも「ふつう」なんだよな。おそらく次回かその次にある回想終えての演奏シーンが楽しみで今からソワソワ。</p><p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/KM0SrqFBt38?si=9cs_OWBUuMx_UFX_\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>"
-		},
-		{
-			"id": "5RblOXu1esCyso-gx9Usg4tC",
-			"title": "The King's Singers『Masterpiece』の2024年版が公開",
-			"date": "2024-11-03",
-			"tags": [],
-			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Ry3Cnw9D5Ws?si=bbvjOKApMW7N_TuQ\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>自分がThe King's Singersにハマったきっかけの一つでもある、音楽史をメロディに乗せて振り返る『Masterpiece』が新録で公開された。</p><p>やっぱりおもろいね。ただ小芝居が無いのは残念ｗ</p>"
-		},
-		{
-			"id": "93bkfHiqe2_hLWXjyJB16IYF",
-			"title": "GoogleAdsense置いてみた",
-			"date": "2024-11-15",
-			"tags": [],
-			"body": "<p>ブログサービスを介してない自前のサイトでの申請は初めて。意外といけた。</p><p>いろいろ試して記事の下に1つだけ置くことにした。記事基本的に短いしあんまゴテゴテするのも何だなと。それに合わせてヘッダー周りや記事本文のデザインもちょこちょこ調整。サイトいじるの楽しい😁</p><p>今回久しぶりにAdsenseさわったんだけど、自動で配置できてしかもそれがかなり効果的っぽくて驚いた。推移の際に全画面に広告乗せたり、追尾とかも自動でできてびっくり。そりゃみんなやるよな。</p>"
-		},
-		{
-			"id": "EIF_JsLnhXScLYycjtVzLw9r",
-			"title": "『正反対な君と僕』完結！",
-			"date": "2024-11-24",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567261201092262\" target=\"_blank\">第65話 正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a></li></ul><p>最後は谷→鈴木メインで一話とリンクさせつつ大団円。そしてアニメ化も決定！</p><p>なんかしみじみよかったな〜。少女漫画（でもないか、群像劇？）のラストとしてとても気持ちがいい構成だ。</p>"
-		},
-		{
-			"id": "BOf179pEwidxd_RwW3SNen22",
-			"title": "英国で一番多い男児名は「ムハンマド」",
-			"date": "2024-12-07",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://www.afpbb.com/articles/-/3552621\" target=\"_blank\">英国で一番人気の男児名は「ムハンマド」　写真1枚　国際ニュース：AFPBB News</a></li></ul><blockquote><p>英国家統計局（ONS）は5日、イングランドとウェールズで2023年の新生児の名前で、最も人気のあった男児名は「ムハンマド（Muhammad）」で、初めて1位を獲得したと発表した。</p></blockquote><p>移民が多いのもイスラム教徒の子がムハンマドと名付けられることが多いのも知ってたけど、こういうデータで示されるとなんか感慨がある。単にイスラム教徒が増えただけでなく（現在6.5%）他の名前が多様化しているという理由もあるらしいけど。</p><p>日本もそうなる未来あるな〜。たくさん来るかはわからないけど潮流的には十分あり得る。</p>"
-		},
-		{
-			"id": "kX1Kl4YphW71wHSDVPH-R9Nm",
-			"title": "ポケポケ連勝イベント",
-			"date": "2024-12-09",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://www.4gamer.net/games/779/G077901/20241209034/\" target=\"_blank\">「ポケポケ」，イベントバトルの連勝数に応じてエンブレムを獲得できる「最強の遺伝子 エンブレムイベント1 SP」を開始</a></li></ul><p>始めてすぐ4連敗くらいして時間かかる覚悟したけどそっから勝ち始めてサクッと5連勝。5連勝済みの人がファンデッキで潜ってくれてるっぽいこともあり早く達成できた。よかった〜。</p><p>ちなみに使ったのはミュウツーデッキ1本。こっからはいろんなデッキで潜ってみよう。</p>"
-		},
-		{
-			"id": "6i2xBU_Phewdnatn2MNHZ0iT",
-			"title": "子項目のない投稿テスト",
-			"date": "2024-12-13",
-			"tags": [],
-			"body": ""
-		},
-		{
-			"id": "UY7Lr3b9xahuaRuwBjmLm4_7",
-			"title": "主語がでかい系の投稿に引っ張られない",
-			"date": "2025-01-03",
-			"tags": [],
-			"body": ""
-		},
-		{
-			"id": "3vMnifMiWrUarXmxMUalHFmM",
-			"title": "ウマ娘 LoH開始 初日は30pt欠損 17時時点121位！！！",
-			"date": "2025-02-16",
-			"tags": [],
-			"body": "<p><img src=\"https://gyazo.com/df2452488b81204344280d826558bcbb/thumb/500#.png\" alt=\"Image\"></p><p>瞬間でもランキング乗るの嬉しいねぇ。上位の構成見てるとコンセ積んでない人思ったより多いかも。まぁでもUD中盤〜後半でもそこそこ安定してるのはコンセのおかげ（ということにしよう）</p><p>勝率はカレン>ミラクル>オグリ。中盤力と緑とパワー(サポカ)弱いからプラチナで勝ち切るのは厳しいと思うけどプラ4はいけそう。</p>"
-		},
-		{
-			"id": "azEK8QreJIHr46iF740683me",
-			"title": "短距離LoH 終了 31860pt ぎりぎりプラ4（3万）",
-			"date": "2025-02-22",
-			"tags": [],
-			"body": "<p><img src=\"https://gyazo.com/c052dabbb8a34f0df6fdf8a0d86cf2b0/thumb/500#.png\" alt=\"Image\"></p><p>勝率は96.1。複勝率はカレン92%>ミラクル88%>オグリ78.3%</p><p>短距離かつサポカ足りない中プラ4届いたのは良かった。パワー盛れてればもうちょいいけそうだった。</p>"
-		},
-		{
-			"id": "QLpSyNZBkNJZwkw2GVVfaGtW",
-			"title": "花粉やばし",
-			"date": "2025-02-28",
-			"tags": [],
-			"body": ""
-		},
-		{
-			"id": "6dLIi_Hb1cMUDQbCiFPnxchF",
-			"title": "ポケポケ「超克の光」の5連勝イベント3、ギャラドスexで初日クリア！",
-			"date": "2025-03-06",
-			"tags": [],
-			"body": "<p>リストはアライさんの。つえ〜。</p><p><img src=\"https://gyazo.com/c944025d540d66bd71962c156c74de87/thumb/500#.png\" alt=\"Image\"></p><p>iPhone14にしてスクショが長くなったのがちょい不便かもしれん。</p>"
-		},
-		{
-			"id": "1r1ssPZvFxEZ58At94l_x1uw",
-			"title": "あちこちオードリー シティボーイズ回がおもしろすぎた",
-			"date": "2025-03-08",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://tver.jp/episodes/epitz7ihws\" target=\"_blank\">芸歴46年レジェンド芸人シティボーイズが初来店！そこには70代おじさん芸人の生き様が！ | TVer</a></li></ul><p>いや〜笑ったわ。若い時代の話、ラジオで口論になった話、2vs1の構図、あちこちで過去一笑ったかもしんない。</p>"
-		},
-		{
-			"id": "TxHRjepBRp3_a3TvvKEgrO-O",
-			"title": "今朝Geminiと話して社会ダーウィニズムについて教えてもらった",
-			"date": "2025-03-14",
-			"tags": [],
-			"body": "<p>アリストテレス概論→不動の動者→一神教→『沈黙』→神の存在→神は死んだ→ニーチェ→マチズモ？→優生思想・社会ダーウィニズムと話が飛びまくった。</p><p>思考の雑談という感じ。</p>"
-		},
-		{
-			"id": "1yMO4bsCLS0JR9pIPws7-h_W",
-			"title": "サチ録終わるのか😭",
-			"date": "2025-03-14",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567264132035821\" target=\"_blank\">[第四十五話]サチ録～サチの黙示録～ - 茶んた | 少年ジャンプ＋</a></li></ul><p>寂しいけどきれいな終わりにはなりそうだ。結局人間審判がなんなのか分かるのか？明かされないパターンもありそうだけど何か仕掛けあると思ってるので。</p>"
-		},
-		{
-			"id": "Pmg_Io3W7Q2Ntn5p6SR_EAGb",
-			"title": "ウマ娘 桜花チャンミ終了！",
-			"date": "2025-03-30",
-			"tags": [],
-			"body": "<p>予選は59/80勝。構成＆勝利数はヘリオス45 フライト11 ルビー3→途中からデバフルドルフ。</p><p>決勝Aは優勝！ヘリオスフライトともに出遅れて絶望してたけど対面の前脚質がフライト1体だけでなんとか差せた。</p><p><img src=\"https://gyazo.com/b355cdd113c002c13b3af47d39187de1/thumb/500#.png\" alt=\"Image\"></p><p><img src=\"https://gyazo.com/7a695630165f8fd9a23fedbac1d83714/thumb/500#.png\" alt=\"Image\"></p>"
-		},
-		{
-			"id": "fsKsIzwdWPg4c5FH1bsRVU-T",
-			"title": "テレビでサモエドが「SNSで大人気！」と語られていた",
-			"date": "2025-04-22",
-			"tags": [],
-			"body": "<p>命や生き物の在り方すら評価経済の文脈に組み込まれている感触があり、「ペットすらもいいね数気にする時代ですか」とちょっとグロく感じてしまった。</p><p>でもよく考えたら、自分もまた、動物やら食べ物、ファッションアイテムを見て「高そう」とか考えてたりするわけで。</p><p>貨幣経済のフィルターが、すでに自分の視線にも深く染み込んでいたんだなぁと改めて思ったりするなどした。評価はグロくて貨幣はグロくないなんて無いわけで。</p><p>別に悪いことでもないんだろうけど、本質から離れてる感がなんかヤ。初っ端の感想はその辺のフィルター外せたらいいな。</p>"
-		},
-		{
-			"id": "Cqda9x-nTSmRCNyW1EGaVQeK",
-			"title": "アークナイツのオートチェス風イベント「堅守協定」のハード（核心）クリア！",
-			"date": "2025-05-11",
-			"tags": [],
-			"body": "<p><img src=\"https://i.gyazo.com/b39a6ae12cb6dbac6ff06de863292337.png\" alt=\"Image\"></p><ul><li>シルバーアッシュで始めてボーナスは術師装備→レベル上げ値引き→装備5種</li></ul><ul><li>術師が都合よく引けてボーナスでもらった装備が噛み合ってなんとかクリアできた</li></ul><ul><li>敵の理解度が低いせいで配置が下手すぎて苦戦した</li></ul><p>端末iPhone14に変えてアークナイツ復帰した。画面下部のバーが邪魔すぎるけど我慢してる。</p>"
-		},
-		{
-			"id": "UVaorZgrGnYkMfVJNNa6JRT2",
-			"title": "GitHub Actionsから投稿のテスト",
-			"date": "2025-07-08",
-			"tags": [],
-			"body": "<p>できた！これで定時に自動で投稿されるようになった。</p><p>一応スマホからでも投稿可能に。最近はCosenseにお熱だったからDynalist経由のここは放置気味だったけどなんとか活用したい。</p>"
-		},
-		{
-			"id": "wOwjhfRujlwfK0xWMBGBklw1",
-			"title": "ダブルヒップ師匠",
-			"date": "2025-07-11",
-			"tags": [],
-			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/mazrTjqG92c?si=WIpe-e7FyYq881GE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>笑った〜。軍団それぞれ色あるけどどっちも好き。</p>"
-		},
-		{
-			"id": "Zzf7gJm4SjsuzbcsrVUmweYO",
-			"title": "WBログノートにシーズン記録を追加",
-			"date": "2025-07-12",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://morvra.github.io/wblog\" target=\"_blank\">WBログノート | シャドウバースWB 対戦支援</a></li></ul><p>フィルターも追加したのでシーズンごとの戦績に絞り込むことも可能。</p><p>拡張名やシーズンを自動で取得して記録してくれるのがベストなんだけど、その度に更新かけるのは現実的じゃないかなと思いシンプルな数字でやってくことにした。</p>"
-		},
-		{
-			"id": "X6ApxxtNyavHghQPGtW8KYsv",
-			"title": "参院選投票日せまってる中Xがしんどい",
-			"date": "2025-07-15",
-			"tags": [],
-			"body": "<p>しんどいとしか表現のしようがない。確実に見ないほうがいい。</p><p>けど新しい情報を浴びたい欲が十何年もかけて醸成されてしまったので難しさもある。とりあえずアクセスしにくいようにするとこから。</p>"
-		},
-		{
-			"id": "UUpNJgxy9GFq1fLypl5AwK2O",
-			"title": "I don’t want to manage knowledge. I want to live it.",
-			"date": "2025-07-16",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://www.joanwestenberg.com/p/i-deleted-my-second-brain\" target=\"_blank\">I Deleted My Second Brain</a></li></ul><p>の一節。</p><p>PKMとSecond Brain信仰？に対する疲れと脱却。面白く、そして納得性高い文章だった。</p>"
-		},
-		{
-			"id": "5dfVxW3w6R4r2P_OswWeCeBj",
-			"title": "タグで投稿できるかテスト",
-			"date": "2025-07-21",
-			"tags": [],
-			"body": ""
-		},
-		{
-			"id": "YUmol6Mgs8OaIFEZWax-9uOW",
-			"title": "シャドバWB マスターダイヤ帯へ！",
-			"date": "2025-08-03",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p>上振れ引けてマスター昇格後すぐにサファイア昇格、そこから5連勝以上2回もありサクッとダイヤ帯へいけた！</p><p><img src=\"https://gyazo.com/1c980d4860b70b51d7932606046ced90/thumb/500\" alt=\"|320\"></p><p>今シーズン初のダイヤがマスター昇格後になるとはねぇ。たぶんAA3の方がプレイヤーの勝ちたさは上だったｗ</p><p>まだ30~40戦くらい？しかやってないけど、マスターダイヤ帯でもピンキリなんだなとすごく感じる。</p><p>すぐ降格する覚悟してたんだけど勝率は5割以上をキープできててビックリ。</p><p>マスターダイヤなんてみんな超上級者で上手い人ばっかなんだろうなと思ってたけど、実際に対戦したらそうでもなかった。</p><p>仕様的に使い始めのデッキでも問答無用でグループで分けられるから練度低いデッキの人もたくさんいるし、そもそもたくさんプレーしてればランクは上がる＆上振れて上位グループにいけることもある（自分もそうだし）ため。</p>"
-		},
-		{
-			"id": "XC4_T115rI76xrq8cosDi3ym",
-			"title": "ウマ娘 メインストーリー第2部後編読んだ",
-			"date": "2025-08-05",
-			"tags": [
-				"ウマ娘"
-			],
-			"body": "<ul><li>フサイチパンドラがチームアスケラに移籍し、そこでの出会いによってレースへの姿勢が変わっていき……というストーリー</li><li>立ちはだかるライバルはカワカミプリンセス！</li><li>自分に甘く顧みることをしなかったパンドラが、ラインクラフトとの出会いによってどんどん頼もしくなっていく姿に感動</li><li>毎度のことながらレースからのライブは涙腺やばかった</li><li>カワカミやクラフトの\"ウマ娘\"ならではのストーリーもよかった。欺瞞だと思う部分でもあるんだけど、こういうIFがあってもいいじゃんと思わせる筆力があるんだよなぁ。</li></ul>"
-		},
-		{
-			"id": "72hbeq0imeRcJPGw8nsArQm3",
-			"title": "生成AIにコードを書いてもらってると",
-			"date": "2025-08-15",
-			"tags": [
-				"ai"
-			],
-			"body": "<p>異世界転生系で魔法の原理を分かってる転生者が改造だったり開発して、暗記的に呪文を覚えて使ってるだけの異世界人を驚かせる、みたいな場面を思い出す。</p><p>多分自分は驚く側だｗ せめて生成されたコードを読めるようになっときたいね。</p>"
-		},
-		{
-			"id": "ghS5B53JwstuiCb7QGC8ELSi",
-			"title": "シャドバWB 第2回グランプリ開始",
-			"date": "2025-08-20",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<ul><li>使用デッキはスペルウィッチ</li><li>2勝（D×・E○・R×・E×・R○）→4勝（R○R○Ni○R○Ni×）</li><li>2回目でなんとかAグループ進出を決めた</li><li>わけわかってない人たちに勝ってるだけという感じもあるが、それだけ上達してきてるということにしよう。。</li></ul>"
-		},
-		{
-			"id": "UFC9kEl4YhIhFUMS2aS7bCuo",
-			"title": "シャドバWB 第2回グランプリラウンド2",
-			"date": "2025-08-24",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p>2勝→3勝→3勝→2勝</p><p>むじ〜〜〜。最後の1回でOD絡みでサタンに進化はいて守護突破して魔将2体でリーサルあったのを見逃して負けてしまった。シーズン通してやってても時間なくなるとテンパるなぁ。</p><p>見通す力が足りない。頭良くないから経験でカバーしたいね。</p><p>とりあえずB決勝頑張ろ。</p><hr><p>と思ったらもう一日あった。</p><ul><li>2勝→4勝！</li></ul><p>最後のチャンスでA決勝決まった〜</p><p>リノにだけ負け。序中盤で横並べ→処理されずに詰めきる展開じゃないと厳しいねぇ</p><p>前回できなかったサタンOD魔将OD後のリーサルもちゃんとできて満足</p>"
-		},
-		{
-			"id": "eAHxAV3C_yfIOAZCOX9D-Ufx",
-			"title": "シャドバWB 2弾グランプリ決勝A 優勝！",
-			"date": "2025-08-26",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p>よっしゃーー💪 2弾にしてグランプリ初優勝！</p><p><img src=\"https://gyazo.com/1645626a47b837e3abfb0abde64e3794/thumb/800\" alt=\"Image\"></p><p>戦績：ナイ先○ ドラ先○ ロイ先○ ビショ後○ ロイ後× ナイ先○</p><p>使ったデッキはスペルウィッチ。<a href=\"https://morvra.github.io/article?id=-d2oBXY_72ZasC9OWTIjBDXK\">昨日の記事</a>の通り、ペネロピー3、イラプションを採用してロイヤルとナイトメアに強いリストにしたつもり。</p><p><img src=\"https://gyazo.com/f836ac92a1f829f798c9e7fb28b3e9fd/thumb/800\" alt=\"Image\"></p><p>＊ピン挿し多いリスト好きじゃないんだけどドロー多いので耐え。AoEのバランスは謎</p><p>最後の一戦はデッキ切れまであと1枚の死闘。0コスODを引いてサタンODアスタロトというシーズンを象徴する勝利に。</p><p>負けたのは重めのロイヤル。中盤まで押せ押せで相手のライフ7まで削れて調子乗って除去札無くなって負けた。打点が無いデッキだから攻めるプランはリーサル見えてないとダメね。</p>"
-		},
-		{
-			"id": "ySQ9XiYNux-k1uMTaSy7OHs_",
-			"title": "シャドバWB マスターサファイア帯12連勝含む15‐5でダイヤモンド帯へ！",
-			"date": "2025-09-04",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p><img src=\"https://gyazo.com/2ad0034e713a3106c9daf11b42461bb6/thumb/500\" alt=\"Image\"></p><p>うおおおおお！かなり上振れただけともいう。</p><p>新環境でときめくアーキタイプ無かったので3弾でも相変わらず土スペルウィッチ使ってる。既存デッキとギルネリーゼのシナジーめっちゃあってなんだかんだ楽しい。</p><p>ビショにそこそこ安定して勝てるようになってきたのがデカい。序中盤進化（特に超進化）温存＆クオンは10T以降の打点という意識。相手もぶん回ってたりサタン先に出されると厳しいけど。</p><p>3日前にトパーズ落ちしてダイヤでグラマスとか夢のまた夢という感じだったんだがありえるぞこれ！</p><p>と思ったらダイヤ入って怒涛の4連敗。なんとか連敗止まったけど厳しい。</p><p>最終的にダイヤ帯入ってから6‐9。やっぱみんなうまいわ。こっちが厳しくなるムーブ分かってる。</p>"
-		},
-		{
-			"id": "8lPKZqsjZz5xnlVgzA02uP9L",
-			"title": "赤猫ラヲタ回",
-			"date": "2025-09-08",
-			"tags": [],
-			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17107094910249409613\" target=\"_blank\">[第162話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋</a></li></ul><p>レンゲケース出すとこと戦慄した顔めちゃ笑ったｗ</p>"
-		},
-		{
-			"id": "6DhUHDKvf1G_nOESeZwaf0CP",
-			"title": "シャドバWB EPICいけた！",
-			"date": "2025-09-08",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p><img src=\"https://gyazo.com/fa338fdcb8fb5acee101401d33ea9777/thumb/500\" alt=\"Image\"></p><p>まさかの。上振れただけだけどびっくり。</p><p>一応自分のリストでいけたのが嬉しい。</p>"
-		},
-		{
-			"id": "O0yppsDjQR3SzpvSDOv5SXsX",
-			"title": "Dynalist連用日記の検索結果をあれこれいじる",
-			"date": "2025-09-09",
-			"tags": [
-				"dynalist"
-			],
-			"body": "<ul><li>検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></p>"
-		},
-		{
-			"id": "WqOxNyraJq8gX5_LNFRoMIjR",
-			"title": "シャドバWB 週末ロビー大会3回目の優勝！",
-			"date": "2025-09-13",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p><img src=\"https://gyazo.com/0ec394c3c4b73a75127c41a11137587d/thumb/1000\" alt=\"Image\"></p><p>使用したのは自作のスペルウィッチ。クオンODギルネリーゼが2回決まったのがデカすぎた。今日のプロリーグでウィッチ全敗（プレミ？もあったが）してて不安定さを改めて実感したけど、強ムーブできたら強いのは間違いない。</p><p>ランクマでもEPIC1700超えていい感じ。</p>"
-		},
-		{
-			"id": "5fLso3T9_F4bwJDwnwCc4X4d",
-			"title": "シャドバWB ULTIMATE到達！",
-			"date": "2025-09-20",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p><img src=\"https://gyazo.com/991ce8bf6e7a47b724d0694089fc25ac/thumb/500\" alt=\"Image\"></p><p>1700前後でスタックしてたけど初ULTIMATE！使ったのはスペルウィッチ。</p><p>まぁソッコーで落ちたけどｗ 最高1777までいけた。</p>"
-		},
-		{
-			"id": "0OoSD0aPBl-ZtM8cHIOtzZgO",
-			"title": "25-09 秋華賞チャンミ優勝！",
-			"date": "2025-09-27",
-			"tags": [
-				"ウマ娘"
-			],
-			"body": "<p><img src=\"https://gyazo.com/a29605e51f458a654a4e3c2cddc343de/thumb/500\" alt=\"Image\"></p><p>よしよし。</p><p>戦績は 予選:63/80勝 決勝:1/3/8</p><p><img src=\"https://i.gyazo.com/455205b49b451f2a072baa75a7c97940.png\" alt=\"Image\"></p><p>2エース1デバフ。色々言われてるけどキャラあんま引いてない（とは言え環境2TOP引いてるけど）勢からしたらデバフやバフで1枠埋めれるのありがたい。</p>"
-		},
-		{
-			"id": "wPfLqw4hrBOwUUVgC78v9oYT",
-			"title": "シャドバWB HoOグランプリ A決勝2勝でフィニッシュ！",
-			"date": "2025-09-27",
-			"tags": [
-				"シャドバWB"
-			],
-			"body": "<p><img src=\"https://gyazo.com/56701040c22c539317a62800a3554d2b/thumb/500\" alt=\"Image\"></p><p>4戦全部ウィッチというｗｗ かなり運ゲー感あるミラーだけど普通に悔しい。来期どうしよ。</p>"
-		},
-		{
-			"id": "uZ--yogg1QDMAlqsWpP_AZJb",
-			"title": "茂み",
-			"date": "2025-10-04",
-			"tags": [],
-			"body": "<p><a href=\"https://rashita.net/blog/?%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%AE%E6%A4%8D%E3%83%AA%E3%83%B3%E3%82%AF%E6%B4%BB%E5%8B%95\" target=\"_blank\">インターネットの植リンク活動 | R-style</a></p><blockquote><p>それを続けていったところで、原始スープの状態に戻ることはないだろう。しかし、何かしらの茂みが戻ってくるかもしれない。</p></blockquote><p>茂みあったら良いなと思うし、その一部でありたいね。</p>"
-		},
-		{
-			"id": "jAZUlfYHXfyERXSrmD96m7PM",
-			"title": "この世は褒め得",
-			"date": "2025-10-04",
-			"tags": [],
-			"body": ""
-		},
-		{
-			"id": "wDJJFbnDDH6GDlQoIXWmxu1g",
-			"title": "デ!?",
-			"date": "2025-10-07",
-			"tags": [
-				"漫画"
-			],
-			"body": "<ul><li><a href=\"https://championcross.jp/episodes/da833f9831a0b\" target=\"_blank\">僕の心のヤバイやつ ラブコメディが始まらない・Score.06　2人の初めて① | チャンピオンクロス</a></li></ul><p>本編とはまた違う読み応えで良い。ニヤニヤしちゃうｗ</p>"
-		},
-		{
-			"id": "GZSRDylf5vT-TmmESSdZ1Gp1",
+			"id": "828f1737-b7d7-5352-be6b-bd1d1507a2ab",
 			"title": "25-10 スプリンターズSチャンミ優勝！",
 			"date": "2025-10-28",
 			"tags": [
@@ -792,13 +409,405 @@
 			"body": "<p><img src=\"https://gyazo.com/2f5a3693ab002c5883b2c8091bb4b119/thumb/500\" alt=\"Image\"></p><p>よっしゃー！</p><p><img src=\"https://gyazo.com/d5d128412e93a4b9328b5b1c2cf1549f/thumb/800\" alt=\"Image\"></p><p>ケイエスミラクルが推しなんだけど、新衣装を活かす方針で逃げ2（マーチャン、カレンチャン）先行1（ケイエスミラクル）でバフ・デバフでマーチャンをサポートしつつ後方をなるべく離して勝つ構成に。A決勝は対面に強キャラいなかったのがデカかった。予選は47/80。</p>"
 		},
 		{
-			"id": "DX3LLyFTHrRGRrG4i4EwyecX",
+			"id": "d630c430-152f-7b7a-0784-ffd44329f58e",
 			"title": "シャドバWB HoOグランプリ2 A決勝2勝でフィニッシュ！",
 			"date": "2025-10-27",
 			"tags": [
 				"シャドバWB"
 			],
 			"body": "<p>今期は人形ネメシスと心中。</p><p>負けたのはクレビショに2回。環境最初期はマゼルでたまに勝ててたんだけど相手がアグレッシブになってきて厳しいわ。アグロプランがハマればそこそこやれるんだけどなぁ。</p><p>次の環境は何使おう。今度こそロイヤル組んでみるか？</p>"
+		},
+		{
+			"id": "c7d5b81a-b7f6-6012-f641-58e8390dd865",
+			"title": "デ!?",
+			"date": "2025-10-07",
+			"tags": [
+				"漫画"
+			],
+			"body": "<ul><li><a href=\"https://championcross.jp/episodes/da833f9831a0b\" target=\"_blank\">僕の心のヤバイやつ ラブコメディが始まらない・Score.06　2人の初めて① | チャンピオンクロス</a></li></ul><p>本編とはまた違う読み応えで良い。ニヤニヤしちゃうｗ</p>"
+		},
+		{
+			"id": "0726bfa4-9e3c-65e6-45c5-8fde1ba3399f",
+			"title": "茂み",
+			"date": "2025-10-04",
+			"tags": [],
+			"body": "<p><a href=\"https://rashita.net/blog/?%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%AE%E6%A4%8D%E3%83%AA%E3%83%B3%E3%82%AF%E6%B4%BB%E5%8B%95\" target=\"_blank\">インターネットの植リンク活動 | R-style</a></p><blockquote><p>それを続けていったところで、原始スープの状態に戻ることはないだろう。しかし、何かしらの茂みが戻ってくるかもしれない。</p></blockquote><p>茂みあったら良いなと思うし、その一部でありたいね。</p>"
+		},
+		{
+			"id": "413f9620-7452-178b-943d-09b476538b5f",
+			"title": "シャドバWB HoOグランプリ A決勝2勝でフィニッシュ！",
+			"date": "2025-09-27",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><img src=\"https://gyazo.com/56701040c22c539317a62800a3554d2b/thumb/500\" alt=\"Image\"></p><p>4戦全部ウィッチというｗｗ かなり運ゲー感あるミラーだけど普通に悔しい。来期どうしよ。</p>"
+		},
+		{
+			"id": "540a2d86-51c9-f0f9-6053-79700acfdd44",
+			"title": "25-09 秋華賞チャンミ優勝！",
+			"date": "2025-09-27",
+			"tags": [
+				"ウマ娘"
+			],
+			"body": "<p><img src=\"https://gyazo.com/a29605e51f458a654a4e3c2cddc343de/thumb/500\" alt=\"Image\"></p><p>よしよし。</p><p>戦績は 予選:63/80勝 決勝:1/3/8</p><p><img src=\"https://i.gyazo.com/455205b49b451f2a072baa75a7c97940.png\" alt=\"Image\"></p><p>2エース1デバフ。色々言われてるけどキャラあんま引いてない（とは言え環境2TOP引いてるけど）勢からしたらデバフやバフで1枠埋めれるのありがたい。</p>"
+		},
+		{
+			"id": "4c0b81f8-208f-3a33-731a-7175f1c54668",
+			"title": "シャドバWB ULTIMATE到達！",
+			"date": "2025-09-20",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><img src=\"https://gyazo.com/991ce8bf6e7a47b724d0694089fc25ac/thumb/500\" alt=\"Image\"></p><p>1700前後でスタックしてたけど初ULTIMATE！使ったのはスペルウィッチ。</p><p>まぁソッコーで落ちたけどｗ 最高1777までいけた。</p>"
+		},
+		{
+			"id": "c21295f2-ef36-1fff-04bd-b15ced91e1d4",
+			"title": "シャドバWB 週末ロビー大会3回目の優勝！",
+			"date": "2025-09-13",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><img src=\"https://gyazo.com/0ec394c3c4b73a75127c41a11137587d/thumb/1000\" alt=\"Image\"></p><p>使用したのは自作のスペルウィッチ。クオンODギルネリーゼが2回決まったのがデカすぎた。今日のプロリーグでウィッチ全敗（プレミ？もあったが）してて不安定さを改めて実感したけど、強ムーブできたら強いのは間違いない。</p><p>ランクマでもEPIC1700超えていい感じ。</p>"
+		},
+		{
+			"id": "d62ba5d9-ab5e-3c40-31d6-f362a9a70f42",
+			"title": "Dynalist連用日記の検索結果をあれこれいじる",
+			"date": "2025-09-09",
+			"tags": [
+				"dynalist"
+			],
+			"body": "<ul><li>検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></p>"
+		},
+		{
+			"id": "a56fc730-7eef-d15a-4574-863e01369a58",
+			"title": "シャドバWB EPICいけた！",
+			"date": "2025-09-08",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><img src=\"https://gyazo.com/fa338fdcb8fb5acee101401d33ea9777/thumb/500\" alt=\"Image\"></p><p>まさかの。上振れただけだけどびっくり。</p><p>一応自分のリストでいけたのが嬉しい。</p>"
+		},
+		{
+			"id": "b92854ca-1b77-71e8-6d30-6f56c03577ee",
+			"title": "赤猫ラヲタ回",
+			"date": "2025-09-08",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17107094910249409613\" target=\"_blank\">[第162話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋</a></li></ul><p>レンゲケース出すとこと戦慄した顔めちゃ笑ったｗ</p>"
+		},
+		{
+			"id": "fc9001fb-f35a-1214-5379-a5134fd79232",
+			"title": "シャドバWB マスターサファイア帯12連勝含む15‐5でダイヤモンド帯へ！",
+			"date": "2025-09-04",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p><img src=\"https://gyazo.com/2ad0034e713a3106c9daf11b42461bb6/thumb/500\" alt=\"Image\"></p><p>うおおおおお！かなり上振れただけともいう。</p><p>新環境でときめくアーキタイプ無かったので3弾でも相変わらず土スペルウィッチ使ってる。既存デッキとギルネリーゼのシナジーめっちゃあってなんだかんだ楽しい。</p><p>ビショにそこそこ安定して勝てるようになってきたのがデカい。序中盤進化（特に超進化）温存＆クオンは10T以降の打点という意識。相手もぶん回ってたりサタン先に出されると厳しいけど。</p><p>3日前にトパーズ落ちしてダイヤでグラマスとか夢のまた夢という感じだったんだがありえるぞこれ！</p><p>と思ったらダイヤ入って怒涛の4連敗。なんとか連敗止まったけど厳しい。</p><p>最終的にダイヤ帯入ってから6‐9。やっぱみんなうまいわ。こっちが厳しくなるムーブ分かってる。</p>"
+		},
+		{
+			"id": "564ffa81-3167-50ff-fda2-dbeb052f9f50",
+			"title": "シャドバWB 2弾グランプリ決勝A 優勝！",
+			"date": "2025-08-26",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p>よっしゃーー💪 2弾にしてグランプリ初優勝！</p><p><img src=\"https://gyazo.com/1645626a47b837e3abfb0abde64e3794/thumb/800\" alt=\"Image\"></p><p>戦績：ナイ先○ ドラ先○ ロイ先○ ビショ後○ ロイ後× ナイ先○</p><p>使ったデッキはスペルウィッチ。<a href=\"https://morvra.github.io/article?id=-d2oBXY_72ZasC9OWTIjBDXK\" target=\"_blank\">昨日の記事</a>の通り、ペネロピー3、イラプションを採用してロイヤルとナイトメアに強いリストにしたつもり。</p><p><img src=\"https://gyazo.com/f836ac92a1f829f798c9e7fb28b3e9fd/thumb/800\" alt=\"Image\"></p><p>＊ピン挿し多いリスト好きじゃないんだけどドロー多いので耐え。AoEのバランスは謎</p><p>最後の一戦はデッキ切れまであと1枚の死闘。0コスODを引いてサタンODアスタロトというシーズンを象徴する勝利に。</p><p>負けたのは重めのロイヤル。中盤まで押せ押せで相手のライフ7まで削れて調子乗って除去札無くなって負けた。打点が無いデッキだから攻めるプランはリーサル見えてないとダメね。</p>"
+		},
+		{
+			"id": "48e189f6-18cb-e00d-a44d-43b3bfd91375",
+			"title": "シャドバWB 第2回グランプリラウンド2",
+			"date": "2025-08-24",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p>2勝→3勝→3勝→2勝</p><p>むじ〜〜〜。最後の1回でOD絡みでサタンに進化はいて守護突破して魔将2体でリーサルあったのを見逃して負けてしまった。シーズン通してやってても時間なくなるとテンパるなぁ。</p><p>見通す力が足りない。頭良くないから経験でカバーしたいね。</p><p>とりあえずB決勝頑張ろ。</p><hr><p>と思ったらもう一日あった。</p><ul><li>2勝→4勝！</li></ul><p>最後のチャンスでA決勝決まった〜</p><p>リノにだけ負け。序中盤で横並べ→処理されずに詰めきる展開じゃないと厳しいねぇ</p><p>前回できなかったサタンOD魔将OD後のリーサルもちゃんとできて満足</p>"
+		},
+		{
+			"id": "5fdcba46-f429-d621-fbfb-73352759d9bb",
+			"title": "シャドバWB 第2回グランプリ開始",
+			"date": "2025-08-20",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<ul><li>使用デッキはスペルウィッチ</li><li>2勝（D×・E○・R×・E×・R○）→4勝（R○R○Ni○R○Ni×）</li><li>2回目でなんとかAグループ進出を決めた</li><li>わけわかってない人たちに勝ってるだけという感じもあるが、それだけ上達してきてるということにしよう。。</li></ul>"
+		},
+		{
+			"id": "c01b7632-5f7d-de96-8616-ca03cdbf8207",
+			"title": "生成AIにコードを書いてもらってると",
+			"date": "2025-08-15",
+			"tags": [
+				"ai"
+			],
+			"body": "<p>異世界転生系で魔法の原理を分かってる転生者が改造だったり開発して、暗記的に呪文を覚えて使ってるだけの異世界人を驚かせる、みたいな場面を思い出す。</p><p>多分自分は驚く側だｗ せめて生成されたコードを読めるようになっときたいね。</p>"
+		},
+		{
+			"id": "1eeb7459-e76a-91eb-6246-273408d72015",
+			"title": "ウマ娘 メインストーリー第2部後編読んだ",
+			"date": "2025-08-05",
+			"tags": [
+				"ウマ娘"
+			],
+			"body": "<ul><li>フサイチパンドラがチームアスケラに移籍し、そこでの出会いによってレースへの姿勢が変わっていき……というストーリー</li><li>立ちはだかるライバルはカワカミプリンセス！</li><li>自分に甘く顧みることをしなかったパンドラが、ラインクラフトとの出会いによってどんどん頼もしくなっていく姿に感動</li><li>毎度のことながらレースからのライブは涙腺やばかった</li><li>カワカミやクラフトの\"ウマ娘\"ならではのストーリーもよかった。欺瞞だと思う部分でもあるんだけど、こういうIFがあってもいいじゃんと思わせる筆力があるんだよなぁ。</li></ul>"
+		},
+		{
+			"id": "6d7aab62-008a-fd97-3cda-ba4eb1e5786d",
+			"title": "シャドバWB マスターダイヤ帯へ！",
+			"date": "2025-08-03",
+			"tags": [
+				"シャドバWB"
+			],
+			"body": "<p>上振れ引けてマスター昇格後すぐにサファイア昇格、そこから5連勝以上2回もありサクッとダイヤ帯へいけた！</p><p><img src=\"https://gyazo.com/1c980d4860b70b51d7932606046ced90/thumb/500\" alt=\"|320\"></p><p>今シーズン初のダイヤがマスター昇格後になるとはねぇ。たぶんAA3の方がプレイヤーの勝ちたさは上だったｗ</p><p>まだ30~40戦くらい？しかやってないけど、マスターダイヤ帯でもピンキリなんだなとすごく感じる。</p><p>すぐ降格する覚悟してたんだけど勝率は5割以上をキープできててビックリ。</p><p>マスターダイヤなんてみんな超上級者で上手い人ばっかなんだろうなと思ってたけど、実際に対戦したらそうでもなかった。</p><p>仕様的に使い始めのデッキでも問答無用でグループで分けられるから練度低いデッキの人もたくさんいるし、そもそもたくさんプレーしてればランクは上がる＆上振れて上位グループにいけることもある（自分もそうだし）ため。</p>"
+		},
+		{
+			"id": "4555eb28-4169-bc8e-d519-66dd43685326",
+			"title": "I don’t want to manage knowledge. I want to live it.",
+			"date": "2025-07-16",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://www.joanwestenberg.com/p/i-deleted-my-second-brain\" target=\"_blank\">I Deleted My Second Brain</a></li></ul><p>の一節。</p><p>PKMとSecond Brain信仰？に対する疲れと脱却。面白く、そして納得性高い文章だった。</p>"
+		},
+		{
+			"id": "d68550a8-203a-895b-3628-a040ec235f81",
+			"title": "参院選投票日せまってる中Xがしんどい",
+			"date": "2025-07-15",
+			"tags": [],
+			"body": "<p>しんどいとしか表現のしようがない。確実に見ないほうがいい。</p><p>けど新しい情報を浴びたい欲が十何年もかけて醸成されてしまったので難しさもある。とりあえずアクセスしにくいようにするとこから。</p>"
+		},
+		{
+			"id": "045bb45c-350d-b517-fe91-38f17fc31576",
+			"title": "WBログノートにシーズン記録を追加",
+			"date": "2025-07-12",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://morvra.github.io/wblog\" target=\"_blank\">WBログノート | シャドウバースWB 対戦支援</a></li></ul><p>フィルターも追加したのでシーズンごとの戦績に絞り込むことも可能。</p><p>拡張名やシーズンを自動で取得して記録してくれるのがベストなんだけど、その度に更新かけるのは現実的じゃないかなと思いシンプルな数字でやってくことにした。</p>"
+		},
+		{
+			"id": "02b70cc3-1dd7-125f-4296-5306135a3fe0",
+			"title": "ダブルヒップ師匠",
+			"date": "2025-07-11",
+			"tags": [],
+			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/mazrTjqG92c?si=WIpe-e7FyYq881GE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>笑った〜。軍団それぞれ色あるけどどっちも好き。</p>"
+		},
+		{
+			"id": "ab25efbd-0728-e100-1fff-f2b50268b423",
+			"title": "GitHub Actionsから投稿のテスト",
+			"date": "2025-07-08",
+			"tags": [],
+			"body": "<p>できた！これで定時に自動で投稿されるようになった。</p><p>一応スマホからでも投稿可能に。最近はCosenseにお熱だったからDynalist経由のここは放置気味だったけどなんとか活用したい。</p>"
+		},
+		{
+			"id": "1e338044-5667-e9b4-29f8-046fcb15c7e7",
+			"title": "アークナイツのオートチェス風イベント「堅守協定」のハード（核心）クリア！",
+			"date": "2025-05-11",
+			"tags": [],
+			"body": "<p><img src=\"https://i.gyazo.com/b39a6ae12cb6dbac6ff06de863292337.png\" alt=\"Image\"></p><ul><li>シルバーアッシュで始めてボーナスは術師装備→レベル上げ値引き→装備5種</li></ul><ul><li>術師が都合よく引けてボーナスでもらった装備が噛み合ってなんとかクリアできた</li></ul><ul><li>敵の理解度が低いせいで配置が下手すぎて苦戦した</li></ul><p>端末iPhone14に変えてアークナイツ復帰した。画面下部のバーが邪魔すぎるけど我慢してる。</p>"
+		},
+		{
+			"id": "59c96845-e91f-088f-ec18-f1ec8a80f405",
+			"title": "テレビでサモエドが「SNSで大人気！」と語られていた",
+			"date": "2025-04-22",
+			"tags": [],
+			"body": "<p>命や生き物の在り方すら評価経済の文脈に組み込まれている感触があり、「ペットすらもいいね数気にする時代ですか」とちょっとグロく感じてしまった。</p><p>でもよく考えたら、自分もまた、動物やら食べ物、ファッションアイテムを見て「高そう」とか考えてたりするわけで。</p><p>貨幣経済のフィルターが、すでに自分の視線にも深く染み込んでいたんだなぁと改めて思ったりするなどした。評価はグロくて貨幣はグロくないなんて無いわけで。</p><p>別に悪いことでもないんだろうけど、本質から離れてる感がなんかヤ。初っ端の感想はその辺のフィルター外せたらいいな。</p>"
+		},
+		{
+			"id": "c80f36f6-6660-907a-0ddb-4753fd578a8e",
+			"title": "ウマ娘 桜花チャンミ終了！",
+			"date": "2025-03-30",
+			"tags": [],
+			"body": "<p>予選は59/80勝。構成＆勝利数はヘリオス45 フライト11 ルビー3→途中からデバフルドルフ。</p><p>決勝Aは優勝！ヘリオスフライトともに出遅れて絶望してたけど対面の前脚質がフライト1体だけでなんとか差せた。</p><p><img src=\"https://gyazo.com/b355cdd113c002c13b3af47d39187de1/thumb/500#.png\" alt=\"Image\"></p><p><img src=\"https://gyazo.com/7a695630165f8fd9a23fedbac1d83714/thumb/500#.png\" alt=\"Image\"></p>"
+		},
+		{
+			"id": "a6e79e2f-845b-194b-c924-40f80e1d189a",
+			"title": "サチ録終わるのか😭",
+			"date": "2025-03-14",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567264132035821\" target=\"_blank\">[第四十五話]サチ録～サチの黙示録～ - 茶んた | 少年ジャンプ＋</a></li></ul><p>寂しいけどきれいな終わりにはなりそうだ。結局人間審判がなんなのか分かるのか？明かされないパターンもありそうだけど何か仕掛けあると思ってるので。</p>"
+		},
+		{
+			"id": "27cbc8ba-5bb5-cdda-7232-c35aa8e8e656",
+			"title": "今朝Geminiと話して社会ダーウィニズムについて教えてもらった",
+			"date": "2025-03-14",
+			"tags": [],
+			"body": "<p>アリストテレス概論→不動の動者→一神教→『沈黙』→神の存在→神は死んだ→ニーチェ→マチズモ？→優生思想・社会ダーウィニズムと話が飛びまくった。</p><p>思考の雑談という感じ。</p>"
+		},
+		{
+			"id": "baad861d-4544-3097-5ab8-60b2a7d4e942",
+			"title": "あちこちオードリー シティボーイズ回がおもしろすぎた",
+			"date": "2025-03-08",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://tver.jp/episodes/epitz7ihws\" target=\"_blank\">芸歴46年レジェンド芸人シティボーイズが初来店！そこには70代おじさん芸人の生き様が！ | TVer</a></li></ul><p>いや〜笑ったわ。若い時代の話、ラジオで口論になった話、2vs1の構図、あちこちで過去一笑ったかもしんない。</p>"
+		},
+		{
+			"id": "8ceab7de-4a2c-208d-6351-8ef8c579725d",
+			"title": "ポケポケ「超克の光」の5連勝イベント3、ギャラドスexで初日クリア！",
+			"date": "2025-03-06",
+			"tags": [],
+			"body": "<p>リストはアライさんの。つえ〜。</p><p><img src=\"https://gyazo.com/c944025d540d66bd71962c156c74de87/thumb/500#.png\" alt=\"Image\"></p><p>iPhone14にしてスクショが長くなったのがちょい不便かもしれん。</p>"
+		},
+		{
+			"id": "fa5927c6-45dd-0180-f1aa-4e87d36c4a98",
+			"title": "短距離LoH 終了 31860pt ぎりぎりプラ4（3万）",
+			"date": "2025-02-22",
+			"tags": [],
+			"body": "<p><img src=\"https://gyazo.com/c052dabbb8a34f0df6fdf8a0d86cf2b0/thumb/500#.png\" alt=\"Image\"></p><p>勝率は96.1。複勝率はカレン92%>ミラクル88%>オグリ78.3%</p><p>短距離かつサポカ足りない中プラ4届いたのは良かった。パワー盛れてればもうちょいいけそうだった。</p>"
+		},
+		{
+			"id": "2143b724-82cb-b646-5d3f-f2cab9ffe782",
+			"title": "ウマ娘 LoH開始 初日は30pt欠損 17時時点121位！！！",
+			"date": "2025-02-16",
+			"tags": [],
+			"body": "<p><img src=\"https://gyazo.com/df2452488b81204344280d826558bcbb/thumb/500#.png\" alt=\"Image\"></p><p>瞬間でもランキング乗るの嬉しいねぇ。上位の構成見てるとコンセ積んでない人思ったより多いかも。まぁでもUD中盤〜後半でもそこそこ安定してるのはコンセのおかげ（ということにしよう）</p><p>勝率はカレン>ミラクル>オグリ。中盤力と緑とパワー(サポカ)弱いからプラチナで勝ち切るのは厳しいと思うけどプラ4はいけそう。</p>"
+		},
+		{
+			"id": "eeecb751-baec-bfc9-7230-2a7895f6e1e6",
+			"title": "ポケポケ連勝イベント",
+			"date": "2024-12-09",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://www.4gamer.net/games/779/G077901/20241209034/\" target=\"_blank\">「ポケポケ」，イベントバトルの連勝数に応じてエンブレムを獲得できる「最強の遺伝子 エンブレムイベント1 SP」を開始</a></li></ul><p>始めてすぐ4連敗くらいして時間かかる覚悟したけどそっから勝ち始めてサクッと5連勝。5連勝済みの人がファンデッキで潜ってくれてるっぽいこともあり早く達成できた。よかった〜。</p><p>ちなみに使ったのはミュウツーデッキ1本。こっからはいろんなデッキで潜ってみよう。</p>"
+		},
+		{
+			"id": "3743a873-07a5-84e5-e819-19409e468e94",
+			"title": "英国で一番多い男児名は「ムハンマド」",
+			"date": "2024-12-07",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://www.afpbb.com/articles/-/3552621\" target=\"_blank\">英国で一番人気の男児名は「ムハンマド」　写真1枚　国際ニュース：AFPBB News</a></li></ul><blockquote><p>英国家統計局（ONS）は5日、イングランドとウェールズで2023年の新生児の名前で、最も人気のあった男児名は「ムハンマド（Muhammad）」で、初めて1位を獲得したと発表した。</p></blockquote><p>移民が多いのもイスラム教徒の子がムハンマドと名付けられることが多いのも知ってたけど、こういうデータで示されるとなんか感慨がある。単にイスラム教徒が増えただけでなく（現在6.5%）他の名前が多様化しているという理由もあるらしいけど。</p><p>日本もそうなる未来あるな〜。たくさん来るかはわからないけど潮流的には十分あり得る。</p>"
+		},
+		{
+			"id": "5f8dc3af-9c85-6196-e783-e56a6dd1c3a6",
+			"title": "『正反対な君と僕』完結！",
+			"date": "2024-11-24",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567261201092262\" target=\"_blank\">第65話 正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a></li></ul><p>最後は谷→鈴木メインで一話とリンクさせつつ大団円。そしてアニメ化も決定！</p><p>なんかしみじみよかったな〜。少女漫画（でもないか、群像劇？）のラストとしてとても気持ちがいい構成だ。</p>"
+		},
+		{
+			"id": "1b66dac1-a645-8a87-2931-f7c7689b58e1",
+			"title": "GoogleAdsense置いてみた",
+			"date": "2024-11-15",
+			"tags": [],
+			"body": "<p>ブログサービスを介してない自前のサイトでの申請は初めて。意外といけた。</p><p>いろいろ試して記事の下に1つだけ置くことにした。記事基本的に短いしあんまゴテゴテするのも何だなと。それに合わせてヘッダー周りや記事本文のデザインもちょこちょこ調整。サイトいじるの楽しい😁</p><p>今回久しぶりにAdsenseさわったんだけど、自動で配置できてしかもそれがかなり効果的っぽくて驚いた。推移の際に全画面に広告乗せたり、追尾とかも自動でできてびっくり。そりゃみんなやるよな。</p>"
+		},
+		{
+			"id": "7beed860-3847-e261-55ca-9a951ee71498",
+			"title": "The King's Singers『Masterpiece』の2024年版が公開",
+			"date": "2024-11-03",
+			"tags": [],
+			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Ry3Cnw9D5Ws?si=bbvjOKApMW7N_TuQ\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>自分がThe King's Singersにハマったきっかけの一つでもある、音楽史をメロディに乗せて振り返る『Masterpiece』が新録で公開された。</p><p>やっぱりおもろいね。ただ小芝居が無いのは残念ｗ</p>"
+		},
+		{
+			"id": "00b682a8-058c-8879-17da-8d7f54547f84",
+			"title": "『ふつうの軽音部』43話、濃い！",
+			"date": "2024-10-27",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106567256216464824\" target=\"_blank\">第４３話 ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul><p>サンボ聴く前のたまき先輩の表情ゾクッときた。</p><p>こんな素敵な3人なのに色恋きっかけでギクシャクしてしまうのも「ふつう」なんだよな。おそらく次回かその次にある回想終えての演奏シーンが楽しみで今からソワソワ。</p><p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/KM0SrqFBt38?si=9cs_OWBUuMx_UFX_\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>"
+		},
+		{
+			"id": "56fa8852-ad29-f97e-7338-cbdd6ebe11c7",
+			"title": "『愚かで勤勉な私たちは、』読んだ",
+			"date": "2024-10-20",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://www.pixiv.net/user/7087222/series/251873\" target=\"_blank\">「愚かで勤勉な私たちは、」/「コガッツオ」のシリーズ [pixiv]</a></li></ul><p>ホッテントリ経由で。面白かった。</p><blockquote><p>愉快な陰謀論まんが</p></blockquote><p>と紹介文あるけどまさにそれ。</p><p>陰謀論関係だと『ようこそ！FACT（東京S区第二支部）へ』も読んだけど、主人公がハマった人のちょい外側でメタ視点もってるから、のめり込む怖さ・しんどさから少し離れておかしみを感じやすかった。</p><p>それでいながら陰謀論や人の意志の恐ろしさも感じられて胸を突かれる要素もあり、完全な他人事ではないよなぁと。</p><p>後半の怒涛の展開もすごくてどんどん引き込まれていった。『愛のむきだし』を思い起こさせるようなひっちゃかめっちゃか感。</p>"
+		},
+		{
+			"id": "42a272b1-5b9b-c497-f4b2-552d9b584883",
+			"title": "天台声明（てんだいしょうみょう）",
+			"date": "2024-10-10",
+			"tags": [],
+			"body": "<p><a href=\"https://www.youtube.com/watch?v=4OPCY27QhtU\" target=\"_blank\">その言葉は現実となる！古代インド神秘伝説 〜インダス文明とアーリア人の足跡〜【54-2 COTEN RADIO ムガール帝国編2】 - YouTube</a> きっかけで天台声明を聴いた。</p><ul><li><a href=\"https://www.youtube.com/watch?v=a9yaDU5kbb8\" target=\"_blank\">天台声明　青龍殿　百僧公演　金曼供フルバージョン - YouTube</a></li></ul><p>こういうの中で音浴びてると一種のトランス状態になるんだよな〜。</p><p>リードからの合唱にグレゴリオ聖歌ぽさ感じた。倍音めっちゃくっきりなとこも。</p><p>倍音はキリスト教でも天使の声と呼ばれてたし、宗教儀式において超自然的な現象として重要なパーツだったんじゃないかな？</p><ul><li><a href=\"https://www.tendai.or.jp/shoumyou/\" target=\"_blank\">天台宗 > 天台宗について > 天台声明（てんだいしょうみょう）</a></li></ul>"
+		},
+		{
+			"id": "ec536e09-4414-6a08-a697-e04ab8621529",
+			"title": "敬意逓減（けいいていげん）の法則",
+			"date": "2024-10-09",
+			"tags": [],
+			"body": "<p>敬語に含まれる敬意が徐々に失われていく現象。</p><p>＊敬意漸減（ぜんげん）とも</p><p>例：御前、貴方、のたまう</p><p>参考</p><ul><li><a href=\"https://x.com/nikkei_kotoba/status/1828373138050011329\" target=\"_blank\">日経 校閲 / X</a></li></ul><ul><li><a href=\"https://www.yomiuri.co.jp/column/henshu/20230317-OYT8T50012/\" target=\"_blank\">「させていただく」を使いすぎ？…言い換えられない理由をベテラン記者が考察 : 読売新聞</a></li></ul><ul><li><a href=\"https://note.com/aaaaayyyymmmmm/n/nc70d5fd24c71\" target=\"_blank\">言葉は生きている～敬意逓減の話～｜くりん◎日本語教師◎勉強垢</a></li></ul>"
+		},
+		{
+			"id": "5fd99f84-3da4-c5af-1144-8830636804bc",
+			"title": "豊か",
+			"date": "2024-09-21",
+			"tags": [],
+			"body": "<p>ニューヨークのニューラジオで頻出する概念</p><p>参考：<a href=\"https://www.youtube.com/watch?v=COYp28n4gK0\" target=\"_blank\">【ニューヨーク】2人とも豊かじゃない【切り抜き】 - YouTube</a></p><p>趣味もってるとか私生活の充実とかそのへんなんだけど、他者からの視線は意識せず内的に満足してるかどうかが重要っぽい。言語化するのも野暮って感じの概念でシャバいも似たような言葉。</p>"
+		},
+		{
+			"id": "51b3c463-cdc3-907d-3ddb-5c364c7f61a7",
+			"title": "名曲で草",
+			"date": "2024-08-31",
+			"tags": [],
+			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/JVlAJlvaT0Y?si=5RcWd6lyFduvEo2W\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><ul><li>地下ラップやら誕生日凸待ちやら小ネタ満載で楽しい</li></ul><ul><li>でも詞は激エモ。1COLOR→ANYCOLORとか</li></ul>"
+		},
+		{
+			"id": "5b0115d5-f70a-bc5c-737a-d7b3e534caaa",
+			"title": "Little Glee Monster アカペラメドレー 2024",
+			"date": "2024-08-10",
+			"tags": [],
+			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/T0NIU8Eum18?si=0fOXxLzpmbmvPN4N\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>年々歌唱力もMIXもめっちゃ向上してる印象。すごい。特にThis is meのハーモニーは痺れた。</p><p>Pentatonix好きでそのイズム感じてかなり刺さった。</p>"
+		},
+		{
+			"id": "b13a184c-e33e-aed5-4e59-b05f7ea3dae4",
+			"title": "『ふつうの軽音部』のハトノのバンドのメンバー集まったぞ！",
+			"date": "2024-06-09",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371867623740984\" target=\"_blank\">[第２５話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋</a></li></ul><p>今年読んだ漫画で一番テンションあがった。やっぱハトノかっけ〜。</p><p>（先週からだけど）ジャンプルーキーの連載してた部分を越えて、物語第一な自分にとってはここからが本番って感じ。楽しみだ。</p><p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/wApm4E_kfvM?si=bPMbGYNr1taaL7YD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>今回の歌唱曲。アニメ化してカバーアルバム出してくれ！でも聴けないからこそいいのかもと思ったりもするけどやっぱり聴きたい。</p>"
+		},
+		{
+			"id": "40a9487b-d3f5-e318-6234-429fa37b04a5",
+			"title": "正反対な君と僕 55話",
+			"date": "2024-05-27",
+			"tags": [],
+			"body": "<ul><li><a href=\"https://shonenjumpplus.com/episode/17106371864158164556\" target=\"_blank\">[第55話]正反対な君と僕 - 阿賀沢紅茶 | 少年ジャンプ＋</a> </li></ul><p>東の自覚回。阿賀沢さんの漫画はみんな幸せになれ！って思う。</p><p>高校生にして言語化と内省が上手すぎる。そのおかげで読みやすいしそこが肌に合う感じがする。</p>"
+		},
+		{
+			"id": "3b989685-9cf1-f671-935f-e20970d2b7d0",
+			"title": "Scrapbox→Cosense",
+			"date": "2024-05-21",
+			"tags": [],
+			"body": "<p>ScrapboxがHelpfeel Cosenseに名前が変わった</p><ul><li><a href=\"https://prtimes.jp/main/html/rd/p/000000323.000027275.html\" target=\"_blank\">【サービス名変更のお知らせ】「Scrapbox」は「Helpfeel Cosense（ヘルプフィール コセンス）」に変わります | 株式会社Helpfeelのプレスリリース</a></li></ul><blockquote><p>情報を集めて整理できる「Scrapbox」は、「スクボ」の愛称で親しまれている一方で、名称からは、人とのつながりが想起しにくく、本サービスの本質的な価値を十分に伝えられていないというジレンマを抱えていました。</p></blockquote><blockquote><p>このような背景から、社会問題である情報格差の解消に向けて、本サービスの「ナレッジによって人や組織を豊かにする」というコアバリューをより明確に伝えるために、サービス名を「Helpfeel Cosense（コセンス）」に変更することを決定いたしました。</p></blockquote><p>とのこと。「Scrapbox」は手軽な感じが好きだったけどウケにくい層もいたのかな〜。</p>"
+		},
+		{
+			"id": "49730904-bdcf-1a61-7f25-5936f13d2256",
+			"title": "延々と永遠",
+			"date": "2024-05-09",
+			"tags": [],
+			"body": "<p>これまでなら「延々と」が使われてたであろうタイミングで「永遠と」とか「永遠に」が使われるケースがかなり増えてきた感触ある。</p><p>おそらく何十年も前からある誤用だと思うんだけど、ここ数年は市民権得てる感じする。若年層で違和感持つ人は少なくなっているのでは？</p>"
+		},
+		{
+			"id": "73e5e69a-7c2e-a90e-397d-9d2e3d21a181",
+			"title": "Pieceテスト",
+			"date": "2024-04-30",
+			"tags": [],
+			"body": "<p>動画やリンク、記事になってないメモなどを載せていく予定。</p><p>タイトルはなんなら無くて良いくらいでテキストだけでも投稿可でDynalist上で青のトピックを羅列するって感じにしたい。</p>"
+		},
+		{
+			"id": "00108a18-330f-139a-04ae-57a014ae6272",
+			"title": "この世は褒め得",
+			"date": "2025-10-04",
+			"tags": [],
+			"body": ""
+		},
+		{
+			"id": "5962427d-18f8-d44e-15bb-57e6ba7002b4",
+			"title": "タグで投稿できるかテスト",
+			"date": "2025-07-21",
+			"tags": [],
+			"body": ""
+		},
+		{
+			"id": "a2e65052-b4b0-099c-2f76-ee068723e1dd",
+			"title": "花粉やばし",
+			"date": "2025-02-28",
+			"tags": [],
+			"body": ""
+		},
+		{
+			"id": "ba28bf63-6db5-90a1-cb9e-0d2e7b96f08c",
+			"title": "主語がでかい系の投稿に引っ張られない",
+			"date": "2025-01-03",
+			"tags": [],
+			"body": ""
+		},
+		{
+			"id": "19796e99-ac3d-6b6b-dd26-f2fcd4c066a2",
+			"title": "子項目のない投稿テスト",
+			"date": "2024-12-13",
+			"tags": [],
+			"body": ""
 		}
 	]
 }
