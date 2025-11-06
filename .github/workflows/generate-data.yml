@@ -1,10 +1,10 @@
-# .github/workflows/generate-data.yml
 name: Generate Data and Push to GitHub
 
 on:
-  workflow_dispatch: # GitHub ActionsのUIから手動でワークフローを実行できるようにする
+  workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *' # 毎日UTC 3時 (日本時間の正午12時) に実行
+    - cron: '0 0 * * *'  # 毎日UTC 0時 → JST 9時
+    - cron: '0 12 * * *' # 毎日UTC12時 → JST 21時
 
 jobs:
   build-and-deploy:
@@ -17,21 +17,20 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # 使用するNode.jsのバージョン
+        node-version: '20'
 
     - name: Install dependencies
       run: npm install node-fetch
 
     - name: Run script to generate data
       env:
-        # 修正: DYNALIST_TOKEN から WORKFLOWY_API_KEY に変更
-        WORKFLOWY_API_KEY: ${{ secrets.WORKFLOWY_API_KEY }} # WorkflowyのKeyを環境変数に設定
-      run: node getDataWf.js # JavaScriptスクリプトを実行
+        WORKFLOWY_API_KEY: ${{ secrets.WORKFLOWY_API_KEY }}
+      run: node getDataWf.js
 
     - name: Commit and push changes
-      uses: EndBug/add-and-commit@v9 # 生成されたファイルをコミット・プッシュするアクション
+      uses: EndBug/add-and-commit@v9
       with:
-        add: 'data.json rss.xml' # コミット対象のファイル
+        add: 'data.json rss.xml'
         message: 'feat: Update data.json and rss.xml from Workflowy'
-        new_branch: main # または master
-        github_token: ${{ secrets.GH_TOKEN }} # プッシュ用のGitHub PAT
+        new_branch: main
+        github_token: ${{ secrets.GH_TOKEN }}
