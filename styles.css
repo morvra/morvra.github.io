@@ -233,8 +233,7 @@ ul#article-list {
     padding-left: 40px; /* 左のパディングをなくす */
     margin: 0;
     overflow: hidden; /* 高さが変わる時に隠れるように */
-    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* スムーズな開閉アニメーション */
-    max-height: 1000px; /* 開いた時の最大高さを十分に大きく設定 */
+    max-height: fit-content;
     opacity: 1;
 }
 
