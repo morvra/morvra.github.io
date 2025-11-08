@@ -29,12 +29,12 @@ function stripParagraphTags(html) {
     const trimmedHtml = html.trim();
     if (trimmedHtml.startsWith('<p>') && trimmedHtml.endsWith('</p>')) {
         const innerContent = trimmedHtml.substring(3, trimmedHtml.length - 4);
-        if (!/<[a-z][\s\S]*>/i.test(innerContent) ||
-            (innerContent.includes('<strong>') || innerContent.includes('<em>') || innerContent.includes('<code>') || innerContent.includes('<a>') || innerContent.includes('<img>')) &&
-            !(innerContent.includes('<p>') || innerContent.includes('<ul>') || innerContent.includes('<ol>') || innerContent.includes('<blockquote>') || innerContent.includes('<pre>') || innerContent.includes('<h1>') || innerContent.includes('<h2>') || innerContent.includes('<h3>') || innerContent.includes('<hr>'))) {
-            return innerContent;
+        
+        if (!innerContent.includes('<p>')) {
+            return innerContent; // 外側の<p>を剥がした中身を返す
         }
     }
+    // 条件に一致しない場合は、元のHTMLをそのまま返す
     return html;
 }
 
@@ -111,7 +111,7 @@ function markdownToHTML(markdown) {
                     listItems = [];
                 }
 
-                // (前回の修正) HTMLタグかどうかを先に判定
+                // HTMLタグかどうかを先に判定
                 if (line.trim().startsWith('<')) {
                     const finalLine = line.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
                         return url; 
@@ -269,7 +269,6 @@ function getBody(allNodes, rootNode) {
     return htmlOutput;
 }
 
-// ★★★ 修正箇所 ★★★
 // ヘルパー関数: 個々のノードとそのサブツリーをHTMLに変換
 function processNodeSubtree(currentNode, allNodes) {
     let nodeHtml = '';
@@ -370,7 +369,6 @@ function processNodeSubtree(currentNode, allNodes) {
     }
     return nodeHtml;
 }
-// ★★★ 修正箇所 終了 ★★★
 
 // RSSフィードを生成する関数
 function generateRSS(articles) {
