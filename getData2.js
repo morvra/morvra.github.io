@@ -1,4 +1,4 @@
-// getData2.js - Dynalistの「li」項目と「・」項目をHTMLリストとして出力する機能を追加
+// getData2.js
 
 const fs = require('fs'); // Node.jsのfsモジュールをインポート
 // fetch関数をより堅牢に定義: Node.jsのネイティブfetchがあればそれを使用し、なければnode-fetchをフォールバックとして使用
