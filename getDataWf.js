@@ -197,17 +197,49 @@ function getNodesByTag(nodes, tagName) {
 }
 
 // ノードのnoteからメタデータを抽出する関数
-function getMetadata(note) {
-    if (!note) return { date: '' };
-    
-    const lines = note.split('\n');
+function getMetadata(node) {
     let date = '';
 
-    lines.forEach(line => {
+    // ノードのnoteプロパティのみを参照
+    const rawNote = node.note;
+    if (!rawNote) return { date: '' };
+
+    // HTMLデコードを適用
+    const note = unescapeHtml(rawNote);
+    
+    const lines = note.split('\n');
+
+    for (const line of lines) {
         if (line.startsWith('date:')) {
-            date = line.replace('date:', '').trim();
+            let rawDate = line.replace('date:', '').trim();
+
+            // 1. <time>タグを抽出（note内に書かれたWorkflowy日付機能に対応）
+            const timeTagMatch = rawDate.match(/<time\s+startYear="(\d{4})"\s+startMonth="(\d{1,2})"\s+startDay="(\d{1,2})">/);
+            
+            if (timeTagMatch) {
+                const year = timeTagMatch[1];
+                const month = String(timeTagMatch[2]).padStart(2, '0');
+                const day = String(timeTagMatch[3]).padStart(2, '0');
+                
+                date = `${year}-${month}-${day}`;
+                return { date }; 
+            }
+
+            // 2. [[YYYY-MM-DD]] 形式 (Workflowyの日付リンク) をチェックし、[]を除去
+            const wfDateMatch = rawDate.match(/\[\[(\d{4}-\d{2}-\d{2})\]\]/);
+            if (wfDateMatch) {
+                date = wfDateMatch[1];
+                return { date }; 
+            }
+            
+            // 3. YYYY-MM-DD 形式をチェック (手動入力された日付)
+            const plainDateMatch = rawDate.match(/(\d{4}-\d{2}-\d{2})/);
+            if (plainDateMatch) {
+                date = plainDateMatch[1];
+                return { date }; 
+            }
         }
-    });
+    }
 
     return { date };
 }
@@ -429,7 +461,7 @@ async function main() {
         const articles = articleNodes.map(obj => {
             const id = obj.id;
             const title = obj.name.replace(/#article/g, '').trim();
-            const { date } = getMetadata(obj.note);
+            const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
             const body = replaceWorkflowyUrls(getBody(data.nodes, obj));
             return { id, title, date, tags, body };
@@ -438,7 +470,7 @@ async function main() {
         const pieces = pieceNodes.map(obj => {
             const id = obj.id;
             const title = obj.name.replace(/#piece/g, '').trim();
-            const { date } = getMetadata(obj.note);
+            const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
             const body = replaceWorkflowyUrls(getBody(data.nodes, obj));
             return { id, title, date, tags, body };
