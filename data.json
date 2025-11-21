@@ -883,6 +883,15 @@
 			"date": "",
 			"tags": [],
 			"body": ""
+		},
+		{
+			"id": "94edf964-bdad-d1e8-143b-b7fe67835489",
+			"title": "Workflowy の Move to Today 機能が便利すぎた",
+			"date": "2025-11-21",
+			"tags": [
+				"Workflowy"
+			],
+			"body": "<p>この機能神。</p><p>前まで自分で書く日付トピックと外部から送られるInboxを2つのInboxとして使っててややこしかったんだけど、今は書くのも送られるのもInboxだけで、後から複数選択とMove to Todayを使って日付トピックに送ってる。</p>"
 		}
 	]
 }
