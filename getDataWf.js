@@ -3,6 +3,19 @@
 const fs = require('fs');
 const fetch = globalThis.fetch || require('node-fetch').default;
 
+
+// MarkdownリンクおよびHTMLリンクからテキストのみを抽出する関数
+function stripMarkdownLinks(text) {
+    // 1. Markdown形式 [テキスト](URL) -> テキスト
+    let replaced = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+    
+    // 2. HTML形式 <a href="...">テキスト</a> -> テキスト
+    // タグの中身($1)だけを残してタグを削除
+    replaced = replaced.replace(/<a\s[^>]*>(.*?)<\/a>/gi, '$1');
+    
+    return replaced;
+}
+
 // HTMLデコード関数 (escapeHtmlの逆)
 function unescapeHtml(text) {
     if (typeof text !== 'string') return text;
@@ -178,12 +191,25 @@ function markdownToHTML(markdown) {
     return html;
 }
 
-// WorkflowyのURLを適切なパスに変換する関数
-function replaceWorkflowyUrls(body) {
-    const workflowyUrlPattern = /https:\/\/workflowy\.com\/#\/([a-zA-Z0-9-]+)/g;
+// WorkflowyのURLを条件に応じて変換またはテキスト化する関数
+function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs) {
+    // <a href="https://workflowy.com/#/shortId">text</a> の形式をキャプチャ
+    // markdownToHTMLの出力に合わせて、target属性などがないシンプルな形を想定しつつ柔軟にマッチ
+    const linkPattern = /<a\s+href=["']https:\/\/workflowy\.com\/#\/([a-zA-Z0-9-]+)["'][^>]*>(.*?)<\/a>/g;
     const siteUrl = 'https://morvra.github.io/article?id=';
-    return body.replace(workflowyUrlPattern, (match, itemId) => {
-        return `${siteUrl}${itemId}`;
+
+    return body.replace(linkPattern, (match, shortId, linkText) => {
+        // MapからUUIDを探す
+        const uuid = shortIdToUuidMap[shortId];
+
+        // UUIDが見つかる、かつ 公開リスト(publicUUIDs)に含まれている場合
+        if (uuid && publicUUIDs.has(uuid)) {
+            // リンクとして出力
+            return `<a href="${siteUrl}${uuid}">${linkText}</a>`;
+        } else {
+            // 非公開または存在しないノードへのリンクは、素のテキストのみを返す
+            return linkText;
+        }
     });
 }
 
@@ -453,26 +479,47 @@ async function main() {
         }
         const data = await response.json();
 
+        // Short ID (URL末尾) と Full UUID の対応マップを作成
+        const shortIdToUuidMap = {};
+        data.nodes.forEach(node => {
+            const shortId = node.id.replace(/-/g, '').slice(-12);
+            shortIdToUuidMap[shortId] = node.id;
+        });
+
         // #articleタグを持つノードを記事として取得
         const articleNodes = getNodesByTag(data.nodes, 'article');
         // #pieceタグを持つノードをpieceとして取得
         const pieceNodes = getNodesByTag(data.nodes, 'piece');
         
+        // 公開される記事のUUIDセットを作成（高速検索用）
+        const publicUUIDs = new Set([
+            ...articleNodes.map(n => n.id),
+            ...pieceNodes.map(n => n.id)
+        ]);
+        
         const articles = articleNodes.map(obj => {
             const id = obj.id;
-            const title = obj.name.replace(/#article/g, '').trim();
+            
+            // タイトルからMarkdownリンクを除去
+            let rawTitle = obj.name.replace(/#article/g, '').trim();
+            const title = stripMarkdownLinks(rawTitle);
             const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
-            const body = replaceWorkflowyUrls(getBody(data.nodes, obj));
+            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs);
+            
             return { id, title, date, tags, body };
         });
 
         const pieces = pieceNodes.map(obj => {
             const id = obj.id;
-            const title = obj.name.replace(/#piece/g, '').trim();
+            
+            let rawTitle = obj.name.replace(/#piece/g, '').trim();
+            const title = stripMarkdownLinks(rawTitle);
+            
             const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
-            const body = replaceWorkflowyUrls(getBody(data.nodes, obj));
+            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs);
+            
             return { id, title, date, tags, body };
         });
 
