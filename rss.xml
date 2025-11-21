@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Fri, 21 Nov 2025 07:43:02 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 21 Nov 2025 12:43:37 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Dynalistのインボックスへ送信するスクリプト</title>
@@ -338,7 +338,7 @@
         <item>
           <title>Workflowyにメモを送信するための自分用Chrome拡張を作った</title>
           <link>https://morvra.github.io/article?id=c24ebea6-b71d-97a6-3198-358520d53141</link>
-          <description><![CDATA[<p>はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。</p><ul><li>ショートカットキー(Alt+n)を押すとモーダルが立ち上がる</li><li>1行のテキスト入力欄にカーソルがあっている状態</li><li>送信ボタンを押すとデフォルトでは「HH:MM 入力テキスト」という時刻付きの形式で送信される</li><li>送られるのはInboxの最下部に送信</li><li>送信ボタンだけじゃなく、入力欄でEnterでも送信可能</li><li>別のボタンで私が運営している個人サイト用のフォーマットをつけて送信できる<ul><li>テキストの最後に <code>#piece</code> が付く</li><li>note欄にdate: YYYY-MM-DD 形式で日付が書かれる</li></ul></li><li>送信後はモーダルが閉じられる</li><li>テキスト未入力でEnter / モーダル外をクリック / Escキー で送信せずモーダルを閉じる</li></ul><p>で、生成されたスクリプトを微調整していったらかなり感触が良くて、「これはWorkflowy上だけじゃなく、どこからでも動かしたいな」と思い、Chrome拡張にしてもらった。</p><p><img src="https://gyazo.com/eb9d70d2fd247ab597fd3cfbf9ee4a0d/thumb/500" alt="Image"></p><p>▲ こんな感じでボタンやショートカットキーからポップアップを呼び出してWorkflowyに送信する拡張機能が完成！ｳﾚｼｲ!!</p><p>自分がやった作業はプロンプトを考える以外＿まぁそれが肝心なんだが＿は拡張機能用のフォルダと作ってもらったコードをコピペしたファイルを作成して、それをChromeの「パッケージ化されていない拡張機能を読み込む」から読み込んだだけ。すご。</p><p>今開いてるページのリンクを追加するオプションつけたり、起動時に選択しているテキストがあったら入力欄に入れるようにしたりと機能追加もした。ﾀﾉｼｲ!!</p>]]></description>
+          <description><![CDATA[<p>はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。</p><ul><li>ショートカットキー(Alt+n)を押すとモーダルが立ち上がる</li><li>1行のテキスト入力欄にカーソルがあっている状態</li><li>送信ボタンを押すとデフォルトでは「HH:MM 入力テキスト」という時刻付きの形式で送信される</li><li>送られるのはInboxの最下部に送信</li><li>送信ボタンだけじゃなく、入力欄でEnterでも送信可能</li><li>別のボタンで私が運営している個人サイト用のフォーマットをつけて送信できる<ul><li>テキストの最後に <code>piece</code> が付く</li><li>note欄にdate: YYYY-MM-DD 形式で日付が書かれる</li></ul></li><li>送信後はモーダルが閉じられる</li><li>テキスト未入力でEnter / モーダル外をクリック / Escキー で送信せずモーダルを閉じる</li></ul><p>で、生成されたスクリプトを微調整していったらかなり感触が良くて、「これはWorkflowy上だけじゃなく、どこからでも動かしたいな」と思い、Chrome拡張にしてもらった。</p><p><img src="https://gyazo.com/eb9d70d2fd247ab597fd3cfbf9ee4a0d/thumb/500" alt="Image"></p><p>▲ こんな感じでボタンやショートカットキーからポップアップを呼び出してWorkflowyに送信する拡張機能が完成！ｳﾚｼｲ!!</p><p>自分がやった作業はプロンプトを考える以外＿まぁそれが肝心なんだが＿は拡張機能用のフォルダと作ってもらったコードをコピペしたファイルを作成して、それをChromeの「パッケージ化されていない拡張機能を読み込む」から読み込んだだけ。すご。</p><p>今開いてるページのリンクを追加するオプションつけたり、起動時に選択しているテキストがあったら入力欄に入れるようにしたりと機能追加もした。ﾀﾉｼｲ!!</p>]]></description>
           <pubDate>Mon, 17 Nov 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=c24ebea6-b71d-97a6-3198-358520d53141</guid>
         </item>
