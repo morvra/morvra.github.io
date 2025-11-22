@@ -236,34 +236,59 @@ function getMetadata(node) {
     const lines = note.split('\n');
 
     for (const line of lines) {
-        if (line.startsWith('date:')) {
-            let rawDate = line.replace('date:', '').trim();
+        const trimmedLine = line.trim();
 
-            // 1. <time>タグを抽出（note内に書かれたWorkflowy日付機能に対応）
-            const timeTagMatch = rawDate.match(/<time\s+startYear="(\d{4})"\s+startMonth="(\d{1,2})"\s+startDay="(\d{1,2})">/);
+        // --- 日付抽出のための共通正規表現 ---
+        
+        // 1. Workflowy <time>タグ (時刻属性 startHour等 があっても許容するように .*? を追加)
+        // 例: <time startYear="2025" startMonth="11" startDay="22" startHour="12">
+        const timeTagRegex = /<time\s+startYear="(\d{4})"\s+startMonth="(\d{1,2})"\s+startDay="(\d{1,2})".*?>/;
+        
+        // 2. Workflowy リンク形式 [[YYYY-MM-DD]]
+        const linkDateRegex = /\[\[(\d{4}-\d{2}-\d{2})\]\]/;
+        
+        // 3. プレーンテキスト YYYY-MM-DD (後ろに時刻が続いても先頭の日付部分だけ取る)
+        const plainDateRegex = /(\d{4}-\d{2}-\d{2})/;
+
+        
+        // --- パターンA: "date:" で始まる明示的な指定 ---
+        if (trimmedLine.startsWith('date:')) {
+            let rawDate = trimmedLine.replace('date:', '').trim();
             
-            if (timeTagMatch) {
-                const year = timeTagMatch[1];
-                const month = String(timeTagMatch[2]).padStart(2, '0');
-                const day = String(timeTagMatch[3]).padStart(2, '0');
-                
-                date = `${year}-${month}-${day}`;
-                return { date }; 
+            const timeMatch = rawDate.match(timeTagRegex);
+            if (timeMatch) {
+                const month = String(timeMatch[2]).padStart(2, '0');
+                const day = String(timeMatch[3]).padStart(2, '0');
+                return { date: `${timeMatch[1]}-${month}-${day}` }; 
             }
 
-            // 2. [[YYYY-MM-DD]] 形式 (Workflowyの日付リンク) をチェックし、[]を除去
-            const wfDateMatch = rawDate.match(/\[\[(\d{4}-\d{2}-\d{2})\]\]/);
-            if (wfDateMatch) {
-                date = wfDateMatch[1];
-                return { date }; 
-            }
+            const wfMatch = rawDate.match(linkDateRegex);
+            if (wfMatch) return { date: wfMatch[1] }; 
             
-            // 3. YYYY-MM-DD 形式をチェック (手動入力された日付)
-            const plainDateMatch = rawDate.match(/(\d{4}-\d{2}-\d{2})/);
-            if (plainDateMatch) {
-                date = plainDateMatch[1];
-                return { date }; 
-            }
+            const plainMatch = rawDate.match(plainDateRegex);
+            if (plainMatch) return { date: plainMatch[1] }; 
+        }
+
+        // --- パターンB: 行の先頭が日付形式で始まっている場合 (シンプル形式) ---
+        
+        // 1. <time>タグで始まる行
+        const timeTagStartMatch = trimmedLine.match(new RegExp('^' + timeTagRegex.source));
+        if (timeTagStartMatch) {
+            const month = String(timeTagStartMatch[2]).padStart(2, '0');
+            const day = String(timeTagStartMatch[3]).padStart(2, '0');
+            return { date: `${timeTagStartMatch[1]}-${month}-${day}` };
+        }
+
+        // 2. [[YYYY-MM-DD]] で始まる行
+        const wfDateStartMatch = trimmedLine.match(/^\[\[(\d{4}-\d{2}-\d{2})\]\]/);
+        if (wfDateStartMatch) {
+            return { date: wfDateStartMatch[1] };
+        }
+
+        // 3. YYYY-MM-DD で始まる行 (時刻 "11:00" 等が後ろにあってもここでマッチ)
+        const plainDateStartMatch = trimmedLine.match(/^(\d{4}-\d{2}-\d{2})/);
+        if (plainDateStartMatch) {
+            return { date: plainDateStartMatch[1] };
         }
     }
 
@@ -275,19 +300,20 @@ function getTags(note) {
     if (!note) {
         return [];
     }
-    const tagLineMatch = note.match(/tag:\s*(.*)/);
-    if (tagLineMatch && tagLineMatch[1]) {
-        const tagString = tagLineMatch[1];
-        const individualTags = [];
-        const tagRegex = /#([\p{L}\p{N}\-_]+)/gu;
-        let match;
-        while ((match = tagRegex.exec(tagString)) !== null) {
-            individualTags.push(match[1]);
-        }
-        return individualTags.filter(tag => tag !== 'article' && tag !== 'piece');
-    } else {
-        return [];
+
+    // HTMLエンティティをデコード (例: &gt; -> >)
+    const decodedNote = unescapeHtml(note);
+    // Unicode対応のタグ抽出正規表現 (行のどこにあってもマッチ)
+    const tagRegex = /#([\p{L}\p{N}\-_]+)/gu;
+    const extractedTags = [];
+    let match;
+
+    while ((match = tagRegex.exec(decodedNote)) !== null) {
+        extractedTags.push(match[1]);
     }
+    // システム用タグ(#article, #piece)を除外し、重複を削除して返す
+    const uniqueTags = [...new Set(extractedTags)];
+    return uniqueTags.filter(tag => tag !== 'article' && tag !== 'piece');
 }
 
 // Workflowyのノードから子ノードを取得するヘルパー関数
