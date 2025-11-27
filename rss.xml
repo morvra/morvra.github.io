@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 26 Nov 2025 12:49:27 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 27 Nov 2025 00:46:10 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Workflowyで書く記事のテスト</title>
@@ -331,7 +331,7 @@
         <item>
           <title>記事テスト</title>
           <link>https://morvra.github.io/article?id=c0245cfc-6ba5-e922-6520-d1fcc01b839f</link>
-          <description><![CDATA[<p>本文</p><h2>見出しh2</h2><p>ほんぶんほんぶん</p><p>ほんぶん２</p><p><strong>太字</strong> ほげ〜</p><ul><li>中黒つき１</li></ul><ul><li>中黒つき1-1</li></ul><ul><li>中黒つき1-2</li></ul><ul><li>2</li></ul><ul><li>2-2</li></ul><ul><li>3</li></ul><p>見出しにかかわらない本文</p><blockquote><p>引用</p></blockquote><p><a href="https://www.youtube.com/" target="_blank">YouTube</a> リンクはどうなる？</p><p>文中<a href="https://www.youtube.com/" target="_blank">YouTube</a>では？</p><p>Dynalistのリンクをサイトの方に置換したい 例:<a href="https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im#z=2BSuXiPppMezZeBA0lpI7sIh" target="_blank">記事テスト2</a></p>]]></description>
+          <description><![CDATA[<p>本文</p><h2>見出しh2</h2><p>ほんぶんほんぶん</p><p>ほんぶん２</p><p><strong>太字</strong> ほげ〜</p><ul><li>中黒つき１</li></ul><ul><li>中黒つき1-1</li></ul><ul><li>中黒つき1-2</li></ul><ul><li>2</li></ul><ul><li>2-2</li></ul><ul><li>3</li></ul><p>見出しにかかわらない本文</p><blockquote><p>引用</p></blockquote><p><a href="https://www.youtube.com/" target="_blank">YouTube</a> リンクはどうなる？</p><p>文中 <a href="https://www.youtube.com/" target="_blank">YouTube</a> では？</p><p>Dynalistのリンクをサイトの方に置換したい 例:<a href="https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im#z=2BSuXiPppMezZeBA0lpI7sIh" target="_blank">記事テスト2</a></p>]]></description>
           <pubDate>Fri, 29 Mar 2024 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=c0245cfc-6ba5-e922-6520-d1fcc01b839f</guid>
         </item>
