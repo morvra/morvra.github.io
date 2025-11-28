@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Workflowy Sender v5</title>
+<style>
+  :root {
+    --bg-color: #f0f2f5;
+    --app-bg: #ffffff;
+    --text-color: #333;
+    --border-color: #ddd;
+    --primary-color: #2b2b2b;
+    --accent-color: #007bff;
+    --danger-color: #dc3545;
+    --toolbar-height: 50px;
+    --footer-height: 60px;
+    --app-max-width: 600px;
+  }
+
+  * { box-sizing: border-box; touch-action: manipulation; }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .app-container {
+    width: 100%;
+    max-width: var(--app-max-width);
+    height: 100%;
+    background-color: var(--app-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+
+  /* --- Top Bar --- */
+  .top-bar {
+    height: var(--toolbar-height);
+    background: var(--app-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .top-bar::-webkit-scrollbar { display: none; }
+
+  .btn-sm {
+    padding: 4px 10px;
+    font-size: 12px;
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-sm:active { background: #e2e6ea; }
+  .btn-sm.tpl-btn { border-color: #adb5bd; color: #495057; }
+
+  /* --- Main Editor Area --- */
+  .main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    overflow-y: auto;
+    background: var(--app-bg);
+  }
+
+  .editor-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    background: transparent;
+    display: block;
+  }
+
+  #editor-main {
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  /* --- Bottom Bar --- */
+  .bottom-bar {
+    height: var(--footer-height);
+    background: #f8f9fa;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    flex-shrink: 0;
+  }
+
+  .btn-group { display: flex; gap: 10px; }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-primary { background: var(--primary-color); color: #fff; }
+  .btn-primary:active { opacity: 0.8; }
+  .btn-primary:disabled { background: #999; cursor: not-allowed; }
+  
+  .btn-danger { background: transparent; color: var(--danger-color); }
+  .btn-secondary { background: transparent; color: #555; }
+
+  /* --- Options Modal --- */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    max-height: 85vh;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  h3 { margin: 0 0 10px 0; font-size: 18px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-label { font-size: 12px; font-weight: bold; color: #555; }
+  .form-input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+  .form-textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; font-family: monospace; height: 120px; resize: vertical; }
+
+  .toast {
+    position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+    background: rgba(40,40,40,0.9); color: white;
+    padding: 8px 16px; border-radius: 20px; font-size: 14px;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    white-space: nowrap; z-index: 999;
+  }
+  .toast.show { opacity: 1; }
+
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%; border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px; display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .kbd-hint { display: none; color: #888; font-size: 10px; margin-left: 4px; }
+  @media (min-width: 768px) {
+    .kbd-hint { display: inline; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <div class="top-bar" id="top-bar"></div>
+
+  <div class="main-area">
+    <div class="editor-wrapper">
+      <textarea id="editor-main" placeholder="入力してください..."></textarea>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn btn-secondary" id="btn-options">⚙️ 設定</button>
+    <div class="btn-group">
+      <button class="btn btn-danger" id="btn-clear">クリア</button>
+      <button class="btn btn-primary" id="btn-send">
+        <div class="spinner" id="loading-spinner"></div>送信 <span class="kbd-hint">(Ctrl+Ent)</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<!-- Options Modal -->
+<div class="modal-overlay" id="options-modal">
+  <div class="modal-content">
+    <h3>設定</h3>
+    
+    <div class="form-group">
+      <label class="form-label">Workflowy API Key (必須)</label>
+      <input type="password" class="form-input" id="opt-apikey" placeholder="API Keyを貼り付け">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">親ノードID (デフォルト: inbox)</label>
+      <input type="text" class="form-input" id="opt-parentid" placeholder="inbox, home, etc...">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">送信位置</label>
+      <select class="form-input" id="opt-position">
+        <option value="top">Top (上に追加)</option>
+        <option value="bottom">Bottom (下に追加)</option>
+      </select>
+    </div>
+
+    <!-- 日付フォーマット設定 (独立行) -->
+    <div class="form-group">
+      <label class="form-label">日付フォーマット (例: [YYYY-MM-DD])</label>
+      <input type="text" class="form-input" id="opt-datefmt">
+    </div>
+
+    <!-- 時刻フォーマット設定 (独立行) -->
+    <div class="form-group">
+      <label class="form-label">時刻フォーマット (例: [YYYY-MM-DD HH:mm])</label>
+      <input type="text" class="form-input" id="opt-timefmt">
+      <div style="font-size:10px; color:#666; margin-top:2px;">
+        ※ Workflowy標準として認識させるには <code>[YYYY-MM-DD HH:mm]</code> の形式が必要です
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">テンプレート (JSON)</label>
+      <div style="font-size:10px; color:#666; margin-bottom:4px;">
+        {{date}}日付, {{time}}時刻, {{cursor}}カーソル位置
+      </div>
+      <textarea class="form-textarea" id="opt-templates"></textarea>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+      <button class="btn btn-secondary" id="btn-cancel-opt">キャンセル</button>
+      <button class="btn btn-primary" id="btn-save-opt">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/**
+ * Workflowy Sender App Logic V5 - Note Date Fix (Removed multiline conversion for Note)
+ */
+
+const STORAGE_KEY = 'workflowy_sender_config_v3';
+const API_URL = 'https://workflowy.com/api/v1/nodes';
+
+const DEFAULT_TEMPLATES = [
+  { label: '標準', text: '' },
+  { label: '日記', text: '{{date}} ' },
+  // 時刻が正しく認識されるよう、デフォルトテンプレートも時刻付き形式を想定
+  { label: 'Todo', text: '- [ ] {{cursor}}' }
+];
+
+const DEFAULT_CONFIG = {
+  apiKey: '',
+  parentId: 'inbox',
+  position: 'top',
+  // Workflowyで認識される標準フォーマット
+  dateFormat: '[YYYY-MM-DD]', 
+  // 時刻のみではなく「時刻付きの日付」にすることで認識させる
+  timeFormat: '[YYYY-MM-DD HH:mm]', 
+  templates: DEFAULT_TEMPLATES
+};
+
+let config = { ...DEFAULT_CONFIG };
+
+// トグル用状態管理
+let toggleState = {
+  lastInsertedText: null,
+  lastInsertedType: null, // 'date' or 'time'
+  timestamp: 0,
+  fieldId: null,
+  selectionEnd: 0
+};
+
+// --- DOM Elements ---
+const dom = {
+  editorMain: document.getElementById('editor-main'),
+  topBar: document.getElementById('top-bar'),
+  btnSend: document.getElementById('btn-send'),
+  btnClear: document.getElementById('btn-clear'),
+  btnOptions: document.getElementById('btn-options'),
+  modal: document.getElementById('options-modal'),
+  btnSaveOpt: document.getElementById('btn-save-opt'),
+  btnCancelOpt: document.getElementById('btn-cancel-opt'),
+  spinner: document.getElementById('loading-spinner'),
+  toast: document.getElementById('toast'),
+  optApiKey: document.getElementById('opt-apikey'),
+  optParentId: document.getElementById('opt-parentid'),
+  optPosition: document.getElementById('opt-position'),
+  optDateFmt: document.getElementById('opt-datefmt'),
+  optTimeFmt: document.getElementById('opt-timefmt'),
+  optTemplates: document.getElementById('opt-templates'),
+};
+
+function init() {
+  loadConfig();
+  renderTopBar();
+  applyTemplate(config.templates[0]);
+  
+  dom.editorMain.focus();
+
+  dom.btnSend.addEventListener('click', handleSend);
+  dom.btnClear.addEventListener('click', () => applyTemplate(config.templates[0]));
+  
+  dom.btnOptions.addEventListener('click', openOptions);
+  dom.btnSaveOpt.addEventListener('click', saveOptions);
+  dom.btnCancelOpt.addEventListener('click', closeOptions);
+
+  [dom.editorMain].forEach(el => {
+    el.addEventListener('keydown', handleKeydown);
+    el.addEventListener('click', resetToggleState);
+  });
+}
+
+function handleKeydown(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    e.preventDefault();
+    handleSend();
+    return;
+  }
+  // Alt+T toggle
+  if (e.altKey && (e.key === 't' || e.key === 'T' || e.key === 'か')) {
+    e.preventDefault();
+    handleDateToggle(e.target);
+    return;
+  }
+}
+
+function resetToggleState() {
+  toggleState = { lastInsertedText: null, lastInsertedType: null, timestamp: 0, fieldId: null, selectionEnd: 0 };
+}
+
+function loadConfig() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      config = { ...DEFAULT_CONFIG, ...parsed };
+      // 旧バージョンの設定を引き継ぐ際、timeFormatがHH:mmだと認識されないため上書き推奨だが
+      // ユーザー設定を尊重しつつ、空ならデフォルト適用
+      if (!config.timeFormat) config.timeFormat = DEFAULT_CONFIG.timeFormat;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
+function saveConfigToStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+}
+
+function getFormattedDateTime(formatStr) {
+  const now = new Date();
+  const map = {
+    'YYYY': now.getFullYear(),
+    'YY': String(now.getFullYear()).slice(-2),
+    'MM': String(now.getMonth() + 1).padStart(2, '0'),
+    'M': now.getMonth() + 1,
+    'DD': String(now.getDate()).padStart(2, '0'),
+    'D': now.getDate(),
+    'HH': String(now.getHours()).padStart(2, '0'),
+    'H': now.getHours(),
+    'mm': String(now.getMinutes()).padStart(2, '0'),
+    'm': now.getMinutes()
+  };
+
+  let result = formatStr;
+  const keys = Object.keys(map).sort((a, b) => b.length - a.length);
+  keys.forEach(key => {
+    result = result.replace(new RegExp(key, 'g'), map[key]);
+  });
+  return result;
+}
+
+function handleDateToggle(targetElement) {
+  const now = Date.now();
+  const dateStr = getFormattedDateTime(config.dateFormat); // 例: [2025-11-28]
+  const timeStr = getFormattedDateTime(config.timeFormat); // 例: [2025-11-28 13:00]
+
+  const canToggle = toggleState.lastInsertedText &&
+                    toggleState.fieldId === targetElement.id &&
+                    targetElement.selectionEnd === toggleState.selectionEnd &&
+                    (now - toggleState.timestamp < 3000);
+
+  if (canToggle) {
+    // 日付 <-> 時刻 のトグル
+    const newType = toggleState.lastInsertedType === 'date' ? 'time' : 'date';
+    const newText = newType === 'date' ? dateStr : timeStr;
+    const oldTextLen = toggleState.lastInsertedText.length;
+
+    const startPos = targetElement.selectionEnd - oldTextLen;
+    targetElement.setSelectionRange(startPos, targetElement.selectionEnd);
+
+    document.execCommand('insertText', false, newText);
+
+    toggleState.lastInsertedText = newText;
+    toggleState.lastInsertedType = newType;
+    toggleState.timestamp = now;
+    toggleState.selectionEnd = targetElement.selectionEnd;
+
+  } else {
+    // 新規挿入 (デフォルトは日付)
+    document.execCommand('insertText', false, dateStr);
+
+    toggleState = {
+      lastInsertedText: dateStr,
+      lastInsertedType: 'date',
+      timestamp: now,
+      fieldId: targetElement.id,
+      selectionEnd: targetElement.selectionEnd
+    };
+  }
+}
+
+function insertTextAtCursor(text, targetId = null) {
+  let target = document.activeElement;
+  if (targetId) target = document.getElementById(targetId);
+  if (target !== dom.editorMain) {
+    target = dom.editorMain;
+  }
+  
+  target.focus();
+  document.execCommand('insertText', false, text);
+  resetToggleState();
+}
+
+/**
+ * メイン項目 (Name) のみ改行を二重改行に変換します。
+ * これは、APIがテキストをMarkdown/Rich Textとして正しく解析し、サブ項目化を防ぐために必要です。
+ */
+function convertToWorkflowyMultiline(text) {
+  if (!text) return "";
+  // 意図的な二重改行は保持
+  let protectedText = text.replace(/\n\n/g, "__DNL__"); 
+  // 単一行の改行を二重改行に変換
+  protectedText = protectedText.replace(/\n/g, "\n\n");
+  // 保持した二重改行を元に戻す
+  return protectedText.replace(/__DNL__/g, "\n\n");
+}
+
+function convertToWorkflowyBullets(text) {
+  if (!text) return "";
+  return text.split('\n')
+    .map(line => line.trim() ? `- ${line}` : '')
+    .join('\n\n');
+}
+
+function renderTopBar() {
+  dom.topBar.innerHTML = '';
+
+  const dateBtn = document.createElement('button');
+  dateBtn.className = 'btn-sm';
+  dateBtn.textContent = '📅 日付';
+  dateBtn.onclick = () => insertTextAtCursor(getFormattedDateTime(config.dateFormat));
+  dom.topBar.appendChild(dateBtn);
+
+  const timeBtn = document.createElement('button');
+  timeBtn.className = 'btn-sm';
+  timeBtn.textContent = '⏰ 時刻';
+  timeBtn.onclick = () => insertTextAtCursor(getFormattedDateTime(config.timeFormat));
+  dom.topBar.appendChild(timeBtn);
+
+  const sep = document.createElement('span');
+  sep.style.width = '1px'; sep.style.background = '#ddd'; sep.style.height = '20px'; sep.style.margin = '0 5px';
+  dom.topBar.appendChild(sep);
+
+  if (Array.isArray(config.templates)) {
+    config.templates.forEach((tpl, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-sm tpl-btn';
+      btn.textContent = tpl.label || `Tpl ${index+1}`;
+      btn.onclick = () => applyTemplate(tpl);
+      dom.topBar.appendChild(btn);
+    });
+  }
+}
+
+function processPlaceholders(text) {
+  if (!text) return "";
+  let res = text;
+  if (res.includes('{{date}}')) {
+    res = res.replace(/{{date}}/g, getFormattedDateTime(config.dateFormat));
+  }
+  if (res.includes('{{time}}')) {
+    res = res.replace(/{{time}}/g, getFormattedDateTime(config.timeFormat));
+  }
+  return res;
+}
+
+function applyTemplate(tpl) {
+  if (!tpl) return;
+  resetToggleState();
+  let mainContent = processPlaceholders(tpl.text || '');
+  const cursorMarker = '{{cursor}}';
+  
+  if (mainContent.includes(cursorMarker)) {
+    const cursorIndex = mainContent.indexOf(cursorMarker);
+    dom.editorMain.value = mainContent.replace(cursorMarker, '');
+    dom.editorMain.focus();
+    dom.editorMain.setSelectionRange(cursorIndex, cursorIndex);
+  } else {
+    dom.editorMain.value = mainContent;
+    dom.editorMain.focus();
+  }
+}
+
+function openOptions() {
+  dom.optApiKey.value = config.apiKey || '';
+  dom.optParentId.value = config.parentId || 'inbox';
+  dom.optPosition.value = config.position || 'top';
+  dom.optDateFmt.value = config.dateFormat || '[YYYY-MM-DD]';
+  dom.optTimeFmt.value = config.timeFormat || '[YYYY-MM-DD HH:mm]';
+  dom.optTemplates.value = JSON.stringify(config.templates, null, 2);
+  dom.modal.classList.add('active');
+}
+
+function closeOptions() {
+  dom.modal.classList.remove('active');
+}
+
+function saveOptions() {
+  try {
+    const templates = JSON.parse(dom.optTemplates.value);
+    config.apiKey = dom.optApiKey.value.trim();
+    config.parentId = dom.optParentId.value.trim() || 'inbox';
+    config.position = dom.optPosition.value;
+    config.dateFormat = dom.optDateFmt.value;
+    config.timeFormat = dom.optTimeFmt.value;
+    config.templates = templates;
+
+    saveConfigToStorage();
+    renderTopBar();
+    showToast('設定を保存しました');
+    closeOptions();
+  } catch (e) {
+    alert('テンプレートのJSON形式が正しくありません。\n' + e.message);
+  }
+}
+
+async function handleSend() {
+  const text = dom.editorMain.value;
+
+  if (!text.trim()) {
+    showToast('本文が空です');
+    return;
+  }
+  if (!config.apiKey) {
+    alert('API Keyが設定されていません。');
+    openOptions();
+    return;
+  }
+
+  dom.btnSend.disabled = true;
+  dom.spinner.style.display = 'inline-block';
+
+  // メイン項目 (Name): 改行を二重改行に変換 (リッチテキスト解析用)
+  const convertedName = convertToWorkflowyBullets(text);
+
+  const payload = {
+	parent_id: config.parentId,
+	name: convertedName,
+	position: config.position,
+    data: {
+	  layoutMode: "bullets"
+	}
+  };
+
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${config.apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Error ${response.status}: ${errText}`);
+    }
+
+    showToast('送信しました！');
+    applyTemplate(config.templates[0]);
+    resetToggleState();
+
+  } catch (error) {
+    console.error(error);
+    alert('送信失敗:\n' + error.message);
+  } finally {
+    dom.btnSend.disabled = false;
+    dom.spinner.style.display = 'none';
+    dom.editorMain.focus();
+  }
+}
+
+function showToast(msg) {
+  dom.toast.textContent = msg;
+  dom.toast.classList.add('show');
+  setTimeout(() => {
+    dom.toast.classList.remove('show');
+  }, 3000);
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
