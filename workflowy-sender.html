@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Workflowy Sender v5</title>
+<title>Workflowy Sender</title>
 <style>
   :root {
     --bg-color: #f0f2f5;
@@ -13,7 +13,7 @@
     --primary-color: #2b2b2b;
     --accent-color: #007bff;
     --danger-color: #dc3545;
-    --toolbar-height: 50px;
+    --header-height: 40px;
     --footer-height: 60px;
     --app-max-width: 600px;
   }
@@ -43,32 +43,28 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
   }
 
-  /* --- Top Bar --- */
-  .top-bar {
-    height: var(--toolbar-height);
+  /* --- Header --- */
+  .header {
+    height: var(--header-height);
     background: var(--app-bg);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    gap: 8px;
-    overflow-x: auto;
-    white-space: nowrap;
+    justify-content: space-between;
+    padding: 0 15px;
     flex-shrink: 0;
   }
-  .top-bar::-webkit-scrollbar { display: none; }
 
-  .btn-sm {
-    padding: 4px 10px;
-    font-size: 12px;
-    background: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background 0.2s;
+  .app-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary-color);
   }
-  .btn-sm:active { background: #e2e6ea; }
-  .btn-sm.tpl-btn { border-color: #adb5bd; color: #495057; }
+
+  .char-count {
+    font-size: 12px;
+    color: #888;
+  }
 
   /* --- Main Editor Area --- */
   .main-area {
@@ -76,7 +72,6 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
-    gap: 10px;
     overflow-y: auto;
     background: var(--app-bg);
   }
@@ -95,13 +90,15 @@
     font-family: inherit;
     background: transparent;
     display: block;
+    padding: 0;
+    -webkit-user-select: text;
+    user-select: text;
   }
 
   #editor-main {
     flex: 1;
-    font-size: 16px;
+    font-size: 16px; /* JSで動的に設定されるためCSSはデフォルト値 */
     line-height: 1.6;
-    margin-bottom: 15px;
   }
 
   /* --- Bottom Bar --- */
@@ -112,22 +109,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 8px 10px;
     flex-shrink: 0;
+    gap: 8px;
   }
 
-  .btn-group { display: flex; gap: 10px; }
+  .btn-group { 
+    display: flex; 
+    gap: 8px;
+    align-items: center;
+  }
 
   .btn {
-    padding: 10px 20px;
+    padding: 8px 12px;
     border-radius: 6px;
     border: none;
     font-weight: bold;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.2s;
   }
   
   .btn-primary { background: var(--primary-color); color: #fff; }
@@ -136,30 +139,134 @@
   
   .btn-danger { background: transparent; color: var(--danger-color); }
   .btn-secondary { background: transparent; color: #555; }
+  .btn-icon { background: transparent; color: #555; padding: 8px; }
 
-  /* --- Options Modal --- */
-  .modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  @media (max-width: 600px) {
+    .btn-text { display: none; }
+    .btn { padding: 8px; font-size: 16px; }
+  }
+
+  @media (min-width: 601px) {
+    .btn-text { display: none; }
+    .btn-icon { display: inline; }
+    .bottom-bar {
+      flex-wrap: nowrap;
+    }
+  }
+
+  /* --- Dropdown Menu --- */
+  .dropdown-menu {
+    position: absolute;
+    bottom: var(--footer-height);
+    left: 80px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .dropdown-menu.active { display: flex; }
+
+  .dropdown-item {
+    padding: 10px 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .dropdown-item:hover { background: #f0f0f0; }
+  .dropdown-item:active { background: #e0e0e0; }
+
+  /* --- Options Panel --- */
+  .options-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.5);
     display: none;
-    justify-content: center;
-    align-items: center;
     z-index: 1000;
+    overflow: hidden;
   }
-  .modal-overlay.active { display: flex; }
 
-  .modal-content {
+  .options-panel.active { display: flex; }
+
+  .options-content {
     background: #fff;
-    width: 90%;
-    max-width: 400px;
-    max-height: 85vh;
-    border-radius: 8px;
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    max-width: var(--app-max-width); /* モーダルも最大幅を適用 */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* モーダルが全画面でない場合の調整 (念のため) */
+  @media (min-width: 601px) {
+    .options-panel.active { align-items: center; justify-content: center; }
+    .options-content { height: 90%; border-radius: 8px; }
+  }
+
+
+  .options-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    background: var(--app-bg);
+    position: sticky;
+    top: 0;
+  }
+
+  .options-header h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .options-body {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  .options-section {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  .options-section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+
+  .options-footer {
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+    background: var(--app-bg);
   }
 
   h3 { margin: 0 0 10px 0; font-size: 18px; }
@@ -167,10 +274,51 @@
   .form-group { display: flex; flex-direction: column; gap: 5px; }
   .form-label { font-size: 12px; font-weight: bold; color: #555; }
   .form-input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
-  .form-textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; font-family: monospace; height: 120px; resize: vertical; }
+
+  .template-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .template-item {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .template-item-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .template-item input {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .template-item textarea {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    height: 60px;
+    resize: vertical;
+  }
+
+  .btn-remove { background: var(--danger-color); color: white; padding: 4px 8px; font-size: 12px; }
+  .btn-add-tpl { background: var(--accent-color); color: white; padding: 8px 12px; font-size: 12px; }
 
   .toast {
-    position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
     background: rgba(40,40,40,0.9); color: white;
     padding: 8px 16px; border-radius: 20px; font-size: 14px;
     opacity: 0; transition: opacity 0.3s; pointer-events: none;
@@ -183,13 +331,22 @@
     border: 2px solid rgba(255,255,255,0.3);
     border-radius: 50%; border-top-color: #fff;
     animation: spin 1s ease-in-out infinite;
-    margin-right: 8px; display: none;
+    margin-right: 6px; display: none;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .kbd-hint { display: none; color: #888; font-size: 10px; margin-left: 4px; }
-  @media (min-width: 768px) {
-    .kbd-hint { display: inline; }
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* iOS対策: キーボード表示時のビューポート調整 */
+  @supports (padding: max(0px)) {
+    .bottom-bar {
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
   }
 
 </style>
@@ -197,7 +354,10 @@
 <body>
 
 <div class="app-container">
-  <div class="top-bar" id="top-bar"></div>
+  <div class="header">
+    <div class="app-title">Workflowy sender</div>
+    <div class="char-count">c:<span id="char-count">0</span></div>
+  </div>
 
   <div class="main-area">
     <div class="editor-wrapper">
@@ -206,65 +366,91 @@
   </div>
 
   <div class="bottom-bar">
-    <button class="btn btn-secondary" id="btn-options">⚙️ 設定</button>
     <div class="btn-group">
-      <button class="btn btn-danger" id="btn-clear">クリア</button>
+      <!-- 📅ボタン: 日付のみ挿入 -->
+      <button class="btn btn-icon btn-secondary" id="btn-date" title="日付">📅</button>
+      <!-- ⏰ボタン: 時刻のみ挿入 (Alt+Tはトグル) -->
+      <button class="btn btn-icon btn-secondary" id="btn-time-toggle" title="時刻">⏰</button>
+      <button class="btn btn-icon btn-secondary" id="btn-templates" title="テンプレート">📋</button>
+      <button class="btn btn-icon btn-danger" id="btn-clear" title="全削除">🗑️</button>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" id="btn-options">
+        <span class="btn-text">⚙️ 設定</span>
+        <span class="btn-icon">⚙️</span>
+      </button>
       <button class="btn btn-primary" id="btn-send">
-        <div class="spinner" id="loading-spinner"></div>送信 <span class="kbd-hint">(Ctrl+Ent)</span>
+        <div class="spinner" id="loading-spinner"></div>
+        <span>送信</span>
       </button>
     </div>
   </div>
 
+  <div class="dropdown-menu" id="templates-menu"></div>
   <div class="toast" id="toast"></div>
 </div>
 
-<!-- Options Modal -->
-<div class="modal-overlay" id="options-modal">
-  <div class="modal-content">
-    <h3>設定</h3>
-    
-    <div class="form-group">
-      <label class="form-label">Workflowy API Key (必須)</label>
-      <input type="password" class="form-input" id="opt-apikey" placeholder="API Keyを貼り付け">
+<!-- Options Panel -->
+<div class="options-panel" id="options-modal">
+  <div class="options-content">
+    <div class="options-header">
+      <h3>設定</h3>
+      <button class="btn btn-secondary" id="btn-close-opt">✕</button>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">親ノードID (デフォルト: inbox)</label>
-      <input type="text" class="form-input" id="opt-parentid" placeholder="inbox, home, etc...">
-    </div>
+    <div class="options-body">
+      <div class="options-section">
+        <div class="options-section-title">APIキー</div>
+        <div class="form-group">
+          <label class="form-label">Workflowy API Key (必須)</label>
+          <input type="password" class="form-input" id="opt-apikey" placeholder="API Keyを貼り付け">
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label class="form-label">送信位置</label>
-      <select class="form-input" id="opt-position">
-        <option value="top">Top (上に追加)</option>
-        <option value="bottom">Bottom (下に追加)</option>
-      </select>
-    </div>
+      <div class="options-section">
+        <div class="options-section-title">送信設定</div>
+        <div class="form-group">
+          <label class="form-label">親ノードID (デフォルト: inbox)</label>
+          <input type="text" class="form-input" id="opt-parentid" placeholder="inbox, home, etc...">
+        </div>
 
-    <!-- 日付フォーマット設定 (独立行) -->
-    <div class="form-group">
-      <label class="form-label">日付フォーマット (例: [YYYY-MM-DD])</label>
-      <input type="text" class="form-input" id="opt-datefmt">
-    </div>
+        <div class="form-group">
+          <label class="form-label">送信位置</label>
+          <select class="form-input" id="opt-position">
+            <option value="top">Top (上に追加)</option>
+            <option value="bottom">Bottom (下に追加)</option>
+          </select>
+        </div>
+      </div>
 
-    <!-- 時刻フォーマット設定 (独立行) -->
-    <div class="form-group">
-      <label class="form-label">時刻フォーマット (例: [YYYY-MM-DD HH:mm])</label>
-      <input type="text" class="form-input" id="opt-timefmt">
-      <div style="font-size:10px; color:#666; margin-top:2px;">
-        ※ Workflowy標準として認識させるには <code>[YYYY-MM-DD HH:mm]</code> の形式が必要です
+      <div class="options-section">
+        <div class="options-section-title">エディタ設定</div>
+        <div class="form-group">
+          <label class="form-label">フォントサイズ (px)</label>
+          <input type="number" class="form-input" id="opt-fontsize" min="12" max="24" value="16">
+        </div>
+      </div>
+
+      <div class="options-section">
+        <div class="form-group">
+          <label class="form-label">日付フォーマット (例: [YYYY-MM-DD])</label>
+          <input type="text" class="form-input" id="opt-datefmt">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">時刻フォーマット (例: [YYYY-MM-DD HH:mm])</label>
+          <input type="text" class="form-input" id="opt-timefmt">
+        </div>
+      </div>
+
+      <div class="options-section">
+        <div class="options-section-title">テンプレート</div>
+        <div class="template-list" id="template-list"></div>
+        <button class="btn btn-add-tpl" id="btn-add-template">+ テンプレート追加</button>
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">テンプレート (JSON)</label>
-      <div style="font-size:10px; color:#666; margin-bottom:4px;">
-        {{date}}日付, {{time}}時刻, {{cursor}}カーソル位置
-      </div>
-      <textarea class="form-textarea" id="opt-templates"></textarea>
-    </div>
-
-    <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+    <div class="options-footer">
       <button class="btn btn-secondary" id="btn-cancel-opt">キャンセル</button>
       <button class="btn btn-primary" id="btn-save-opt">保存</button>
     </div>
@@ -273,16 +459,15 @@
 
 <script>
 /**
- * Workflowy Sender App Logic V5 - Note Date Fix (Removed multiline conversion for Note)
+ * Workflowy Sender v6.4 - ボタン固定、Alt+Tで日付/時刻トグル
  */
 
-const STORAGE_KEY = 'workflowy_sender_config_v3';
+const STORAGE_KEY = 'workflowy_sender_config_v4';
 const API_URL = 'https://workflowy.com/api/v1/nodes';
 
 const DEFAULT_TEMPLATES = [
   { label: '標準', text: '' },
   { label: '日記', text: '{{date}} ' },
-  // 時刻が正しく認識されるよう、デフォルトテンプレートも時刻付き形式を想定
   { label: 'Todo', text: '- [ ] {{cursor}}' }
 ];
 
@@ -290,80 +475,135 @@ const DEFAULT_CONFIG = {
   apiKey: '',
   parentId: 'inbox',
   position: 'top',
-  // Workflowyで認識される標準フォーマット
-  dateFormat: '[YYYY-MM-DD]', 
-  // 時刻のみではなく「時刻付きの日付」にすることで認識させる
-  timeFormat: '[YYYY-MM-DD HH:mm]', 
+  dateFormat: '[YYYY-MM-DD]',
+  timeFormat: '[YYYY-MM-DD HH:mm]',
+  fontSize: 16,
   templates: DEFAULT_TEMPLATES
 };
 
 let config = { ...DEFAULT_CONFIG };
 
-// トグル用状態管理
+// トグル機能のための状態管理変数
 let toggleState = {
-  lastInsertedText: null,
-  lastInsertedType: null, // 'date' or 'time'
-  timestamp: 0,
-  fieldId: null,
-  selectionEnd: 0
+  active: false,
+  lastInsertedFormat: null, // 最後に挿入されたフォーマットを保持
+  cursorStart: 0,
+  cursorEnd: 0
 };
+
 
 // --- DOM Elements ---
 const dom = {
   editorMain: document.getElementById('editor-main'),
-  topBar: document.getElementById('top-bar'),
   btnSend: document.getElementById('btn-send'),
   btnClear: document.getElementById('btn-clear'),
   btnOptions: document.getElementById('btn-options'),
+  btnDate: document.getElementById('btn-date'),
+  btnTimeToggle: document.getElementById('btn-time-toggle'), 
+  btnTemplates: document.getElementById('btn-templates'),
   modal: document.getElementById('options-modal'),
   btnSaveOpt: document.getElementById('btn-save-opt'),
   btnCancelOpt: document.getElementById('btn-cancel-opt'),
+  btnCloseOpt: document.getElementById('btn-close-opt'),
   spinner: document.getElementById('loading-spinner'),
   toast: document.getElementById('toast'),
+  charCount: document.getElementById('char-count'),
   optApiKey: document.getElementById('opt-apikey'),
   optParentId: document.getElementById('opt-parentid'),
   optPosition: document.getElementById('opt-position'),
   optDateFmt: document.getElementById('opt-datefmt'),
   optTimeFmt: document.getElementById('opt-timefmt'),
-  optTemplates: document.getElementById('opt-templates'),
+  optFontSize: document.getElementById('opt-fontsize'),
+  templateList: document.getElementById('template-list'),
+  btnAddTemplate: document.getElementById('btn-add-template'),
+  templatesMenu: document.getElementById('templates-menu'),
 };
 
 function init() {
   loadConfig();
-  renderTopBar();
   applyTemplate(config.templates[0]);
+  applyFontSize();
   
-  dom.editorMain.focus();
+  setTimeout(() => dom.editorMain.focus(), 100);
 
+  // イベントリスナー設定
   dom.btnSend.addEventListener('click', handleSend);
-  dom.btnClear.addEventListener('click', () => applyTemplate(config.templates[0]));
+  dom.btnClear.addEventListener('click', () => {
+    dom.editorMain.value = '';
+    dom.editorMain.focus();
+    updateCharCount();
+  });
   
   dom.btnOptions.addEventListener('click', openOptions);
   dom.btnSaveOpt.addEventListener('click', saveOptions);
   dom.btnCancelOpt.addEventListener('click', closeOptions);
+  dom.btnCloseOpt.addEventListener('click', closeOptions);
+  
+  // 📅ボタン: 日付のみを挿入 (固定)
+  if (dom.btnDate) dom.btnDate.addEventListener('click', () => {
+    insertDateTime(config.dateFormat);
+    resetToggleState(); // ボタン操作でトグル状態をリセット
+  }); 
+  
+  // ⏰ボタン: 時刻のみを挿入 (固定)
+  if (dom.btnTimeToggle) dom.btnTimeToggle.addEventListener('click', () => {
+    insertDateTime(config.timeFormat);
+    resetToggleState(); // ボタン操作でトグル状態をリセット
+  }); 
+  
+  if (dom.btnTemplates) dom.btnTemplates.addEventListener('click', toggleTemplateMenu);
+  dom.btnAddTemplate.addEventListener('click', addTemplateItem);
 
-  [dom.editorMain].forEach(el => {
-    el.addEventListener('keydown', handleKeydown);
-    el.addEventListener('click', resetToggleState);
-  });
+  dom.editorMain.addEventListener('keydown', handleKeydown);
+  dom.editorMain.addEventListener('input', updateCharCount);
+  
+  // トグル機能のためのリセットイベントリスナー
+  dom.editorMain.addEventListener('click', resetToggleState);
+  dom.editorMain.addEventListener('keyup', resetToggleState);
+}
+
+function updateCharCount() {
+  dom.charCount.textContent = dom.editorMain.value.length;
+}
+
+function applyFontSize() {
+  const fontSize = config.fontSize || 16;
+  dom.editorMain.style.fontSize = fontSize + 'px';
 }
 
 function handleKeydown(e) {
+  // Ctrl/Cmd + Enter で送信
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
     e.preventDefault();
     handleSend();
     return;
   }
-  // Alt+T toggle
-  if (e.altKey && (e.key === 't' || e.key === 'T' || e.key === 'か')) {
+  
+  // Alt + D のショートカットは削除済み
+  
+  // Alt + T で日付/時刻をトグル挿入
+  if (e.altKey && (e.key === 't' || e.key === 'T' || e.key === 'ã‹')) { 
     e.preventDefault();
-    handleDateToggle(e.target);
+    insertDateOrTimeToggle(); // トグル関数を呼び出し
     return;
   }
 }
 
+// トグル状態をリセットする関数
 function resetToggleState() {
-  toggleState = { lastInsertedText: null, lastInsertedType: null, timestamp: 0, fieldId: null, selectionEnd: 0 };
+  const isInputActive = dom.editorMain === document.activeElement;
+  if (!isInputActive) {
+    toggleState.active = false;
+    toggleState.lastInsertedFormat = null;
+    return;
+  }
+
+  // カーソル位置が変わったらリセット
+  const currentCursor = dom.editorMain.selectionStart;
+  if (toggleState.active && currentCursor !== toggleState.cursorEnd) {
+    toggleState.active = false;
+    toggleState.lastInsertedFormat = null;
+  }
 }
 
 function loadConfig() {
@@ -372,9 +612,8 @@ function loadConfig() {
     try {
       const parsed = JSON.parse(saved);
       config = { ...DEFAULT_CONFIG, ...parsed };
-      // 旧バージョンの設定を引き継ぐ際、timeFormatがHH:mmだと認識されないため上書き推奨だが
-      // ユーザー設定を尊重しつつ、空ならデフォルト適用
       if (!config.timeFormat) config.timeFormat = DEFAULT_CONFIG.timeFormat;
+      if (!config.fontSize) config.fontSize = DEFAULT_CONFIG.fontSize;
     } catch (e) {
       console.error(e);
     }
@@ -408,107 +647,80 @@ function getFormattedDateTime(formatStr) {
   return result;
 }
 
-function handleDateToggle(targetElement) {
-  const now = Date.now();
-  const dateStr = getFormattedDateTime(config.dateFormat); // 例: [2025-11-28]
-  const timeStr = getFormattedDateTime(config.timeFormat); // 例: [2025-11-28 13:00]
-
-  const canToggle = toggleState.lastInsertedText &&
-                    toggleState.fieldId === targetElement.id &&
-                    targetElement.selectionEnd === toggleState.selectionEnd &&
-                    (now - toggleState.timestamp < 3000);
-
-  if (canToggle) {
-    // 日付 <-> 時刻 のトグル
-    const newType = toggleState.lastInsertedType === 'date' ? 'time' : 'date';
-    const newText = newType === 'date' ? dateStr : timeStr;
-    const oldTextLen = toggleState.lastInsertedText.length;
-
-    const startPos = targetElement.selectionEnd - oldTextLen;
-    targetElement.setSelectionRange(startPos, targetElement.selectionEnd);
-
-    document.execCommand('insertText', false, newText);
-
-    toggleState.lastInsertedText = newText;
-    toggleState.lastInsertedType = newType;
-    toggleState.timestamp = now;
-    toggleState.selectionEnd = targetElement.selectionEnd;
-
-  } else {
-    // 新規挿入 (デフォルトは日付)
-    document.execCommand('insertText', false, dateStr);
-
-    toggleState = {
-      lastInsertedText: dateStr,
-      lastInsertedType: 'date',
-      timestamp: now,
-      fieldId: targetElement.id,
-      selectionEnd: targetElement.selectionEnd
-    };
-  }
-}
-
-function insertTextAtCursor(text, targetId = null) {
-  let target = document.activeElement;
-  if (targetId) target = document.getElementById(targetId);
-  if (target !== dom.editorMain) {
-    target = dom.editorMain;
-  }
-  
-  target.focus();
-  document.execCommand('insertText', false, text);
-  resetToggleState();
-}
-
 /**
- * メイン項目 (Name) のみ改行を二重改行に変換します。
- * これは、APIがテキストをMarkdown/Rich Textとして正しく解析し、サブ項目化を防ぐために必要です。
+ * 指定されたフォーマットで日時を挿入する
+ * @param {string} formatStr 日時フォーマット文字列
+ * @returns {object} 挿入された情報 (カーソル位置含む)
  */
-function convertToWorkflowyMultiline(text) {
-  if (!text) return "";
-  // 意図的な二重改行は保持
-  let protectedText = text.replace(/\n\n/g, "__DNL__"); 
-  // 単一行の改行を二重改行に変換
-  protectedText = protectedText.replace(/\n/g, "\n\n");
-  // 保持した二重改行を元に戻す
-  return protectedText.replace(/__DNL__/g, "\n\n");
+function insertDateTime(formatStr) {
+  const textArea = dom.editorMain;
+  const insertStr = getFormattedDateTime(formatStr);
+  const start = textArea.selectionStart;
+  const end = textArea.selectionEnd;
+  const value = textArea.value;
+
+  textArea.value = value.substring(0, start) + insertStr + value.substring(end);
+  
+  const newCursorPos = start + insertStr.length;
+  textArea.setSelectionRange(newCursorPos, newCursorPos);
+  
+  textArea.focus();
+  updateCharCount();
+
+  return { insertStr, start, end: newCursorPos };
 }
+
+// Alt+T用のトグル挿入関数
+function insertDateOrTimeToggle() {
+  const textArea = dom.editorMain;
+  let targetFormat = config.dateFormat; // デフォルトは日付
+
+  // 1. 次に挿入すべきフォーマットを決定
+  if (toggleState.active && toggleState.lastInsertedFormat) {
+    if (toggleState.lastInsertedFormat === config.dateFormat) {
+      // 前回日付だったので、今回は時刻
+      targetFormat = config.timeFormat;
+    } else {
+      // 前回時刻だったので、今回は日付
+      targetFormat = config.dateFormat;
+    }
+
+    // 2. 既存の文字列を削除（トグル）
+    const start = toggleState.cursorStart;
+    const end = toggleState.cursorEnd;
+    const value = textArea.value;
+    textArea.value = value.substring(0, start) + value.substring(end);
+    textArea.setSelectionRange(start, start); // 削除位置にカーソルを戻す
+  }
+
+  // 3. 新しい文字列を挿入
+  const { insertStr, start, end: newCursorPos } = insertDateTime(targetFormat);
+
+  // 4. トグル状態を更新
+  toggleState.active = true;
+  toggleState.cursorStart = start;
+  toggleState.cursorEnd = newCursorPos;
+  toggleState.lastInsertedFormat = targetFormat;
+  
+  // Alt+T操作後にカーソルが動いた場合、トグル状態をリセットするための監視
+  setTimeout(() => {
+    const currentCursorPos = textArea.selectionStart;
+    if (currentCursorPos !== newCursorPos) {
+      resetToggleState();
+    }
+  }, 100);
+  
+  // トグル処理時のトースト通知は削除
+}
+
 
 function convertToWorkflowyBullets(text) {
   if (!text) return "";
+  // 複数行を'- 'を付けた箇条書き形式に変換
   return text.split('\n')
     .map(line => line.trim() ? `- ${line}` : '')
+    .filter(line => line) // 空行を削除
     .join('\n\n');
-}
-
-function renderTopBar() {
-  dom.topBar.innerHTML = '';
-
-  const dateBtn = document.createElement('button');
-  dateBtn.className = 'btn-sm';
-  dateBtn.textContent = '📅 日付';
-  dateBtn.onclick = () => insertTextAtCursor(getFormattedDateTime(config.dateFormat));
-  dom.topBar.appendChild(dateBtn);
-
-  const timeBtn = document.createElement('button');
-  timeBtn.className = 'btn-sm';
-  timeBtn.textContent = '⏰ 時刻';
-  timeBtn.onclick = () => insertTextAtCursor(getFormattedDateTime(config.timeFormat));
-  dom.topBar.appendChild(timeBtn);
-
-  const sep = document.createElement('span');
-  sep.style.width = '1px'; sep.style.background = '#ddd'; sep.style.height = '20px'; sep.style.margin = '0 5px';
-  dom.topBar.appendChild(sep);
-
-  if (Array.isArray(config.templates)) {
-    config.templates.forEach((tpl, index) => {
-      const btn = document.createElement('button');
-      btn.className = 'btn-sm tpl-btn';
-      btn.textContent = tpl.label || `Tpl ${index+1}`;
-      btn.onclick = () => applyTemplate(tpl);
-      dom.topBar.appendChild(btn);
-    });
-  }
 }
 
 function processPlaceholders(text) {
@@ -525,28 +737,49 @@ function processPlaceholders(text) {
 
 function applyTemplate(tpl) {
   if (!tpl) return;
-  resetToggleState();
+  resetToggleState(); // テンプレート適用時はトグル状態をリセット
   let mainContent = processPlaceholders(tpl.text || '');
   const cursorMarker = '{{cursor}}';
   
   if (mainContent.includes(cursorMarker)) {
     const cursorIndex = mainContent.indexOf(cursorMarker);
     dom.editorMain.value = mainContent.replace(cursorMarker, '');
-    dom.editorMain.focus();
     dom.editorMain.setSelectionRange(cursorIndex, cursorIndex);
   } else {
     dom.editorMain.value = mainContent;
-    dom.editorMain.focus();
   }
+  dom.editorMain.focus();
+  updateCharCount();
+}
+
+function toggleTemplateMenu() {
+  dom.templatesMenu.classList.toggle('active');
+  renderTemplateMenu();
+}
+
+function renderTemplateMenu() {
+  dom.templatesMenu.innerHTML = '';
+  config.templates.forEach((tpl, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'dropdown-item';
+    btn.textContent = tpl.label || `Tpl ${idx+1}`;
+    btn.onclick = () => {
+      applyTemplate(tpl);
+      dom.templatesMenu.classList.remove('active');
+    };
+    dom.templatesMenu.appendChild(btn);
+  });
 }
 
 function openOptions() {
+  // 設定値をモーダルに反映
   dom.optApiKey.value = config.apiKey || '';
   dom.optParentId.value = config.parentId || 'inbox';
   dom.optPosition.value = config.position || 'top';
   dom.optDateFmt.value = config.dateFormat || '[YYYY-MM-DD]';
   dom.optTimeFmt.value = config.timeFormat || '[YYYY-MM-DD HH:mm]';
-  dom.optTemplates.value = JSON.stringify(config.templates, null, 2);
+  dom.optFontSize.value = config.fontSize || 16; 
+  renderTemplateItems();
   dom.modal.classList.add('active');
 }
 
@@ -554,22 +787,81 @@ function closeOptions() {
   dom.modal.classList.remove('active');
 }
 
+function renderTemplateItems() {
+  dom.templateList.innerHTML = '';
+  config.templates.forEach((tpl, idx) => {
+    const item = document.createElement('div');
+    item.className = 'template-item';
+    
+    const header = document.createElement('div');
+    header.className = 'template-item-header';
+    
+    const labelInput = document.createElement('input');
+    labelInput.type = 'text';
+    labelInput.placeholder = 'テンプレート名';
+    labelInput.value = tpl.label || '';
+    labelInput.style.flex = '1';
+    
+    const btnRemove = document.createElement('button');
+    btnRemove.className = 'btn btn-remove';
+    btnRemove.textContent = '削除';
+    btnRemove.onclick = () => {
+      config.templates.splice(idx, 1);
+      renderTemplateItems();
+    };
+    
+    header.appendChild(labelInput);
+    header.appendChild(btnRemove);
+    
+    const textArea = document.createElement('textarea');
+    textArea.placeholder = 'テンプレート内容 ({{date}}, {{time}}, {{cursor}} が使用可能)';
+    textArea.value = tpl.text || '';
+    
+    item.appendChild(header);
+    item.appendChild(textArea);
+    
+    // リアルタイム同期
+    labelInput.addEventListener('input', (e) => {
+      config.templates[idx].label = e.target.value;
+    });
+    
+    textArea.addEventListener('input', (e) => {
+      config.templates[idx].text = e.target.value;
+    });
+    
+    dom.templateList.appendChild(item);
+  });
+}
+
+function addTemplateItem() {
+  config.templates.push({ label: '新規', text: '' });
+  renderTemplateItems();
+}
+
 function saveOptions() {
   try {
-    const templates = JSON.parse(dom.optTemplates.value);
     config.apiKey = dom.optApiKey.value.trim();
     config.parentId = dom.optParentId.value.trim() || 'inbox';
     config.position = dom.optPosition.value;
     config.dateFormat = dom.optDateFmt.value;
     config.timeFormat = dom.optTimeFmt.value;
-    config.templates = templates;
+    
+    const newFontSize = parseInt(dom.optFontSize.value, 10);
+    if (newFontSize >= 12 && newFontSize <= 24) {
+      config.fontSize = newFontSize;
+      applyFontSize(); 
+    } else {
+      config.fontSize = 16; 
+      applyFontSize();
+    }
 
     saveConfigToStorage();
-    renderTopBar();
+    renderTemplateMenu();
     showToast('設定を保存しました');
     closeOptions();
   } catch (e) {
-    alert('テンプレートのJSON形式が正しくありません。\n' + e.message);
+    console.error(e);
+    showToast('設定の保存に失敗しました。');
   }
 }
 
@@ -581,7 +873,7 @@ async function handleSend() {
     return;
   }
   if (!config.apiKey) {
-    alert('API Keyが設定されていません。');
+    showToast('API Keyが設定されていません。設定を開きます。');
     openOptions();
     return;
   }
@@ -589,16 +881,17 @@ async function handleSend() {
   dom.btnSend.disabled = true;
   dom.spinner.style.display = 'inline-block';
 
-  // メイン項目 (Name): 改行を二重改行に変換 (リッチテキスト解析用)
+  resetToggleState(); // 送信時はトグル状態をリセット
+
   const convertedName = convertToWorkflowyBullets(text);
 
   const payload = {
-	parent_id: config.parentId,
-	name: convertedName,
-	position: config.position,
+    parent_id: config.parentId,
+    name: convertedName,
+    position: config.position,
     data: {
-	  layoutMode: "bullets"
-	}
+      layoutMode: "bullets"
+    }
   };
 
   try {
@@ -618,11 +911,10 @@ async function handleSend() {
 
     showToast('送信しました！');
     applyTemplate(config.templates[0]);
-    resetToggleState();
 
   } catch (error) {
-    console.error(error);
-    alert('送信失敗:\n' + error.message);
+    console.error('送信失敗:', error);
+    showToast('送信失敗: ' + error.message.substring(0, 50) + '...'); 
   } finally {
     dom.btnSend.disabled = false;
     dom.spinner.style.display = 'none';
@@ -639,6 +931,22 @@ function showToast(msg) {
 }
 
 window.addEventListener('DOMContentLoaded', init);
+
+// モーダル背景をクリックで閉じる
+document.getElementById('options-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'options-modal') {
+    closeOptions();
+  }
+});
+
+// ドロップダウン外をクリックで閉じる
+if (dom.templatesMenu) {
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#btn-templates') && !e.target.closest('#templates-menu')) {
+      dom.templatesMenu.classList.remove('active');
+    }
+  });
+}
 </script>
 </body>
 </html>
