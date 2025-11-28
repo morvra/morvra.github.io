@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- 修正1: Viewportメタタグをシンプル化し、キーボード挙動への干渉を最小限に抑える -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Workflowy Sender</title>
 <style>
   :root {
@@ -26,26 +27,24 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
-    /* 修正: height: 100vh; から 100%; に変更し、overflow: hidden; を削除 */
-    height: 100%; 
+    /* heightを100vhに設定し直し、Flexで中央揃え */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     position: relative; 
+    overflow: hidden; /* 親コンテナのスクロールを禁止 */
   }
 
   .app-container {
     width: 100%;
     max-width: var(--app-max-width);
-    /* 修正: height: 100%; から 100vh; に変更 (ビューポートいっぱいに) */
-    height: 100vh; 
+    /* heightはJSで制御する可能性があるため、ここでは100% */
+    height: 100%; 
     background-color: var(--app-bg);
     display: flex;
     flex-direction: column;
     position: relative;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    /* 修正: スクロールを許可 */
-    overflow-y: auto; 
-    -webkit-overflow-scrolling: touch;
   }
 
   /* --- Header --- */
@@ -58,8 +57,6 @@
     justify-content: space-between;
     padding: 0 15px;
     flex-shrink: 0;
-    position: sticky; 
-    top: 0;
     z-index: 10;
   }
 
@@ -80,9 +77,11 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
-    /* 修正: 下部バー固定のため、padding-bottomを調整 */
-    padding-bottom: calc(15px + var(--footer-height));
+    /* JSで動的にpadding-bottomを調整するため、一旦デフォルトに戻す */
+    padding-bottom: calc(15px + var(--footer-height)); 
     background: var(--app-bg);
+    overflow-y: auto; /* エディタ部分のみスクロール可能にする */
+    -webkit-overflow-scrolling: touch;
   }
 
   .editor-wrapper {
@@ -121,12 +120,13 @@
     padding: 8px 10px;
     flex-shrink: 0;
     gap: 8px;
-    /* 修正: キーボードの上に表示するための固定配置 */
+    /* 修正2: CSS固定はbottom: 0とし、JSで動的に上書きする */
     position: fixed;
     bottom: 0;
     width: 100%;
     max-width: var(--app-max-width);
     z-index: 100;
+    transition: bottom 0.2s ease-out; /* スムーズな移動 */
   }
 
   .btn-group { 
@@ -159,7 +159,6 @@
   @media (max-width: 600px) {
     .btn-text { display: none; }
     .btn { padding: 8px; font-size: 16px; }
-    /* 修正: モバイル時も下部バーの最大幅を適用 */
     .bottom-bar {
       max-width: 100%; 
     }
@@ -176,7 +175,7 @@
   /* --- Dropdown Menu --- */
   .dropdown-menu {
     position: absolute;
-    /* 修正: 固定された bottom-bar の上に来るように bottom の値を調整 */
+    /* bottom-barの上に配置 */
     bottom: calc(var(--footer-height) + 5px); 
     left: 80px;
     background: white;
@@ -341,7 +340,6 @@
   .btn-add-tpl { background: var(--accent-color); color: white; padding: 8px 12px; font-size: 12px; }
 
   .toast {
-    /* 修正: bottom: 90px から bottom: calc(var(--footer-height) + 30px); に変更 */
     position: fixed; bottom: calc(var(--footer-height) + 30px); left: 50%; transform: translateX(-50%);
     background: rgba(40,40,40,0.9); color: white;
     padding: 8px 16px; border-radius: 20px; font-size: 14px;
@@ -366,7 +364,7 @@
     margin-top: 10px;
   }
 
-  /* iOS対策: キーボード表示時のビューポート調整 */
+  /* iOS対策: セーフエリアのインセットを考慮（JSで上書きされるが念のため） */
   @supports (padding: max(0px)) {
     .bottom-bar {
       padding-bottom: max(8px, env(safe-area-inset-bottom));
@@ -391,7 +389,9 @@
 
   <div class="bottom-bar">
     <div class="btn-group">
+      <!-- 📅ボタン: 日付のみ挿入 -->
       <button class="btn btn-icon btn-secondary" id="btn-date" title="日付">📅</button>
+      <!-- ⏰ボタン: 時刻のみ挿入 (Alt+Tはトグル) -->
       <button class="btn btn-icon btn-secondary" id="btn-time-toggle" title="時刻">⏰</button>
       <button class="btn btn-icon btn-secondary" id="btn-templates" title="テンプレート">📋</button>
       <button class="btn btn-icon btn-danger" id="btn-clear" title="全削除">🗑️</button>
@@ -412,6 +412,7 @@
   <div class="toast" id="toast"></div>
 </div>
 
+<!-- Options Panel -->
 <div class="options-panel" id="options-modal">
   <div class="options-content">
     <div class="options-header">
@@ -480,7 +481,7 @@
 
 <script>
 /**
- * Workflowy Sender v6.5 - モバイルキーボード対応
+ * Workflowy Sender v6.6 - モバイルキーボード追従ロジックを導入
  */
 
 const STORAGE_KEY = 'workflowy_sender_config_v4';
@@ -538,6 +539,11 @@ const dom = {
   templateList: document.getElementById('template-list'),
   btnAddTemplate: document.getElementById('btn-add-template'),
   templatesMenu: document.getElementById('templates-menu'),
+  
+  // 修正2: 動的調整のために要素を追加
+  bottomBar: document.querySelector('.bottom-bar'), 
+  mainArea: document.querySelector('.main-area'),
+  appContainer: document.querySelector('.app-container'),
 };
 
 function init() {
@@ -545,8 +551,8 @@ function init() {
   applyTemplate(config.templates[0]);
   applyFontSize();
   
-  // 修正: 起動時の自動フォーカスを復活 (すぐにキーボードを立ち上げる)
-  setTimeout(() => dom.editorMain.focus(), 100);
+  // 修正1: 起動時の自動フォーカスを維持 (ブラウザの許可に依存)
+  setTimeout(() => dom.editorMain.focus(), 300); // 念のため時間を少し長く
 
   // イベントリスナー設定
   dom.btnSend.addEventListener('click', handleSend);
@@ -582,6 +588,66 @@ function init() {
   // トグル機能のためのリセットイベントリスナー
   dom.editorMain.addEventListener('click', resetToggleState);
   dom.editorMain.addEventListener('keyup', resetToggleState);
+  
+  // 修正2: キーボード出現時の動的調整ロジックをバインド
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', adjustBottomBarPosition);
+    // 初期化時にも一度実行
+    adjustBottomBarPosition();
+  }
+}
+
+/**
+ * 修正2: キーボードの出現を検知し、bottom-barの位置を動的に調整する
+ */
+function adjustBottomBarPosition() {
+  if (!window.visualViewport || !dom.bottomBar || !dom.mainArea || !dom.appContainer) return;
+  
+  const visualHeight = window.visualViewport.height;
+  const innerHeight = window.innerHeight;
+  const footerHeightCSS = getComputedStyle(document.documentElement).getPropertyValue('--footer-height');
+  const footerHeight = parseFloat(footerHeightCSS.replace('px', ''));
+  
+  // キーボードが出現しているかチェック (50px以上の差がある場合)
+  const isKeyboardOpen = Math.abs(visualHeight - innerHeight) > 50;
+
+  if (isKeyboardOpen) {
+    // 1. キーボードの高さ分だけ bottom-bar を上に移動させる
+    // 常に bottom-bar はビューポートの底を基準とするため、bottom: 0 は
+    // ビジュアルビューポートの底からの距離を意味する
+    
+    // innerHeight と visualHeight の差分 = キーボードの高さ (iPhoneでは少し複雑)
+    // ここでは、bottom-barの bottom プロパティをキーボードの下端からの距離に設定する
+    // iOS/Safariでは visualViewport.height はキーボード出現後の高さを返す
+    
+    // キーボードが出ている場合、bottom-bar の bottom を visualViewport の底からの距離にする
+    // window.visualViewport.offsetTop は、レイアウトビューポートのトップからの距離
+    // window.visualViewport.height は、キーボード出現後の高
+    
+    // Safari特有の挙動に対応するため、bottom-barをビジュアルビューポートの底に合わせる
+    const offset = innerHeight - visualHeight - window.visualViewport.offsetTop;
+    
+    // 実際には、キーボードが出ているときのビューポートの底からの距離を計算
+    // ここでは、キーボードの高さ (innerHeight - visualHeight) を bottom に設定
+    const kbHeight = innerHeight - visualHeight;
+    
+    // bottom-bar をキーボードの上に配置
+    dom.bottomBar.style.bottom = `${kbHeight}px`;
+
+    // 2. メインエディタエリアのパディングを調整
+    // bottom-barの高さ + キーボードの高さ + 必要なマージン
+    // これにより、キーボード出現時でもコンテンツの最後までスクロールできる
+    dom.mainArea.style.paddingBottom = `${kbHeight + footerHeight + 15}px`;
+    
+    // 3. アプリコンテナの高さを調整 (iOSでのスクロール問題対策)
+    // dom.appContainer.style.height = `${visualHeight}px`;
+    
+  } else {
+    // キーボードが隠れた状態 (通常の状態)
+    dom.bottomBar.style.bottom = '0';
+    dom.mainArea.style.paddingBottom = `calc(15px + var(--footer-height))`;
+    // dom.appContainer.style.height = `100%`;
+  }
 }
 
 function updateCharCount() {
@@ -602,6 +668,7 @@ function handleKeydown(e) {
   }
   
   // Alt + T で日付/時刻をトグル挿入
+  // Safari (iOS)ではAlt+Tが効かない可能性が高いため、ボタン操作を推奨
   if (e.altKey && (e.key === 't' || e.key === 'T' || e.key === 'ã‹')) { 
     e.preventDefault();
     insertDateOrTimeToggle(); 
