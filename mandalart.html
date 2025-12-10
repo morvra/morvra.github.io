@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八方思案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+            min-height: 100vh;
+            /* Grid layout variables */
+            --grid-size: min(90vw, 90vh); 
+            --cell-gap: 2vmin;
+            --cell-padding: 2vmin;
+        }
+
+        /* メインステージの基本スタイル（3x3用） */
+        #main-stage {
+            width: var(--grid-size); 
+            height: var(--grid-size);
+            touch-action: manipulation; 
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* 9x9モード時のステージスタイル */
+        .stage-9x9 {
+            width: max(95vmin, 1200px) !important;
+            height: max(95vmin, 1200px) !important;
+        }
+
+        /* タブレット向けの9x9サイズ調整 */
+        @media (max-width: 768px) {
+            .stage-9x9 {
+                width: max(95vmin, 800px) !important;
+                height: max(95vmin, 800px) !important;
+            }
+        }
+		/* スマホではモード切替しない */
+		@media (max-width: 640px) {
+    		#mode-change {
+        		display: none !important;
+    		}
+		}
+
+        .grid-wrapper-anim {
+            transform-origin: center center;
+            will-change: transform, opacity;
+            position: absolute;
+            inset: 0;
+        }
+
+        /* --- Common Cell Styling --- */
+        .cell {
+            transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 1.5vmin; /* 3x3 default */
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* 9x9 Mode Cell Adjustments */
+        .mode-9x9 .cell {
+            border-radius: 4px; /* 固定値に変更 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border-width: 1px;
+        }
+
+        .cell:hover {
+            z-index: 10;
+            transform: translateY(-0.5vmin);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #60a5fa;
+        }
+        
+        /* 9x9 Hover effect */
+        .mode-9x9 .cell:hover {
+            transform: scale(1.05); /* 少し控えめに */
+            z-index: 20;
+        }
+
+        /* --- Center Cell Styling --- */
+        .center-cell {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 0.4vmin solid #93c5fd;
+            font-weight: bold;
+            cursor: default;
+        }
+        
+        /* 9x9 Center Block Styling */
+        .block-center {
+            background-color: #f0f9ff;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.1);
+        }
+
+        /* --- Editable Area --- */
+        .editable-area {
+            width: 100%;
+            max-height: 100%;
+            outline: none;
+            text-align: center;
+            word-break: break-all;
+            white-space: pre-wrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1vmin;
+            line-height: 1.2;
+            font-size: 4vmin; 
+            user-select: none;
+        }
+        
+        /* iOS Zoom Fix & Font Sizing */
+        @media (max-width: 768px) {
+            .editable-area {
+                font-size: max(4vmin, 16px); 
+            }
+        }
+        
+        /* 9x9 specific font size override */
+        .mode-9x9 .editable-area {
+            font-size: 14px; /* 最低サイズを確保 */
+            padding: 4px;
+        }
+        
+        /* 9x9でもPCならもっと大きく */
+        @media (min-width: 769px) {
+            .mode-9x9 .editable-area {
+                font-size: 16px;
+            }
+        }
+
+        .editable-area:empty:before {
+            content: attr(data-placeholder);
+            color: #cbd5e1;
+            pointer-events: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* --- Buttons --- */
+        .zoom-button-style {
+            position: absolute;
+            bottom: 0.5vmin;
+            right: 0.5vmin;
+            width: 5vmin;
+            height: 5vmin;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
+            color: #9ca3af;
+        }
+        .center-cell .zoom-button-style {
+            bottom: 1.5vmin;
+            right: 1.5vmin;
+            width: 4.5vmin;
+            height: 4.5vmin;
+        }
+        .zoom-button-style:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+            color: #6b7280;
+            transform: scale(1.05);
+        }
+
+        /* 9x9 Hide Zoom Buttons */
+        .mode-9x9 .zoom-button-style {
+            display: none;
+        }
+
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col text-slate-700 bg-slate-50">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 h-14 flex items-center justify-between px-4 shadow-sm z-50 shrink-0">
+        <div class="flex items-center gap-2 overflow-hidden flex-1">
+            <h1 class="font-bold text-lg shrink-0 mr-4">八方思案</h1>
+            
+            <!-- Breadcrumbs -->
+            <div id="breadcrumbs" class="flex items-center text-sm text-slate-500 overflow-x-auto whitespace-nowrap scrollbar-hide gap-1 mask-linear px-2 transition-opacity duration-300">
+                <!-- Breadcrumb items injected here -->
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+            <!-- Mode Toggle Switch -->
+            <div id="mode-change" class="bg-slate-100 p-1 rounded-lg flex items-center text-xs font-medium border border-slate-200">
+                <button onclick="switchMode('3x3')" id="btn-3x3" class="px-3 py-1.5 rounded-md transition-all shadow-sm bg-white text-blue-600">3×3</button>
+                <button onclick="switchMode('9x9')" id="btn-9x9" class="px-3 py-1.5 rounded-md transition-all text-slate-500 hover:text-slate-700">9×9</button>
+            </div>
+
+            <div class="h-6 w-px bg-slate-200 mx-1"></div>
+
+            <button onclick="toggleSidebar()" class="p-2 hover:bg-slate-100 rounded text-slate-600" title="ファイル一覧">
+                <i class="fa-solid fa-folder-open"></i>
+            </button>
+            <button onclick="exportToText()" class="p-2 hover:bg-slate-100 rounded text-slate-600" title="テキストエクスポート">
+                <i class="fa-solid fa-file-export"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 relative flex items-center justify-center overflow-auto bg-slate-50/50 p-4">
+        
+        <div id="main-stage" class="relative aspect-square transition-all duration-300">
+            <!-- Grid content generated by JS -->
+            <div id="grid-container" class="w-full h-full grid-wrapper-anim">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Sidebar (File Manager) -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/20 z-40 hidden transition-opacity"></div>
+    <aside id="sidebar" class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 translate-x-full flex flex-col">
+        <div class="p-4 border-b flex justify-between items-center bg-slate-50">
+            <h2 class="font-bold text-lg">保存されたチャート</h2>
+            <button onclick="toggleSidebar()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="p-4">
+            <button onclick="createNewFile()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded shadow transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-plus"></i> 新規作成
+            </button>
+        </div>
+
+        <div id="file-list" class="flex-1 overflow-y-auto px-4 pb-4 space-y-2">
+            <!-- File items injected here -->
+        </div>
+    </aside>
+
+    <!-- Export Modal -->
+    <div id="export-modal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg flex flex-col max-h-[90vh]">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 class="font-bold">テキストエクスポート</h3>
+                <button onclick="closeExportModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 flex-1 overflow-hidden flex flex-col">
+                <textarea id="export-area" class="flex-1 w-full border rounded p-2 text-sm font-mono bg-slate-50 resize-none h-64 overflow-y-auto focus:ring-2 focus:ring-blue-500 focus:outline-none" readonly></textarea>
+            </div>
+            <div class="p-4 border-t bg-slate-50 rounded-b-lg flex justify-end gap-2">
+                <button onclick="copyToClipboard()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    <i class="fa-regular fa-copy"></i> コピー
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // --- Data Structure & State ---
+        
+        let appState = {
+            files: [], 
+            currentFileId: null,
+            currentData: null, 
+            pathStack: [], 
+            activeAnimation: false, 
+            activeCellIndex: null,
+            viewMode: '3x3', // '3x3' or '9x9'
+        };
+        
+        let dragData = {
+            sourceIndex: null,
+            sourceBlock: null,
+        };
+
+        const GRID_SIZE = 9;
+        const CENTER_INDEX = 4;
+        const ANIMATION_DURATION = 200; 
+
+        // --- Initialization ---
+
+        function init() {
+            loadFilesFromStorage();
+            if (appState.files.length === 0) {
+                createNewFile("メインテーマ");
+            } else {
+                loadFile(appState.files[0].id);
+            }
+            renderSidebar();
+            setupKeyboardListeners(); 
+            updateModeButtons();
+        }
+
+        function switchMode(mode) {
+            if (appState.viewMode === mode) return;
+            appState.viewMode = mode;
+            updateModeButtons();
+            
+            const stage = document.getElementById('main-stage');
+            if (mode === '9x9') {
+                stage.classList.add('stage-9x9');
+            } else {
+                stage.classList.remove('stage-9x9');
+            }
+
+            const container = document.getElementById('grid-container');
+            container.style.opacity = '0';
+            setTimeout(() => {
+                render(getCurrentNode());
+                container.style.opacity = '1';
+            }, 150);
+        }
+
+        function updateModeButtons() {
+            const btn3x3 = document.getElementById('btn-3x3');
+            const btn9x9 = document.getElementById('btn-9x9');
+            
+            if (appState.viewMode === '3x3') {
+                btn3x3.className = "px-3 py-1.5 rounded-md transition-all shadow-sm bg-white text-blue-600 font-bold";
+                btn9x9.className = "px-3 py-1.5 rounded-md transition-all text-slate-500 hover:text-slate-700";
+                document.getElementById('breadcrumbs').style.opacity = '1';
+                document.getElementById('breadcrumbs').style.pointerEvents = 'auto';
+            } else {
+                btn3x3.className = "px-3 py-1.5 rounded-md transition-all text-slate-500 hover:text-slate-700";
+                btn9x9.className = "px-3 py-1.5 rounded-md transition-all shadow-sm bg-white text-blue-600 font-bold";
+                document.getElementById('breadcrumbs').style.opacity = '0.5';
+            }
+        }
+
+        // --- Keyboard Logic ---
+
+        function setupKeyboardListeners() {
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('sidebar').classList.contains('translate-x-full') === false || 
+                    document.getElementById('export-modal').classList.contains('hidden') === false) {
+                    return;
+                }
+                
+                if (appState.viewMode === '3x3') {
+                    const isContractKey = e.key === 'Escape' || (e.key === 'ArrowUp' && (e.altKey || e.metaKey));
+                    if (isContractKey) {
+                        e.preventDefault();
+                        const shouldMaintainFocus = e.key === 'ArrowUp';
+                        navigateUp(shouldMaintainFocus);
+                    }
+
+                    const isExpandKey = (e.key === 'Enter' && (e.altKey || e.metaKey)) || 
+                                        (e.key === 'ArrowDown' && (e.altKey || e.metaKey));
+                    if (isExpandKey) {
+                        e.preventDefault();
+                        if (appState.activeCellIndex !== null && appState.activeCellIndex !== CENTER_INDEX) {
+                            navigateDown(appState.activeCellIndex, true); 
+                        }
+                    }
+                }
+            });
+        }
+        
+        function handleMandalartTab(e, currentIndex) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                let nextIndex = currentIndex;
+                const step = e.shiftKey ? -1 : 1;
+                nextIndex += step;
+
+                if (nextIndex < 0) nextIndex = GRID_SIZE - 1;
+                else if (nextIndex >= GRID_SIZE) nextIndex = 0;
+                
+                const activeEl = document.activeElement;
+                const blockEl = activeEl.closest('.grid-block'); 
+                
+                let selector = "";
+                if (appState.viewMode === '9x9' && blockEl) {
+                     selector = `.grid-block[data-block="${blockEl.dataset.block}"] [data-index="${nextIndex}"] .editable-area`;
+                } else {
+                     selector = `#grid-container [data-index="${nextIndex}"] .editable-area`;
+                }
+
+                const nextCellEditable = document.querySelector(selector);
+                if (nextCellEditable) nextCellEditable.focus();
+            }
+        }
+
+        // --- Data Logic ---
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function createNode(text = "") {
+            return { id: generateId(), text: text, children: {} };
+        }
+
+        function createNewFile(name = "新しいマンダラート") {
+            const rootNode = createNode(name);
+            const newFile = {
+                id: generateId(),
+                name: name,
+                data: rootNode,
+                updatedAt: Date.now()
+            };
+            appState.files.unshift(newFile);
+            saveFilesToStorage();
+            loadFile(newFile.id);
+            toggleSidebar(false);
+        }
+
+        function loadFile(fileId) {
+            const file = appState.files.find(f => f.id === fileId);
+            if (!file) return;
+
+            appState.currentFileId = fileId;
+            appState.currentData = file.data;
+            appState.pathStack = [appState.currentData];
+            appState.activeCellIndex = null; 
+            
+            render(appState.currentData);
+            renderBreadcrumbs();
+            renderSidebar();
+        }
+
+        function saveCurrentFile() {
+            const fileIndex = appState.files.findIndex(f => f.id === appState.currentFileId);
+            if (fileIndex !== -1) {
+                appState.files[fileIndex].data = appState.currentData;
+                appState.files[fileIndex].updatedAt = Date.now();
+                if (appState.pathStack.length === 1) {
+                    appState.files[fileIndex].name = appState.currentData.text || "無題";
+                }
+                saveFilesToStorage();
+                renderSidebar();
+            }
+        }
+
+        function saveFilesToStorage() {
+            localStorage.setItem('mandalart_data', JSON.stringify(appState.files));
+        }
+
+        function loadFilesFromStorage() {
+            const data = localStorage.getItem('mandalart_data');
+            if (data) {
+                appState.files = JSON.parse(data);
+            }
+        }
+
+        function deleteFile(e, fileId) {
+            e.stopPropagation();
+            if (!confirm("本当に削除しますか？")) return; 
+            appState.files = appState.files.filter(f => f.id !== fileId);
+            saveFilesToStorage();
+            if (appState.files.length === 0) createNewFile();
+            else if (appState.currentFileId === fileId) loadFile(appState.files[0].id);
+            else renderSidebar();
+        }
+
+        // --- Deep Content Check (New Feature) ---
+        // 再帰的に下層をチェックし、意味のあるテキストが含まれているかを判定する
+        function hasDeepContent(node) {
+            if (!node || !node.children) return false;
+            return Object.values(node.children).some(child => {
+                const hasText = child.text && child.text.trim().length > 0;
+                return hasText || hasDeepContent(child);
+            });
+        }
+
+        // --- Navigation Logic ---
+
+        function getCurrentNode() {
+            return appState.pathStack[appState.pathStack.length - 1];
+        }
+
+        function getCellOffset(index) {
+            const container = document.getElementById('grid-container');
+            if (!container) return { targetX: 0, targetY: 0 };
+            const rect = container.getBoundingClientRect();
+            const width = rect.width;
+            const style = getComputedStyle(container);
+            const gap = parseFloat(style.getPropertyValue('gap')) || 0;
+            const padding = parseFloat(style.getPropertyValue('padding-top')) || 0;
+            
+            const totalInnerWidth = width - 2 * padding;
+            const cellSize = (totalInnerWidth - 2 * gap) / 3;
+            const row = Math.floor(index / 3);
+            const col = index % 3;
+            const cellLeft = padding + col * (cellSize + gap);
+            const cellTop = padding + row * (cellSize + gap);
+            const cellCenterX = cellLeft + cellSize / 2;
+            const cellCenterY = cellTop + cellSize / 2;
+            const containerCenterX = width / 2;
+            const containerCenterY = width / 2;
+            return { targetX: containerCenterX - cellCenterX, targetY: containerCenterY - cellCenterY }; 
+        }
+
+        function navigateDown(index, maintainFocus = false) {
+            if (appState.activeAnimation || index === CENTER_INDEX) return;
+            if (appState.viewMode === '9x9') {
+                return;
+            }
+
+            appState.activeAnimation = true;
+            const currentNode = getCurrentNode();
+            
+            if (!currentNode.children[index]) {
+                currentNode.children[index] = createNode(currentNode.children[index]?.text || "");
+            }
+            const nextNode = currentNode.children[index];
+            appState.pathStack.push(nextNode);
+            
+            const oldContainer = document.getElementById('grid-container');
+            if (!oldContainer) { appState.activeAnimation = false; return; }
+            oldContainer.id = 'grid-container-old'; 
+            
+            render(nextNode); 
+            const newContainer = document.getElementById('grid-container'); 
+            const { targetX, targetY } = getCellOffset(index); 
+            
+            newContainer.style.opacity = '0';
+            newContainer.style.transition = `transform 0ms, opacity 0ms`;
+            newContainer.style.transform = `translate(${-targetX}px, ${-targetY}px)`; 
+
+            requestAnimationFrame(() => {
+                oldContainer.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out, opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                oldContainer.style.transform = `translate(${targetX}px, ${targetY}px)`;
+                oldContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    newContainer.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out, opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                    newContainer.style.transform = `translate(0, 0)`; 
+                    newContainer.style.opacity = '1';
+                }, 10); 
+
+                setTimeout(() => {
+                    const finalOldContainer = document.getElementById('grid-container-old');
+                    if (finalOldContainer) finalOldContainer.remove();
+                    appState.activeCellIndex = null; 
+                    appState.activeAnimation = false;
+                    if (maintainFocus) {
+                        const newCenterCellEditable = document.querySelector(`#grid-container [data-index="${CENTER_INDEX}"] .editable-area`);
+                        if (newCenterCellEditable) newCenterCellEditable.focus();
+                    }
+                    renderBreadcrumbs();
+                }, ANIMATION_DURATION + 50);
+            });
+        }
+
+        function navigateUp(maintainFocus = false) {
+            if (appState.activeAnimation || appState.pathStack.length <= 1) return; 
+            
+            appState.activeAnimation = true;
+            const oldContainer = document.getElementById('grid-container');
+            if (!oldContainer) { appState.activeAnimation = false; return; }
+            oldContainer.id = 'grid-container-old';
+            
+            const exitingNode = getCurrentNode();
+            appState.pathStack.pop();
+            const targetNode = getCurrentNode(); 
+            
+            let exitIndex = -1;
+            for(const key in targetNode.children) {
+                if(targetNode.children[key]?.id === exitingNode.id) {
+                    exitIndex = parseInt(key);
+                    break;
+                }
+            }
+            
+            render(targetNode); 
+            const newContainer = document.getElementById('grid-container');
+            
+            if (exitIndex === -1 || appState.viewMode === '9x9') {
+                newContainer.style.opacity = '0';
+                newContainer.style.transition = `opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                newContainer.style.opacity = '1';
+                oldContainer.style.transition = `opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                oldContainer.style.opacity = '0';
+                setTimeout(() => { oldContainer.remove(); appState.activeAnimation = false; renderBreadcrumbs(); }, ANIMATION_DURATION + 50);
+                appState.activeCellIndex = null;
+                return;
+            }
+
+            const { targetX, targetY } = getCellOffset(exitIndex);
+            newContainer.style.opacity = '0';
+            newContainer.style.transition = `transform 0ms, opacity 0ms`;
+            newContainer.style.transform = `translate(${targetX}px, ${targetY}px)`; 
+            
+            requestAnimationFrame(() => {
+                oldContainer.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out, opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                oldContainer.style.transform = `translate(${-targetX}px, ${-targetY}px)`;
+                oldContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    newContainer.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out, opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                    newContainer.style.transform = `translate(0, 0)`; 
+                    newContainer.style.opacity = '1';
+                }, 10); 
+
+                setTimeout(() => {
+                    const finalOldContainer = document.getElementById('grid-container-old');
+                    if (finalOldContainer) finalOldContainer.remove();
+                    appState.activeCellIndex = null; 
+                    appState.activeAnimation = false;
+                    if (maintainFocus && exitIndex !== -1) {
+                        const targetCellEditable = document.querySelector(`#grid-container [data-index="${exitIndex}"] .editable-area`);
+                        if (targetCellEditable) targetCellEditable.focus();
+                    }
+                    renderBreadcrumbs();
+                }, ANIMATION_DURATION + 50);
+            });
+        }
+
+        function navigateToPathIndex(index) {
+            if (appState.activeAnimation || index === appState.pathStack.length - 1) return;
+            appState.activeAnimation = true;
+            const oldContainer = document.getElementById('grid-container');
+            oldContainer.style.transition = `opacity ${ANIMATION_DURATION}ms ease-in-out`;
+            oldContainer.style.opacity = '0';
+            
+            appState.pathStack = appState.pathStack.slice(0, index + 1);
+            
+            setTimeout(() => {
+                render(getCurrentNode());
+                const newContainer = document.getElementById('grid-container');
+                if (newContainer) {
+                    newContainer.style.opacity = '0';
+                    newContainer.style.transition = `opacity ${ANIMATION_DURATION}ms ease-in-out`;
+                    newContainer.style.opacity = '1';
+                }
+                renderBreadcrumbs();
+                appState.activeCellIndex = null; 
+                appState.activeAnimation = false;
+            }, ANIMATION_DURATION);
+        }
+
+        // --- Rendering Core ---
+
+        function render(node) {
+            const stage = document.getElementById('main-stage');
+
+            const newContainer = document.createElement('div');
+            newContainer.id = 'grid-container';
+            newContainer.className = 'w-full h-full grid-wrapper-anim';
+            
+            if (appState.viewMode === '9x9') {
+                render9x9Grid(node, newContainer);
+            } else {
+                newContainer.style.display = 'grid';
+                newContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                newContainer.style.gridTemplateRows = 'repeat(3, 1fr)';
+                newContainer.style.gap = 'var(--cell-gap)';
+                newContainer.style.padding = 'var(--cell-padding)';
+                render3x3Cells(node, newContainer);
+            }
+
+            const existingContainer = document.getElementById('grid-container');
+            if (existingContainer && existingContainer.id !== 'grid-container-old') {
+                 existingContainer.remove();
+            }
+            stage.appendChild(newContainer);
+        }
+
+        // --- 9x9 Renderer ---
+
+        function render9x9Grid(rootNode, container) {
+            container.classList.add('mode-9x9');
+            container.style.display = 'grid';
+            container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            container.style.gridTemplateRows = 'repeat(3, 1fr)';
+            container.style.gap = '1vmin'; 
+            container.style.padding = '1vmin';
+
+            for (let blockIndex = 0; blockIndex < 9; blockIndex++) {
+                const blockDiv = document.createElement('div');
+                blockDiv.className = 'grid-block grid grid-cols-3 grid-rows-3 gap-[1px]';
+                blockDiv.dataset.block = blockIndex;
+                
+                if (blockIndex === CENTER_INDEX) {
+                    blockDiv.classList.add('block-center');
+                }
+
+                let blockNode;
+                if (blockIndex === CENTER_INDEX) {
+                    blockNode = rootNode;
+                } else {
+                    if (!rootNode.children[blockIndex]) {
+                        rootNode.children[blockIndex] = createNode("");
+                    }
+                    blockNode = rootNode.children[blockIndex];
+                }
+
+                for (let cellIndex = 0; cellIndex < 9; cellIndex++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell relative bg-white';
+                    
+                    if (blockIndex === CENTER_INDEX && cellIndex === CENTER_INDEX) {
+                        cell.classList.add('center-cell');
+                    } else if (blockIndex !== CENTER_INDEX && cellIndex === CENTER_INDEX) {
+                        cell.style.backgroundColor = '#f8fafc';
+                        cell.style.fontWeight = 'bold';
+                    }
+
+                    cell.dataset.index = cellIndex; 
+                    
+                    const editable = document.createElement('div');
+                    editable.contentEditable = true;
+                    editable.tabIndex = 0; 
+                    editable.className = "editable-area";
+                    
+                    let ph = "";
+                    if (blockIndex === CENTER_INDEX) {
+                         ph = (cellIndex === CENTER_INDEX) ? "メインテーマ" : "サブテーマ";
+                    } else {
+                         ph = (cellIndex === CENTER_INDEX) ? "サブテーマ" : "詳細";
+                    }
+                    editable.dataset.placeholder = ph;
+
+                    let cellValue = "";
+                    if (cellIndex === CENTER_INDEX) {
+                        cellValue = blockNode.text || "";
+                    } else {
+                        cellValue = blockNode.children[cellIndex] ? blockNode.children[cellIndex].text : "";
+                    }
+                    editable.textContent = cellValue;
+                    
+                    editable.addEventListener('focus', () => {
+                         appState.activeCellIndex = null; 
+                         editable.style.userSelect = 'text';
+                    });
+                    
+                    editable.addEventListener('blur', () => {
+                        editable.style.userSelect = 'none';
+                        handleInput9x9(editable, blockIndex, cellIndex);
+                    });
+                    
+                    editable.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        e.target.focus(); 
+                    });
+
+                    editable.addEventListener('keydown', (e) => handleMandalartTab(e, cellIndex));
+
+                    editable.addEventListener('input', (e) => {
+                        handleInput9x9(e.target, blockIndex, cellIndex, true); 
+                    });
+
+                    cell.appendChild(editable);
+                    blockDiv.appendChild(cell);
+                }
+                container.appendChild(blockDiv);
+            }
+        }
+        
+        function handleInput9x9(target, blockIndex, cellIndex, isInputEvent = false) {
+            const rootNode = getCurrentNode(); 
+            const val = target.textContent;
+            
+            if (blockIndex === CENTER_INDEX) {
+                if (cellIndex === CENTER_INDEX) {
+                    rootNode.text = val;
+                } else {
+                    if (!rootNode.children[cellIndex]) rootNode.children[cellIndex] = createNode("");
+                    rootNode.children[cellIndex].text = val;
+                    
+                    if (isInputEvent) {
+                        syncCellText(cellIndex, CENTER_INDEX, val);
+                    }
+                }
+            } else {
+                if (!rootNode.children[blockIndex]) rootNode.children[blockIndex] = createNode("");
+                const subNode = rootNode.children[blockIndex];
+                
+                if (cellIndex === CENTER_INDEX) {
+                    subNode.text = val;
+                    if (isInputEvent) {
+                        syncCellText(CENTER_INDEX, blockIndex, val);
+                    }
+                } else {
+                    if (!subNode.children[cellIndex]) subNode.children[cellIndex] = createNode(val);
+                    else subNode.children[cellIndex].text = val;
+                    
+                    if (val.length === 0) {
+                        const detailNode = subNode.children[cellIndex];
+                        if (detailNode && !hasDeepContent(detailNode)) {
+                            // Deep check before delete? Mostly just removing empty leaf here
+                            delete subNode.children[cellIndex];
+                        }
+                    }
+                }
+            }
+            saveCurrentFile();
+        }
+        
+        function syncCellText(targetBlockIdx, targetCellIdx, text) {
+            const selector = `.grid-block[data-block="${targetBlockIdx}"] [data-index="${targetCellIdx}"] .editable-area`;
+            const el = document.querySelector(selector);
+            if (el && el.textContent !== text) {
+                el.textContent = text;
+            }
+        }
+
+        // --- 3x3 Renderer (Existing) ---
+
+        function render3x3Cells(node, container) {
+            container.classList.remove('mode-9x9');
+            
+            for (let i = 0; i < GRID_SIZE; i++) {
+                const cell = document.createElement('div');
+                cell.className = `cell relative`;
+                if (i === CENTER_INDEX) cell.classList.add('center-cell');
+                cell.dataset.index = i; 
+
+                const editable = document.createElement('div');
+                editable.contentEditable = true;
+                editable.tabIndex = 0; 
+                editable.className = "editable-area";
+                editable.dataset.placeholder = i === CENTER_INDEX ? "メインテーマ" : "サブテーマ";
+                
+                let cellValue = "";
+                if (i === CENTER_INDEX) {
+                    cellValue = node.text || "";
+                } else {
+                    cellValue = node.children[i] ? node.children[i].text : "";
+                }
+                editable.textContent = cellValue;
+                adjustFontSize(editable);
+                
+                editable.addEventListener('focus', () => {
+                    appState.activeCellIndex = i;
+                    editable.style.userSelect = 'text';
+                });
+
+                editable.addEventListener('blur', () => {
+                    appState.activeCellIndex = null;
+                    editable.style.userSelect = 'none'; 
+                    handleInput(editable, i);
+                });
+                
+                editable.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    e.target.focus(); 
+                });
+                
+                editable.addEventListener('keydown', (e) => handleMandalartTab(e, i));
+                
+                cell.addEventListener('dblclick', (e) => {
+                    e.preventDefault();
+                    if (i === CENTER_INDEX) {
+                        navigateUp(true); 
+                    } else {
+                        navigateDown(i, true); 
+                    }
+                });
+
+                const isDraggable = i !== CENTER_INDEX;
+                if (isDraggable) {
+                    cell.draggable = true;
+                    cell.addEventListener('dragstart', (e) => handleDragStart(e, i));
+                    cell.addEventListener('dragend', handleDragEnd);
+                    cell.addEventListener('dragover', handleDragOver);
+                    cell.addEventListener('dragenter', (e) => handleDragEnter(e, i));
+                    cell.addEventListener('dragleave', handleDragLeave);
+                    cell.addEventListener('drop', (e) => handleDrop(e, i));
+                }
+
+                editable.addEventListener('input', (e) => {
+                    handleInput(e.target, i, true); 
+                    adjustFontSize(e.target);
+                });
+                
+                if (i === CENTER_INDEX && appState.pathStack.length > 1) {
+                    const zoomOutButton = createZoomButton('up');
+                    zoomOutButton.onclick = (e) => {
+                        e.stopPropagation();
+                        navigateUp(true); 
+                    };
+                    cell.appendChild(zoomOutButton);
+                } 
+                else if (i !== CENTER_INDEX) {
+                    const zoomInButton = createZoomButton('down');
+                    zoomInButton.onclick = (e) => {
+                        e.stopPropagation();
+                        navigateDown(i, true);
+                    };
+                    cell.appendChild(zoomInButton);
+                }
+                
+                // --- 修正箇所: マーク表示ロジック ---
+                if (i !== CENTER_INDEX) {
+                    const childNode = node.children[i];
+                    // 以前のロジック: if (childNode && Object.keys(childNode.children).length > 0)
+                    // 新しいロジック: hasDeepContent を使用して中身があるかチェック
+                    if (childNode && hasDeepContent(childNode)) {
+                        const indicator = document.createElement('div');
+                        indicator.className = "absolute top-[1vmin] right-[1vmin] w-[1.5vmin] h-[1.5vmin] bg-blue-400 rounded-full pointer-events-none shadow-md";
+                        cell.appendChild(indicator);
+                    }
+                }
+
+                cell.appendChild(editable);
+                container.appendChild(cell);
+            }
+        }
+        
+        function createZoomButton(direction) {
+            const button = document.createElement('button');
+            button.className = `zoom-button-style`; 
+            button.type = 'button';
+            let iconClass = '';
+            let label = '';
+            if (direction === 'down') {
+                iconClass = 'fa-solid fa-plus';
+                label = 'ズームイン';
+            } else { 
+                iconClass = 'fa-solid fa-arrow-up';
+                label = '親テーマに戻る';
+            }
+            button.innerHTML = `<i class="${iconClass} text-2vmin"></i>`;
+            button.title = label;
+            return button;
+        }
+
+        // --- Drag & Drop Handlers (3x3 only) ---
+
+        function handleDragStart(e, index) {
+            if (appState.viewMode === '9x9') return; 
+            if (document.activeElement.closest('.editable-area')) { e.preventDefault(); return; }
+            if (index === CENTER_INDEX) { e.preventDefault(); return; }
+            e.target.classList.add('dragging');
+            dragData.sourceIndex = index;
+            e.dataTransfer.setData('text/plain', index.toString()); 
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('drag-over'));
+            dragData.sourceIndex = null;
+        }
+
+        function handleDragOver(e) { e.preventDefault(); }
+
+        function handleDragEnter(e, index) {
+            e.preventDefault();
+            if (appState.viewMode === '9x9') return;
+            if (index !== CENTER_INDEX && index !== dragData.sourceIndex) {
+                e.currentTarget.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+
+        function handleDrop(e, targetIndex) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            if (appState.viewMode === '9x9') return;
+
+            const sourceIndex = dragData.sourceIndex;
+            if (sourceIndex === null || sourceIndex === targetIndex || targetIndex === CENTER_INDEX) return;
+            
+            const children = getCurrentNode().children;
+            const sourceNode = children[sourceIndex];
+            if (!sourceNode) return; 
+
+            const targetNode = children[targetIndex];
+            children[targetIndex] = sourceNode;
+
+            if (targetNode) children[sourceIndex] = targetNode;
+            else delete children[sourceIndex];
+
+            saveCurrentFile();
+            render(getCurrentNode());
+        }
+
+        // --- Utility ---
+
+        function handleInput(target, index, isInputEvent = false) {
+            const currentGrid = document.getElementById('grid-container');
+            if (!currentGrid || !currentGrid.contains(target)) return;
+
+            const val = target.textContent;
+            const currentNode = getCurrentNode();
+            
+            if (index === CENTER_INDEX) {
+                currentNode.text = val;
+            } else {
+                if (!currentNode.children[index]) currentNode.children[index] = createNode(val);
+                else currentNode.children[index].text = val;
+                
+                // テキストが空の場合、子要素もなければノード自体を削除（構造最適化）
+                if (val.length === 0) {
+                    const childNode = currentNode.children[index];
+                    if (childNode && Object.keys(childNode.children).length === 0) {
+                        delete currentNode.children[index];
+                    }
+                }
+            }
+            saveCurrentFile();
+        }
+        
+        function adjustFontSize(el) {
+            const len = el.textContent.length;
+            if (appState.viewMode === '9x9') return; 
+            if (len > 30) el.style.fontSize = "2.5vmin";
+            else if (len > 15) el.style.fontSize = "3.2vmin";
+            else el.style.fontSize = "4vmin";
+        }
+
+
+        // --- Sidebar & Breadcrumbs ---
+
+        function renderBreadcrumbs() {
+            const container = document.getElementById('breadcrumbs');
+            container.innerHTML = '';
+            appState.pathStack.forEach((node, index) => {
+                const isLast = index === appState.pathStack.length - 1;
+                const span = document.createElement('button');
+                span.className = `hover:bg-slate-100 px-2 py-1 rounded transition max-w-[15vmin] truncate ${isLast ? 'font-bold text-slate-800' : 'text-slate-500'}`;
+                span.textContent = node.text || (index === 0 ? "Root" : "無題");
+                span.onclick = () => {
+                    if (appState.viewMode === '3x3') navigateToPathIndex(index);
+                };
+                container.appendChild(span);
+                if (!isLast) {
+                    const separator = document.createElement('span');
+                    separator.innerHTML = '<i class="fa-solid fa-chevron-right text-[10px] mx-1"></i>';
+                    container.appendChild(separator);
+                }
+            });
+            container.scrollLeft = container.scrollWidth;
+        }
+
+        function renderSidebar() {
+            const list = document.getElementById('file-list');
+            list.innerHTML = '';
+            appState.files.forEach(file => {
+                const isActive = file.id === appState.currentFileId;
+                const div = document.createElement('div');
+                div.className = `p-3 rounded border cursor-pointer flex justify-between items-center group transition ${isActive ? 'bg-blue-50 border-blue-300' : 'bg-white border-slate-200 hover:border-blue-300'}`;
+                div.onclick = () => { if (!isActive) { loadFile(file.id); toggleSidebar(false); } };
+                div.innerHTML = `
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium truncate ${isActive ? 'text-blue-700' : 'text-slate-700'}">${file.name || "無題"}</div>
+                        <div class="text-xs text-slate-400">${new Date(file.updatedAt).toLocaleString('ja-JP')}</div>
+                    </div>
+                    <button onclick="event.stopPropagation(); deleteFile(event, '${file.id}')" class="ml-2 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded opacity-0 group-hover:opacity-100 transition"><i class="fa-solid fa-trash"></i></button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function toggleSidebar(forceState) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const isHidden = sidebar.classList.contains('translate-x-full');
+            const shouldOpen = forceState !== undefined ? forceState : isHidden;
+            if (shouldOpen) {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        // --- Export (Updated) ---
+
+        function exportToText() {
+            const root = appState.currentData;
+            let result = "";
+            function traverse(node, depth, isRoot) {
+                const indent = "  ".repeat(depth);
+                const prefix = isRoot ? "" : "- "; 
+                // 修正箇所: (空) を空文字に変更
+                const text = node.text ? node.text.replace(/\n/g, " ") : "";
+                
+                // テキストがある場合のみ行を追加（ルートは必ず追加）
+                // あるいは、子供がいる場合は構造を示すために空でも追加するべきだが、
+                // 今回は「(空)」という表記が不要とのことなので、完全に空行にするか、テキストがある時だけにするか。
+                // 通常のマインドマップエクスポートの慣例に従い、行自体は残すが文字は空にする形にします。
+                result += `${isRoot ? '' : indent}${prefix}${text}\n`;
+
+                for (let i = 0; i < 9; i++) {
+                    if (i === CENTER_INDEX) continue; 
+                    // 修正箇所: 下層を探索する条件を厳密化。
+                    // テキストがある、または下層に意味のあるコンテンツがある場合のみトラバースする
+                    if (node.children[i] && ( (node.children[i].text && node.children[i].text.trim() !== "") || hasDeepContent(node.children[i]) )) {
+                        traverse(node.children[i], depth + 1, false); 
+                    }
+                }
+            }
+            traverse(root, 0, true);
+            const modal = document.getElementById('export-modal');
+            document.getElementById('export-area').value = result;
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => modal.style.opacity = 1);
+        }
+
+        function closeExportModal() {
+            const modal = document.getElementById('export-modal');
+            modal.style.opacity = 0;
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function copyToClipboard() {
+            const textarea = document.getElementById('export-area');
+            textarea.select();
+            document.execCommand('copy');
+            closeExportModal();
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+        window.handleMandalartTab = handleMandalartTab;
+
+    </script>
+</body>
+</html>
