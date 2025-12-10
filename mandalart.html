@@ -2,22 +2,26 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>八方思案</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f8fafc;
-            min-height: 100vh;
-            /* Grid layout variables */
-            --grid-size: min(90vw, 90vh); 
-            --cell-gap: 2vmin;
-            --cell-padding: 2vmin;
-        }
+		body {
+		    font-family: 'Noto Sans JP', sans-serif;
+		    background-color: #f8fafc;
+		    min-height: 100vh;
+		    /* 追加: 横スクロールとiOSのバウンス動作を防止 */
+		    overflow: hidden;
+		    overscroll-behavior: none;
+		    
+		    /* Grid layout variables */
+		    --grid-size: min(90vw, 90vh); 
+		    --cell-gap: 2vmin;
+		    --cell-padding: 2vmin;
+		}
 
         /* メインステージの基本スタイル（3x3用） */
         #main-stage {
@@ -130,9 +134,9 @@
         
         /* 9x9 specific font size override */
         .mode-9x9 .editable-area {
-            font-size: 14px; /* 最低サイズを確保 */
-            padding: 4px;
-        }
+		    font-size: max(12px, 1.5vmin); 
+		    padding: 2px;
+		}
         
         /* 9x9でもPCならもっと大きく */
         @media (min-width: 769px) {
@@ -304,25 +308,22 @@
             updateModeButtons();
         }
 
-        function switchMode(mode) {
-            if (appState.viewMode === mode) return;
-            appState.viewMode = mode;
-            updateModeButtons();
-            
-            const stage = document.getElementById('main-stage');
-            if (mode === '9x9') {
-                stage.classList.add('stage-9x9');
-            } else {
-                stage.classList.remove('stage-9x9');
-            }
-
-            const container = document.getElementById('grid-container');
-            container.style.opacity = '0';
-            setTimeout(() => {
-                render(getCurrentNode());
-                container.style.opacity = '1';
-            }, 150);
-        }
+		function switchMode(mode) {
+		    if (appState.viewMode === mode) return;
+		    appState.viewMode = mode;
+		    updateModeButtons();
+		    
+		    const stage = document.getElementById('main-stage');
+		    // ステージサイズのクラス切り替え
+		    if (mode === '9x9') {
+		        stage.classList.add('stage-9x9');
+		    } else {
+		        stage.classList.remove('stage-9x9');
+		    }		
+		    // 遅延やフェードアウトなしで即座に再描画を実行
+		    // #main-stage の CSS transition がサイズ変化のアニメーションを担います
+		    render(getCurrentNode());
+		}
 
         function updateModeButtons() {
             const btn3x3 = document.getElementById('btn-3x3');
