@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Mon, 15 Dec 2025 00:53:06 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 15 Dec 2025 12:52:47 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Dynalistのインボックスへ送信するスクリプト</title>
@@ -19,13 +19,6 @@
           <description><![CDATA[<p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p><p>コード → <a href="https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30" target="_blank">DynalistTaskViewer.js</a></p><p>＊APIとドキュメントIDを自分用に変更して使ってください。</p><ul><li>右上のボタンをクリックするとリストが表示される</li></ul><ul><li>タスク名をクリックするとDynalist上でその項目に移動できる</li></ul><ul><li>URLをコピーしてDynalistにリンクを貼り付けることも可能</li></ul><p>ここから完了状態を変更するのも考えたんだけど処理が複雑になりそう＆API使いすぎたくないのでやめた。起動時と10分間隔で取得するようにしてるけどこのへんは改良の余地あり。</p><p>検索でも同じようなことはできるんだけど、その場で一覧できるのが便利でいい感じ。</p><p>総数が多いならタグで絞り込んだり日付入れて順番並び替えたりするのもよさそう。</p>]]></description>
           <pubDate>Thu, 13 Mar 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=46230c76-2d95-1fb8-96be-dc51d833272e</guid>
-        </item>
-        <item>
-          <title>シャドバWBの対戦支援ツールを作った</title>
-          <link>https://morvra.github.io/article?id=29fa4397-2603-5a82-2130-a89b4cc4589a</link>
-          <description><![CDATA[<ul><li><a href="https://morvra.github.io/wblog" target="_blank">WBログノート | シャドウバースWB 対戦支援</a></li></ul><h2>できること</h2><ul><li>クラス毎の警戒カードリスト＆カウンター</li></ul><ul><li>クラス毎のメモでマリガンやプレイ指針</li></ul><ul><li>自分のデッキ、相手クラス、先後、勝敗、メモを記録して一覧</li></ul><ul><li>デッキや先後でフィルターできて勝率も算出</li></ul><ul><li>データのインポート、エクスポートにも対応</li></ul><hr><p>ほぼChatGPTとGeminiに頼った。</p><p>経緯含めた紹介記事はnoteに投稿してみた→<a href="https://note.com/morvra/n/n42208430550c" target="_blank">シャドウバースWBの対戦支援ツールを作りました｜morvra</a></p><p>この記事投稿時C3サファイアだったけど、これ使ったおかげ？で現在AA0ダイヤ(踏めただけでルビサファ常駐)、ロビー大会優勝、グランプリA進出と上達してるはず。ダイヤ安定してれば上達を確信できたけどそれはまだまだ先かな〜。</p>]]></description>
-          <pubDate>Thu, 10 Jul 2025 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=29fa4397-2603-5a82-2130-a89b4cc4589a</guid>
         </item>
         <item>
           <title>シャドバWB感想</title>
@@ -133,25 +126,11 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=ccb0135c-6929-9a07-be9e-938b332ab771</guid>
         </item>
         <item>
-          <title>Dynalistの連用日記用ビューワーをつくった</title>
-          <link>https://morvra.github.io/article?id=4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0</link>
-          <description><![CDATA[<p>▼ これ</p><p><img src="https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000" alt="Image"></p><ul><li><a href="https://morvra.github.io/dynalistdiary" target="_blank">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>]]></description>
-          <pubDate>Sun, 07 Sep 2025 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0</guid>
-        </item>
-        <item>
           <title>【シャドバWB】グラマス達成！</title>
           <link>https://morvra.github.io/article?id=9ad5ec15-6ab7-a884-a856-e47909092776</link>
           <description><![CDATA[<p>グラマス実装直後のランクマッチで達成！</p><p><img src="https://gyazo.com/38add4e04ba0bbe39f8f7fd5b1f52f02/thumb/500" alt="Image"></p><p>2回目の昇格戦で昇格。なんとダイヤいってから降格なし！できすぎ！</p><p><img src="https://gyazo.com/4b7b4f60e315c036f9103c4af1107d39/thumb/500" alt="Image"></p><p>直近の戦績は16-14でギリ勝ち越しｗ 使用デッキはスペルウィッチ一本。</p><p><img src="https://gyazo.com/9b115914099f3e71ff7cc34502f9dd53/thumb/500" alt="Image"></p><p>継承者出てすぐのEra53さんのリスト（ https://x.com/garbage_er/status/1962042383304171606 ）を使い続けた。慣れたリストを崩したくなくてずっとそのまま使ってたけど、グラマス上がったことだしこっからはリスト弄りつつやってこう。</p><p>マスターランクマ終盤はスノーアウェイク入れたりペネロピー抜いたりしたかったのよね。でもロイヤル多いならペネロピーの価値高くなるからグラマスの環境次第かな〜。</p><hr><p>練度としては自分の動きに少しずつ慣れてきて時間切れの回数がだいぶ減った。</p><p>リーサルまでのプランがハンドで見えてる時や、強いムーブができるターンはそこそこやれてるんだけど、微妙なターンのすごし方はまだまだ謎。</p><p>優勢/劣勢が微妙なラインでのODがめっちゃむずくて、相手からのリーサル無いからと耐えてたら強ムーブされてはっきり劣勢になってODしてもズルズル負けちゃうパターンもありゃあ、確定リーサル無いのに強いターンにしたいからってOD打って引いてきた5枚が噛み合わなくて結局強くpp使えないパターンもある。</p><p>何となくで打つんじゃなくて、デッキに何入ってるか把握して「〇〇か〇〇引けたら強いしそこそこ確率ありそうだ」って感じで打つODが強いんだろうな。</p><p>相手を見ることもまだ全然できてなくて、相手のハンド読もうとし始めたくらいのレベル。</p><p>まだまだ課題は多いんだけど、その課題が具体的に見えてきたのがもう成長だと思うことにする。</p>]]></description>
           <pubDate>Fri, 05 Sep 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=9ad5ec15-6ab7-a884-a856-e47909092776</guid>
-        </item>
-        <item>
-          <title>Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</title>
-          <link>https://morvra.github.io/article?id=21f14291-a88c-1ac7-01e3-da1d16d8d2dc</link>
-          <description><![CDATA[<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href="https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/" target="_blank">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href="https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2" target="_blank">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src="https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500" alt="Image"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>]]></description>
-          <pubDate>Wed, 03 Sep 2025 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=21f14291-a88c-1ac7-01e3-da1d16d8d2dc</guid>
         </item>
         <item>
           <title>サイト内を検索できるようにした</title>
@@ -201,6 +180,13 @@
           <description><![CDATA[<p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title="Filter #hoge"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>]]></description>
           <pubDate>Mon, 21 Jul 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=ab43c63b-4f0f-3fda-e249-321614c8e3b3</guid>
+        </item>
+        <item>
+          <title>Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</title>
+          <link>https://morvra.github.io/article?id=21f14291-a88c-1ac7-01e3-da1d16d8d2dc</link>
+          <description><![CDATA[<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href="https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/" target="_blank">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href="https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2" target="_blank">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src="https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500" alt="Image"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>]]></description>
+          <pubDate>Wed, 03 Sep 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=21f14291-a88c-1ac7-01e3-da1d16d8d2dc</guid>
         </item>
         <item>
           <title>アーカイブにアクセスする手段が豊富な世代とそうでない世代で過去の意味が違ってくる説</title>
@@ -336,11 +322,32 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=a205d0b9-8ec7-43b1-aa3b-33037626e02e</guid>
         </item>
         <item>
+          <title>シャドバWBの対戦支援ツールを作った</title>
+          <link>https://morvra.github.io/article?id=29fa4397-2603-5a82-2130-a89b4cc4589a</link>
+          <description><![CDATA[<ul><li><a href="https://morvra.github.io/wblog" target="_blank">WBログノート | シャドウバースWB 対戦支援</a></li></ul><h2>できること</h2><ul><li>クラス毎の警戒カードリスト＆カウンター</li></ul><ul><li>クラス毎のメモでマリガンやプレイ指針</li></ul><ul><li>自分のデッキ、相手クラス、先後、勝敗、メモを記録して一覧</li></ul><ul><li>デッキや先後でフィルターできて勝率も算出</li></ul><ul><li>データのインポート、エクスポートにも対応</li></ul><hr><p>ほぼChatGPTとGeminiに頼った。</p><p>経緯含めた紹介記事はnoteに投稿してみた→<a href="https://note.com/morvra/n/n42208430550c" target="_blank">シャドウバースWBの対戦支援ツールを作りました｜morvra</a></p><p>この記事投稿時C3サファイアだったけど、これ使ったおかげ？で現在AA0ダイヤ(踏めただけでルビサファ常駐)、ロビー大会優勝、グランプリA進出と上達してるはず。ダイヤ安定してれば上達を確信できたけどそれはまだまだ先かな〜。</p>]]></description>
+          <pubDate>Thu, 10 Jul 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=29fa4397-2603-5a82-2130-a89b4cc4589a</guid>
+        </item>
+        <item>
+          <title>Dynalistの連用日記用ビューワーをつくった</title>
+          <link>https://morvra.github.io/article?id=4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0</link>
+          <description><![CDATA[<p>▼ これ</p><p><img src="https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000" alt="Image"></p><ul><li><a href="https://morvra.github.io/dynalistdiary" target="_blank">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>]]></description>
+          <pubDate>Sun, 07 Sep 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0</guid>
+        </item>
+        <item>
           <title>Workflowyにメモを送信するための自分用Chrome拡張を作った</title>
           <link>https://morvra.github.io/article?id=c24ebea6-b71d-97a6-3198-358520d53141</link>
           <description><![CDATA[<p>はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。</p><ul><li>ショートカットキー(Alt+n)を押すとモーダルが立ち上がる</li><li>1行のテキスト入力欄にカーソルがあっている状態</li><li>送信ボタンを押すとデフォルトでは「HH:MM 入力テキスト」という時刻付きの形式で送信される</li><li>送られるのはInboxの最下部に送信</li><li>送信ボタンだけじゃなく、入力欄でEnterでも送信可能</li><li>別のボタンで私が運営している個人サイト用のフォーマットをつけて送信できる<ul><li>テキストの最後に <code>piece</code> が付く</li><li>note欄にdate: YYYY-MM-DD 形式で日付が書かれる</li></ul></li><li>送信後はモーダルが閉じられる</li><li>テキスト未入力でEnter / モーダル外をクリック / Escキー で送信せずモーダルを閉じる</li></ul><p>で、生成されたスクリプトを微調整していったらかなり感触が良くて、「これはWorkflowy上だけじゃなく、どこからでも動かしたいな」と思い、Chrome拡張にしてもらった。</p><p><img src="https://gyazo.com/eb9d70d2fd247ab597fd3cfbf9ee4a0d/thumb/500" alt="Image"></p><p>▲ こんな感じでボタンやショートカットキーからポップアップを呼び出してWorkflowyに送信する拡張機能が完成！ｳﾚｼｲ!!</p><p>自分がやった作業はプロンプトを考える以外＿まぁそれが肝心なんだが＿は拡張機能用のフォルダと作ってもらったコードをコピペしたファイルを作成して、それをChromeの「パッケージ化されていない拡張機能を読み込む」から読み込んだだけ。すご。</p><p>今開いてるページのリンクを追加するオプションつけたり、起動時に選択しているテキストがあったら入力欄に入れるようにしたりと機能追加もした。ﾀﾉｼｲ!!</p>]]></description>
           <pubDate>Mon, 17 Nov 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=c24ebea6-b71d-97a6-3198-358520d53141</guid>
+        </item>
+        <item>
+          <title>マンダラートのWebアプリ作った</title>
+          <link>https://morvra.github.io/article?id=6feb0874-9c92-cd89-3f60-237fe8e05904</link>
+          <description><![CDATA[<p>マンダラートは発想法の一種で、「3×3のマスをつくり、メインテーマを中心マスに置き、周辺8マスにそれに関連するものを埋めていく」というもの。</p><p>参考: <a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%B3%E3%83%80%E3%83%A9%E3%83%BC%E3%83%88">マンダラート - Wikipedia</a></p><p>考えを広げたり深めたりする手法としてたまに使っていたんだけど、Geminiで自分が使いやすいものを作ってみたくなった。</p><p>それで作ったのがこちら → <a href="https://morvra.github.io/mandalart">八方思案</a></p><p><img src="https://gyazo.com/8e8b62316338850396e3378ba5658806/thumb/800" alt="Image"></p><h2>こだわったポイント</h2><ul><li>セルのドラッグ・アンド・ドロップ<ul><li>マンダラートで発想を広げるうえで、上下左右の位置関係があることが重要だと思ってるので、それをいじれるD&Dは大事。手慰みにもなる。</li><li>スマホでも一応できる</li></ul></li><li>9×9モード<ul><li>書いたら広げて一覧、そこで編集も可能</li><li>対応するセルのテキストは同期する</li><li>＊スマホでは見にくいので切り替えボタン表示してない</li></ul></li><li>下位にテキストがあるセルの右上にマークがつく</li><li>ズームした時にその方向に移動するアニメーション</li><li>インデント付きのテキストとしてエクスポート<ul><li>アウトライナーに階層を維持して貼り付け</li></ul></li></ul><h2>操作</h2><p>直感的に使えるようにしたけどショートカットキーは説明が必要なので書いておく。</p><ul><li>Zoom: セルをダブルクリック、Alt+Enter、Alt+↓、セル右下の+ボタン</li><li>Zoom out: 中心セルをダブルクリック、Esc、Alt+↑、中心セル右下の↑ボタン</li><li>セルの移動: ドラッグ・アンド・ドロップ</li><li>セル間のカーソル移動: Tab、Shift+Tab</li></ul>]]></description>
+          <pubDate>Mon, 15 Dec 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=6feb0874-9c92-cd89-3f60-237fe8e05904</guid>
         </item>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
