@@ -120,9 +120,6 @@
 			text-align: center;
 			word-break: break-all;
 			white-space: pre-wrap;
-			display: flex;
-			align-items: center;
-			justify-content: center;
 			padding: 1vmin;
 			line-height: 1.2;
 			font-size: min(4vmin, 30px); 
@@ -767,7 +764,7 @@
         
         function handleInput9x9(target, blockIndex, cellIndex, isInputEvent = false) {
             const rootNode = getCurrentNode(); 
-            const val = target.textContent;
+            const val = target.innerText;
             
             if (blockIndex === CENTER_INDEX) {
                 if (cellIndex === CENTER_INDEX) {
@@ -793,10 +790,9 @@
                     if (!subNode.children[cellIndex]) subNode.children[cellIndex] = createNode(val);
                     else subNode.children[cellIndex].text = val;
                     
-                    if (val.length === 0) {
+                    if (val.trim().length === 0) {
                         const detailNode = subNode.children[cellIndex];
                         if (detailNode && !hasDeepContent(detailNode)) {
-                            // Deep check before delete? Mostly just removing empty leaf here
                             delete subNode.children[cellIndex];
                         }
                     }
@@ -989,8 +985,7 @@
         function handleInput(target, index, isInputEvent = false) {
             const currentGrid = document.getElementById('grid-container');
             if (!currentGrid || !currentGrid.contains(target)) return;
-
-            const val = target.textContent;
+            const val = target.innerText;
             const currentNode = getCurrentNode();
             
             if (index === CENTER_INDEX) {
@@ -998,9 +993,7 @@
             } else {
                 if (!currentNode.children[index]) currentNode.children[index] = createNode(val);
                 else currentNode.children[index].text = val;
-                
-                // テキストが空の場合、子要素もなければノード自体を削除（構造最適化）
-                if (val.length === 0) {
+                if (val.trim().length === 0) {
                     const childNode = currentNode.children[index];
                     if (childNode && Object.keys(childNode.children).length === 0) {
                         delete currentNode.children[index];
@@ -1011,7 +1004,7 @@
         }
         
 		function adjustFontSize(el) {
-            const len = el.textContent.length;
+            const len = el.innerText.length;
             if (appState.viewMode === '9x9') return; 
             let baseSize = 4.0;
             if (len > 30) baseSize = 2.5;
