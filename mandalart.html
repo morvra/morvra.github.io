@@ -6,45 +6,46 @@
     <title>八方思案</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
-
-		body {
-		    font-family: 'Noto Sans JP', sans-serif;
-		    background-color: #f8fafc;
-		    min-height: 100vh;
-		    /* 追加: 横スクロールとiOSのバウンス動作を防止 */
-		    overflow: hidden;
-		    overscroll-behavior: none;
-		    
-		    /* Grid layout variables */
-		    --grid-size: min(90vw, 90vh); 
-		    --cell-gap: 2vmin;
-		    --cell-padding: 2vmin;
-		}
-
-        /* メインステージの基本スタイル（3x3用） */
-        #main-stage {
-            width: var(--grid-size); 
-            height: var(--grid-size);
-            touch-action: manipulation; 
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        /* 9x9モード時のステージスタイル */
-        .stage-9x9 {
-            width: max(95vmin, 1200px) !important;
-            height: max(95vmin, 1200px) !important;
-        }
-
-        /* タブレット向けの9x9サイズ調整 */
-        @media (max-width: 768px) {
-            .stage-9x9 {
-                width: max(95vmin, 800px) !important;
-                height: max(95vmin, 800px) !important;
-            }
-        }
+	<style>
+	    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+	
+	    body {
+	        font-family: 'Noto Sans JP', sans-serif;
+	        background-color: #f8fafc;
+	        min-height: 100vh;
+	        overflow: hidden;
+	        overscroll-behavior: none;
+	        
+	        /* Grid layout variables */
+	        --max-grid-size: 900px; 
+	        --grid-size: min(90vmin, var(--max-grid-size)); 
+	        --cell-gap: 2vmin;
+	        --cell-padding: 2vmin;
+	    }
+	
+	    /* メインステージの基本スタイル（3x3用） */
+	    #main-stage {
+	        width: var(--grid-size); 
+	        height: var(--grid-size);
+	        touch-action: manipulation; 
+	        max-width: 100%;
+	        max-height: 100%;
+	        aspect-ratio: 1 / 1;
+	    }
+	
+	    /* 9x9モード時のステージスタイル */
+	    .stage-9x9 {
+	        width: max(95vmin, 1200px) !important;
+	        height: max(95vmin, 1200px) !important;
+	    }
+	
+	    /* タブレット向けの9x9サイズ調整 */
+	    @media (max-width: 768px) {
+	        .stage-9x9 {
+	            width: max(95vmin, 800px) !important;
+	            height: max(95vmin, 800px) !important;
+	        }
+	    }
 		/* スマホではタイトル表示＆モード切替しない */
 		@media (max-width: 640px) {
 			h1.font-bold.text-lg.shrink-0.mr-4 {
@@ -111,29 +112,29 @@
             box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.1);
         }
 
-        /* --- Editable Area --- */
-        .editable-area {
-            width: 100%;
-            max-height: 100%;
-            outline: none;
-            text-align: center;
-            word-break: break-all;
-            white-space: pre-wrap;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1vmin;
-            line-height: 1.2;
-            font-size: 4vmin; 
-            user-select: none;
-        }
-        
-        /* iOS Zoom Fix & Font Sizing */
-        @media (max-width: 768px) {
-            .editable-area {
-                font-size: max(4vmin, 16px); 
-            }
-        }
+		/* --- Editable Area --- */
+		.editable-area {
+			width: 100%;
+			max-height: 100%;
+			outline: none;
+			text-align: center;
+			word-break: break-all;
+			white-space: pre-wrap;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1vmin;
+			line-height: 1.2;
+			font-size: min(4vmin, 30px); 
+			user-select: none;
+		}
+
+		/* iOS Zoom Fix & Font Sizing */
+		@media (max-width: 768px) {
+			.editable-area {
+				font-size: max(min(4vmin, 30px), 16px); 
+			}
+		}
         
         /* 9x9 specific font size override */
         .mode-9x9 .editable-area {
@@ -163,8 +164,8 @@
             position: absolute;
             bottom: 0.5vmin;
             right: 0.5vmin;
-            width: 5vmin;
-            height: 5vmin;
+            width: 28px; 
+        	height: 28px;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 9999px;
             display: flex;
@@ -179,8 +180,8 @@
         .center-cell .zoom-button-style {
             bottom: 1.5vmin;
             right: 1.5vmin;
-            width: 4.5vmin;
-            height: 4.5vmin;
+            width: 24px;
+        	height: 24px;
         }
         .zoom-button-style:hover {
             background: #f3f4f6;
@@ -470,8 +471,7 @@
             else renderSidebar();
         }
 
-        // --- Deep Content Check (New Feature) ---
-        // 再帰的に下層をチェックし、意味のあるテキストが含まれているかを判定する
+        // --- Deep Content Check ---
         function hasDeepContent(node) {
             if (!node || !node.children) return false;
             return Object.values(node.children).some(child => {
@@ -899,14 +899,13 @@
                     cell.appendChild(zoomInButton);
                 }
                 
-                // --- 修正箇所: マーク表示ロジック ---
+                // マーク表示ロジック
                 if (i !== CENTER_INDEX) {
                     const childNode = node.children[i];
-                    // 以前のロジック: if (childNode && Object.keys(childNode.children).length > 0)
-                    // 新しいロジック: hasDeepContent を使用して中身があるかチェック
                     if (childNode && hasDeepContent(childNode)) {
                         const indicator = document.createElement('div');
-                        indicator.className = "absolute top-[1vmin] right-[1vmin] w-[1.5vmin] h-[1.5vmin] bg-blue-400 rounded-full pointer-events-none shadow-md";
+                        
+                        indicator.className = "absolute top-2 right-2 w-2 h-2 bg-blue-400 rounded-full pointer-events-none shadow-md";
                         cell.appendChild(indicator);
                     }
                 }
@@ -929,7 +928,7 @@
                 iconClass = 'fa-solid fa-arrow-up';
                 label = '親テーマに戻る';
             }
-            button.innerHTML = `<i class="${iconClass} text-2vmin"></i>`;
+            button.innerHTML = `<i class="${iconClass} text-sm"></i>`;
             button.title = label;
             return button;
         }
@@ -1011,12 +1010,17 @@
             saveCurrentFile();
         }
         
-        function adjustFontSize(el) {
+		function adjustFontSize(el) {
             const len = el.textContent.length;
             if (appState.viewMode === '9x9') return; 
-            if (len > 30) el.style.fontSize = "2.5vmin";
-            else if (len > 15) el.style.fontSize = "3.2vmin";
-            else el.style.fontSize = "4vmin";
+            let baseSize = 4.0;
+            if (len > 30) baseSize = 2.5;
+            else if (len > 15) baseSize = 3.2;
+            
+            el.style.fontSize = `min(${baseSize}vmin, 28px)`; 
+            if (len > 30) el.style.fontSize = "min(2.5vmin, 20px)";
+            else if (len > 15) el.style.fontSize = "min(3.2vmin, 24px)";
+            else el.style.fontSize = "";
         }
 
 
@@ -1078,27 +1082,18 @@
             }
         }
 
-        // --- Export (Updated) ---
+        // Export
 
         function exportToText() {
             const root = appState.currentData;
             let result = "";
             function traverse(node, depth, isRoot) {
                 const indent = "  ".repeat(depth);
-                const prefix = isRoot ? "" : "- "; 
-                // 修正箇所: (空) を空文字に変更
                 const text = node.text ? node.text.replace(/\n/g, " ") : "";
-                
-                // テキストがある場合のみ行を追加（ルートは必ず追加）
-                // あるいは、子供がいる場合は構造を示すために空でも追加するべきだが、
-                // 今回は「(空)」という表記が不要とのことなので、完全に空行にするか、テキストがある時だけにするか。
-                // 通常のマインドマップエクスポートの慣例に従い、行自体は残すが文字は空にする形にします。
-                result += `${isRoot ? '' : indent}${prefix}${text}\n`;
+                result += `${isRoot ? '' : indent}${text}\n`;
 
                 for (let i = 0; i < 9; i++) {
                     if (i === CENTER_INDEX) continue; 
-                    // 修正箇所: 下層を探索する条件を厳密化。
-                    // テキストがある、または下層に意味のあるコンテンツがある場合のみトラバースする
                     if (node.children[i] && ( (node.children[i].text && node.children[i].text.trim() !== "") || hasDeepContent(node.children[i]) )) {
                         traverse(node.children[i], depth + 1, false); 
                     }
