@@ -45,8 +45,11 @@
                 height: max(95vmin, 800px) !important;
             }
         }
-		/* スマホではモード切替しない */
+		/* スマホではタイトル表示＆モード切替しない */
 		@media (max-width: 640px) {
+			h1.font-bold.text-lg.shrink-0.mr-4 {
+			    display: none;
+			}
     		#mode-change {
         		display: none !important;
     		}
@@ -1025,7 +1028,7 @@
             appState.pathStack.forEach((node, index) => {
                 const isLast = index === appState.pathStack.length - 1;
                 const span = document.createElement('button');
-                span.className = `hover:bg-slate-100 px-2 py-1 rounded transition max-w-[15vmin] truncate ${isLast ? 'font-bold text-slate-800' : 'text-slate-500'}`;
+                span.className = `hover:bg-slate-100 px-2 py-1 rounded transition max-w-[30vmin] truncate ${isLast ? 'font-bold text-slate-800' : 'text-slate-500'}`;
                 span.textContent = node.text || (index === 0 ? "Root" : "無題");
                 span.onclick = () => {
                     if (appState.viewMode === '3x3') navigateToPathIndex(index);
