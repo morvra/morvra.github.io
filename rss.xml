@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 17 Dec 2025 12:51:01 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 18 Dec 2025 00:45:44 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Dynalistのインボックスへ送信するスクリプト</title>
@@ -359,7 +359,7 @@
         <item>
           <title>d-PoICのDropbox同期をマークダウンに変更</title>
           <link>https://morvra.github.io/article?id=33683671-aa84-8dba-243a-191af9f17747</link>
-          <description><![CDATA[<p>自作のPoIC用ツール「<a href="https://morvra.github.io/poic/">d-PoIC</a>」の同期方式を変更。全カードを1つのJSONとして保存していたのを、カード毎にマークダウンファイルを作成するようにした。</p><p>＊d-PoIC独自のタイプやタグ等のメタ情報はフロントマターにまとめた。</p><p>カード1枚が1ファイルになったことで、</p><ul><li>ファイルを開いてカードをそのまま読める</li><li>エディタ等からDropbox上のmdファイルを作成・編集すればd-PoICに反映</li><li>iOSのショートカットからカードの作成や、指定したカードに追記</li></ul><p>みたいなこともできるようになった。</p><p>同期の処理はややこしかった（日本語の扱いや最新版をどこで判別するかなど）んだけど、今回はClaudeにGithubのリポジトリをまるごと読み込ませてちまちま改良していった。</p><p>Workflowyみたいな1つの大きなリストもいいんだけど、カード形式なら1カード1ファイルになっていた方がしっくりくるね。</p>]]></description>
+          <description><![CDATA[<p>自作のPoIC用ツール「<a href="https://morvra.github.io/poic/">d-PoIC</a>」の同期方式を変更。これまで全カードを1つのJSONとして保存していたのを、カード毎にマークダウンファイルを作成するようにした。</p><p>＊d-PoIC独自のタイプやタグ等のメタ情報はフロントマターにまとめた。</p><p>カード1枚が1ファイルになったことで、</p><ul><li>ファイルを開いてカードをそのまま読める</li><li>エディタ等からDropbox上のmdファイルを作成・編集すればd-PoICに反映</li><li>iOSのショートカットからカードの作成や、指定したカードに追記</li></ul><p>みたいなこともできるようになった。</p><p>同期の処理はややこしかった（日本語の扱いや最新版をどこで判別するかなど）んだけど、今回はClaudeにGithubのリポジトリをまるごと読み込ませてちまちま改良していった。</p><p>Workflowyみたいな1つの大きなリストもいいんだけど、カード形式なら1カード1ファイルになっていた方がしっくりくるね。</p>]]></description>
           <pubDate>Wed, 17 Dec 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=33683671-aa84-8dba-243a-191af9f17747</guid>
         </item>
