@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardBoard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f8fafc;
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            cursor: default;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        #board {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            position: absolute;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 10px;
+            min-width: 120px;
+            max-width: 500px;
+            min-height: 40px;
+            cursor: move;
+            border: 1px solid #e2e8f0;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            transform: translateZ(0);
+        }
+
+        .card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .card.editing {
+            cursor: default;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .card-title {
+            position: relative;
+            z-index: 10; 
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 3px;
+            outline: none;
+            padding-right: 20px;
+            word-break: break-all;
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+
+        .card.editing .card-title,
+        .card.editing .card-body {
+            pointer-events: auto;
+            background: #fafafa;
+            border-radius: 2px;
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 1;
+            font-size: 0.75rem;
+            color: #334155;
+            flex-grow: 1;
+            white-space: pre-wrap;
+            outline: none;
+            word-break: break-all;
+            overflow: hidden;
+            line-height: 1.5;
+            padding-top: 2px;
+            pointer-events: none;
+            min-height: 24px;
+        }
+
+        .card-body a {
+            color: #2563eb;
+            text-decoration: underline;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 11;
+            position: relative;
+        }
+
+        .resizer {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 14px;
+            height: 14px;
+            cursor: nwse-resize;
+            background: linear-gradient(135deg, transparent 50%, #cbd5e1 50%);
+            border-radius: 0 0 8px 0;
+            opacity: 0;
+            z-index: 20;
+        }
+
+        .card:hover .resizer {
+            opacity: 1;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            color: #94a3b8;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 30;
+            border: 1px solid #e2e8f0;
+            pointer-events: auto;
+        }
+
+        .card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 10px 20px;
+            border-radius: 100px;
+            box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+            z-index: 10000;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-primary { background: #0f172a; color: white; }
+        .btn-primary:hover { background: #334155; transform: translateY(-1px); }
+        
+        .instructions {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: #64748b;
+            font-size: 0.7rem;
+            pointer-events: none;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="instructions">
+    Wクリック: 追加・編集 / ドラッグ: 移動 / Ctrl+ホイール: ズーム / Ctrl+V: OPML貼付
+</div>
+
+<div id="canvas-container">
+    <div id="board"></div>
+</div>
+
+<div class="controls">
+    <div class="flex items-center gap-2 border-r pr-4 border-gray-200">
+        <button onclick="zoomAroundCenter(1/1.2)" class="p-1 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">－</button>
+        <span id="zoom-level" class="text-xs font-mono w-10 text-center text-gray-600">100%</span>
+        <button onclick="zoomAroundCenter(1.2)" class="p-1 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">＋</button>
+        <button onclick="resetZoom()" class="text-[10px] text-blue-500 hover:underline px-2">1:1</button>
+    </div>
+    <span id="card-count" class="text-[10px] text-slate-400 font-bold tracking-wider">0 件</span>
+    <button onclick="addCard()" class="btn btn-primary">カード追加</button>
+    <button onclick="copyOPML()" class="btn border border-slate-200 hover:bg-slate-50">OPMLコピー</button>
+    <button onclick="clearBoard()" class="btn text-red-400 hover:bg-red-50">全削除</button>
+</div>
+
+<script>
+    const container = document.getElementById('canvas-container');
+    const board = document.getElementById('board');
+    const zoomDisplay = document.getElementById('zoom-level');
+    const cardCountDisplay = document.getElementById('card-count');
+    const STORAGE_KEY = 'cardboard_v11_state';
+    
+    let state = {
+        offsetX: 0,
+        offsetY: 0,
+        scale: 1,
+        nodes: [],
+        maxZ: 1000
+    };
+
+    let draggingNode = null;
+    let draggingElement = null;
+    let resizingNode = null;
+    let resizingElement = null;
+    let dragStartX, dragStartY;
+    let resizeStartW, resizeStartH;
+
+    let edgeScrollInterval = null;
+    const scrollEdgeSize = 50;
+    const scrollSpeed = 10;
+
+    window.onload = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                Object.assign(state, parsed);
+                state.nodes.forEach(node => renderCard(node));
+            } catch (e) {
+                initCenter();
+            }
+        } else {
+            initCenter();
+        }
+        updateTransform();
+        updateCounter();
+    };
+
+    function initCenter() {
+        state.offsetX = window.innerWidth / 2;
+        state.offsetY = window.innerHeight / 2;
+    }
+
+    function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function updateTransform() {
+        board.style.transform = `translate(${state.offsetX}px, ${state.offsetY}px) scale(${state.scale})`;
+        zoomDisplay.innerText = `${Math.round(state.scale * 100)}%`;
+        saveState();
+    }
+
+    function resetZoom() {
+        state.scale = 1;
+        updateTransform();
+    }
+
+    function updateCounter() {
+        cardCountDisplay.innerText = `${state.nodes.length} 件`;
+    }
+
+    function parseMarkdown(text) {
+        if (!text) return "";
+        let html = text.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m]));
+        const mdLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g;
+        html = html.replace(mdLinkRegex, '<a href="$2" target="_blank" rel="noopener" onmousedown="event.stopPropagation()">$1</a>');
+        const rawUrlRegex = /(?<!href="|">)(https?:\/\/[^\s<]+)/g;
+        html = html.replace(rawUrlRegex, '<a href="$1" target="_blank" rel="noopener" onmousedown="event.stopPropagation()">$1</a>');
+        return html;
+    }
+
+    container.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+            const factor = e.deltaY > 0 ? 1/1.1 : 1.1;
+            const oldScale = state.scale;
+            state.scale = Math.min(Math.max(state.scale * factor, 0.1), 5);
+            state.offsetX = e.clientX - (e.clientX - state.offsetX) * (state.scale / oldScale);
+            state.offsetY = e.clientY - (e.clientY - state.offsetY) * (state.scale / oldScale);
+            updateTransform();
+        } else {
+            state.offsetX -= e.deltaX;
+            state.offsetY -= e.deltaY;
+            updateTransform();
+        }
+        e.preventDefault();
+    }, { passive: false });
+
+    function zoomAroundCenter(factor) {
+        const oldScale = state.scale;
+        state.scale = Math.min(Math.max(state.scale * factor, 0.1), 5);
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        state.offsetX = cx - (cx - state.offsetX) * (state.scale / oldScale);
+        state.offsetY = cy - (cy - state.offsetY) * (state.scale / oldScale);
+        updateTransform();
+    }
+
+    function renderCard(node) {
+        const el = document.createElement('div');
+        el.id = node.id;
+        el.className = 'card';
+        el.style.left = `${node.x}px`;
+        el.style.top = `${node.y}px`;
+        el.style.zIndex = node.z;
+        if (node.width) el.style.width = `${node.width}px`;
+        if (node.height) el.style.height = `${node.height}px`;
+
+        const titleEl = document.createElement('div');
+        titleEl.className = 'card-title';
+        titleEl.innerText = node.title || '';
+
+        const bodyEl = document.createElement('div');
+        bodyEl.className = 'card-body';
+        bodyEl.innerHTML = parseMarkdown(node.body || '');
+
+        const startEdit = (target, selectAll = false) => {
+            if (el.classList.contains('editing')) return;
+            el.classList.add('editing');
+            target.contentEditable = "true";
+            
+            if (target === bodyEl) {
+                target.innerText = node.body;
+            }
+            
+            target.focus();
+            
+            if (selectAll) {
+                document.execCommand('selectAll', false, null);
+            }
+        };
+
+        const endEdit = () => {
+            if (!el.classList.contains('editing')) return;
+            el.classList.remove('editing');
+            titleEl.contentEditable = "false";
+            bodyEl.contentEditable = "false";
+            node.title = titleEl.innerText;
+            node.body = bodyEl.innerText;
+            bodyEl.innerHTML = parseMarkdown(node.body);
+            saveState();
+        };
+
+        titleEl.onblur = endEdit;
+        bodyEl.onblur = endEdit;
+
+        titleEl.ondblclick = (e) => {
+            e.stopPropagation();
+            startEdit(titleEl);
+        };
+
+        bodyEl.ondblclick = (e) => {
+            e.stopPropagation();
+            startEdit(bodyEl);
+        };
+
+        el.ondblclick = (e) => {
+            e.stopPropagation();
+            if (!el.classList.contains('editing')) {
+                const rect = el.getBoundingClientRect();
+                if ((e.clientY - rect.top) < 30) startEdit(titleEl);
+                else startEdit(bodyEl);
+            }
+        };
+
+        const del = document.createElement('div');
+        del.className = 'delete-btn';
+        del.innerHTML = '&times;';
+        del.onclick = (e) => {
+            e.stopPropagation();
+            state.nodes = state.nodes.filter(n => n.id !== node.id);
+            el.remove();
+            saveState();
+            updateCounter();
+        };
+
+        const resizer = document.createElement('div');
+        resizer.className = 'resizer';
+
+        el.append(titleEl, bodyEl, del, resizer);
+
+        el.onmousedown = (e) => {
+            if (e.target.closest('a') || e.target === del || el.classList.contains('editing')) return;
+            
+            state.maxZ++;
+            node.z = state.maxZ;
+            el.style.zIndex = node.z;
+
+            if (e.target === resizer) {
+                resizingNode = node; resizingElement = el;
+                dragStartX = e.clientX; dragStartY = e.clientY;
+                resizeStartW = el.offsetWidth;
+                resizeStartH = el.offsetHeight;
+                e.preventDefault(); e.stopPropagation(); return;
+            }
+
+            draggingNode = node; draggingElement = el;
+            dragStartX = e.clientX; dragStartY = e.clientY;
+            e.preventDefault();
+        };
+
+        board.appendChild(el);
+        return { el, titleEl, bodyEl };
+    }
+
+    window.onmousemove = (e) => {
+        if (draggingNode) {
+            const dx = (e.clientX - dragStartX) / state.scale;
+            const dy = (e.clientY - dragStartY) / state.scale;
+            draggingNode.x += dx;
+            draggingNode.y += dy;
+            draggingElement.style.left = `${draggingNode.x}px`;
+            draggingElement.style.top = `${draggingNode.y}px`;
+            dragStartX = e.clientX; dragStartY = e.clientY;
+            checkEdgeScroll(e.clientX, e.clientY);
+        } else if (resizingNode) {
+            const dw = (e.clientX - dragStartX) / state.scale;
+            const dh = (e.clientY - dragStartY) / state.scale;
+            resizingNode.width = Math.max(120, resizeStartW + dw);
+            resizingNode.height = Math.max(40, resizeStartH + dh);
+            resizingElement.style.width = `${resizingNode.width}px`;
+            resizingElement.style.height = `${resizingNode.height}px`;
+        }
+    };
+
+    window.onmouseup = () => {
+        if (draggingNode || resizingNode) saveState();
+        draggingNode = null; resizingNode = null;
+        stopEdgeScroll();
+    };
+
+    function checkEdgeScroll(mx, my) {
+        stopEdgeScroll();
+        let vx = 0, vy = 0;
+        if (mx < scrollEdgeSize) vx = scrollSpeed;
+        else if (mx > window.innerWidth - scrollEdgeSize) vx = -scrollSpeed;
+        if (my < scrollEdgeSize) vy = scrollSpeed;
+        else if (my > window.innerHeight - scrollEdgeSize) vy = -scrollSpeed;
+
+        if (vx !== 0 || vy !== 0) {
+            edgeScrollInterval = setInterval(() => {
+                state.offsetX += vx;
+                state.offsetY += vy;
+                if (draggingNode) {
+                    draggingNode.x -= vx / state.scale;
+                    draggingNode.y -= vy / state.scale;
+                    draggingElement.style.left = `${draggingNode.x}px`;
+                    draggingElement.style.top = `${draggingNode.y}px`;
+                }
+                updateTransform();
+            }, 16);
+        }
+    }
+
+    function stopEdgeScroll() {
+        if (edgeScrollInterval) { clearInterval(edgeScrollInterval); edgeScrollInterval = null; }
+    }
+
+    function createCard(x, y, data = {}, autoEdit = false) {
+        const node = {
+            id: 'n' + Date.now() + Math.random(),
+            x: x, y: y, z: ++state.maxZ,
+            width: data.width || null,
+            height: data.height || null,
+            title: data.title || 'タイトル',
+            body: data.body || ''
+        };
+        state.nodes.push(node);
+        const { titleEl } = renderCard(node);
+        updateCounter();
+        saveState();
+
+        if (autoEdit) {
+            setTimeout(() => {
+                const cardEl = document.getElementById(node.id);
+                cardEl.classList.add('editing');
+                titleEl.contentEditable = "true";
+                titleEl.focus();
+                document.execCommand('selectAll', false, null);
+            }, 10);
+        }
+        return node;
+    }
+
+    function addCard() {
+        createCard((-state.offsetX + window.innerWidth/2 - 80)/state.scale, (-state.offsetY + window.innerHeight/2 - 30)/state.scale, {}, true);
+    }
+
+    window.addEventListener('paste', (e) => {
+        const text = e.clipboardData.getData('text');
+        if (text.includes('<opml')) importOPML(text);
+    });
+
+    function importOPML(xml) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xml, "text/xml");
+        const rootElements = doc.querySelectorAll('body > outline');
+        let curX = (-state.offsetX + 80) / state.scale;
+        let curY = (-state.offsetY + 80) / state.scale;
+        const stepX = 40; const stepY = 32; 
+        let cardIdx = 0;
+
+        function processOutline(outline) {
+            const children = outline.querySelectorAll(':scope > outline');
+            if (children.length > 0) {
+                const title = outline.getAttribute('text') || '';
+                const bodyLines = [];
+                let maxLineChars = title.length;
+                function extractBody(items, depth = 0) {
+                    items.forEach(item => {
+                        const txt = item.getAttribute('text') || '';
+                        bodyLines.push("  ".repeat(depth) + txt);
+                        maxLineChars = Math.max(maxLineChars, txt.length + (depth * 2));
+                        const sub = item.querySelectorAll(':scope > outline');
+                        if (sub.length > 0) extractBody(sub, depth + 1);
+                    });
+                }
+                extractBody(children);
+                const calculatedWidth = Math.min(320, Math.max(200, maxLineChars * 10 + 40));
+                createCard(curX + (cardIdx * stepX), curY + (cardIdx * stepY), { 
+                    title, body: bodyLines.join('\n'), width: calculatedWidth
+                });
+                cardIdx++;
+            }
+        }
+
+        rootElements.forEach(root => {
+            const subOutlines = root.querySelectorAll(':scope > outline');
+            if (subOutlines.length > 0) subOutlines.forEach(processOutline);
+            else { createCard(curX, curY, { title: root.getAttribute('text') || '', body: '' }); cardIdx++; }
+        });
+        showToast('インポート完了');
+    }
+
+    function clearBoard() {
+        if (confirm('全てのカードを削除しますか？')) {
+            state.nodes = []; board.innerHTML = ''; state.maxZ = 1000; saveState(); updateCounter();
+        }
+    }
+
+    function copyOPML() {
+        // 配置の左上から順番になるようにソート（Y座標優先、次にX座標）
+        const sortedNodes = [...state.nodes].sort((a, b) => {
+            if (Math.abs(a.y - b.y) < 10) return a.x - b.x; // Yがほぼ同じならX順
+            return a.y - b.y;
+        });
+
+        let opml = `<?xml version="1.0" encoding="UTF-8"?><opml version="2.0"><body><outline text="CardBoard Export">`;
+        sortedNodes.forEach(n => {
+            opml += `<outline text="${escapeXml(n.title)}">`;
+            if (n.body) {
+                n.body.split('\n').forEach(line => {
+                    if(line.trim()) opml += `<outline text="${escapeXml(line.trim())}"/>`;
+                });
+            }
+            opml += `</outline>`;
+        });
+        opml += `</outline></body></opml>`;
+        const textArea = document.createElement("textarea");
+        textArea.value = opml;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast('OPMLをコピーしました');
+    }
+
+    function escapeXml(s) {
+        return s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":"&apos;"}[c]));
+    }
+
+    function showToast(m) {
+        const t = document.createElement('div');
+        t.className = "fixed top-4 right-4 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-xl z-[10001] text-xs";
+        t.innerText = m;
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 2000);
+    }
+
+    container.ondblclick = (e) => {
+        if(e.target === container) {
+            const x = (e.clientX - state.offsetX) / state.scale;
+            const y = (e.clientY - state.offsetY) / state.scale;
+            createCard(x, y, {}, true);
+        }
+    };
+</script>
+</body>
+</html>
