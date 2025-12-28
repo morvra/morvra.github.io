@@ -72,6 +72,7 @@
             outline: none;
             padding-right: 20px;
             word-break: break-all;
+            white-space: pre-wrap;
             flex-shrink: 0;
             pointer-events: none;
         }
@@ -88,7 +89,6 @@
             z-index: 1;
             font-size: 0.75rem;
             color: #334155;
-            flex-grow: 1;
             white-space: pre-wrap;
             outline: none;
             word-break: break-all;
@@ -96,7 +96,44 @@
             line-height: 1.5;
             padding-top: 2px;
             pointer-events: none;
-            min-height: 24px;
+            min-height: 0;
+            max-height: calc(1.5em * 5);
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* デフォルト状態でも本文が隠れている場合は...を表示 */
+        .card-body::after {
+            content: '...';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: white;
+            padding-left: 3px;
+            display: none;
+        }
+        
+        .card.has-overflow .card-body::after {
+            display: inline;
+        }
+        
+        /* 手動リサイズされたカードは行数制限を解除するが、overflowは維持 */
+        .card.resized .card-body {
+            max-height: none;
+            display: block;
+            -webkit-line-clamp: unset;
+            position: relative;
+        }
+        
+        .card.editing .card-body {
+            max-height: none;
+            display: block;
+            -webkit-line-clamp: unset;
+        }
+        
+        .card.editing .card-body::after {
+            display: none !important;
         }
 
         .card-body a {
@@ -106,6 +143,50 @@
             cursor: pointer;
             z-index: 11;
             position: relative;
+        }
+
+        /* グループのスタイル */
+        .group {
+            position: absolute;
+            background: rgba(147, 197, 253, 0.08);
+            border-radius: 12px;
+            border: 2px solid #93c5fd;
+            min-width: 200px;
+            min-height: 150px;
+            cursor: move;
+            user-select: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .group:hover {
+            border-color: #60a5fa;
+            background: rgba(147, 197, 253, 0.12);
+        }
+
+        .group.editing {
+            cursor: default;
+            border-color: #3b82f6;
+            background: rgba(147, 197, 253, 0.15);
+        }
+
+        .group-title {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #1e40af;
+            outline: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            pointer-events: none;
+            z-index: 10;
+            background: transparent;
+        }
+
+        .group.editing .group-title {
+            pointer-events: auto;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .resizer {
@@ -121,8 +202,14 @@
             z-index: 20;
         }
 
-        .card:hover .resizer {
+        .card:hover .resizer,
+        .group:hover .resizer {
             opacity: 1;
+        }
+
+        .group .resizer {
+            background: linear-gradient(135deg, transparent 50%, #93c5fd 50%);
+            border-radius: 0 0 12px 0;
         }
 
         .delete-btn {
@@ -145,7 +232,8 @@
             pointer-events: auto;
         }
 
-        .card:hover .delete-btn {
+        .card:hover .delete-btn,
+        .group:hover .delete-btn {
             opacity: 1;
         }
 
@@ -178,6 +266,9 @@
         .btn-primary { background: #0f172a; color: white; }
         .btn-primary:hover { background: #334155; transform: translateY(-1px); }
         
+        .btn-group { background: #1e40af; color: white; }
+        .btn-group:hover { background: #2563eb; transform: translateY(-1px); }
+        
         .instructions {
             position: fixed;
             top: 10px;
@@ -209,8 +300,9 @@
         <button onclick="zoomAroundCenter(1.2)" class="p-1 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">＋</button>
         <button onclick="resetZoom()" class="text-[10px] text-blue-500 hover:underline px-2">1:1</button>
     </div>
-    <span id="card-count" class="text-[10px] text-slate-400 font-bold tracking-wider">0 件</span>
+    <span id="card-count" class="text-[10px] text-slate-400 font-bold tracking-wider min-w-[40px]">0 件</span>
     <button onclick="addCard()" class="btn btn-primary">カード追加</button>
+    <button onclick="addGroup()" class="btn btn-group">グループ追加</button>
     <button onclick="copyOPML()" class="btn border border-slate-200 hover:bg-slate-50">OPMLコピー</button>
     <button onclick="clearBoard()" class="btn text-red-400 hover:bg-red-50">全削除</button>
 </div>
@@ -220,47 +312,42 @@
     const board = document.getElementById('board');
     const zoomDisplay = document.getElementById('zoom-level');
     const cardCountDisplay = document.getElementById('card-count');
-    const STORAGE_KEY = 'cardboard_v11_state';
+    const STORAGE_KEY = 'cardboard_v12_state';
     
     let state = {
         offsetX: 0,
         offsetY: 0,
         scale: 1,
         nodes: [],
+        groups: [],
         maxZ: 1000
     };
 
     let draggingNode = null;
     let draggingElement = null;
+    let draggingGroup = null; // ドラッグ中のグループを追跡
+    let draggingGroupCards = []; // ドラッグ開始時にグループに含まれていたカード
     let resizingNode = null;
     let resizingElement = null;
     let dragStartX, dragStartY;
     let resizeStartW, resizeStartH;
-
     let edgeScrollInterval = null;
     const scrollEdgeSize = 50;
     const scrollSpeed = 10;
 
-    window.onload = () => {
+    function loadState() {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
             try {
-                const parsed = JSON.parse(saved);
-                Object.assign(state, parsed);
-                state.nodes.forEach(node => renderCard(node));
-            } catch (e) {
-                initCenter();
-            }
-        } else {
-            initCenter();
+                const data = JSON.parse(saved);
+                state = { ...state, ...data };
+                state.groups = state.groups || [];
+                updateTransform();
+                state.nodes.forEach(renderCard);
+                state.groups.forEach(renderGroup);
+                updateCounter();
+            } catch(e) { console.error('Failed to load state', e); }
         }
-        updateTransform();
-        updateCounter();
-    };
-
-    function initCenter() {
-        state.offsetX = window.innerWidth / 2;
-        state.offsetY = window.innerHeight / 2;
     }
 
     function saveState() {
@@ -269,119 +356,219 @@
 
     function updateTransform() {
         board.style.transform = `translate(${state.offsetX}px, ${state.offsetY}px) scale(${state.scale})`;
-        zoomDisplay.innerText = `${Math.round(state.scale * 100)}%`;
-        saveState();
-    }
-
-    function resetZoom() {
-        state.scale = 1;
-        updateTransform();
     }
 
     function updateCounter() {
         cardCountDisplay.innerText = `${state.nodes.length} 件`;
     }
 
-    function parseMarkdown(text) {
-        if (!text) return "";
-        let html = text.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m]));
-        const mdLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g;
-        html = html.replace(mdLinkRegex, '<a href="$2" target="_blank" rel="noopener" onmousedown="event.stopPropagation()">$1</a>');
-        const rawUrlRegex = /(?<!href="|">)(https?:\/\/[^\s<]+)/g;
-        html = html.replace(rawUrlRegex, '<a href="$1" target="_blank" rel="noopener" onmousedown="event.stopPropagation()">$1</a>');
-        return html;
-    }
+    let isPanning = false; let panStartX, panStartY;
+    container.onmousedown = (e) => {
+        if (e.target === container && e.button === 0) {
+            isPanning = true; panStartX = e.clientX; panStartY = e.clientY;
+            container.style.cursor = 'grabbing';
+        }
+    };
+    container.onmousemove = (e) => {
+        if (isPanning) {
+            state.offsetX += e.clientX - panStartX;
+            state.offsetY += e.clientY - panStartY;
+            panStartX = e.clientX; panStartY = e.clientY;
+            updateTransform();
+        }
+    };
+    container.onmouseup = () => { isPanning = false; container.style.cursor = 'default'; saveState(); };
 
     container.addEventListener('wheel', (e) => {
-        if (e.ctrlKey) {
-            const factor = e.deltaY > 0 ? 1/1.1 : 1.1;
-            const oldScale = state.scale;
-            state.scale = Math.min(Math.max(state.scale * factor, 0.1), 5);
-            state.offsetX = e.clientX - (e.clientX - state.offsetX) * (state.scale / oldScale);
-            state.offsetY = e.clientY - (e.clientY - state.offsetY) * (state.scale / oldScale);
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            const delta = e.deltaY < 0 ? 1.1 : 1/1.1;
+            const rect = container.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            const wx = (mx - state.offsetX) / state.scale;
+            const wy = (my - state.offsetY) / state.scale;
+            state.scale *= delta;
+            state.scale = Math.max(0.1, Math.min(5, state.scale));
+            state.offsetX = mx - wx * state.scale;
+            state.offsetY = my - wy * state.scale;
             updateTransform();
+            zoomDisplay.innerText = Math.round(state.scale * 100) + '%';
+            saveState();
         } else {
+            // 通常のスクロールでボードを移動
             state.offsetX -= e.deltaX;
             state.offsetY -= e.deltaY;
             updateTransform();
+            saveState();
         }
-        e.preventDefault();
     }, { passive: false });
 
-    function zoomAroundCenter(factor) {
-        const oldScale = state.scale;
-        state.scale = Math.min(Math.max(state.scale * factor, 0.1), 5);
+    function zoomAroundCenter(f) {
         const cx = window.innerWidth / 2;
         const cy = window.innerHeight / 2;
-        state.offsetX = cx - (cx - state.offsetX) * (state.scale / oldScale);
-        state.offsetY = cy - (cy - state.offsetY) * (state.scale / oldScale);
+        const wx = (cx - state.offsetX) / state.scale;
+        const wy = (cy - state.offsetY) / state.scale;
+        state.scale *= f;
+        state.scale = Math.max(0.1, Math.min(5, state.scale));
+        state.offsetX = cx - wx * state.scale;
+        state.offsetY = cy - wy * state.scale;
         updateTransform();
+        zoomDisplay.innerText = Math.round(state.scale * 100) + '%';
+        saveState();
+    }
+
+    function resetZoom() {
+        state.scale = 1;
+        state.offsetX = 0;
+        state.offsetY = 0;
+        updateTransform();
+        zoomDisplay.innerText = '100%';
+        saveState();
+    }
+
+    loadState();
+
+    function linkify(text) {
+        // マークダウンのリンク記法 [text](url) を先に処理してプレースホルダーに置換
+        const mdLinks = [];
+        text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (match, linkText, url) => {
+            const placeholder = `__MDLINK_${mdLinks.length}__`;
+            mdLinks.push(`<a href="${url}" target="_blank" rel="noopener">${linkText}</a>`);
+            return placeholder;
+        });
+        
+        // 通常のURLをリンク化
+        const urlPattern = /(https?:\/\/[^\s]+)/g;
+        text = text.replace(urlPattern, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+        
+        // プレースホルダーを実際のリンクに戻す
+        mdLinks.forEach((link, i) => {
+            text = text.replace(`__MDLINK_${i}__`, link);
+        });
+        
+        return text;
+    }
+
+    function startEdit(el) {
+        const isGroup = el.classList?.contains('group-title');
+        const card = isGroup ? el.closest('.group') : el.closest('.card');
+        
+        // カードの本文を編集する場合、現在の高さを保存
+        if (!isGroup && el.classList.contains('card-body')) {
+            const cardId = card.id;
+            const node = state.nodes.find(n => n.id === cardId);
+            if (node) {
+                // 編集前の高さを一時保存
+                const currentHeight = card.offsetHeight;
+                card.dataset.preEditHeight = card.style.height || '';
+                // 現在の高さを最小値として設定し、コンテンツが長ければ広がる
+                card.style.minHeight = `${currentHeight}px`;
+                card.style.height = 'auto';
+                el.textContent = node.body; // 保存されている生のテキストを表示
+            }
+        }
+        
+        card.classList.add('editing');
+        el.contentEditable = "true";
+        el.focus();
+        // 全選択はしない（カーソルは自然にクリック位置に来る）
+    }
+
+    function endEdit(el) {
+        const isGroup = el.classList?.contains('group-title');
+        const card = isGroup ? el.closest('.group') : el.closest('.card');
+        card.classList.remove('editing');
+        el.contentEditable = "false";
+        const id = card.id;
+        
+        if (isGroup) {
+            const group = state.groups.find(g => g.id === id);
+            if (group) {
+                group.title = el.innerText;
+                saveState();
+            }
+        } else {
+            const node = state.nodes.find(n => n.id === id);
+            if (!node) return;
+            
+            if (el.classList.contains('card-title')) {
+                node.title = el.innerText;
+            } else {
+                // 生のテキストを保存
+                node.body = el.innerText;
+                // プレビュー表示に変換
+                el.innerHTML = linkify(node.body);
+                // 編集前の高さを復元し、min-heightをクリア
+                if (card.dataset.preEditHeight !== undefined) {
+                    card.style.height = card.dataset.preEditHeight;
+                    card.style.minHeight = '';
+                    delete card.dataset.preEditHeight;
+                }
+            }
+            saveState();
+        }
     }
 
     function renderCard(node) {
         const el = document.createElement('div');
-        el.id = node.id;
         el.className = 'card';
+        if (node.resized) el.classList.add('resized');
+        el.id = node.id;
         el.style.left = `${node.x}px`;
         el.style.top = `${node.y}px`;
-        el.style.zIndex = node.z;
+        el.style.zIndex = node.z || 1000;
         if (node.width) el.style.width = `${node.width}px`;
         if (node.height) el.style.height = `${node.height}px`;
 
         const titleEl = document.createElement('div');
         titleEl.className = 'card-title';
-        titleEl.innerText = node.title || '';
+        titleEl.innerText = node.title;
 
         const bodyEl = document.createElement('div');
         bodyEl.className = 'card-body';
-        bodyEl.innerHTML = parseMarkdown(node.body || '');
+        bodyEl.innerHTML = linkify(node.body);
 
-        const startEdit = (target, selectAll = false) => {
-            if (el.classList.contains('editing')) return;
-            el.classList.add('editing');
-            target.contentEditable = "true";
-            
-            if (target === bodyEl) {
-                target.innerText = node.body;
+        titleEl.onblur = () => endEdit(titleEl);
+        bodyEl.onblur = () => endEdit(bodyEl);
+
+        titleEl.onkeydown = (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                endEdit(titleEl);
+                startEdit(bodyEl);
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                endEdit(titleEl);
+                startEdit(bodyEl);
             }
-            
-            target.focus();
-            
-            if (selectAll) {
-                document.execCommand('selectAll', false, null);
-            }
-        };
-
-        const endEdit = () => {
-            if (!el.classList.contains('editing')) return;
-            el.classList.remove('editing');
-            titleEl.contentEditable = "false";
-            bodyEl.contentEditable = "false";
-            node.title = titleEl.innerText;
-            node.body = bodyEl.innerText;
-            bodyEl.innerHTML = parseMarkdown(node.body);
-            saveState();
-        };
-
-        titleEl.onblur = endEdit;
-        bodyEl.onblur = endEdit;
-
-        titleEl.ondblclick = (e) => {
-            e.stopPropagation();
-            startEdit(titleEl);
-        };
-
-        bodyEl.ondblclick = (e) => {
-            e.stopPropagation();
-            startEdit(bodyEl);
         };
 
         el.ondblclick = (e) => {
             e.stopPropagation();
             if (!el.classList.contains('editing')) {
                 const rect = el.getBoundingClientRect();
-                if ((e.clientY - rect.top) < 30) startEdit(titleEl);
-                else startEdit(bodyEl);
+                let targetEl;
+                if ((e.clientY - rect.top) < 30) {
+                    targetEl = titleEl;
+                } else {
+                    targetEl = bodyEl;
+                }
+                
+                startEdit(targetEl);
+                
+                // ダブルクリックによるテキスト選択をキャンセル
+                window.getSelection().removeAllRanges();
+                
+                // クリック位置にカーソルを配置
+                setTimeout(() => {
+                    const range = document.caretRangeFromPoint(e.clientX, e.clientY);
+                    if (range) {
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }, 0);
             }
         };
 
@@ -411,8 +598,17 @@
             if (e.target === resizer) {
                 resizingNode = node; resizingElement = el;
                 dragStartX = e.clientX; dragStartY = e.clientY;
-                resizeStartW = el.offsetWidth;
-                resizeStartH = el.offsetHeight;
+                // widthが設定されている場合はそれを使用、なければoffsetWidthを使用して設定
+                if (!node.width) {
+                    node.width = el.offsetWidth;
+                    el.style.width = `${node.width}px`;
+                }
+                if (!node.height) {
+                    node.height = el.offsetHeight;
+                    el.style.height = `${node.height}px`;
+                }
+                resizeStartW = node.width;
+                resizeStartH = node.height;
                 e.preventDefault(); e.stopPropagation(); return;
             }
 
@@ -422,7 +618,104 @@
         };
 
         board.appendChild(el);
+        
+        // すべてのカードでoverflowチェック
+        setTimeout(() => {
+            if (bodyEl.scrollHeight > bodyEl.clientHeight) {
+                el.classList.add('has-overflow');
+            }
+        }, 0);
+        
         return { el, titleEl, bodyEl };
+    }
+
+    function renderGroup(group) {
+        const el = document.createElement('div');
+        el.className = 'group';
+        el.id = group.id;
+        el.style.left = `${group.x}px`;
+        el.style.top = `${group.y}px`;
+        el.style.width = `${group.width}px`;
+        el.style.height = `${group.height}px`;
+        // グループは常にカードより後ろに配置
+        el.style.zIndex = (group.z || 1000) - 5000;
+
+        const titleEl = document.createElement('div');
+        titleEl.className = 'group-title';
+        titleEl.innerText = group.title;
+
+        titleEl.onblur = () => endEdit(titleEl);
+        
+        titleEl.onkeydown = (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                endEdit(titleEl);
+            }
+        };
+
+        el.ondblclick = (e) => {
+            e.stopPropagation();
+            if (!el.classList.contains('editing')) {
+                startEdit(titleEl);
+            }
+        };
+
+        const del = document.createElement('div');
+        del.className = 'delete-btn';
+        del.innerHTML = '&times;';
+        del.onclick = (e) => {
+            e.stopPropagation();
+            // グループを削除（カードは削除しない）
+            state.groups = state.groups.filter(g => g.id !== group.id);
+            state.nodes.forEach(n => {
+                if (n.groupId === group.id) delete n.groupId;
+            });
+            el.remove();
+            saveState();
+            updateCounter();
+        };
+
+        const resizer = document.createElement('div');
+        resizer.className = 'resizer';
+
+        el.append(titleEl, del, resizer);
+
+        el.onmousedown = (e) => {
+            if (e.target === del || el.classList.contains('editing')) return;
+            
+            // グループのz-indexは更新しない（常に背面）
+            
+            if (e.target === resizer) {
+                resizingNode = group; resizingElement = el;
+                dragStartX = e.clientX; dragStartY = e.clientY;
+                // グループは常にwidth/heightが設定されているはずだが、念のため
+                resizeStartW = group.width || el.offsetWidth;
+                resizeStartH = group.height || el.offsetHeight;
+                e.preventDefault(); e.stopPropagation(); return;
+            }
+
+            draggingNode = group; draggingElement = el;
+            draggingGroup = group; // グループをドラッグ中であることを記録
+            // ドラッグ開始時にグループ内にあるカードを記憶
+            draggingGroupCards = getCardsInGroup(group);
+            dragStartX = e.clientX; dragStartY = e.clientY;
+            e.preventDefault();
+        };
+
+        board.appendChild(el);
+        return { el, titleEl };
+    }
+
+    // グループ内のカードを判定する関数
+    function getCardsInGroup(group) {
+        return state.nodes.filter(node => {
+            const cardCenterX = node.x + (node.width || 150) / 2;
+            const cardCenterY = node.y + (node.height || 60) / 2;
+            return cardCenterX >= group.x && 
+                   cardCenterX <= group.x + group.width &&
+                   cardCenterY >= group.y && 
+                   cardCenterY <= group.y + group.height;
+        });
     }
 
     window.onmousemove = (e) => {
@@ -433,21 +726,75 @@
             draggingNode.y += dy;
             draggingElement.style.left = `${draggingNode.x}px`;
             draggingElement.style.top = `${draggingNode.y}px`;
+            
+            // グループをドラッグ中の場合、ドラッグ開始時に含まれていたカードだけを移動
+            if (draggingGroup && draggingGroupCards.length > 0) {
+                draggingGroupCards.forEach(card => {
+                    card.x += dx;
+                    card.y += dy;
+                    const cardEl = document.getElementById(card.id);
+                    if (cardEl) {
+                        cardEl.style.left = `${card.x}px`;
+                        cardEl.style.top = `${card.y}px`;
+                    }
+                });
+            }
+            
             dragStartX = e.clientX; dragStartY = e.clientY;
             checkEdgeScroll(e.clientX, e.clientY);
         } else if (resizingNode) {
             const dw = (e.clientX - dragStartX) / state.scale;
             const dh = (e.clientY - dragStartY) / state.scale;
-            resizingNode.width = Math.max(120, resizeStartW + dw);
-            resizingNode.height = Math.max(40, resizeStartH + dh);
+            // グループかカードかをIDで判定（グループは'g'で始まる）
+            const isGroup = resizingNode.id.startsWith('g');
+            const minSize = isGroup ? 200 : 120;
+            const minHeight = isGroup ? 150 : 40;
+            
+            resizingNode.width = Math.max(minSize, resizeStartW + dw);
+            resizingNode.height = Math.max(minHeight, resizeStartH + dh);
             resizingElement.style.width = `${resizingNode.width}px`;
             resizingElement.style.height = `${resizingNode.height}px`;
+            
+            // カードの場合、本文がoverflowしているかチェック
+            if (!isGroup) {
+                const bodyEl = resizingElement.querySelector('.card-body');
+                if (bodyEl && bodyEl.scrollHeight > bodyEl.clientHeight) {
+                    resizingElement.classList.add('has-overflow');
+                } else {
+                    resizingElement.classList.remove('has-overflow');
+                }
+            }
         }
     };
 
     window.onmouseup = () => {
+        // リサイズが完了したら、カードに'resized'クラスを追加してフラグを保存
+        if (resizingNode && resizingElement && !resizingNode.id.startsWith('g')) {
+            resizingElement.classList.add('resized');
+            resizingNode.resized = true;
+        }
+        
+        // グループをドラッグし終わったときに、最終的にグループ内にあるカードのgroupIdを更新
+        if (draggingGroup) {
+            const cardsInGroup = getCardsInGroup(draggingGroup);
+            // すべてのカードのgroupIdをクリア
+            state.nodes.forEach(card => {
+                if (card.groupId === draggingGroup.id) {
+                    delete card.groupId;
+                }
+            });
+            // 現在グループ内にあるカードにgroupIdを設定
+            cardsInGroup.forEach(card => {
+                card.groupId = draggingGroup.id;
+            });
+        }
+        
         if (draggingNode || resizingNode) saveState();
-        draggingNode = null; resizingNode = null;
+        draggingNode = null; 
+        draggingGroup = null;
+        draggingGroupCards = [];
+        resizingNode = null;
+        resizingElement = null;
         stopEdgeScroll();
     };
 
@@ -468,6 +815,19 @@
                     draggingNode.y -= vy / state.scale;
                     draggingElement.style.left = `${draggingNode.x}px`;
                     draggingElement.style.top = `${draggingNode.y}px`;
+                    
+                    // グループをドラッグ中の場合、グループ内のカードも一緒にスクロール
+                    if (draggingGroup && draggingGroupCards.length > 0) {
+                        draggingGroupCards.forEach(card => {
+                            card.x -= vx / state.scale;
+                            card.y -= vy / state.scale;
+                            const cardEl = document.getElementById(card.id);
+                            if (cardEl) {
+                                cardEl.style.left = `${card.x}px`;
+                                cardEl.style.top = `${card.y}px`;
+                            }
+                        });
+                    }
                 }
                 updateTransform();
             }, 16);
@@ -485,7 +845,8 @@
             width: data.width || null,
             height: data.height || null,
             title: data.title || 'タイトル',
-            body: data.body || ''
+            body: data.body || '',
+            groupId: data.groupId || null
         };
         state.nodes.push(node);
         const { titleEl } = renderCard(node);
@@ -504,8 +865,37 @@
         return node;
     }
 
+    function createGroup(x, y, data = {}, autoEdit = false) {
+        const group = {
+            id: 'g' + Date.now() + Math.random(),
+            x: x, y: y, z: ++state.maxZ,
+            width: data.width || 300,
+            height: data.height || 200,
+            title: data.title || 'グループ'
+        };
+        state.groups.push(group);
+        const { titleEl } = renderGroup(group);
+        updateCounter();
+        saveState();
+
+        if (autoEdit) {
+            setTimeout(() => {
+                const groupEl = document.getElementById(group.id);
+                groupEl.classList.add('editing');
+                titleEl.contentEditable = "true";
+                titleEl.focus();
+                document.execCommand('selectAll', false, null);
+            }, 10);
+        }
+        return group;
+    }
+
     function addCard() {
         createCard((-state.offsetX + window.innerWidth/2 - 80)/state.scale, (-state.offsetY + window.innerHeight/2 - 30)/state.scale, {}, true);
+    }
+
+    function addGroup() {
+        createGroup((-state.offsetX + window.innerWidth/2 - 150)/state.scale, (-state.offsetY + window.innerHeight/2 - 100)/state.scale, {}, true);
     }
 
     window.addEventListener('paste', (e) => {
@@ -555,28 +945,99 @@
     }
 
     function clearBoard() {
-        if (confirm('全てのカードを削除しますか？')) {
-            state.nodes = []; board.innerHTML = ''; state.maxZ = 1000; saveState(); updateCounter();
+        if (confirm('全てのカードとグループを削除しますか？')) {
+            state.nodes = []; 
+            state.groups = [];
+            board.innerHTML = ''; 
+            state.maxZ = 1000; 
+            saveState(); 
+            updateCounter();
         }
     }
 
     function copyOPML() {
-        // 配置の左上から順番になるようにソート（Y座標優先、次にX座標）
-        const sortedNodes = [...state.nodes].sort((a, b) => {
-            if (Math.abs(a.y - b.y) < 10) return a.x - b.x; // Yがほぼ同じならX順
+        // グループ情報を含めてOPML生成
+        const groupMap = {};
+        state.groups.forEach(g => {
+            const cardsInGroup = getCardsInGroup(g);
+            // グループIDをカードに設定
+            cardsInGroup.forEach(card => card.groupId = g.id);
+            
+            groupMap[g.id] = {
+                group: g,
+                cards: cardsInGroup
+            };
+        });
+
+        // グループに属していないカードを取得
+        const cardsInAnyGroup = new Set();
+        Object.values(groupMap).forEach(({cards}) => {
+            cards.forEach(c => cardsInAnyGroup.add(c.id));
+        });
+        
+        const orphanCards = state.nodes.filter(n => !cardsInAnyGroup.has(n.id));
+
+        // グループとカードを混在させて位置でソート
+        const items = [];
+        
+        // グループを追加（グループの位置を基準）
+        state.groups.forEach(g => {
+            items.push({
+                type: 'group',
+                data: g,
+                y: g.y,
+                x: g.x
+            });
+        });
+        
+        // グループに属していないカードを追加
+        orphanCards.forEach(card => {
+            items.push({
+                type: 'card',
+                data: card,
+                y: card.y,
+                x: card.x
+            });
+        });
+        
+        // Y座標優先でソート
+        items.sort((a, b) => {
+            if (Math.abs(a.y - b.y) < 10) return a.x - b.x;
             return a.y - b.y;
         });
 
         let opml = `<?xml version="1.0" encoding="UTF-8"?><opml version="2.0"><body><outline text="CardBoard Export">`;
-        sortedNodes.forEach(n => {
-            opml += `<outline text="${escapeXml(n.title)}">`;
-            if (n.body) {
-                n.body.split('\n').forEach(line => {
-                    if(line.trim()) opml += `<outline text="${escapeXml(line.trim())}"/>`;
+        
+        items.forEach(item => {
+            if (item.type === 'group') {
+                const g = item.data;
+                opml += `<outline text="${escapeXml(g.title)}">`;
+                const cards = groupMap[g.id].cards.sort((a, b) => {
+                    if (Math.abs(a.y - b.y) < 10) return a.x - b.x;
+                    return a.y - b.y;
                 });
+                cards.forEach(card => {
+                    opml += `<outline text="${escapeXml(card.title)}">`;
+                    if (card.body) {
+                        card.body.split('\n').forEach(line => {
+                            if(line.trim()) opml += `<outline text="${escapeXml(line.trim())}"/>`;
+                        });
+                    }
+                    opml += `</outline>`;
+                });
+                opml += `</outline>`;
+            } else {
+                const n = item.data;
+                opml += `<outline text="${escapeXml(n.title)}">`;
+                if (n.body) {
+                    n.body.split('\n').forEach(line => {
+                        if(line.trim()) opml += `<outline text="${escapeXml(line.trim())}"/>`;
+                    });
+                }
+                opml += `</outline>`;
             }
-            opml += `</outline>`;
         });
+        
         opml += `</outline></body></opml>`;
         const textArea = document.createElement("textarea");
         textArea.value = opml;
