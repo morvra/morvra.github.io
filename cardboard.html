@@ -281,6 +281,31 @@
             padding: 6px 12px;
             border-radius: 8px;
         }
+		/* 送信ボタンのスタイル */
+		.send-poic-btn {
+		    position: absolute;
+		    top: 6px;
+		    right: 28px;
+		    width: 18px;
+		    height: 18px;
+		    background: #fff;
+		    color: #8b5cf6;
+		    border-radius: 4px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    font-size: 12px;
+		    font-weight: bold;
+		    cursor: pointer;
+		    opacity: 0;
+		    z-index: 30;
+		    border: 1px solid #e2e8f0;
+		    pointer-events: auto;
+		    transition: all 0.2s;
+		}
+		.card:hover .send-poic-btn {
+		    opacity: 1;
+		}
     </style>
 </head>
 <body>
@@ -583,10 +608,19 @@
             updateCounter();
         };
 
+		const sendBtn = document.createElement('div');
+		    sendBtn.className = 'send-poic-btn';
+		    sendBtn.innerHTML = '→';
+		    sendBtn.title = 'd-PoICに送る';
+		    sendBtn.onclick = (e) => {
+		        e.stopPropagation();
+		        sendToPoIC(node);
+		};
+
         const resizer = document.createElement('div');
         resizer.className = 'resizer';
 
-        el.append(titleEl, bodyEl, del, resizer);
+        el.append(titleEl, bodyEl, sendBtn, del, resizer);
 
         el.onmousedown = (e) => {
             if (e.target.closest('a') || e.target === del || el.classList.contains('editing')) return;
@@ -842,8 +876,8 @@
         const node = {
             id: 'n' + Date.now() + Math.random(),
             x: x, y: y, z: ++state.maxZ,
-            width: data.width || null,
-            height: data.height || null,
+            width: data.width || 250,
+            height: data.height || 120,
             title: data.title || 'タイトル',
             body: data.body || '',
             groupId: data.groupId || null
@@ -1067,6 +1101,26 @@
             createCard(x, y, {}, true);
         }
     };
+
+	// d-PoICに送る関数
+	function sendToPoIC(card) {
+	    const cardData = {
+	        title: card.title,
+	        body: card.body,
+	        type: 'Discovery', // CardBoardから来たものはDiscovery扱い
+	        stacks: [],
+	        createdAt: Date.now(),
+	        updatedAt: Date.now()
+	    };
+	    
+	    const jsonStr = JSON.stringify(cardData);
+	    const encoded = btoa(encodeURIComponent(jsonStr));
+	    
+	    // d-PoICを開く
+	    const poicUrl = `https://morvra.github.io/poic/?import=${encoded}`;
+	    window.open(poicUrl, '_blank');
+	}
+	
 </script>
 </body>
 </html>
