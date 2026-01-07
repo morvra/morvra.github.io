@@ -31,6 +31,15 @@
 			"body": "<p>シャドウバースWB、リリース初日から遊んでるのでこの辺で感想をざっくり。</p><ul><li>進化、超進化とExPPのシステムで先後のバランス取れてそう（突き詰めればどうなるかはわからないけど）でよき</li></ul><ul><li>使ってるデッキはAFネメシスとフェイスドラゴン。中盤の融合と進化のプランニングがむずくて時間切れ頻発中</li></ul><ul><li>初日に無課金はデッキ組めないみたいな文句多かったけど、毎日やってれば1拡張で3~4テーマ組めそう</li></ul><ul><li>ランクはAA0、グループはサファイアとルビー行ったり来たりしつつたま〜にダイヤいけるって感じ</li></ul><ul><li>週末ロビー大会は大会気分（というか大会そのもの）味わえてヒリヒリ。ちなみに2回目で優勝できた！</li></ul><ul><li>負けてもランク上がる影響からか、環境がよくていろんなデッキと戦えて楽しい（上位帯はエルフ一色なのかもしれないけど）</li></ul><p>シャドバの楽しさ面白さは維持しつつ、UIやUXが正統進化。システム面が面白くなってDCGとしても改善してる印象。初弾にしてカードパワー高いから前作でも揶揄されたメンコ感はあるんだけど、それはお互い様だし超進化も絡んで駆け引きがおもろいメンコになってる。</p><p>この先空中戦ばっかりになったり一強環境でミラーしか発生しない、みたいな環境にならない限りは楽しめそう。</p><p><div id=\"appreach-box\" style=\"text-align: left;\"><img src=\"https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f6/48/98/f648985e-52bf-40e5-deab-c7d721844c43/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg\" alt=\"Shadowverse: Worlds Beyond\" id=\"appreach-image\" style=\"float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;\"><div class=\"appreach-info\" style=\"margin: 10px;\"><div id=\"appreach-appname\">Shadowverse: Worlds Beyond</div><div id=\"appreach-developer\" style=\"font-size: 80%; display: inline-block;\">開発元:<span id=\"appreach-developerurl\">Cygames, Inc.</span></div><div id=\"appreach-price\" style=\"font-size: 80%; display: inline-block;\">無料</div><div class=\"appreach-powered\" style=\"font-size: 80%; display: inline-block;\">posted with<a href=\"https://mama-hack.com/app-reach/\" title=\"アプリーチ\" target=\"_blank\" rel=\"nofollow\">アプリーチ</a></div><div class=\"appreach-links\" style=\"float: left;\"><div id=\"appreach-itunes-link\" style=\"display: inline-block;\"><a id=\"appreach-itunes\" href=\"https://apps.apple.com/jp/app/shadowverse-worlds-beyond/id6472019540?uo=4\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/itune_ja.svg\" style=\"height: 40px; width: 135px;\"></a></div><div id=\"appreach-gplay-link\" style=\"display: inline-block;\"><a id=\"appreach-gplay\" href=\"https://play.google.com/store/apps/details?id=jp.co.cygames.ShadowverseWorldsBeyond\" rel=\"nofollow\"><img src=\"https://nabettu.github.io/appreach/img/gplay_ja.png\" style=\"height: 40px; width: 134.5px;\"></a></div></div></div><div class=\"appreach-footer\" style=\"margin-bottom: 10px; clear: left;\"></div></div></p>"
 		},
 		{
+			"id": "39123630-b6ec-c476-fe80-5127a89e072e",
+			"title": "d-PoICにHubカード作成機能を追加",
+			"date": "2026-01-06",
+			"tags": [
+				"自作ツール"
+			],
+			"body": "<p>自作のPoIC用ツール「<a href=\"https://morvra.github.io/poic/\">d-PoIC</a>」に複数のカードのリンクをまとめたカードを作成する機能を追加した。</p><ul><li>ヘッダー右のボタンから複数選択モードにして</li><li>選択後に紫のレイヤーボタンを押すと</li><li>選択したカードへのリンクをリストにしたHubカードが作成される</li><li>＊リストはカードの作成日順で並ぶ</li></ul><p>まとめカードを4タイプのうち何にするか迷いつつ、とりあえず「記録」にしておいた。ちなみにHubというタグがつくのでまとめのみで絞り込みも可能。</p><p>さらにこの機能の実装に合わせて、エディター内でリストを扱うことが増えると思い、</p><ul><li>改行によるリスト記号（-,*,+）とインデントの自動挿入</li><li>Ctrl+↑↓キーで行の入れ替え（Cosense風。これはリスト以外でも）</li><li>Ctrl+←→キーでインデントレベル変更</li></ul><p>にも対応。</p><p>■</p><p>この開発を始めて（ほぼAI任せの自分でも）Cosenseの凄さをより感じるようになった。リンク機能や同期はもちろん、テキスト編集の操作性においてもめっちゃすごい。エディタとかノートツール作ってもCosenseの基本劣化版にしかならないもんな〜。</p>"
+		},
+		{
 			"id": "6fc9afb0-659d-4f73-fa8d-3558cd992a1b",
 			"title": "「これ、AIが書いた？」文章の進化と創作の価値の行方",
 			"date": "2025-03-12",
@@ -527,15 +536,6 @@
 				"自作ツール"
 			],
 			"body": "<p>自作のボードツール「<a href=\"https://morvra.github.io/cardboard\">CardBoard</a>」のアプデ。</p><p>カード右上の送信ボタンでd-PoICが新しいタブで開いて、そのカードを発見カードとして作成できるようになった！</p><p><img src=\"https://gyazo.com/a8f4538ed322846241ac13a4727c760a/thumb/400\" alt=\"Image\"></p><p>CardBoardはもともとd-PoICからコピーしたOPMLを貼り付けてこねこねしたくて作ったんだけど、ここで操作してるうちに思いついたことをカードに残したいことあるなと（そりゃそう）。</p><hr><p>ちなみにグループ機能も追加した。</p><p>視覚的に意味があるのはもちろん、グループごと移動できたりOPMLコピー時には階層もちゃんと作られる。</p><p>＊この機能追加でこれまでのカードが一旦消えてしまったかも＿(._.)＿</p>"
-		},
-		{
-			"id": "39123630-b6ec-c476-fe80-5127a89e072e",
-			"title": "d-PoICにHubカード作成機能を追加",
-			"date": "2026-01-06",
-			"tags": [
-				"自作ツール"
-			],
-			"body": "<p>自作のPoIC用ツール「<a href=\"https://morvra.github.io/poic/\">d-PoIC</a>」に複数のカードのリンクをまとめたカードを作成する機能を追加した。</p><ul><li>ヘッダー右のボタンから複数選択モードにして</li><li>選択後に紫のレイヤーボタンを押すと</li><li>選択したカードへのリンクをリストにしたHubカードが作成される</li><li>＊リストはカードの作成日順で並ぶ</li></ul><p>まとめカードを4タイプのうち何にするか迷いつつ、とりあえず「記録」にしておいた。ちなみにHubというタグがつくのでまとめのみで絞り込みも可能。</p><p>さらにこの機能の実装に合わせて、エディター内でリストを扱うことが増えると思い、</p><ul><li>改行によるリスト記号（-,*,+）とインデントの自動挿入</li><li>Ctrl+↑↓キーで行の入れ替え（Cosense風。これはリスト以外でも）</li><li>Ctrl+←→キーでインデントレベル変更</li></ul><p>にも対応。</p><p>■</p><p>この開発を始めて（ほぼAI任せの自分でも）Cosenseの凄さをより感じるようになった。リンク機能や同期はもちろん、テキスト編集の操作性においてもめっちゃすごい。エディタとかノートツール作ってもCosenseの基本劣化版にしかならないもんな〜。</p>"
 		}
 	],
 	"pieces": [
