@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sat, 17 Jan 2026 00:50:18 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 17 Jan 2026 12:44:54 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Dynalistのインボックスへ送信するスクリプト</title>
@@ -68,6 +68,13 @@
           <description><![CDATA[<p>前から欲しかった正月エフネを11連で引けた。正月の中からとはいえ闇鍋なのにすぐ引けてラッキー！</p><p>ということでGG編成組んでみることに。</p><p>まずは自分の持ってるユニットの中で使えそうな候補を挙げてく。</p><h2>必須</h2><ul><li>正月エフネ 永続範囲GG</li></ul><ul><li>リエーフ エフネの自傷身代わりトークン</li></ul><ul><li>イムラウ 自傷バリア 覚醒スキルで範囲HP攻撃UP</li></ul><ul><li>ヤシマ リエーフorエフネをコピー＆編成で攻撃UP</li></ul><ul><li>ディエーラ 報酬GUP＆コスト生産</li></ul><ul><li>トトノ GG効率UP</li></ul><h2>編成バフ</h2><ul><li>ハリナ スキル初動40％短縮</li></ul><ul><li>タマミ プラチナ初動25％短縮</li></ul><ul><li>トワ 攻撃隙</li></ul><ul><li>ユキザクラ 呪殺9％</li></ul><h2>バフ </h2><p>＊HPバフは自傷ダメUPにもなるので注意（ヤシマ→リエーフでカバーできる）</p><ul><li>ヴィディア 初動のコスト生産＆消費バフ</li></ul><ul><li>フィネス 射程or攻撃、永続以外のCT短縮</li></ul><ul><li>イムラウ 覚醒スキルで全体攻撃HP30％</li></ul><ul><li>アミー 吟遊詩人(魔界)＋通常スキルで属性バフ(1.3倍)or覚醒スキルでアビ倍率UP＆HP</li></ul><ul><li>オーガスタ 料理(近接)＋覚醒スキルで全体攻撃30％</li></ul><ul><li>ダーク王子 配置バフ(デーモン)15％＋通常スキルで属性バフ(1.3倍)敵全体デバフ</li></ul><ul><li>星を追う者 配置15％＋範囲ダンサーバフ 王子はHPが上がらないものを採用</li></ul><h2>その他</h2><ul><li>夏レオーネ GGもちスキル中確定</li></ul><ul><li>ハロウィンジュリア GGもちスキル中確定</li></ul><ul><li>ニコル スキル中確定GG</li></ul><ul><li>リンネ 回復＋地形＆悪天候軽減</li></ul><ul><li>夏サナラ マスバフ</li></ul><ul><li>夏レオラ スキルオート＆コスト下げ</li></ul><ul><li>スカラー 隠密デバフ</li></ul><ul><li>スカウト 隠密デバフ</li></ul><p>以上の候補から最終的に組んだのがこちら▼</p><p><img src="https://gyazo.com/42f53fe66b0cfc3b4f3dd2575d2aad3d/thumb/500#.png" alt="Image"></p><p>基本エフネで全ての敵を処理、漏れた敵や別レーンはレオーネが担当する構成。</p><p>とは言っても組んで初日なのでまだまだ迷い中。</p><p>手軽さ優先ならフィネスを通常にしてGG要員増やすのが良さげだし、エフネの火力優先なら夏レオラと夏レオーネのとこ夏サナラとダーク王子にすると良いよな〜、、などなど。</p><p>これからヒストリー進めつつちょうどいい構成を見つけていこう。</p>]]></description>
           <pubDate>Mon, 06 Jan 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=0450f854-92fa-b387-1382-ae02b308d589</guid>
+        </item>
+        <item>
+          <title>Rhizonoteで書いてるノートを公開する場所を作った</title>
+          <link>https://morvra.github.io/article?id=7da3f4e4-1c72-0666-2548-4d5df5b79abc</link>
+          <description><![CDATA[<p><a href="https://morvra.github.io/article?id=518b6ce8-0f78-8965-ba43-295d96da0816">前回記事で書いた</a> Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。</p><p>その名も<a href="https://morvra.github.io/rhizoroji/">Rhizoroji</a>。由来はRhizome+露地（Roji）。</p><p>Rhizonoteの中を公開するからRhizoはつけたい＆庭の要素つけたいけどRhizogardenは長いし地下茎とガーデンってニュアンスがちょっと合わないかなってことで、茶室につながる庭でやや野味のある趣な露地という語を採用。</p><p>仕組みとしては、</p><ul><li>Rhizonote側の機能でPublishをonにしたノートを</li><li>DropboxAPIを使ってGithubActionsでHTMLに変換して</li><li>GithubPagesに静的サイトとしてビルト</li></ul><p>することで公開している。</p>]]></description>
+          <pubDate>Sat, 17 Jan 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=7da3f4e4-1c72-0666-2548-4d5df5b79abc</guid>
         </item>
         <item>
           <title>d-PoICに並び順変更機能を追加</title>
