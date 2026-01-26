@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sun, 25 Jan 2026 12:48:39 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 26 Jan 2026 00:57:25 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -54,6 +54,13 @@
           <description><![CDATA[<p><a href="https://morvra.github.io/poic/">d-PoIC</a>の並びを作成順だけじゃなくて更新日でも並べるようにした。さらに昇順も。</p><p>PoICの作成日だけでいいって思想がシンプルで好きなんだけど、デジタルなら勝手にやってくれるし切り替えも自由なのでやってもいいかなって。カードの編集もたまにやりたくなるし。</p>]]></description>
           <pubDate>Sat, 20 Dec 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=b97b16df-8dc5-8cd3-9581-804581f4d2e1</guid>
+        </item>
+        <item>
+          <title>『AIと30分放置したら…』のもったいなさ</title>
+          <link>https://morvra.github.io/article?id=d9a30f60-09d5-1679-8af9-3a072155aaaf</link>
+          <description><![CDATA[<ul><li><a href="https://www.youtube.com/watch?v=ceTowf0y_YI">【ノーカット】AIと30分放置したら…ランジャタイ国崎 史上最高傑作が誕生！？ - YouTube</a></li></ul><p>前回の川北さんに続き面白かったし苦行だったｗ</p><p>■</p><p>蛇足だけど現状だとこの番組におけるAI（Grok）は人間的知性をもった存在じゃなくて単なるLLMだよなって。まぁ人間の"知性"も別に大したもんじゃないと思うんだけどさ。</p><p>番組のコンセプトや国崎さんのコンテキストを教えたうえで、この動画をGrokやChatGPTに見せることができたら音の抑揚とジェスチャーからストーリーを組んで"解説"してくれるんだろうか？そしてそれを自分はもっともらしく感じるんだろうか？</p><p>前回も思ったんだけど、文字起こしとタイミングが正確なら（今回であれば動画を見せることができれば）もっと面白くなるのかなぁ。</p><p>今のままだとシンプルな音声認識の稚拙さによる齟齬だけが面白のエッセンスになっていて、AIとのセッションになってない。</p><p>ななまがりのVSAIの企画の方がAIの面白さとの融合がある。</p><ul><li><a href="https://www.youtube.com/watch?v=N8oSmMjy5xg">【ChatGPT vs 森下】AIが今までされたことがないであろう質問をぶつける - YouTube</a></li></ul>]]></description>
+          <pubDate>Sun, 25 Jan 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=d9a30f60-09d5-1679-8af9-3a072155aaaf</guid>
         </item>
         <item>
           <title>ウマ娘 温泉シナリオで初のUS！</title>
