@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Tue, 17 Feb 2026 01:04:07 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 17 Feb 2026 13:09:37 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Dynalistのインボックスへ送信するスクリプト</title>
@@ -439,6 +439,13 @@
           <description><![CDATA[<ul><li><a href="https://gist.github.com/morvra/2414f4899ceddb31b706a0affab533e9#file-wfcollapseparent-js">wfCollapseParent.js</a></li></ul><p>タイトルの通り。こういうショートカット欲しいと思って、コードをClaudeに書いてもらった。</p><p>最初うまくいかなかったのでWorkflowyの構造をコピペして教えたり調整して完成。デフォルトのキーは（文字選択せずに）Ctrl+uにしてある。</p><p>記事書いてから調べたら倉下さんがもうすでにBookmarkletでほとんど同じことやってた。さすが。</p><ul><li><a href="https://scrapbox.io/rashitamemo/WorkFlowy%E3%81%A7%E8%A6%AA%E9%A0%85%E7%9B%AE%E3%82%92%E9%96%89%E3%81%98%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%82%AD%E3%83%BC%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88">WorkFlowyで親項目を閉じるショートカットキーを追加するブックマークレット - 倉下忠憲の発想工房</a></li></ul><hr><p>追記。自分はショートカットをCtrl+←に変更した。こっちのほうが直感的だった。</p>]]></description>
           <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=ac589c42-ff2e-70ef-d4fd-f77497ffc062</guid>
+        </item>
+        <item>
+          <title>ScriptableのコードをClaudeに書いてもらえて神！</title>
+          <link>https://morvra.github.io/article?id=5baa00a8-0b50-a55a-2e5d-63b65c52fec5</link>
+          <description><![CDATA[<p>iOSのScriptableはiOS上でJavascriptを実行できるアプリ。</p><p><div style="text-align: left;" id="appreach-box"><img src="<a href="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1a/a2/fa/1aa2fa5f-2440-f3d1-7785-2e6f1b82984a/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/512x512bb.jpg">https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1a/a2/fa/1aa2fa5f-2440-f3d1-7785-2e6f1b82984a/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/512x512bb.jpg</a>" alt="Scriptable" style="float: left; margin: 10px; width: 25%; max-width: 120px; border-radius: 10%;" id="appreach-image"><div class="appreach-info" style="margin: 10px;"><div id="appreach-appname">Scriptable</div><div id="appreach-developer" style="font-size: 80%; display: inline-block;">開発元:<span id="appreach-developerurl">Simon B. Støvring</span></div><div id="appreach-price" style="font-size: 80%; display: inline-block;">無料</div><div class="appreach-powered" style="font-size: 80%; display: inline-block;">posted with<a href="<a href="https://mama-hack.com/app-reach/">https://mama-hack.com/app-reach/</a>" title="アプリーチ" target="_blank" rel="nofollow">アプリーチ</a></div><div class="appreach-links" style="float: left;"><div id="appreach-itunes-link" style="display: inline-block;"><a id="appreach-itunes" href="<a href="https://apps.apple.com/jp/app/scriptable/id1405459188?uo=4">https://apps.apple.com/jp/app/scriptable/id1405459188?uo=4</a>" rel="nofollow"><img src="<a href="https://nabettu.github.io/appreach/img/itune_ja.svg">https://nabettu.github.io/appreach/img/itune_ja.svg</a>" style="height: 40px; width: 135px;"></a></div><div id="appreach-gplay-link" style="display: inline-block;"></div></div></div><div class="appreach-footer" style="margin-bottom: 10px; clear: left;"></div></div></p><p>これまではコードをコピペして使うくらいだったんだけど、</p><p>Claudeに「iOSのScriptableというアプリで、〇〇を使って〇〇したいからコードを書いて欲しい」みたいに伝えればだいたい思った通りのコードを書いてくれることを発見！神！</p><p>まだあんまり触ってないけどWorkflowy関連で、</p><ul><li>WorkflowyのinboxにあるTodoを一覧（ウィジェットにも表示）、タップで完了して末尾に時刻を挿入</li><li>ショートカットを介して、定時に自動で当日の予定をカレンダーからWorkflowyにTodoとして送信する</li><li>特定の項目の完了済みTodoを一括で未完に戻して時刻を削除する</li></ul><p>コードはすぐにできた。</p><p>ローカルのファイルもいじれるし、APIがあるサービスなら連携できるし、活用の幅はめちゃくちゃ広いと思う。</p><p>iOSはショートカットが優秀だから、自動化したいことがあっても大体そっちでできるんだけど、こみいった操作が必要ならScriptable（とAI）に頼っていこう。</p>]]></description>
+          <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=5baa00a8-0b50-a55a-2e5d-63b65c52fec5</guid>
         </item>
       </channel>
     </rss>
