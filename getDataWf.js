@@ -357,16 +357,13 @@ function getBody(allNodes, rootNode) {
 function processNodeSubtree(currentNode, allNodes) {
     let nodeHtml = '';
 
-    // layoutModeを取得 (存在しない場合に備えて 'bullets' をデフォルトに)
     const layoutMode = (currentNode.data && currentNode.data.layoutMode) ? currentNode.data.layoutMode : 'bullets';
 
     if (layoutMode === 'h1' || layoutMode === 'h2' || layoutMode === 'h3') {
         const level = layoutMode.charAt(1);
-        // nameの中身をMarkdownとして処理 (リンク、太字など) し、<p>タグを除去
         const content = stripParagraphTags(markdownToHTML(currentNode.name));
         nodeHtml += `<h${level}>${content}</h${level}>`;
         
-        // Note 処理
         if (currentNode.note) {
             const noteContentToRender = currentNode.note
                 .split('\n')
@@ -379,7 +376,6 @@ function processNodeSubtree(currentNode, allNodes) {
             }
         }
         
-        // 子ノードの処理
         const children = getChildren(currentNode.id, allNodes);
         if (children.length > 0) {
             children.forEach(childNode => {
@@ -388,12 +384,9 @@ function processNodeSubtree(currentNode, allNodes) {
         }
 
     } else if (layoutMode === 'quote-block') {
-        // 引用の場合
-        // nameの中身をMarkdownとして処理し、<p>タグを除去
         const content = stripParagraphTags(markdownToHTML(currentNode.name));
-        nodeHtml += `<blockquote><p>${content}</p></blockquote>`; // 引用は <p> があった方がセマンティック
+        nodeHtml += `<blockquote><p>${content}</p></blockquote>`;
 
-        // Note 処理
         if (currentNode.note) {
             const noteContentToRender = currentNode.note
                 .split('\n')
@@ -402,13 +395,32 @@ function processNodeSubtree(currentNode, allNodes) {
                 .trim();
             
             if (noteContentToRender !== '') {
-                // 引用内のNoteは、そのまま引用の一部として追加する
                 nodeHtml += `<blockquote>${markdownToHTML(noteContentToRender)}</blockquote>`;
             }
         }
         
-        // 子ノードの処理 (子も引用として扱うか、通常のテキストとして続けるか)
-        // ここでは通常のテキストとして処理
+        const children = getChildren(currentNode.id, allNodes);
+        if (children.length > 0) {
+            children.forEach(childNode => {
+                nodeHtml += processNodeSubtree(childNode, allNodes);
+            });
+        }
+
+    } else if (layoutMode === 'code-block') {
+        nodeHtml += `<pre><code>${escapeHtml(currentNode.name)}</code></pre>`;
+
+        if (currentNode.note) {
+            const noteContentToRender = currentNode.note
+                .split('\n')
+                .filter(line => !line.startsWith('date:') && !line.startsWith('tag:'))
+                .join('\n')
+                .trim();
+            
+            if (noteContentToRender !== '') {
+                nodeHtml += markdownToHTML(noteContentToRender);
+            }
+        }
+
         const children = getChildren(currentNode.id, allNodes);
         if (children.length > 0) {
             children.forEach(childNode => {
@@ -417,7 +429,6 @@ function processNodeSubtree(currentNode, allNodes) {
         }
 
     } else if (currentNode.name.trim().toLowerCase() === 'li') {
-        // 既存の 'li' 特殊処理 (layoutMode == 'bullets' のはず)
         const children = getChildren(currentNode.id, allNodes);
         if (children.length > 0) {
             nodeHtml += '<ul>';
@@ -426,10 +437,8 @@ function processNodeSubtree(currentNode, allNodes) {
             });
             nodeHtml += '</ul>';
         }
+
     } else {
-        // デフォルトの処理 (layoutMode == 'bullets' や 'todo' など)
-        // この場合、markdownToHTMLが '# 見出し' などを処理する
-        
         nodeHtml += markdownToHTML(currentNode.name);
         
         if (currentNode.note) {
