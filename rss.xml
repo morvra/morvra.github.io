@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 18 Feb 2026 13:10:40 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 19 Feb 2026 01:05:47 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -98,13 +98,6 @@
           <guid isPermaLink="true">https://morvra.github.io/article?id=5acc19fe-0c8a-d3ac-8599-299fb939fe4c</guid>
         </item>
         <item>
-          <title>発見とは何か？</title>
-          <link>https://morvra.github.io/article?id=3e3d8238-296b-bf73-f1fd-782e4299fe77</link>
-          <description><![CDATA[<p><a href="https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983">前の考えごと</a>から、「発見とは何か」が気になってきた。</p><p>辞書的に言えば、発見とは</p><blockquote><p><p>まだ知られていなかったものを見つけ出すこと。また、わからなかった存在を見いだすこと。</p><p>via: <a href="https://kotobank.jp/word/%E7%99%BA%E8%A6%8B-114996">デジタル大辞泉 - コトバンク</a></p></p></blockquote><p>とされる。</p><p>この定義を、個人の思考に引き寄せてみると、</p><p>とても重要なポイントが見えてくる。</p><p><b>発見とは、</b></p><p><b>これまで見えていなかった「何か」を、</b></p><p><b>あるものとして認識したこと</b></p><p>なのではないか。</p><p>ここで言う「何か」は、</p><p>結論である必要も、完成した理論である必要もない。</p><p>ただ、「あ、これはそういうものだ」と、</p><p>対象として立ち上がった、という感覚があるかどうか。</p><p>思ったことの多くは、この段階に至っていない。</p><p>ただ通り過ぎるだけの反応であり、</p><p>まだ「あるもの」として認識されていない。</p><p>だから、発見カードにする気が起きなかったのだと思う。</p><p>■</p><p>この問いを考えているうちに、『知的生産の技術』を想起した。</p><p>梅棹忠夫は知的生産を、</p><blockquote><p>頭をはたらかせて、なにかあたらしいことがら──情報──を、ひとにわかるかたちで提出すること</p></blockquote><p>と定義している。</p><p>発見は、知的生産そのものではない。</p><p>けれど、知的生産の原材料であることは間違いない。</p><p>発見がなければ、提出する中身がない。</p><p>そう考えると、発見は「新しいことがら」を生む最小単位なのかもしれない。</p><p>とても小さく私的で、未完成なもの。</p><p>しかし、確かに「あるもの」として認識されたもの。</p><p>それ以上でもそれ以下でもない。</p><p>発見はゴールではなく、入口だ。</p><p>そして、その入口が見えたときだけカードに残したくなる。</p><p>たぶん、この感覚を大切にしていれば、</p><p>発見カードが少ないことを、</p><p>それほど気にしなくて済む気がしている。</p><p>考えごとは続く。</p><p>でも、発見は、ちゃんと起きている。</p><p>参考:</p><ul><li><a href="https://www.amazon.co.jp/dp/4004150930/?tag=morvra-22">知的生産の技術 (岩波新書 青版 722)</a></li><li><a href="https://cyblog.jp/2888">知的生産の定義とそこから見えてくる「心がけ」 | シゴタノ！</a></li><li><a href="https://poic2023.capture.jp/">Pile of Index Cards</a></li></ul>]]></description>
-          <pubDate>Sun, 21 Dec 2025 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=3e3d8238-296b-bf73-f1fd-782e4299fe77</guid>
-        </item>
-        <item>
           <title>このサイトの元データをDynalistからWorkflowyに移動した</title>
           <link>https://morvra.github.io/article?id=ef97353a-5ca5-0ff4-ab6a-a6eeced6d423</link>
           <description><![CDATA[<p>このサイトの記事やPieceはすべてDynalistで書いて、それを自動でHTMLおよびJSONに変換してGithubにPushして公開してた。それは元々Workflowyでやりたかったのを、公開APIが無くて諦めてDynalistを使うことにした、という経緯がある。</p><p>普段使いのアウトライナーとしてはWorkflowyが好みだったのにも関わらず、その理由だけでDynalistを使ってた。</p><p>しかしDynalistのアップデートが数年無く、一方Workflowyのアップデートは頻繁で機能差は広がり続けていたこともあり、乗り換えたい欲は高まっていたけどなかなか踏ん切りがつかずにいた。</p><p>そんな中、WorkflowyのAPI（公開自体は少し前からされていた）が Export All  Nodes に対応したことで、Workflowyで直接記事の執筆ができるようになった。ガチ神アプデ！！</p><ul><li><a href="https://beta.workflowy.com/api-reference/#nodes-export">API Reference | Workflowy</a></li></ul><p>Workflowy独自の仕様（マークダウンが勝手に変換される等）もあり引越し作業に苦戦したものの、ひとまず完成！すべての記事が一括で変換されたので、不具合等もあるかもしれないけど今んとこ大丈夫そう。</p><p>これでWorkflowy上の特定のタグを付けた文章が自動でJSONに変換されてGithubにPushされるようになった。</p><p>念願のWorkflowyと個人サイトを自動で結びつける環境が整ったぞー！</p>]]></description>
@@ -124,13 +117,6 @@
           <description><![CDATA[<p>2025-09-12本格オープンのニュウマン高輪。なんか響きが気になったので調べた。</p><p>new + woman/man を合わせて NEWoMan らしい</p><blockquote><p>「あたらしい時代を生きる、すべてのあたらしい女性のために。あたらしい経験と出合う場所」というコンセプト。</p></blockquote><p>* <a href="https://namae.co.jp/news_letter/1833/" target="_blank">VOL.163 「フック」の効いたネーミング – 日本ネーミング&リサーチ</a></p><p>音で聴いた印象で単なる new man じゃないんだろうなと思ってたけど、英語由来の謎の造語だった。女性のWomanを強調してるのね。</p><p>* <a href="https://ja.wikipedia.org/wiki/NEWoMan" target="_blank">NEWoMan - Wikipedia</a></p><p>ちなみにJR東日本の連結子会社でルミネが運営してた。知らなかった〜。</p>]]></description>
           <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=f145e6e9-da65-9afe-fd29-58637fc3a57d</guid>
-        </item>
-        <item>
-          <title>思ったことと考えたことはどう違う？</title>
-          <link>https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983</link>
-          <description><![CDATA[<p>PoICをやっていて、発見カードなかなか増えないなぁと思ってた。</p><p>だからといって日々生きていく中で思ったことを逐一書くのは違う気がしている。</p><p>そんな中で、</p><p>「思ったことと考えたことはどう違うんだろう？」</p><p>という疑問が浮かんできた。</p><p>■</p><p>自分なりに考えると、</p><p>「思ったこと」はその場では思いついたことでしかなく理由や根拠がない。</p><p>そこから深堀り・展開・（検証）していくことで、「考えごと」になっていく。</p><p>そしてそれは「発見」としてカードに残す価値がある、</p><p>と思えるものになる。</p><p>と考えたｗ</p><p>■</p><p>だけど、思いついたことがあっても</p><p>それをメモとして書いておかなければ、そこから考えること自体が難しい（新たな刺激に反応しているうちに忘れてしまう）</p><p>のがミソ。</p><p>PoICの野帳の役割は大事ってことだな。</p><p>自分の場合はWorkflowyのinboxや日付トピックになるだろう。</p><p>■</p><p>Lento（自分がカスタムしたChatGPT）はこんな風に言ってた。</p><blockquote><p><p>思ったことがなければ、考えることは始まらない</p><p>考えたことがなければ、思ったことは残らない</p></p></blockquote><p>今回の思考で、思ったことをそのまま発見として扱おうとしていない自分に気がついた。</p><p>「<b>思ったことはそのままでは発見にならない</b>」というのは発見だな！</p><p>ってことでカード化した。</p><hr><p>じゃあ「発見ってなに？」が次の考えごと。</p>]]></description>
-          <pubDate>Sat, 20 Dec 2025 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983</guid>
         </item>
         <item>
           <title>2025-11時点でのWorkflowyの構造と使い方</title>
@@ -187,6 +173,20 @@
           <description><![CDATA[<p><blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【カード能力変更】<br>9/29のメンテナンス時に「栄弦の天宮・リュウフウ」「狂気の創造者・リーアム」「パペットキャット」「シンフォニアハート・ツヴァイ」のカード能力を変更いたします。<br><br>▼詳細はこちら<a href="<a href="https://t.co/GKXWAM72Ni">https://t.co/GKXWAM72Ni</a>"><a href="https://t.co/GKXWAM72Ni">https://t.co/GKXWAM72Ni</a></a><a href="<a href="https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&ref_src=twsrc%5Etfw">https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&amp;ref_src=twsrc%5Etfw</a>">#シャドバWB</a> <a href="<a href="https://t.co/Su8iIjxAVo">https://t.co/Su8iIjxAVo</a>"><a href="http://pic.twitter.com/Su8iIjxAVo">pic.twitter.com/Su8iIjxAVo</a></a></p>&mdash; Shadowverse: Worlds Beyond公式 (shadowverse_jp) <a href="<a href="https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw">https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw</a>">September 26, 2025</a></blockquote> <script async src="<a href="https://platform.twitter.com/widgets.js">https://platform.twitter.com/widgets.js</a>" charset="utf-8"></script></p><h2>調整内容</h2><ul><li>リュウフウ 4PP→3PP</li><li>パペットキャット 2/2/2→1/1/1 突進</li><li>リーアム 10/8/8→9/7/7</li><li>ツヴァイ 進化時改良型操り人形出す</li></ul><p>アッパーのみでナーフは無し！できたことできなくなるのは嫌だもんね。なるべくこの形がいいと思う。</p><p>CRで苦戦してるドラネメに順当な強化って感じ。3弾強化ではないのはマゼルベインの影響もあるのかな？破壊軸に強化が無いのは不遇かも。</p><p>環境にどれくらいインパクトがあるのかは謎。2クラスのCR底上げは間違いないけど。</p><p>ドラ強化で増えたらウィッチは減りそう。</p><p>ネメは何に強いのか謎。人形が戦えてない＆破壊にとってパペットキャットがどんくらいありがたいかわからんので。</p><p>人形がロイに（環境における立ち位置的な意味で）勝てるのであれば環境がかなり動きそう。具体的にはウィッチ・モードメア・クレビショにどれくらい抗えるか。</p><p>次は財宝ロイヤルか人形ネメシスで</p>]]></description>
           <pubDate>Fri, 26 Sep 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/article?id=8cba96ed-2bdf-6743-9aca-58c449d6c692</guid>
+        </item>
+        <item>
+          <title>思ったことと考えたことはどう違う？</title>
+          <link>https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983</link>
+          <description><![CDATA[<p>PoICをやっていて、発見カードなかなか増えないなぁと思ってた。</p><p>だからといって日々生きていく中で思ったことを逐一書くのは違う気がしている。</p><p>そんな中で、</p><p>「思ったことと考えたことはどう違うんだろう？」</p><p>という疑問が浮かんできた。</p><p>■</p><p>自分なりに考えると、</p><p>「思ったこと」はその場では思いついたことでしかなく理由や根拠がない。</p><p>そこから深堀り・展開・（検証）していくことで、「考えごと」になっていく。</p><p>そしてそれは「発見」としてカードに残す価値がある、</p><p>と思えるものになる。</p><p>と考えたｗ</p><p>■</p><p>だけど、思いついたことがあっても</p><p>それをメモとして書いておかなければ、そこから考えること自体が難しい（新たな刺激に反応しているうちに忘れてしまう）</p><p>のがミソ。</p><p>PoICの野帳の役割は大事ってことだな。</p><p>自分の場合はWorkflowyのinboxや日付トピックになるだろう。</p><p>■</p><p>Lento（自分がカスタムしたChatGPT）はこんな風に言ってた。</p><blockquote><p><p>思ったことがなければ、考えることは始まらない</p><p>考えたことがなければ、思ったことは残らない</p></p></blockquote><p>今回の思考で、思ったことをそのまま発見として扱おうとしていない自分に気がついた。</p><p>「<b>思ったことはそのままでは発見にならない</b>」というのは発見だな！</p><p>ってことでカード化した。</p><hr><p>じゃあ「発見ってなに？」が次の考えごと。</p>]]></description>
+          <pubDate>Sat, 20 Dec 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983</guid>
+        </item>
+        <item>
+          <title>発見とは何か？</title>
+          <link>https://morvra.github.io/article?id=3e3d8238-296b-bf73-f1fd-782e4299fe77</link>
+          <description><![CDATA[<p><a href="https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983">前の考えごと</a>から、「発見とは何か」が気になってきた。</p><p>辞書的に言えば、発見とは</p><blockquote><p><p>まだ知られていなかったものを見つけ出すこと。また、わからなかった存在を見いだすこと。</p><p>via: <a href="https://kotobank.jp/word/%E7%99%BA%E8%A6%8B-114996">デジタル大辞泉 - コトバンク</a></p></p></blockquote><p>とされる。</p><p>この定義を、個人の思考に引き寄せてみると、</p><p>とても重要なポイントが見えてくる。</p><p><b>発見とは、</b></p><p><b>これまで見えていなかった「何か」を、</b></p><p><b>あるものとして認識したこと</b></p><p>なのではないか。</p><p>ここで言う「何か」は、</p><p>結論である必要も、完成した理論である必要もない。</p><p>ただ、「あ、これはそういうものだ」と、</p><p>対象として立ち上がった、という感覚があるかどうか。</p><p>思ったことの多くは、この段階に至っていない。</p><p>ただ通り過ぎるだけの反応であり、</p><p>まだ「あるもの」として認識されていない。</p><p>だから、発見カードにする気が起きなかったのだと思う。</p><p>■</p><p>この問いを考えているうちに、『知的生産の技術』を想起した。</p><p>梅棹忠夫は知的生産を、</p><blockquote><p>頭をはたらかせて、なにかあたらしいことがら──情報──を、ひとにわかるかたちで提出すること</p></blockquote><p>と定義している。</p><p>発見は、知的生産そのものではない。</p><p>けれど、知的生産の原材料であることは間違いない。</p><p>発見がなければ、提出する中身がない。</p><p>そう考えると、発見は「新しいことがら」を生む最小単位なのかもしれない。</p><p>とても小さく私的で、未完成なもの。</p><p>しかし、確かに「あるもの」として認識されたもの。</p><p>それ以上でもそれ以下でもない。</p><p>発見はゴールではなく、入口だ。</p><p>そして、その入口が見えたときだけカードに残したくなる。</p><p>たぶん、この感覚を大切にしていれば、</p><p>発見カードが少ないことを、</p><p>それほど気にしなくて済む気がしている。</p><p>考えごとは続く。</p><p>でも、発見は、ちゃんと起きている。</p><p>参考:</p><ul><li><a href="https://www.amazon.co.jp/dp/4004150930/?tag=morvra-22">知的生産の技術 (岩波新書 青版 722)</a></li><li><a href="https://cyblog.jp/2888">知的生産の定義とそこから見えてくる「心がけ」 | シゴタノ！</a></li><li><a href="https://poic2023.capture.jp/">Pile of Index Cards</a></li></ul>]]></description>
+          <pubDate>Sun, 21 Dec 2025 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/article?id=3e3d8238-296b-bf73-f1fd-782e4299fe77</guid>
         </item>
         <item>
           <title>Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト</title>
