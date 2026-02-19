@@ -37,6 +37,14 @@ function escapeHtml(text) {
         .replace(/'/g, "&#039;");
 }
 
+// コードブロック用: & < > のみエスケープ（" ' は不要）
+function escapeHtmlForCode(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
 // ヘルパー関数: HTML文字列から外側の<p>タグを除去
 function stripParagraphTags(html) {
     const trimmedHtml = html.trim();
@@ -407,7 +415,7 @@ function processNodeSubtree(currentNode, allNodes) {
         }
 
     } else if (layoutMode === 'code-block') {
-        nodeHtml += `<pre><code>${escapeHtml(currentNode.name)}</code></pre>`;
+        nodeHtml += `<pre><code>${escapeHtmlForCode(unescapeHtml(currentNode.name))}</code></pre>`;
 
         if (currentNode.note) {
             const noteContentToRender = currentNode.note
