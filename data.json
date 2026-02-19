@@ -976,7 +976,7 @@
 			"title": "コードブロック投稿テスト",
 			"date": "2026-02-19",
 			"tags": [],
-			"body": "<p>▼ コードブロック</p><p>javascript: ! function() {</p><p>    var e = document.createElement(\"textarea\"),</p><p>        t = document.title,</p><p>        c = document.URL.replace(/\\(/g, \"%2528\").replace(/\\)/g, \"%2529\");</p><p>    e.textContent = \"<a href=\"\" + c + \"\" target=\"_blank\">\" + t + \"</a>\", document.querySelector(\"body\").append(e), e.select(), document.execCommand(\"copy\"), e.remove()</p><p>}();</p><p>本文。</p>"
+			"body": "<p>▼ コードブロック</p><pre><code>javascript: ! function() {\n    var e = document.createElement(&amp;quot;textarea&amp;quot;),\n        t = document.title,\n        c = document.URL.replace(/\\(/g, &amp;quot;%2528&amp;quot;).replace(/\\)/g, &amp;quot;%2529&amp;quot;);\n    e.textContent = &amp;quot;[&amp;quot; + t + &amp;quot;](&amp;quot; + c + &amp;quot;)&amp;quot;, document.querySelector(&amp;quot;body&amp;quot;).append(e), e.select(), document.execCommand(&amp;quot;copy&amp;quot;), e.remove()\n}();\n</code></pre><p>本文。</p>"
 		},
 		{
 			"id": "ab25efbd-0728-e100-1fff-f2b50268b423",
