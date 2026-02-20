@@ -115,6 +115,15 @@
 			"body": "<p><img src=\"https://gyazo.com/0b18bbe8ce980b17c37095a17e93f669/thumb/800\" alt=\"Image\"></p><p>よしよし。</p><p><img src=\"https://gyazo.com/336dc3ec2e3c3b0b412fceec5b6a9037/thumb/800\" alt=\"Image\"></p><p>ダイヤ率は66.5％で過去最高。</p><p>ダイヤスタートだったのと、人形ネメシスがこれまで使ってたデッキに比べればシンプルかつ安定感あったおかげ。</p><h2>構築</h2><p>▼ 使ったデッキ</p><p><img src=\"https://i.gyazo.com/052c5bf40e50e34e9564992fcfa51c41.com\" alt=\"Image\"></p><p>一応自作のリストで、事故りにくい構築かつドラゴンをやや重く見てるつもり。ギルネリーゼ・ストリングアサルト・シルヴィアのピン挿しに迷いが現れている。</p><p>ノアは人形3枚持ってこれないことが多すぎて3積みが正解なのか謎。でも進化権使わない処理札＆リーサルまでの火力溜め＆5/6スタッツと色んな面で優秀で外せない。</p><p>前期までいたリーアムは、9~10ターンでの決着を志向するなら欲しい場面もあるんだけど、進化orモードナイトメアや秘術ウィッチの回復を想定するとベルゼバブからのオーキスを引き込む方が大事と判断して外した。</p><h2>プレイング</h2><p>簡単よりだと思う。考えどころは2コスのプレイ優先度だったり、最終盤の火力計算くらいかな。だから相手を見る余裕あるし、基本的には盤面で戦うデッキなのでトレード学べて初心者にはめっちゃおすすめ。</p><p>マリガンは特定のカードを探すというより、マナカーブ通りに動くのが基本方針。最優先はルリア以外の2コス、次いでエース（先行時）・ツヴァイ・オーキスも欲しい、そのへんを持ってたら3・4のキープも対面考慮して考えるって感じ。</p><p>有利不利については判断できるほど上手くない。強いて言うならナイトメアと秘術には有利、財宝には不利かも？</p>"
 		},
 		{
+			"id": "449e2fca-f705-20ab-0f82-17139c8b0983",
+			"title": "思ったことと考えたことはどう違う？",
+			"date": "2025-12-20",
+			"tags": [
+				"考えごと"
+			],
+			"body": "<p>PoICをやっていて、発見カードなかなか増えないなぁと思ってた。</p><p>だからといって日々生きていく中で思ったことを逐一書くのは違う気がしている。</p><p>そんな中で、</p><p>「思ったことと考えたことはどう違うんだろう？」</p><p>という疑問が浮かんできた。</p><p>■</p><p>自分なりに考えると、</p><p>「思ったこと」はその場では思いついたことでしかなく理由や根拠がない。</p><p>そこから深堀り・展開・（検証）していくことで、「考えごと」になっていく。</p><p>そしてそれは「発見」としてカードに残す価値がある、</p><p>と思えるものになる。</p><p>と考えたｗ</p><p>■</p><p>だけど、思いついたことがあっても</p><p>それをメモとして書いておかなければ、そこから考えること自体が難しい（新たな刺激に反応しているうちに忘れてしまう）</p><p>のがミソ。</p><p>PoICの野帳の役割は大事ってことだな。</p><p>自分の場合はWorkflowyのinboxや日付トピックになるだろう。</p><p>■</p><p>Lento（自分がカスタムしたChatGPT）はこんな風に言ってた。</p><blockquote><p><p>思ったことがなければ、考えることは始まらない</p><p>考えたことがなければ、思ったことは残らない</p></p></blockquote><p>今回の思考で、思ったことをそのまま発見として扱おうとしていない自分に気がついた。</p><p>「<b>思ったことはそのままでは発見にならない</b>」というのは発見だな！</p><p>ってことでカード化した。</p><hr><p>じゃあ「発見ってなに？」が次の考えごと。</p>"
+		},
+		{
 			"id": "ef97353a-5ca5-0ff4-ab6a-a6eeced6d423",
 			"title": "このサイトの元データをDynalistからWorkflowyに移動した",
 			"date": "2025-11-06",
@@ -143,6 +152,15 @@
 			"body": "<p>2025-09-12本格オープンのニュウマン高輪。なんか響きが気になったので調べた。</p><p>new + woman/man を合わせて NEWoMan らしい</p><blockquote><p>「あたらしい時代を生きる、すべてのあたらしい女性のために。あたらしい経験と出合う場所」というコンセプト。</p></blockquote><p>* <a href=\"https://namae.co.jp/news_letter/1833/\" target=\"_blank\">VOL.163 「フック」の効いたネーミング – 日本ネーミング&リサーチ</a></p><p>音で聴いた印象で単なる new man じゃないんだろうなと思ってたけど、英語由来の謎の造語だった。女性のWomanを強調してるのね。</p><p>* <a href=\"https://ja.wikipedia.org/wiki/NEWoMan\" target=\"_blank\">NEWoMan - Wikipedia</a></p><p>ちなみにJR東日本の連結子会社でルミネが運営してた。知らなかった〜。</p>"
 		},
 		{
+			"id": "3e3d8238-296b-bf73-f1fd-782e4299fe77",
+			"title": "発見とは何か？",
+			"date": "2025-12-21",
+			"tags": [
+				"考えごと"
+			],
+			"body": "<p><a href=\"https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983\">前の考えごと</a>から、「発見とは何か」が気になってきた。</p><p>辞書的に言えば、発見とは</p><blockquote><p><p>まだ知られていなかったものを見つけ出すこと。また、わからなかった存在を見いだすこと。</p><p>via: <a href=\"https://kotobank.jp/word/%E7%99%BA%E8%A6%8B-114996\">デジタル大辞泉 - コトバンク</a></p></p></blockquote><p>とされる。</p><p>この定義を、個人の思考に引き寄せてみると、</p><p>とても重要なポイントが見えてくる。</p><p><b>発見とは、</b></p><p><b>これまで見えていなかった「何か」を、</b></p><p><b>あるものとして認識したこと</b></p><p>なのではないか。</p><p>ここで言う「何か」は、</p><p>結論である必要も、完成した理論である必要もない。</p><p>ただ、「あ、これはそういうものだ」と、</p><p>対象として立ち上がった、という感覚があるかどうか。</p><p>思ったことの多くは、この段階に至っていない。</p><p>ただ通り過ぎるだけの反応であり、</p><p>まだ「あるもの」として認識されていない。</p><p>だから、発見カードにする気が起きなかったのだと思う。</p><p>■</p><p>この問いを考えているうちに、『知的生産の技術』を想起した。</p><p>梅棹忠夫は知的生産を、</p><blockquote><p>頭をはたらかせて、なにかあたらしいことがら──情報──を、ひとにわかるかたちで提出すること</p></blockquote><p>と定義している。</p><p>発見は、知的生産そのものではない。</p><p>けれど、知的生産の原材料であることは間違いない。</p><p>発見がなければ、提出する中身がない。</p><p>そう考えると、発見は「新しいことがら」を生む最小単位なのかもしれない。</p><p>とても小さく私的で、未完成なもの。</p><p>しかし、確かに「あるもの」として認識されたもの。</p><p>それ以上でもそれ以下でもない。</p><p>発見はゴールではなく、入口だ。</p><p>そして、その入口が見えたときだけカードに残したくなる。</p><p>たぶん、この感覚を大切にしていれば、</p><p>発見カードが少ないことを、</p><p>それほど気にしなくて済む気がしている。</p><p>考えごとは続く。</p><p>でも、発見は、ちゃんと起きている。</p><p>参考:</p><ul><li><a href=\"https://www.amazon.co.jp/dp/4004150930/?tag=morvra-22\">知的生産の技術 (岩波新書 青版 722)</a></li><li><a href=\"https://cyblog.jp/2888\">知的生産の定義とそこから見えてくる「心がけ」 | シゴタノ！</a></li><li><a href=\"https://poic2023.capture.jp/\">Pile of Index Cards</a></li></ul>"
+		},
+		{
 			"id": "f1f0b5f0-f360-4f46-870a-dac719665cde",
 			"title": "2025-11時点でのWorkflowyの構造と使い方",
 			"date": "2025-11-08",
@@ -159,6 +177,16 @@
 				"自作ツール"
 			],
 			"body": "<p>自作のPoICツール <a href=\"https://morvra.github.io/poic/\">d-PoIC</a> でCosense風の「リンク先カードに載っているリンク＆被リンク」を表示させるようにした。</p><p>▼ こんな感じ</p><p><img src=\"https://gyazo.com/b9bb282ad059ae3775d23ae705da3107/thumb/500\" alt=\"Image\"></p><p>＊2ホップリンクについては <a href=\"https://scrapbox.io/daiiz/Scrapbox%E3%81%AE2%E3%83%9B%E3%83%83%E3%83%97%E3%83%AA%E3%83%B3%E3%82%AF\">Scrapboxの2ホップリンク - daiiz</a> に詳しい。</p><p>リンクが多いカードだと縦幅とるので開閉式＆タイトルのみ並べてる。それとBacklink（開いているカードへのリンクがあるカード）は本文で参照している行を読めるようにしてみた。</p>"
+		},
+		{
+			"id": "69078751-3526-69b5-f6cf-a8bbcc4a72f8",
+			"title": "WorkflowyからCosenseに投稿するBookmarklet",
+			"date": "2026-02-19",
+			"tags": [
+				"Workflowy",
+				"Cosense"
+			],
+			"body": "<p>最近「やっぱCosenseすげえなぁ」という気持ちがふつふつとわいてきた。</p><p>まだガッツリは使ってないものの、普段の書き物はWorkflowyから始まるのでとりあえず転記用のBookmarkletを作ってみた。</p><p>変換ツールはいくつかあったんだけど、自分好みに階層や装飾をたもったまま1ボタンで転記してくれるのは見つからなかったので。</p><p>作成はClaudeに頼んだ。<a href=\"https://morvra.github.io/article?id=6ec5b51c-9320-18d4-ab04-8601a0efc508\">前にDynalist用に作った</a> のでそれを活かしてすぐに作れた。</p><p>▼ コード</p><p><code>javascript:(function(){function WF2CS(p){try{if(!location.host.includes('workflowy.com')){alert('Workflowyで実行してください');return;}if(!p){alert('プロジェクト名を設定してください');return;}function hC(h){if(!h)return'';let t=h;t=t.replace(/<a [^>]*href=\"([^\"]*)\"[^>]*>([\\s\\S]*?)<\\/a>/gi,function(_,u,i){const ti=i.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/&nbsp;/g,' ').replace(/&#39;/g,\"'\").replace(/\"/g,'\"').trim();if(!ti||ti===u)return'['+u+']';return'['+ti+' '+u+']';});t=t.replace(/<code>([\\s\\S]*?)<\\/code>/gi,function(_,i){return'`'+i.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/&nbsp;/g,' ').replace(/&#39;/g,\"'\").replace(/\"/g,'\"')+'`';});t=t.replace(/<b>([\\s\\S]*?)<\\/b>/gi,function(_,i){return'[* '+i.replace(/<[^>]+>/g,'')+']';});t=t.replace(/<i>([\\s\\S]*?)<\\/i>/gi,function(_,i){return'[/ '+i.replace(/<[^>]+>/g,'')+']';});t=t.replace(/<s>([\\s\\S]*?)<\\/s>/gi,function(_,i){return'[- '+i.replace(/<[^>]+>/g,'')+']';});t=t.replace(/<[^>]+>/g,'');t=t.replace(/&amp;/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/&nbsp;/g,' ').replace(/&#39;/g,\"'\").replace(/\"/g,'\"');return t;}function fN(n,ind){if(!n)return'';return hC(n).split(/\\r\\n|\\r|\\n/).filter(function(l){return l.trim()!=='';}).map(function(l){return ind+'> '+l;}).join('\\n')+'\\n';}function gC(item,ind){const ch=item.getChildren();if(!ch||ch.length===0)return'';return ch.map(function(c){let nm=hC(c.getName()||'');if(c.data&&c.data.he)nm='[* '+nm+']';return ind+nm+'\\n'+fN(c.getNote(),ind)+gC(c,ind+' ');}).join('');}const root=WF.currentItem();if(!root){alert('カレント項目が取得できませんでした');return;}const wfUrl=root.getUrl?'https://workflowy.com'+root.getUrl():location.href;const title=hC(root.getName())||'Untitled';const body=gC(root,' ')+'\\nfrom [Workflowy '+wfUrl+']';const url='https://scrapbox.io/'+p+'/'+encodeURIComponent(title)+'?body='+encodeURIComponent(body);const t=window.open(url,'_blank');if(!t){if(confirm('ポップアップがブロックされました。このタブで開きますか？')){location.href=url;}}}catch(e){alert('エラー: '+e.message);}}WF2CS('YOUR-PROJECT');})();</code></p><p>＊文末のYOUR-PROJECTを変更して使ってください</p><ul><li>Gist → <a href=\"https://gist.github.com/morvra/ebd7ff9faa364218e7ccea30cc9ae80a\">WorkflowyからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>Workflowy上でBookmarkletを実行</li><li>Zoomした項目をタイトル、子項目を本文としてCosenseで新規ページ作成</li><li>階層構造は維持。全て箇条書きで</li><li></li><li>Workflowy上の装飾（太字・リンク・コードなど）をCosense記法に変換<ul><li>見出しは単なる太字にした</li></ul></li><li>最後にWorkflowyへのリンクも追加</li></ul><hr><p>Workflowyの表記、このサイトではFを大文字or小文字どっちにするか迷ってる。確か最初はFで、一時期fになったからそれに合わせて変えてたんだけど、いつの間にか戻ってるところもある。でも公式でも記事によって変わってるんだよなぁ。</p>"
 		},
 		{
 			"id": "6feb0874-9c92-cd89-3f60-237fe8e05904",
@@ -218,24 +246,6 @@
 			"body": "<p><blockquote class=\"twitter-tweet\"><p lang=\"ja\" dir=\"ltr\">【カード能力変更】<br>9/29のメンテナンス時に「栄弦の天宮・リュウフウ」「狂気の創造者・リーアム」「パペットキャット」「シンフォニアハート・ツヴァイ」のカード能力を変更いたします。<br><br>▼詳細はこちら<a href=\"<a href=\"https://t.co/GKXWAM72Ni\">https://t.co/GKXWAM72Ni</a>\"><a href=\"https://t.co/GKXWAM72Ni\">https://t.co/GKXWAM72Ni</a></a><a href=\"<a href=\"https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&ref_src=twsrc%5Etfw\">https://twitter.com/hashtag/%E3%82%B7%E3%83%A3%E3%83%89%E3%83%90WB?src=hash&amp;ref_src=twsrc%5Etfw</a>\">#シャドバWB</a> <a href=\"<a href=\"https://t.co/Su8iIjxAVo\">https://t.co/Su8iIjxAVo</a>\"><a href=\"http://pic.twitter.com/Su8iIjxAVo\">pic.twitter.com/Su8iIjxAVo</a></a></p>&mdash; Shadowverse: Worlds Beyond公式 (shadowverse_jp) <a href=\"<a href=\"https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw\">https://twitter.com/shadowverse_jp/status/1971409402398986592?ref_src=twsrc%5Etfw</a>\">September 26, 2025</a></blockquote> <script async src=\"<a href=\"https://platform.twitter.com/widgets.js\">https://platform.twitter.com/widgets.js</a>\" charset=\"utf-8\"></script></p><h2>調整内容</h2><ul><li>リュウフウ 4PP→3PP</li><li>パペットキャット 2/2/2→1/1/1 突進</li><li>リーアム 10/8/8→9/7/7</li><li>ツヴァイ 進化時改良型操り人形出す</li></ul><p>アッパーのみでナーフは無し！できたことできなくなるのは嫌だもんね。なるべくこの形がいいと思う。</p><p>CRで苦戦してるドラネメに順当な強化って感じ。3弾強化ではないのはマゼルベインの影響もあるのかな？破壊軸に強化が無いのは不遇かも。</p><p>環境にどれくらいインパクトがあるのかは謎。2クラスのCR底上げは間違いないけど。</p><p>ドラ強化で増えたらウィッチは減りそう。</p><p>ネメは何に強いのか謎。人形が戦えてない＆破壊にとってパペットキャットがどんくらいありがたいかわからんので。</p><p>人形がロイに（環境における立ち位置的な意味で）勝てるのであれば環境がかなり動きそう。具体的にはウィッチ・モードメア・クレビショにどれくらい抗えるか。</p><p>次は財宝ロイヤルか人形ネメシスで</p>"
 		},
 		{
-			"id": "449e2fca-f705-20ab-0f82-17139c8b0983",
-			"title": "思ったことと考えたことはどう違う？",
-			"date": "2025-12-20",
-			"tags": [
-				"考えごと"
-			],
-			"body": "<p>PoICをやっていて、発見カードなかなか増えないなぁと思ってた。</p><p>だからといって日々生きていく中で思ったことを逐一書くのは違う気がしている。</p><p>そんな中で、</p><p>「思ったことと考えたことはどう違うんだろう？」</p><p>という疑問が浮かんできた。</p><p>■</p><p>自分なりに考えると、</p><p>「思ったこと」はその場では思いついたことでしかなく理由や根拠がない。</p><p>そこから深堀り・展開・（検証）していくことで、「考えごと」になっていく。</p><p>そしてそれは「発見」としてカードに残す価値がある、</p><p>と思えるものになる。</p><p>と考えたｗ</p><p>■</p><p>だけど、思いついたことがあっても</p><p>それをメモとして書いておかなければ、そこから考えること自体が難しい（新たな刺激に反応しているうちに忘れてしまう）</p><p>のがミソ。</p><p>PoICの野帳の役割は大事ってことだな。</p><p>自分の場合はWorkflowyのinboxや日付トピックになるだろう。</p><p>■</p><p>Lento（自分がカスタムしたChatGPT）はこんな風に言ってた。</p><blockquote><p><p>思ったことがなければ、考えることは始まらない</p><p>考えたことがなければ、思ったことは残らない</p></p></blockquote><p>今回の思考で、思ったことをそのまま発見として扱おうとしていない自分に気がついた。</p><p>「<b>思ったことはそのままでは発見にならない</b>」というのは発見だな！</p><p>ってことでカード化した。</p><hr><p>じゃあ「発見ってなに？」が次の考えごと。</p>"
-		},
-		{
-			"id": "3e3d8238-296b-bf73-f1fd-782e4299fe77",
-			"title": "発見とは何か？",
-			"date": "2025-12-21",
-			"tags": [
-				"考えごと"
-			],
-			"body": "<p><a href=\"https://morvra.github.io/article?id=449e2fca-f705-20ab-0f82-17139c8b0983\">前の考えごと</a>から、「発見とは何か」が気になってきた。</p><p>辞書的に言えば、発見とは</p><blockquote><p><p>まだ知られていなかったものを見つけ出すこと。また、わからなかった存在を見いだすこと。</p><p>via: <a href=\"https://kotobank.jp/word/%E7%99%BA%E8%A6%8B-114996\">デジタル大辞泉 - コトバンク</a></p></p></blockquote><p>とされる。</p><p>この定義を、個人の思考に引き寄せてみると、</p><p>とても重要なポイントが見えてくる。</p><p><b>発見とは、</b></p><p><b>これまで見えていなかった「何か」を、</b></p><p><b>あるものとして認識したこと</b></p><p>なのではないか。</p><p>ここで言う「何か」は、</p><p>結論である必要も、完成した理論である必要もない。</p><p>ただ、「あ、これはそういうものだ」と、</p><p>対象として立ち上がった、という感覚があるかどうか。</p><p>思ったことの多くは、この段階に至っていない。</p><p>ただ通り過ぎるだけの反応であり、</p><p>まだ「あるもの」として認識されていない。</p><p>だから、発見カードにする気が起きなかったのだと思う。</p><p>■</p><p>この問いを考えているうちに、『知的生産の技術』を想起した。</p><p>梅棹忠夫は知的生産を、</p><blockquote><p>頭をはたらかせて、なにかあたらしいことがら──情報──を、ひとにわかるかたちで提出すること</p></blockquote><p>と定義している。</p><p>発見は、知的生産そのものではない。</p><p>けれど、知的生産の原材料であることは間違いない。</p><p>発見がなければ、提出する中身がない。</p><p>そう考えると、発見は「新しいことがら」を生む最小単位なのかもしれない。</p><p>とても小さく私的で、未完成なもの。</p><p>しかし、確かに「あるもの」として認識されたもの。</p><p>それ以上でもそれ以下でもない。</p><p>発見はゴールではなく、入口だ。</p><p>そして、その入口が見えたときだけカードに残したくなる。</p><p>たぶん、この感覚を大切にしていれば、</p><p>発見カードが少ないことを、</p><p>それほど気にしなくて済む気がしている。</p><p>考えごとは続く。</p><p>でも、発見は、ちゃんと起きている。</p><p>参考:</p><ul><li><a href=\"https://www.amazon.co.jp/dp/4004150930/?tag=morvra-22\">知的生産の技術 (岩波新書 青版 722)</a></li><li><a href=\"https://cyblog.jp/2888\">知的生産の定義とそこから見えてくる「心がけ」 | シゴタノ！</a></li><li><a href=\"https://poic2023.capture.jp/\">Pile of Index Cards</a></li></ul>"
-		},
-		{
 			"id": "ccb0135c-6929-9a07-be9e-938b332ab771",
 			"title": "Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト",
 			"date": "2025-09-08",
@@ -274,6 +284,16 @@
 				"自作ツール"
 			],
 			"body": "<p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href=\"https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/\" target=\"_blank\">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href=\"https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2\" target=\"_blank\">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src=\"https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500\" alt=\"Image\"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>"
+		},
+		{
+			"id": "7a7bac45-e0f1-4a7b-84b9-c9a7856a1c50",
+			"title": "Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript",
+			"date": "2026-02-20",
+			"tags": [
+				"Workflowy",
+				"javascript"
+			],
+			"body": "<p>作った（Claudeが）。</p><p><img src=\"https://i.gyazo.com/24f931c7c4db9513ef45522c1e4215ec.png\" alt=\"Image\"></p><p>Gist → <a href=\"https://gist.github.com/morvra/5850966a792046374da56316804a45c9\">Workflowyで複数選択した項目を1つにまとめる機能を追加するUserScript</a></p><p>機能は単純で、「複数の項目を選択した状態で Ctrl+m を押すと1つの項目にまとまる」だけ。</p><hr><ul><li>アウトライナーで文章を書いている時、</li><li>普段は一文ごと、段落ごとに分けて書いているんだけど、</li><li>こんな感じで読点だったり、</li><li>ときには</li><li>文節で</li><li>区切ることが</li><li>ある。</li><li>なぜこんなことをやっているのかと言うと、</li><li>細かく前後を入れ替えられるので、</li><li>どの流れなら自然に読めるかなど</li><li>単語や語順の選択・検討をするのに便利だから。</li><li>それに加えて</li><li>書きながらリズムに乗っていく</li><li>感覚があるのもよい。</li><li>もともとは</li><li>『<a href=\"https://amzn.to/4rtm7zv\">アウトライナー実践入門</a>』で書かれていた</li><li>文節単位で改行する</li><li>手法を参考にして、</li><li>だんだん</li><li>自分なりのリズムで分けるようになった。</li></ul><p>上記のようにアウトライナーで書いたあと、それを段落ごとにまとめるのが面倒だったのでショートカットでできるようにした。</p>"
 		},
 		{
 			"id": "155f3986-4f8b-70ca-e046-2316c49adaf1",
@@ -322,16 +342,6 @@
 				"ゲーム"
 			],
 			"body": "<p>シャドバWBにて、ついにマスターランクに到達した。</p><p><img src=\"https://i.gyazo.com/d50a4817f99f510bd4cc78a97a9d3c6b.png\" alt=\"マスター到達！\"></p><p>リリースから約1ヶ月半プレイしてきた現時点での感想と、使用してきたデッキについてまとめる。</p><h2>シーズンごとの使用デッキと感想</h2><h3>シーズン1：AFネメシスとフェイスドラゴン</h3><p>シーズン1の前半は<strong>AFネメシス</strong>、後半は<strong>フェイスドラゴン</strong>を使用した。</p><ul><li>AFネメシス</li></ul><p><img src=\"https://i.gyazo.com/033ed2ba7d48fd182b86a9e39c845018.png\" alt=\"Image\"></p><p>最初に組んだのはAFネメシス。始めに引いたカードで安く組めそうだったことと、長く飽きずに遊べそうだったので選択。</p><p>グループはルビーとサファイアを往復してた。融合の手順や選択がめちゃくちゃ奥深かった。慣れないうちは時間切れになることも多かったけど、プレイ自体は非常に楽しかった。</p><p>が、コアの融合で手札こねこねするのが指的に面倒になってきてた。</p><ul><li>フェイスドラゴン</li></ul><p><img src=\"https://i.gyazo.com/9e2fe4f54b52b20262d1fee2eb9350a2.png\" alt=\"Image\"></p><p>AFネメシスにやや飽きてきた頃、フォルテを3枚引けたこともあり組んだ。ダイヤからルビーまで上下を繰り返したが、このデッキで最もポイントを稼げたように思う。</p><p>時間もかからずスムーズに回せ、シンプルながらも数ターン先のリーサルまでのプランニングが楽しかった。</p><p>序盤から攻めるスタイルが自分には合っていると感じたが、こういったアグロ系のデッキはたまにで良いかな、とも思ったり。</p><p>第一弾環境ではAA1まで遊んだ。</p><h3>シーズン2：スペルウィッチ一本でマスター到達</h3><p>新環境のシーズン2が始まってからは、<strong>スペルウィッチ</strong>一本でマスターに到達した。</p><p><img src=\"https://i.gyazo.com/a2e79f342f5ec03ebd799a10cda2cfa4.png\" alt=\"Image\"></p><p>他クラスも試したい、現資産で安価に組みたい、フォロワーとスペルを組み合わせて多数のカードを使いたい、引けたプレミアムサタン使いたい、という様々な要素が合致し、このデッキを選択した。</p><p>グループはルビー常駐でたまに上下って感じ。ランクAA以降ってこともあり一番苦戦したかな。特にOD（オーバーディメンション）が絡むと未だに時間切れになることや、ドローや土の印のプレイ順をミスすることも多々。構築も非常に難しく、どこまで秘術要素を入れるべきか、どの対面を厚く見るべきかなど、謎すぎる。</p><p>まだまだ奥深いデッキだと感じているため、今シーズンはこのスペルウィッチを使い続けていく予定。</p><p>ちなみに、配信やSNSでスペルウィッチに対するヘイトが非常に高いためそれらを見るのはちょっと悲しいポイント。</p><h2>現時点でのランクマッチの感想</h2><p>1ヶ月以上シャドバWBをプレイしてみて、主にランクマッチに関して感じたことをいくつか挙げる。</p><ul><li><strong>多様なクラスと環境のバランス</strong><ul><li>本当に様々なクラスと対戦できて楽しい</li><li>もちろん今期でいえばウィッチやロイヤルのように人気のクラスはあるが、全体的にかなりバランスの取れた環境だと感じている</li><li>前シーズンそうだったように環境が煮詰まったらリノエルフ一強になるなら問題かもしれない</li></ul></li><li><strong>先攻・後攻のバランス</strong><ul><li>未だにどちらが有利なのか判断できていないのでいいバランスだと思う</li><li>マッチアップによっても違いそう</li><li>上位勢は既に結論出てるのだろうか？</li></ul></li><li><strong>再戦について</strong><ul><li>勝っても負けても高確率で再戦希望を出しているが、ほとんど断られてしまう</li><li>試合中の反省をすぐに活かせるし、相手のデッキが分かっている状況での駆け引きも楽しいと思うんだけど……</li><li>極端な相性差があるデッキもあるしサイドボードもないため、やりたくない気持ちもわかるけど、せっかくの機能なので遊びたい</li></ul></li></ul><p>基本的には楽しくプレイできてるし大満足のカードゲーム体験。この感じが毎拡張続くことを祈ってるｗ</p><p>新弾を出す以上環境に変化を加えなきゃいけないわけで、カードパワーは自ずと上がっていく宿命だと思うので、どこかのタイミングで\"こと\"が起こると覚悟はしてる。</p><h2>次の拡張に向けて</h2><p>次の拡張では、序盤から中盤に自分で試合のテンポを作っていけるようなデッキを握りたいと考えている。今シーズン使用しているウィッチが対応型のデッキだったため、また違った味を求めて。</p><p>ただ、進化（特に超進化）がある以上1ターンでテンポスウィングしやすいゲームだと感じていて、そうなるとアグレッシブなデッキがTier1になるには、よほどの「壊れカード」が登場しないと難しいのではないかとも思う。＿そうなると一強環境になってそれはそれでつまらなそう、というわがままなプレイヤー心理。</p><p>下手な自分が中途半端デッキを使い続けても、勝てなくて面白くないと感じてしまうかもしれない。今シーズンでいうアグロナイトメアをランクマッチで使い続けたいか、と問われると悩ましい。</p><p>ポイントを稼ぐことが目的なら最適だろうけど、エンジョイ勢としては「プレイしてて楽しいか」も非常に重要。次から盛るのはMPになって区切りも無いので、勝敗・好み・楽しさなどなど、何を優先してデッキ選択をしていくか、じっくり考えていきたい。</p>"
-		},
-		{
-			"id": "69078751-3526-69b5-f6cf-a8bbcc4a72f8",
-			"title": "WorkflowyからCosenseに投稿するBookmarklet",
-			"date": "2026-02-19",
-			"tags": [
-				"Workflowy",
-				"Cosense"
-			],
-			"body": "<p>最近「やっぱCosenseすげえなぁ」という気持ちがふつふつとわいてきた。</p><p>まだガッツリは使ってないものの、普段の書き物はWorkflowyから始まるのでとりあえず転記用のBookmarkletを作ってみた。</p><p>変換ツールはいくつかあったんだけど、自分好みに階層や装飾をたもったまま1ボタンで転記してくれるのは見つからなかったので。</p><p>作成はClaudeに頼んだ。<a href=\"https://morvra.github.io/article?id=6ec5b51c-9320-18d4-ab04-8601a0efc508\">前にDynalist用に作った</a> のでそれを活かしてすぐに作れた。</p><p>▼ コード</p><p><code>javascript:(function(){function WF2CS(p){try{if(!location.host.includes('workflowy.com')){alert('Workflowyで実行してください');return;}if(!p){alert('プロジェクト名を設定してください');return;}function hC(h){if(!h)return'';let t=h;t=t.replace(/<a [^>]*href=\"([^\"]*)\"[^>]*>([\\s\\S]*?)<\\/a>/gi,function(_,u,i){const ti=i.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/&nbsp;/g,' ').replace(/&#39;/g,\"'\").replace(/\"/g,'\"').trim();if(!ti||ti===u)return'['+u+']';return'['+ti+' '+u+']';});t=t.replace(/<code>([\\s\\S]*?)<\\/code>/gi,function(_,i){return'`'+i.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/&nbsp;/g,' ').replace(/&#39;/g,\"'\").replace(/\"/g,'\"')+'`';});t=t.replace(/<b>([\\s\\S]*?)<\\/b>/gi,function(_,i){return'[* '+i.replace(/<[^>]+>/g,'')+']';});t=t.replace(/<i>([\\s\\S]*?)<\\/i>/gi,function(_,i){return'[/ '+i.replace(/<[^>]+>/g,'')+']';});t=t.replace(/<s>([\\s\\S]*?)<\\/s>/gi,function(_,i){return'[- '+i.replace(/<[^>]+>/g,'')+']';});t=t.replace(/<[^>]+>/g,'');t=t.replace(/&amp;/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/&nbsp;/g,' ').replace(/&#39;/g,\"'\").replace(/\"/g,'\"');return t;}function fN(n,ind){if(!n)return'';return hC(n).split(/\\r\\n|\\r|\\n/).filter(function(l){return l.trim()!=='';}).map(function(l){return ind+'> '+l;}).join('\\n')+'\\n';}function gC(item,ind){const ch=item.getChildren();if(!ch||ch.length===0)return'';return ch.map(function(c){let nm=hC(c.getName()||'');if(c.data&&c.data.he)nm='[* '+nm+']';return ind+nm+'\\n'+fN(c.getNote(),ind)+gC(c,ind+' ');}).join('');}const root=WF.currentItem();if(!root){alert('カレント項目が取得できませんでした');return;}const wfUrl=root.getUrl?'https://workflowy.com'+root.getUrl():location.href;const title=hC(root.getName())||'Untitled';const body=gC(root,' ')+'\\nfrom [Workflowy '+wfUrl+']';const url='https://scrapbox.io/'+p+'/'+encodeURIComponent(title)+'?body='+encodeURIComponent(body);const t=window.open(url,'_blank');if(!t){if(confirm('ポップアップがブロックされました。このタブで開きますか？')){location.href=url;}}}catch(e){alert('エラー: '+e.message);}}WF2CS('YOUR-PROJECT');})();</code></p><p>＊文末のYOUR-PROJECTを変更して使ってください</p><ul><li>Gist → <a href=\"https://gist.github.com/morvra/ebd7ff9faa364218e7ccea30cc9ae80a\">WorkflowyからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>Workflowy上でBookmarkletを実行</li><li>Zoomした項目をタイトル、子項目を本文としてCosenseで新規ページ作成</li><li>階層構造は維持。全て箇条書きで</li><li></li><li>Workflowy上の装飾（太字・リンク・コードなど）をCosense記法に変換<ul><li>見出しは単なる太字にした</li></ul></li><li>最後にWorkflowyへのリンクも追加</li></ul><hr><p>Workflowyの表記、このサイトではFを大文字or小文字どっちにするか迷ってる。確か最初はFで、一時期fになったからそれに合わせて変えてたんだけど、いつの間にか戻ってるところもある。でも公式でも記事によって変わってるんだよなぁ。</p>"
 		},
 		{
 			"id": "835c2e31-6116-a79e-760a-b6dc8b0c00af",
@@ -824,6 +834,13 @@
 			"body": "<p><img src=\"https://gyazo.com/a29605e51f458a654a4e3c2cddc343de/thumb/500\" alt=\"Image\"></p><p>よしよし。</p><p>戦績は 予選:63/80勝 決勝:1/3/8</p><p><img src=\"https://i.gyazo.com/455205b49b451f2a072baa75a7c97940.png\" alt=\"Image\"></p><p>2エース1デバフ。色々言われてるけどキャラあんま引いてない（とは言え環境2TOP引いてるけど）勢からしたらデバフやバフで1枠埋めれるのありがたい。</p>"
 		},
 		{
+			"id": "12b99fa6-b198-2d41-e8a5-ed4416df3fbd",
+			"title": "コードブロック投稿テスト",
+			"date": "2026-02-19",
+			"tags": [],
+			"body": "<p>▼ コードブロック</p><pre><code>javascript: ! function() {\n    var e = document.createElement(\"textarea\"),\n        t = document.title,\n        c = document.URL.replace(/\\(/g, \"%2528\").replace(/\\)/g, \"%2529\");\n    e.textContent = \"[\" + t + \"](\" + c + \")\", document.querySelector(\"body\").append(e), e.select(), document.execCommand(\"copy\"), e.remove()\n}();\n</code></pre><p>本文。</p><p>できた！</p>"
+		},
+		{
 			"id": "76f94d7d-ab11-29e4-3a01-42987faf27fb",
 			"title": "週末ロビー大会人形で優勝！",
 			"date": "2025-11-15",
@@ -970,13 +987,6 @@
 			"date": "2025-07-11",
 			"tags": [],
 			"body": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/mazrTjqG92c?si=WIpe-e7FyYq881GE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p><p>笑った〜。軍団それぞれ色あるけどどっちも好き。</p>"
-		},
-		{
-			"id": "12b99fa6-b198-2d41-e8a5-ed4416df3fbd",
-			"title": "コードブロック投稿テスト",
-			"date": "2026-02-19",
-			"tags": [],
-			"body": "<p>▼ コードブロック</p><pre><code>javascript: ! function() {\n    var e = document.createElement(\"textarea\"),\n        t = document.title,\n        c = document.URL.replace(/\\(/g, \"%2528\").replace(/\\)/g, \"%2529\");\n    e.textContent = \"[\" + t + \"](\" + c + \")\", document.querySelector(\"body\").append(e), e.select(), document.execCommand(\"copy\"), e.remove()\n}();\n</code></pre><p>本文。</p><p>できた！</p>"
 		},
 		{
 			"id": "ab25efbd-0728-e100-1fff-f2b50268b423",
