@@ -500,6 +500,57 @@ function generateRSS(articles) {
 }
 
 // ============================================================
+// SSG: 記事一覧HTMLフラグメントを生成する関数
+// ============================================================
+
+/**
+ * articles配列からトップページ用の記事一覧HTMLフラグメントを生成し
+ * articlelist.html として書き出す。
+ * articlelist.js はこのファイルをfetchしてinnerHTMLで流し込むだけでよい。
+ *
+ * @param {Array} articles - articlesの配列（id, title, date を使用）
+ */
+function generateArticleListHtml(articles) {
+    const currentYear = new Date().getFullYear();
+
+    // 日付の新しい順にソート
+    const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // 年ごとにグループ化
+    const groupedByYear = {};
+    sorted.forEach(article => {
+        const year = new Date(article.date).getFullYear();
+        if (!groupedByYear[year]) groupedByYear[year] = [];
+        groupedByYear[year].push(article);
+    });
+
+    // 年を新しい順にソート
+    const sortedYears = Object.keys(groupedByYear).sort((a, b) => b - a);
+
+    let html = '';
+    sortedYears.forEach(year => {
+        const isCurrentYear = (parseInt(year) === currentYear);
+        const collapseClass = isCurrentYear ? '' : 'collapsed';
+        const iconClass    = isCurrentYear ? 'fa-chevron-down' : 'fa-chevron-right';
+
+        html += `<li class="year-group">
+<h3 class="year-header${isCurrentYear ? ' active-year' : ''}" data-year="${year}">
+${year}年 <i class="fa ${iconClass}"></i>
+</h3>
+<ul class="article-sub-list ${collapseClass}">
+`;
+        groupedByYear[year].forEach(({ id, title, date }) => {
+            html += `<li><a href="/articles/${id}.html">${title}</a><span class="article-date">(${date})</span></li>\n`;
+        });
+
+        html += `</ul>\n</li>\n`;
+    });
+
+    fs.writeFileSync('articlelist.html', html, 'utf8');
+    console.log('articlelist.html generated.');
+}
+
+// ============================================================
 // SSG: 静的HTMLファイルを生成する関数
 // ============================================================
 
@@ -611,6 +662,8 @@ async function main() {
             return { id, title, date, tags, body };
         });
 
+        // --- 既存の処理: data.json と rss.xml を書き出す ---
+
         const output = {
             articles: articles,
             pieces: pieces
@@ -622,6 +675,10 @@ async function main() {
         const rssFeed = generateRSS(articles);
         fs.writeFileSync('rss.xml', rssFeed);
         console.log('rss.xml generated.');
+
+        // --- 記事一覧HTMLフラグメントを生成する ---
+
+        generateArticleListHtml(articles);
 
         // --- 静的HTMLファイルを生成する ---
 

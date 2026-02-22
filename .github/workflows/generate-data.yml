@@ -30,7 +30,7 @@ jobs:
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9
       with:
-        add: 'data.json rss.xml articles/ pieces/'
-        message: 'feat: Update data.json, rss.xml, and static HTML from Workflowy'
+        add: 'data.json rss.xml articlelist.html articles/ pieces/'
+        message: 'feat: Update data.json, rss.xml, articlelist.html, and static HTML from Workflowy'
         new_branch: main
         github_token: ${{ secrets.GH_TOKEN }}
