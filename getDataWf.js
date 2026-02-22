@@ -562,8 +562,10 @@ ${year}年 <i class="fa ${iconClass}"></i>
  * @param {Array}  items      - articles または pieces の配列
  * @param {string} outputDir  - 書き出し先ディレクトリ ('articles' | 'pieces')
  * @param {string} template   - article_template.html の内容
+ * @param {Array}  allItems   - 関連記事検索用の全コンテンツ（articles + pieces）
+ * @param {Set}    articleIds - article/piece振り分け用のarticle UUIDセット
  */
-function generateStaticHtmlFiles(items, outputDir, template) {
+function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds) {
     // 出力先ディレクトリが存在しない場合は作成
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
@@ -576,10 +578,29 @@ function generateStaticHtmlFiles(items, outputDir, template) {
         const plainText = item.body.replace(/<[^>]*>?/gm, '');
         const description = escapeHtml(plainText.substring(0, 120).trim() + '...');
 
-        // --- {{TAGS}}: タグをリンクに変換（親ディレクトリへの相対パス ../tag?tag=xxx）---
+        // --- {{TAGS}}: タグをリンクに変換（絶対パス）---
         const tagsHtml = (item.tags && item.tags.length > 0)
-            ? item.tags.map(tag => `<a href="../tag?tag=${tag}">${escapeHtml(tag)}</a>`).join(', ')
+            ? item.tags.map(tag => `<a href="/tag?tag=${tag}">${escapeHtml(tag)}</a>`).join(', ')
             : '';
+
+        // --- {{RELATED}}: 共通タグを持つ関連記事リストを生成 ---
+        let relatedHtml = '';
+        if (item.tags && item.tags.length > 0) {
+            const related = allItems.filter(other =>
+                other.id !== item.id &&
+                other.tags &&
+                other.tags.some(tag => item.tags.includes(tag))
+            );
+
+            if (related.length > 0) {
+                related.sort(() => 0.5 - Math.random());
+                const listItems = related.map(r => {
+                    const folder = articleIds.has(r.id) ? 'articles' : 'pieces';
+                    return `<li><a href="/${folder}/${r.id}.html">${escapeHtml(r.title)}</a></li>`;
+                }).join('\n');
+                relatedHtml = `<div id="related-articles">\n<h2>関連記事</h2>\n<ul>\n${listItems}\n</ul>\n</div>`;
+            }
+        }
 
         // --- プレースホルダーを一括置換 ---
         const html = template
@@ -587,7 +608,8 @@ function generateStaticHtmlFiles(items, outputDir, template) {
             .replace(/\{\{DATE\}\}/g,        escapeHtml(item.date))
             .replace(/\{\{TAGS\}\}/g,        tagsHtml)
             .replace(/\{\{DESCRIPTION\}\}/g, description)
-            .replace(/\{\{BODY\}\}/g,        item.body); // bodyはすでにHTML済み
+            .replace(/\{\{BODY\}\}/g,        item.body)
+            .replace(/\{\{RELATED\}\}/g,     relatedHtml);
 
         const filePath = path.join(outputDir, `${item.id}.html`);
         fs.writeFileSync(filePath, html, 'utf8');
@@ -695,8 +717,11 @@ async function main() {
 
         const template = fs.readFileSync(templatePath, 'utf8');
 
-        generateStaticHtmlFiles(articles, 'articles', template);
-        generateStaticHtmlFiles(pieces,   'pieces',  template);
+        // 関連記事生成用に全コンテンツを統合
+        const allItems = [...articles, ...pieces];
+
+        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs);
+        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs);
 
         console.log('Static HTML generation complete.');
 
