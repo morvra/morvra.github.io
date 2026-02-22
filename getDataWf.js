@@ -1,6 +1,7 @@
 // getDataWorkflowy.js - WorkflowyのノードをHTMLリストとして出力
 
 const fs = require('fs');
+const path = require('path');
 const fetch = globalThis.fetch || require('node-fetch').default;
 
 
@@ -202,7 +203,6 @@ function markdownToHTML(markdown) {
 // WorkflowyのURLを条件に応じて変換またはテキスト化する関数
 function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs) {
     // <a href="https://workflowy.com/#/shortId">text</a> の形式をキャプチャ
-    // markdownToHTMLの出力に合わせて、target属性などがないシンプルな形を想定しつつ柔軟にマッチ
     const linkPattern = /<a\s+href=["']https:\/\/workflowy\.com\/#\/([a-zA-Z0-9-]+)["'][^>]*>(.*?)<\/a>/g;
     const siteUrl = 'https://morvra.github.io/article?id=';
 
@@ -249,7 +249,6 @@ function getMetadata(node) {
         // --- 日付抽出のための共通正規表現 ---
         
         // 1. Workflowy <time>タグ (時刻属性 startHour等 があっても許容するように .*? を追加)
-        // 例: <time startYear="2025" startMonth="11" startDay="22" startHour="12">
         const timeTagRegex = /<time\s+startYear="(\d{4})"\s+startMonth="(\d{1,2})"\s+startDay="(\d{1,2})".*?>/;
         
         // 2. Workflowy リンク形式 [[YYYY-MM-DD]]
@@ -500,6 +499,52 @@ function generateRSS(articles) {
     return rssFeed;
 }
 
+// ============================================================
+// SSG: 静的HTMLファイルを生成する関数
+// ============================================================
+
+/**
+ * article_template.html を読み込み、プレースホルダーを置換して
+ * 個別の静的HTMLファイルを書き出す。
+ *
+ * @param {Array}  items      - articles または pieces の配列
+ * @param {string} outputDir  - 書き出し先ディレクトリ ('articles' | 'pieces')
+ * @param {string} template   - article_template.html の内容
+ */
+function generateStaticHtmlFiles(items, outputDir, template) {
+    // 出力先ディレクトリが存在しない場合は作成
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+        console.log(`Created directory: ${outputDir}/`);
+    }
+
+    let count = 0;
+    for (const item of items) {
+        // --- {{DESCRIPTION}}: 本文HTMLからタグを除去して先頭120文字 ---
+        const plainText = item.body.replace(/<[^>]*>?/gm, '');
+        const description = escapeHtml(plainText.substring(0, 120).trim() + '...');
+
+        // --- {{TAGS}}: タグをリンクに変換（親ディレクトリへの相対パス ../tag?tag=xxx）---
+        const tagsHtml = (item.tags && item.tags.length > 0)
+            ? item.tags.map(tag => `<a href="../tag?tag=${tag}">${escapeHtml(tag)}</a>`).join(', ')
+            : '';
+
+        // --- プレースホルダーを一括置換 ---
+        const html = template
+            .replace(/\{\{TITLE\}\}/g,       escapeHtml(item.title))
+            .replace(/\{\{DATE\}\}/g,        escapeHtml(item.date))
+            .replace(/\{\{TAGS\}\}/g,        tagsHtml)
+            .replace(/\{\{DESCRIPTION\}\}/g, description)
+            .replace(/\{\{BODY\}\}/g,        item.body); // bodyはすでにHTML済み
+
+        const filePath = path.join(outputDir, `${item.id}.html`);
+        fs.writeFileSync(filePath, html, 'utf8');
+        count++;
+    }
+
+    console.log(`Generated ${count} HTML file(s) in ${outputDir}/`);
+}
+
 // Workflowyからデータを取得する部分
 async function main() {
     const WORKFLOWY_API_KEY = process.env.WORKFLOWY_API_KEY;
@@ -577,6 +622,23 @@ async function main() {
         const rssFeed = generateRSS(articles);
         fs.writeFileSync('rss.xml', rssFeed);
         console.log('rss.xml generated.');
+
+        // --- 静的HTMLファイルを生成する ---
+
+        // article_template.html が存在しない場合はスキップ（後方互換）
+        const templatePath = 'article_template.html';
+        if (!fs.existsSync(templatePath)) {
+            console.warn(`Warning: ${templatePath} not found. Skipping static HTML generation.`);
+            return;
+        }
+
+        const template = fs.readFileSync(templatePath, 'utf8');
+
+        generateStaticHtmlFiles(articles, 'articles', template);
+        generateStaticHtmlFiles(pieces,   'pieces',  template);
+
+        console.log('Static HTML generation complete.');
+
     } catch (error) {
         console.error('Error fetching data:', error);
         process.exit(1);

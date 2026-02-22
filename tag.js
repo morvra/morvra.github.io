@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('取得したデータ:', data); // 取得したデータをコンソールに表示
 
+            // article と piece それぞれのIDセットを作成（フォルダ振り分け用）
+            const articleIds = new Set(data.articles.map(a => a.id));
+
             // articles と pieces を統合したリストを作成
             const allContent = [...data.articles, ...data.pieces];
 
@@ -43,10 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 articlesWithTag.forEach(item => {
                     const articleItem = document.createElement('li');
                     const articleLink = document.createElement('a');
-                    
+
                     articleLink.textContent = item.title;
-                    
-                    articleLink.href = `article?id=${item.id}`; // 記事とpieceでURLを共通化
+
+                    // article か piece かでリンク先フォルダを振り分ける
+                    const folder = articleIds.has(item.id) ? 'articles' : 'pieces';
+                    articleLink.href = `/${folder}/${item.id}.html`;
+
                     articleItem.appendChild(articleLink);
                     articleListElement.appendChild(articleItem);
                 });

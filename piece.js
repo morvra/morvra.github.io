@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const articleDiv = document.createElement('div');
                 articleDiv.classList.add('piece');
                 articleDiv.innerHTML = `
-                    <h2 id="piece-title"><a href="article?id=${id}">${title}</a></h2>
+                    <h2 id="piece-title"><a href="/pieces/${id}.html">${title}</a></h2>
                     <div id="article-date">${date}</div>
                     <div id="article-content">${body}</div>
                 `;

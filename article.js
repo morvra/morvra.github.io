@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(jsonPath)
         .then(response => response.json())
         .then(data => {
+            // article と piece それぞれのIDセットを作成（フォルダ振り分け用）
+            const articleIds = new Set(data.articles.map(a => a.id));
+
             // articles と pieces を統合したリストを作成
             const allContent = [...data.articles, ...data.pieces];
 
@@ -25,6 +28,27 @@ document.addEventListener('DOMContentLoaded', function() {
             const content = allContent.find(item => item.id === contentId);
 
             if (content) {
+
+                // =====================================================
+                // 後方互換リダイレクト:
+                // 旧URL (article.html?id=xxx または /article?id=xxx) で
+                // アクセスされた場合、新しい静的HTMLページへ転送する。
+                // 新URLは記事なら /articles/{id}.html、
+                // piece なら /pieces/{id}.html。
+                // =====================================================
+                const isOldUrl = window.location.pathname.endsWith('/article')
+                    || window.location.pathname.endsWith('/article.html')
+                    || window.location.pathname.endsWith('article');
+
+                if (isOldUrl && contentId) {
+                    const folder = articleIds.has(contentId) ? 'articles' : 'pieces';
+
+                    // replace() を使うことでブラウザ履歴に旧URLを残さない
+                    window.location.replace(`/${folder}/${contentId}.html`);
+                    return; // リダイレクト後の処理は不要
+                }
+                // =====================================================
+
                 document.title = `${content.title} - morvra lists`; // titleタグを更新
 
                 // meta descriptionタグを追加または更新
@@ -79,7 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     relatedArticles.forEach(relatedArticle => {
                         const listItem = document.createElement('li');
                         const link = document.createElement('a');
-                        link.href = `article?id=${relatedArticle.id}`; // 記事とpieceでURLを共通化
+
+                        // article か piece かでリンク先フォルダを振り分ける
+                        const folder = articleIds.has(relatedArticle.id) ? 'articles' : 'pieces';
+                        link.href = `/${folder}/${relatedArticle.id}.html`;
+
                         link.textContent = relatedArticle.title;
                         listItem.appendChild(link);
                         relatedArticlesList.appendChild(listItem);

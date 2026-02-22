@@ -53,11 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // その年の記事をリストに追加
                 groupedArticles[year].forEach(article => {
-                    // 記事のタイトルとIDを取得
                     const { id, title, date } = article;
                     htmlContent += `
                             <li>
-                                <a href="article?id=${id}">${title}</a>
+                                <a href="/articles/${id}.html">${title}</a>
                                 <span class="article-date">(${date})</span>
                             </li>
                     `;

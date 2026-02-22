@@ -45,6 +45,9 @@
         fetch(jsonPath)
             .then(response => response.json())
             .then(data => {
+                // article と piece それぞれのIDセットを作成（フォルダ振り分け用）
+                const articleIds = new Set(data.articles.map(a => a.id));
+
                 // articles と pieces を統合したリストを作成
                 const allContent = [...data.articles, ...data.pieces];
                 const groupedArticles = {};
@@ -77,14 +80,17 @@
                         const articleListItem = document.createElement('li');
                         const articleLink = document.createElement('a');
                         articleLink.textContent = article.title;
-                        articleLink.href = `article?id=${article.id}`; // 記事・つぶやき共通のURL
+
+                        // article か piece かでリンク先フォルダを振り分ける
+                        const folder = articleIds.has(article.id) ? 'articles' : 'pieces';
+                        articleLink.href = `/${folder}/${article.id}.html`;
+
                         articleListItem.appendChild(articleLink);
                         articleList.appendChild(articleListItem);
                     });
                     
                     tagListItem.appendChild(articleList);
                     tagList.appendChild(tagListItem);
-                    
                 });
 
             })
