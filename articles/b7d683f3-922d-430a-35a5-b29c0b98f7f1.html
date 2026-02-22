@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイトの構成やURL形式を変更した - morvra lists</title>
+    <meta name="description" content="このサイトは Workflowy をバックエンドに使った自作の仕組みで動いている。記事を Workflowy で書いて特定のタグをつけておくと、GitHub Actions が自動でデータを取得してサイトに反映される、というものだ。アウトラ...">
+    <meta property="og:title" content="サイトの構成やURL形式を変更した - morvra lists">
+    <meta property="og:description" content="このサイトは Workflowy をバックエンドに使った自作の仕組みで動いている。記事を Workflowy で書いて特定のタグをつけておくと、GitHub Actions が自動でデータを取得してサイトに反映される、というものだ。アウトラ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="/styles.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='/bullet_icon.png' rel='shortcut icon'/>
+    <link href='/bullet_icon.png' rel='apple-touch-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
+</head>
+<body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>サイトの構成やURL形式を変更した</h1></div>
+            <div id="article-date">2026-02-22</div>
+            <div id="article-tags"><a href="/tag?tag=ブログ">ブログ</a></div>
+
+            <div id="article-content">
+                <p>このサイトは Workflowy をバックエンドに使った自作の仕組みで動いている。記事を Workflowy で書いて特定のタグをつけておくと、GitHub Actions が自動でデータを取得してサイトに反映される、というものだ。</p><p>アウトライナーの項目がそのまま記事化する、という仕組みはめちゃくちゃ気に入っているんだけど、記事が増えるにしたがって<b>ページの表示が遅くなってきた</b>。</p><p>この問題が仕組みを変えることで改善したので、その記録を残しておく。</p><h2>なぜ遅くなってしまったか</h2><p>もともとの仕組みはこういう流れだった。</p><ul><li>ページを開く</li><li>JavaScript が data.json（Workflowyの項目から変換した全記事のメタデータを含むファイル） を取得する</li><li>JSON のデータをもとに記事の内容を組み立ててDOMに書き込む</li><li>記事が表示される</li></ul><p>このうち2,3番目のフェーズがボトルネックだった。data.json には全記事の本文HTMLが丸ごと入っているので、記事が増えるにつれてファイルが肥大化していく。そのためトップページの記事一覧を表示するだけでも、使いもしない全記事の本文を読み込む必要があったわけだ。</p><h2>解決策：ビルド時にHTMLを作ってしまう</h2><p>解決策はシンプルで、<b>記事ごとの HTML ファイルをビルド時に生成しておく</b>というもの。いわゆる静的サイト生成（SSG）と呼ばれるアプローチで、Next.js や Hugo がやっていることと本質的には同じ（らしい）。</p><p>ビルドは GitHub Actions が1日2回回しているので、Workflowy で記事を書いてタグをつけておけば、最大12時間以内に静的なHTMLファイルとして書き出されて自動でサイトに反映される。</p><p>これで記事ページにアクセスしたときは最初から完成したHTMLが返ってくるので、JavaScriptが動く前から内容が表示されるようになった。</p><h2>トップページの記事一覧も別ファイルに</h2><p>もうひとつ対応したのがトップページの記事一覧だ。</p><p>もとのコードはトップページを開くたびに data.json を読んで一覧を動的に組み立てていたが、ここも同じ問題がある。一覧表示に必要なのは記事のタイトルと日付だけなのに、全本文が入った巨大なファイルを毎回読み込んでいた。</p><p>対策として、ビルド時にタイトルと日付だけからなる articlelist.html というフラグメントファイルを生成するようにした。トップページはこれを読み込んで innerHTML に流し込むだけ。JavaScriptがやる仕事がほぼなくなった。</p><h2>やってみて</h2><p>表示速度は体感でもわかるくらい改善した。特に記事ページに関しては爆速！</p><p>副産物として OGP（SNSシェア時のタイトルや説明文）が記事ごとに正しく設定されるようになったのも地味にうれしい。これまでは JavaScript が動いてからページタイトルを書き換えていたので、SNS のクローラーには空のページとして認識されていた。</p><p>自作サイトのいいところは、こういう改善を自分のペースでちまちまできることだよね〜。</p>
+            </div>
+
+            <div id="ad">
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="related-articles">
+<h2>関連記事</h2>
+<ul>
+<li><a href="/articles/e1dab0f9-5f9c-6a9b-010f-0ce91bb8d961.html">このサイトのRSSフィードを作った</a></li>
+<li><a href="/articles/835c2e31-6116-a79e-760a-b6dc8b0c00af.html">サイトの運用方法やデザインをアップデート</a></li>
+<li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
+<li><a href="/articles/1903c7ea-8e59-b9db-7834-68a1fc26f06e.html">Hello world!</a></li>
+<li><a href="/articles/2744b6b5-596e-3e7b-b133-ac792fe874cf.html">Workflowyで書く記事のテスト</a></li>
+<li><a href="/articles/c0245cfc-6ba5-e922-6520-d1fcc01b839f.html">記事テスト</a></li>
+<li><a href="/articles/ac08d795-be94-54c0-74ee-2d320f6d14d4.html">サイトのタイトルとアイコンを変更</a></li>
+<li><a href="/pieces/9f1c0a42-bc80-8811-1b6f-4f432084d48c.html">Workflowyの内部リンクとサイトのリンクをつなげた</a></li>
+<li><a href="/articles/155f3986-4f8b-70ca-e046-2316c49adaf1.html">サイト内を検索できるようにした</a></li>
+</ul>
+</div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>
