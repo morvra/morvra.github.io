@@ -8,36 +8,71 @@
     <meta property="og:title" content="Hello world! - morvra lists">
     <meta property="og:description" content="こんにちは。morvra（もーゔら）と言います。今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。サイトの構築はNoratetsu Houseさんの連載（Noratetsu House: Noratets...">
     <meta property="og:type" content="article">
-    <link rel="stylesheet" href="../styles.css">
-    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" href="/styles.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='/bullet_icon.png' rel='shortcut icon'/>
+    <link href='/bullet_icon.png' rel='apple-touch-icon'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
 </head>
 <body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
     <div id="header"></div>
 
     <main>
         <div id="article">
             <div id="article-title"><h1>Hello world!</h1></div>
             <div id="article-date">2024-03-30</div>
-            <div id="article-tags"><a href="../tag?tag=ブログ">ブログ</a></div>
+            <div id="article-tags"><a href="/tag?tag=ブログ">ブログ</a></div>
 
             <div id="article-content">
                 <p>こんにちは。morvra（もーゔら）と言います。</p><p>今更（今こそ？）文章中心の個人サイトをやってみようと思い、このサイトを立ち上げました。</p><p>サイトの構築はNoratetsu Houseさんの連載（<a href="https://noratetsu.deno.dev/article/FfQomMl-OXtdVY1NfdkUiPQB" target="_blank">Noratetsu House: Noratetsu Houseの作り方（概要）</a>）を参考にさせていただき、Dynalistで書いた文章をJSONに加工し、Github Pagesにアップして公開しています。</p><p>このシステムを作る際は上記の連載からのコピペに加え、コードの多くをChatGPTに書いてもらいました。DenoのインストールからAPIとJSONまわりの知識、実際のコーディングまでめちゃくちゃお世話になりました。</p><p>チャットを駆使しつつ手動で細かい修正をするのは大変でしたが、ミニマムなサイトとしてはけっこういい感じになったかな、と思ってます。こういうのは手を動かしながら勉強するのが一番ですね :^)</p><p>今後は記事を更新しつつ、</p><ul><li>タグ機能</li></ul><ul><li>RSSフィードの配信</li></ul><ul><li>デザインを洗練</li></ul><p>などなど、サイトとしてのクオリティも上げていく予定です。ペースはゆっくりになると思いますが、たまに見にきていただけると幸いです。</p>
             </div>
-            
+
             <div id="ad">
-                </div>
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="related-articles">
+<h2>関連記事</h2>
+<ul>
+<li><a href="/pieces/9f1c0a42-bc80-8811-1b6f-4f432084d48c.html">Workflowyの内部リンクとサイトのリンクをつなげた</a></li>
+<li><a href="/articles/155f3986-4f8b-70ca-e046-2316c49adaf1.html">サイト内を検索できるようにした</a></li>
+<li><a href="/articles/ac08d795-be94-54c0-74ee-2d320f6d14d4.html">サイトのタイトルとアイコンを変更</a></li>
+<li><a href="/articles/c0245cfc-6ba5-e922-6520-d1fcc01b839f.html">記事テスト</a></li>
+<li><a href="/articles/2744b6b5-596e-3e7b-b133-ac792fe874cf.html">Workflowyで書く記事のテスト</a></li>
+<li><a href="/articles/e1dab0f9-5f9c-6a9b-010f-0ce91bb8d961.html">このサイトのRSSフィードを作った</a></li>
+<li><a href="/articles/835c2e31-6116-a79e-760a-b6dc8b0c00af.html">サイトの運用方法やデザインをアップデート</a></li>
+<li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
+</ul>
+</div>
         </div>
     </main>
 
     <div id="footer"></div>
 
     <script>
-        // ヘッダー・フッターの読み込み（パスを ../ に修正）
-        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
-        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
 </body>
 </html>

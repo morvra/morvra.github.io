@@ -8,36 +8,86 @@
     <meta property="og:title" content="Workflowyにメモを送信するための自分用Chrome拡張を作った - morvra lists">
     <meta property="og:description" content="はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。ショートカットキー(Alt+n)を押すとモーダルが立ち上がる1行のテキスト入力欄にカ...">
     <meta property="og:type" content="article">
-    <link rel="stylesheet" href="../styles.css">
-    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" href="/styles.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='/bullet_icon.png' rel='shortcut icon'/>
+    <link href='/bullet_icon.png' rel='apple-touch-icon'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
 </head>
 <body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
     <div id="header"></div>
 
     <main>
         <div id="article">
             <div id="article-title"><h1>Workflowyにメモを送信するための自分用Chrome拡張を作った</h1></div>
             <div id="article-date">2025-11-17</div>
-            <div id="article-tags"><a href="../tag?tag=Workflowy">Workflowy</a>, <a href="../tag?tag=javascript">javascript</a>, <a href="../tag?tag=自作ツール">自作ツール</a></div>
+            <div id="article-tags"><a href="/tag?tag=Workflowy">Workflowy</a>, <a href="/tag?tag=javascript">javascript</a>, <a href="/tag?tag=自作ツール">自作ツール</a></div>
 
             <div id="article-content">
                 <p>はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。</p><ul><li>ショートカットキー(Alt+n)を押すとモーダルが立ち上がる</li><li>1行のテキスト入力欄にカーソルがあっている状態</li><li>送信ボタンを押すとデフォルトでは「HH:MM 入力テキスト」という時刻付きの形式で送信される</li><li>送られるのはInboxの最下部に送信</li><li>送信ボタンだけじゃなく、入力欄でEnterでも送信可能</li><li>別のボタンで私が運営している個人サイト用のフォーマットをつけて送信できる<ul><li>テキストの最後に <code>piece</code> が付く</li><li>note欄にdate: YYYY-MM-DD 形式で日付が書かれる</li></ul></li><li>送信後はモーダルが閉じられる</li><li>テキスト未入力でEnter / モーダル外をクリック / Escキー で送信せずモーダルを閉じる</li></ul><p>で、生成されたスクリプトを微調整していったらかなり感触が良くて、「これはWorkflowy上だけじゃなく、どこからでも動かしたいな」と思い、Chrome拡張にしてもらった。</p><p><img src="https://gyazo.com/eb9d70d2fd247ab597fd3cfbf9ee4a0d/thumb/500" alt="Image"></p><p>▲ こんな感じでボタンやショートカットキーからポップアップを呼び出してWorkflowyに送信する拡張機能が完成！ｳﾚｼｲ!!</p><p>自分がやった作業はプロンプトを考える以外＿まぁそれが肝心なんだが＿は拡張機能用のフォルダと作ってもらったコードをコピペしたファイルを作成して、それをChromeの「パッケージ化されていない拡張機能を読み込む」から読み込んだだけ。すご。</p><p>今開いてるページのリンクを追加するオプションつけたり、起動時に選択しているテキストがあったら入力欄に入れるようにしたりと機能追加もした。ﾀﾉｼｲ!!</p>
             </div>
-            
+
             <div id="ad">
-                </div>
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="related-articles">
+<h2>関連記事</h2>
+<ul>
+<li><a href="/articles/4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0.html">Dynalistの連用日記用ビューワーをつくった</a></li>
+<li><a href="/articles/f4f73dea-0357-0dcd-824a-3eb3b0c90501.html">CardBoardで作ったカードをd-PoICに送れるようにした</a></li>
+<li><a href="/articles/29fa4397-2603-5a82-2130-a89b4cc4589a.html">シャドバWBの対戦支援ツールを作った</a></li>
+<li><a href="/articles/69078751-3526-69b5-f6cf-a8bbcc4a72f8.html">WorkflowyからCosenseに投稿するBookmarklet</a></li>
+<li><a href="/articles/33683671-aa84-8dba-243a-191af9f17747.html">d-PoICのDropbox同期をマークダウンに変更</a></li>
+<li><a href="/articles/518b6ce8-0f78-8965-ba43-295d96da0816.html">内部リンク機能があるMarkdownエディタを作った</a></li>
+<li><a href="/pieces/772c9c22-7103-9764-7c41-712ebedb8cc7.html">Workflowyの美しさは、機能ではなく、その抑制にある</a></li>
+<li><a href="/articles/ae773cd3-35e8-0406-cc9f-7780e0a42992.html">Google AI Studioを使ってPoIC用のWebアプリを作ってみた</a></li>
+<li><a href="/articles/36833c90-82be-b5b0-ef24-ed8e14a2ab78.html">Dynalistのインボックスへ送信するスクリプト</a></li>
+<li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
+<li><a href="/pieces/94edf964-bdad-d1e8-143b-b7fe67835489.html">Workflowy の Move to Today 機能が便利すぎた</a></li>
+<li><a href="/articles/7a7bac45-e0f1-4a7b-84b9-c9a7856a1c50.html">Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript</a></li>
+<li><a href="/articles/7af683f2-634b-0ac7-63b2-7929bf56da76.html">d-PoICのカードを広げるためのボードアプリをつくった</a></li>
+<li><a href="/articles/ac589c42-ff2e-70ef-d4fd-f77497ffc062.html">Workflowyで現在カーソルがある項目の親項目を閉じて、そこにカーソルを移動させるショートカットをUserScriptでつくった</a></li>
+<li><a href="/articles/f1f0b5f0-f360-4f46-870a-dac719665cde.html">2025-11時点でのWorkflowyの構造と使い方</a></li>
+<li><a href="/articles/5baa00a8-0b50-a55a-2e5d-63b65c52fec5.html">ScriptableのコードをClaudeに書いてもらえて神！</a></li>
+<li><a href="/articles/6feb0874-9c92-cd89-3f60-237fe8e05904.html">マンダラートのWebアプリ作った</a></li>
+<li><a href="/articles/21f14291-a88c-1ac7-01e3-da1d16d8d2dc.html">Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</a></li>
+<li><a href="/articles/ccb0135c-6929-9a07-be9e-938b332ab771.html">Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト</a></li>
+<li><a href="/articles/7da3f4e4-1c72-0666-2548-4d5df5b79abc.html">Rhizonoteで書いてるノートを公開する場所を作った</a></li>
+<li><a href="/articles/46230c76-2d95-1fb8-96be-dc51d833272e.html">Dynalistのタスク表示用スクリプト</a></li>
+<li><a href="/articles/894eb4dd-c928-e030-d0f6-6dbf4a89b68c.html">d-PoICに2ホップリンク機能を追加</a></li>
+<li><a href="/articles/39123630-b6ec-c476-fe80-5127a89e072e.html">d-PoICにHubカード作成機能を追加</a></li>
+</ul>
+</div>
         </div>
     </main>
 
     <div id="footer"></div>
 
     <script>
-        // ヘッダー・フッターの読み込み（パスを ../ に修正）
-        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
-        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
 </body>
 </html>

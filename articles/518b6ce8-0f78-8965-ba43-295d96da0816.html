@@ -8,36 +8,75 @@
     <meta property="og:title" content="内部リンク機能があるMarkdownエディタを作った - morvra lists">
     <meta property="og:description" content="普段のメモ・ノートツールは基本的にWorkflowyを使ってるんだけど、ブラウザで動く軽いObsidian、もしくはMarkdownを扱えるCosenseがあったらいいなぁと夢想してた。フラットな文章で書きたい時、ブラウザで軽く書けて、内部...">
     <meta property="og:type" content="article">
-    <link rel="stylesheet" href="../styles.css">
-    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" href="/styles.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='/bullet_icon.png' rel='shortcut icon'/>
+    <link href='/bullet_icon.png' rel='apple-touch-icon'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
 </head>
 <body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
     <div id="header"></div>
 
     <main>
         <div id="article">
             <div id="article-title"><h1>内部リンク機能があるMarkdownエディタを作った</h1></div>
             <div id="article-date">2026-01-13</div>
-            <div id="article-tags"><a href="../tag?tag=自作ツール">自作ツール</a></div>
+            <div id="article-tags"><a href="/tag?tag=自作ツール">自作ツール</a></div>
 
             <div id="article-content">
                 <p>普段のメモ・ノートツールは基本的にWorkflowyを使ってるんだけど、ブラウザで動く軽いObsidian、もしくはMarkdownを扱えるCosenseがあったらいいなぁと夢想してた。</p><p>フラットな文章で書きたい時、<b>ブラウザで軽く書けて</b>、<b>内部リンク機能がある</b>、<b>MarkDownエディタ</b>って意外と無いんだよね。</p><p>で、バイブコーディングに慣れてきた今なら自分で作れるのでは？と思い挑戦してみた。</p><p>その結果がこちら → <a href="https://morvra.github.io/rhizonote/">Rhizonote</a> （リゾノート）</p><p><img src="https://gyazo.com/0c6e1c8590cd6c419be4b63627f50dd3/thumb/800" alt="Image"></p><p>名前の由来はRhizome(地下茎 / 水平的・横断的に接続・広がる構造や関係性を表す概念) + Note。主にGoogleAIStudioで作業して、一応形になるところまできた。</p><h2>機能</h2><p>とりあえず機能をざっとリストにして並べてみる。</p><ul><li>基本機能＆オプション<ul><li>データはindexedDBに保存</li><li>階層付きフォルダ機能（名前に反して非Rhizomeな機能だけどデイリーを分けたい欲求に抗えず）</li><li>Bookmarkでノート一覧の上部に表示（手動で並び替え可能）</li><li>ノートタイトルと本文から検索<ul><li>ハイライト＆検索語句までスクロール</li></ul></li><li>マークダウンプレビュー（Ctrl+E）<ul><li>画像記法部分をホバーで編集画面でも確認可能</li></ul></li><li>文字数カウンタ</li><li>フォントサイズ変更</li><li>ライト/ダークテーマ切り替え</li><li>全ノートをZipでエクスポート / 全データ削除 </li></ul></li><li>Dropbox同期（Ctrl+S）<ul><li>フロントマター付きのマークダウンとフォルダで同期</li></ul></li><li>リンクまわり<ul><li>Wikiリンク形式の内部リンク</li><li><code>[[</code>  を入力するとリンク先の候補がでてきて文字入力で絞り込める</li><li>ノートタイトルを変更したらそのノートへのリンクテキストも一括で変更できる</li><li>文字を選択してCtrl+[でリンク化</li><li>ファイルが存在しないリンクも作れる（赤いリンク）<ul><li>リンクをクリックするとそのタイトルでノートが作られる</li></ul></li><li>関連するノート（2HopLink風）が本文の下部に並べて表示される</li></ul></li><li>複数行を選択して新規ノートとして切り出し（Ctrl+Shift+E）<ul><li>切り出し元にはリンクとして残す、切り出し先にも元ノートへのリンクを挿入</li></ul></li><li>Split View（Ctrl+Shift+V）<ul><li>ノートを右側に表示して、2つのノートを並べられる</li></ul></li><li>GridView（Alt+G）<ul><li>全てのノートをカード形式で並べる。Markdownの画像記法があったらサムネも表示。</li><li>ここからでも検索できる。</li></ul></li><li>デイリーノート（Alt+D）<ul><li>カスタムした日付タイトルのノートが開く(月別・年別ノートにもできる)</li><li>始めて開いた時に挿入されるテンプレートも設定可能</li></ul></li><li>タスク行を抽出して一覧（Alt+T）<ul><li>ノート本文の行頭にタスク記号 <code>- [ ]</code>  があるとタスクとして認識され、ファイルをまたいで一覧できる</li><li>一覧するモーダル内で完了状態を切り替え可能</li><li>該当ノートに移動することも可能で、タスクの位置まで自動でスクロールされる</li></ul></li><li>ランダムにノートを開く（Alt+R）</li><li>コマンドパレット（Ctrl+P）<ul><li>各種機能の呼び出し</li><li>ブックマークしたノートも開ける</li><li>文字を入力するとノートを検索できる</li></ul></li><li>テンプレート<ul><li>あらかじめ書いておいたテキスト（日時も取得可能）をカーソル位置に挿入できる機能</li><li>テンプレート用フォルダを設定すると、その中身がテンプレートとして登録される</li><li>新規ノート作成時のデフォルトで挿入されるテンプレートも設定可能</li><li>出番が少ない想定でコマンドパレットから呼び出すようにしてる</li></ul></li><li>他ショートカット<ul><li>Ctrl+Alt+N 新規ノート</li><li>Ctrl+↑↓ 行入れ替え（複数行可）</li><li>Ctrl+Shift+C タスク記号挿入→完了→記号削除トグル</li><li>Ctrl+? ショートカット一覧</li></ul></li><li>スマホ対応<ul><li>PWAでアプリ化</li><li>オフラインでも動くはず</li><li>画面下部に各機能にアクセスするためのツールバーを設置</li><li>左端スワイプでサイドバー表示</li><li>左右にスライドで滑らかにカーソル移動</li></ul></li></ul><p>自作なので当然ながら好きな機能ばかりで、どれも書きたくて長くなってしまった。</p><p>シンプルに書くと「ブラウザから使えるDropbox経由で同期するマークダウンエディタで、内部リンク機能がけっこう充実してる」って感じ。</p><p>■</p><p>こんなのあったらいいなと思ったものがざっくり作れて、それを使いながら手になじませていくのがめっちゃ楽しい。自分が道具に合わせるだけじゃなく、道具を自分に寄せながら双方向でアップデートしていく感覚というか。</p><p>エディタやツールの使い方をあーでもないこーでもないと考えるのが好きな自分にとってはバイブコーディングによって自作できる幅が広がって無限に遊べちゃう。システム手帳に凝ってバインダーとかリフィル作ったりする感覚に近いかも。使ったこと無いし知らんけど。</p><p>とは言えこれを使い続けるかは謎ｗ Workflowyがメモ環境の中心にあるのは間違いないわけで、とりあえず段差が無い方が良い時とかファイルが欲しい時に使う感じになるかな。</p><p>■</p><p>数日でここまで形にできたのはd-PoICや他のツールを作って（もらって）きた経験がかなり活きてる。でも同期周りをはじめちんぷんかんぷんな部分も沢山。</p><p>バイブコーディングはどんどん一般的なスキルになっていくと思うけど、クオリティは練度でめちゃくちゃ変わることを実感する日々。プログラミングとAIの知識がもっとあれば更に手軽に思い通りのものが作れるんだろうなぁ。</p>
             </div>
-            
+
             <div id="ad">
-                </div>
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="related-articles">
+<h2>関連記事</h2>
+<ul>
+<li><a href="/articles/ae773cd3-35e8-0406-cc9f-7780e0a42992.html">Google AI Studioを使ってPoIC用のWebアプリを作ってみた</a></li>
+<li><a href="/articles/21f14291-a88c-1ac7-01e3-da1d16d8d2dc.html">Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</a></li>
+<li><a href="/articles/4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0.html">Dynalistの連用日記用ビューワーをつくった</a></li>
+<li><a href="/articles/f4f73dea-0357-0dcd-824a-3eb3b0c90501.html">CardBoardで作ったカードをd-PoICに送れるようにした</a></li>
+<li><a href="/articles/7af683f2-634b-0ac7-63b2-7929bf56da76.html">d-PoICのカードを広げるためのボードアプリをつくった</a></li>
+<li><a href="/articles/39123630-b6ec-c476-fe80-5127a89e072e.html">d-PoICにHubカード作成機能を追加</a></li>
+<li><a href="/articles/33683671-aa84-8dba-243a-191af9f17747.html">d-PoICのDropbox同期をマークダウンに変更</a></li>
+<li><a href="/articles/6feb0874-9c92-cd89-3f60-237fe8e05904.html">マンダラートのWebアプリ作った</a></li>
+<li><a href="/articles/7da3f4e4-1c72-0666-2548-4d5df5b79abc.html">Rhizonoteで書いてるノートを公開する場所を作った</a></li>
+<li><a href="/articles/894eb4dd-c928-e030-d0f6-6dbf4a89b68c.html">d-PoICに2ホップリンク機能を追加</a></li>
+<li><a href="/articles/c24ebea6-b71d-97a6-3198-358520d53141.html">Workflowyにメモを送信するための自分用Chrome拡張を作った</a></li>
+<li><a href="/articles/29fa4397-2603-5a82-2130-a89b4cc4589a.html">シャドバWBの対戦支援ツールを作った</a></li>
+</ul>
+</div>
         </div>
     </main>
 
     <div id="footer"></div>
 
     <script>
-        // ヘッダー・フッターの読み込み（パスを ../ に修正）
-        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
-        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
 </body>
 </html>
