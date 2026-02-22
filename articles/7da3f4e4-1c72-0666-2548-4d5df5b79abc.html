@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhizonoteで書いてるノートを公開する場所を作った - morvra lists</title>
+    <meta name="description" content="前回記事で書いた Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。その名もRhizoroji。由来はRhizome+...">
+    <meta property="og:title" content="Rhizonoteで書いてるノートを公開する場所を作った - morvra lists">
+    <meta property="og:description" content="前回記事で書いた Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。その名もRhizoroji。由来はRhizome+...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Rhizonoteで書いてるノートを公開する場所を作った</h1></div>
+            <div id="article-date">2026-01-17</div>
+            <div id="article-tags"><a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p><a href="/articles/518b6ce8-0f78-8965-ba43-295d96da0816.html">前回記事で書いた</a> Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。</p><p>その名も<a href="https://morvra.github.io/rhizoroji/">Rhizoroji</a>。由来はRhizome+露地（Roji）。</p><p>Rhizonoteの中を公開するからRhizoはつけたい＆庭の要素つけたいけどRhizogardenは長いし地下茎とガーデンってニュアンスがちょっと合わないかなってことで、茶室につながる庭でやや野味のある趣な露地という語を採用。</p><p>仕組みとしては、</p><ul><li>Rhizonote側の機能でPublishをonにしたノートを</li><li>DropboxAPIを使ってGithubActionsでHTMLに変換して</li><li>GithubPagesに静的サイトとしてビルト</li></ul><p>することで公開している。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

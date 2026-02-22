@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d-PoICに2ホップリンク機能を追加 - morvra lists</title>
+    <meta name="description" content="自作のPoICツール d-PoIC でCosense風の「リンク先カードに載っているリンク＆被リンク」を表示させるようにした。▼ こんな感じ＊2ホップリンクについては Scrapboxの2ホップリンク - daiiz に詳しい。リンクが多い...">
+    <meta property="og:title" content="d-PoICに2ホップリンク機能を追加 - morvra lists">
+    <meta property="og:description" content="自作のPoICツール d-PoIC でCosense風の「リンク先カードに載っているリンク＆被リンク」を表示させるようにした。▼ こんな感じ＊2ホップリンクについては Scrapboxの2ホップリンク - daiiz に詳しい。リンクが多い...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>d-PoICに2ホップリンク機能を追加</h1></div>
+            <div id="article-date">2025-12-18</div>
+            <div id="article-tags"><a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>自作のPoICツール <a href="https://morvra.github.io/poic/">d-PoIC</a> でCosense風の「リンク先カードに載っているリンク＆被リンク」を表示させるようにした。</p><p>▼ こんな感じ</p><p><img src="https://gyazo.com/b9bb282ad059ae3775d23ae705da3107/thumb/500" alt="Image"></p><p>＊2ホップリンクについては <a href="https://scrapbox.io/daiiz/Scrapbox%E3%81%AE2%E3%83%9B%E3%83%83%E3%83%97%E3%83%AA%E3%83%B3%E3%82%AF">Scrapboxの2ホップリンク - daiiz</a> に詳しい。</p><p>リンクが多いカードだと縦幅とるので開閉式＆タイトルのみ並べてる。それとBacklink（開いているカードへのリンクがあるカード）は本文で参照している行を読めるようにしてみた。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

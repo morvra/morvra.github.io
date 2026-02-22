@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynalistでタグごとに色を設定する - morvra lists</title>
+    <meta name="description" content="検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。 .node-tag[title=&quot;Filter #hoge&quot;] で指定できる。これをStylusなどを使ってスタイルを設定すればOK。このサイトへの投稿をD...">
+    <meta property="og:title" content="Dynalistでタグごとに色を設定する - morvra lists">
+    <meta property="og:description" content="検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。 .node-tag[title=&quot;Filter #hoge&quot;] で指定できる。これをStylusなどを使ってスタイルを設定すればOK。このサイトへの投稿をD...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Dynalistでタグごとに色を設定する</h1></div>
+            <div id="article-date">2025-07-21</div>
+            <div id="article-tags"><a href="../tag?tag=Dynalist">Dynalist</a></div>
+
+            <div id="article-content">
+                <p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title="Filter #hoge"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

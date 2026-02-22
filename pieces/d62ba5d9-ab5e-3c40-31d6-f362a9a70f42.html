@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynalist連用日記の検索結果をあれこれいじる - morvra lists</title>
+    <meta name="description" content="検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更親要素わからないと不便だったのでパンくずリストを表示するようにした これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mans...">
+    <meta property="og:title" content="Dynalist連用日記の検索結果をあれこれいじる - morvra lists">
+    <meta property="og:description" content="検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更親要素わからないと不便だったのでパンくずリストを表示するようにした これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mans...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Dynalist連用日記の検索結果をあれこれいじる</h1></div>
+            <div id="article-date">2025-09-09</div>
+            <div id="article-tags"><a href="../tag?tag=Dynalist">Dynalist</a></div>
+
+            <div id="article-content">
+                <ul><li>検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href="https://morvra.github.io/dynalistdiary" target="_blank">Dynalist 連用日記</a></p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

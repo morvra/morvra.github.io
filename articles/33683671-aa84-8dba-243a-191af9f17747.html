@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d-PoICのDropbox同期をマークダウンに変更 - morvra lists</title>
+    <meta name="description" content="自作のPoIC用ツール「d-PoIC」の同期方式を変更。これまで全カードを1つのJSONとして保存していたのを、カード毎にマークダウンファイルを作成するようにした。＊d-PoIC独自のタイプやタグ等のメタ情報はフロントマターにまとめた。カー...">
+    <meta property="og:title" content="d-PoICのDropbox同期をマークダウンに変更 - morvra lists">
+    <meta property="og:description" content="自作のPoIC用ツール「d-PoIC」の同期方式を変更。これまで全カードを1つのJSONとして保存していたのを、カード毎にマークダウンファイルを作成するようにした。＊d-PoIC独自のタイプやタグ等のメタ情報はフロントマターにまとめた。カー...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>d-PoICのDropbox同期をマークダウンに変更</h1></div>
+            <div id="article-date">2025-12-17</div>
+            <div id="article-tags"><a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>自作のPoIC用ツール「<a href="https://morvra.github.io/poic/">d-PoIC</a>」の同期方式を変更。これまで全カードを1つのJSONとして保存していたのを、カード毎にマークダウンファイルを作成するようにした。</p><p>＊d-PoIC独自のタイプやタグ等のメタ情報はフロントマターにまとめた。</p><p>カード1枚が1ファイルになったことで、</p><ul><li>ファイルを開いてカードをそのまま読める</li><li>エディタ等からDropbox上のmdファイルを作成・編集すればd-PoICに反映</li><li>iOSのショートカットからカードの作成や、指定したカードに追記</li></ul><p>みたいなこともできるようになった。</p><p>同期の処理はややこしかった（日本語の扱いや最新版をどこで判別するかなど）んだけど、今回はClaudeにGithubのリポジトリをまるごと読み込ませてちまちま改良していった。</p><p>Workflowyみたいな1つの大きなリストもいいんだけど、カード形式なら1カード1ファイルになっていた方がしっくりくるね。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

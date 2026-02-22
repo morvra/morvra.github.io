@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflowyにメモを送信するための自分用Chrome拡張を作った - morvra lists</title>
+    <meta name="description" content="はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。ショートカットキー(Alt+n)を押すとモーダルが立ち上がる1行のテキスト入力欄にカ...">
+    <meta property="og:title" content="Workflowyにメモを送信するための自分用Chrome拡張を作った - morvra lists">
+    <meta property="og:description" content="はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。ショートカットキー(Alt+n)を押すとモーダルが立ち上がる1行のテキスト入力欄にカ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Workflowyにメモを送信するための自分用Chrome拡張を作った</h1></div>
+            <div id="article-date">2025-11-17</div>
+            <div id="article-tags"><a href="../tag?tag=Workflowy">Workflowy</a>, <a href="../tag?tag=javascript">javascript</a>, <a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>はじめに、Workflowy上で動くどこからでもInboxに送信するためのUserScriptを作りたくて、以下の概要を元にGeminiに作成してもらった。</p><ul><li>ショートカットキー(Alt+n)を押すとモーダルが立ち上がる</li><li>1行のテキスト入力欄にカーソルがあっている状態</li><li>送信ボタンを押すとデフォルトでは「HH:MM 入力テキスト」という時刻付きの形式で送信される</li><li>送られるのはInboxの最下部に送信</li><li>送信ボタンだけじゃなく、入力欄でEnterでも送信可能</li><li>別のボタンで私が運営している個人サイト用のフォーマットをつけて送信できる<ul><li>テキストの最後に <code>piece</code> が付く</li><li>note欄にdate: YYYY-MM-DD 形式で日付が書かれる</li></ul></li><li>送信後はモーダルが閉じられる</li><li>テキスト未入力でEnter / モーダル外をクリック / Escキー で送信せずモーダルを閉じる</li></ul><p>で、生成されたスクリプトを微調整していったらかなり感触が良くて、「これはWorkflowy上だけじゃなく、どこからでも動かしたいな」と思い、Chrome拡張にしてもらった。</p><p><img src="https://gyazo.com/eb9d70d2fd247ab597fd3cfbf9ee4a0d/thumb/500" alt="Image"></p><p>▲ こんな感じでボタンやショートカットキーからポップアップを呼び出してWorkflowyに送信する拡張機能が完成！ｳﾚｼｲ!!</p><p>自分がやった作業はプロンプトを考える以外＿まぁそれが肝心なんだが＿は拡張機能用のフォルダと作ってもらったコードをコピペしたファイルを作成して、それをChromeの「パッケージ化されていない拡張機能を読み込む」から読み込んだだけ。すご。</p><p>今開いてるページのリンクを追加するオプションつけたり、起動時に選択しているテキストがあったら入力欄に入れるようにしたりと機能追加もした。ﾀﾉｼｲ!!</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynalistからCosenseに投稿するBookmarklet - morvra lists</title>
+    <meta name="description" content="参考：WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog上のスクリプトを元にChatGPT頼りつつ改造。▼ コードjavascript:(function(){functio...">
+    <meta property="og:title" content="DynalistからCosenseに投稿するBookmarklet - morvra lists">
+    <meta property="og:description" content="参考：WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog上のスクリプトを元にChatGPT頼りつつ改造。▼ コードjavascript:(function(){functio...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>DynalistからCosenseに投稿するBookmarklet</h1></div>
+            <div id="article-date">2024-10-29</div>
+            <div id="article-tags"><a href="../tag?tag=Dynalist">Dynalist</a>, <a href="../tag?tag=Cosense">Cosense</a></div>
+
+            <div id="article-content">
+                <p>参考：<a href="https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/" target="_blank">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p><p>上のスクリプトを元にChatGPT頼りつつ改造。</p><p>▼ コード</p><p><code>javascript:(function(){function DL2CS(projectName, indentLinks){function formatQuote(note){return note.split(/\r\n|\r|\n/).map(line=>"> "+line).join("\n")+"\n"}function convertMarkdownLinks(text){return text.replace(/\[(.<em>?)\]\((.</em>?)\)/g,'[$1 $2]')}if(location.host==="dynalist.io"&&projectName){const root=DYNALIST.app.app_document.ui.current_root;const meta=root.get_meta_object();const content=meta.get_content()||"Undefined";const note=meta.get_note()?formatQuote(meta.get_note()):"";const children=(function getChildren(indentation,items){return items.map(item=>{const childMeta=item.get_meta_object();return indentation+childMeta.get_content()+"\n"+(childMeta.get_note()?formatQuote(childMeta.get_note()):"")+getChildren(indentation+" ",item.get_children().children);}).join("")}(indentLinks?" ":"",root.get_children().children));const url="https://scrapbox.io/"+projectName+"/"+encodeURIComponent(content);const body=convertMarkdownLinks(note+children);window.open(url+"?body="+encodeURIComponent(body),'_blank')}}DL2CS("YOUR-PROJECT",true);})();</code></p><ul><li>Gist → <a href="https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87" target="_blank">DynalistからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li></ul><ul><li>階層はそのまま</li></ul><ul><li>ノートは引用符</li></ul><ul><li>マークダウンのリンクをCosenseの記法に置換</li></ul><h2>使用方法</h2><ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li></ul><ul><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoogleAdsense置いてみた - morvra lists</title>
+    <meta name="description" content="ブログサービスを介してない自前のサイトでの申請は初めて。意外といけた。いろいろ試して記事の下に1つだけ置くことにした。記事基本的に短いしあんまゴテゴテするのも何だなと。それに合わせてヘッダー周りや記事本文のデザインもちょこちょこ調整。サイト...">
+    <meta property="og:title" content="GoogleAdsense置いてみた - morvra lists">
+    <meta property="og:description" content="ブログサービスを介してない自前のサイトでの申請は初めて。意外といけた。いろいろ試して記事の下に1つだけ置くことにした。記事基本的に短いしあんまゴテゴテするのも何だなと。それに合わせてヘッダー周りや記事本文のデザインもちょこちょこ調整。サイト...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>GoogleAdsense置いてみた</h1></div>
+            <div id="article-date">2024-11-15</div>
+            <div id="article-tags"></div>
+
+            <div id="article-content">
+                <p>ブログサービスを介してない自前のサイトでの申請は初めて。意外といけた。</p><p>いろいろ試して記事の下に1つだけ置くことにした。記事基本的に短いしあんまゴテゴテするのも何だなと。それに合わせてヘッダー周りや記事本文のデザインもちょこちょこ調整。サイトいじるの楽しい😁</p><p>今回久しぶりにAdsenseさわったんだけど、自動で配置できてしかもそれがかなり効果的っぽくて驚いた。推移の際に全画面に広告乗せたり、追尾とかも自動でできてびっくり。そりゃみんなやるよな。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

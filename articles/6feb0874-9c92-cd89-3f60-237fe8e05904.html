@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マンダラートのWebアプリ作った - morvra lists</title>
+    <meta name="description" content="マンダラートは発想法の一種で、「3×3のマスをつくり、メインテーマを中心マスに置き、周辺8マスにそれに関連するものを埋めていく」というもの。参考: マンダラート - Wikipedia考えを広げたり深めたりする手法としてたまに使っていたんだ...">
+    <meta property="og:title" content="マンダラートのWebアプリ作った - morvra lists">
+    <meta property="og:description" content="マンダラートは発想法の一種で、「3×3のマスをつくり、メインテーマを中心マスに置き、周辺8マスにそれに関連するものを埋めていく」というもの。参考: マンダラート - Wikipedia考えを広げたり深めたりする手法としてたまに使っていたんだ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>マンダラートのWebアプリ作った</h1></div>
+            <div id="article-date">2025-12-15</div>
+            <div id="article-tags"><a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>マンダラートは発想法の一種で、「3×3のマスをつくり、メインテーマを中心マスに置き、周辺8マスにそれに関連するものを埋めていく」というもの。</p><p>参考: <a href="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%B3%E3%83%80%E3%83%A9%E3%83%BC%E3%83%88">マンダラート - Wikipedia</a></p><p>考えを広げたり深めたりする手法としてたまに使っていたんだけど、Geminiで自分が使いやすいものを作ってみたくなった。</p><p>それで作ったのがこちら → <a href="https://morvra.github.io/mandalart">八方思案</a></p><p><img src="https://gyazo.com/8e8b62316338850396e3378ba5658806/thumb/800" alt="Image"></p><h2>こだわったポイント</h2><ul><li>セルのドラッグ・アンド・ドロップ<ul><li>マンダラートで発想を広げるうえで、上下左右の位置関係があることが重要だと思ってるので、それをいじれるD&Dは大事。手慰みにもなる。</li><li>スマホでも一応できる</li></ul></li><li>9×9モード<ul><li>書いたら広げて一覧、そこで編集も可能</li><li>対応するセルのテキストは同期する</li><li>＊スマホでは見にくいので切り替えボタン表示してない</li></ul></li><li>下位にテキストがあるセルの右上にマークがつく</li><li>ズームした時にその方向に移動するアニメーション</li><li>インデント付きのテキストとしてエクスポート<ul><li>アウトライナーに階層を維持して貼り付け</li></ul></li></ul><h2>操作</h2><p>直感的に使えるようにしたけどショートカットキーは説明が必要なので書いておく。</p><ul><li>Zoom: セルをダブルクリック、Alt+Enter、Alt+↓、セル右下の+ボタン</li><li>Zoom out: 中心セルをダブルクリック、Esc、Alt+↑、中心セル右下の↑ボタン</li><li>セルの移動: ドラッグ・アンド・ドロップ</li><li>セル間のカーソル移動: Tab、Shift+Tab</li></ul>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

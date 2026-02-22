@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflowyの内部リンクとサイトのリンクをつなげた - morvra lists</title>
+    <meta name="description" content="タイトルに含まれるリンクは素のテキストになる。公開されている（article or piece タグがついた）項目へのリンクの場合はサイトのリンクに変換される。非公開項目へのリンク、もしくは公開された項目の子要素へのリンクも素のテキストにな...">
+    <meta property="og:title" content="Workflowyの内部リンクとサイトのリンクをつなげた - morvra lists">
+    <meta property="og:description" content="タイトルに含まれるリンクは素のテキストになる。公開されている（article or piece タグがついた）項目へのリンクの場合はサイトのリンクに変換される。非公開項目へのリンク、もしくは公開された項目の子要素へのリンクも素のテキストにな...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Workflowyの内部リンクとサイトのリンクをつなげた</h1></div>
+            <div id="article-date">2025-11-22</div>
+            <div id="article-tags"><a href="../tag?tag=ブログ">ブログ</a></div>
+
+            <div id="article-content">
+                <p>タイトルに含まれるリンクは素のテキストになる。</p><p>公開されている（article or piece タグがついた）項目へのリンクの場合はサイトのリンクに変換される。</p><p>非公開項目へのリンク、もしくは公開された項目の子要素へのリンクも素のテキストになる。</p><p>テスト</p><ul><li>公開リンク → <a href="/articles/2744b6b5-596e-3e7b-b133-ac792fe874cf.html">Workflowyで書く記事のテスト</a></li><li>非公開リンク → 非公開項目へのリンクテスト</li></ul>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

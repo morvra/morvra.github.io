@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d-PoICのカードを広げるためのボードアプリをつくった - morvra lists</title>
+    <meta name="description" content="自作のPoICアプリ「d-PoIC」にはタグor検索結果or手動で複数選択したカードをまとめてOPMLとしてエクスポートする機能がある。本家PoICでいうタスクフォース編成の感覚で、そこからアウトライナーに貼り付けて使う想定だったんだけど、...">
+    <meta property="og:title" content="d-PoICのカードを広げるためのボードアプリをつくった - morvra lists">
+    <meta property="og:description" content="自作のPoICアプリ「d-PoIC」にはタグor検索結果or手動で複数選択したカードをまとめてOPMLとしてエクスポートする機能がある。本家PoICでいうタスクフォース編成の感覚で、そこからアウトライナーに貼り付けて使う想定だったんだけど、...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>d-PoICのカードを広げるためのボードアプリをつくった</h1></div>
+            <div id="article-date">2025-12-27</div>
+            <div id="article-tags"><a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>自作のPoICアプリ「<a href="https://morvra.github.io/poic/">d-PoIC</a>」にはタグor検索結果or手動で複数選択したカードをまとめてOPMLとしてエクスポートする機能がある。</p><p>本家PoICでいうタスクフォース編成の感覚で、そこからアウトライナーに貼り付けて使う想定だったんだけど、カード型のデザインということもあり、2次元空間に自由に配置して眺めたくなってきた。</p><p>のでつくった。</p><ul><li><a href="https://morvra.github.io/cardboard">CardBoard</a></li></ul><p><img src="https://gyazo.com/eabb2435f410ecc23676d4166a380f30/thumb/800" alt="Image"></p><ul><li>d-PoICでエクスポートしたOPMLを貼り付ければカードがインポートされる</li><li>ドラッグ・アンド・ドロップでカード移動</li><li>カードの追加・編集も可能</li><li>無限にスクロールできる</li><li>マークダウンのリンク記法やURLはリンクになる</li><li>左上から順番に並べてOPMLとしてコピーできる</li></ul><p>d-PoICの検索結果をこっちで並べたり、発見だけを並べたり、それを複数回やったりしてこねこねするイメージ。で、そっからアウトライナーにも移動可能という。</p><p>グルーピングとか図挿入とかカード間の関係をうんたらかんたらできたらベストだけど、むずそうなのでとりあえずシンプルな形で実装した。</p><p>「一旦カードとしてざっと並べてみる」使い方を想定していて、複雑な操作も無いのでここでガッツリ作業とか大きな構想を練るみたいな用途には向かないと思う。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynalistのタスク表示用スクリプト - morvra lists</title>
+    <meta name="description" content="DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。コード → DynalistTaskViewer.js＊APIとドキュメントIDを自分用に変更して使って...">
+    <meta property="og:title" content="Dynalistのタスク表示用スクリプト - morvra lists">
+    <meta property="og:description" content="DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。コード → DynalistTaskViewer.js＊APIとドキュメントIDを自分用に変更して使って...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Dynalistのタスク表示用スクリプト</h1></div>
+            <div id="article-date">2025-03-13</div>
+            <div id="article-tags"><a href="../tag?tag=Dynalist">Dynalist</a>, <a href="../tag?tag=javascript">javascript</a></div>
+
+            <div id="article-content">
+                <p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p><p>コード → <a href="https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30" target="_blank">DynalistTaskViewer.js</a></p><p>＊APIとドキュメントIDを自分用に変更して使ってください。</p><ul><li>右上のボタンをクリックするとリストが表示される</li></ul><ul><li>タスク名をクリックするとDynalist上でその項目に移動できる</li></ul><ul><li>URLをコピーしてDynalistにリンクを貼り付けることも可能</li></ul><p>ここから完了状態を変更するのも考えたんだけど処理が複雑になりそう＆API使いすぎたくないのでやめた。起動時と10分間隔で取得するようにしてるけどこのへんは改良の余地あり。</p><p>検索でも同じようなことはできるんだけど、その場で一覧できるのが便利でいい感じ。</p><p>総数が多いならタグで絞り込んだり日付入れて順番並び替えたりするのもよさそう。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

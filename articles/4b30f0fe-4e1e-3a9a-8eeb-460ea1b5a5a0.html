@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynalistの連用日記用ビューワーをつくった - morvra lists</title>
+    <meta name="description" content="▼ これDynalist 連用日記＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある機能Dynalist上の日付（yy...">
+    <meta property="og:title" content="Dynalistの連用日記用ビューワーをつくった - morvra lists">
+    <meta property="og:description" content="▼ これDynalist 連用日記＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある機能Dynalist上の日付（yy...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Dynalistの連用日記用ビューワーをつくった</h1></div>
+            <div id="article-date">2025-09-07</div>
+            <div id="article-tags"><a href="../tag?tag=Dynalist">Dynalist</a>, <a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>▼ これ</p><p><img src="https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000" alt="Image"></p><ul><li><a href="https://morvra.github.io/dynalistdiary" target="_blank">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

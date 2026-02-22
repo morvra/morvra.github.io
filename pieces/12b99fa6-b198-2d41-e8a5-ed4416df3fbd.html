@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードブロック投稿テスト - morvra lists</title>
+    <meta name="description" content="▼ コードブロックjavascript: ! function() {
+    var e = document.createElement(&quot;textarea&quot;),
+        t = document.title,...">
+    <meta property="og:title" content="コードブロック投稿テスト - morvra lists">
+    <meta property="og:description" content="▼ コードブロックjavascript: ! function() {
+    var e = document.createElement(&quot;textarea&quot;),
+        t = document.title,...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>コードブロック投稿テスト</h1></div>
+            <div id="article-date">2026-02-19</div>
+            <div id="article-tags"></div>
+
+            <div id="article-content">
+                <p>▼ コードブロック</p><pre><code>javascript: ! function() {
+    var e = document.createElement("textarea"),
+        t = document.title,
+        c = document.URL.replace(/\(/g, "%2528").replace(/\)/g, "%2529");
+    e.textContent = "[" + t + "](" + c + ")", document.querySelector("body").append(e), e.select(), document.execCommand("copy"), e.remove()
+}();
+</code></pre><p>本文。</p><p>できた！</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

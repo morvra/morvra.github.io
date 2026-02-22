@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事テスト - morvra lists</title>
+    <meta name="description" content="本文見出しh2ほんぶんほんぶんほんぶん２太字 ほげ〜中黒つき１中黒つき1-1中黒つき1-222-23見出しにかかわらない本文引用YouTube リンクはどうなる？文中 YouTube では？Dynalistのリンクをサイトの方に置換したい...">
+    <meta property="og:title" content="記事テスト - morvra lists">
+    <meta property="og:description" content="本文見出しh2ほんぶんほんぶんほんぶん２太字 ほげ〜中黒つき１中黒つき1-1中黒つき1-222-23見出しにかかわらない本文引用YouTube リンクはどうなる？文中 YouTube では？Dynalistのリンクをサイトの方に置換したい...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>記事テスト</h1></div>
+            <div id="article-date">2024-03-29</div>
+            <div id="article-tags"><a href="../tag?tag=ブログ">ブログ</a></div>
+
+            <div id="article-content">
+                <p>本文</p><h2>見出しh2</h2><p>ほんぶんほんぶん</p><p>ほんぶん２</p><p><strong>太字</strong> ほげ〜</p><ul><li>中黒つき１</li></ul><ul><li>中黒つき1-1</li></ul><ul><li>中黒つき1-2</li></ul><ul><li>2</li></ul><ul><li>2-2</li></ul><ul><li>3</li></ul><p>見出しにかかわらない本文</p><blockquote><p>引用</p></blockquote><p><a href="https://www.youtube.com/" target="_blank">YouTube</a> リンクはどうなる？</p><p>文中 <a href="https://www.youtube.com/" target="_blank">YouTube</a> では？</p><p>Dynalistのリンクをサイトの方に置換したい 例:<a href="https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im#z=2BSuXiPppMezZeBA0lpI7sIh" target="_blank">記事テスト2</a></p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

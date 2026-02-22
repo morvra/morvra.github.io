@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>このサイトの元データをDynalistからWorkflowyに移動した - morvra lists</title>
+    <meta name="description" content="このサイトの記事やPieceはすべてDynalistで書いて、それを自動でHTMLおよびJSONに変換してGithubにPushして公開してた。それは元々Workflowyでやりたかったのを、公開APIが無くて諦めてDynalistを使うこ...">
+    <meta property="og:title" content="このサイトの元データをDynalistからWorkflowyに移動した - morvra lists">
+    <meta property="og:description" content="このサイトの記事やPieceはすべてDynalistで書いて、それを自動でHTMLおよびJSONに変換してGithubにPushして公開してた。それは元々Workflowyでやりたかったのを、公開APIが無くて諦めてDynalistを使うこ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>このサイトの元データをDynalistからWorkflowyに移動した</h1></div>
+            <div id="article-date">2025-11-06</div>
+            <div id="article-tags"><a href="../tag?tag=Workflowy">Workflowy</a>, <a href="../tag?tag=ブログ">ブログ</a></div>
+
+            <div id="article-content">
+                <p>このサイトの記事やPieceはすべてDynalistで書いて、それを自動でHTMLおよびJSONに変換してGithubにPushして公開してた。それは元々Workflowyでやりたかったのを、公開APIが無くて諦めてDynalistを使うことにした、という経緯がある。</p><p>普段使いのアウトライナーとしてはWorkflowyが好みだったのにも関わらず、その理由だけでDynalistを使ってた。</p><p>しかしDynalistのアップデートが数年無く、一方Workflowyのアップデートは頻繁で機能差は広がり続けていたこともあり、乗り換えたい欲は高まっていたけどなかなか踏ん切りがつかずにいた。</p><p>そんな中、WorkflowyのAPI（公開自体は少し前からされていた）が Export All  Nodes に対応したことで、Workflowyで直接記事の執筆ができるようになった。ガチ神アプデ！！</p><ul><li><a href="https://beta.workflowy.com/api-reference/#nodes-export">API Reference | Workflowy</a></li></ul><p>Workflowy独自の仕様（マークダウンが勝手に変換される等）もあり引越し作業に苦戦したものの、ひとまず完成！すべての記事が一括で変換されたので、不具合等もあるかもしれないけど今んとこ大丈夫そう。</p><p>これでWorkflowy上の特定のタグを付けた文章が自動でJSONに変換されてGithubにPushされるようになった。</p><p>念願のWorkflowyと個人サイトを自動で結びつける環境が整ったぞー！</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>このサイトのRSSフィードを作った - morvra lists</title>
+    <meta name="description" content="発行しているRSSフィードは https://morvra.github.io/rss.xml です。DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。毎度のごとくChatGPTに...">
+    <meta property="og:title" content="このサイトのRSSフィードを作った - morvra lists">
+    <meta property="og:description" content="発行しているRSSフィードは https://morvra.github.io/rss.xml です。DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。毎度のごとくChatGPTに...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>このサイトのRSSフィードを作った</h1></div>
+            <div id="article-date">2024-06-11</div>
+            <div id="article-tags"><a href="../tag?tag=ブログ">ブログ</a></div>
+
+            <div id="article-content">
+                <p>発行しているRSSフィードは <a href="https://morvra.github.io/rss.xml" target="_blank">https://morvra.github.io/rss.xml</a> です。</p><p>DynalistのAPIからJSONをつくるJavascriptで、同時にxmlファイルも作成することにした。</p><p>毎度のごとくChatGPTにほとんど書いてもらった。記事本文まわりでエラーでて解決に苦労したんだけど、CDATAセクション使えば大丈夫だった。</p><ul><li><a href="https://atmarkit.itmedia.co.jp/aig/01xml/cdata.html" target="_blank">XML用語事典 [CDATAセクション]</a></li></ul>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

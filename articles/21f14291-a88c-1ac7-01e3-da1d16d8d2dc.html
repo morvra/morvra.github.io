@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった - morvra lists</title>
+    <meta name="description" content="最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（WorkFlowy shortcuts: Lighting fast navigation）、Dynalistでも似たようなことできないかなと。Dynal...">
+    <meta property="og:title" content="Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった - morvra lists">
+    <meta property="og:description" content="最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（WorkFlowy shortcuts: Lighting fast navigation）、Dynalistでも似たようなことできないかなと。Dynal...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</h1></div>
+            <div id="article-date">2025-09-03</div>
+            <div id="article-tags"><a href="../tag?tag=Dynalist">Dynalist</a>, <a href="../tag?tag=javascript">javascript</a>, <a href="../tag?tag=自作ツール">自作ツール</a></div>
+
+            <div id="article-content">
+                <p>最近Workflowyでショートカットを設定して項目間を移動する機能が追加されまして（<a href="https://blog.workflowy.com/workflowy-shortcuts-lighting-fast-navigation/" target="_blank">WorkFlowy shortcuts: Lighting fast navigation</a>）、Dynalistでも似たようなことできないかなと。</p><p>Dynalistにもデフォルトで似たような機能は存在している（Ctrl+Oでコンテナが出てくる）のですが、それは文書間の移動には適しているものの、同一文書内の項目間の移動に関してはちょい不便なんですよね。</p><p>というわけで文書内を移動するためのスクリプトを作ってみました。</p><ul><li><a href="https://gist.github.com/morvra/32f89a87cfc2e78e5c172b9e25187ff2" target="_blank">gist</a></li></ul><p>APIトークンを設定して使ってください。</p><h2>機能</h2><ul><li>Alt+b で現在開いているドキュメント内のbmタグがついた項目を一覧</li><li>クリックorキーボード上下で選択→Enterで移動</li><li>ホームにも移動可能</li></ul><p>＊ブラウザの読み込み時に取得しているのでリストの更新には再読み込みが必要</p><p>よく開く項目や、進行中の項目にタグを付けて使うイメージです。</p><p>▼ サンプル</p><p><img src="https://gyazo.com/e6028abea9549ff36320a3d47c18fcaa/thumb/500" alt="Image"></p><hr><p>項目が増えたら検索欲しくなるはずだけど実装が難しそう。でもここに表示される項目があんまり多くてもウザい気がするので、このままが丁度いいのでは？と思ったり。</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>

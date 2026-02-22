@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイトの運用方法やデザインをアップデート - morvra lists</title>
+    <meta name="description" content="今月はサイトの外側をあれこれいじったので、何をしたか書いておく。変更点運用Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更タグをつければいいだけなので楽子要素のあるリストも扱えるようにDynalist上の「li」という...">
+    <meta property="og:title" content="サイトの運用方法やデザインをアップデート - morvra lists">
+    <meta property="og:description" content="今月はサイトの外側をあれこれいじったので、何をしたか書いておく。変更点運用Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更タグをつければいいだけなので楽子要素のあるリストも扱えるようにDynalist上の「li」という...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../styles.css">
+    <link href='../bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>サイトの運用方法やデザインをアップデート</h1></div>
+            <div id="article-date">2025-07-22</div>
+            <div id="article-tags"><a href="../tag?tag=ブログ">ブログ</a></div>
+
+            <div id="article-content">
+                <p>今月はサイトの外側をあれこれいじったので、何をしたか書いておく。</p><h2>変更点</h2><ul><li>運用<ul><li>Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更<ul><li>タグをつければいいだけなので楽</li></ul></li><li>子要素のあるリストも扱えるように<ul><li>Dynalist上の「li」という項目の子要素はリストとして出力される</li><li>これもそう</li></ul></li><li>更新の自動化（GithubActions）<ul><li>毎日0時と12時くらいにDynalistAPIからJSONとRSSを生成してGithubPagesにデプロイ</li></ul></li></ul></li><li>トップページ<ul><li>モジュールのデザインをカード風にして一言も追加</li><li>記事一覧を年ごとに分けて開閉式に</li></ul></li><li>記事ページ<ul><li>ページ下部に関連記事として同じタグがついた記事をリスト化</li></ul></li><li>piece<ul><li>モジュールのデザインをもとにカード風に</li></ul></li></ul><hr><p>基本的にはGeminiにおんぶにだっこでコードを書いてもらいつつテストと細かい修正は自分でやった。</p><p>これでサイトの立ち上げ時から「こんな風に実装できたらいいな」と考えていたことはだいたい完成した。特に更新の自動化と、リストの階層化ができたのは箇条書き好きとしてだいぶ嬉しい。</p><p>あとはコンテンツが充実してきたら検索機能つけるくらいかな？</p>
+            </div>
+            
+            <div id="ad">
+                </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // ヘッダー・フッターの読み込み（パスを ../ に修正）
+        fetch("../header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("../footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>
