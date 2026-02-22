@@ -81,7 +81,13 @@
                     return response.json();
                 })
                 .then(data => {
-                    allContent = [...data.articles, ...data.pieces];
+                    // article/piece の振り分け用セット
+                    const articleIds = new Set(data.articles.map(a => a.id));
+
+                    allContent = [...data.articles, ...data.pieces].map(item => ({
+                        ...item,
+                        _folder: articleIds.has(item.id) ? 'articles' : 'pieces'
+                    }));
                     allContent.sort((a, b) => new Date(b.date) - new Date(a.date));
                 })
                 .catch(error => {
@@ -96,16 +102,10 @@
                     return;
                 }
 
-                const results = [];
-                allContent.forEach(content => {
-                    const titleMatch = content.title.toLowerCase().includes(query);
-                    const bodyMatch = content.body.toLowerCase().includes(query);
-
-                    if (titleMatch || bodyMatch) {
-                        // 検索ワードにマッチしたコンテンツを結果に追加
-                        results.push(content);
-                    }
-                });
+                const results = allContent.filter(content =>
+                    content.title.toLowerCase().includes(query) ||
+                    content.body.toLowerCase().includes(query)
+                );
 
                 displayResults(results, query);
             };
@@ -125,9 +125,9 @@
                     const listItem = document.createElement('li');
                     listItem.classList.add('search-result-item');
 
-                    // タイトルのハイライト処理はそのまま
                     const titleLink = document.createElement('a');
-                    titleLink.href = `article?id=${content.id}`;
+                    // article/piece に応じた新URLで直接リンク
+                    titleLink.href = `/${content._folder}/${content.id}.html`;
                     titleLink.innerHTML = highlightMatch(content.title, query);
                     
                     const dateSpan = document.createElement('span');
@@ -141,7 +141,6 @@
                         snippets.forEach(snippetHtml => {
                             const snippet = document.createElement('div');
                             snippet.classList.add('search-snippet');
-                            // ここではinnerHTMLではなく、直接HTMLコンテンツを挿入
                             snippet.innerHTML = snippetHtml;
                             listItem.appendChild(snippet);
                         });
@@ -153,14 +152,13 @@
                 searchResults.appendChild(resultList);
             };
 
-            // テキスト内の検索ワードをハイライトするヘルパー関数
-            // この関数はタイトル専用に変更
+            // テキスト内の検索ワードをハイライトするヘルパー関数（タイトル専用）
             const highlightMatch = (text, query) => {
                 const regex = new RegExp(`(${query})`, 'gi');
                 return text.replace(regex, `<span class="highlight">$1</span>`);
             };
             
-            // ノードツリーを走査してハイライトする新しいヘルパー関数
+            // ノードツリーを走査してハイライトする関数
             const highlightTextNodes = (element, query) => {
                 const treeWalker = document.createTreeWalker(
                     element,
@@ -214,38 +212,18 @@
                         if (parent) {
                             const clonedElement = parent.cloneNode(true);
                             highlightTextNodes(clonedElement, query);
-                            snippets.add(replaceDynalistUrls(clonedElement.outerHTML));
+                            snippets.add(clonedElement.outerHTML);
                         }
                     }
                 }
                 return Array.from(snippets);
             };
-            
-            // DynalistのURLを通常のURLに変換するヘルパー関数
-            const replaceDynalistUrls = (html) => {
-                // `getData2.js`のロジックを再現
-                return html.replace(/<a href="([^"]+?)">/g, (match, url) => {
-                    const urlPattern = 'https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im';
-                    const idPattern = 'https://dynalist.io/d/ihr-nPYa3LhA5ETZ9F0NS9Im#z=';
-                    if (url.includes(urlPattern) && !url.includes(idPattern)) {
-                        // これは記事全体へのリンクなので、そのまま変換
-                        return `<a href="${url}">`;
-                    } else if (url.includes(idPattern)) {
-                        // これは記事内の特定箇所へのリンクなので、`article?id=` に変換
-                        const id = url.split('#z=')[1];
-                        return `<a href="article?id=${id}">`;
-                    } else {
-                        // Dynalist内部リンクではないので、target="_blank"を追加
-                        return `<a href="${url}" target="_blank">`;
-                    }
-                });
-            }
 
             // ブロックレベル要素かどうかを判定するヘルパー関数
             const isBlockElement = (el) => {
-              const blockTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote', 'div', 'main', 'section', 'article'];
-              return blockTags.includes(el.tagName.toLowerCase());
-            }
+                const blockTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote', 'div', 'main', 'section', 'article'];
+                return blockTags.includes(el.tagName.toLowerCase());
+            };
 
             searchButton.addEventListener('click', performSearch);
 

@@ -201,10 +201,10 @@ function markdownToHTML(markdown) {
 }
 
 // WorkflowyのURLを条件に応じて変換またはテキスト化する関数
-function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs) {
+// articleUUIDs: articleノードのUUIDセット（article/pieceでフォルダを振り分けるために使用）
+function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs, articleUUIDs) {
     // <a href="https://workflowy.com/#/shortId">text</a> の形式をキャプチャ
     const linkPattern = /<a\s+href=["']https:\/\/workflowy\.com\/#\/([a-zA-Z0-9-]+)["'][^>]*>(.*?)<\/a>/g;
-    const siteUrl = 'https://morvra.github.io/article?id=';
 
     return body.replace(linkPattern, (match, shortId, linkText) => {
         // MapからUUIDを探す
@@ -212,8 +212,9 @@ function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs) {
 
         // UUIDが見つかる、かつ 公開リスト(publicUUIDs)に含まれている場合
         if (uuid && publicUUIDs.has(uuid)) {
-            // リンクとして出力
-            return `<a href="${siteUrl}${uuid}">${linkText}</a>`;
+            // article か piece かでフォルダを振り分けて新URL形式で出力
+            const folder = articleUUIDs.has(uuid) ? 'articles' : 'pieces';
+            return `<a href="/${folder}/${uuid}.html">${linkText}</a>`;
         } else {
             // 非公開または存在しないノードへのリンクは、素のテキストのみを返す
             return linkText;
@@ -485,10 +486,10 @@ function generateRSS(articles) {
         rssFeed += `
         <item>
           <title>${article.title}</title>
-          <link>https://morvra.github.io/article?id=${article.id}</link>
+          <link>https://morvra.github.io/articles/${article.id}.html</link>
           <description><![CDATA[${article.body}]]></description>
           <pubDate>${new Date(article.date).toUTCString()}</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/article?id=${article.id}</guid>
+          <guid isPermaLink="true">https://morvra.github.io/articles/${article.id}.html</guid>
         </item>`;
     });
 
@@ -635,6 +636,9 @@ async function main() {
             ...articleNodes.map(n => n.id),
             ...pieceNodes.map(n => n.id)
         ]);
+
+        // article/piece のフォルダ振り分け用セット
+        const articleUUIDs = new Set(articleNodes.map(n => n.id));
         
         const articles = articleNodes.map(obj => {
             const id = obj.id;
@@ -644,7 +648,7 @@ async function main() {
             const title = stripMarkdownLinks(rawTitle);
             const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
-            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs);
+            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs);
             
             return { id, title, date, tags, body };
         });
@@ -657,7 +661,7 @@ async function main() {
             
             const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
-            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs);
+            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs);
             
             return { id, title, date, tags, body };
         });
