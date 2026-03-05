@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflowyで表を扱うためのUserScript - morvra lists</title>
+    <meta name="description" content="Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。＊区切りの表現を2パターン用意したので好みの方を使ってくだ...">
+    <meta property="og:title" content="Workflowyで表を扱うためのUserScript - morvra lists">
+    <meta property="og:description" content="Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。＊区切りの表現を2パターン用意したので好みの方を使ってくだ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="/styles.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='/bullet_icon.png' rel='shortcut icon'/>
+    <link href='/bullet_icon.png' rel='apple-touch-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
+</head>
+<body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>Workflowyで表を扱うためのUserScript</h1></div>
+            <div id="article-date">2026-03-05</div>
+            <div id="article-tags"><a href="/tag?tag=Workflowy">Workflowy</a></div>
+
+            <div id="article-content">
+                <p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href="https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee">WfTable-CommaSplit.js</a></li><li>TypeB → <a href="https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300" alt="Image"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300" alt="Image"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>
+            </div>
+
+            <div id="ad">
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="related-articles">
+<h2>関連記事</h2>
+<ul>
+<li><a href="/articles/7a7bac45-e0f1-4a7b-84b9-c9a7856a1c50.html">Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript</a></li>
+<li><a href="/articles/ac589c42-ff2e-70ef-d4fd-f77497ffc062.html">Workflowyで現在カーソルがある項目の親項目を閉じて、そこにカーソルを移動させるショートカットをUserScriptでつくった</a></li>
+<li><a href="/articles/c24ebea6-b71d-97a6-3198-358520d53141.html">Workflowyにメモを送信するための自分用Chrome拡張を作った</a></li>
+<li><a href="/pieces/772c9c22-7103-9764-7c41-712ebedb8cc7.html">Workflowyの美しさは、機能ではなく、その抑制にある</a></li>
+<li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
+<li><a href="/articles/f1f0b5f0-f360-4f46-870a-dac719665cde.html">2025-11時点でのWorkflowyの構造と使い方</a></li>
+<li><a href="/articles/69078751-3526-69b5-f6cf-a8bbcc4a72f8.html">WorkflowyからCosenseに投稿するBookmarklet</a></li>
+<li><a href="/pieces/94edf964-bdad-d1e8-143b-b7fe67835489.html">Workflowy の Move to Today 機能が便利すぎた</a></li>
+</ul>
+</div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>
