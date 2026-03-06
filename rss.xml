@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Thu, 05 Mar 2026 13:06:14 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 06 Mar 2026 01:07:37 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -47,6 +47,13 @@
           <description><![CDATA[<ul><li><a href="https://gist.github.com/morvra/2414f4899ceddb31b706a0affab533e9#file-wfcollapseparent-js">wfCollapseParent.js</a></li></ul><p>タイトルの通り。こういうショートカット欲しいと思って、コードをClaudeに書いてもらった。</p><p>最初うまくいかなかったのでWorkflowyの構造をコピペして教えたり調整して完成。デフォルトのキーは（文字選択せずに）Ctrl+uにしてある。</p><p>記事書いてから調べたら倉下さんがもうすでにBookmarkletでほとんど同じことやってた。さすが。</p><ul><li><a href="https://scrapbox.io/rashitamemo/WorkFlowy%E3%81%A7%E8%A6%AA%E9%A0%85%E7%9B%AE%E3%82%92%E9%96%89%E3%81%98%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%82%AD%E3%83%BC%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88">WorkFlowyで親項目を閉じるショートカットキーを追加するブックマークレット - 倉下忠憲の発想工房</a></li></ul><hr><p>追記。自分はショートカットをCtrl+←に変更した。こっちのほうが直感的だった。</p>]]></description>
           <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/ac589c42-ff2e-70ef-d4fd-f77497ffc062.html</guid>
+        </item>
+        <item>
+          <title>Workflowyで表を扱うためのUserScript</title>
+          <link>https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html</link>
+          <description><![CDATA[<p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href="https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee">WfTable-CommaSplit.js</a></li><li>TypeB → <a href="https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300" alt="Image"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300" alt="Image"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>]]></description>
+          <pubDate>Thu, 05 Mar 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html</guid>
         </item>
         <item>
           <title>d-PoICのカードを広げるためのボードアプリをつくった</title>
@@ -257,13 +264,6 @@
           <description><![CDATA[<p>カタログスペックの時点でだいぶ強そう＆サポカはステゴだけ完凸すればいいかなと思い、スティルインラブを引くことに！</p><p>幸いチケット80枚で引けた！もともと持ってたのが86枚だったのでギリ。クロノもチケット分で引けたしキャラガチャはだいぶ上振れてる。</p><h2>初育成</h2><p>適当に組んだハイランダーで初回UA！かなり育てやすい印象。</p><p>それよりエンドが激重なんですが……トレーナーがウマ娘に引っ張られて変わっていく様はいろんなウマ娘で見られたんだけど、こんな風に超常的な感じで狂っていくパターンがあるとは。。</p><p>育成の度にこれくらうのか〜。ノベルゲーのビターエンドっぽいのかな？あんまやったこと無いからわからんけど。</p><p>温泉旅行でどうやらトゥルーエンドのようなものが見れるらしい？次回の秋華賞チャンミでエースとして出走させるので、たくさん育成することになるからそのうち見れると思いたい。</p>]]></description>
           <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/a3535430-7863-d963-2fdf-362bc6500aa2.html</guid>
-        </item>
-        <item>
-          <title>Workflowyで表を扱うためのUserScript</title>
-          <link>https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html</link>
-          <description><![CDATA[<p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href="https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee">WfTable-CommaSplit.js</a></li><li>TypeB → <a href="https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300" alt="Image"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300" alt="Image"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>]]></description>
-          <pubDate>Thu, 05 Mar 2026 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html</guid>
         </item>
         <item>
           <title>愛着と進化："#keep4o"運動</title>
