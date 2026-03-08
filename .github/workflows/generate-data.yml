@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'  # 毎日UTC 0時 → JST 9時
-    - cron: '0 12 * * *' # 毎日UTC12時 → JST 21時
+    - cron: '0 10 * * *' # 毎日UTC10時 → JST 19時
 
 jobs:
   build-and-deploy:
