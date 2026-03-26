@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 25 Mar 2026 10:51:55 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2026 01:11:35 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -33,6 +33,13 @@
           <description><![CDATA[<p><a href="/articles/518b6ce8-0f78-8965-ba43-295d96da0816.html">前回記事で書いた</a> Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。</p><p>その名も<a href="https://morvra.github.io/rhizoroji/">Rhizoroji</a>。由来はRhizome+露地（Roji）。</p><p>Rhizonoteの中を公開するからRhizoはつけたい＆庭の要素つけたいけどRhizogardenは長いし地下茎とガーデンってニュアンスがちょっと合わないかなってことで、茶室につながる庭でやや野味のある趣な露地という語を採用。</p><p>仕組みとしては、</p><ul><li>Rhizonote側の機能でPublishをonにしたノートを</li><li>DropboxAPIを使ってGithubActionsでHTMLに変換して</li><li>GithubPagesに静的サイトとしてビルト</li></ul><p>することで公開している。</p>]]></description>
           <pubDate>Sat, 17 Jan 2026 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/7da3f4e4-1c72-0666-2548-4d5df5b79abc.html</guid>
+        </item>
+        <item>
+          <title>Workflowyの最上位項目晒し Ver202603</title>
+          <link>https://morvra.github.io/articles/8d62c58a-0c90-4732-8472-25a0f31c522a.html</link>
+          <description><![CDATA[<p>定期的にやっていきたい。</p><p><img src="https://gyazo.com/670be8a4fed903e0a860f24e5ff8a287/thumb/800" alt="Image"></p><ul><li>🏷 Index<ul><li>頻出タグ / ブクマ / 検索 / あんちょこ</li></ul></li><li>📅 Future<ul><li>Routine / 先の予定</li></ul></li><li>⏱ Now<ul><li>inbox / 進行中 / 今日のログ</li></ul></li><li>📓 Journal<ul><li>カレンダー機能 / 過去の日付項目</li></ul></li><li>🌱 Thoughts<ul><li>考え事を非時系列で / 継続的なテーマも含む</li></ul></li><li>🎯 Projects<ul><li>プロジェクトリスト / DO-ALL</li></ul></li><li>🗃 Collections<ul><li> なんでもリスト / LIFE-AS、BE</li></ul></li><li>🗄️ Archive<ul><li> 完了プロジェクト / やめたこと / 保管庫</li></ul></li></ul><p><a href="https://morvra.github.io/articles/f1f0b5f0-f360-4f46-870a-dac719665cde.html">前回</a> とくらべると Future と Thoughts が増えて、「inbox→Now」「Days→Journal」「All→Projects」に名称変更した。</p><p>UserScriptでタスクシュート風のタスク/時間管理をするようになったこともあり、未来→現在→過去という流れが自然になり、ほとんどの情報がWorkflowyだけで完結するようになった。</p>]]></description>
+          <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/8d62c58a-0c90-4732-8472-25a0f31c522a.html</guid>
         </item>
         <item>
           <title>d-PoICのDropbox同期をマークダウンに変更</title>
@@ -264,13 +271,6 @@
           <description><![CDATA[<p>サイト内検索は前から実装したかったんだけど、コンテンツ少ないし、どんな形式がいいか決めかねてて保留にしていた。</p><p>今日たまたまDave WinerさんのScripting Newsを検索するためのサイト <a href="https://daytona.scripting.com/" target="_blank">DAYTONA 2</a> を見つけて、こんな感じがいいなと思ってGeminiとともに作ったのがこちら。</p><ul><li><a href="https://morvra.github.io/search" target="_blank">検索 - morvra lists</a></li></ul><p>入力フォームで検索したらワードの含まれた記事が一覧できて、記事内の該当部分が抜粋されハイライトになる仕様。</p><p>DynalistとかWorkflowyの検索に近い感触で気に入ってる。</p>]]></description>
           <pubDate>Tue, 26 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/155f3986-4f8b-70ca-e046-2316c49adaf1.html</guid>
-        </item>
-        <item>
-          <title>Workflowyの最上位項目晒し Ver202603</title>
-          <link>https://morvra.github.io/articles/8d62c58a-0c90-4732-8472-25a0f31c522a.html</link>
-          <description><![CDATA[<p>定期的にやっていきたい。</p><p><img src="i.https://gyazo.com/670be8a4fed903e0a860f24e5ff8a287" alt="Image"></p><ul><li>🏷 Index<ul><li>頻出タグ / ブクマ / 検索 / あんちょこ</li></ul></li><li>📅 Future<ul><li>Routine / 先の予定</li></ul></li><li>⏱ Now<ul><li>inbox / 進行中 / 今日のログ</li></ul></li><li>📓 Journal<ul><li>カレンダー機能 / 過去の日付項目</li></ul></li><li>🌱 Thoughts<ul><li>考え事を非時系列で / 継続的なテーマも含む</li></ul></li><li>🎯 Projects<ul><li>プロジェクトリスト / DO-ALL</li></ul></li><li>🗃 Collections<ul><li> なんでもリスト / LIFE-AS、BE</li></ul></li><li>🗄️ Archive<ul><li> 完了プロジェクト / やめたこと / 保管庫</li></ul></li></ul><p><a href="https://morvra.github.io/articles/f1f0b5f0-f360-4f46-870a-dac719665cde.html">前回</a> とくらべると Future と Thoughts が増えて、「inbox→Now」「Days→Journal」「All→Projects」に名称変更した。</p><p>UserScriptでタスクシュート風のタスク/時間管理をするようになったこともあり、未来→現在→過去という流れが自然になり、ほとんどの情報がWorkflowyだけで完結するようになった。</p>]]></description>
-          <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/articles/8d62c58a-0c90-4732-8472-25a0f31c522a.html</guid>
         </item>
         <item>
           <title>【シャドバWB】スペルウィッチにおいてメルヴィとペネロピーどっちが優れているのか考</title>
