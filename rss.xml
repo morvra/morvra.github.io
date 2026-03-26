@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Thu, 26 Mar 2026 01:11:35 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2026 10:53:51 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -306,6 +306,13 @@
           <description><![CDATA[<p>今月はサイトの外側をあれこれいじったので、何をしたか書いておく。</p><h2>変更点</h2><ul><li>運用<ul><li>Dynalistの項目の色で投稿とその種類を分けていたがタグ付けに変更<ul><li>タグをつければいいだけなので楽</li></ul></li><li>子要素のあるリストも扱えるように<ul><li>Dynalist上の「li」という項目の子要素はリストとして出力される</li><li>これもそう</li></ul></li><li>更新の自動化（GithubActions）<ul><li>毎日0時と12時くらいにDynalistAPIからJSONとRSSを生成してGithubPagesにデプロイ</li></ul></li></ul></li><li>トップページ<ul><li>モジュールのデザインをカード風にして一言も追加</li><li>記事一覧を年ごとに分けて開閉式に</li></ul></li><li>記事ページ<ul><li>ページ下部に関連記事として同じタグがついた記事をリスト化</li></ul></li><li>piece<ul><li>モジュールのデザインをもとにカード風に</li></ul></li></ul><hr><p>基本的にはGeminiにおんぶにだっこでコードを書いてもらいつつテストと細かい修正は自分でやった。</p><p>これでサイトの立ち上げ時から「こんな風に実装できたらいいな」と考えていたことはだいたい完成した。特に更新の自動化と、リストの階層化ができたのは箇条書き好きとしてだいぶ嬉しい。</p><p>あとはコンテンツが充実してきたら検索機能つけるくらいかな？</p>]]></description>
           <pubDate>Tue, 22 Jul 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/835c2e31-6116-a79e-760a-b6dc8b0c00af.html</guid>
+        </item>
+        <item>
+          <title>コンピューターってなに？computeする存在ってこと？</title>
+          <link>https://morvra.github.io/articles/6fb30ad8-4c6b-cd71-5a85-4e4240eef80e.html</link>
+          <description><![CDATA[<p>『<a href="https://amzn.to/4dPRL62">生成AIとライフハック</a>』を読んで気になった。「パーソナルコンピューティングとは」とか「ライフハックとは」から語られていたけど、そもそもコンピュータってなにか知らないな、と。</p><p>compute する存在ってこと？じゃあ compute って？</p><p>↓ とりあえずWikipedia。</p><ul><li><a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF">コンピュータ - Wikipedia</a></li></ul><blockquote><p><p>コンピュータ（英: computer）は、計算やデータ処理を自動的に行う装置全般のことであり、計算機、電算機とも言う。</p><p>（略）英語の「computer」は算術演算を行う主体であるが、元々は計算する人を指した。この用法は今でも有効である。オックスフォード英語辞典第2版では、この語が計算する機械をも指すようになった最初の年を1286年と記している。同辞典では、1946年までに、「computer」の前に修飾語を付けることで異なる方式の計算機を区別するようになったとする。たとえば「analogue computer」「digital computer」「electronic computer」といった表現である。</p></p></blockquote><p>原義的には「計算する人」だけど計算機全般のことを指すらしい。というかそろばん等もアナログ・コンピュータだったのね。</p><hr><p>続いて気になった compute について。</p><p>辞書を引くと「計算する・割り出す・数にいれる」とある。</p><p>語源はラテン語の computare らしい。</p><p>参考: <a href="https://gogengo.me/words/2151">英単語 compute - Gogengo! - 英単語は語源でたのしく</a></p><p>「ともに(com)数える(putare)」ということか。</p><p>となると生成AIと一緒にコードを書く作業はまさに computare しているわけだ。なんだか感慨深いね（？）</p>]]></description>
+          <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/6fb30ad8-4c6b-cd71-5a85-4e4240eef80e.html</guid>
         </item>
         <item>
           <title>Dynalistでタグごとに色を設定する</title>
