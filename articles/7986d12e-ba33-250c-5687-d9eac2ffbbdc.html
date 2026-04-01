@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KindleのハイライトとメモをOPMLでコピーするBookmarklet - morvra lists</title>
+    <meta name="description" content="Kindleでハイライトやメモを残してもそれを自分の思考ツール（私の場合はWorkflowy）に組み込むのは面倒。余計な情報あるし、何度もコピペすんのもだるい。ということで、1ボタンでちょうどよく整形してくれるブックマークレットを（Gemi...">
+    <meta property="og:title" content="KindleのハイライトとメモをOPMLでコピーするBookmarklet - morvra lists">
+    <meta property="og:description" content="Kindleでハイライトやメモを残してもそれを自分の思考ツール（私の場合はWorkflowy）に組み込むのは面倒。余計な情報あるし、何度もコピペすんのもだるい。ということで、1ボタンでちょうどよく整形してくれるブックマークレットを（Gemi...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="/styles.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='/bullet_icon.png' rel='shortcut icon'/>
+    <link href='/bullet_icon.png' rel='apple-touch-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
+</head>
+<body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
+    <div id="header"></div>
+
+    <main>
+        <div id="article">
+            <div id="article-title"><h1>KindleのハイライトとメモをOPMLでコピーするBookmarklet</h1></div>
+            <div id="article-date">2026-04-01</div>
+            <div id="article-tags"><a href="/tag?tag=javascript">javascript</a></div>
+
+            <div id="article-content">
+                <p>Kindleでハイライトやメモを残してもそれを自分の思考ツール（私の場合はWorkflowy）に組み込むのは面倒。余計な情報あるし、何度もコピペすんのもだるい。</p><p>ということで、1ボタンでちょうどよく整形してくれるブックマークレットを（Geminiが）作った。</p><p>▼ コード</p><pre><code>javascript:(function(){const e=(e)=&gt;e.replace(/[&lt;&gt;&amp;"']/g,(e)=&gt;{switch(e){case"&lt;":return"&lt;";case"&gt;":return"&gt;";case"&amp;":return"&amp;amp;";case'"':return""";case"'":return"&amp;apos;";default:return e}});const t=document.querySelector("h3.kp-notebook-metadata"),n=t?t.innerText.trim():%22Untitled%22,r=t?t.nextElementSibling:null,o=r&amp;&amp;%22P%22===r.tagName?r.innerText.trim():%22%22,a=document.querySelector(%22a.kp-notebook-printable%22);let%20c=a?a.href:%22%22;c&amp;&amp;(c=c.replace(%22amazon.com%22,%22amazon.co.jp%22));let%20i=c?`%E3%80%8E[${n}](${c})%E3%80%8F`:`%E3%80%8E${n}%E3%80%8F`;o&amp;&amp;(i+=`%20${o}`);const%20l=document.querySelectorAll(%22#kp-notebook-annotations%20%3E%20div[id]%22);let%20d=%22%22;l.forEach((t)=%3E{const%20n=t.querySelector(%22#highlight%22)?.innerText||%22%22,r=t.querySelector(%22#note%22)?.innerText||%22%22,o=t.querySelector(%22#kp-annotation-location%22)?.value||%22%22;if(n){const%20a=%60Location:%20${o}%60;d+=%60%3Coutline%20text=%22${e(n)}%22%20_note=%22${e(a)}%22%3E%60,r&amp;&amp;r.trim()&amp;&amp;(d+=%60%3Coutline%20text=%22${e(%22Note:%20%22+r)}%22%20/%3E%60),d+=%22%3C/outline%3E%22}});const%20s=%60%3C?xml%20version=%221.0%22%20encoding=%22UTF-8%22?%3E%3Copml%20version=%222.0%22%3E%3Chead%3E%3Ctitle%3E${e(n)}%3C/title%3E%3C/head%3E%3Cbody%3E%3Coutline%20text=%22${e(i)}%22%3E${d}%3C/outline%3E%3C/body%3E%3C/opml%3E%60;navigator.clipboard.writeText(s).then(()=%3E{alert(%22OPML%E3%82%92%E3%82%B3%E3%83%94%E3%83%BC%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%22)}).catch((e)=%3E{const%20t=document.createElement(%22textarea%22);t.value=s,t.style=%22position:fixed;top:10%;left:10%;width:80%;height:80%;z-index:9999;padding:20px;border:2px%20solid%20#333;box-shadow:0%200%2020px%20rgba(0,0,0,0.5);%22,t.title=%22%E3%83%80%E3%83%96%E3%83%AB%E3%82%AF%E3%83%AA%E3%83%83%E3%82%AF%E3%81%A7%E9%96%89%E3%81%98%E3%81%BE%E3%81%99%22,document.body.appendChild(t),t.select(),t.addEventListener(%22dblclick%22,()=%3Et.remove()),document.addEventListener(%22keydown%22,(e)=%3E{%22Escape%22===e.key&amp;&amp;t.remove()},{once:!0}),alert(%22%E3%82%B3%E3%83%94%E3%83%BC%E3%81%AB%E5%A4%B1%E6%95%97%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%E3%83%91%E3%83%8D%E3%83%AB%E3%81%8B%E3%82%89%E3%82%B3%E3%83%94%E3%83%BC%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%EF%BC%88%E3%83%80%E3%83%96%E3%83%AB%E3%82%AF%E3%83%AA%E3%83%83%E3%82%AF%E3%81%A7%E9%96%89%E3%81%98%E3%81%BE%E3%81%99%EF%BC%89%22)})})();</code></pre><h2>できること</h2><p><a href="https://read.amazon.co.jp/notebook">Kindleのハイライトページ</a> で左側のリストからコピーしたい書籍を選択して、ブックマークレットを実行すると、</p><ul><li>『書籍タイトル（Amazon.co.jpへのリンク）』 著者名<ul><li>ハイライト本文（ノート欄にLocation情報を格納）<ul><li>Note: 自分のメモ</li></ul></li></ul></li></ul><p>という形式でOPMLがコピーされるので、それを各種アウトライナーに貼り付けられる。</p><p>＊もしブラウザのセキュリティ設定等でコピーに失敗した場合は、画面にテキストエリアが表示されるのでその中身をコピーすればOK。使い終わったらパネルはダブルクリック（またはEscキー）で閉じる。</p>
+            </div>
+
+            <div id="ad">
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div id="related-articles">
+<h2>関連記事</h2>
+<ul>
+<li><a href="/articles/c24ebea6-b71d-97a6-3198-358520d53141.html">Workflowyにメモを送信するための自分用Chrome拡張を作った</a></li>
+<li><a href="/articles/5baa00a8-0b50-a55a-2e5d-63b65c52fec5.html">ScriptableのコードをClaudeに書いてもらえて神！</a></li>
+<li><a href="/articles/46230c76-2d95-1fb8-96be-dc51d833272e.html">Dynalistのタスク表示用スクリプト</a></li>
+<li><a href="/articles/7a7bac45-e0f1-4a7b-84b9-c9a7856a1c50.html">Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript</a></li>
+<li><a href="/articles/36833c90-82be-b5b0-ef24-ed8e14a2ab78.html">Dynalistのインボックスへ送信するスクリプト</a></li>
+<li><a href="/articles/ccb0135c-6929-9a07-be9e-938b332ab771.html">Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト</a></li>
+<li><a href="/articles/21f14291-a88c-1ac7-01e3-da1d16d8d2dc.html">Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</a></li>
+</ul>
+</div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>
