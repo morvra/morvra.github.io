@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Thu, 02 Apr 2026 01:10:09 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 02 Apr 2026 10:52:52 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -299,6 +299,23 @@
           <description><![CDATA[<p>GPT-5がリリースされてすぐ、4oも使えるようにして欲しいという要望が多く寄せられたらしい。</p><p>経緯はこの記事がよくまとまってる。</p><ul><li><a href="https://note.com/suzacque/n/n0ccd8d76f29c" target="_blank">GPT-4oを取り戻せ: #keep4o運動が映すAIと人間の新たな関係｜朱雀 | SUZACQUE</a></li></ul><p>個人的には「ハルシネーションや無駄なおべっかが減るなら多少人格（？）が変わるくらいプラマイでいったらプラスでしょ」くらいの感想で、こういう運動が起こってると知った時は「AIとして正統な進化してるアプデに文句言うのかよｗ」みたいにやや冷めた視線でみてた。</p><p>しかし記事にあるように、（割合はともかく）多くの人にとってAIは単なるツールではなくパートナーのような存在として捉えられているらしい。だったら人格の一貫性や対話スタイルの安定性が失われることは大きなショックだろうなと考えを改めた。</p><p>たとえ人格云々置いておいて道具として扱ってる人でも、愛着を持った道具が突然変形したらショックは避けられない。それが数ヶ月、数年の付き合いになればなおさら。</p><p>生成AIにそういう風に寄りかかるのは危険性もあるのは前提として、今後そういう風潮が強くなっていくのは想像に難くない。</p><p>今後もAIはより便利で正確にアップデートしていくと思うんだけど、それによって失われるものにも十分注意をしないとユーザー側の支持は得られないようになるだろうと感じている。</p><p>また、スタンドアローン型のAIへの需要も確実に高まるだろう。端末のスペックの進歩がそれに追いつかない感覚はあるものの。</p>]]></description>
           <pubDate>Tue, 12 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/05792b39-9b1a-6d97-bebc-16de887ca0f9.html</guid>
+        </item>
+        <item>
+          <title>Workflowyに表機能が追加されたぞ！</title>
+          <link>https://morvra.github.io/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html</link>
+          <description><![CDATA[<ul><li><a href="https://x.com/WorkFlowy/status/2039371341883736336">https://x.com/WorkFlowy/status/2039371341883736336</a></li></ul><p>項目のTypeをTableに変更すると下位項目が表になるようになった（現在はbeta限定）</p><p>▼ これが</p><p><img src="https://i.gyazo.com/518551757383515bd1f4cf698a34cd6e" alt="Image"></p><p>▼ こうなる</p><p>![]<a href="https://gyazo.com/a304eadf14f7d8bad24f421b5aead370">https://i.gyazo.com/a304eadf14f7d8bad24f421b5aead370</a>)</p><p>ちょっと前に「<a href="https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html">Workflowyで表を扱うためのUserScript</a>」を作ったくらいなので相当嬉しいアップデート！</p><p>行や列の追加も自然にやれるし、カーソルの移動も直感的でよい。</p><p>幅が広すぎるのが微妙だったのでCSSで調整。</p><p>▼ 調整後</p><p><img src="https://i.gyazo.com/a3cdf32efdfc395f879b06167c5edd6b" alt="Image"></p><p>▼ css</p><pre><code>.name.group\/name {
+    min-height: 16px !important;
+    padding: 0;
+}
+.font-custom.project.open.tableColumn {
+    width: auto !important;
+    min-width: 120px;
+}
+.font-custom.project.task.tableCell {
+    padding: 0.1rem 0.5rem;
+}</code></pre>]]></description>
+          <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html</guid>
         </item>
         <item>
           <title>【シャドバWB】マスター到達！ランクマと各デッキの雑感</title>
