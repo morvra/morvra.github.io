@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Thu, 02 Apr 2026 10:52:52 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 03 Apr 2026 01:12:36 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
@@ -65,7 +65,7 @@
         <item>
           <title>Workflowyで表を扱うためのUserScript</title>
           <link>https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html</link>
-          <description><![CDATA[<p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href="https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee">WfTable-CommaSplit.js</a></li><li>TypeB → <a href="https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300" alt="Image"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300" alt="Image"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>]]></description>
+          <description><![CDATA[<p>＊2026-04-01に公式で表機能が追加された → <a href="/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html">Workflowyに表機能が追加されたぞ！</a></p><p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href="https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee">WfTable-CommaSplit.js</a></li><li>TypeB → <a href="https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300" alt="Image"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300" alt="Image"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>]]></description>
           <pubDate>Thu, 05 Mar 2026 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html</guid>
         </item>
@@ -189,6 +189,23 @@
           <guid isPermaLink="true">https://morvra.github.io/articles/894eb4dd-c928-e030-d0f6-6dbf4a89b68c.html</guid>
         </item>
         <item>
+          <title>Workflowyに表機能が追加されたぞ！</title>
+          <link>https://morvra.github.io/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html</link>
+          <description><![CDATA[<ul><li><a href="https://x.com/WorkFlowy/status/2039371341883736336">https://x.com/WorkFlowy/status/2039371341883736336</a></li></ul><p>項目のTypeをTableに変更すると下位項目が表になるようになった（現在はbeta限定）</p><p>▼ これが</p><p><img src="https://i.gyazo.com/518551757383515bd1f4cf698a34cd6e" alt="Image"></p><p>▼ こうなる</p><p>![]<a href="https://gyazo.com/a304eadf14f7d8bad24f421b5aead370">https://i.gyazo.com/a304eadf14f7d8bad24f421b5aead370</a>)</p><p>ちょっと前に「<a href="https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html">Workflowyで表を扱うためのUserScript</a>」を作ったくらいなので相当嬉しいアップデート！</p><p>行や列の追加も自然にやれるし、カーソルの移動も直感的でよい。</p><p>幅が広すぎるのが微妙だったのでCSSで調整。</p><p>▼ 調整後</p><p><img src="https://i.gyazo.com/a3cdf32efdfc395f879b06167c5edd6b" alt="Image"></p><p>▼ css</p><pre><code>.name.group\/name {
+    min-height: 16px !important;
+    padding: 0;
+}
+.font-custom.project.open.tableColumn {
+    width: auto !important;
+    min-width: 120px;
+}
+.font-custom.project.task.tableCell {
+    padding: 0.1rem 0.5rem;
+}</code></pre>]]></description>
+          <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html</guid>
+        </item>
+        <item>
           <title>サイトの構成やURL形式を変更した</title>
           <link>https://morvra.github.io/articles/b7d683f3-922d-430a-35a5-b29c0b98f7f1.html</link>
           <description><![CDATA[<p>このサイトは Workflowy をバックエンドに使った自作の仕組みで動いている。記事を Workflowy で書いて特定のタグをつけておくと、GitHub Actions が自動でデータを取得してサイトに反映される、というものだ。</p><p>アウトライナーの項目がそのまま記事化する、という仕組みはめちゃくちゃ気に入っているんだけど、記事が増えるにしたがって<b>ページの表示が遅くなってきた</b>。</p><p>この問題が仕組みを変えることで改善したので、その記録を残しておく。</p><h2>なぜ遅くなってしまったか</h2><p>もともとの仕組みはこういう流れだった。</p><ul><li>ページを開く</li><li>JavaScript が data.json（Workflowyの項目から変換した全記事のメタデータを含むファイル） を取得する</li><li>JSON のデータをもとに記事の内容を組み立ててDOMに書き込む</li><li>記事が表示される</li></ul><p>このうち2,3番目のフェーズがボトルネックだった。data.json には全記事の本文HTMLが丸ごと入っているので、記事が増えるにつれてファイルが肥大化していく。そのためトップページの記事一覧を表示するだけでも、使いもしない全記事の本文を読み込む必要があったわけだ。</p><h2>解決策：ビルド時にHTMLを作ってしまう</h2><p>解決策はシンプルで、<b>記事ごとの HTML ファイルをビルド時に生成しておく</b>というもの。いわゆる静的サイト生成（SSG）と呼ばれるアプローチで、Next.js や Hugo がやっていることと本質的には同じ（らしい）。</p><p>ビルドは GitHub Actions が1日2回回しているので、Workflowy で記事を書いてタグをつけておけば、最大12時間以内に静的なHTMLファイルとして書き出されて自動でサイトに反映される。</p><p>これで記事ページにアクセスしたときは最初から完成したHTMLが返ってくるので、JavaScriptが動く前から内容が表示されるようになった。</p><h2>トップページの記事一覧も別ファイルに</h2><p>もうひとつ対応したのがトップページの記事一覧だ。</p><p>もとのコードはトップページを開くたびに data.json を読んで一覧を動的に組み立てていたが、ここも同じ問題がある。一覧表示に必要なのは記事のタイトルと日付だけなのに、全本文が入った巨大なファイルを毎回読み込んでいた。</p><p>対策として、ビルド時にタイトルと日付だけからなる articlelist.html というフラグメントファイルを生成するようにした。トップページはこれを読み込んで innerHTML に流し込むだけ。JavaScriptがやる仕事がほぼなくなった。</p><h2>やってみて</h2><p>表示速度は体感でもわかるくらい改善した。特に記事ページに関しては爆速！</p><p>副産物として OGP（SNSシェア時のタイトルや説明文）が記事ごとに正しく設定されるようになったのも地味にうれしい。これまでは JavaScript が動いてからページタイトルを書き換えていたので、SNS のクローラーには空のページとして認識されていた。</p><p>自作サイトのいいところは、こういう改善を自分のペースでちまちまできることだよね〜。</p>]]></description>
@@ -299,23 +316,6 @@
           <description><![CDATA[<p>GPT-5がリリースされてすぐ、4oも使えるようにして欲しいという要望が多く寄せられたらしい。</p><p>経緯はこの記事がよくまとまってる。</p><ul><li><a href="https://note.com/suzacque/n/n0ccd8d76f29c" target="_blank">GPT-4oを取り戻せ: #keep4o運動が映すAIと人間の新たな関係｜朱雀 | SUZACQUE</a></li></ul><p>個人的には「ハルシネーションや無駄なおべっかが減るなら多少人格（？）が変わるくらいプラマイでいったらプラスでしょ」くらいの感想で、こういう運動が起こってると知った時は「AIとして正統な進化してるアプデに文句言うのかよｗ」みたいにやや冷めた視線でみてた。</p><p>しかし記事にあるように、（割合はともかく）多くの人にとってAIは単なるツールではなくパートナーのような存在として捉えられているらしい。だったら人格の一貫性や対話スタイルの安定性が失われることは大きなショックだろうなと考えを改めた。</p><p>たとえ人格云々置いておいて道具として扱ってる人でも、愛着を持った道具が突然変形したらショックは避けられない。それが数ヶ月、数年の付き合いになればなおさら。</p><p>生成AIにそういう風に寄りかかるのは危険性もあるのは前提として、今後そういう風潮が強くなっていくのは想像に難くない。</p><p>今後もAIはより便利で正確にアップデートしていくと思うんだけど、それによって失われるものにも十分注意をしないとユーザー側の支持は得られないようになるだろうと感じている。</p><p>また、スタンドアローン型のAIへの需要も確実に高まるだろう。端末のスペックの進歩がそれに追いつかない感覚はあるものの。</p>]]></description>
           <pubDate>Tue, 12 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/05792b39-9b1a-6d97-bebc-16de887ca0f9.html</guid>
-        </item>
-        <item>
-          <title>Workflowyに表機能が追加されたぞ！</title>
-          <link>https://morvra.github.io/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html</link>
-          <description><![CDATA[<ul><li><a href="https://x.com/WorkFlowy/status/2039371341883736336">https://x.com/WorkFlowy/status/2039371341883736336</a></li></ul><p>項目のTypeをTableに変更すると下位項目が表になるようになった（現在はbeta限定）</p><p>▼ これが</p><p><img src="https://i.gyazo.com/518551757383515bd1f4cf698a34cd6e" alt="Image"></p><p>▼ こうなる</p><p>![]<a href="https://gyazo.com/a304eadf14f7d8bad24f421b5aead370">https://i.gyazo.com/a304eadf14f7d8bad24f421b5aead370</a>)</p><p>ちょっと前に「<a href="https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html">Workflowyで表を扱うためのUserScript</a>」を作ったくらいなので相当嬉しいアップデート！</p><p>行や列の追加も自然にやれるし、カーソルの移動も直感的でよい。</p><p>幅が広すぎるのが微妙だったのでCSSで調整。</p><p>▼ 調整後</p><p><img src="https://i.gyazo.com/a3cdf32efdfc395f879b06167c5edd6b" alt="Image"></p><p>▼ css</p><pre><code>.name.group\/name {
-    min-height: 16px !important;
-    padding: 0;
-}
-.font-custom.project.open.tableColumn {
-    width: auto !important;
-    min-width: 120px;
-}
-.font-custom.project.task.tableCell {
-    padding: 0.1rem 0.5rem;
-}</code></pre>]]></description>
-          <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html</guid>
         </item>
         <item>
           <title>【シャドバWB】マスター到達！ランクマと各デッキの雑感</title>

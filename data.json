@@ -82,7 +82,7 @@
 			"tags": [
 				"Workflowy"
 			],
-			"body": "<p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href=\"https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee\">WfTable-CommaSplit.js</a></li><li>TypeB → <a href=\"https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e\">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src=\"https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300\" alt=\"Image\"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src=\"https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300\" alt=\"Image\"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>"
+			"body": "<p>＊2026-04-01に公式で表機能が追加された → <a href=\"/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html\">Workflowyに表機能が追加されたぞ！</a></p><p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href=\"https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee\">WfTable-CommaSplit.js</a></li><li>TypeB → <a href=\"https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e\">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src=\"https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300\" alt=\"Image\"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src=\"https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300\" alt=\"Image\"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>"
 		},
 		{
 			"id": "7986d12e-ba33-250c-5687-d9eac2ffbbdc",
@@ -233,6 +233,15 @@
 				"自作ツール"
 			],
 			"body": "<p>自作のPoICツール <a href=\"https://morvra.github.io/poic/\">d-PoIC</a> でCosense風の「リンク先カードに載っているリンク＆被リンク」を表示させるようにした。</p><p>▼ こんな感じ</p><p><img src=\"https://gyazo.com/b9bb282ad059ae3775d23ae705da3107/thumb/500\" alt=\"Image\"></p><p>＊2ホップリンクについては <a href=\"https://scrapbox.io/daiiz/Scrapbox%E3%81%AE2%E3%83%9B%E3%83%83%E3%83%97%E3%83%AA%E3%83%B3%E3%82%AF\">Scrapboxの2ホップリンク - daiiz</a> に詳しい。</p><p>リンクが多いカードだと縦幅とるので開閉式＆タイトルのみ並べてる。それとBacklink（開いているカードへのリンクがあるカード）は本文で参照している行を読めるようにしてみた。</p>"
+		},
+		{
+			"id": "68c0b22e-25fd-11ef-2f9e-c5c22fc68b16",
+			"title": "Workflowyに表機能が追加されたぞ！",
+			"date": "2026-04-02",
+			"tags": [
+				"Workflowy"
+			],
+			"body": "<ul><li><a href=\"https://x.com/WorkFlowy/status/2039371341883736336\">https://x.com/WorkFlowy/status/2039371341883736336</a></li></ul><p>項目のTypeをTableに変更すると下位項目が表になるようになった（現在はbeta限定）</p><p>▼ これが</p><p><img src=\"https://i.gyazo.com/518551757383515bd1f4cf698a34cd6e\" alt=\"Image\"></p><p>▼ こうなる</p><p>![]<a href=\"https://gyazo.com/a304eadf14f7d8bad24f421b5aead370\">https://i.gyazo.com/a304eadf14f7d8bad24f421b5aead370</a>)</p><p>ちょっと前に「<a href=\"https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html\">Workflowyで表を扱うためのUserScript</a>」を作ったくらいなので相当嬉しいアップデート！</p><p>行や列の追加も自然にやれるし、カーソルの移動も直感的でよい。</p><p>幅が広すぎるのが微妙だったのでCSSで調整。</p><p>▼ 調整後</p><p><img src=\"https://i.gyazo.com/a3cdf32efdfc395f879b06167c5edd6b\" alt=\"Image\"></p><p>▼ css</p><pre><code>.name.group\\/name {\n    min-height: 16px !important;\n    padding: 0;\n}\n.font-custom.project.open.tableColumn {\n    width: auto !important;\n    min-width: 120px;\n}\n.font-custom.project.task.tableCell {\n    padding: 0.1rem 0.5rem;\n}</code></pre>"
 		},
 		{
 			"id": "b7d683f3-922d-430a-35a5-b29c0b98f7f1",
@@ -387,15 +396,6 @@
 				"考えごと"
 			],
 			"body": "<p>GPT-5がリリースされてすぐ、4oも使えるようにして欲しいという要望が多く寄せられたらしい。</p><p>経緯はこの記事がよくまとまってる。</p><ul><li><a href=\"https://note.com/suzacque/n/n0ccd8d76f29c\" target=\"_blank\">GPT-4oを取り戻せ: #keep4o運動が映すAIと人間の新たな関係｜朱雀 | SUZACQUE</a></li></ul><p>個人的には「ハルシネーションや無駄なおべっかが減るなら多少人格（？）が変わるくらいプラマイでいったらプラスでしょ」くらいの感想で、こういう運動が起こってると知った時は「AIとして正統な進化してるアプデに文句言うのかよｗ」みたいにやや冷めた視線でみてた。</p><p>しかし記事にあるように、（割合はともかく）多くの人にとってAIは単なるツールではなくパートナーのような存在として捉えられているらしい。だったら人格の一貫性や対話スタイルの安定性が失われることは大きなショックだろうなと考えを改めた。</p><p>たとえ人格云々置いておいて道具として扱ってる人でも、愛着を持った道具が突然変形したらショックは避けられない。それが数ヶ月、数年の付き合いになればなおさら。</p><p>生成AIにそういう風に寄りかかるのは危険性もあるのは前提として、今後そういう風潮が強くなっていくのは想像に難くない。</p><p>今後もAIはより便利で正確にアップデートしていくと思うんだけど、それによって失われるものにも十分注意をしないとユーザー側の支持は得られないようになるだろうと感じている。</p><p>また、スタンドアローン型のAIへの需要も確実に高まるだろう。端末のスペックの進歩がそれに追いつかない感覚はあるものの。</p>"
-		},
-		{
-			"id": "68c0b22e-25fd-11ef-2f9e-c5c22fc68b16",
-			"title": "Workflowyに表機能が追加されたぞ！",
-			"date": "2026-04-02",
-			"tags": [
-				"Workflowy"
-			],
-			"body": "<ul><li><a href=\"https://x.com/WorkFlowy/status/2039371341883736336\">https://x.com/WorkFlowy/status/2039371341883736336</a></li></ul><p>項目のTypeをTableに変更すると下位項目が表になるようになった（現在はbeta限定）</p><p>▼ これが</p><p><img src=\"https://i.gyazo.com/518551757383515bd1f4cf698a34cd6e\" alt=\"Image\"></p><p>▼ こうなる</p><p>![]<a href=\"https://gyazo.com/a304eadf14f7d8bad24f421b5aead370\">https://i.gyazo.com/a304eadf14f7d8bad24f421b5aead370</a>)</p><p>ちょっと前に「<a href=\"https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html\">Workflowyで表を扱うためのUserScript</a>」を作ったくらいなので相当嬉しいアップデート！</p><p>行や列の追加も自然にやれるし、カーソルの移動も直感的でよい。</p><p>幅が広すぎるのが微妙だったのでCSSで調整。</p><p>▼ 調整後</p><p><img src=\"https://i.gyazo.com/a3cdf32efdfc395f879b06167c5edd6b\" alt=\"Image\"></p><p>▼ css</p><pre><code>.name.group\\/name {\n    min-height: 16px !important;\n    padding: 0;\n}\n.font-custom.project.open.tableColumn {\n    width: auto !important;\n    min-width: 120px;\n}\n.font-custom.project.task.tableCell {\n    padding: 0.1rem 0.5rem;\n}</code></pre>"
 		},
 		{
 			"id": "761897ac-9ca2-1c1d-afed-293a687463ba",
