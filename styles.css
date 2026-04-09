@@ -328,6 +328,7 @@ iframe {
 
 #article-content img {
     max-width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 #article-content hr {
     border: 1px dashed #ccc;
