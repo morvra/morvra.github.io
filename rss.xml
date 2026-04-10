@@ -4,8 +4,15 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Thu, 09 Apr 2026 11:01:04 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 10 Apr 2026 01:15:02 GMT</lastBuildDate>
         <language>ja-jp</language>
+        <item>
+          <title>自分用ポータル＆ダッシュボードを作ってChromeの新しいタブに設定している話</title>
+          <link>https://morvra.github.io/articles/f8d9dce5-0e43-6ad6-0134-2d48438443cb.html</link>
+          <description><![CDATA[<p>結城浩さんのポータル（<a href="https://scrapbox.io/incremental/%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88">ポータルページのスクリーンショット - インクリメンタルな環境改善</a>）を見かけて、自分用に作ってみたくなった。</p><p>Claudeに基礎となるHTMLを書いてもらって、ちまちま調整しながら使ってる。</p><p>▼ 現状こんな感じ</p><p><img src="https://gyazo.com/0ba95e84677c10db4468b96408445bf0/thumb/600" alt="Image"></p><p>最初は単なるブクマ集だったんだけど、予定やタスクも見れたら便利かも？となり、Workflowy関連のパーツや他のツールが増えていった。</p><h2>機能</h2><ul><li>ブックマークリスト<ul><li>カテゴリ分けしてリスト化</li><li>ドラッグ・アンド・ドロップで移動</li><li>ヘッダーにもアイコンのみ並べられる</li><li>アイコンは自動取得だけどカスタムも可</li><li>HTMLに直接書いてあるわけではなくブラウザ上で編集・保存してる</li></ul></li><li>小さいツール群<ul><li>天気予報: 指定した地名の天気を取得</li><li>メモ: ブラウザに保存。Ctrl+EnterでWorkflowyのinboxに送信</li><li>ストップウォッチ・タイマー</li></ul></li><li>Workflowyから<ul><li>カレンダー: Googleカレンダーの予定から（Workflowy経由で）直近3件を表示。該当の日付・予定へのリンクになってる</li><li>タスク: 当日のタスクをまとめてある項目から取得。開始/終了時刻の挿入、完了操作もここから可能</li></ul></li><li>テーマは4つから気分で選択</li></ul><p>設定やリストはブラウザのローカルストレージに保存してあり、インポート・エクスポートできる。</p><p>このHTMLファイルをローカルにおいて、拡張機能「<a href="https://chromewebstore.google.com/detail/custom-new-tab/lfjnnkckddkopjfgmbcpdiolnmfobflj?hl=ja">Custom New Tab</a>」で新しいタブで開くように設定して使っている。</p><p>■</p><p>これ書きながら思い出したけど、子供の頃に父が似たようなことHTML直書きとかホームページビルダーでやってたなぁと懐かしくなった。</p>]]></description>
+          <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/f8d9dce5-0e43-6ad6-0134-2d48438443cb.html</guid>
+        </item>
         <item>
           <title>Google AI Studioを使ってPoIC用のWebアプリを作ってみた</title>
           <link>https://morvra.github.io/articles/ae773cd3-35e8-0406-cc9f-7780e0a42992.html</link>
@@ -267,13 +274,6 @@
           <description><![CDATA[<p>つくった。</p><p>gist → <a href="https://gist.github.com/morvra/a490a0b6918a700e023b00013d57ee4c" target="_blank">Dynalist Random Tagged Item Viewer</a> / <a href="https://gist.github.com/morvra/eb2ec1cf588c8bf3e143ea86649204f3" target="_blank">Dynalist Random Item Viewer</a></p><ul><li>右下のコンテナに設定した項目がランダムで表示される</li><li>コンテナをクリックでその項目に移動</li><li>ボタンで項目の中からランダムに切り替え</li></ul><p>「今日の名言」「モットーから1要素」「アイディアリストから1つ」「クイズや英単語問題集」などなど見かえしたいもの何でもござれ。</p><p>完成してから思ったけど、Dynalistでデイリーノート書いてるとほぼ日手帳の「日々の言葉」みたいになってて良さげ。</p>]]></description>
           <pubDate>Mon, 08 Sep 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/ccb0135c-6929-9a07-be9e-938b332ab771.html</guid>
-        </item>
-        <item>
-          <title>自分用ポータル＆ダッシュボードを作ってChromeの新しいタブに設定している話</title>
-          <link>https://morvra.github.io/articles/f8d9dce5-0e43-6ad6-0134-2d48438443cb.html</link>
-          <description><![CDATA[<p>結城浩さんのポータル（<a href="https://scrapbox.io/incremental/%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88">ポータルページのスクリーンショット - インクリメンタルな環境改善</a>）を見かけて、自分用に作ってみたくなった。</p><p>Claudeに基礎となるHTMLを書いてもらって、ちまちま調整しながら使ってる。</p><p>▼ 現状こんな感じ</p><p><img src="https://gyazo.com/0ba95e84677c10db4468b96408445bf0/thumb/600" alt="Image"></p><p>最初は単なるブクマ集だったんだけど、予定やタスクも見れたら便利かも？となり、Workflowy関連のパーツや他のツールが増えていった。</p><h2>機能</h2><ul><li>ブックマークリスト<ul><li>カテゴリ分けしてリスト化</li><li>ドラッグ・アンド・ドロップで移動</li><li>ヘッダーにもアイコンのみ並べられる</li><li>アイコンは自動取得だけどカスタムも可</li><li>HTMLに直接書いてあるわけではなくブラウザ上で編集・保存してる</li></ul></li><li>小さいツール群<ul><li>天気予報: 指定した地名の天気を取得</li><li>メモ: ブラウザに保存。Ctrl+EnterでWorkflowyのinboxに送信</li><li>ストップウォッチ・タイマー</li></ul></li><li>Workflowyから<ul><li>カレンダー: Googleカレンダーの予定から（Workflowy経由で）直近3件を表示。該当の日付・予定へのリンクになってる</li><li>タスク: 当日のタスクをまとめてある項目から取得。開始/終了時刻の挿入、完了操作もここから可能</li></ul></li><li>テーマは4つから気分で選択</li></ul><p>設定やリストはブラウザのローカルストレージに保存してあり、インポート・エクスポートできる。</p><p>このHTMLファイルをローカルにおいて、拡張機能「<a href="https://chromewebstore.google.com/detail/custom-new-tab/lfjnnkckddkopjfgmbcpdiolnmfobflj?hl=ja">Custom New Tab</a>」で新しいタブで開くように設定して使っている。</p><p>■</p><p>これ書きながら思い出したけど、子供の頃に父が似たようなことHTML直書きとかホームページビルダーでやってたなぁと懐かしくなった。</p>]]></description>
-          <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/articles/f8d9dce5-0e43-6ad6-0134-2d48438443cb.html</guid>
         </item>
         <item>
           <title>Dynalistの連用日記用ビューワーをつくった</title>
