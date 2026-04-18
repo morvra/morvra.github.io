@@ -136,7 +136,29 @@ ul.news-items {
     color: #0088cc;
 }
 
-/* コメント部分 */
+/* 日付 (リンク付き) */
+.news-date a {
+    color: #999;
+    font-size: 0.85em;
+    text-decoration: none;
+}
+.news-date a:hover {
+    color: #0088cc;
+    text-decoration: underline;
+}
+
+/* 日付別ページ: 戻るリンク */
+p.news-back {
+    margin: -8px 0 20px;
+    font-size: 0.9em;
+}
+
+/* 日付別ページ: アイテムリスト (インデントなし) */
+ul.news-day-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 .news-comment {
     margin-top: 4px;
     font-size: 0.9em;

@@ -256,8 +256,9 @@ ${label} <i class="fa ${iconClass}"></i>
         });
 
         Object.keys(byDate).sort((a, b) => b.localeCompare(a)).forEach(date => {
+            const dateSlug = date.replace(/-/g, ''); // "2026-04-19" → "20260419"
             html += `<li class="news-date-group">
-<div class="news-date">${date}</div>
+<div class="news-date"><a href="/news/${dateSlug}.html">${date}</a></div>
 <ul class="news-items">
 `;
             byDate[date].forEach(item => {
@@ -289,6 +290,103 @@ ${item.comment}
 
     fs.writeFileSync('newslist.html', html, 'utf8');
     console.log('newslist.html generated.');
+}
+
+// ============================================================
+// 日付別静的HTMLページ生成
+// ============================================================
+
+/**
+ * 日付ごとに news/YYYYMMDD.html を生成する
+ * 例: news/20260419.html
+ */
+function generateNewsDayPages(newsItems) {
+    const outputDir = 'news';
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+        console.log(`Created directory: ${outputDir}/`);
+    }
+
+    // 日付ごとにグループ化
+    const byDate = {};
+    newsItems.forEach(item => {
+        if (!byDate[item.date]) byDate[item.date] = [];
+        byDate[item.date].push(item);
+    });
+
+    let count = 0;
+    Object.keys(byDate).forEach(date => {
+        const items = byDate[date];
+        const dateSlug = date.replace(/-/g, ''); // "20260419"
+        const [year, mon, day] = date.split('-');
+        const dateLabel = `${year}年${parseInt(mon)}月${parseInt(day)}日`;
+
+        // ニュースアイテムのHTML
+        let itemsHtml = '';
+        items.forEach(item => {
+            const titleHtml = item.url
+                ? `<a href="${escapeHtml(item.url)}" target="_blank">${escapeHtml(item.title)}</a>`
+                : escapeHtml(item.title);
+
+            const tagsHtml = item.tags.length > 0
+                ? `<span class="news-tags">${item.tags.map(t =>
+                    `<a href="/tag?tag=${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join(' ')}</span>`
+                : '';
+
+            itemsHtml += `<li class="news-item">
+<div class="news-item-header">${titleHtml}${tagsHtml ? ' ' + tagsHtml : ''}</div>
+${item.comment}
+</li>
+`;
+        });
+
+        const html = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${dateLabel}のニュース - morvra lists</title>
+    <meta name="description" content="${dateLabel}にmorvraが気になったリンク集">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/news.css">
+    <link href='/bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
+</head>
+<body>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
+    <div id="header"></div>
+
+    <main>
+        <div id="article-title"><h1>${dateLabel}のニュース</h1></div>
+        <p class="news-back"><a href="/news">&laquo; ニュース一覧に戻る</a></p>
+
+        <ul class="news-items news-day-list">
+${itemsHtml}        </ul>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>`;
+
+        fs.writeFileSync(`${outputDir}/${dateSlug}.html`, html, 'utf8');
+        count++;
+    });
+
+    console.log(`Generated ${count} day page(s) in news/`);
 }
 
 // ============================================================
@@ -360,6 +458,9 @@ async function main() {
 
         // newslist.html フラグメントを生成
         generateNewsListHtml(newsItems);
+
+        // 日付別静的ページを生成
+        generateNewsDayPages(newsItems);
 
         console.log('News generation complete.');
 
