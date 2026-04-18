@@ -1,0 +1,35 @@
+name: Generate News and Push to GitHub
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 14 * * *'  # 毎日UTC 14:00 → JST 23:00
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install node-fetch
+
+    - name: Run script to generate news data
+      env:
+        WORKFLOWY_API_KEY: ${{ secrets.WORKFLOWY_API_KEY }}
+      run: node getNews.js
+
+    - name: Commit and push changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: 'news.json newslist.html'
+        message: 'feat: Update news.json and newslist.html from Workflowy'
+        new_branch: main
+        github_token: ${{ secrets.GH_TOKEN }}

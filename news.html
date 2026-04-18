@@ -1,0 +1,51 @@
+<!-- news.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - morvra lists</title>
+    <meta name="description" content="morvraが気になったニュース・リンク集">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./news.css">
+    <link href='./bullet_icon.png' rel='icon' type='image/x-icon'/>
+    <link href='./bullet_icon.png' rel='shortcut icon'/>
+    <link href='./bullet_icon.png' rel='apple-touch-icon'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3575252598876356" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-3575252598876356">
+</head>
+<body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0NP5Z9M9"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0G0NP5Z9M9');
+    </script>
+
+    <div id="header"></div>
+
+    <main>
+        <h2>News</h2>
+        <p class="news-description">気になったリンク・メモ</p>
+
+        <!-- タグ絞り込み用 (URLパラメータ ?tag=xxx で動作) -->
+        <div id="news-filter-info"></div>
+
+        <ul id="news-list">
+            <!-- newslist.js が newslist.html を読み込んで展開 -->
+        </ul>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="./newslist.js"></script>
+
+    <script>
+        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
+        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
+    </script>
+</body>
+</html>
