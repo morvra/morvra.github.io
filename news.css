@@ -8,6 +8,33 @@ p.news-description {
     margin-bottom: 20px;
 }
 
+/* News見出しと検索窓を横並びに */
+.news-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.news-header h2 {
+    margin: 0;
+}
+
+.news-header #search-container {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    max-width: 180px;
+}
+.news-header #search-input {
+    padding: 5px 8px;
+    font-size: 0.85em;
+    width: 130px;
+}
+.news-header #search-button {
+    padding: 5px 9px;
+    font-size: 0.85em;
+}
+
 /* 絞り込みバッジ */
 .news-filter-badge {
     display: inline-block;
