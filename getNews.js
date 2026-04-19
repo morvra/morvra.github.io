@@ -549,7 +549,13 @@ async function main() {
             // noteからタグを取得 (nameにあるタグも拾う)
             const tagsFromNote = getTags(node.note || '');
             const tagsFromName = (() => {
-                const plainName = unescapeHtml(node.name).replace(/<[^>]*>/g, '');
+                let plainName = unescapeHtml(node.name);
+                // HTMLリンク全体を除去 (リンクテキスト内のタグも含めて)
+                plainName = plainName.replace(/<a\s[^>]*>.*?<\/a>/gi, '');
+                // Markdownリンク全体を除去 ([テキスト](URL) のテキスト部分も含めて)
+                plainName = plainName.replace(/\[[^\]]*\]\([^\)]*\)/g, '');
+                // 残りのHTMLタグを除去
+                plainName = plainName.replace(/<[^>]*>/g, '');
                 const regex = /#([\p{L}\p{N}\-_]+)/gu;
                 const tags = [];
                 let m;
