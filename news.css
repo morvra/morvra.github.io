@@ -135,7 +135,7 @@ ul.news-items {
 }
 .news-item-header::before {
     content: "■ ";
-    color: #555;
+    color: #888;
 }
 .news-item-header a:first-child {
     font-weight: normal;
@@ -181,7 +181,6 @@ ul.news-day-list {
     margin-top: 4px;
     font-size: 0.9em;
     color: #666;
-    padding-left: 4px;
 }
 .news-comment p {
     margin: 2px 0;
