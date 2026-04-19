@@ -1,5 +1,5 @@
 // getNews.js
-// #newsタグのWorkflowyノードを取得し、news.json と newslist.html を生成する
+// #newsタグのWorkflowyノードを取得し、news.json / news-latest.json / newslist.html を生成する
 
 const fs = require('fs');
 const fetch = globalThis.fetch || require('node-fetch').default;
@@ -154,40 +154,33 @@ function getNodesByTag(nodes, tagName) {
  * ノードのnameからタイトルとURLを抽出する
  *
  * 対応する2つの形式:
- *   1. Workflowyネイティブリンク (UI上でリンク設定した場合):
- *      `<a href="https://example.com">記事タイトル</a> #news #AI`
- *   2. Markdownリンク (手書きの場合):
- *      `[記事タイトル](https://example.com) #news #AI`
- *
- * どちらも → { title: "記事タイトル", url: "https://example.com" }
+ *   1. Workflowyネイティブリンク: <a href="URL">テキスト</a> #news #AI
+ *   2. Markdownリンク:           [テキスト](URL) #news #AI
  */
 function extractNewsLink(rawName) {
-    // APIレスポンスのnameはHTMLエンティティがエスケープされている場合があるのでデコード
     const name = unescapeHtml(rawName);
 
-    // 1. WorkflowyネイティブHTMLリンク: <a href="URL">テキスト</a>
+    // 1. WorkflowyネイティブHTMLリンク
     const htmlMatch = name.match(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/i);
     if (htmlMatch) {
         const url   = htmlMatch[1];
-        // タグ (#news 等) を除去してタイトルをクリーンにする
         const title = htmlMatch[2].replace(/#[\p{L}\p{N}\-_]+/gu, '').trim();
         return { title, url };
     }
 
-    // 2. Markdownリンク: [テキスト](URL)
+    // 2. Markdownリンク
     const mdMatch = name.match(/\[([^\]]+)\]\(([^\)]+)\)/);
     if (mdMatch) {
         return { title: mdMatch[1], url: mdMatch[2] };
     }
 
-    // 3. リンクなし: タグを除去してタイトルのみ
+    // 3. リンクなし
     const title = name.replace(/#[\p{L}\p{N}\-_]+/gu, '').trim();
     return { title, url: null };
 }
 
 /**
  * 子ノードをコメントとしてHTMLに変換する
- * (シンプルに各子ノードのnameを段落として返す)
  */
 function renderComments(node, allNodes) {
     const children = getChildren(node.id, allNodes);
@@ -201,7 +194,6 @@ function renderComments(node, allNodes) {
                 .join('\n').trim();
             if (note) html += markdownToHTML(note);
         }
-        // さらに深い孫ノードも処理
         const grandChildren = getChildren(child.id, allNodes);
         grandChildren.forEach(gc => {
             html += markdownToHTML(gc.name);
@@ -215,19 +207,14 @@ function renderComments(node, allNodes) {
 // newslist.html フラグメント生成
 // ============================================================
 
-/**
- * ニュース一覧を月単位で折りたたみ可能なHTMLフラグメントとして生成する
- */
 function generateNewsListHtml(newsItems) {
-    const currentYearMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+    const currentYearMonth = new Date().toISOString().slice(0, 7);
 
-    // 日付の新しい順にソート
     const sorted = [...newsItems].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // 月ごとにグループ化
     const groupedByMonth = {};
     sorted.forEach(item => {
-        const month = item.date.slice(0, 7); // "YYYY-MM"
+        const month = item.date.slice(0, 7);
         if (!groupedByMonth[month]) groupedByMonth[month] = [];
         groupedByMonth[month].push(item);
     });
@@ -252,7 +239,7 @@ function generateNewsListHtml(newsItems) {
 `;
 
     let html = '';
-    let adInserted = false; // 広告は全体で1回だけ挿入する
+    let adInserted = false;
 
     sortedMonths.forEach(month => {
         const isCurrentMonth = month === currentYearMonth;
@@ -267,7 +254,6 @@ ${label} <i class="fa ${iconClass}"></i>
 </h3>
 <ul class="news-sub-list ${collapseClass}">
 `;
-        // 同じ月の中で日付ごとにグループ化
         const byDate = {};
         groupedByMonth[month].forEach(item => {
             if (!byDate[item.date]) byDate[item.date] = [];
@@ -276,7 +262,7 @@ ${label} <i class="fa ${iconClass}"></i>
 
         const sortedDates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
         sortedDates.forEach((date, dateIndex) => {
-            const dateSlug = date.replace(/-/g, ''); // "2026-04-19" → "20260419"
+            const dateSlug = date.replace(/-/g, '');
             html += `<li class="news-date-group">
 <div class="news-date"><a href="/news/${dateSlug}.html">${date}</a></div>
 <ul class="news-items">
@@ -302,7 +288,7 @@ ${item.comment}
 </li>
 `;
             // 最初の日付グループの直後に広告を1回だけ挿入
-            if (!adInserted && (dateIndex === 0)) {
+            if (!adInserted && dateIndex === 0) {
                 html += adHtml;
                 adInserted = true;
             }
@@ -321,10 +307,6 @@ ${item.comment}
 // 日付別静的HTMLページ生成
 // ============================================================
 
-/**
- * 日付ごとに news/YYYYMMDD.html を生成する
- * 例: news/20260419.html
- */
 function generateNewsDayPages(newsItems) {
     const outputDir = 'news';
     if (!fs.existsSync(outputDir)) {
@@ -332,7 +314,6 @@ function generateNewsDayPages(newsItems) {
         console.log(`Created directory: ${outputDir}/`);
     }
 
-    // 日付ごとにグループ化
     const byDate = {};
     newsItems.forEach(item => {
         if (!byDate[item.date]) byDate[item.date] = [];
@@ -342,11 +323,10 @@ function generateNewsDayPages(newsItems) {
     let count = 0;
     Object.keys(byDate).forEach(date => {
         const items = byDate[date];
-        const dateSlug = date.replace(/-/g, ''); // "20260419"
+        const dateSlug = date.replace(/-/g, '');
         const [year, mon, day] = date.split('-');
         const dateLabel = `${year}年${parseInt(mon)}月${parseInt(day)}日`;
 
-        // ニュースアイテムのHTML
         let itemsHtml = '';
         items.forEach(item => {
             const titleHtml = item.url
@@ -397,18 +377,18 @@ ${item.comment}
         <ul class="news-items news-day-list">
 ${itemsHtml}        </ul>
 
-            <div id="ad">
-                スポンサードリンク
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-3575252598876356"
-                     data-ad-slot="6223968026"
-                     data-ad-format="rectangle"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+        <div id="ad">
+            スポンサードリンク
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3575252598876356"
+                 data-ad-slot="6223968026"
+                 data-ad-format="rectangle"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </main>
 
     <div id="footer"></div>
@@ -428,29 +408,48 @@ ${itemsHtml}        </ul>
 }
 
 // ============================================================
+// news-latest.json 生成 (トップページ用)
+// ============================================================
+
+/**
+ * 最新日付分のニュースアイテムのみを news-latest.json として出力する。
+ * トップページでの fetch 用に最小限のサイズに絞る。
+ *
+ * @param {Array} newsItems - ソート済み（新しい順）のニュースアイテム配列
+ */
+function generateNewsLatestJson(newsItems) {
+    if (newsItems.length === 0) return;
+
+    const latestDate = newsItems[0].date; // ソート済みなので先頭が最新
+    const latest = newsItems.filter(i => i.date === latestDate);
+
+    fs.writeFileSync(
+        'news-latest.json',
+        JSON.stringify({ date: latestDate, news: latest }, null, '\t'),
+        'utf8'
+    );
+    console.log(`news-latest.json generated. (${latest.length} items for ${latestDate})`);
+}
+
+// ============================================================
 // rss.xml にニュース日付ページをマージ
 // ============================================================
 
 /**
  * 既存の rss.xml を読み込み、ニュース日付ページのエントリをマージして書き直す。
- * - 記事エントリ (<item>) はそのまま保持する
+ * - 記事エントリはそのまま保持する
  * - ニュースエントリは guid を基準に重複を除外してから追加する
- * - 新しい日付ページが増えた日だけ差分として追記される
- *
- * @param {Array} newsItems - getNews で生成したニュースアイテム配列
  */
 function mergeNewsIntoRss(newsItems) {
     const RSS_PATH = 'rss.xml';
     const BASE_URL = 'https://morvra.github.io';
 
-    // 日付ごとにグループ化して、日付ページ単位のエントリを作る
     const byDate = {};
     newsItems.forEach(item => {
         if (!byDate[item.date]) byDate[item.date] = [];
         byDate[item.date].push(item);
     });
 
-    // ニュース日付ページ分の <item> を生成
     const newsRssItems = Object.keys(byDate)
         .sort((a, b) => b.localeCompare(a))
         .map(date => {
@@ -460,7 +459,6 @@ function mergeNewsIntoRss(newsItems) {
             const link      = `${BASE_URL}/news/${dateSlug}.html`;
             const pubDate   = new Date(`${date}T00:00:00+09:00`).toUTCString();
 
-            // その日のアイテムタイトルを概要として並べる
             const summary = byDate[date]
                 .map(i => `・${i.title}`)
                 .join('\n');
@@ -477,11 +475,9 @@ function mergeNewsIntoRss(newsItems) {
             };
         });
 
-    // 既存の rss.xml から記事 <item> を抽出（ニュースエントリは除外して入れ替える）
     let existingArticleItems = '';
     if (fs.existsSync(RSS_PATH)) {
         const existing = fs.readFileSync(RSS_PATH, 'utf8');
-        // /news/ を含む guid を持つ <item> を除いた既存エントリを保持
         const itemRegex = /<item>[\s\S]*?<\/item>/g;
         const matches = existing.match(itemRegex) || [];
         existingArticleItems = matches
@@ -489,10 +485,8 @@ function mergeNewsIntoRss(newsItems) {
             .join('\n');
     }
 
-    // ニュースエントリのguidセット（重複除外用）
     const newsGuids = new Set(newsRssItems.map(i => i.guid));
 
-    // 記事エントリの中にニュースguidが紛れていれば除外（念のため）
     const cleanedArticleItems = existingArticleItems
         .replace(/<item>[\s\S]*?<\/item>/g, match =>
             newsGuids.has(match.match(/<guid[^>]*>(.*?)<\/guid>/)?.[1] || '')
@@ -547,8 +541,7 @@ async function main() {
         const newsItems = newsNodes.map(node => {
             const { title, url } = extractNewsLink(node.name);
 
-            // createdAt (Unixタイムスタンプ秒) から日付を生成
-            // JST (UTC+9) に変換して日付を取得
+            // createdAt (Unixタイムスタンプ秒) から日付を生成 (JST: UTC+9)
             const createdDate = new Date((node.createdAt + 9 * 3600) * 1000)
                 .toISOString()
                 .slice(0, 10);
@@ -556,7 +549,6 @@ async function main() {
             // noteからタグを取得 (nameにあるタグも拾う)
             const tagsFromNote = getTags(node.note || '');
             const tagsFromName = (() => {
-                // HTMLタグ (<a href="...">) を除去してからタグ (#xxx) を抽出
                 const plainName = unescapeHtml(node.name).replace(/<[^>]*>/g, '');
                 const regex = /#([\p{L}\p{N}\-_]+)/gu;
                 const tags = [];
@@ -566,17 +558,9 @@ async function main() {
             })();
             const tags = [...new Set([...tagsFromName, ...tagsFromNote])];
 
-            // 子ノード = コメント・参照元
             const comment = renderComments(node, data.nodes);
 
-            return {
-                id: node.id,
-                title,
-                url,
-                date: createdDate,
-                tags,
-                comment,
-            };
+            return { id: node.id, title, url, date: createdDate, tags, comment };
         });
 
         // 日付の新しい順にソート
@@ -585,6 +569,9 @@ async function main() {
         // news.json を出力
         fs.writeFileSync('news.json', JSON.stringify({ news: newsItems }, null, '\t'), 'utf8');
         console.log(`news.json generated. (${newsItems.length} items)`);
+
+        // news-latest.json を出力 (トップページ用)
+        generateNewsLatestJson(newsItems);
 
         // newslist.html フラグメントを生成
         generateNewsListHtml(newsItems);

@@ -197,6 +197,34 @@ ul.nav-icons {
     margin-bottom: 0.8em;
 }
 
+/* トップページのニュース最新枠 */
+#news-latest-inner {
+    margin-bottom: 32px;
+    padding: 12px 16px;
+    background: #fafaff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.news-latest-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.news-latest-title {
+    font-weight: bold;
+    font-size: 1.05em;
+}
+.news-latest-date {
+    font-size: 0.85em;
+    color: #999;
+}
+.news-latest-more {
+    margin-left: auto;
+    font-size: 0.85em;
+}
+
 /* 年ごとのグループのスタイル */
 .year-group {
     list-style: none; /* デフォルトのリストスタイルをなくす */
