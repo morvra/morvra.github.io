@@ -268,7 +268,7 @@ ${label} <i class="fa ${iconClass}"></i>
 
                 const tagsHtml = item.tags.length > 0
                     ? `<span class="news-tags">${item.tags.map(t =>
-                        `<a href="/tag?tag=${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join(' ')}</span>`
+                        `<a href="/news?tag=${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join(' ')}</span>`
                     : '';
 
                 html += `<li class="news-item">
@@ -330,7 +330,7 @@ function generateNewsDayPages(newsItems) {
 
             const tagsHtml = item.tags.length > 0
                 ? `<span class="news-tags">${item.tags.map(t =>
-                    `<a href="/tag?tag=${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join(' ')}</span>`
+                    `<a href="/news?tag=${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join(' ')}</span>`
                 : '';
 
             itemsHtml += `<li class="news-item">
