@@ -31,6 +31,12 @@
         <h2>News</h2>
         <p class="news-description">気になったリンク・メモ</p>
 
+        <!-- 検索フォーム -->
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="ニュースを検索..." aria-label="ニュースを検索">
+            <button id="search-button"><i class="fa fa-search"></i></button>
+        </div>
+
         <!-- タグ絞り込み用 (URLパラメータ ?tag=xxx で動作) -->
         <div id="news-filter-info"></div>
 
@@ -42,6 +48,28 @@
     <div id="footer"></div>
 
     <script src="./newslist.js"></script>
+
+    <script>
+        // 検索フォーム: ボタンクリックまたはEnterで ?q=xxx に遷移
+        const input  = document.getElementById('search-input');
+        const button = document.getElementById('search-button');
+
+        // ページ読み込み時に既存クエリを入力欄に反映
+        const currentQ = new URLSearchParams(window.location.search).get('q') || '';
+        if (currentQ) input.value = currentQ;
+
+        function doSearch() {
+            const q = input.value.trim();
+            if (!q) {
+                window.location.href = './news';
+                return;
+            }
+            window.location.href = `./news?q=${encodeURIComponent(q)}`;
+        }
+
+        button.addEventListener('click', doSearch);
+        input.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+    </script>
 
     <script>
         fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
