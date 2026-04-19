@@ -135,7 +135,7 @@ ul.news-items {
 }
 .news-item-header::before {
     content: "■ ";
-    color: #aaa;
+    color: #555;
 }
 .news-item-header a:first-child {
     font-weight: normal;
@@ -144,12 +144,11 @@ ul.news-items {
 /* タグ */
 .news-tags {
     margin-left: 6px;
-    font-size: 0.82em;
     white-space: nowrap;
 }
 .news-tags a {
     color: #aaa;
-    margin-right: 2px;
+    margin-right: 4px;
 }
 .news-tags a:hover {
     color: #555;
