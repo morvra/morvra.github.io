@@ -126,7 +126,7 @@ ul.news-items {
 /* 個別ニュースアイテム */
 .news-item {
     padding: 8px;
-    margin-bottom: 6px;
+    margin-bottom: 16px;
     background: #fafaff;
 }
 
