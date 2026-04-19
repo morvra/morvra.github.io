@@ -390,6 +390,98 @@ ${itemsHtml}        </ul>
 }
 
 // ============================================================
+// rss.xml にニュース日付ページをマージ
+// ============================================================
+
+/**
+ * 既存の rss.xml を読み込み、ニュース日付ページのエントリをマージして書き直す。
+ * - 記事エントリ (<item>) はそのまま保持する
+ * - ニュースエントリは guid を基準に重複を除外してから追加する
+ * - 新しい日付ページが増えた日だけ差分として追記される
+ *
+ * @param {Array} newsItems - getNews で生成したニュースアイテム配列
+ */
+function mergeNewsIntoRss(newsItems) {
+    const RSS_PATH = 'rss.xml';
+    const BASE_URL = 'https://morvra.github.io';
+
+    // 日付ごとにグループ化して、日付ページ単位のエントリを作る
+    const byDate = {};
+    newsItems.forEach(item => {
+        if (!byDate[item.date]) byDate[item.date] = [];
+        byDate[item.date].push(item);
+    });
+
+    // ニュース日付ページ分の <item> を生成
+    const newsRssItems = Object.keys(byDate)
+        .sort((a, b) => b.localeCompare(a))
+        .map(date => {
+            const [year, mon, day] = date.split('-');
+            const dateLabel = `${year}年${parseInt(mon)}月${parseInt(day)}日`;
+            const dateSlug  = date.replace(/-/g, '');
+            const link      = `${BASE_URL}/news/${dateSlug}.html`;
+            const pubDate   = new Date(`${date}T00:00:00+09:00`).toUTCString();
+
+            // その日のアイテムタイトルを概要として並べる
+            const summary = byDate[date]
+                .map(i => `・${i.title}`)
+                .join('\n');
+
+            return {
+                guid: link,
+                xml: `        <item>
+          <title>${dateLabel}のニュース</title>
+          <link>${link}</link>
+          <description><![CDATA[${summary}]]></description>
+          <pubDate>${pubDate}</pubDate>
+          <guid isPermaLink="true">${link}</guid>
+        </item>`,
+            };
+        });
+
+    // 既存の rss.xml から記事 <item> を抽出（ニュースエントリは除外して入れ替える）
+    let existingArticleItems = '';
+    if (fs.existsSync(RSS_PATH)) {
+        const existing = fs.readFileSync(RSS_PATH, 'utf8');
+        // /news/ を含む guid を持つ <item> を除いた既存エントリを保持
+        const itemRegex = /<item>[\s\S]*?<\/item>/g;
+        const matches = existing.match(itemRegex) || [];
+        existingArticleItems = matches
+            .filter(item => !item.includes(`${BASE_URL}/news/`))
+            .join('\n');
+    }
+
+    // ニュースエントリのguidセット（重複除外用）
+    const newsGuids = new Set(newsRssItems.map(i => i.guid));
+
+    // 記事エントリの中にニュースguidが紛れていれば除外（念のため）
+    const cleanedArticleItems = existingArticleItems
+        .replace(/<item>[\s\S]*?<\/item>/g, match =>
+            newsGuids.has(match.match(/<guid[^>]*>(.*?)<\/guid>/)?.[1] || '')
+                ? ''
+                : match
+        );
+
+    const newsXml = newsRssItems.map(i => i.xml).join('\n');
+
+    const rss = `<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+      <channel>
+        <title>morvra lists</title>
+        <link>${BASE_URL}/</link>
+        <description>morvraが何でも書く場所</description>
+        <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+        <language>ja-jp</language>
+${newsXml}
+${cleanedArticleItems}
+      </channel>
+    </rss>`;
+
+    fs.writeFileSync(RSS_PATH, rss, 'utf8');
+    console.log(`rss.xml updated. (${newsRssItems.length} news day entries merged)`);
+}
+
+// ============================================================
 // メイン処理
 // ============================================================
 
@@ -461,6 +553,9 @@ async function main() {
 
         // 日付別静的ページを生成
         generateNewsDayPages(newsItems);
+
+        // rss.xml にニュース日付ページをマージ
+        mergeNewsIntoRss(newsItems);
 
         console.log('News generation complete.');
 

@@ -471,29 +471,48 @@ function processNodeSubtree(currentNode, allNodes) {
     return nodeHtml;
 }
 
+// ============================================================
 // RSSフィードを生成する関数
+// 既存 rss.xml にニュース日付ページのエントリがあれば保持してマージする
+// ============================================================
 function generateRSS(articles) {
-    let rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
-    <rss version="2.0">
-      <channel>
-        <title>morvra lists</title>
-        <link>https://morvra.github.io/</link>
-        <description>morvraが何でも書く場所</description>
-        <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-        <language>ja-jp</language>`;
+    const BASE_URL = 'https://morvra.github.io';
+    const RSS_PATH = 'rss.xml';
 
+    // 既存 rss.xml からニュースエントリ (/news/ を含む guid) を抽出して保持
+    let existingNewsItems = '';
+    if (fs.existsSync(RSS_PATH)) {
+        const existing = fs.readFileSync(RSS_PATH, 'utf8');
+        const matches = existing.match(/<item>[\s\S]*?<\/item>/g) || [];
+        existingNewsItems = matches
+            .filter(item => item.includes(`${BASE_URL}/news/`))
+            .join('\n        ');
+        if (existingNewsItems) existingNewsItems = '        ' + existingNewsItems;
+    }
+
+    // 記事エントリを生成
+    let articleItems = '';
     articles.forEach(article => {
-        rssFeed += `
+        articleItems += `
         <item>
           <title>${article.title}</title>
-          <link>https://morvra.github.io/articles/${article.id}.html</link>
+          <link>${BASE_URL}/articles/${article.id}.html</link>
           <description><![CDATA[${article.body}]]></description>
           <pubDate>${new Date(article.date).toUTCString()}</pubDate>
-          <guid isPermaLink="true">https://morvra.github.io/articles/${article.id}.html</guid>
+          <guid isPermaLink="true">${BASE_URL}/articles/${article.id}.html</guid>
         </item>`;
     });
 
-    rssFeed += `
+    const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+      <channel>
+        <title>morvra lists</title>
+        <link>${BASE_URL}/</link>
+        <description>morvraが何でも書く場所</description>
+        <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+        <language>ja-jp</language>
+${existingNewsItems}
+${articleItems}
       </channel>
     </rss>`;
 
@@ -580,7 +599,7 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
 
         // --- {{TAGS}}: タグをリンクに変換（絶対パス）---
         const tagsHtml = (item.tags && item.tags.length > 0)
-            ? item.tags.map(tag => `<a href="/tag?tag=${tag}">${escapeHtml(tag)}</a>`).join(', ')
+            ? item.tags.map(tag => `<a href="/tag?tag=${escapeHtml(tag)}">${escapeHtml(tag)}</a>`).join(', ')
             : '';
 
         // --- {{RELATED}}: 共通タグを持つ関連記事リストを生成 ---
@@ -698,6 +717,7 @@ async function main() {
         fs.writeFileSync('data.json', JSON.stringify(output, null, '\t'));
         console.log('data.json generated.');
 
+        // ニュースエントリを保持しつつ rss.xml を生成
         const rssFeed = generateRSS(articles);
         fs.writeFileSync('rss.xml', rssFeed);
         console.log('rss.xml generated.');
