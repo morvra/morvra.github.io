@@ -234,7 +234,26 @@ function generateNewsListHtml(newsItems) {
 
     const sortedMonths = Object.keys(groupedByMonth).sort((a, b) => b.localeCompare(a));
 
+    // 広告HTML (最新日付と次の日付の間に1回だけ挿入)
+    const adHtml = `<li class="news-ad">
+<div id="ad">
+スポンサードリンク
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3575252598876356"
+     data-ad-slot="6223968026"
+     data-ad-format="rectangle"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</li>
+`;
+
     let html = '';
+    let adInserted = false; // 広告は全体で1回だけ挿入する
+
     sortedMonths.forEach(month => {
         const isCurrentMonth = month === currentYearMonth;
         const [year, mon] = month.split('-');
@@ -255,7 +274,8 @@ ${label} <i class="fa ${iconClass}"></i>
             byDate[item.date].push(item);
         });
 
-        Object.keys(byDate).sort((a, b) => b.localeCompare(a)).forEach(date => {
+        const sortedDates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
+        sortedDates.forEach((date, dateIndex) => {
             const dateSlug = date.replace(/-/g, ''); // "2026-04-19" → "20260419"
             html += `<li class="news-date-group">
 <div class="news-date"><a href="/news/${dateSlug}.html">${date}</a></div>
@@ -281,6 +301,11 @@ ${item.comment}
             html += `</ul>
 </li>
 `;
+            // 最初の日付グループの直後に広告を1回だけ挿入
+            if (!adInserted && (dateIndex === 0)) {
+                html += adHtml;
+                adInserted = true;
+            }
         });
 
         html += `</ul>
@@ -371,6 +396,19 @@ ${item.comment}
 
         <ul class="news-items news-day-list">
 ${itemsHtml}        </ul>
+
+            <div id="ad">
+                スポンサードリンク
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3575252598876356"
+                     data-ad-slot="6223968026"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
     </main>
 
     <div id="footer"></div>
