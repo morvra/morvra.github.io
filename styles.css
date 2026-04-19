@@ -412,6 +412,15 @@ ul#tag-list {
     border: 1px solid #e0e0e0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); 
 }
+.piece-header h2 {
+    margin: 0;
+}
+p.piece-description {
+    color: #888;
+    font-size: 0.9em;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
 h2#piece-title {
     margin: 0px;
     font-size: 1em;
