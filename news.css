@@ -125,21 +125,20 @@ ul.news-items {
 
 /* 個別ニュースアイテム */
 .news-item {
-    padding: 8px;
+    padding: 8px 0;
     margin-bottom: 16px;
-    background: #fafaff;
 }
 
 /* アイテムヘッダー (タイトル + タグ) */
 .news-item-header {
     line-height: 1.5;
 }
+.news-item-header::before {
+    content: "■ ";
+    color: #aaa;
+}
 .news-item-header a:first-child {
     font-weight: normal;
-}
-.news-item-header a:first-child:hover {
-    color: #0088cc;
-    text-decoration: underline;
 }
 
 /* タグ */
