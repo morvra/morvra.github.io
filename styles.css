@@ -107,7 +107,7 @@ div#top-module.card-design {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 160px; /* アイコンとナビゲーションの最小幅 */
+    min-width: 180px; /* アイコンとナビゲーションの最小幅 */
     text-align: center;
 }
 
