@@ -55,11 +55,11 @@
             <div id="related-articles">
 <h2>関連記事</h2>
 <ul>
-<li><a href="/pieces/581dd130-35d5-b54c-4f8a-8add3496099a.html">ふつうの軽音部。次回が気になりすぎる</a></li>
-<li><a href="/pieces/af203739-e13e-7c2d-33ce-ac45b8b8c6ac.html">野球・文明・エイリアンの試合回好き</a></li>
-<li><a href="/pieces/cb3e8daf-4bf8-82ca-5fa8-cd50023974fc.html">にごリリ、次回完結！</a></li>
 <li><a href="/pieces/c7d5b81a-b7f6-6012-f641-58e8390dd865.html">デ!?</a></li>
+<li><a href="/pieces/af203739-e13e-7c2d-33ce-ac45b8b8c6ac.html">野球・文明・エイリアンの試合回好き</a></li>
+<li><a href="/pieces/581dd130-35d5-b54c-4f8a-8add3496099a.html">ふつうの軽音部。次回が気になりすぎる</a></li>
 <li><a href="/pieces/d541af38-860c-1ea4-542f-ca3f11f65b5b.html">にごリリ完結！</a></li>
+<li><a href="/pieces/cb3e8daf-4bf8-82ca-5fa8-cd50023974fc.html">にごリリ、次回完結！</a></li>
 </ul>
 </div>
         </div>
@@ -71,37 +71,6 @@
         fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
         fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.footnote-ref a').forEach(el => {
-                el.addEventListener('click', function (e) {
-                    // すでにツールチップが出ていれば2回目タップ → 移動させる
-                    const existing = el.parentNode.querySelector('.fn-tooltip');
-                    if (existing) return; // そのままhref先へ移動
 
-                    // 1回目タップ → ツールチップを表示して移動キャンセル
-                    e.preventDefault();
-
-                    // 他のツールチップを消す
-                    document.querySelectorAll('.fn-tooltip').forEach(t => t.remove());
-
-                    const tip = document.createElement('span');
-                    tip.className = 'fn-tooltip';
-                    tip.textContent = el.getAttribute('title');
-                    el.parentNode.appendChild(tip);
-
-                    // 画面外クリックで閉じる
-                    const close = (ev) => {
-                        if (!tip.contains(ev.target) && ev.target !== el) {
-                            tip.remove();
-                            document.removeEventListener('click', close);
-                        }
-                    };
-                    setTimeout(() => document.addEventListener('click', close), 0);
-                });
-            });
-        });
-    </script>
 </body>
 </html>

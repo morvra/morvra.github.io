@@ -57,8 +57,8 @@
 <ul>
 <li><a href="/articles/f4f78153-129f-c940-2125-835f43118038.html">MECE</a></li>
 <li><a href="/articles/8ba8b0cf-6086-1686-1be1-393a6d1759e5.html">恙無くってたまに使うけど「恙」って何？</a></li>
-<li><a href="/articles/6fb30ad8-4c6b-cd71-5a85-4e4240eef80e.html">コンピューターってなに？computeする存在ってこと？</a></li>
 <li><a href="/articles/ec61aab0-b71f-26b9-d33a-ac8dd6bb40b7.html">中動態についてメモ</a></li>
+<li><a href="/articles/6fb30ad8-4c6b-cd71-5a85-4e4240eef80e.html">コンピューターってなに？computeする存在ってこと？</a></li>
 </ul>
 </div>
         </div>
@@ -70,37 +70,6 @@
         fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
         fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.footnote-ref a').forEach(el => {
-                el.addEventListener('click', function (e) {
-                    // すでにツールチップが出ていれば2回目タップ → 移動させる
-                    const existing = el.parentNode.querySelector('.fn-tooltip');
-                    if (existing) return; // そのままhref先へ移動
 
-                    // 1回目タップ → ツールチップを表示して移動キャンセル
-                    e.preventDefault();
-
-                    // 他のツールチップを消す
-                    document.querySelectorAll('.fn-tooltip').forEach(t => t.remove());
-
-                    const tip = document.createElement('span');
-                    tip.className = 'fn-tooltip';
-                    tip.textContent = el.getAttribute('title');
-                    el.parentNode.appendChild(tip);
-
-                    // 画面外クリックで閉じる
-                    const close = (ev) => {
-                        if (!tip.contains(ev.target) && ev.target !== el) {
-                            tip.remove();
-                            document.removeEventListener('click', close);
-                        }
-                    };
-                    setTimeout(() => document.addEventListener('click', close), 0);
-                });
-            });
-        });
-    </script>
 </body>
 </html>
