@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(html => {
             newsListEl.innerHTML = html;
 
+            // innerHTML経由では<script>が実行されないため広告を手動初期化
+            newsListEl.querySelectorAll('ins.adsbygoogle').forEach(ins => {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.error('adsbygoogle push error:', e);
+                }
+            });
             // タグ絞り込みモード
             if (filterTag) {
                 applyTagFilter(filterTag);
