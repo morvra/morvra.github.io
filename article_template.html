@@ -63,45 +63,5 @@
         fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.footnote-ref a').forEach(el => {
-                // title属性をdata-fnに退避してブラウザ標準ツールチップを消す
-                el.dataset.fn = el.getAttribute('title');
-                el.removeAttribute('title');
-
-                const showTip = () => {
-                    if (el.parentNode.querySelector('.fn-tooltip')) return;
-                    const tip = document.createElement('span');
-                    tip.className = 'fn-tooltip';
-                    tip.textContent = el.dataset.fn;
-                    el.parentNode.appendChild(tip);
-                };
-
-                const hideTip = () => {
-                    el.parentNode.querySelectorAll('.fn-tooltip').forEach(t => t.remove());
-                };
-
-                // ホバー
-                el.addEventListener('mouseenter', showTip);
-                el.addEventListener('mouseleave', hideTip);
-
-                // タップ: 1回目でツールチップ、2回目で移動
-                el.addEventListener('click', function (e) {
-                    const existing = el.parentNode.querySelector('.fn-tooltip');
-                    if (existing) return; // 2回目 → そのままhref先へ移動
-                    e.preventDefault();
-                    showTip();
-                    const close = (ev) => {
-                        if (ev.target !== el) {
-                            hideTip();
-                            document.removeEventListener('click', close);
-                        }
-                    };
-                    setTimeout(() => document.addEventListener('click', close), 0);
-                });
-            });
-        });
-    </script>
 </body>
 </html>

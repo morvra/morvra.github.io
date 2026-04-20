@@ -399,26 +399,6 @@ code {
     padding: 0 2px;
 }
 
-/* ツールチップ */
-.fn-tooltip {
-    position: absolute;
-    bottom: 1.6em;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 240px;           /* max-widthではなくwidthで固定 */
-    background: #333;
-    color: #fff;
-    font-size: 0.85em;
-    font-weight: normal;
-    vertical-align: baseline;
-    padding: 6px 10px;
-    border-radius: 4px;
-    white-space: normal;
-    line-height: 1.5;
-    z-index: 100;
-    pointer-events: none;
-}
-
 /* 脚注リスト */
 .footnotes {
     margin-top: 40px;
