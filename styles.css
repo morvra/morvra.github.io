@@ -402,20 +402,21 @@ code {
 /* ツールチップ */
 .fn-tooltip {
     position: absolute;
-    bottom: 1.4em;
+    bottom: 1.6em;
     left: 50%;
     transform: translateX(-50%);
+    width: 240px;           /* max-widthではなくwidthで固定 */
     background: #333;
     color: #fff;
     font-size: 0.85em;
-    padding: 4px 10px;
+    font-weight: normal;
+    vertical-align: baseline;
+    padding: 6px 10px;
     border-radius: 4px;
-    white-space: nowrap;
-    max-width: 260px;
     white-space: normal;
+    line-height: 1.5;
     z-index: 100;
     pointer-events: none;
-    line-height: 1.4;
 }
 
 /* 脚注リスト */

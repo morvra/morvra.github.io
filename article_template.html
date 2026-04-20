@@ -62,30 +62,39 @@
         fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
         fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
     </script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.footnote-ref a').forEach(el => {
-                el.addEventListener('click', function (e) {
-                    // すでにツールチップが出ていれば2回目タップ → 移動させる
-                    const existing = el.parentNode.querySelector('.fn-tooltip');
-                    if (existing) return; // そのままhref先へ移動
+                // title属性をdata-fnに退避してブラウザ標準ツールチップを消す
+                el.dataset.fn = el.getAttribute('title');
+                el.removeAttribute('title');
 
-                    // 1回目タップ → ツールチップを表示して移動キャンセル
-                    e.preventDefault();
-
-                    // 他のツールチップを消す
-                    document.querySelectorAll('.fn-tooltip').forEach(t => t.remove());
-
+                const showTip = () => {
+                    if (el.parentNode.querySelector('.fn-tooltip')) return;
                     const tip = document.createElement('span');
                     tip.className = 'fn-tooltip';
-                    tip.textContent = el.getAttribute('title');
+                    tip.textContent = el.dataset.fn;
                     el.parentNode.appendChild(tip);
+                };
 
-                    // 画面外クリックで閉じる
+                const hideTip = () => {
+                    el.parentNode.querySelectorAll('.fn-tooltip').forEach(t => t.remove());
+                };
+
+                // ホバー
+                el.addEventListener('mouseenter', showTip);
+                el.addEventListener('mouseleave', hideTip);
+
+                // タップ: 1回目でツールチップ、2回目で移動
+                el.addEventListener('click', function (e) {
+                    const existing = el.parentNode.querySelector('.fn-tooltip');
+                    if (existing) return; // 2回目 → そのままhref先へ移動
+                    e.preventDefault();
+                    showTip();
                     const close = (ev) => {
-                        if (!tip.contains(ev.target) && ev.target !== el) {
-                            tip.remove();
+                        if (ev.target !== el) {
+                            hideTip();
                             document.removeEventListener('click', close);
                         }
                     };
