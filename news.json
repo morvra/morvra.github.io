@@ -1,6 +1,42 @@
 {
 	"news": [
 		{
+			"id": "e36e1bee-2c2b-42a1-8b1d-cc09883af85d",
+			"title": "快適なVSCode生活を!! | 東京科学大学デジタル創作同好会traP",
+			"url": "https://trap.jp/post/2909/",
+			"date": "2026-04-20",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>Error Lens と Material Icon Theme 入れてみた。</p></div>"
+		},
+		{
+			"id": "5eb4b6df-a07b-45fe-b37f-0a33a0a18efa",
+			"title": "「特殊な条件下での『ぼくのなつやすみ』だと思って制作した」Steam“100%好評”の傑作青春ADV『ペンギンウォーズ』はどうやって生まれたのか？余すことなく訊いてみた【開発者インタビュー】 | Game*Spark",
+			"url": "https://www.gamespark.jp/article/2026/04/19/165372.html",
+			"date": "2026-04-20",
+			"tags": [
+				"ゲーム"
+			],
+			"comment": ""
+		},
+		{
+			"id": "8c69ea61-820c-44cf-bd9f-a046a8c2540a",
+			"title": "【2007年のINTERNET Watch】「ニコニコ動画」「初音ミク」がデビューして人気に、「ダウンロード違法化」議論は紛糾 - INTERNET Watch",
+			"url": "https://internet.watch.impress.co.jp/docs/special/30th/2096502.html",
+			"date": "2026-04-20",
+			"tags": [
+				"ネット"
+			],
+			"comment": ""
+		},
+		{
+			"id": "4e1c5d3a-410e-d19b-53a7-1902c39bcf59",
+			"title": "クックパッドが誰向けなのかがわかりません。… | mond",
+			"url": "https://mond.how/ja/topics/t5co53bn5mfqb4h/3x8k3ug0qhz737j",
+			"date": "2026-04-20",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"象徴的なのは、その検索窓には薄字で「使いたい食材は？」と書いてあることです。\"</p><p>わかる。使いたい具材からサンプルをいっぱい見られるのが便利。そこで雰囲気掴んで良さげなレシピ考えてる。</p></div>"
+		},
+		{
 			"id": "753392b7-2d26-4638-a62a-9db478246ec1",
 			"title": "芸能人定着由来（仮稿）｜喜利彦山人",
 			"url": "https://note.com/yogiritei_shujin/n/n7c39e59c6b44",
@@ -20,12 +56,10 @@
 		},
 		{
 			"id": "cb2414f9-2869-4fe0-8f94-c8b339ba5e41",
-			"title": "【  】にじさんじスレスパ杯！！！！！！👑✨✨【Slay the Spire 2 / 椎名唯華/にじさんじ】 - YouTube",
+			"title": "【にじさんじスレスパ杯】にじさんじスレスパ杯！！！！！！👑✨✨【Slay the Spire 2 / 椎名唯華/にじさんじ】 - YouTube",
 			"url": "https://www.youtube.com/watch?v=AOyBHoNE57A",
 			"date": "2026-04-19",
-			"tags": [
-				"にじさんじスレスパ杯"
-			],
+			"tags": [],
 			"comment": "<div class=\"news-comment\"><p>面白かった！終盤の急かし方笑ったｗ</p></div>"
 		},
 		{

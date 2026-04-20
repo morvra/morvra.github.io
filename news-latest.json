@@ -1,51 +1,41 @@
 {
-	"date": "2026-04-19",
+	"date": "2026-04-20",
 	"news": [
 		{
-			"id": "753392b7-2d26-4638-a62a-9db478246ec1",
-			"title": "芸能人定着由来（仮稿）｜喜利彦山人",
-			"url": "https://note.com/yogiritei_shujin/n/n7c39e59c6b44",
-			"date": "2026-04-19",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p><a href=\"https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AC%E3%82%B2%E3%83%BC%E3%83%AB\">アプレゲール</a> 初めて知った。フランス語で戦後という意味で「芸術・文学など文化面における新傾向を指す名称」だって。</p><p>読み物としても面白かった。</p></div>"
-		},
-		{
-			"id": "42ea4c12-8110-3510-eb36-9caa86a7ceef",
-			"title": "サッカーワールドカップ 決勝会場への列車運賃 通常の11倍の2万3000円台 | NHKニュース",
-			"url": "https://news.web.nhk/newsweb/na/na-k10015102281000",
-			"date": "2026-04-19",
+			"id": "e36e1bee-2c2b-42a1-8b1d-cc09883af85d",
+			"title": "快適なVSCode生活を!! | 東京科学大学デジタル創作同好会traP",
+			"url": "https://trap.jp/post/2909/",
+			"date": "2026-04-20",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>資本主義だな〜</p></div>"
+			"comment": "<div class=\"news-comment\"><p>Error Lens と Material Icon Theme 入れてみた。</p></div>"
 		},
 		{
-			"id": "cb2414f9-2869-4fe0-8f94-c8b339ba5e41",
-			"title": "【  】にじさんじスレスパ杯！！！！！！👑✨✨【Slay the Spire 2 / 椎名唯華/にじさんじ】 - YouTube",
-			"url": "https://www.youtube.com/watch?v=AOyBHoNE57A",
-			"date": "2026-04-19",
+			"id": "5eb4b6df-a07b-45fe-b37f-0a33a0a18efa",
+			"title": "「特殊な条件下での『ぼくのなつやすみ』だと思って制作した」Steam“100%好評”の傑作青春ADV『ペンギンウォーズ』はどうやって生まれたのか？余すことなく訊いてみた【開発者インタビュー】 | Game*Spark",
+			"url": "https://www.gamespark.jp/article/2026/04/19/165372.html",
+			"date": "2026-04-20",
 			"tags": [
-				"にじさんじスレスパ杯"
+				"ゲーム"
 			],
-			"comment": "<div class=\"news-comment\"><p>面白かった！終盤の急かし方笑ったｗ</p></div>"
-		},
-		{
-			"id": "fa506688-f794-e51a-db56-7358de1f1575",
-			"title": "多重質問の誤謬 - Wikipedia",
-			"url": "https://ja.wikipedia.org/wiki/%E5%A4%9A%E9%87%8D%E8%B3%AA%E5%95%8F%E3%81%AE%E8%AA%A4%E8%AC%AC",
-			"date": "2026-04-19",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p>\"たとえば「あなたはまだ妻を虐待しているのか?」といった質問がある。\" 前提が自明でないのにそれを無批判に考えてしまいがち。</p><p>via: <a href=\"https://dabun.net/#20260418\">駄文にゅうす</a></p></div>"
-		},
-		{
-			"id": "35288756-d243-5c7a-4823-8b2db18ad9c7",
-			"title": "最高気温が40℃以上の日は「酷暑日」、気象庁も決定 - ITmedia NEWS",
-			"url": "https://www.itmedia.co.jp/news/articles/2604/17/news085.html",
-			"date": "2026-04-19",
-			"tags": [],
 			"comment": ""
+		},
+		{
+			"id": "8c69ea61-820c-44cf-bd9f-a046a8c2540a",
+			"title": "【2007年のINTERNET Watch】「ニコニコ動画」「初音ミク」がデビューして人気に、「ダウンロード違法化」議論は紛糾 - INTERNET Watch",
+			"url": "https://internet.watch.impress.co.jp/docs/special/30th/2096502.html",
+			"date": "2026-04-20",
+			"tags": [
+				"ネット"
+			],
+			"comment": ""
+		},
+		{
+			"id": "4e1c5d3a-410e-d19b-53a7-1902c39bcf59",
+			"title": "クックパッドが誰向けなのかがわかりません。… | mond",
+			"url": "https://mond.how/ja/topics/t5co53bn5mfqb4h/3x8k3ug0qhz737j",
+			"date": "2026-04-20",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"象徴的なのは、その検索窓には薄字で「使いたい食材は？」と書いてあることです。\"</p><p>わかる。使いたい具材からサンプルをいっぱい見られるのが便利。そこで雰囲気掴んで良さげなレシピ考えてる。</p></div>"
 		}
 	]
 }
