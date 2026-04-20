@@ -696,11 +696,11 @@ async function main() {
 
         const pieces = pieceNodes.map(obj => {
             const id = obj.id;
-            
             let rawTitle = obj.name.replace(/#piece/g, '').trim();
             const title = stripMarkdownLinks(rawTitle);
-            
-            const { date } = getMetadata(obj);
+            const { date: metaDate } = getMetadata(obj);
+            // noteに日付がなければ作成日(JST)にフォールバック
+            const date = metaDate || new Date((obj.createdAt + 9 * 3600) * 1000).toISOString().slice(0, 10);
             const tags = getTags(obj.note);
             const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs);
             
