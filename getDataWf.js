@@ -200,6 +200,59 @@ function markdownToHTML(markdown) {
     return html;
 }
 
+// ============================================================
+// 脚注処理: [^テキスト] を脚注参照に変換し、末尾に脚注リストを追加
+// ============================================================
+
+/**
+ * 記事本文HTML全体を受け取り、[^テキスト] を脚注に変換する。
+ * - 本文中: <sup class="footnote-ref"> に変換
+ * - 末尾: <div class="footnotes"> に脚注リストを追加
+ *
+ * @param {string} html - getBody() が生成した記事本文HTML
+ * @returns {string} 脚注処理済みのHTML
+ */
+function processFootnotes(html) {
+    const footnotes = [];
+    let counter = 0;
+
+    // リンクをHTMLに変換するヘルパー (脚注リスト用)
+    // WorkflowyネイティブHTMLリンクはそのまま通し、Markdownリンクを<a>に変換する
+    const renderLinks = (text) => {
+        return text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g,
+            (m, t, u) => `<a href="${u}" target="_blank">${t}</a>`);
+    };
+
+    // リンクを除去してプレーンテキストにするヘルパー (title属性＝ツールチップ用)
+    const stripLinks = (text) => {
+        return text
+            .replace(/<a\s[^>]*>(.*?)<\/a>/gi, '$1')  // WorkflowyネイティブHTMLリンク
+            .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1'); // Markdownリンク
+    };
+
+    // [^テキスト] を脚注参照に置換
+    // ※ Markdownリンク [text](url) とは別パターン（URLがない）なので競合しない
+    const processed = html.replace(/\[\^([^\]]+)\]/g, (match, text) => {
+        counter++;
+        const trimmed = text.trim();
+        footnotes.push({ num: counter, text: trimmed });
+        return `<sup class="footnote-ref" id="fnref-${counter}">` +
+               `<a href="#fn-${counter}" title="${stripLinks(trimmed)}">${counter}</a>` +
+               `</sup>`;
+    });
+
+    if (footnotes.length === 0) return html;
+
+    // 脚注リストを末尾に追加 (リンクはHTML変換して出力)
+    const fnItems = footnotes.map(fn =>
+        `<li id="fn-${fn.num}">${renderLinks(fn.text)} ` +
+        `<a href="#fnref-${fn.num}" class="footnote-back">↩</a></li>`
+    ).join('\n');
+
+    return processed +
+        `<div class="footnotes"><hr><ol>\n${fnItems}\n</ol></div>`;
+}
+
 // WorkflowyのURLを条件に応じて変換またはテキスト化する関数
 // articleUUIDs: articleノードのUUIDセット（article/pieceでフォルダを振り分けるために使用）
 function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs, articleUUIDs) {
@@ -689,7 +742,9 @@ async function main() {
             const title = stripMarkdownLinks(rawTitle);
             const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
-            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs);
+            const body = processFootnotes(
+                replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs)
+            );
             
             return { id, title, date, tags, body };
         });
@@ -699,10 +754,11 @@ async function main() {
             let rawTitle = obj.name.replace(/#piece/g, '').trim();
             const title = stripMarkdownLinks(rawTitle);
             const { date: metaDate } = getMetadata(obj);
-            // noteに日付がなければ作成日(JST)にフォールバック
             const date = metaDate || new Date((obj.createdAt + 9 * 3600) * 1000).toISOString().slice(0, 10);
             const tags = getTags(obj.note);
-            const body = replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs);
+            const body = processFootnotes(
+                replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs)
+            );
             
             return { id, title, date, tags, body };
         });

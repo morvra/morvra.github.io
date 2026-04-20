@@ -387,6 +387,64 @@ code {
     padding: 2px 0px;
 }
 
+/* 脚注 */
+.footnote-ref {
+    font-size: 0.75em;
+    vertical-align: super;
+    position: relative;
+}
+.footnote-ref a {
+    color: #0088cc;
+    text-decoration: none;
+    padding: 0 2px;
+}
+
+/* ツールチップ */
+.fn-tooltip {
+    position: absolute;
+    bottom: 1.4em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    font-size: 0.85em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    max-width: 260px;
+    white-space: normal;
+    z-index: 100;
+    pointer-events: none;
+    line-height: 1.4;
+}
+
+/* 脚注リスト */
+.footnotes {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
+}
+.footnotes hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+    margin-bottom: 12px;
+}
+.footnotes ol {
+    padding-left: 24px;
+    margin: 0;
+}
+.footnotes li {
+    margin-bottom: 4px;
+}
+.footnote-back {
+    color: #aaa;
+    text-decoration: none;
+    margin-left: 4px;
+}
+.footnote-back:hover {
+    color: #0088cc;
+}
+
 /* tag list */
 ul#tag-list {
     list-style: none;
