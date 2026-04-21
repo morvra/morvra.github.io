@@ -180,8 +180,26 @@ function extractNewsLink(rawName) {
 }
 
 /**
- * 子ノードをコメントとしてHTMLに変換する
+ * ノードのnameからインラインコメントを抽出する
+ * リンク・タグ・余分な空白を除いた残りのテキストを返す
+ *
+ * 例: `[タイトル](url) #news #tag1 これがコメント`
+ *     → "これがコメント"
  */
+function extractInlineComment(rawName) {
+    let name = unescapeHtml(rawName);
+
+    // WorkflowyネイティブHTMLリンクを除去
+    name = name.replace(/<a\s[^>]*>.*?<\/a>/gi, '');
+    // Markdownリンクを除去
+    name = name.replace(/\[[^\]]*\]\([^\)]*\)/g, '');
+    // 残りのHTMLタグを除去
+    name = name.replace(/<[^>]*>/g, '');
+    // ハッシュタグを除去
+    name = name.replace(/#[\p{L}\p{N}\-_]+/gu, '');
+
+    return name.trim();
+}
 function renderComments(node, allNodes) {
     const children = getChildren(node.id, allNodes);
     if (children.length === 0) return '';
@@ -459,16 +477,9 @@ function mergeNewsIntoRss(newsItems) {
             const link      = `${BASE_URL}/news/${dateSlug}.html`;
             const pubDate   = new Date(`${date}T00:00:00+09:00`).toUTCString();
 
-            const summary = byDate[date].map(i => {
-                const titleHtml = i.url
-                    ? `<a href="${i.url}">${i.title}</a>`
-                    : i.title;
-                const tagsHtml = i.tags.length > 0
-                    ? ` <span>${i.tags.map(t => `#${t}`).join(' ')}</span>`
-                    : '';
-                const commentHtml = i.comment || '';
-                return `<p>■ ${titleHtml}${tagsHtml}</p>${commentHtml}`;
-            }).join('\n');
+            const summary = byDate[date]
+                .map(i => `・${i.title}`)
+                .join('\n');
 
             return {
                 guid: link,
@@ -556,13 +567,7 @@ async function main() {
             // noteからタグを取得 (nameにあるタグも拾う)
             const tagsFromNote = getTags(node.note || '');
             const tagsFromName = (() => {
-                let plainName = unescapeHtml(node.name);
-                // HTMLリンク全体を除去 (リンクテキスト内のタグも含めて)
-                plainName = plainName.replace(/<a\s[^>]*>.*?<\/a>/gi, '');
-                // Markdownリンク全体を除去 ([テキスト](URL) のテキスト部分も含めて)
-                plainName = plainName.replace(/\[[^\]]*\]\([^\)]*\)/g, '');
-                // 残りのHTMLタグを除去
-                plainName = plainName.replace(/<[^>]*>/g, '');
+                const plainName = unescapeHtml(node.name).replace(/<[^>]*>/g, '');
                 const regex = /#([\p{L}\p{N}\-_]+)/gu;
                 const tags = [];
                 let m;
@@ -571,7 +576,20 @@ async function main() {
             })();
             const tags = [...new Set([...tagsFromName, ...tagsFromNote])];
 
-            const comment = renderComments(node, data.nodes);
+            const comment = (() => {
+                const inline = extractInlineComment(node.name);
+                const inlineHtml = inline ? `<p>${inline}</p>` : '';
+                const childHtml = renderComments(node, data.nodes);
+                // 子要素コメントは <div class="news-comment">...</div> で包まれているので
+                // 中身だけ取り出して結合する
+                const childInner = childHtml
+                    ? childHtml.replace(/^<div class="news-comment">|<\/div>$/g, '')
+                    : '';
+                const combined = inlineHtml + childInner;
+                return combined
+                    ? `<div class="news-comment">${combined}</div>`
+                    : '';
+            })();
 
             return { id: node.id, title, url, date: createdDate, tags, comment };
         });
