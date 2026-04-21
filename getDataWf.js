@@ -751,15 +751,34 @@ async function main() {
 
         const pieces = pieceNodes.map(obj => {
             const id = obj.id;
-            let rawTitle = obj.name.replace(/#piece/g, '').trim();
+
+            // nameからタグを抽出（#piece は除外）
+            const tagsFromName = (() => {
+                let plainName = unescapeHtml(obj.name);
+                plainName = plainName.replace(/<a\s[^>]*>.*?<\/a>/gi, '');
+                plainName = plainName.replace(/\[[^\]]*\]\([^\)]*\)/g, '');
+                plainName = plainName.replace(/<[^>]*>/g, '');
+                const regex = /#([\p{L}\p{N}\-_]+)/gu;
+                const tags = [];
+                let m;
+                while ((m = regex.exec(plainName)) !== null) tags.push(m[1]);
+                return [...new Set(tags)].filter(t => t !== 'piece');
+            })();
+
+            // タイトルから #piece および他のタグ文字列を除去
+            let rawTitle = obj.name.replace(/#[\p{L}\p{N}\-_]+/gu, '').trim();
             const title = stripMarkdownLinks(rawTitle);
+
             const { date: metaDate } = getMetadata(obj);
             const date = metaDate || new Date((obj.createdAt + 9 * 3600) * 1000).toISOString().slice(0, 10);
-            const tags = getTags(obj.note);
+
+            const tagsFromNote = getTags(obj.note);
+            const tags = [...new Set([...tagsFromName, ...tagsFromNote])];
+
             const body = processFootnotes(
                 replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs)
             );
-            
+
             return { id, title, date, tags, body };
         });
 
