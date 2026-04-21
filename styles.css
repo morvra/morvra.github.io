@@ -487,6 +487,42 @@ footer {
     bottom: 0;
 }
 
+/* tag cloud */
+#tag-cloud-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed #ccc;
+}
+
+#tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 12px;
+    border-radius: 99px;
+    border: 1px solid #ccc;
+    font-size: 0.85em;
+    color: #555;
+    text-decoration: none;
+}
+
+.tag-chip:hover,
+.tag-chip:focus {
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+}
+
+.tag-chip .tag-count {
+    font-size: 0.85em;
+    color: #aaa;
+}
 
 /* search */
 
