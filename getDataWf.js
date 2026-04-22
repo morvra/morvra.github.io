@@ -666,7 +666,8 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
 
             if (related.length > 0) {
                 related.sort(() => 0.5 - Math.random());
-                const listItems = related.map(r => {
+                const relatedSliced = related.slice(0, 5);
+                const listItems = relatedSliced.map(r => {
                     const folder = articleIds.has(r.id) ? 'articles' : 'pieces';
                     return `<li><a href="/${folder}/${r.id}.html">${escapeHtml(r.title)}</a></li>`;
                 }).join('\n');
