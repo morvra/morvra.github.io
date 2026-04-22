@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Wed, 22 Apr 2026 01:17:48 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 22 Apr 2026 11:07:35 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>2026年4月21日のニュース</title>
@@ -383,6 +383,16 @@
           <description><![CDATA[<p>GPT-5がリリースされてすぐ、4oも使えるようにして欲しいという要望が多く寄せられたらしい。</p><p>経緯はこの記事がよくまとまってる。</p><ul><li><a href="https://note.com/suzacque/n/n0ccd8d76f29c" target="_blank">GPT-4oを取り戻せ: #keep4o運動が映すAIと人間の新たな関係｜朱雀 | SUZACQUE</a></li></ul><p>個人的には「ハルシネーションや無駄なおべっかが減るなら多少人格（？）が変わるくらいプラマイでいったらプラスでしょ」くらいの感想で、こういう運動が起こってると知った時は「AIとして正統な進化してるアプデに文句言うのかよｗ」みたいにやや冷めた視線でみてた。</p><p>しかし記事にあるように、（割合はともかく）多くの人にとってAIは単なるツールではなくパートナーのような存在として捉えられているらしい。だったら人格の一貫性や対話スタイルの安定性が失われることは大きなショックだろうなと考えを改めた。</p><p>たとえ人格云々置いておいて道具として扱ってる人でも、愛着を持った道具が突然変形したらショックは避けられない。それが数ヶ月、数年の付き合いになればなおさら。</p><p>生成AIにそういう風に寄りかかるのは危険性もあるのは前提として、今後そういう風潮が強くなっていくのは想像に難くない。</p><p>今後もAIはより便利で正確にアップデートしていくと思うんだけど、それによって失われるものにも十分注意をしないとユーザー側の支持は得られないようになるだろうと感じている。</p><p>また、スタンドアローン型のAIへの需要も確実に高まるだろう。端末のスペックの進歩がそれに追いつかない感覚はあるものの。</p>]]></description>
           <pubDate>Tue, 12 Aug 2025 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/05792b39-9b1a-6d97-bebc-16de887ca0f9.html</guid>
+        </item>
+        <item>
+          <title>人力キュレーション×植リンク活動 羅列型ニュース始めます</title>
+          <link>https://morvra.github.io/articles/35623038-4d9e-b354-d009-8611a6b3f445.html</link>
+          <description><![CDATA[<p>以下の記事とそれに関連した記事群を読みまして。</p><ul><li><a href="https://nomolk.hatenablog.com/entry/2026/04/17/021654">みんな、はてなブックマークしてくれ - nomolkのブログ</a></li></ul><p>▼ 関連</p><ul><li><a href="https://nejimakinikki.hatenablog.com/entry/hatena-bookmark-blog-kojin-link-quote">はてなブックマークもいいけれど、ブログのリンクを貼ったり引用することにしている。 - ねじまき日記</a></li><li><a href="https://orangestar.hatenadiary.jp/entry/2026/04/17/200212">はてなブックマークだけじゃなくて、いろいろしてくれ - orangestarの雑記</a></li><li><a href="https://ryozi.hatenadiary.jp/entry/2026/02/17/031704">記事を書く人、読む人、けなす人 - 日々量産</a></li></ul><p>以前倉下忠憲さんが提唱されていた「<a href="https://rashita.net/blog/?%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%AE%E6%A4%8D%E3%83%AA%E3%83%B3%E3%82%AF%E6%B4%BB%E5%8B%95">植リンク活動</a>」に賛同していたこともあり、気に入ったコンテンツや記事をガンガン紹介したくなってきた。</p><p>だからといって今からはてブを使いたくない（ソーシャルブックマークとしての価値は高いと思うが参加者にはなりたくない温度感）し、自分でまとめて読めるようにしたかったので、このサイトでやってみる。</p><p>それがこちら → <a href="https://morvra.github.io/news">News - morvra lists</a></p><p>フォーマットはゼロ年代に流行した羅列型の個人ニュースサイト<sup class="footnote-ref" id="fnref-1"><a href="#fn-1" title="詳しくは個人ニュースサイト史 ＜ 佐倉葉ウェブ文化研究室">1</a></sup>風にリンク＋一言コメントを並べる形式で、検索やタグでの絞り込みにも対応。日付ごとにHTMLを生成してて、RSSにも流してる。</p><p>＊サイトのトップにも最新日のリストを表示中。</p><p>これまで<a href="https://morvra.github.io/piece">Piece</a><sup class="footnote-ref" id="fnref-2"><a href="#fn-2" title="記事未満のつぶやき集">2</a></sup>でやっていたことに近いんだけど、より手軽かつ、まとまって読みやすい形を目指した。</p><p>運用の仕組みは普通の記事とほぼ同じで、Workflowyで紹介したいリンクにnewsというタグをつける → Github Actionsを経由で毎日深夜に自動でJSONとHTMLに加工 → サイトにアップされるようになっている。</p><p>ちなみにコーディングはClaudeに頼って、自分は細かいデザインや仕様の調整だけ行った。</p><p>デザインの参考にしようと10年以上前（!?）よく読んでた個人ニュースサイト（<a href="https://dabun.net/">駄文にゅうす</a>や<a href="http://www.plusxplus.co.uk/">【小人閑居シテ駄文記ス】</a>）を覗いたら今も更新しててかなり嬉しかった。改めてRSSリーダーにも登録した。</p><p>GoogleやSNSの検索汚染と生成AIの台頭によって人力でのキュレーション＆異なるサイト間のハイパーリンクがとても価値のあるものに感じる。世の中的にはニッチな方向かもしれないけど、ネットにただよう一個人として続けていきたいな。</p><div class="footnotes"><hr><ol>
+<li id="fn-1">詳しくは<a href="https://websitemap.sakura.ne.jp/monograph/monograph06.html">個人ニュースサイト史 ＜ 佐倉葉ウェブ文化研究室</a> <a href="#fnref-1" class="footnote-back">↩</a></li>
+<li id="fn-2">記事未満のつぶやき集 <a href="#fnref-2" class="footnote-back">↩</a></li>
+</ol></div>]]></description>
+          <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+          <guid isPermaLink="true">https://morvra.github.io/articles/35623038-4d9e-b354-d009-8611a6b3f445.html</guid>
         </item>
         <item>
           <title>【シャドバWB】マスター到達！ランクマと各デッキの雑感</title>
