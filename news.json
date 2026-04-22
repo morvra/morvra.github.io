@@ -1,6 +1,38 @@
 {
 	"news": [
 		{
+			"id": "738d8d12-7991-46ef-b6fb-b2e5a57e413c",
+			"title": "2026.04: Google Calendar Sync and more – Workflowy",
+			"url": "https://blog.workflowy.com/2026-04/",
+			"date": "2026-04-22",
+			"tags": [],
+			"comment": ""
+		},
+		{
+			"id": "f9825ec1-392d-68ad-6da9-60ca92733c9f",
+			"title": "TimからAppleコミュニティのみなさんへ - Apple（日本）",
+			"url": "https://www.apple.com/jp/community-letter-from-tim/",
+			"date": "2026-04-22",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"私たちは毎朝起きるたびに、みなさんの毎日を少しでも良くするために何ができるかを考えてきました。それと同時に、みなさんも私の毎日を最高に幸せなものにしてくれたのです。\"</p></div>"
+		},
+		{
+			"id": "4e4afbc7-f893-4489-8add-77fd154abad7",
+			"title": "好きなものが数年前で止まっている | 101ta28's Blog",
+			"url": "https://blog.101ta28.com/posts/my-favorites-stopped-a-few-years-ago/",
+			"date": "2026-04-22",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>最大HPとMPが減っていくんだろうな。そしてそれはあまり悲観するものでもない、と思えたら嬉しい。</p><p>via: <a href=\"https://dabun.net/#20260422\">駄文にゅうす</a></p></div>"
+		},
+		{
+			"id": "1201be60-f287-43d0-aa77-efbbbc89d700",
+			"title": "概念の電卓",
+			"url": "https://www.arimurataishi.com/concept-calculator/",
+			"date": "2026-04-22",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>一発ネタながら的確と思える計算結果もあって面白い</p></div>"
+		},
+		{
 			"id": "9b5328ea-3ee2-d22d-ae20-9987c8e04ccb",
 			"title": "「日本のマクドナルドのハンバーガーの写真のバンズはどれも少しずれている」と海外で話題に - GIGAZINE",
 			"url": "https://gigazine.net/news/20260417-japanese-mcdonalds-photos/",
@@ -13,7 +45,9 @@
 			"title": "[第61話]ドラゴンクエスト ダイの大冒険 勇者アバンと獄炎の魔王 - 三条陸/芝田優作 | 少年ジャンプ＋",
 			"url": "https://shonenjumpplus.com/episode/17107419589536396089",
 			"date": "2026-04-21",
-			"tags": [],
+			"tags": [
+				"漫画"
+			],
 			"comment": "<div class=\"news-comment\"><p>ロカ(ﾉД`) マァム編楽しみ</p></div>"
 		},
 		{
