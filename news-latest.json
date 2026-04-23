@@ -1,37 +1,41 @@
 {
-	"date": "2026-04-22",
+	"date": "2026-04-23",
 	"news": [
 		{
-			"id": "738d8d12-7991-46ef-b6fb-b2e5a57e413c",
-			"title": "2026.04: Google Calendar Sync and more – Workflowy",
-			"url": "https://blog.workflowy.com/2026-04/",
-			"date": "2026-04-22",
+			"id": "fb5a4ad0-f41c-4ba6-ac6b-ec11c28adc99",
+			"title": "愚夫愚妻問題",
+			"url": "https://anond.hatelabo.jp/20260422200526",
+			"date": "2026-04-23",
+			"tags": [
+				"言葉"
+			],
+			"comment": "<div class=\"news-comment\"><p>非対称性のある言葉だとは思う。</p></div>"
+		},
+		{
+			"id": "ad5b123a-8446-4d5b-ae46-34d20fe09f25",
+			"title": "「荒川弘は性差別を恐れて男性名義にした」という海外ファンの誤解についての覚書｜ヤヤネヒロコ",
+			"url": "https://note.com/hiroko_yayane/n/n25ed767e3346",
+			"date": "2026-04-23",
 			"tags": [],
 			"comment": ""
 		},
 		{
-			"id": "f9825ec1-392d-68ad-6da9-60ca92733c9f",
-			"title": "TimからAppleコミュニティのみなさんへ - Apple（日本）",
-			"url": "https://www.apple.com/jp/community-letter-from-tim/",
-			"date": "2026-04-22",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"私たちは毎朝起きるたびに、みなさんの毎日を少しでも良くするために何ができるかを考えてきました。それと同時に、みなさんも私の毎日を最高に幸せなものにしてくれたのです。\"</p></div>"
+			"id": "86b6a854-55bd-4138-b4cc-837b83f4e858",
+			"title": "【公式】オーイシマサヨシ - ポケモンオールスターズ1025 (213/1025) - YouTube",
+			"url": "https://www.youtube.com/watch?v=kQ8fiBCxRAg",
+			"date": "2026-04-23",
+			"tags": [
+				"音楽"
+			],
+			"comment": ""
 		},
 		{
-			"id": "4e4afbc7-f893-4489-8add-77fd154abad7",
-			"title": "好きなものが数年前で止まっている | 101ta28's Blog",
-			"url": "https://blog.101ta28.com/posts/my-favorites-stopped-a-few-years-ago/",
-			"date": "2026-04-22",
+			"id": "fa4766d9-21ff-badb-016a-6cee8f37e6e0",
+			"title": "キャラの格差について＠ウマ娘 - マイセンのブログ",
+			"url": "https://mysen.muragon.com/entry/4158.html",
+			"date": "2026-04-23",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>最大HPとMPが減っていくんだろうな。そしてそれはあまり悲観するものでもない、と思えたら嬉しい。</p><p>via: <a href=\"https://dabun.net/#20260422\">駄文にゅうす</a></p></div>"
-		},
-		{
-			"id": "1201be60-f287-43d0-aa77-efbbbc89d700",
-			"title": "概念の電卓",
-			"url": "https://www.arimurataishi.com/concept-calculator/",
-			"date": "2026-04-22",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>一発ネタながら的確と思える計算結果もあって面白い</p></div>"
+			"comment": "<div class=\"news-comment\"><p>因子と知識あれば対面運まではもってこれる印象 > 推し活</p></div>"
 		}
 	]
 }
