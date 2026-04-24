@@ -1,41 +1,37 @@
 {
-	"date": "2026-04-23",
+	"date": "2026-04-24",
 	"news": [
 		{
-			"id": "fb5a4ad0-f41c-4ba6-ac6b-ec11c28adc99",
-			"title": "愚夫愚妻問題",
-			"url": "https://anond.hatelabo.jp/20260422200526",
-			"date": "2026-04-23",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p>非対称性のある言葉だとは思う。</p></div>"
+			"id": "ae63ebfd-c3f1-ad22-6632-6e085da56f72",
+			"title": "ドーパミンと報酬系について解説してみる - シロクマの屑籠",
+			"url": "https://p-shirokuma.hatenadiary.com/entry/20260423/1776931200",
+			"date": "2026-04-24",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"報酬系に限らず、自然淘汰や性淘汰を耐えてできあがってきた人間の生物学的デザインは、現代社会に照準をあわせてできているわけではない。\"</p></div>"
 		},
 		{
-			"id": "ad5b123a-8446-4d5b-ae46-34d20fe09f25",
-			"title": "「荒川弘は性差別を恐れて男性名義にした」という海外ファンの誤解についての覚書｜ヤヤネヒロコ",
-			"url": "https://note.com/hiroko_yayane/n/n25ed767e3346",
-			"date": "2026-04-23",
+			"id": "0e9ac298-a89d-4c78-0d9a-91f5cf300ee5",
+			"title": "桃鉄で地理を覚えたように「遊んでたら勝手に教養がつくゲーム」って何がある？ - Togetter",
+			"url": "https://togetter.com/li/2688972",
+			"date": "2026-04-24",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"役に立った知識\"を募ったからかシミュレーション多め。あとマイクラはこういう話題の時必ずと言っていいほど挙がるようになってきた感じ。</p></div>"
+		},
+		{
+			"id": "fdd8d842-5943-474a-8b94-9639d74c90af",
+			"title": "プロンプトの前で手を合わせる: AIとソフトウェア，祈りへの回帰 | wtrclred",
+			"url": "https://wtrclred.io/ja/posts/14",
+			"date": "2026-04-24",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>例に挙げられた新しい儀礼のうちいくつかはガチでありそう</p></div>"
+		},
+		{
+			"id": "9e5e0d14-1ba4-49a0-9218-eb54bf0a2e72",
+			"title": "アニメ調の少女が、夜の街を徘徊するVlog「ﾏﾖﾁｬﾝねる」の“実在感”がすごい - KAI-YOU",
+			"url": "https://kai-you.net/article/92643",
+			"date": "2026-04-24",
 			"tags": [],
 			"comment": ""
-		},
-		{
-			"id": "86b6a854-55bd-4138-b4cc-837b83f4e858",
-			"title": "【公式】オーイシマサヨシ - ポケモンオールスターズ1025 (213/1025) - YouTube",
-			"url": "https://www.youtube.com/watch?v=kQ8fiBCxRAg",
-			"date": "2026-04-23",
-			"tags": [
-				"音楽"
-			],
-			"comment": ""
-		},
-		{
-			"id": "fa4766d9-21ff-badb-016a-6cee8f37e6e0",
-			"title": "キャラの格差について＠ウマ娘 - マイセンのブログ",
-			"url": "https://mysen.muragon.com/entry/4158.html",
-			"date": "2026-04-23",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>因子と知識あれば対面運まではもってこれる印象 > 推し活</p></div>"
 		}
 	]
 }
