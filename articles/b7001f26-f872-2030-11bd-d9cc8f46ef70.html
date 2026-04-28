@@ -33,7 +33,7 @@
         <div id="article">
             <div id="article-title"><h1>Workflowyで表を扱うためのUserScript</h1></div>
             <div id="article-date">2026-03-05</div>
-            <div id="article-tags"><a href="/tag?tag=Workflowy">Workflowy</a></div>
+            <div id="article-tags"><a href="/tag?tag=workflowy">workflowy</a></div>
 
             <div id="article-content">
                 <p>＊2026-04-01に公式で表機能が追加された → <a href="/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html">Workflowyに表機能が追加されたぞ！</a></p><p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href="https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee">WfTable-CommaSplit.js</a></li><li>TypeB → <a href="https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300" alt="Image"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src="https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300" alt="Image"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>
@@ -55,11 +55,11 @@
             <div id="related-articles">
 <h2>関連記事</h2>
 <ul>
-<li><a href="/articles/7a7bac45-e0f1-4a7b-84b9-c9a7856a1c50.html">Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript</a></li>
-<li><a href="/articles/8d62c58a-0c90-4732-8472-25a0f31c522a.html">Workflowyの最上位項目晒し Ver202603</a></li>
-<li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
 <li><a href="/articles/69078751-3526-69b5-f6cf-a8bbcc4a72f8.html">WorkflowyからCosenseに投稿するBookmarklet</a></li>
-<li><a href="/articles/ac589c42-ff2e-70ef-d4fd-f77497ffc062.html">Workflowyで現在カーソルがある項目の親項目を閉じて、そこにカーソルを移動させるショートカットをUserScriptでつくった</a></li>
+<li><a href="/articles/7a7bac45-e0f1-4a7b-84b9-c9a7856a1c50.html">Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript</a></li>
+<li><a href="/articles/3ca5a6a4-4d3f-4cf6-991a-0b8627409235.html">Workflowyの「軽さ」について考えた</a></li>
+<li><a href="/pieces/772c9c22-7103-9764-7c41-712ebedb8cc7.html">Workflowyの美しさは、機能ではなく、その抑制にある</a></li>
+<li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
 </ul>
 </div>
         </div>

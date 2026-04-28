@@ -14,7 +14,7 @@
 			"title": "Google AI Studioを使ってPoIC用のWebアプリを作ってみた",
 			"date": "2025-12-07",
 			"tags": [
-				"PoIC",
+				"poic",
 				"自作ツール"
 			],
 			"body": "<p>（当記事は<a href=\"https://adventar.org/calendars/11792\">知的生産の技術 Advent Calendar 2025</a>への参加記事です。）</p><p>ふと<a href=\"https://aistudio.google.com/apps\">Google AI Studio</a>を触ってみようと思い立って、何作れるかなぁと考えていたら「PoICのWebアプリなら実装シンプルにできるんじゃね？」とひらめいた！</p><p>＊PoIC（<a href=\"https://poic2023.capture.jp/\">Pile of Index Cards</a>）は情報カードを使った知的生産術（？）で、普段からその思想を取り入れてメモしたり、ツールを使ったりしてるので自然な発想だった。</p><p>何か必要にかられてというよりは、作れそうかつ面白そうだったから作った感じ。</p><p>で、完成したのが <a href=\"https://morvra.github.io/poic/\">d-PoIC</a> というアプリ。「デジタルでPoICをやる」そのまんまの命名。</p><p><img src=\"https://gyazo.com/86121a95c7e62a799e8a3315af658753/thumb/800\" alt=\"Image\"></p><p>▲ d-PoICの画面。カードが色分けされて表示される</p><p>コードはほとんどAI Studio内でGemini 3 Pro Previewに書いてもらって、他のツールも使いながらちまちま修正していった。</p><h2>主な機能</h2><p>d-PoICの主な機能をざっくり紹介。</p><ul><li>PoIC準拠の4カード<ul><li>カードを記録・発見・GTD・参照に分けて書いて時系列で並べる</li><li>それぞれフィルタリング＆カウントできる</li><li>GTDカードは期限や完了の管理が可能で、期日順で見るモードもある</li><li>分類は色とアイコン</li><li>位置で分けて <a href=\"https://poic2023.capture.jp/page_e-1/#%e6%96%87%e5%8c%96%e3%81%ae%e9%81%ba%e4%bc%9d%e5%ad%90\">文化の遺伝子</a> 風にしたい気持ちもあったけど、デジタルなら勝手に色変えてくれるし、上部のタグだけ並べるのは中身読めなくて不便と判断した</li></ul></li><li>カード作成時間を自動で記録<ul><li>タイムスタンプの形式は自分でカスタムできる</li><li>カードの本文中にもAlt+tで日時を挿入</li></ul></li><li>タグ<ul><li>カードごとにタグを付けられて、フィルタリング＆カウントできる</li><li>インクリメンタルサーチ？できる</li><li>一括でOPMLでコピー可能</li></ul></li><li>WIKIリンク<ul><li>本文中 <code>[[hoge]]</code> でそのカードへのリンクになる</li><li>バックリンクも見られる</li><li>インクリメンタルサーチ？できる</li><li>リンク元のカードタイトルを変更するとリンクのテキストも自動で変更される</li><li>カードが存在しないリンクをクリックすると新しいカードが作られる</li><li>＊この辺はCosenseに影響受けた</li></ul></li><li>URLは自動でリンクになる</li><li>MarkDownのリンク記法にも対応</li><li>ピンしたカードは上部に並ぶ</li><li>タイトル・本文から検索可能</li><li>ヘッダー右のボタン類<ul><li>表示されてるカードからランダムピックアップ（カードをくる）</li><li>複数選択して削除・タグ付け</li></ul></li><li>OPMLボタンでタグまるごとや手動で複数選択してコピー<ul><li>各種アウトライナーにそのままペーストできる</li><li>PoICでいうタスクフォース編成</li></ul></li><li>画面分割<ul><li>カードをCtrl+クリックしたり、カードを開いたら表示されるボタンからカードを右側に展開できる</li><li>2枚のカードを比べてみたり、常駐用カードを開きっぱなしで他の操作が可能</li></ul></li><li>Dropboxで同期</li></ul><p>PoICがアナログでやっていたことに、デジタルならではの検索やデータ管理を加えたアプリになった。その分画像を扱えなかったり、自由に広げたりできないなどアナログならではの利点は無くなってるけど、うまいこと折衷させたつもり。</p><h2>開発の苦労話</h2><p>開発を始めてすぐにPoICらしきものになったものの、デジタルならではの機能を追加するのにかなり手こずった。</p><p>特に画面分割が難しかったんだけど、<strong>「今回は手動でファイルを修正するのでファイルの全文ではなく、修正箇所だけを生成して、元ファイルのどこをどう修正すればいいか教えてください。」</strong>というプロンプトを送るようにしてからサクサク進むようになった。</p><p>作業が複雑になってきたらAI全任せより問題を切り分けて人間の方でもトライアンドエラーできる環境にした方が良さげ。少なくとも今は。（\"知的生産の技術\"かはわからないけど、このへんは役に立つ工夫と言えるかも、と思いAdventCalendarに参加させていただきました。）</p><p>何にせよ素人の自分が数日でここまで高機能なものが作れるのはありがたい時代だわ。</p><p>でも普段遣いのメモやサイトのコンテンツ管理はWorkflowyを使っているので、これを使い続けるかは謎ｗ</p><p>参考リンク</p><ul><li><a href=\"https://aistudio.google.com/apps\">Google AI Studio</a></li><li><a href=\"https://poic2023.capture.jp/\">Pile of Index Cards</a></li><li><a href=\"https://cosen.se/product\">Cosense - Share Experience, Make Co-sense, and Go！</a></li><li><a href=\"https://www.amazon.co.jp/dp/4004150930/?tag=morvra-22\">知的生産の技術 (岩波新書 青版 722)</a></li></ul>"
@@ -24,7 +24,7 @@
 			"title": "Workflowyで複数選択した項目を1つの項目にまとめるショートカットキーを追加するUserScript",
 			"date": "2026-02-20",
 			"tags": [
-				"Workflowy",
+				"workflowy",
 				"javascript"
 			],
 			"body": "<p>作った（Claudeが）。</p><p><img src=\"https://i.gyazo.com/24f931c7c4db9513ef45522c1e4215ec.png\" alt=\"Image\"></p><p>Gist → <a href=\"https://gist.github.com/morvra/5850966a792046374da56316804a45c9\">Workflowyで複数選択した項目を1つにまとめる機能を追加するUserScript</a></p><p>機能は単純で、「複数の項目を選択した状態で Ctrl+m を押すと1つの項目にまとまる」だけ。</p><hr><ul><li>アウトライナーで文章を書いている時、</li><li>普段は一文ごと、段落ごとに分けて書いているんだけど、</li><li>こんな感じで読点だったり、</li><li>ときには</li><li>文節で</li><li>区切ることが</li><li>ある。</li><li>なぜこんなことをやっているのかと言うと、</li><li>細かく前後を入れ替えられるので、</li><li>どの流れなら自然に読めるかなど</li><li>単語や語順の選択・検討をするのに便利だから。</li><li>それに加えて</li><li>書きながらリズムに乗っていく</li><li>感覚があるのもよい。</li><li>もともとは</li><li>『<a href=\"https://amzn.to/4rtm7zv\">アウトライナー実践入門</a>』で書かれていた</li><li>文節単位で改行する</li><li>手法を参考にして、</li><li>だんだん</li><li>自分なりのリズムで分けるようになった。</li></ul><p>上記のようにアウトライナーで書いたあと、それを段落ごとにまとめるのが面倒だったのでショートカットでできるようにした。</p>"
@@ -52,7 +52,7 @@
 			"title": "Workflowyの最上位項目晒し Ver202603",
 			"date": "2026-03-25",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<p>定期的にやっていきたい。</p><p><img src=\"https://gyazo.com/670be8a4fed903e0a860f24e5ff8a287/thumb/800\" alt=\"Image\"></p><ul><li>🏷 Index<ul><li>頻出タグ / ブクマ / 検索 / あんちょこ</li></ul></li><li>📅 Future<ul><li>Routine / 先の予定</li></ul></li><li>⏱ Now<ul><li>inbox / 進行中 / 今日のログ</li></ul></li><li>📓 Journal<ul><li>カレンダー機能 / 過去の日付項目</li></ul></li><li>🌱 Thoughts<ul><li>考え事を非時系列で / 継続的なテーマも含む</li></ul></li><li>🎯 Projects<ul><li>プロジェクトリスト / DO-ALL</li></ul></li><li>🗃 Collections<ul><li> なんでもリスト / LIFE-AS、BE</li></ul></li><li>🗄️ Archive<ul><li> 完了プロジェクト / やめたこと / 保管庫</li></ul></li></ul><p><a href=\"https://morvra.github.io/articles/f1f0b5f0-f360-4f46-870a-dac719665cde.html\">前回</a> とくらべると Future と Thoughts が増えて、「inbox→Now」「Days→Journal」「All→Projects」に名称変更した。</p><p>UserScriptでタスクシュート風のタスク/時間管理をするようになったこともあり、未来→現在→過去という流れが自然になり、ほとんどの情報がWorkflowyだけで完結するようになった。</p>"
 		},
@@ -70,7 +70,7 @@
 			"title": "Workflowyで現在カーソルがある項目の親項目を閉じて、そこにカーソルを移動させるショートカットをUserScriptでつくった",
 			"date": "2026-02-11",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<ul><li><a href=\"https://gist.github.com/morvra/2414f4899ceddb31b706a0affab533e9#file-wfcollapseparent-js\">wfCollapseParent.js</a></li></ul><p>タイトルの通り。こういうショートカット欲しいと思って、コードをClaudeに書いてもらった。</p><p>最初うまくいかなかったのでWorkflowyの構造をコピペして教えたり調整して完成。デフォルトのキーは（文字選択せずに）Ctrl+uにしてある。</p><p>記事書いてから調べたら倉下さんがもうすでにBookmarkletでほとんど同じことやってた。さすが。</p><ul><li><a href=\"https://scrapbox.io/rashitamemo/WorkFlowy%E3%81%A7%E8%A6%AA%E9%A0%85%E7%9B%AE%E3%82%92%E9%96%89%E3%81%98%E3%82%8B%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%82%AB%E3%83%83%E3%83%88%E3%82%AD%E3%83%BC%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88\">WorkFlowyで親項目を閉じるショートカットキーを追加するブックマークレット - 倉下忠憲の発想工房</a></li></ul><hr><p>追記。自分はショートカットをCtrl+←に変更した。こっちのほうが直感的だった。</p>"
 		},
@@ -89,7 +89,7 @@
 			"title": "Workflowyで表を扱うためのUserScript",
 			"date": "2026-03-05",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<p>＊2026-04-01に公式で表機能が追加された → <a href=\"/articles/68c0b22e-25fd-11ef-2f9e-c5c22fc68b16.html\">Workflowyに表機能が追加されたぞ！</a></p><p>Workflowyを使っていると、表で比較検討したり、データを一覧したくなる時、あるよね。</p><p>そこで、Workflowy内で表をつくれるUserScriptをつくった（Geminiが）。</p><p>＊区切りの表現を2パターン用意したので好みの方を使ってください。</p><ul><li>TypeA → <a href=\"https://gist.github.com/morvra/48921a0afbbc1842540cca7d495d62ee\">WfTable-CommaSplit.js</a></li><li>TypeB → <a href=\"https://gist.github.com/morvra/0c30c6d987dab0c481ba0e1885f5f47e\">WfTable-Hierarchical.js</a></li></ul><h2>仕様</h2><ul><li><code>#table</code> タグをつけた項目の子要素を表の中身として表示</li><li>子要素に <code>#header</code> タグがあるとその行の見た目が変わる</li><li>Workflowy上のテキストを書き換えると即座に表に反映される</li></ul><h3>Type A：インライン・カンマ区切り（スピード重視）</h3><p>1つの項目に「項目A, 項目B, 項目C」と書くスタイル。区切りはカンマ(,)、読点(、)、スラッシュ(/)、縦線(|)に対応。</p><ul><li>1行でサクサク入力したい</li><li>アウトラインを深くしたくない（縦に長くしたくない）</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src=\"https://gyazo.com/66c23f1bf78e02f4ff9dbb2955ae1cbe/thumb/300\" alt=\"Image\"></p><h3>Type B：子・孫階層構造（データ密度重視）</h3><p>子項目をA列、孫項目をB以降の列として扱うスタイル。</p><ul><li>1つのセルの中に長文を書きたい</li><li>Workflowy本来の階層構造を活かして詳細に管理したい</li></ul><p>人におすすめ。</p><p>▼ 例</p><p><img src=\"https://gyazo.com/72ba03859e35e36687292885c0b0fe80/thumb/300\" alt=\"Image\"></p><h2>注意点</h2><ul><li>このスクリプトはあくまで「見た目」を変えるものであり、表のセルを直接クリックしても編集できない</li><li>子項目が折りたたまれているとWorkflowyがHTMLを生成しないため、表が表示されない</li></ul>"
 		},
@@ -193,7 +193,7 @@
 			"title": "Workflowyの「軽さ」について考えた",
 			"date": "2026-04-21",
 			"tags": [
-				"Workflowy",
+				"workflowy",
 				"考えごと"
 			],
 			"body": "<p>私はObsidianやCosenseよりも、DynalistやWorkflowyのほうがたくさんメモを書ける。最初は箇条書き＆折り畳めるアウトライナーという形式が自分に合っているからだと思っていた。</p><p>でも、DynalistよりWorkflowyのほうがさらに書ける。同じアウトライナーなのに、なぜか。Workflowyには独特の軽さがある。</p><p>■</p><p>Workflowyをはじめアウトライナーで新しい項目を追加するとき、何かを「作った」という感じはしない。</p><p>Enterキーを一度押す。それだけだ。カーソルが次の行に移り、そこに文字を打ち始める。作成したという感覚はなく、ただ続きを書いたという感覚しかない。</p><p>技術的に見れば、この瞬間に固有のIDを持つデータが1つ生まれている。ObsidianのMarkdownファイルや、CosenseのページがそれぞれIDや名前を持つように、Workflowyの1項目もデータとして独立した存在だ。</p><p>でも、そうは感じない。</p><p>■</p><p>最初、この軽さはファイル型ツールとの比較で説明できると思っていた。ObsidianやCosenseで新しいページを作るとき、必ず「名前を決める」という動作が挟まる。その一瞬に、思考は「今から何かを新しく作る」という方向に向かざるを得ない。これが書き始めのコストになっている、と。</p><p>でも、その説明では不十分だ。</p><p>ObsidianやCosenseでも、InboxやDaily Noteなど書き始めるページをあらかじめ用意しておけば「名前を決める」コストはほぼ消える。<sup class=\"footnote-ref\" id=\"fnref-1\"><a href=\"#fn-1\" title=\"そしてそこから選択して書き出す機能も備わっている。\">1</a></sup>書き始めるハードルという意味では、Enterを押せば良いという点でほとんど同じ条件になるはずだ。</p><p>なんなら自分もWorkflowy上にInboxやデイリーのノードを作って、そこに書きつけている。構造的には先の例と変わらない使い方だ。</p><p>それでもWorkflowyのほうが軽く感じている。</p><p>この差はどこから来るのか。</p><p>■</p><p>おそらく、Workflowy上のInboxやデイリーノードが、その中の項目と<b>存在のレベルが同じ</b>だからだと思う。</p><p>ファイル型ツールでは、ファイル（とそのタイトル）は「入れ物」でコンテンツは「中身」という階層がある。この2つは異なるレイヤーに属している。でもWorkflowyのInboxノードは、その下にぶら下がる項目と同じ素材でできている。入れ物と中身の区別がない。</p><p>だから、Inboxと同じ階層に項目を移動することも、インデントを変えるのと同じ操作で済む。ファイルをまたぐわけでも、特別な移動機能を使うわけでもない。</p><p><b>どこに置いても、格が変わらない。</b></p><p>■</p><p>ファイル型ツールでは、ファイルの境界は「越えるもの」だ。別のファイルに移るとき、何かをまたいでいる感覚がある。意識の端に、つねに「どのファイルにいるか」が残っている。DynalistやLogseqがアウトライナーでありながらDocumentやPageという単位をもっているのも、同じ理由で微妙な境界を生んでいる。</p><p>「デイリーで改行して新規メモ作成」という入口は同じでも、ファイルとコンテンツという境界は存在し続ける。</p><p>Workflowyにはその境界がない。Inboxだろうとデイリーだろうと、それはただの項目であり、他のすべての項目と同列にある。ズームアウトすれば、Inboxも木の中の1ノードに過ぎないことが見える。壁がなく、ただインデントがあるだけだ。</p><p>この格の平等さによって、「1つの大きなアウトラインを操作している」という感覚がうまれる。</p><p>そしてその感覚があるおかげで、「どこに何をどれだけ書いても、ファイルが増えるわけではなく、アウトラインの中で同じ素材のものを1つ増やしているだけ」と感じ、新しい素材を増やすことへの心理的ハードルが下がる。</p><p>それが今回考えたWorkflowyの軽さの正体だ。</p><div class=\"footnotes\"><hr><ol>\n<li id=\"fn-1\">そしてそこから選択して書き出す機能も備わっている。 <a href=\"#fnref-1\" class=\"footnote-back\">↩</a></li>\n</ol></div>"
@@ -212,7 +212,7 @@
 			"title": "このサイトの元データをDynalistからWorkflowyに移動した",
 			"date": "2025-11-06",
 			"tags": [
-				"Workflowy",
+				"workflowy",
 				"ブログ"
 			],
 			"body": "<p>このサイトの記事やPieceはすべてDynalistで書いて、それを自動でHTMLおよびJSONに変換してGithubにPushして公開してた。それは元々Workflowyでやりたかったのを、公開APIが無くて諦めてDynalistを使うことにした、という経緯がある。</p><p>普段使いのアウトライナーとしてはWorkflowyが好みだったのにも関わらず、その理由だけでDynalistを使ってた。</p><p>しかしDynalistのアップデートが数年無く、一方Workflowyのアップデートは頻繁で機能差は広がり続けていたこともあり、乗り換えたい欲は高まっていたけどなかなか踏ん切りがつかずにいた。</p><p>そんな中、WorkflowyのAPI（公開自体は少し前からされていた）が Export All  Nodes に対応したことで、Workflowyで直接記事の執筆ができるようになった。ガチ神アプデ！！</p><ul><li><a href=\"https://beta.workflowy.com/api-reference/#nodes-export\">API Reference | Workflowy</a></li></ul><p>Workflowy独自の仕様（マークダウンが勝手に変換される等）もあり引越し作業に苦戦したものの、ひとまず完成！すべての記事が一括で変換されたので、不具合等もあるかもしれないけど今んとこ大丈夫そう。</p><p>これでWorkflowy上の特定のタグを付けた文章が自動でJSONに変換されてGithubにPushされるようになった。</p><p>念願のWorkflowyと個人サイトを自動で結びつける環境が整ったぞー！</p>"
@@ -249,7 +249,7 @@
 			"title": "2025-11時点でのWorkflowyの構造と使い方",
 			"date": "2025-11-08",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<p>普段使いのアウトライナーをDynalistからWorkflowyに乗り換えたので使い方をメモしておく。</p><p>▼最近のスクショ</p><p><img src=\"https://gyazo.com/bac94c5efaee7121244015efaeaae1eb/thumb/1000\" alt=\"Image\"></p><h2>環境整備</h2><h3>スタイル</h3><p>StylusというChrome拡張を使ってデフォルトのスタイルから変更している。</p><ul><li>フォントをM+Roundedにしてすこし大きく</li><li>全体的に影を無くしてよりシンプルに</li><li>サイドバーを白く</li><li>バレットを罫線にして、特定のタグがついたら色をつけてわかりやすく（公開済み記事や下書きを明確に）</li><li>ミラーの項目はバレットを青背景に</li></ul><h3>スクリプト</h3><p>TampermonkeyというChrome拡張でUserScriptを使っている。</p><ul><li>ズームしている項目の下位項目の文字数をHTMLやMarkdownの記法を省いて表示</li><li>Markdownの画像記法があったらプレビューしてくれるスクリプト</li></ul><p>の2つを作った。</p><p>後はBookmarkletで検索置換とか見てるページのリンク送ったりできるようにした。</p><h3>連用日記</h3><p><a href=\"https://morvra.github.io/article?id=4b30f0fe-4e1e-3a9a-8eeb-460ea1b5a5a0\">Dynalistでやっていた</a> 連用日記ビューワーのWorkflowy版を作った。公開はAPIの仕様上難しそうなのでローカルで使ってる。</p><p>同じ日付が含まれている項目とその下位項目を一覧できる。ランダムジャンプもできて過去の日記をパラパラ見返す楽しさがある。</p><h2>最上位の項目</h2><p>Dynalist時代（<a href=\"https://morvra.github.io/article?id=86671c0c-a74a-654f-3c7f-f9fdd685ee91\">Dynalistの構造 Ver.202404</a>）から基本的には変わっていない。</p><ul><li>Index<ul><li>よく使うタグや検索結果をメモっておく索引</li><li>外部サイトのブックマークも置いてある</li></ul></li><li>Inbox<ul><li>外部から送信される項目が入ってくる場所</li><li>日をまたぐ項目や書きかけの文章も入ってる</li><li>基本的には Move to today の機能を使ってDaysに送られる</li></ul></li><li>Days<ul><li>Workflowyでは備え付けの機能として日付ごとの項目を運用できるのでそれを利用している</li><li>ライフ・アウトラインより命名。1日ごとに項目を作成してそこにライフログ、考えた事など何でも書きつける場所</li><li>このサイトの記事もInboxかDaysで書いて、タグ付けをしたら公開されるようにしてある</li></ul></li><li>All<ul><li>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部</li><li>以前のBlogはここに統合した（スターを付けてサイドバーには置いてる）</li></ul></li><li>Collections<ul><li>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている</li><li>PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多になっている場所</li><li>最近「🗺️ Knowledge Maps」という項目を作って、そこに気になる言葉やテーマを入れておいて、日々のメモをそこの項目にリンクさせるようにしている</li></ul></li><li>Archive<ul><li>完了したプロジェクトや昔のデイリーノート</li></ul></li></ul><h2>運用</h2><p>最上位の構造にも書いたけど、ざっくりどんな風に使っているかを書く。</p><ul><li>キャプチャ<ul><li>Daysの今日、もしくはInboxに何でも書く</li><li>iOSのショートカットやBookmarkletを使って画像やURL含めて諸々集めてる</li></ul></li><li>まとめる・煮詰める<ul><li>プロジェクト管理や何でもリストとしても使っている</li><li>むしろここがアウトライナーとしての一番の活躍のしどころ</li><li>サイトのコンテンツ置き場（しかも同期する）としても使っているので執筆から公開の流れがスムーズ</li></ul></li><li>スター<ul><li>頻繁にアクセスする項目や検索を並べてる</li><li>それ以上でもそれ以下でもない</li></ul></li><li>リンク・ミラー・タグ<ul><li>この辺の機能はあまり使ってない。オマケ</li><li>リンク：キーワードやテーマをリンクさせてCosense風に</li><li>ミラー：複数箇所においておきたいもの。プロジェクトで同じ資料が必要なものとか、Daysから他の場所に移す際Daysにも残したい場合とか</li><li>タグ：たまに抽出したいけど項目としてまとめる必要のないもの。情報（食事・本・レシピ等）や状態（todo・draft等）をなんとなくでつけてる</li></ul></li><li>AI<ul><li>なんとWorkflowyにはAIが入っててチャットができたり、項目を書いたりしてくれる</li><li>正直乗り換える前は要らなくね？と思ってたんだけど、いざ使ってみると楽しい</li><li>自分の書いたことをだいたいわかってるAIがいて、いつでも喋れるっていうのはこれまでなかった体験</li><li>記事を書いた後に読んでもらったり、考え事してる最中に関連する項目を探してもらったりしてる</li><li>あとこの記事を書きながら思いついたんだけど、Daysから探してくるのも楽だ。「直近の髪切った日教えて」とか「カレー食べた日を全部挙げて」とかｗ</li><li>右下にずっといるせいで、まんまと使う気にさせられている</li></ul></li></ul><hr><p>ざっくりだけどこんな感じで使ってる。カーソルの移動の仕様やショートカットキーがDynalistと違うから慣れは必要だけどやっぱWorkflowyのUXとUIが好きだ！</p><p><b>参考</b></p><ul><li><a href=\"https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?hl=ja\">Stylus - Chrome ウェブストア</a></li><li><a href=\"https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=ja\">Tampermonkey - Chrome ウェブストア</a></li><li><a href=\"https://noratetsu.deno.dev/article/-izOzugCGnMgSb0tbE286P0C\">アウトライナー日誌：バレットを「┠」にしたらバレット感に邪魔されなくなった | Noratetsu House</a></li><li><a href=\"https://amzn.to/3xREGWY\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li><li><a href=\"https://bulletjournal.com/\">Bullet Journal</a></li><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
 		},
@@ -267,7 +267,7 @@
 			"title": "Workflowyに表機能が追加されたぞ！",
 			"date": "2026-04-02",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<ul><li><a href=\"https://x.com/WorkFlowy/status/2039371341883736336\">https://x.com/WorkFlowy/status/2039371341883736336</a></li></ul><p>項目のTypeをTableに変更すると下位項目が表になるようになった（現在はbeta限定）</p><p>▼ これが</p><p><img src=\"https://i.gyazo.com/518551757383515bd1f4cf698a34cd6e.png\" alt=\"Image\"></p><p>▼ こうなる</p><p><img src=\"https://i.gyazo.com/a304eadf14f7d8bad24f421b5aead370.png\" alt=\"Image\"></p><p>ちょっと前に「<a href=\"https://morvra.github.io/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html\">Workflowyで表を扱うためのUserScript</a>」を作ったくらいなので相当嬉しいアップデート！</p><p>行や列の追加も自然にやれるし、カーソルの移動も直感的でよい。</p><p>幅が広すぎるのが微妙だったのでCSSで調整。</p><p>▼ 調整後</p><p><img src=\"https://i.gyazo.com/a3cdf32efdfc395f879b06167c5edd6b.png\" alt=\"Image\"></p><p>▼ css</p><pre><code>.name.group\\/name {\n    min-height: 16px !important;\n    padding: 0;\n}\n.font-custom.project.open.tableColumn {\n    width: auto !important;\n    min-width: 120px;\n}\n.font-custom.project.task.tableCell {\n    padding: 0.1rem 0.5rem;\n}</code></pre>"
 		},
@@ -285,8 +285,8 @@
 			"title": "WorkflowyからCosenseに投稿するBookmarklet",
 			"date": "2026-02-19",
 			"tags": [
-				"Workflowy",
-				"Cosense"
+				"workflowy",
+				"cosense"
 			],
 			"body": "<p>最近「やっぱCosenseすげえなぁ」という気持ちがふつふつとわいてきた。</p><p>まだガッツリは使ってないものの、普段の書き物はWorkflowyから始まるのでとりあえず転記用のBookmarkletを作ってみた。</p><p>変換ツールはいくつかあったんだけど、自分好みに階層や装飾をたもったまま1ボタンで転記してくれるのは見つからなかったので。</p><p>作成はClaudeに頼んだ。<a href=\"https://morvra.github.io/article?id=6ec5b51c-9320-18d4-ab04-8601a0efc508\">前にDynalist用に作った</a> のでそれを活かしてすぐに作れた。</p><p>▼ コード</p><pre><code>javascript:(function(){function WF2CS(p){try{if(!location.host.includes('workflowy.com')){alert('Workflowyで実行してください');return;}if(!p){alert('プロジェクト名を設定してください');return;}function hC(h){if(!h)return'';let t=h;t=t.replace(/&lt;a <sup class=\"footnote-ref\" id=\"fnref-1\"><a href=\"#fn-1\" title=\"&gt;\">1</a></sup>*href=\"(<sup class=\"footnote-ref\" id=\"fnref-2\"><a href=\"#fn-2\" title=\"\"\">2</a></sup>*)\"<sup class=\"footnote-ref\" id=\"fnref-3\"><a href=\"#fn-3\" title=\"&gt;\">3</a></sup>*&gt;([\\s\\S]*?)&lt;\\/a&gt;/gi,function(_,u,i){const ti=i.replace(/&lt;<sup class=\"footnote-ref\" id=\"fnref-4\"><a href=\"#fn-4\" title=\"&gt;\">4</a></sup>+&gt;/g,'').replace(/&amp;amp;/g,'&amp;').replace(/&lt;/g,'&lt;').replace(/&gt;/g,'&gt;').replace(/&amp;nbsp;/g,' ').replace(/&amp;#39;/g,\"'\").replace(/\"/g,'\"').trim();if(!ti||ti===u)return'['+u+']';return'['+ti+' '+u+']';});t=t.replace(/&lt;code&gt;([\\s\\S]*?)&lt;\\/code&gt;/gi,function(_,i){return'`'+i.replace(/&lt;<sup class=\"footnote-ref\" id=\"fnref-5\"><a href=\"#fn-5\" title=\"&gt;\">5</a></sup>+&gt;/g,'').replace(/&amp;amp;/g,'&amp;').replace(/&lt;/g,'&lt;').replace(/&gt;/g,'&gt;').replace(/&amp;nbsp;/g,' ').replace(/&amp;#39;/g,\"'\").replace(/\"/g,'\"')+'`';});t=t.replace(/&lt;b&gt;([\\s\\S]*?)&lt;\\/b&gt;/gi,function(_,i){return'[* '+i.replace(/&lt;<sup class=\"footnote-ref\" id=\"fnref-6\"><a href=\"#fn-6\" title=\"&gt;\">6</a></sup>+&gt;/g,'')+']';});t=t.replace(/&lt;i&gt;([\\s\\S]*?)&lt;\\/i&gt;/gi,function(_,i){return'[/ '+i.replace(/&lt;<sup class=\"footnote-ref\" id=\"fnref-7\"><a href=\"#fn-7\" title=\"&gt;\">7</a></sup>+&gt;/g,'')+']';});t=t.replace(/&lt;s&gt;([\\s\\S]*?)&lt;\\/s&gt;/gi,function(_,i){return'[- '+i.replace(/&lt;<sup class=\"footnote-ref\" id=\"fnref-8\"><a href=\"#fn-8\" title=\"&gt;\">8</a></sup>+&gt;/g,'')+']';});t=t.replace(/&lt;<sup class=\"footnote-ref\" id=\"fnref-9\"><a href=\"#fn-9\" title=\"&gt;\">9</a></sup>+&gt;/g,'');t=t.replace(/&amp;amp;/g,'&amp;').replace(/&lt;/g,'&lt;').replace(/&gt;/g,'&gt;').replace(/&amp;nbsp;/g,' ').replace(/&amp;#39;/g,\"'\").replace(/\"/g,'\"');return t;}function fN(n,ind){if(!n)return'';return hC(n).split(/\\r\\n|\\r|\\n/).filter(function(l){return l.trim()!=='';}).map(function(l){return ind+'&gt; '+l;}).join('\\n')+'\\n';}function gC(item,ind){const ch=item.getChildren();if(!ch||ch.length===0)return'';return ch.map(function(c){let nm=hC(c.getName()||'');if(c.data&amp;&amp;c.data.he)nm='[* '+nm+']';return ind+nm+'\\n'+fN(c.getNote(),ind)+gC(c,ind+' ');}).join('');}const root=WF.currentItem();if(!root){alert('カレント項目が取得できませんでした');return;}const wfUrl=root.getUrl?'https://workflowy.com'+root.getUrl():location.href;const title=hC(root.getName())||'Untitled';const body=gC(root,' ')+'\\nfrom [Workflowy '+wfUrl+']';const url='https://scrapbox.io/'+p+'/'+encodeURIComponent(title)+'?body='+encodeURIComponent(body);const t=window.open(url,'_blank');if(!t){if(confirm('ポップアップがブロックされました。このタブで開きますか？')){location.href=url;}}}catch(e){alert('エラー: '+e.message);}}WF2CS('YOUR-PROJECT');})();</code></pre><p>＊文末のYOUR-PROJECTを変更して使ってください</p><ul><li>Gist → <a href=\"https://gist.github.com/morvra/ebd7ff9faa364218e7ccea30cc9ae80a\">WorkflowyからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>Workflowy上でBookmarkletを実行</li><li>Zoomした項目をタイトル、子項目を本文としてCosenseで新規ページ作成</li><li>階層構造は維持。全て箇条書きで表現</li><li>Workflowy上の装飾（太字・リンク・コードなど）をCosense記法に変換<ul><li>見出しは単なる太字にした</li></ul></li><li>最後にWorkflowyへのリンクも追加</li></ul><hr><p>Workflowyの表記、このサイトではFを大文字or小文字どっちにするか迷ってる。確か最初はFで、一時期fになったからそれに合わせて変えてたんだけど、いつの間にか戻ってるところもある。でも公式でも記事によって変わってるんだよなぁ。</p><div class=\"footnotes\"><hr><ol>\n<li id=\"fn-1\">&gt; <a href=\"#fnref-1\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-2\">\" <a href=\"#fnref-2\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-3\">&gt; <a href=\"#fnref-3\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-4\">&gt; <a href=\"#fnref-4\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-5\">&gt; <a href=\"#fnref-5\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-6\">&gt; <a href=\"#fnref-6\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-7\">&gt; <a href=\"#fnref-7\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-8\">&gt; <a href=\"#fnref-8\" class=\"footnote-back\">↩</a></li>\n<li id=\"fn-9\">&gt; <a href=\"#fnref-9\" class=\"footnote-back\">↩</a></li>\n</ol></div>"
 		},
@@ -313,7 +313,7 @@
 			"title": "ScriptableのコードをClaudeに書いてもらえて神！",
 			"date": "2026-02-17",
 			"tags": [
-				"iOS",
+				"ios",
 				"javascript"
 			],
 			"body": "<p>iOSのScriptableはiOS上でJavascriptを実行できるアプリ。</p><ul><li><a href=\"https://apps.apple.com/jp/app/scriptable/id1405459188\">‎Scriptableアプリ - App Store</a></li></ul><p>これまではコードをコピペして使うくらいだったんだけど、</p><p>Claudeに「iOSのScriptableというアプリで、〇〇を使って〇〇したいからコードを書いて欲しい」みたいに伝えればだいたい思った通りのコードを書いてくれることを発見！神！</p><p>まだあんまり触ってないけどWorkflowy関連で、</p><ul><li>WorkflowyのinboxにあるTodoを一覧（ウィジェットにも表示）、タップで完了して末尾に時刻を挿入</li><li>ショートカットを介して、定時に自動で当日の予定をカレンダーからWorkflowyにTodoとして送信する</li><li>特定の項目の完了済みTodoを一括で未完に戻して時刻を削除する</li></ul><p>コードはすぐにできた。</p><p>ローカルのファイルもいじれるし、APIがあるサービスなら連携できるし、活用の幅はめちゃくちゃ広いと思う。</p><p>iOSはショートカットが優秀だから、自動化したいことがあっても大体そっちでできるんだけど、こみいった操作が必要ならScriptable（とAI）に頼っていこう。</p>"
@@ -332,7 +332,7 @@
 			"title": "Workflowyにメモを送信するための自分用Chrome拡張を作った",
 			"date": "2025-11-17",
 			"tags": [
-				"Workflowy",
+				"workflowy",
 				"javascript",
 				"自作ツール"
 			],
@@ -352,7 +352,7 @@
 			"title": "Dynalistの特定のタグor項目から子項目を1つランダムで表示するスクリプト",
 			"date": "2025-09-08",
 			"tags": [
-				"Dynalist",
+				"dynalist",
 				"javascript"
 			],
 			"body": "<p>つくった。</p><p>gist → <a href=\"https://gist.github.com/morvra/a490a0b6918a700e023b00013d57ee4c\" target=\"_blank\">Dynalist Random Tagged Item Viewer</a> / <a href=\"https://gist.github.com/morvra/eb2ec1cf588c8bf3e143ea86649204f3\" target=\"_blank\">Dynalist Random Item Viewer</a></p><ul><li>右下のコンテナに設定した項目がランダムで表示される</li><li>コンテナをクリックでその項目に移動</li><li>ボタンで項目の中からランダムに切り替え</li></ul><p>「今日の名言」「モットーから1要素」「アイディアリストから1つ」「クイズや英単語問題集」などなど見かえしたいもの何でもござれ。</p><p>完成してから思ったけど、Dynalistでデイリーノート書いてるとほぼ日手帳の「日々の言葉」みたいになってて良さげ。</p>"
@@ -362,7 +362,7 @@
 			"title": "Dynalistの連用日記用ビューワーをつくった",
 			"date": "2025-09-07",
 			"tags": [
-				"Dynalist",
+				"dynalist",
 				"自作ツール"
 			],
 			"body": "<p>▼ これ</p><p><img src=\"https://gyazo.com/946271ed4bcd98d01c8c4703bd61e4a4/thumb/1000\" alt=\"Image\"></p><ul><li><a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></li></ul><p>＊DynalistのAPIトークンとファイルID（dynalist.io/d/hogehogeのhogehoge部分）をlocalStrageに保存して使えるようにしてある</p><h2>機能</h2><ul><li>Dynalist上の日付（yyyy-mm-dd）が入った項目を表示</li><li>年別で一覧できるので連用日記のように使える</li><li>マークダウンはHTMLとして表示。画像も</li><li>日付入りの項目はDynalistへのリンクになってる</li><li>キーボードの左右で前日、翌日に移動できる</li><li>Dynalistの開閉状態がキープされている（日付入りの子要素は絶対開いてる）</li><li>ランダムジャンプ、検索機能も</li><li>複数のファイルから抽出可能なのでDynalistの1ファイルが重くなるのを防げる</li></ul><p>普段日記（デイリーノート）はCosenseで書いてるんだけど、これあるならDynalistで書くのもいいなと思えるくらい良いものできた。</p><p>他にもいろんなビューワー作りたい。タスク・カレンダー用とかタグまとめるとか、いわゆるアウトラインではないViewで見たいものはいろいろ思いつく。</p>"
@@ -381,7 +381,7 @@
 			"title": "Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった",
 			"date": "2025-09-03",
 			"tags": [
-				"Dynalist",
+				"dynalist",
 				"javascript",
 				"自作ツール"
 			],
@@ -449,7 +449,7 @@
 			"title": "Dynalistでタグごとに色を設定する",
 			"date": "2025-07-21",
 			"tags": [
-				"Dynalist"
+				"dynalist"
 			],
 			"body": "<p>検索しても（すぐには）でてこなくてDevToolsで調べた。メモとして残しておく。</p><p><code> .node-tag[title=\"Filter #hoge\"] </code></p><p>で指定できる。これをStylusなどを使ってスタイルを設定すればOK。</p><p>このサイトへの投稿をDynalistの色付けからタグ付けに変更したので、投稿状態を目立たせるために設定した。</p>"
 		},
@@ -478,7 +478,7 @@
 			"title": "Dynalistのインボックスへ送信するスクリプト",
 			"date": "2025-03-15",
 			"tags": [
-				"Dynalist",
+				"dynalist",
 				"javascript"
 			],
 			"body": "<p>Dynalist上のどこからでもインボックスにメモするためのユーザースクリプト。ObsidianのQuickAddみたいなイメージ。</p><p>コード → <a href=\"https://gist.github.com/morvra/0e899e1cd57f2c2aaa69e328fd9b99f8\" target=\"_blank\">DynalistInboxSender.js</a></p><p>＊APIキーを自分用のものにして使ってください</p><ul><li>左下のボタンか「Alt+T」で入力画面がポップアップする</li></ul><ul><li>テキストを入力して送信ボタンかEnterを押すとインボックスに現在時刻付きで送信される</li></ul><ul><li>右上の閉じるボタン or 何も入力がない状態でEnter or カーソルが外れる でポップアップが消える</li></ul>"
@@ -488,7 +488,7 @@
 			"title": "Dynalistのタスク表示用スクリプト",
 			"date": "2025-03-13",
 			"tags": [
-				"Dynalist",
+				"dynalist",
 				"javascript"
 			],
 			"body": "<p>DynalistのAPIを経由して指定したドキュメントの中のチェックボックスがあり未完了の項目をリストにして表示するスクリプトを作った。</p><p>コード → <a href=\"https://gist.github.com/morvra/a0e612f90e2c6817802cc70540bbbb30\" target=\"_blank\">DynalistTaskViewer.js</a></p><p>＊APIとドキュメントIDを自分用に変更して使ってください。</p><ul><li>右上のボタンをクリックするとリストが表示される</li></ul><ul><li>タスク名をクリックするとDynalist上でその項目に移動できる</li></ul><ul><li>URLをコピーしてDynalistにリンクを貼り付けることも可能</li></ul><p>ここから完了状態を変更するのも考えたんだけど処理が複雑になりそう＆API使いすぎたくないのでやめた。起動時と10分間隔で取得するようにしてるけどこのへんは改良の余地あり。</p><p>検索でも同じようなことはできるんだけど、その場で一覧できるのが便利でいい感じ。</p><p>総数が多いならタグで絞り込んだり日付入れて順番並び替えたりするのもよさそう。</p>"
@@ -582,8 +582,8 @@
 			"title": "DynalistからCosenseに投稿するBookmarklet",
 			"date": "2024-10-29",
 			"tags": [
-				"Dynalist",
-				"Cosense"
+				"dynalist",
+				"cosense"
 			],
 			"body": "<p>参考：<a href=\"https://blog.marumi.nap.jp/post/2020/0309-outliner2scrapbox/\" target=\"_blank\">WorkFlowyまたはDynalistからScrapboxのページを作成するスクリプト - MARUMI blog</a></p><p>上のスクリプトを元にChatGPT頼りつつ改造。</p><p>▼ コード</p><p><code>javascript:(function(){function DL2CS(projectName, indentLinks){function formatQuote(note){return note.split(/\\r\\n|\\r|\\n/).map(line=>\"> \"+line).join(\"\\n\")+\"\\n\"}function convertMarkdownLinks(text){return text.replace(/\\[(.<em>?)\\]\\((.</em>?)\\)/g,'[$1 $2]')}if(location.host===\"dynalist.io\"&&projectName){const root=DYNALIST.app.app_document.ui.current_root;const meta=root.get_meta_object();const content=meta.get_content()||\"Undefined\";const note=meta.get_note()?formatQuote(meta.get_note()):\"\";const children=(function getChildren(indentation,items){return items.map(item=>{const childMeta=item.get_meta_object();return indentation+childMeta.get_content()+\"\\n\"+(childMeta.get_note()?formatQuote(childMeta.get_note()):\"\")+getChildren(indentation+\" \",item.get_children().children);}).join(\"\")}(indentLinks?\" \":\"\",root.get_children().children));const url=\"https://scrapbox.io/\"+projectName+\"/\"+encodeURIComponent(content);const body=convertMarkdownLinks(note+children);window.open(url+\"?body=\"+encodeURIComponent(body),'_blank')}}DL2CS(\"YOUR-PROJECT\",true);})();</code></p><ul><li>Gist → <a href=\"https://gist.github.com/morvra/ffd291bf7ff0fc1e46bfece646e15e87\" target=\"_blank\">DynalistからCosenseに投稿するBookmarklet</a></li></ul><h2>機能</h2><ul><li>ズームした項目をタイトル、その子項目以下を本文としてCosenseに転記</li></ul><ul><li>階層はそのまま</li></ul><ul><li>ノートは引用符</li></ul><ul><li>マークダウンのリンクをCosenseの記法に置換</li></ul><h2>使用方法</h2><ul><li>末尾のYOUR-PROJECTを転記したいプロジェクト名に変更してください</li></ul><ul><li>その後ろのtrue/falseは最上位項目をインデントするかどうかを決めます</li></ul>"
 		},
@@ -655,7 +655,7 @@
 			"title": "Dynalistの構造 Ver.202404",
 			"date": "2024-04-20",
 			"tags": [
-				"Dynalist"
+				"dynalist"
 			],
 			"body": "<p>ライフ・アウトラインとバレットジャーナルとPARAメソッドを参考にDynalistのファイル構造を作ってる。</p><p>現時点（2024年4月）はこんな感じだよって記録。</p><p><img src=\"https://i.gyazo.com/861cbf2b42752edb4f2307d06d143408.png\" alt=\"Image\"></p><h2>📆 Days</h2><p>ライフ・アウトラインより。1日ごとに項目を作成してそこにタスク、食事、考え事などなんでも書きつける。基本的にここを開いて過ごしている。</p><p>日毎の項目だけじゃなく進行中案件へのリンクや何日間かにまたがる項目なども最上位項目に並んでるのがミソ（こういう自由度がLogseqなどにはない）</p><h2>🧭 ALL</h2><p>ライフ・アウトラインより。行動をともなうタスクやプロジェクトが一覧できる。PARAメソッドのProjectsとAreaの一部。</p><h2>🌏 Blog</h2><p>このブログについてのやることだったり下書きだったり記事だったりもろもろ。ALLの1プロジェクトでもいいんだけど、公開されうるものはファイルとしても分けた方が気分的に安心するので独立させている。</p><h2>📔 Notes</h2><p>Daysに書いた項目のうち読み返したいもの。Collectionsに入らないような雑多なメモが並んでる。ブラウズ（拾い読み）が楽しい。</p><h2>🗄 Collections</h2><p>バレットジャーナルより。モットーや好きな言葉から自分を作ったコンテンツ100やら欲望やらあらゆるリストが集約されている。PARAメソッドのAreaの一部、ライフ・アウトラインでいうASとBEが一緒になってさらに雑多なもの。</p><p>ここの階層やグルーピングが悩み。</p><h2>📚 Reference</h2><p>あんちょこ。忘れがちなショートカットキーやAPIに関するメモなど外部の情報。</p><p>でも読んでる本・料理のレシピ・好きなクイズ問題集なんかはCollectionsに入ってるので自分の主観や記録が入らない（入りにくい）ものに限ってる、とこれ書いてて気付いた。</p><h2>Archives</h2><p>完了したプロジェクトや昔のデイリーノートがまとめられている。あんま見ないけど残してる。</p><p>▼ 参考</p><ul><li><a href=\"https://amzn.to/3xREGWY\" target=\"_blank\">アウトライン・プロセッシングLIFE: アウトライナーで書く「生活」と「人生」</a></li></ul><ul><li><a href=\"https://bulletjournal.com/\" target=\"_blank\">Bullet Journal</a></li></ul><ul><li><a href=\"https://workflowy.com/systems/para-method/\">PARA Method - Workflowy guide</a></li></ul>"
 		},
@@ -842,7 +842,7 @@
 			"title": "Workflowyの美しさは、機能ではなく、その抑制にある",
 			"date": "2026-02-08",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<ul><li><a href=\"https://www.puhala.com/musings/2025/7/24/workflowy-beautiful-simplicity\">Workflowy - Beautiful Simplicity — puhala.com</a></li></ul><p>Workflowyの記事読んだ。</p><blockquote><p>Its beauty lies not in features, but in _restraint_. （Workflowyの美しさは、機能ではなく、その抑制にあります。）</p></blockquote><p>訳はGoogle。ここにすごく共感。</p>"
 		},
@@ -869,7 +869,7 @@
 			"title": "Workflowy の Move to Today 機能が便利すぎた",
 			"date": "2025-11-21",
 			"tags": [
-				"Workflowy"
+				"workflowy"
 			],
 			"body": "<p>この機能神。</p><p>前まで自分で書く日付トピックと外部から送られるInboxを2つのInboxとして使っててややこしかったんだけど、今は書くのも送られるのもInboxだけで、後から複数選択とMove to Todayを使って日付トピックに送ってる。</p>"
 		},
@@ -1063,7 +1063,7 @@
 			"title": "Dynalist連用日記の検索結果をあれこれいじる",
 			"date": "2025-09-09",
 			"tags": [
-				"Dynalist"
+				"dynalist"
 			],
 			"body": "<ul><li>検索結果すべて1カラムだったのを項目ごとにカード化してMansonryレイアウトに変更</li><li>親要素わからないと不便だったのでパンくずリストを表示するようにした </li></ul><p>これにより連用日記だけじゃなくて適当なワードで検索して眺めるのも楽しくなった。Mansonry形式で表示されるからDynalist上でやるよりざっくり一覧してる感覚になって良い。</p><p>→ <a href=\"https://morvra.github.io/dynalistdiary\" target=\"_blank\">Dynalist 連用日記</a></p>"
 		},
