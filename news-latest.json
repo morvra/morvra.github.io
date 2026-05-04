@@ -1,47 +1,45 @@
 {
-	"date": "2026-05-02",
+	"date": "2026-05-04",
 	"news": [
 		{
-			"id": "86138e67-0380-0e6d-1d80-eb474e5549ea",
-			"title": "伝説の王ギルガメシュ実在の可能性高まる。4000年前の粘土板の楔形文字を解読 | カラパイア",
-			"url": "https://karapaia.com/archives/600315.html",
-			"date": "2026-05-02",
-			"tags": [
-				"歴史"
-			],
-			"comment": "<div class=\"news-comment\"><p>4000年以上前でもめちゃくちゃ社会だな。しかも文書に残ってるってのがすごい。</p></div>"
-		},
-		{
-			"id": "ccbb5bc0-a788-4950-0b37-8b9be07a69d6",
-			"title": "小学生向けＡＩ教室人気 将来なりたい１位「ＡＩ」が追い風 -  虚構新聞",
-			"url": "https://kyoko-np.net/2026050201.html",
-			"date": "2026-05-02",
+			"id": "2abf2086-1bc3-4b96-bc6f-3394f3d1edca",
+			"title": "「日記ブーム」と誤配されうる「日記」 - 気分は日記",
+			"url": "https://oheso.hatenablog.com/entry/2026/04/29/122802",
+			"date": "2026-05-04",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>＊虚構 \"「将来なりたい職業」アンケート調査では、全員が「ＡＩ」と回答。３年前に行った前回調査で上位だったスポーツ選手やパティシエ、動画配信者は姿を消した。\" ｗｗ</p></div>"
+			"comment": "<div class=\"news-comment\"><p>\"その結果、日記は実践ではなくなり、ジャンルになる。営みではなく、様式になっていく。\"</p></div>"
 		},
 		{
-			"id": "0588216b-21eb-4878-bdca-7c4051bcc175",
-			"title": "ホルムズ海峡冬景色 清⽔ミチコのHAPPY PARADISE 千秋楽 沖縄公演より - YouTube",
-			"url": "https://www.youtube.com/watch?v=KY7-G2yUSkQ",
-			"date": "2026-05-02",
+			"id": "924a0d0b-3a53-43a1-901c-4df83fbe78f8",
+			"title": "野生チンパンジー最大のコロニーが暴力と殺し合いで2つの勢力に分裂 - GIGAZINE",
+			"url": "https://gigazine.net/news/20260502-chimpanzees-lethal-conflict/",
+			"date": "2026-05-04",
 			"tags": [],
 			"comment": ""
 		},
 		{
-			"id": "89b07920-b996-39b4-9650-1be11d22f683",
-			"title": "納豆や冷蔵ギョーザに販売休止の動き ミツカン 納豆4商品 ぎょうざの満洲 冷蔵ギョーザ 関東93店舗で | NHKニュース | イラン情勢 日本への影響・対応、イラン情勢",
-			"url": "https://news.web.nhk/newsweb/na/na-k10015112681000",
-			"date": "2026-05-02",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>こういった製品が安定して安価で手に入っていた状況は、原材料や加工・輸送の体制だけじゃなく容器（とそれに使われる石油）にも依存したものだったことを再認識。当然のことながらあんま意識して過ごしてなかった。</p></div>"
-		},
-		{
-			"id": "9030a69f-f3e3-4423-a9f4-ae2fe671ecb9",
-			"title": "あなたはNINTENDO 64のコントローラーを描けますか？ | オモコロ",
-			"url": "https://omocoro.jp/kiji/571137/",
-			"date": "2026-05-02",
+			"id": "1f3b6d3b-b00f-4b72-a4cd-bf2fc6f31f0f",
+			"title": "「日本の兄貴たちへ 味噌汁ってキャベツを入れてもいいのか？」「こうするといいぞ」→常識の範囲で味噌汁に入れちゃいけないものってあるんだっけ…？ - Togetter",
+			"url": "https://togetter.com/li/2692675",
+			"date": "2026-05-04",
 			"tags": [],
 			"comment": ""
+		},
+		{
+			"id": "0713c212-7ec4-4bf5-9945-08de985c4582",
+			"title": "全部の行程を２倍かけてやると旅っぽくなる (1/2) :: デイリーポータルZ",
+			"url": "https://dailyportalz.jp/kiji/2-bai-kakete-yaru",
+			"date": "2026-05-04",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>アンチタイパ論だ</p></div>"
+		},
+		{
+			"id": "abcb2656-d773-4416-8a4e-bf99bf2fc934",
+			"title": "カニはいつ「横歩き」を獲得したのか ―約2億年前の共通祖先に由来し、多様化につながった可能性―｜長崎大学",
+			"url": "https://www.nagasaki-u.ac.jp/ja/science/science450.html",
+			"date": "2026-05-04",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"進化史の再構築\" 面白かった。</p></div>"
 		}
 	]
 }
