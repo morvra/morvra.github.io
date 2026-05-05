@@ -1,45 +1,41 @@
 {
-	"date": "2026-05-04",
+	"date": "2026-05-05",
 	"news": [
 		{
-			"id": "2abf2086-1bc3-4b96-bc6f-3394f3d1edca",
-			"title": "「日記ブーム」と誤配されうる「日記」 - 気分は日記",
-			"url": "https://oheso.hatenablog.com/entry/2026/04/29/122802",
-			"date": "2026-05-04",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"その結果、日記は実践ではなくなり、ジャンルになる。営みではなく、様式になっていく。\"</p></div>"
-		},
-		{
-			"id": "924a0d0b-3a53-43a1-901c-4df83fbe78f8",
-			"title": "野生チンパンジー最大のコロニーが暴力と殺し合いで2つの勢力に分裂 - GIGAZINE",
-			"url": "https://gigazine.net/news/20260502-chimpanzees-lethal-conflict/",
-			"date": "2026-05-04",
-			"tags": [],
+			"id": "34e7b602-447b-4316-b8c7-da93c1197859",
+			"title": "僕の心のヤバイやつ ラブコメディが始まらない・Score.18 俺は釣り合いたい① | チャンピオンクロス",
+			"url": "https://championcross.jp/episodes/3e7af091125e6",
+			"date": "2026-05-05",
+			"tags": [
+				"漫画"
+			],
 			"comment": ""
 		},
 		{
-			"id": "1f3b6d3b-b00f-4b72-a4cd-bf2fc6f31f0f",
-			"title": "「日本の兄貴たちへ 味噌汁ってキャベツを入れてもいいのか？」「こうするといいぞ」→常識の範囲で味噌汁に入れちゃいけないものってあるんだっけ…？ - Togetter",
-			"url": "https://togetter.com/li/2692675",
-			"date": "2026-05-04",
+			"id": "8cda0c65-373b-4f90-bf4d-76d4cbbb0bf1",
+			"title": "「スマホ農場」でつくる閲覧数 SNS時代の「正義」に現実が揺らぐ [AIの時代]：朝日新聞",
+			"url": "https://www.asahi.com/articles/ASV4P3FWHV4PUTIL029M.html",
+			"date": "2026-05-05",
 			"tags": [],
-			"comment": ""
+			"comment": "<div class=\"news-comment\"><p>知っとこう</p></div>"
 		},
 		{
-			"id": "0713c212-7ec4-4bf5-9945-08de985c4582",
-			"title": "全部の行程を２倍かけてやると旅っぽくなる (1/2) :: デイリーポータルZ",
-			"url": "https://dailyportalz.jp/kiji/2-bai-kakete-yaru",
-			"date": "2026-05-04",
+			"id": "237ffa1e-7599-41eb-8be6-9ad4412bf67f",
+			"title": "AI生成感のあるポスターの内容、全然頭に入ってこない事に気付いた「別に全否定派じゃないけど、AIだなってまず入ってくる感じはする」「AI生成には“意図”を感じない」 - Togetter",
+			"url": "https://togetter.com/li/2693392",
+			"date": "2026-05-05",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>アンチタイパ論だ</p></div>"
+			"comment": "<div class=\"news-comment\"><p>わかる。でもAI製なのか気にすることが認知や判断の材料として大きくなるのは避けたい。</p></div>"
 		},
 		{
-			"id": "abcb2656-d773-4416-8a4e-bf99bf2fc934",
-			"title": "カニはいつ「横歩き」を獲得したのか ―約2億年前の共通祖先に由来し、多様化につながった可能性―｜長崎大学",
-			"url": "https://www.nagasaki-u.ac.jp/ja/science/science450.html",
-			"date": "2026-05-04",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"進化史の再構築\" 面白かった。</p></div>"
+			"id": "a82b4e39-3247-4c95-954e-3d3fb4a883f3",
+			"title": "水平思考問題部 1話 - ジャンプルーキー！",
+			"url": "https://rookie.shonenjump.com/series/OmkvmYUXG_A/OmkvmYUXIt8",
+			"date": "2026-05-05",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>面白い試み。続きも読みたい。</p></div>"
 		}
 	]
 }
