@@ -1,6 +1,32 @@
 {
 	"news": [
 		{
+			"id": "8cc5cf51-ba11-4fba-867c-bfa94ef28d1f",
+			"title": "[45話]サンキューピッチ - 住吉九 | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253189534697938064",
+			"date": "2026-05-12",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>うおおおお</p></div>"
+		},
+		{
+			"id": "96e70bcf-f0cb-4c35-988c-45eea6543490",
+			"title": "知の自転車、自動車、飛行機 - by 倉下忠憲@rashita2 - Rashita's Newsletter",
+			"url": "https://tadanori.substack.com/p/986",
+			"date": "2026-05-12",
+			"tags": [],
+			"comment": ""
+		},
+		{
+			"id": "a3d9b04a-55c2-4089-9594-3d11a498909c",
+			"title": "コンピュータ科学の超難問「同期」。 - YouTube",
+			"url": "https://www.youtube.com/watch?v=m51irzGrB-M",
+			"date": "2026-05-12",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>自作ツールでも頻発する問題。</p></div>"
+		},
+		{
 			"id": "a664bb0d-8c5e-4a0c-ad4f-cad77ba69f27",
 			"title": "[第１０８話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋",
 			"url": "https://shonenjumpplus.com/episode/17107419589696005517",
