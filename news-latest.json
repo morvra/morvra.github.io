@@ -1,31 +1,37 @@
 {
-	"date": "2026-05-12",
+	"date": "2026-05-13",
 	"news": [
 		{
-			"id": "8cc5cf51-ba11-4fba-867c-bfa94ef28d1f",
-			"title": "[45話]サンキューピッチ - 住吉九 | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253189534697938064",
-			"date": "2026-05-12",
-			"tags": [
-				"漫画"
-			],
-			"comment": "<div class=\"news-comment\"><p>うおおおお</p></div>"
+			"id": "53bb165a-e53b-4b59-8a49-4a429e45b47d",
+			"title": "ウェブページの魅力",
+			"url": "https://studio15.jp/blog/webpage-looking/",
+			"date": "2026-05-13",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>うちも真空タンブラー系だな。もうちょっとゴテゴテしてもいいかもと思い始めてる。</p></div>"
 		},
 		{
-			"id": "96e70bcf-f0cb-4c35-988c-45eea6543490",
-			"title": "知の自転車、自動車、飛行機 - by 倉下忠憲@rashita2 - Rashita's Newsletter",
-			"url": "https://tadanori.substack.com/p/986",
-			"date": "2026-05-12",
+			"id": "8c718345-2ef5-4c14-b5c6-5afb53af7692",
+			"title": "「最適化の罠」から逃れる | Lifehacking.jp",
+			"url": "https://lifehacking.jp/2026/05/un-optimize/",
+			"date": "2026-05-13",
 			"tags": [],
 			"comment": ""
 		},
 		{
-			"id": "a3d9b04a-55c2-4089-9594-3d11a498909c",
-			"title": "コンピュータ科学の超難問「同期」。 - YouTube",
-			"url": "https://www.youtube.com/watch?v=m51irzGrB-M",
-			"date": "2026-05-12",
+			"id": "2b330cf9-edff-4210-8df1-30005e02510e",
+			"title": "自分が一番考えてるという自信を持つ - Konifar's ZATSU",
+			"url": "https://konifar-zatsu.hatenadiary.jp/entry/2026/05/12/205034",
+			"date": "2026-05-13",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>自作ツールでも頻発する問題。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>\"この「自分が一番考えてる」という自信は、自分がオーナーシップを持っている時にのみ発揮するべきだと思っている。\"</p></div>"
+		},
+		{
+			"id": "6d2672b8-097f-4f85-b1a6-c4291eb2f24a",
+			"title": "カードゲームの思い出話 | p-hone.info",
+			"url": "https://p-hone.info/posts/cardgame/",
+			"date": "2026-05-13",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>これなぁ。（メインの主戦場と想定されている）ランクマで勝とうと思ったらよほどの強者じゃないかぎりTire表から選択する感じになっちゃうんだよねぇ。初日が楽しいのはみんな手探りだから。</p></div>"
 		}
 	]
 }
