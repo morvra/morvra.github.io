@@ -1,33 +1,21 @@
 {
-	"date": "2026-05-15",
+	"date": "2026-05-16",
 	"news": [
 		{
-			"id": "d9eb961e-09a8-4af9-9766-b0fe63c19b30",
-			"title": "指標をめぐる認知バイアス - kawasima",
-			"url": "https://scrapbox.io/kawasima/%E6%8C%87%E6%A8%99%E3%82%92%E3%82%81%E3%81%90%E3%82%8B%E8%AA%8D%E7%9F%A5%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9",
-			"date": "2026-05-15",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p>自分の歪みチェックに使えたりするので知っとこう。</p></div>"
-		},
-		{
-			"id": "8f2f9b00-1678-4087-bc66-1418cd62aaa7",
-			"title": "ウナギ完全養殖、商業化へ──人工的に育てた稚魚の普及に向け水産庁が7億円投入 : エネフロ ウナギ完全養殖、商業化へ──人工的に育てた稚魚の普及に向け水産庁が7億円投入",
-			"url": "https://ene-fro.com/article/ef498_a1/",
-			"date": "2026-05-15",
+			"id": "7fca8b8c-408e-4f20-a6b5-c912f2611cd6",
+			"title": "【学マス】２周年記念PV 【アイドルマスター】 - YouTube",
+			"url": "https://www.youtube.com/watch?v=x92_IX5pOko",
+			"date": "2026-05-16",
 			"tags": [],
 			"comment": ""
 		},
 		{
-			"id": "af228652-0c46-41c9-9150-7491e1f91ef9",
-			"title": "消去法のゲームデザインと言う話。「堀井雄二的なデザインで伸びた20世紀の日本ゲームと堀井雄二的なデザインで崩壊した21世紀日本のゲーム市場」｜地雷魚",
-			"url": "https://note.com/jiraygyo/n/n94e997e8b415",
-			"date": "2026-05-15",
-			"tags": [
-				"ゲーム"
-			],
-			"comment": "<div class=\"news-comment\"><p>これの内側で育ってしまったので\"成長\"してない感じが分かってない。DQ以前のRPGの姿とその盛り上がりを知っているともっと創造的なジャンルになっているはずだという実感があるのかなぁ。</p></div>"
+			"id": "34d18a14-d69e-48a3-860b-946e384e2923",
+			"title": "人気ノートアプリ「Obsidian」がプラグイン審査を刷新、マルウェア検査や安全性表示を導入へ - GIGAZINE",
+			"url": "https://gigazine.net/news/20260513-obsidian-plugin-future/",
+			"date": "2026-05-16",
+			"tags": [],
+			"comment": ""
 		}
 	]
 }
