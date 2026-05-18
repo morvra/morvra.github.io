@@ -1,6 +1,22 @@
 {
 	"news": [
 		{
+			"id": "b69a2806-3eee-4400-a167-9f95724c77c9",
+			"title": "ソーラー充電PDA「Orion」登場！STM32U575と3.16型Sharp Memory LCD搭載、Zaurus再来の自作端末 - デイリーガジェット",
+			"url": "https://daily-gadget.net/gadgets/114176/",
+			"date": "2026-05-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>こういう方向性のガジェットはスペック上がればローカルLLMと相性良さそう</p></div>"
+		},
+		{
+			"id": "0d43dc07-e9b6-4b74-abbb-9e4f5cf279e3",
+			"title": "Obsidianで家庭内wikiを作り無料で運用する",
+			"url": "https://raahii.me/posts/building-family-wiki-with-obsidian/",
+			"date": "2026-05-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>必要十分って感じで素敵</p></div>"
+		},
+		{
 			"id": "c8b1c065-bb1c-48c8-b89a-d8ed97ad5a4e",
 			"title": "[第１０９話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋",
 			"url": "https://shonenjumpplus.com/episode/9253189534697938759",
@@ -17,14 +33,6 @@
 			"comment": ""
 		},
 		{
-			"id": "7fca8b8c-408e-4f20-a6b5-c912f2611cd6",
-			"title": "【学マス】２周年記念PV 【アイドルマスター】 - YouTube",
-			"url": "https://www.youtube.com/watch?v=x92_IX5pOko",
-			"date": "2026-05-16",
-			"tags": [],
-			"comment": ""
-		},
-		{
 			"id": "34d18a14-d69e-48a3-860b-946e384e2923",
 			"title": "人気ノートアプリ「Obsidian」がプラグイン審査を刷新、マルウェア検査や安全性表示を導入へ - GIGAZINE",
 			"url": "https://gigazine.net/news/20260513-obsidian-plugin-future/",
@@ -33,14 +41,12 @@
 			"comment": ""
 		},
 		{
-			"id": "d9eb961e-09a8-4af9-9766-b0fe63c19b30",
-			"title": "指標をめぐる認知バイアス - kawasima",
-			"url": "https://scrapbox.io/kawasima/%E6%8C%87%E6%A8%99%E3%82%92%E3%82%81%E3%81%90%E3%82%8B%E8%AA%8D%E7%9F%A5%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9",
-			"date": "2026-05-15",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p>自分の歪みチェックに使えたりするので知っとこう。</p></div>"
+			"id": "7fca8b8c-408e-4f20-a6b5-c912f2611cd6",
+			"title": "【学マス】２周年記念PV 【アイドルマスター】 - YouTube",
+			"url": "https://www.youtube.com/watch?v=x92_IX5pOko",
+			"date": "2026-05-16",
+			"tags": [],
+			"comment": ""
 		},
 		{
 			"id": "8f2f9b00-1678-4087-bc66-1418cd62aaa7",
@@ -61,12 +67,14 @@
 			"comment": "<div class=\"news-comment\"><p>これの内側で育ってしまったので\"成長\"してない感じが分かってない。DQ以前のRPGの姿とその盛り上がりを知っているともっと創造的なジャンルになっているはずだという実感があるのかなぁ。</p></div>"
 		},
 		{
-			"id": "409b7424-1593-413d-89fc-32247c89f4b1",
-			"title": "グーグル、新たなノートパソコン「Googlebook」発表 Gemini搭載でAndroidとChromeOSが融合 - ケータイ Watch",
-			"url": "https://k-tai.watch.impress.co.jp/docs/news/2106890.html",
-			"date": "2026-05-14",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>気になってる</p></div>"
+			"id": "d9eb961e-09a8-4af9-9766-b0fe63c19b30",
+			"title": "指標をめぐる認知バイアス - kawasima",
+			"url": "https://scrapbox.io/kawasima/%E6%8C%87%E6%A8%99%E3%82%92%E3%82%81%E3%81%90%E3%82%8B%E8%AA%8D%E7%9F%A5%E3%83%90%E3%82%A4%E3%82%A2%E3%82%B9",
+			"date": "2026-05-15",
+			"tags": [
+				"言葉"
+			],
+			"comment": "<div class=\"news-comment\"><p>自分の歪みチェックに使えたりするので知っとこう。</p></div>"
 		},
 		{
 			"id": "c67c0d6d-d295-4aa4-8d67-87ac18af1f67",
@@ -77,12 +85,12 @@
 			"comment": ""
 		},
 		{
-			"id": "53bb165a-e53b-4b59-8a49-4a429e45b47d",
-			"title": "ウェブページの魅力",
-			"url": "https://studio15.jp/blog/webpage-looking/",
-			"date": "2026-05-13",
+			"id": "409b7424-1593-413d-89fc-32247c89f4b1",
+			"title": "グーグル、新たなノートパソコン「Googlebook」発表 Gemini搭載でAndroidとChromeOSが融合 - ケータイ Watch",
+			"url": "https://k-tai.watch.impress.co.jp/docs/news/2106890.html",
+			"date": "2026-05-14",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>うちも真空タンブラー系だな。もうちょっとゴテゴテしてもいいかもと思い始めてる。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>気になってる</p></div>"
 		},
 		{
 			"id": "8c718345-2ef5-4c14-b5c6-5afb53af7692",
@@ -91,6 +99,14 @@
 			"date": "2026-05-13",
 			"tags": [],
 			"comment": ""
+		},
+		{
+			"id": "53bb165a-e53b-4b59-8a49-4a429e45b47d",
+			"title": "ウェブページの魅力",
+			"url": "https://studio15.jp/blog/webpage-looking/",
+			"date": "2026-05-13",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>うちも真空タンブラー系だな。もうちょっとゴテゴテしてもいいかもと思い始めてる。</p></div>"
 		},
 		{
 			"id": "2b330cf9-edff-4210-8df1-30005e02510e",
@@ -179,14 +195,6 @@
 			"comment": ""
 		},
 		{
-			"id": "380e1443-f7a1-4bf6-9026-08c2f79cc5c4",
-			"title": "日本はなぜ天皇がいるのに「王国」「帝国」やkingdom、empireと呼ばれないのでしょうか？ - Quora",
-			"url": "https://jp.quora.com/nippon-ha-naze-tennou-ga-iru-no-ni-oukoku-teikoku-ya-kingdom-empire-to-ko-ba-re-nai-node-shou-ka",
-			"date": "2026-05-08",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>中空構造関連？</p></div>"
-		},
-		{
 			"id": "b4092141-866c-4e26-bc76-1c45eb2864c7",
 			"title": "お前のAIスロップなんざ誰も読みたくねえよ（送りつけてくんな） » p2ptk[.]org",
 			"url": "https://p2ptk.org/ai/5481",
@@ -195,20 +203,12 @@
 			"comment": "<div class=\"news-comment\"><p>\"ある主題について学び、自ら新たな知見を加えるなり、欠陥を指摘するなりして、主題を前進させられるだけの理解に達することの代わりになるものは、単純に存在しない。\"</p></div>"
 		},
 		{
-			"id": "d8daf3c5-0e6e-4fc5-8c5f-65761f45dd06",
-			"title": "To Ukraine with Love: Drawings of a Japanese Prisoner of War — Bird In Flight",
-			"url": "https://birdinflight.com/en/inspiration/20221111-nobuo-kiuchi-drawings.html",
-			"date": "2026-05-07",
+			"id": "380e1443-f7a1-4bf6-9026-08c2f79cc5c4",
+			"title": "日本はなぜ天皇がいるのに「王国」「帝国」やkingdom、empireと呼ばれないのでしょうか？ - Quora",
+			"url": "https://jp.quora.com/nippon-ha-naze-tennou-ga-iru-no-ni-oukoku-teikoku-ya-kingdom-empire-to-ko-ba-re-nai-node-shou-ka",
+			"date": "2026-05-08",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>生活だ</p></div>"
-		},
-		{
-			"id": "680c2704-fa40-4a86-bc98-89fac5eed97a",
-			"title": "The Boring Internet | Terry Godier",
-			"url": "https://www.terrygodier.com/the-boring-internet",
-			"date": "2026-05-07",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"The internet you grew up on is not gone.\"</p></div>"
+			"comment": "<div class=\"news-comment\"><p>中空構造関連？</p></div>"
 		},
 		{
 			"id": "ff6e438e-c536-4614-8b24-bd4454c7bcf7",
@@ -233,6 +233,32 @@
 			"date": "2026-05-07",
 			"tags": [],
 			"comment": ""
+		},
+		{
+			"id": "d8daf3c5-0e6e-4fc5-8c5f-65761f45dd06",
+			"title": "To Ukraine with Love: Drawings of a Japanese Prisoner of War — Bird In Flight",
+			"url": "https://birdinflight.com/en/inspiration/20221111-nobuo-kiuchi-drawings.html",
+			"date": "2026-05-07",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>生活だ</p></div>"
+		},
+		{
+			"id": "680c2704-fa40-4a86-bc98-89fac5eed97a",
+			"title": "The Boring Internet | Terry Godier",
+			"url": "https://www.terrygodier.com/the-boring-internet",
+			"date": "2026-05-07",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"The internet you grew up on is not gone.\"</p></div>"
+		},
+		{
+			"id": "a82b4e39-3247-4c95-954e-3d3fb4a883f3",
+			"title": "水平思考問題部 1話 - ジャンプルーキー！",
+			"url": "https://rookie.shonenjump.com/series/OmkvmYUXG_A/OmkvmYUXIt8",
+			"date": "2026-05-05",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>面白い試み。続きも読みたい。</p></div>"
 		},
 		{
 			"id": "34e7b602-447b-4316-b8c7-da93c1197859",
@@ -261,14 +287,12 @@
 			"comment": "<div class=\"news-comment\"><p>わかる。でもAI製なのか気にすることが認知や判断の材料として大きくなるのは避けたい。</p></div>"
 		},
 		{
-			"id": "a82b4e39-3247-4c95-954e-3d3fb4a883f3",
-			"title": "水平思考問題部 1話 - ジャンプルーキー！",
-			"url": "https://rookie.shonenjump.com/series/OmkvmYUXG_A/OmkvmYUXIt8",
-			"date": "2026-05-05",
-			"tags": [
-				"漫画"
-			],
-			"comment": "<div class=\"news-comment\"><p>面白い試み。続きも読みたい。</p></div>"
+			"id": "924a0d0b-3a53-43a1-901c-4df83fbe78f8",
+			"title": "野生チンパンジー最大のコロニーが暴力と殺し合いで2つの勢力に分裂 - GIGAZINE",
+			"url": "https://gigazine.net/news/20260502-chimpanzees-lethal-conflict/",
+			"date": "2026-05-04",
+			"tags": [],
+			"comment": ""
 		},
 		{
 			"id": "2abf2086-1bc3-4b96-bc6f-3394f3d1edca",
@@ -277,14 +301,6 @@
 			"date": "2026-05-04",
 			"tags": [],
 			"comment": "<div class=\"news-comment\"><p>\"その結果、日記は実践ではなくなり、ジャンルになる。営みではなく、様式になっていく。\"</p></div>"
-		},
-		{
-			"id": "924a0d0b-3a53-43a1-901c-4df83fbe78f8",
-			"title": "野生チンパンジー最大のコロニーが暴力と殺し合いで2つの勢力に分裂 - GIGAZINE",
-			"url": "https://gigazine.net/news/20260502-chimpanzees-lethal-conflict/",
-			"date": "2026-05-04",
-			"tags": [],
-			"comment": ""
 		},
 		{
 			"id": "1f3b6d3b-b00f-4b72-a4cd-bf2fc6f31f0f",
@@ -311,14 +327,12 @@
 			"comment": "<div class=\"news-comment\"><p>\"進化史の再構築\" 面白かった。</p></div>"
 		},
 		{
-			"id": "86138e67-0380-0e6d-1d80-eb474e5549ea",
-			"title": "伝説の王ギルガメシュ実在の可能性高まる。4000年前の粘土板の楔形文字を解読 | カラパイア",
-			"url": "https://karapaia.com/archives/600315.html",
+			"id": "0588216b-21eb-4878-bdca-7c4051bcc175",
+			"title": "ホルムズ海峡冬景色 清⽔ミチコのHAPPY PARADISE 千秋楽 沖縄公演より - YouTube",
+			"url": "https://www.youtube.com/watch?v=KY7-G2yUSkQ",
 			"date": "2026-05-02",
-			"tags": [
-				"歴史"
-			],
-			"comment": "<div class=\"news-comment\"><p>4000年以上前でもめちゃくちゃ社会だな。しかも文書に残ってるってのがすごい。</p></div>"
+			"tags": [],
+			"comment": ""
 		},
 		{
 			"id": "ccbb5bc0-a788-4950-0b37-8b9be07a69d6",
@@ -329,12 +343,14 @@
 			"comment": "<div class=\"news-comment\"><p>＊虚構 \"「将来なりたい職業」アンケート調査では、全員が「ＡＩ」と回答。３年前に行った前回調査で上位だったスポーツ選手やパティシエ、動画配信者は姿を消した。\" ｗｗ</p></div>"
 		},
 		{
-			"id": "0588216b-21eb-4878-bdca-7c4051bcc175",
-			"title": "ホルムズ海峡冬景色 清⽔ミチコのHAPPY PARADISE 千秋楽 沖縄公演より - YouTube",
-			"url": "https://www.youtube.com/watch?v=KY7-G2yUSkQ",
+			"id": "86138e67-0380-0e6d-1d80-eb474e5549ea",
+			"title": "伝説の王ギルガメシュ実在の可能性高まる。4000年前の粘土板の楔形文字を解読 | カラパイア",
+			"url": "https://karapaia.com/archives/600315.html",
 			"date": "2026-05-02",
-			"tags": [],
-			"comment": ""
+			"tags": [
+				"歴史"
+			],
+			"comment": "<div class=\"news-comment\"><p>4000年以上前でもめちゃくちゃ社会だな。しかも文書に残ってるってのがすごい。</p></div>"
 		},
 		{
 			"id": "89b07920-b996-39b4-9650-1be11d22f683",
@@ -353,14 +369,6 @@
 			"comment": ""
 		},
 		{
-			"id": "61fc63ec-2371-4aa3-8b59-c1abe670c59d",
-			"title": "藪の中から現れた最強の刺客 - YouTube",
-			"url": "https://www.youtube.com/watch?v=bvmNvap_R-s",
-			"date": "2026-04-30",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>鳥肌が……</p></div>"
-		},
-		{
 			"id": "1384b996-25b1-43d4-b1b6-1a940b465a94",
 			"title": "【 SFLロスター発表！】新加入ひかるの熱い想いとは？加入の経緯やSFLの目標、今後のチーム活動について語ります｜RIDDLE TALK  - YouTube",
 			"url": "https://www.youtube.com/watch?v=7tlTx6-FM90",
@@ -369,6 +377,22 @@
 				"12"
 			],
 			"comment": ""
+		},
+		{
+			"id": "61fc63ec-2371-4aa3-8b59-c1abe670c59d",
+			"title": "藪の中から現れた最強の刺客 - YouTube",
+			"url": "https://www.youtube.com/watch?v=bvmNvap_R-s",
+			"date": "2026-04-30",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>鳥肌が……</p></div>"
+		},
+		{
+			"id": "5a05bd89-82fd-4bab-8751-45061813d34f",
+			"title": "【公式日本語放送】ウメハラ vs MenaRD: Evo Legends Live - YouTube",
+			"url": "https://www.youtube.com/watch?v=jbZzDGzj16k",
+			"date": "2026-04-29",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>Mena強かった！</p></div>"
 		},
 		{
 			"id": "a242db2c-6867-4a42-9059-e53dbe87c963",
@@ -387,14 +411,6 @@
 				"漫画"
 			],
 			"comment": "<div class=\"news-comment\"><p>Sinかぐや姫ｗ あれだけ多くの種のケモ言語が通じあえてるんだからヒト流のケモ言語もできそうなもんだけど。</p></div>"
-		},
-		{
-			"id": "5a05bd89-82fd-4bab-8751-45061813d34f",
-			"title": "【公式日本語放送】ウメハラ vs MenaRD: Evo Legends Live - YouTube",
-			"url": "https://www.youtube.com/watch?v=jbZzDGzj16k",
-			"date": "2026-04-29",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>Mena強かった！</p></div>"
 		},
 		{
 			"id": "2e6bf16a-1f24-4a7b-874c-dc0462b155a7",
@@ -423,12 +439,12 @@
 			"comment": ""
 		},
 		{
-			"id": "37330500-3b12-452b-8ca8-aabbc8a0ccf7",
-			"title": "ラノベ業界の衰退がやばいって言ってる人いるけど「コミカライズ含めたビジネスモデルと見れば」現在のラノベ業界は過去最高の売上の黄金期だよという話 - posfie",
-			"url": "https://posfie.com/@golden_haniwa/p/hv1Sh8g",
+			"id": "07b6cc6e-9390-4145-9161-ca6e7c976521",
+			"title": "TikTok化が我らを解放する » p2ptk[.]org",
+			"url": "https://p2ptk.org/monopoly/5588",
 			"date": "2026-04-27",
 			"tags": [],
-			"comment": ""
+			"comment": "<div class=\"news-comment\"><p>AI含む見知らぬクリエイターしかいないタイムラインは代替可能。タイムラインにずっと貼り付けさせるにはクリエイターが必要だが、プラットフォームに居続けさせるには友人が必要。</p></div>"
 		},
 		{
 			"id": "a4287763-6764-69dc-fa4e-4e8d9f84f9a2",
@@ -447,12 +463,12 @@
 			"comment": ""
 		},
 		{
-			"id": "07b6cc6e-9390-4145-9161-ca6e7c976521",
-			"title": "TikTok化が我らを解放する » p2ptk[.]org",
-			"url": "https://p2ptk.org/monopoly/5588",
+			"id": "37330500-3b12-452b-8ca8-aabbc8a0ccf7",
+			"title": "ラノベ業界の衰退がやばいって言ってる人いるけど「コミカライズ含めたビジネスモデルと見れば」現在のラノベ業界は過去最高の売上の黄金期だよという話 - posfie",
+			"url": "https://posfie.com/@golden_haniwa/p/hv1Sh8g",
 			"date": "2026-04-27",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>AI含む見知らぬクリエイターしかいないタイムラインは代替可能。タイムラインにずっと貼り付けさせるにはクリエイターが必要だが、プラットフォームに居続けさせるには友人が必要。</p></div>"
+			"comment": ""
 		},
 		{
 			"id": "1ffd002a-f61e-4fd6-3ec3-097751efd9ee",
@@ -471,28 +487,12 @@
 			"comment": "<div class=\"news-comment\"><p>進歩のスピード的に自分も危うい側にいきそう。もういってるか。。</p></div>"
 		},
 		{
-			"id": "64542d2a-42be-46bd-840c-4dc938ed73a1",
-			"title": "【トモコレ】社と石神の結婚でオワコンになるやししぃ/さくゆい同棲・月見草同棲・ローレンの恋色恋が動き出す１日【にじさんじ切り抜き/椎名唯華/剣持刀也/社築/石神のぞみ/トモダチコレクション】 - YouTube",
-			"url": "https://www.youtube.com/watch?v=mRFef3o27t8",
-			"date": "2026-04-25",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>カプ厨で草なんぴょ〜</p></div>"
-		},
-		{
 			"id": "7baf6390-0011-4763-b583-5d2f319128f4",
 			"title": "モバイルバッテリー 4月24日から航空機内での使用禁止に 原因と疑われる火災は年々増加 | NHKニュース | 国土交通省、交通・インフラ、航空",
 			"url": "https://news.web.nhk/newsweb/na/na-k10015107041000",
 			"date": "2026-04-25",
 			"tags": [],
 			"comment": ""
-		},
-		{
-			"id": "ae7a5271-9edf-4221-b0be-08fbc6814aa3",
-			"title": "現役オタク「昔は推しって言わなかったなら一体なんて呼んでたんですか？」→昭和～平成くらいのオタクたち「幅がありすぎてなんて言ってたか思い出せないんだよ…」 - Togetter",
-			"url": "https://togetter.com/li/2689037",
-			"date": "2026-04-25",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>嫁・萌え・担当・派・贔屓など。推しはAKBの文脈から？「推され・干され」みたいな話もあったなぁ</p></div>"
 		},
 		{
 			"id": "2f199704-bcb8-47cd-a457-e91a36273ea8",
@@ -509,6 +509,22 @@
 			"date": "2026-04-25",
 			"tags": [],
 			"comment": "<div class=\"news-comment\"><p>ｗｗ</p></div>"
+		},
+		{
+			"id": "64542d2a-42be-46bd-840c-4dc938ed73a1",
+			"title": "【トモコレ】社と石神の結婚でオワコンになるやししぃ/さくゆい同棲・月見草同棲・ローレンの恋色恋が動き出す１日【にじさんじ切り抜き/椎名唯華/剣持刀也/社築/石神のぞみ/トモダチコレクション】 - YouTube",
+			"url": "https://www.youtube.com/watch?v=mRFef3o27t8",
+			"date": "2026-04-25",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>カプ厨で草なんぴょ〜</p></div>"
+		},
+		{
+			"id": "ae7a5271-9edf-4221-b0be-08fbc6814aa3",
+			"title": "現役オタク「昔は推しって言わなかったなら一体なんて呼んでたんですか？」→昭和～平成くらいのオタクたち「幅がありすぎてなんて言ってたか思い出せないんだよ…」 - Togetter",
+			"url": "https://togetter.com/li/2689037",
+			"date": "2026-04-25",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>嫁・萌え・担当・派・贔屓など。推しはAKBの文脈から？「推され・干され」みたいな話もあったなぁ</p></div>"
 		},
 		{
 			"id": "ae63ebfd-c3f1-ad22-6632-6e085da56f72",
@@ -587,20 +603,20 @@
 			"comment": ""
 		},
 		{
-			"id": "f9825ec1-392d-68ad-6da9-60ca92733c9f",
-			"title": "TimからAppleコミュニティのみなさんへ - Apple（日本）",
-			"url": "https://www.apple.com/jp/community-letter-from-tim/",
-			"date": "2026-04-22",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"私たちは毎朝起きるたびに、みなさんの毎日を少しでも良くするために何ができるかを考えてきました。それと同時に、みなさんも私の毎日を最高に幸せなものにしてくれたのです。\"</p></div>"
-		},
-		{
 			"id": "4e4afbc7-f893-4489-8add-77fd154abad7",
 			"title": "好きなものが数年前で止まっている | 101ta28's Blog",
 			"url": "https://blog.101ta28.com/posts/my-favorites-stopped-a-few-years-ago/",
 			"date": "2026-04-22",
 			"tags": [],
 			"comment": "<div class=\"news-comment\"><p>最大HPとMPが減っていくんだろうな。そしてそれはあまり悲観するものでもない、と思えたら嬉しい。</p><p>via: <a href=\"https://dabun.net/#20260422\">駄文にゅうす</a></p></div>"
+		},
+		{
+			"id": "f9825ec1-392d-68ad-6da9-60ca92733c9f",
+			"title": "TimからAppleコミュニティのみなさんへ - Apple（日本）",
+			"url": "https://www.apple.com/jp/community-letter-from-tim/",
+			"date": "2026-04-22",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"私たちは毎朝起きるたびに、みなさんの毎日を少しでも良くするために何ができるかを考えてきました。それと同時に、みなさんも私の毎日を最高に幸せなものにしてくれたのです。\"</p></div>"
 		},
 		{
 			"id": "1201be60-f287-43d0-aa77-efbbbc89d700",
@@ -611,12 +627,28 @@
 			"comment": "<div class=\"news-comment\"><p>一発ネタながら的確と思える計算結果もあって面白い</p></div>"
 		},
 		{
+			"id": "f23399c9-082f-a19c-bf56-67b7e77db0bf",
+			"title": "「VTuber」と「ストリーマー」の違いって？ 卯月コウ・社築の「ろくろ回し」対談から｜北出栞 siori kitade",
+			"url": "https://note.com/sr_ktd/n/nbd4ebf1d11a5",
+			"date": "2026-04-21",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>メタ認知的な話もあり面白かった。2つを分けるとしたら何をもってわかれるのか。</p></div>"
+		},
+		{
 			"id": "9b5328ea-3ee2-d22d-ae20-9987c8e04ccb",
 			"title": "「日本のマクドナルドのハンバーガーの写真のバンズはどれも少しずれている」と海外で話題に - GIGAZINE",
 			"url": "https://gigazine.net/news/20260417-japanese-mcdonalds-photos/",
 			"date": "2026-04-21",
 			"tags": [],
 			"comment": "<div class=\"news-comment\"><p>色んな人の考察読めて面白いので<a href=\"https://b.hatena.ne.jp/entry/s/gigazine.net/news/20260417-japanese-mcdonalds-photos/\">ブコメ</a>もおすすめ</p><p>via: <a href=\"https://coup2.jugem.jp/?eid=1561\">スナック深爪（ブログ版）β</a></p></div>"
+		},
+		{
+			"id": "39508cbb-818a-6420-d543-7703db2cea59",
+			"title": "庭いじりとしての個人サイト運営 - 頬杖書房",
+			"url": "https://hodzue.jp/post/personal-site-adventcalendar2024/",
+			"date": "2026-04-21",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>この心持ちでやっていきたい</p></div>"
 		},
 		{
 			"id": "a552c5c1-acce-1454-0fba-8f6a07af8c37",
@@ -629,28 +661,20 @@
 			"comment": "<div class=\"news-comment\"><p>ロカ(ﾉД`) マァム編楽しみ</p></div>"
 		},
 		{
-			"id": "39508cbb-818a-6420-d543-7703db2cea59",
-			"title": "庭いじりとしての個人サイト運営 - 頬杖書房",
-			"url": "https://hodzue.jp/post/personal-site-adventcalendar2024/",
-			"date": "2026-04-21",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>この心持ちでやっていきたい</p></div>"
-		},
-		{
-			"id": "f23399c9-082f-a19c-bf56-67b7e77db0bf",
-			"title": "「VTuber」と「ストリーマー」の違いって？ 卯月コウ・社築の「ろくろ回し」対談から｜北出栞 siori kitade",
-			"url": "https://note.com/sr_ktd/n/nbd4ebf1d11a5",
-			"date": "2026-04-21",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>メタ認知的な話もあり面白かった。2つを分けるとしたら何をもってわかれるのか。</p></div>"
-		},
-		{
 			"id": "e36e1bee-2c2b-42a1-8b1d-cc09883af85d",
 			"title": "快適なVSCode生活を!! | 東京科学大学デジタル創作同好会traP",
 			"url": "https://trap.jp/post/2909/",
 			"date": "2026-04-20",
 			"tags": [],
 			"comment": "<div class=\"news-comment\"><p>Error Lens と Material Icon Theme 入れてみた。</p></div>"
+		},
+		{
+			"id": "4e1c5d3a-410e-d19b-53a7-1902c39bcf59",
+			"title": "クックパッドが誰向けなのかがわかりません。… | mond",
+			"url": "https://mond.how/ja/topics/t5co53bn5mfqb4h/3x8k3ug0qhz737j",
+			"date": "2026-04-20",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"象徴的なのは、その検索窓には薄字で「使いたい食材は？」と書いてあることです。\"</p><p>わかる。使いたい具材からサンプルをいっぱい見られるのが便利。そこで雰囲気掴んで良さげなレシピ考えてる。</p></div>"
 		},
 		{
 			"id": "5eb4b6df-a07b-45fe-b37f-0a33a0a18efa",
@@ -673,12 +697,30 @@
 			"comment": ""
 		},
 		{
-			"id": "4e1c5d3a-410e-d19b-53a7-1902c39bcf59",
-			"title": "クックパッドが誰向けなのかがわかりません。… | mond",
-			"url": "https://mond.how/ja/topics/t5co53bn5mfqb4h/3x8k3ug0qhz737j",
-			"date": "2026-04-20",
+			"id": "cb2414f9-2869-4fe0-8f94-c8b339ba5e41",
+			"title": "【にじさんじスレスパ杯】にじさんじスレスパ杯！！！！！！👑✨✨【Slay the Spire 2 / 椎名唯華/にじさんじ】 - YouTube",
+			"url": "https://www.youtube.com/watch?v=AOyBHoNE57A",
+			"date": "2026-04-19",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"象徴的なのは、その検索窓には薄字で「使いたい食材は？」と書いてあることです。\"</p><p>わかる。使いたい具材からサンプルをいっぱい見られるのが便利。そこで雰囲気掴んで良さげなレシピ考えてる。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>面白かった！終盤の急かし方笑ったｗ</p></div>"
+		},
+		{
+			"id": "35288756-d243-5c7a-4823-8b2db18ad9c7",
+			"title": "最高気温が40℃以上の日は「酷暑日」、気象庁も決定 - ITmedia NEWS",
+			"url": "https://www.itmedia.co.jp/news/articles/2604/17/news085.html",
+			"date": "2026-04-19",
+			"tags": [],
+			"comment": ""
+		},
+		{
+			"id": "fa506688-f794-e51a-db56-7358de1f1575",
+			"title": "多重質問の誤謬 - Wikipedia",
+			"url": "https://ja.wikipedia.org/wiki/%E5%A4%9A%E9%87%8D%E8%B3%AA%E5%95%8F%E3%81%AE%E8%AA%A4%E8%AC%AC",
+			"date": "2026-04-19",
+			"tags": [
+				"言葉"
+			],
+			"comment": "<div class=\"news-comment\"><p>\"たとえば「あなたはまだ妻を虐待しているのか?」といった質問がある。\" 前提が自明でないのにそれを無批判に考えてしまいがち。</p><p>via: <a href=\"https://dabun.net/#20260418\">駄文にゅうす</a></p></div>"
 		},
 		{
 			"id": "753392b7-2d26-4638-a62a-9db478246ec1",
@@ -699,40 +741,6 @@
 			"comment": "<div class=\"news-comment\"><p>資本主義だな〜</p></div>"
 		},
 		{
-			"id": "cb2414f9-2869-4fe0-8f94-c8b339ba5e41",
-			"title": "【にじさんじスレスパ杯】にじさんじスレスパ杯！！！！！！👑✨✨【Slay the Spire 2 / 椎名唯華/にじさんじ】 - YouTube",
-			"url": "https://www.youtube.com/watch?v=AOyBHoNE57A",
-			"date": "2026-04-19",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>面白かった！終盤の急かし方笑ったｗ</p></div>"
-		},
-		{
-			"id": "fa506688-f794-e51a-db56-7358de1f1575",
-			"title": "多重質問の誤謬 - Wikipedia",
-			"url": "https://ja.wikipedia.org/wiki/%E5%A4%9A%E9%87%8D%E8%B3%AA%E5%95%8F%E3%81%AE%E8%AA%A4%E8%AC%AC",
-			"date": "2026-04-19",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p>\"たとえば「あなたはまだ妻を虐待しているのか?」といった質問がある。\" 前提が自明でないのにそれを無批判に考えてしまいがち。</p><p>via: <a href=\"https://dabun.net/#20260418\">駄文にゅうす</a></p></div>"
-		},
-		{
-			"id": "35288756-d243-5c7a-4823-8b2db18ad9c7",
-			"title": "最高気温が40℃以上の日は「酷暑日」、気象庁も決定 - ITmedia NEWS",
-			"url": "https://www.itmedia.co.jp/news/articles/2604/17/news085.html",
-			"date": "2026-04-19",
-			"tags": [],
-			"comment": ""
-		},
-		{
-			"id": "b5dea3c0-e54a-c1ef-0ec9-2044207dfec8",
-			"title": "もしも石破茂が「冬季富士山登山禁止論」について論じたら。 : 絶対にマネをしてはいけない山歩き。",
-			"url": "https://ksg2999.com/archives/41752224.html",
-			"date": "2026-04-18",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>論点の整理から議論の必要性を説くロジックなのかな？インスタントな回答をもとめられがちな現代において、あった方がよい視点だと思う。</p></div>"
-		},
-		{
 			"id": "e11a25a5-f899-27d3-016b-a7ba6e8ceda4",
 			"title": "「僕らがずっとモチモチだと思っていたものはダイフクという別の食べ物だった 地元のレストランに騙されていた」海外ユーザーがモチの真実にショックを受ける - Togetter",
 			"url": "https://togetter.com/li/2687029",
@@ -749,6 +757,14 @@
 				"ネット"
 			],
 			"comment": "<div class=\"news-comment\"><p>個人ブログ見つけるの難しくなったよねぇ。<a href=\"https://rashita.net/blog/?%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%AE%E6%A4%8D%E3%83%AA%E3%83%B3%E3%82%AF%E6%B4%BB%E5%8B%95\">植リンク活動</a>が必要だ。</p></div>"
+		},
+		{
+			"id": "b5dea3c0-e54a-c1ef-0ec9-2044207dfec8",
+			"title": "もしも石破茂が「冬季富士山登山禁止論」について論じたら。 : 絶対にマネをしてはいけない山歩き。",
+			"url": "https://ksg2999.com/archives/41752224.html",
+			"date": "2026-04-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>論点の整理から議論の必要性を説くロジックなのかな？インスタントな回答をもとめられがちな現代において、あった方がよい視点だと思う。</p></div>"
 		}
 	]
 }

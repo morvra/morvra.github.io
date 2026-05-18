@@ -1,21 +1,21 @@
 {
-	"date": "2026-05-17",
+	"date": "2026-05-18",
 	"news": [
 		{
-			"id": "c8b1c065-bb1c-48c8-b89a-d8ed97ad5a4e",
-			"title": "[第１０９話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253189534697938759",
-			"date": "2026-05-17",
+			"id": "b69a2806-3eee-4400-a167-9f95724c77c9",
+			"title": "ソーラー充電PDA「Orion」登場！STM32U575と3.16型Sharp Memory LCD搭載、Zaurus再来の自作端末 - デイリーガジェット",
+			"url": "https://daily-gadget.net/gadgets/114176/",
+			"date": "2026-05-18",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>ロックンロール。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>こういう方向性のガジェットはスペック上がればローカルLLMと相性良さそう</p></div>"
 		},
 		{
-			"id": "78fe96f4-de0f-4802-a1fd-9a8632d88f10",
-			"title": "【速報】TSMC熊本工場が初の黒字化|47NEWS（よんななニュース）",
-			"url": "https://www.47news.jp/14311251.html",
-			"date": "2026-05-17",
+			"id": "0d43dc07-e9b6-4b74-abbb-9e4f5cf279e3",
+			"title": "Obsidianで家庭内wikiを作り無料で運用する",
+			"url": "https://raahii.me/posts/building-family-wiki-with-obsidian/",
+			"date": "2026-05-18",
 			"tags": [],
-			"comment": ""
+			"comment": "<div class=\"news-comment\"><p>必要十分って感じで素敵</p></div>"
 		}
 	]
 }
