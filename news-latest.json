@@ -1,21 +1,29 @@
 {
-	"date": "2026-05-18",
+	"date": "2026-05-19",
 	"news": [
 		{
-			"id": "b69a2806-3eee-4400-a167-9f95724c77c9",
-			"title": "ソーラー充電PDA「Orion」登場！STM32U575と3.16型Sharp Memory LCD搭載、Zaurus再来の自作端末 - デイリーガジェット",
-			"url": "https://daily-gadget.net/gadgets/114176/",
-			"date": "2026-05-18",
+			"id": "709fc070-091e-45f8-a701-d219d45f424a",
+			"title": "いろんな理由で辞書に載らなくなった言葉たち～「三省堂国語辞典から消えたことば辞典」 :: デイリーポータルZ",
+			"url": "https://dailyportalz.jp/kiji/book-review-nchutagui01",
+			"date": "2026-05-19",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>こういう方向性のガジェットはスペック上がればローカルLLMと相性良さそう</p></div>"
+			"comment": "<div class=\"news-comment\"><p>絶対おもろい。</p></div>"
 		},
 		{
-			"id": "0d43dc07-e9b6-4b74-abbb-9e4f5cf279e3",
-			"title": "Obsidianで家庭内wikiを作り無料で運用する",
-			"url": "https://raahii.me/posts/building-family-wiki-with-obsidian/",
-			"date": "2026-05-18",
+			"id": "0aa786f6-dcb0-4f16-a660-e5327c195279",
+			"title": "手塚治虫：表現の自由とタブー『歴史の証言 〜あの日何が語られたのか〜』 - YouTube",
+			"url": "https://www.youtube.com/watch?v=LZwvuByB31Y",
+			"date": "2026-05-19",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>必要十分って感じで素敵</p></div>"
+			"comment": ""
+		},
+		{
+			"id": "8d16a93b-cad5-d754-1f05-aafa5604f201",
+			"title": "印刷業界では、なぜ「インキ」と呼ぶのか？｜デザインのひきだし 津田淳子",
+			"url": "https://note.com/design_hikidashi/n/n4fbdcdc4cee5",
+			"date": "2026-05-19",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>二重語ね。マジックインキの件、Geminiにさっと聞いてそこから深堀りせず記事化されてるのがちょっと残念。</p><p>関連: <a href=\"https://ja.wikipedia.org/wiki/%E4%BA%8C%E9%87%8D%E8%AA%9E\">二重語 - Wikipedia</a></p></div>"
 		}
 	]
 }
