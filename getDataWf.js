@@ -135,10 +135,23 @@ function markdownToHTML(markdown) {
 
                 // HTMLタグかどうかを先に判定
                 if (line.trim().startsWith('<')) {
-                    const finalLine = line.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
-                        return url; 
-                    });
-                    html += `<p>${finalLine}</p>`;
+                    // WorkflowyがHTML属性値内のURLを<a>タグに自動変換している場合、生のURLに戻す
+                    let finalLine = line.replace(/<a\s+href=["']([^"']+)["'][^>]*>.*?<\/a>/g, '$1');
+
+                    // ブロックレベル要素は<p>タグで囲まない（iframeなど）
+                    const firstTag = ((finalLine.trim().match(/^<(\w[\w-]*)/) || [])[1] || '').toLowerCase();
+                    const blockTags = new Set([
+                        'iframe', 'div', 'table', 'thead', 'tbody', 'tr', 'th', 'td',
+                        'ul', 'ol', 'li', 'blockquote', 'pre', 'figure',
+                        'video', 'audio', 'section', 'article', 'aside',
+                        'header', 'footer', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr'
+                    ]);
+
+                    if (blockTags.has(firstTag)) {
+                        html += finalLine;
+                    } else {
+                        html += `<p>${finalLine}</p>`;
+                    }
                 } else {
                     // HTMLタグでなかった行だけをMarkdown処理する
                     if (line.startsWith('#')) {
