@@ -1,6 +1,42 @@
 {
 	"news": [
 		{
+			"id": "b0ab5bdd-ef57-4127-80ef-6cb58b4620e4",
+			"title": "鎌田を見ろ。常に鎌田だけを見ろ。これでサッカーの面白さがわかる",
+			"url": "https://anond.hatelabo.jp/20260528180155",
+			"date": "2026-05-29",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>鎌田に限らず一人に注目する観戦も面白い。動くタイプのボランチは特に。オフザボールにどういう意図をもって動いてるか考えるのが楽しい。</p></div>"
+		},
+		{
+			"id": "b551cab3-8fa6-4cd5-a051-a5ef2327437a",
+			"title": "初星学園 「コンテンポラリのダンス」Official Music Video (HATSUBOSHI GAKUEN - contemporary dance) - YouTube",
+			"url": "https://www.youtube.com/watch?v=82SGsHkhySg",
+			"date": "2026-05-29",
+			"tags": [
+				"音楽"
+			],
+			"comment": "<div class=\"news-comment\"><p>耳に残る詞と曲。よい。</p></div>"
+		},
+		{
+			"id": "3e287178-3d8c-403b-bfa4-78349aa74d02",
+			"title": "[1話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191254047172549",
+			"date": "2026-05-29",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>これきっかけでルーキー版見てきたけどおもろすぎ！インターネット好きなら要チェック！</p></div>"
+		},
+		{
+			"id": "114686eb-6368-47fe-a9c2-3e6a9712d6e1",
+			"title": "肉食恐竜ティラノサウルス、腕だけあんなに小さい理由は 長年の謎をついに解明？(1/2) - CNN.co.jp",
+			"url": "https://www.cnn.co.jp/fringe/35248000.html",
+			"date": "2026-05-29",
+			"tags": [],
+			"comment": ""
+		},
+		{
 			"id": "ca1c7144-6def-4d94-a23f-41d2f68e8742",
 			"title": "00年代のブログ年表 : 佐倉葉ウェブ文化研究室の作業報告書",
 			"url": "http://blog.livedoor.jp/sakuraba_izl/archives/63137005.html",

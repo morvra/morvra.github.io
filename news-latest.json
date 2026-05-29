@@ -1,55 +1,41 @@
 {
-	"date": "2026-05-26",
+	"date": "2026-05-29",
 	"news": [
 		{
-			"id": "ca1c7144-6def-4d94-a23f-41d2f68e8742",
-			"title": "00年代のブログ年表 : 佐倉葉ウェブ文化研究室の作業報告書",
-			"url": "http://blog.livedoor.jp/sakuraba_izl/archives/63137005.html",
-			"date": "2026-05-26",
+			"id": "b0ab5bdd-ef57-4127-80ef-6cb58b4620e4",
+			"title": "鎌田を見ろ。常に鎌田だけを見ろ。これでサッカーの面白さがわかる",
+			"url": "https://anond.hatelabo.jp/20260528180155",
+			"date": "2026-05-29",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>年表見るだけでもおもろい。</p><p>via: <a href=\"https://dabun.net/news/20260524\">2026年05月24日 - 駄文にゅうす</a></p></div>"
+			"comment": "<div class=\"news-comment\"><p>鎌田に限らず一人に注目する観戦も面白い。動くタイプのボランチは特に。オフザボールにどういう意図をもって動いてるか考えるのが楽しい。</p></div>"
 		},
 		{
-			"id": "7e5e4c29-04bd-4783-add8-42677c85afda",
-			"title": "ラプラス・ダークネス生誕祭ライブに『学マス』姫崎莉波（声:薄井友里）が登場、『36℃U・B・U』『clumsy trick』を披露。誕生日のご本人はまさかの歌わず、特等席での応援 | ゲーム・エンタメ最新情報のファミ通.com",
-			"url": "https://www.famitsu.com/article/202605/75922",
-			"date": "2026-05-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>面白い試みだな〜と思ってみてたんだけど、ゲーム内でお披露目されてない衣装でのライブだったのね。なんか言いたくなる気持ちも分かる。</p></div>"
+			"id": "b551cab3-8fa6-4cd5-a051-a5ef2327437a",
+			"title": "初星学園 「コンテンポラリのダンス」Official Music Video (HATSUBOSHI GAKUEN - contemporary dance) - YouTube",
+			"url": "https://www.youtube.com/watch?v=82SGsHkhySg",
+			"date": "2026-05-29",
+			"tags": [
+				"音楽"
+			],
+			"comment": "<div class=\"news-comment\"><p>耳に残る詞と曲。よい。</p></div>"
 		},
 		{
-			"id": "300f0cdc-ea16-4ace-bda8-07dfd3ba581a",
-			"title": "TVアニメ『ヒストリエ』PV第1弾 - YouTube",
-			"url": "https://www.youtube.com/watch?v=GM1Y206Unwg",
-			"date": "2026-05-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>うおおおおお</p></div>"
-		},
-		{
-			"id": "44b0a9c2-c942-43dc-9373-6be918c4ff77",
-			"title": "『資本主義の悪魔』の対概念『傷物の悪魔』さん - orangestar2",
-			"url": "https://orangestar2.hatenadiary.com/entry/2026/05/25/111837",
-			"date": "2026-05-26",
+			"id": "3e287178-3d8c-403b-bfa4-78349aa74d02",
+			"title": "[1話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191254047172549",
+			"date": "2026-05-29",
 			"tags": [
 				"漫画"
 			],
+			"comment": "<div class=\"news-comment\"><p>これきっかけでルーキー版見てきたけどおもろすぎ！インターネット好きなら要チェック！</p></div>"
+		},
+		{
+			"id": "114686eb-6368-47fe-a9c2-3e6a9712d6e1",
+			"title": "肉食恐竜ティラノサウルス、腕だけあんなに小さい理由は 長年の謎をついに解明？(1/2) - CNN.co.jp",
+			"url": "https://www.cnn.co.jp/fringe/35248000.html",
+			"date": "2026-05-29",
+			"tags": [],
 			"comment": ""
-		},
-		{
-			"id": "49e29081-0ecf-39a0-5b76-13971a645c33",
-			"title": "【全文】巨人・阿部監督の娘が手紙で説明「父が警察に連行された姿見て泣き崩れてしまいました」　電撃辞任 - サンスポ",
-			"url": "https://www.sanspo.com/article/20260526-3SN7APA3LFDL5OVMB45IWLDKDM/?outputType=theme_giants",
-			"date": "2026-05-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>腹を立てて暴力をふるった本人が悪い＆逮捕までの流れも各所真っ当に動いた結果というのは大前提だが、これで家族全員しんどい思いするのはつらいなぁ。とりあえずよそから石投げるようなマネはやめよう。</p></div>"
-		},
-		{
-			"id": "c4280942-7d09-4875-bc9a-28a617b15c4a",
-			"title": "月刊『ダ・ヴィンチ』休刊決定のお知らせ | KADOKAWA",
-			"url": "https://www.kadokawa.co.jp/topics/16879/",
-			"date": "2026-05-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>たまに読んでた。時代だねぇ。</p></div>"
 		}
 	]
 }
