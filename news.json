@@ -1,6 +1,48 @@
 {
 	"news": [
 		{
+			"id": "568a8adb-c946-4859-a17e-18ddc1f6e13f",
+			"title": "ぽこポケは究極のポケモン | s2terminal.log",
+			"url": "https://blog.s2terminal.com/pokemon-pokopia/",
+			"date": "2026-06-02",
+			"tags": [
+				"ゲーム"
+			],
+			"comment": ""
+		},
+		{
+			"id": "5ccf7adb-f6e0-427b-a57c-5a45b10caed3",
+			"title": "世界の至宝を脅かす乾燥に強いカビ 対策が裏目に - 日本経済新聞",
+			"url": "https://www.nikkei.com/article/DGXZQOSG29DC70Z20C26A5000000/",
+			"date": "2026-06-02",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>気密性を重視することで菌が繁殖しやすくなる場合もあるのね。</p></div>"
+		},
+		{
+			"id": "de0eb927-9081-4266-b729-25fe7191ac17",
+			"title": "「サブカルの聖地」ヴィレッジヴァンガード本店、40年の歴史に幕 - 日本経済新聞",
+			"url": "https://www.nikkei.com/article/DGXZQOFD292DG0Z20C26A5000000/",
+			"date": "2026-06-02",
+			"tags": [],
+			"comment": ""
+		},
+		{
+			"id": "fcfdbeef-8bdc-4700-87a2-d19285bdd551",
+			"title": "昭和時代のインチキ広告を調べてみました【公正取引委員会排除命令集より】 - 日常にツベルクリン注射を‥",
+			"url": "https://www.tuberculin.net/entry/2026/05/25/%E6%98%AD%E5%92%8C%E6%99%82%E4%BB%A3%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%81%E3%82%AD%E5%BA%83%E5%91%8A%E3%82%92%E8%AA%BF%E3%81%B9%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%90%E5%85%AC%E6%AD%A3",
+			"date": "2026-06-02",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>ひでーなーと思いつつ、現代のウェブ広告はこれよりひどい気もする。</p><p>関連？: <a href=\"https://blog.tinect.jp/?p=91160\">ワインショップの売り文句に「嘘を嘘と見抜く」やり方は通用しない | Books&Apps</a></p></div>"
+		},
+		{
+			"id": "005b6c35-15c1-470c-aa1a-232691ddf740",
+			"title": "記事よさらば あるいは HtoHという回路 - by 倉下忠憲@rashita2",
+			"url": "https://tadanori.substack.com/p/htoh",
+			"date": "2026-06-02",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>明確に書きたいことがある場合は、テーマとポイントだけ与えてAIに書かせるより自分の手で書いた方がちゃんと伝わるだろうなって感覚がある。</p></div>"
+		},
+		{
 			"id": "28079282-8c27-4778-b0f7-3dc7ed72baab",
 			"title": "[第１１０話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋",
 			"url": "https://shonenjumpplus.com/episode/9253191254047172905",
