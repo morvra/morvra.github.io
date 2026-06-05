@@ -1,0 +1,2914 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boardflowy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0d0e'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-weight='700' font-size='22' fill='%23d4a94a' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg: #19171a;
+  --card-bg: #27242e;
+  --card-border: #38343f;
+  --card-hover: #c8a96e;
+  --group-bg: rgba(200,169,110,0.06);
+  --group-border: rgba(200,169,110,0.35);
+  --accent: #c8a96e;
+  --accent-dim: rgba(200,169,110,0.15);
+  --red: #d4584a;
+  --text-primary: #e8e4f0;
+  --text-body: #b0aab8;
+  --text-muted: #7a7588;
+  --ui-bg: #222028;
+  --ui-border: #38353f;
+  --ui-text: #c8c4d0;
+  --sidebar-bg: #1e1c22;
+  --conn-color: #c8a96e;
+  --conn-selected: #e06a50;
+}
+:root.light {
+  --bg: #edeae3;
+  --card-bg: #fdfbf7;
+  --card-border: #d0c9bc;
+  --card-hover: #a07840;
+  --group-bg: rgba(160,120,64,0.05);
+  --group-border: rgba(160,120,64,0.28);
+  --accent: #a07840;
+  --accent-dim: rgba(160,120,64,0.12);
+  --red: #c0412e;
+  --text-primary: #1a1714;
+  --text-body: #3e3a34;
+  --text-muted: #7a7470;
+  --ui-bg: #f5f2eb;
+  --ui-border: #cec8be;
+  --ui-text: #3a3630;
+  --sidebar-bg: #eeebe3;
+  --conn-color: #a07840;
+  --conn-selected: #c04030;
+}
+body, .card, .group, #toolbar, #sidebar, #hint, .act-btn, .tb-btn, .sidebar-item {
+  transition: background-color .22s, border-color .22s, color .2s, box-shadow .22s;
+}
+
+body{
+  margin:0; overflow:hidden;
+  background:var(--bg);
+  font-family:'Noto Sans JP','Outfit',sans-serif;
+}
+
+#canvas-container{
+  width:100vw; height:100vh;
+  position:relative; overflow:hidden;
+  touch-action:none;
+}
+
+#board{
+  position:absolute; top:0; left:0;
+  transform-origin:0 0;
+  /* will-change外すことでsubpixelレンダリングを安定させる */
+  image-rendering:auto;
+}
+
+/* ── CARDS ──────────────────────────────────────── */
+.card{
+  position:absolute;
+  background:var(--card-bg);
+  border-radius:6px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  box-shadow:0 1px 6px rgba(0,0,0,0.22),0 1px 2px rgba(0,0,0,0.12);
+  padding:10px 12px 12px;
+  min-width:140px;
+  max-width:520px;
+  min-height:36px;
+  cursor:move;
+  border:1.5px solid var(--card-border);
+  user-select:none;
+  display:flex; flex-direction:column; gap:4px;
+  overflow:hidden;
+  transition:border-color .15s,box-shadow .15s;
+}
+.card:hover,.card.selected{
+  border-color:var(--card-hover);
+  box-shadow:0 2px 12px rgba(200,169,110,0.18),0 1px 3px rgba(0,0,0,0.18);
+}
+.card.editing{
+  cursor:default;
+  border-color:var(--accent);
+  box-shadow:0 0 0 2px rgba(200,169,110,0.25),0 2px 12px rgba(0,0,0,0.18);
+}
+.card.connect-source{
+  border-color:#6eb8c8;
+  box-shadow:0 0 0 3px rgba(110,184,200,0.25);
+}
+.card.connect-hover{
+  border-color:#6eb8c8;
+  cursor:crosshair !important;
+}
+
+.card-title{
+  font-family:'Noto Sans JP','Outfit',sans-serif;
+  font-weight:400; font-size:var(--fs-card,.76rem); line-height:1.6; letter-spacing:.01em;
+  color:var(--text-primary);
+  outline:none; border-radius:2px;
+  word-break:break-all; white-space:pre-wrap;
+  pointer-events:none;
+  padding-right:16px;
+  min-height:1.3em;
+}
+/* タイトルは常に表示（空でも編集時はスペース確保） */
+.card-title:empty::before{content:'メモを入力…'; color:var(--text-muted); pointer-events:none}
+.card.editing .card-title:empty::before{content:''; display:none}
+
+/* 下位項目があるとき、本文が太字に */
+.card.has-notes .card-title{
+  font-weight:700; font-size:var(--fs-card,.76rem);
+}
+
+.card-body{
+  font-size:var(--fs-body,.7rem); line-height:1.55;
+  color:var(--text-body);
+  outline:none; border-radius:2px;
+  word-break:break-all; white-space:pre-wrap;
+  pointer-events:none;
+  max-height:calc(1.55em * 6);
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:6;
+  -webkit-box-orient:vertical;
+  margin-top:4px;
+  padding-left:2px;
+}
+.card-body a{color:#4a7eb8;text-decoration:underline;pointer-events:auto;cursor:pointer}
+.card.editing .card-body{
+  max-height:none; display:block;
+  -webkit-line-clamp:unset;
+}
+.card.resized .card-body{
+  max-height:none; display:block;
+  -webkit-line-clamp:unset;
+}
+
+/* ── IMAGE CARDS ─────────────────────────────────── */
+.card.image-card{
+  padding:4px;
+  min-width:80px; min-height:60px;
+  overflow:hidden; background:var(--card-bg);
+}
+.card-image{
+  display:block; width:100%; height:100%;
+  object-fit:contain; border-radius:3px;
+  pointer-events:none; user-select:none;
+}
+/* drop zone highlight */
+#board.img-drop-over,.card.image-card.drop-hover{
+  outline:2px dashed var(--accent);
+}
+
+/* 本文なし & 非編集時は下位項目エリアを隠す */
+.card-body:empty:not(:focus){display:none}
+.card.editing .card-body:empty{
+  display:block; min-height:1.4em; opacity:.5;
+}
+.card.editing .card-body:empty::before{content:'下位項目を追加…'; color:var(--text-muted)}
+
+.card.editing .card-title,
+.card.editing .card-body{pointer-events:auto}
+
+.card-actions{
+  position:absolute; top:5px; right:5px;
+  display:flex; gap:3px; opacity:0;
+  transition:opacity .15s;
+  z-index:30;
+}
+.card:hover .card-actions{opacity:1}
+
+.act-btn{
+  width:18px; height:18px;
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  color:var(--text-muted);
+  border-radius:3px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; cursor:pointer; color:var(--text-muted);
+  transition:all .12s;
+}
+.act-btn:hover{background:var(--accent-dim); border-color:var(--accent); color:var(--accent)}
+.act-btn.del:hover{background:#fde8e6; border-color:var(--red); color:var(--red)}
+
+.resizer{
+  position:absolute; right:0; bottom:0; width:14px; height:14px;
+  cursor:nwse-resize;
+  background:linear-gradient(135deg,transparent 50%,#c8c0b8 50%);
+  border-radius:0 0 6px 0; opacity:0; z-index:20;
+  transition:opacity .15s;
+}
+.card:hover .resizer,.group:hover .resizer{opacity:1}
+
+/* ── GROUPS ──────────────────────────────────────── */
+.group{
+  position:absolute;
+  background:var(--group-bg);
+  border-radius:10px;
+  border:1.5px dashed var(--group-border);
+  min-width:180px; min-height:120px;
+  cursor:move; user-select:none;
+  transition:border-color .15s, background .15s;
+}
+.group:hover,.group.selected{
+  border-color:var(--accent);
+  background:rgba(200,169,110,0.1);
+}
+.group.editing{border-color:var(--accent); background:rgba(200,169,110,0.12)}
+
+.group-title{
+  position:absolute; top:8px; left:12px;
+  font-family:'Outfit',sans-serif;
+  font-weight:600; font-size:var(--fs-group,.8rem); letter-spacing:.02em;
+  color:var(--accent);
+  outline:none; pointer-events:none;
+  z-index:10; min-width:40px;
+}
+.group.editing .group-title{pointer-events:auto}
+.group-copy-btn{
+  position:absolute; top:7px; left:auto; right:32px;
+  width:20px; height:20px; border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--text-muted); cursor:pointer; opacity:0;
+  transition:all .12s; background:transparent;
+}
+.group:hover .group-copy-btn{opacity:.7}
+.group-copy-btn:hover{opacity:1!important; background:var(--accent-dim); color:var(--accent)}
+
+.group .card-actions{top:5px; right:5px; opacity:0}
+.group:hover .card-actions{opacity:1}
+.group .resizer{
+  background:linear-gradient(135deg,transparent 50%,rgba(200,169,110,0.5) 50%);
+  border-radius:0 0 10px 0;
+}
+
+/* ── CONNECTIONS SVG ──────────────────────────────── */
+#conn-svg{
+  position:absolute; top:0; left:0;
+  width:1px; height:1px;
+  overflow:visible; pointer-events:none;
+  z-index:1;
+}
+.conn-path{
+  fill:none; stroke:var(--conn-color);
+  stroke-width:1.5; cursor:pointer;
+  pointer-events:stroke;
+  transition:stroke .15s;
+}
+.conn-path:hover{stroke:#e8c080; stroke-width:2.5}
+.conn-path.selected{stroke:var(--conn-selected); stroke-width:2.5}
+.conn-hitbox{
+  fill:none; stroke:transparent; stroke-width:16;
+  cursor:pointer; pointer-events:stroke;
+}
+.conn-label-bg{
+  fill:var(--bg); stroke:var(--conn-color);
+  stroke-width:1; rx:4; ry:4;
+}
+.conn-label-text{
+  fill:var(--conn-color);
+  font-family:'Outfit',sans-serif;
+  font-size:var(--fs-conn,11px); font-weight:500;
+  text-anchor:middle; dominant-baseline:middle;
+  cursor:pointer; pointer-events:all;
+}
+
+/* ── TOOLBAR ──────────────────────────────────────── */
+#toolbar{
+  position:fixed; bottom:16px; left:16px;
+  display:flex; align-items:center; gap:6px;
+  background:var(--ui-bg);
+  border:1px solid var(--ui-border);
+  padding:6px 10px; border-radius:100px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.12);
+  z-index:10000; white-space:nowrap;
+  transition:all .28s cubic-bezier(.4,0,.2,1);
+}
+/* collapsed: only the toggle button visible */
+#toolbar.collapsed{
+  padding:6px 8px; gap:0;
+}
+.tb-inner{
+  display:flex; align-items:center; gap:6px;
+  overflow:hidden;
+  transition:opacity .2s .05s, max-width .28s cubic-bezier(.4,0,.2,1);
+  max-width:800px;
+}
+#toolbar.collapsed .tb-inner{
+  max-width:0; opacity:0; pointer-events:none;
+  transition:opacity .1s, max-width .28s cubic-bezier(.4,0,.2,1);
+  gap:0;
+}
+
+#tb-toggle{
+  width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--ui-text); flex-shrink:0;
+  transition:all .15s; background:transparent;
+  border:1.5px solid transparent;
+}
+#tb-toggle:hover{background:var(--accent-dim); border-color:var(--accent); color:var(--accent)}
+#toolbar:not(.collapsed) #tb-toggle{color:var(--accent)}
+
+.tb-sep{width:1px; height:20px; background:var(--ui-border); margin:0 1px; flex-shrink:0}
+
+.tb-btn{
+  width:30px; height:30px; padding:0;
+  border-radius:100px;
+  font-family:'Outfit',sans-serif;
+  font-size:.72rem; font-weight:600; letter-spacing:.04em;
+  cursor:pointer; display:inline-flex; align-items:center; justify-content:center;
+  transition:all .15s; border:1.5px solid transparent;
+  color:var(--ui-text); background:transparent;
+  line-height:1; position:relative; flex-shrink:0;
+}
+.tb-icon{display:inline-flex; align-items:center; justify-content:center; line-height:1}
+.tb-icon svg{display:block; vertical-align:middle}
+.tb-btn:hover{background:rgba(128,96,32,0.1); border-color:rgba(128,96,32,0.25); color:var(--accent)}
+.tb-btn.primary{background:var(--accent); color:#1a1612; border-color:var(--accent); width:34px; height:30px; border-radius:100px}
+.tb-btn.primary:hover{background:#d4b878; border-color:#d4b878}
+.tb-btn.active{background:rgba(110,184,200,0.15); border-color:#6eb8c8; color:#6eb8c8}
+.tb-btn.danger{color:#d4584a}
+.tb-btn.danger:hover{background:rgba(212,88,74,0.12); border-color:rgba(212,88,74,0.4)}
+
+/* Tooltip (JS-driven, appended to body) */
+#tb-tooltip{
+  position:fixed;
+  background:#111; color:#e8e4f0; font-size:.62rem; font-weight:500;
+  font-family:'Outfit',sans-serif; letter-spacing:.03em;
+  padding:4px 8px; border-radius:6px; white-space:nowrap;
+  pointer-events:none;
+  z-index:99999;
+  box-shadow:0 2px 8px rgba(0,0,0,0.4);
+  transition:opacity .12s;
+  opacity:0;
+}
+
+.zoom-display{
+  font-family:'Outfit',sans-serif;
+  font-size:.68rem; font-weight:500; letter-spacing:.05em;
+  color:var(--text-muted); min-width:36px; text-align:center;
+}
+.zoom-btn{
+  width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; cursor:pointer;
+  color:var(--ui-text); transition:all .12s;
+  position:relative;
+}
+.zoom-btn:hover{background:rgba(200,169,110,0.15); color:var(--accent)}
+
+.zoom-display{
+  font-family:'Outfit',sans-serif;
+  font-size:.68rem; font-weight:500; letter-spacing:.05em;
+  color:var(--text-muted); min-width:36px; text-align:center;
+}
+.zoom-btn{
+  width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; cursor:pointer;
+  color:var(--ui-text); transition:all .12s;
+}
+.zoom-btn:hover{background:rgba(200,169,110,0.15); color:var(--accent)}
+
+/* ── SIDEBAR ──────────────────────────────────────── */
+#sidebar{
+  position:fixed; right:-280px; top:0; bottom:0; width:280px;
+  background:var(--sidebar-bg);
+  border-left:1px solid var(--ui-border);
+  z-index:9000; transition:right .25s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column;
+}
+#sidebar.open{right:0}
+
+#sidebar-header{
+  padding:16px; border-bottom:1px solid var(--ui-border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+#sidebar-header h2{
+  font-family:'Outfit',sans-serif; font-weight:600;
+  font-size:.85rem; letter-spacing:.05em; color:var(--ui-text);
+}
+.sidebar-close{
+  width:24px; height:24px; border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--text-muted);
+  font-size:16px; transition:all .12s;
+}
+.sidebar-close:hover{background:rgba(200,169,110,0.12); color:var(--accent)}
+
+#sidebar-search{
+  padding:8px 16px; border-bottom:1px solid var(--ui-border);
+}
+#sidebar-search input{
+  width:100%; background:rgba(255,255,255,0.05);
+  border:1px solid var(--ui-border); border-radius:6px;
+  padding:6px 10px; font-size:.72rem;
+  color:var(--ui-text); outline:none; font-family:inherit;
+}
+#sidebar-search input::placeholder{color:var(--text-muted)}
+#sidebar-search input:focus{border-color:rgba(200,169,110,0.5)}
+
+#sidebar-list{
+  flex:1; overflow-y:auto; padding:8px 0;
+}
+#sidebar-list::-webkit-scrollbar{width:4px}
+#sidebar-list::-webkit-scrollbar-track{background:transparent}
+#sidebar-list::-webkit-scrollbar-thumb{background:rgba(200,169,110,0.2); border-radius:2px}
+
+.sidebar-item{
+  padding:8px 16px; cursor:pointer;
+  border-left:2px solid transparent;
+  transition:all .12s;
+}
+.sidebar-item:hover{
+  background:rgba(200,169,110,0.07);
+  border-left-color:var(--accent);
+}
+.sidebar-item-title{
+  font-size:.73rem; font-weight:500;
+  color:var(--ui-text); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+}
+.sidebar-item-preview{
+  font-size:.65rem; color:var(--text-muted);
+  margin-top:2px; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+}
+.sidebar-group-label{
+  padding:12px 16px 4px;
+  font-size:.62rem; font-weight:700; letter-spacing:.1em;
+  color:var(--text-muted); text-transform:uppercase;
+}
+
+/* ── HELP HINT ──────────────────────────────────────── */
+
+/* ── SETTINGS PANEL ──────────────────────────────── */
+#settings-panel{
+  position:fixed; bottom:72px; left:16px; transform:none;
+  background:var(--ui-bg); border:1px solid var(--ui-border);
+  border-radius:12px; padding:16px 20px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.25);
+  z-index:9999; min-width:260px;
+  font-family:'Outfit',sans-serif;
+  display:none;
+  animation:panelIn .18s cubic-bezier(.4,0,.2,1);
+}
+#settings-panel.open{display:block}
+@keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sp-title{
+  font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text-muted); margin-bottom:12px;
+}
+.sp-row{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:10px; gap:12px;
+}
+.sp-row:last-child{margin-bottom:0}
+.sp-label{font-size:.72rem; font-weight:500; color:var(--ui-text)}
+.sp-controls{display:flex; align-items:center; gap:6px}
+.sp-btn{
+  width:26px; height:26px; border-radius:6px;
+  background:rgba(128,128,128,0.12); border:1px solid var(--ui-border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:700; cursor:pointer; color:var(--ui-text);
+  transition:all .12s;
+}
+.sp-btn:hover{background:var(--accent-dim); border-color:var(--accent); color:var(--accent)}
+.sp-val{
+  font-size:.72rem; font-weight:600; min-width:36px; text-align:center;
+  color:var(--ui-text);
+}
+.sp-toggle{
+  display:flex; gap:4px;
+}
+.sp-toggle-btn{
+  padding:4px 10px; border-radius:6px; font-size:.68rem; font-weight:600;
+  cursor:pointer; color:var(--text-muted);
+  border:1px solid transparent;
+  transition:all .12s;
+}
+.sp-toggle-btn.active{
+  background:var(--accent-dim); border-color:var(--accent); color:var(--accent);
+}
+.sp-sep{height:1px; background:var(--ui-border); margin:10px 0}
+
+/* ── FREE ARROWS ──────────────────────────────────── */
+.arrow-handle{
+  fill:var(--ui-bg); stroke:var(--accent); stroke-width:1.5;
+  cursor:move; opacity:0;
+  transition:opacity .15s;
+  r:5;
+}
+.arrow-group:hover .arrow-handle,
+.arrow-group.selected .arrow-handle{ opacity:1 }
+.arrow-line{
+  fill:none; stroke:var(--conn-color); stroke-width:1.5;
+  cursor:pointer; pointer-events:stroke;
+}
+.arrow-line:hover{ stroke-width:2.5 }
+.arrow-line.selected{ stroke:var(--conn-selected); stroke-width:2.5 }
+.arrow-hitbox{
+  fill:none; stroke:transparent; stroke-width:16;
+  cursor:pointer; pointer-events:stroke;
+}
+.arrow-label-bg{
+  fill:var(--ui-bg); stroke:var(--conn-color); stroke-width:1;
+  cursor:pointer; pointer-events:all; rx:4; ry:4;
+}
+.arrow-label-text{
+  fill:var(--conn-color);
+  font-family:'Outfit',sans-serif;
+  font-size:var(--fs-conn,11px); font-weight:500;
+  text-anchor:middle; dominant-baseline:middle;
+  cursor:pointer; pointer-events:all;
+}
+
+/* ── FREE TEXT ──────────────────────────────────────── */
+.free-text{
+  position:absolute;
+  display:inline-block;
+  min-width:30px; min-height:1em;
+  cursor:move; user-select:none;
+  font-family:'Outfit',sans-serif;
+  font-size:var(--fs-card,.76rem);
+  color:var(--text-primary);
+  padding:5px 8px;
+  border-radius:4px;
+  border:1.5px solid transparent;
+  transition:border-color .15s;
+  outline:none;
+  box-sizing:border-box;
+}
+.ft-inner{
+  outline:none;
+  white-space:pre;
+  word-break:normal;
+  pointer-events:none;
+  min-width:10px;
+  display:block;
+}
+.free-text.has-width .ft-inner{
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+/* SE resize handle for box size */
+.ft-resize-box{
+  position:absolute; bottom:0; right:0;
+  width:10px; height:10px;
+  cursor:se-resize;
+  opacity:0; transition:opacity .15s;
+}
+.ft-resize-box::after{
+  content:'';
+  position:absolute; bottom:2px; right:2px;
+  width:6px; height:6px;
+  border-right:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+  border-radius:1px;
+}
+.free-text:hover .ft-resize-box,
+.free-text.selected .ft-resize-box{ opacity:1 }
+.free-text:hover{ border-color:var(--ui-border) }
+.free-text.selected{ border-color:var(--accent) }
+.free-text.editing{
+  cursor:text;
+  border-color:var(--accent);
+  box-shadow:0 0 0 2px rgba(200,169,110,0.18);
+  background:var(--card-bg);
+}
+.free-text.editing .ft-inner{ pointer-events:auto }
+
+/* drawing mode */
+body.arrow-draw-mode #canvas-container{ cursor:crosshair }
+
+/* ── BOARD MANAGER ───────────────────────────────── */
+#board-manager{
+  padding:8px 12px 4px; border-bottom:1px solid var(--ui-border);
+  display:block;
+}
+.board-item{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:5px 8px; border-radius:6px; cursor:pointer;
+  font-size:.7rem; font-family:'Outfit',sans-serif;
+  color:var(--ui-text); margin-bottom:3px;
+  transition:background .12s;
+}
+.board-item:hover{background:var(--accent-dim)}
+.board-item.active{background:var(--accent-dim); color:var(--accent); font-weight:600}
+.board-item-name{flex:1; outline:none; background:transparent; border:none;
+  color:inherit; font:inherit; cursor:inherit; min-width:0}
+.board-item-name:focus{cursor:text}
+.board-item-actions{display:flex;gap:4px;opacity:0;transition:opacity .12s}
+.board-item:hover .board-item-actions{opacity:1}
+.board-item-btn{
+  width:18px;height:18px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;cursor:pointer;color:var(--text-muted);
+  transition:all .1s;
+}
+.board-item-btn:hover{background:var(--accent-dim);color:var(--accent)}
+.board-add-btn{
+  width:100%; padding:5px; border-radius:6px; cursor:pointer;
+  font-size:.68rem; font-family:'Outfit',sans-serif;
+  color:var(--text-muted); text-align:center;
+  border:1px dashed var(--ui-border);
+  transition:all .12s; margin-top:4px;
+}
+.board-add-btn:hover{border-color:var(--accent);color:var(--accent)}
+/* ── HINT TOGGLE ──────────────────────────────── */
+#hint-toggle{ display:none; }
+
+#hint{
+  position:fixed; top:12px; left:12px;
+  font-size:.65rem; color:var(--ui-text);
+  background:var(--ui-bg);
+  border:1px solid var(--ui-border);
+  backdrop-filter:blur(8px);
+  padding:10px 14px; border-radius:8px;
+  pointer-events:none; z-index:100;
+  font-family:'Outfit',sans-serif; line-height:1.9;
+  opacity:0; visibility:hidden;
+  transform:translateY(-4px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);
+}
+#hint.visible{opacity:.97; visibility:visible; transform:translateY(0)}
+#hint kbd{
+  background:rgba(128,128,128,0.18); border-radius:3px;
+  padding:1px 5px; font-family:inherit; font-size:.6rem;
+  color:var(--accent); font-weight:600;
+}
+
+/* ── TOAST ──────────────────────────────────────── */
+.toast{
+  position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+  background:var(--ui-bg); border:1px solid var(--ui-border);
+  color:var(--ui-text); padding:8px 18px; border-radius:100px;
+  font-size:.72rem; font-family:'Outfit',sans-serif; font-weight:500;
+  z-index:20000; box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  animation:toastIn .2s ease;
+}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ── CONNECT MODE CURSOR ──────────────────────────── */
+body.connect-mode #canvas-container{cursor:crosshair}
+body.connect-mode .card{cursor:crosshair}
+body.connect-mode .group{cursor:crosshair}
+
+/* ── CONN LABEL EDITOR ──────────────────────────── */
+#label-editor{
+  position:fixed; z-index:20000;
+  display:none; flex-direction:column; gap:6px;
+  background:var(--ui-bg); border:1px solid var(--ui-border);
+  border-radius:8px; padding:10px 12px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5);
+  min-width:200px;
+}
+#label-editor input{
+  background:rgba(255,255,255,0.06); border:1px solid var(--ui-border);
+  border-radius:4px; padding:6px 8px;
+  font-size:.73rem; color:var(--ui-text); outline:none; font-family:inherit;
+}
+#label-editor input:focus{border-color:rgba(200,169,110,0.5)}
+#label-editor-actions{display:flex; gap:6px}
+.le-btn{
+  flex:1; padding:5px; border-radius:4px;
+  font-size:.68rem; font-weight:600; font-family:'Outfit',sans-serif;
+  cursor:pointer; text-align:center;
+  transition:all .12s;
+}
+.le-btn.save{background:var(--accent); color:#1a1612}
+.le-btn.save:hover{background:#d4b878}
+.le-btn.del-conn{background:rgba(212,88,74,0.15); color:var(--red); border:1px solid rgba(212,88,74,0.3)}
+.le-btn.del-conn:hover{background:rgba(212,88,74,0.25)}
+.le-type-btn{
+  flex:1; padding:4px; border-radius:5px; font-size:.8rem; font-weight:700;
+  cursor:pointer; text-align:center; color:var(--text-muted);
+  border:1.5px solid var(--ui-border);
+  transition:all .12s; background:transparent;
+}
+.le-type-btn:hover{background:var(--accent-dim); border-color:var(--accent); color:var(--accent)}
+.le-type-btn.active{background:var(--accent-dim); border-color:var(--accent); color:var(--accent)}
+
+/* ── CONTEXT INFO ──────────────────────────────── */
+
+
+@media(max-width:520px){
+  .tb-sep{display:none}
+  #toolbar{gap:2px}
+}
+/* ── CARD COUNT ────────────────────────────────── */
+#card-count{
+  font-family:'Outfit',sans-serif;
+  font-size:.65rem; font-weight:600; letter-spacing:.05em;
+  color:var(--text-muted); min-width:36px; text-align:center;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div id="hint-toggle" onclick="toggleHint()" title="Ctrl+?">
+  <kbd>?</kbd> ショートカット
+</div>
+<div id="hint">
+  <kbd>N</kbd> 新規カード &nbsp; <kbd>G</kbd> グループ &nbsp; <kbd>C</kbd> 接続モード<br>
+  <kbd>A</kbd> 矢印描画 &nbsp; <kbd>T</kbd> テキスト追加 &nbsp; <kbd>I</kbd> 画像追加 &nbsp; <kbd>L</kbd> カード一覧<br>
+  <kbd>\</kbd> ツールバー開閉 &nbsp; <kbd>Esc</kbd> キャンセル<br>
+  <kbd>Ctrl</kbd>+<kbd>Z</kbd> 元に戻す &nbsp; <kbd>Ctrl</kbd>+<kbd>V</kbd> OPML貼付<br>
+  ダブルクリック 編集 &nbsp; <kbd>Ctrl</kbd>+スクロール ズーム
+</div>
+
+
+<div id="canvas-container">
+  <div id="board">
+    <svg id="conn-svg">
+      <defs>
+        <marker id="arrow-tip" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-color)"/>
+        </marker>
+        <marker id="arrow-tip-sel" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-selected)"/>
+        </marker>
+        <marker id="arrow-tip-both-start" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-color)"/>
+        </marker>
+        <marker id="arrow-tip-both-start-sel" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-selected)"/>
+        </marker>
+        <marker id="free-arrow-tip" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-color)"/>
+        </marker>
+        <marker id="free-arrow-tip-sel" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-selected)"/>
+        </marker>
+        <marker id="free-arrow-start" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+          <polygon points="0 0, 8 3, 0 6" fill="var(--conn-color)"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+</div>
+
+<div id="toolbar" class="collapsed">
+  <!-- Toggle button always visible -->
+  <div id="tb-toggle" onclick="toggleToolbar()" title="">
+    <svg id="tb-toggle-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="3" width="12" height="10" rx="1.5"/>
+      <line x1="2" y1="7" x2="14" y2="7"/>
+    </svg>
+  </div>
+  <!-- Collapsible inner -->
+  <div class="tb-inner">
+    <div class="tb-sep"></div>
+    <div class="zoom-btn" onclick="zoomCenter(1/1.2)" data-tip="縮小">−</div>
+    <span class="zoom-display" id="zoom-display">100%</span>
+    <div class="zoom-btn" onclick="zoomCenter(1.2)" data-tip="拡大">+</div>
+    <div class="tb-sep"></div>
+    <button class="tb-btn primary" onclick="addCard()" data-tip="カードを追加 [N]"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M8 6v4M6 8h4"/></svg></span></button>
+    <button class="tb-btn" style="color:#9ab8d4" onclick="addGroup()" data-tip="グループを追加 [G]"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="14" height="10" rx="1.5" stroke-dasharray="3 2"/><path d="M1 7h14"/></svg></span></button>
+    <button class="tb-btn" id="conn-btn" onclick="toggleConnectMode()" data-tip="接続モード [C]"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r="2"/><circle cx="12.5" cy="8" r="2"/><path d="M5.5 8h5"/><path d="M3.5 4.5C3.5 2.5 12.5 2.5 12.5 4.5"/><path d="M3.5 11.5C3.5 13.5 12.5 13.5 12.5 11.5"/></svg></span></button>
+    <button class="tb-btn" id="arrow-btn" onclick="toggleArrowDraw()" data-tip="矢印を描く [A]"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="12" y2="4"/><polyline points="7,4 12,4 12,9"/></svg></span></button>
+    <button class="tb-btn" id="text-btn" onclick="addFreeText()" data-tip="テキストを追加"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h12M8 4v8M5 12h6"/></svg></span></button>
+    <button class="tb-btn" onclick="addImageCard()" data-tip="画像を追加 [I]"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 10l3.5-3.5 3 3 2.5-2.5 4 4"/><circle cx="11.5" cy="6.5" r="1"/></svg></span></button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="importOPML()" data-tip="OPMLをインポート"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8M4 6l4 4 4-4"/><path d="M2 12v2h12v-2"/></svg></span></button>
+    <button class="tb-btn" onclick="exportOPML()" data-tip="OPMLをコピー"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10V2M4 6l4-4 4 4"/><path d="M2 12v2h12v-2"/></svg></span></button>
+    <button class="tb-btn" onclick="exportPNG()" data-tip="PNG書き出し"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.5A1.5 1.5 0 012.5 4h.9l.8-1.5h5.6L10.6 4h.9A1.5 1.5 0 0113 5.5v6A1.5 1.5 0 0111.5 13h-9A1.5 1.5 0 011 11.5v-6z"/><circle cx="7" cy="8.5" r="2"/></svg></span></button>
+    <div class="tb-sep"></div>
+    <span id="card-count" style="font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.05em;color:var(--text-muted);min-width:30px;text-align:center">0件</span>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" id="sidebar-btn" onclick="toggleSidebar()" data-tip="カード一覧 [L]"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="5" x2="13" y2="5"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="3" y1="11" x2="13" y2="11"/></svg></span></button>
+    <button class="tb-btn" id="settings-btn" onclick="toggleSettings()" data-tip="設定"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.5"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.2 3.2l1.1 1.1M11.7 11.7l1.1 1.1M3.2 12.8l1.1-1.1M11.7 4.3l1.1-1.1"/></svg></span></button>
+    <button class="tb-btn danger" onclick="clearBoard()" data-tip="ボードを全削除"><span class="tb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h10M6 5V3h4v2M5 5l.5 7h5l.5-7"/></svg></span></button>
+  </div>
+</div>
+
+<div id="settings-panel">
+  <div class="sp-title">設定</div>
+  <div class="sp-row">
+    <span class="sp-label">テーマ</span>
+    <div class="sp-toggle">
+      <div class="sp-toggle-btn" id="theme-dark-btn" onclick="setTheme('dark')">ダーク</div>
+      <div class="sp-toggle-btn" id="theme-light-btn" onclick="setTheme('light')">ライト</div>
+    </div>
+  </div>
+  <div class="sp-sep"></div>
+  <div class="sp-row">
+    <span class="sp-label">フォントサイズ</span>
+    <div class="sp-controls">
+      <div class="sp-btn" onclick="changeFontSize(-1)">−</div>
+      <span class="sp-val" id="font-size-val">M</span>
+      <div class="sp-btn" onclick="changeFontSize(1)">＋</div>
+    </div>
+  </div>
+</div>
+
+<div id="sidebar">
+  <div id="sidebar-header">
+    <h2>BOARDS</h2>
+    <div class="sidebar-close" onclick="toggleSidebar()"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" ><path d="M3 3l10 10M13 3L3 13"/></svg></div>
+  </div>
+  <div id="board-manager"></div>
+  <div id="sidebar-search"><input type="text" id="search-input" placeholder="検索..." oninput="renderSidebar()"></div>
+  <div id="sidebar-list"></div>
+</div>
+
+<div id="label-editor">
+  <div style="display:flex;gap:4px;margin-bottom:6px" id="conn-type-btns">
+    <div class="le-type-btn" data-type="line" onclick="setConnType('line')" title="線">─</div>
+    <div class="le-type-btn" data-type="arrow" onclick="setConnType('arrow')" title="矢印">→</div>
+    <div class="le-type-btn" data-type="both-arrow" onclick="setConnType('both-arrow')" title="双方向矢印">↔</div>
+    <div class="le-type-btn" data-type="dashed" onclick="setConnType('dashed')" title="破線矢印">⇢</div>
+  </div>
+  <input type="text" id="label-input" placeholder="ラベル（空でもOK）">
+  <div id="label-editor-actions">
+    <div class="le-btn save" onclick="saveConnLabel()">保存</div>
+    <div class="le-btn del-conn" onclick="deleteSelectedConn()">削除</div>
+  </div>
+</div>
+
+
+<div id="arrow-label-editor" style="position:fixed;z-index:20000;display:none;flex-direction:column;gap:6px;background:var(--ui-bg);border:1px solid var(--ui-border);border-radius:8px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,0.4);min-width:180px;">
+  <div style="display:flex;gap:4px;margin-bottom:4px" id="arr-type-btns">
+    <div class="le-type-btn" data-type="line" onclick="setArrowType('line')" title="線">─</div>
+    <div class="le-type-btn" data-type="arrow" onclick="setArrowType('arrow')" title="矢印">→</div>
+    <div class="le-type-btn" data-type="both-arrow" onclick="setArrowType('both-arrow')" title="双方向">↔</div>
+    <div class="le-type-btn" data-type="dashed" onclick="setArrowType('dashed')" title="破線">⇢</div>
+  </div>
+  <input type="text" id="arrow-label-input" placeholder="ラベル（空でもOK）" style="background:rgba(128,128,128,0.08);border:1px solid var(--ui-border);border-radius:4px;padding:6px 8px;font-size:.73rem;color:var(--ui-text);outline:none;font-family:inherit;">
+  <div style="display:flex;gap:6px">
+    <div class="le-btn save" onclick="saveArrowLabel()">保存</div>
+    <div class="le-btn del-conn" onclick="deleteSelectedArrow()">削除</div>
+  </div>
+</div>
+
+<input type="file" id="file-input" accept=".opml,.xml" style="display:none" onchange="handleFileImport(event)">
+<input type="file" id="image-file-input" accept="image/*" style="display:none" onchange="handleImageFileInput(event)">
+
+<script>
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
+const STORAGE_KEY = 'flowboard_v1';
+let state = {
+  offsetX:0, offsetY:0, scale:1,
+  nodes:[], groups:[], connections:[], arrows:[], texts:[], maxZ:1000,
+  boardId: null, boardName: 'ボード 1'
+};
+let selectedId = null;
+let selectedConnId = null;
+let connectMode = false;
+let connectSourceId = null;
+let history = [];
+let sidebarOpen = false;
+
+// ═══════════════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════════════
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
+function loadState(){
+  const s=localStorage.getItem(STORAGE_KEY);
+  if(s){try{const d=JSON.parse(s);state={...state,...d};state.groups=state.groups||[];state.connections=state.connections||[]}catch(e){}}
+}
+function snapshot(){
+  history.push(JSON.stringify({nodes:JSON.parse(JSON.stringify(state.nodes)),groups:JSON.parse(JSON.stringify(state.groups)),connections:JSON.parse(JSON.stringify(state.connections))}));
+  if(history.length>40)history.shift();
+}
+function undo(){
+  if(!history.length)return;
+  const prev=JSON.parse(history.pop());
+  state.nodes=prev.nodes; state.groups=prev.groups; state.connections=prev.connections;
+  rerender(); saveState(); showToast('元に戻しました');
+}
+
+// ═══════════════════════════════════════════════════
+// TRANSFORM
+// ═══════════════════════════════════════════════════
+const board=document.getElementById('board');
+const container=document.getElementById('canvas-container');
+const zoomDisp=document.getElementById('zoom-display');
+const countDisp=document.getElementById('card-count');
+
+function updateTransform(){
+  board.style.transform=`translate(${state.offsetX}px,${state.offsetY}px) scale(${state.scale})`;
+  zoomDisp.textContent=Math.round(state.scale*100)+'%';
+}
+function updateCounter(){
+  countDisp.textContent=`${state.nodes.length}件`;
+}
+function zoomCenter(f){
+  const cx=window.innerWidth/2, cy=window.innerHeight/2;
+  const wx=(cx-state.offsetX)/state.scale, wy=(cy-state.offsetY)/state.scale;
+  state.scale=Math.max(0.08,Math.min(8,state.scale*f));
+  state.offsetX=cx-wx*state.scale; state.offsetY=cy-wy*state.scale;
+  updateTransform(); saveState();
+}
+function zoomAt(f,mx,my){
+  const wx=(mx-state.offsetX)/state.scale, wy=(my-state.offsetY)/state.scale;
+  state.scale=Math.max(0.08,Math.min(8,state.scale*f));
+  state.offsetX=mx-wx*state.scale; state.offsetY=my-wy*state.scale;
+  updateTransform(); saveState();
+}
+function resetView(){state.scale=1;state.offsetX=0;state.offsetY=0;updateTransform();saveState()}
+
+// ═══════════════════════════════════════════════════
+// PAN
+// ═══════════════════════════════════════════════════
+let isPanning=false, panX=0, panY=0;
+container.addEventListener('mousedown',e=>{
+  if(e.target===container||e.target===board||e.target===document.getElementById('conn-svg')){
+    if(e.button===0){isPanning=true;panX=e.clientX;panY=e.clientY;container.style.cursor='grabbing'}
+    if(!connectMode){deselectAll()}
+  }
+});
+window.addEventListener('mousemove',e=>{
+  if(isPanning){
+    state.offsetX+=e.clientX-panX; state.offsetY+=e.clientY-panY;
+    panX=e.clientX; panY=e.clientY; updateTransform();
+  }
+});
+window.addEventListener('mouseup',()=>{
+  if(isPanning){isPanning=false;container.style.cursor='default';saveState()}
+});
+container.addEventListener('wheel',e=>{
+  if(e.ctrlKey||e.metaKey){
+    e.preventDefault();
+    const rect=container.getBoundingClientRect();
+    zoomAt(e.deltaY<0?1.1:1/1.1, e.clientX-rect.left, e.clientY-rect.top);
+  } else {
+    state.offsetX-=e.deltaX; state.offsetY-=e.deltaY;
+    updateTransform(); saveState();
+  }
+},{passive:false});
+
+container.addEventListener('dblclick',e=>{
+  if(e.target===container||e.target===board||e.target===document.getElementById('conn-svg')){
+    const x=(e.clientX-state.offsetX)/state.scale;
+    const y=(e.clientY-state.offsetY)/state.scale;
+    createCard(x,y,{},true);
+  }
+});
+
+// ═══════════════════════════════════════════════════
+// DRAG & DROP
+// ═══════════════════════════════════════════════════
+let dragging=null, dragEl=null, dragIsGroup=false, dragGroupCards=[], dragGroupArrows=[], dragGroupTexts=[];
+let resizing=null, resizEl=null, resizeW0=0, resizeH0=0;
+let dx0=0,dy0=0;
+
+let edgeScrollTimer=null;
+function startEdgeScroll(cx,cy){
+  stopEdgeScroll();
+  const speed=12, edge=50;
+  edgeScrollTimer=setInterval(()=>{
+    let vx=0,vy=0;
+    if(cx<edge)vx=speed; else if(cx>window.innerWidth-edge)vx=-speed;
+    if(cy<edge)vy=speed; else if(cy>window.innerHeight-edge)vy=-speed;
+    if(!vx&&!vy){stopEdgeScroll();return}
+    state.offsetX+=vx; state.offsetY+=vy;
+    if(dragging){
+      dragging.x-=vx/state.scale; dragging.y-=vy/state.scale;
+      dragEl.style.left=dragging.x+'px'; dragEl.style.top=dragging.y+'px';
+      if(dragIsGroup){ 
+        dragGroupCards.forEach(c=>{
+          c.x-=vx/state.scale; c.y-=vy/state.scale;
+          const el=document.getElementById(c.id);
+          if(el){el.style.left=c.x+'px';el.style.top=c.y+'px'}
+        });
+        dragGroupArrows.forEach(a=>{a.x1-=vx/state.scale;a.y1-=vy/state.scale;a.x2-=vx/state.scale;a.y2-=vy/state.scale});
+        dragGroupTexts.forEach(t=>{
+          t.x-=vx/state.scale; t.y-=vy/state.scale;
+          const el=document.getElementById(t.id);
+          if(el){el.style.left=t.x+'px';el.style.top=t.y+'px'}
+        });
+      }
+    }
+    updateTransform(); renderAllConnections();
+  },16);
+}
+function stopEdgeScroll(){if(edgeScrollTimer){clearInterval(edgeScrollTimer);edgeScrollTimer=null}}
+
+window.addEventListener('mousemove',e=>{
+  if(dragging){
+    const ddx=(e.clientX-dx0)/state.scale, ddy=(e.clientY-dy0)/state.scale;
+    dragging.x+=ddx; dragging.y+=ddy;
+    dragEl.style.left=dragging.x+'px'; dragEl.style.top=dragging.y+'px';
+    if(dragIsGroup) dragGroupCards.forEach(c=>{
+      c.x+=ddx; c.y+=ddy;
+      const el=document.getElementById(c.id);
+      if(el){el.style.left=c.x+'px'; el.style.top=c.y+'px'}
+    });
+    if(dragIsGroup){ 
+      dragGroupArrows.forEach(a=>{a.x1+=ddx;a.y1+=ddy;a.x2+=ddx;a.y2+=ddy});
+      dragGroupTexts.forEach(t=>{
+        t.x+=ddx; t.y+=ddy;
+        const el=document.getElementById(t.id);
+        if(el){el.style.left=t.x+'px';el.style.top=t.y+'px'}
+      });
+      renderAllArrows();
+    }
+    dx0=e.clientX; dy0=e.clientY;
+    renderAllConnections();
+    startEdgeScroll(e.clientX,e.clientY);
+  }
+  if(resizing){
+    const ddx=(e.clientX-dx0)/state.scale, ddy=(e.clientY-dy0)/state.scale;
+    const isGroup=resizing.id.startsWith('g');
+    const minW=isGroup?140:120, minH=isGroup?100:32;
+    resizing.width=Math.max(minW, resizeW0+ddx);
+    resizing.height=Math.max(minH, resizeH0+ddy);
+    resizEl.style.width=resizing.width+'px'; resizEl.style.height=resizing.height+'px';
+    renderAllConnections();
+  }
+});
+window.addEventListener('mouseup',()=>{
+  if(dragging||resizing){
+    if(resizing&&resizEl&&!resizing.id.startsWith('g')){
+      resizEl.classList.add('resized'); resizing.resized=true;
+    }
+    if(dragIsGroup&&dragging){
+      const inGroup=getCardsInGroup(dragging);
+      state.nodes.forEach(n=>{if(n.groupId===dragging.id)delete n.groupId});
+      inGroup.forEach(c=>{c.groupId=dragging.id});
+    }
+    dragging=null; dragEl=null; dragIsGroup=false; dragGroupCards=[]; dragGroupArrows=[]; dragGroupTexts=[];
+    resizing=null; resizEl=null;
+    stopEdgeScroll(); saveState(); renderSidebar();
+  }
+});
+
+function startDragNode(e,node,el){
+  e.preventDefault(); e.stopPropagation();
+  snapshot();
+  state.maxZ++; node.z=state.maxZ; el.style.zIndex=node.z;
+  dragging=node; dragEl=el; dragIsGroup=false;
+  dx0=e.clientX; dy0=e.clientY;
+}
+function startDragGroup(e,group,el){
+  e.preventDefault(); e.stopPropagation();
+  snapshot();
+  dragging=group; dragEl=el; dragIsGroup=true;
+  dragGroupCards=getCardsInGroup(group);
+  dragGroupArrows=getArrowsInGroup(group);
+  dragGroupTexts=getTextsInGroup(group);
+  dx0=e.clientX; dy0=e.clientY;
+}
+function getArrowsInGroup(g){
+  return (state.arrows||[]).filter(a=>{
+    const mx=(a.x1+a.x2)/2, my=(a.y1+a.y2)/2;
+    return mx>=g.x&&mx<=g.x+g.width&&my>=g.y&&my<=g.y+g.height;
+  });
+}
+function getTextsInGroup(g){
+  return (state.texts||[]).filter(t=>{
+    return t.x>=g.x&&t.x<=g.x+g.width&&t.y>=g.y&&t.y<=g.y+g.height;
+  });
+}
+function startResize(e,node,el){
+  e.preventDefault(); e.stopPropagation();
+  snapshot();
+  resizing=node; resizEl=el;
+  if(!node.width)node.width=el.offsetWidth;
+  if(!node.height)node.height=el.offsetHeight;
+  resizeW0=node.width; resizeH0=node.height;
+  dx0=e.clientX; dy0=e.clientY;
+}
+function getCardsInGroup(group){
+  return state.nodes.filter(n=>{
+    const cx=n.x+(n.width||200)/2, cy=n.y+(n.height||80)/2;
+    return cx>=group.x&&cx<=group.x+group.width&&cy>=group.y&&cy<=group.y+group.height;
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// SELECTION & INFO
+// ═══════════════════════════════════════════════════
+function deselectAll(){
+  const hadArrow=typeof selectedArrowId!=='undefined'&&selectedArrowId;
+  selectedId=null; selectedConnId=null;
+  if(typeof selectedArrowId!=='undefined') selectedArrowId=null;
+  if(typeof selectedTextId!=='undefined') selectedTextId=null;
+  document.querySelectorAll('.card.selected,.group.selected,.free-text.selected').forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll('.conn-path.selected').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('label-editor').style.display='none';
+  const ale=document.getElementById('arrow-label-editor');
+  if(ale) ale.style.display='none';
+  if(hadArrow&&typeof renderAllArrows==='function') renderAllArrows();
+}
+function selectNode(id){
+  deselectAll(); selectedId=id;
+  const el=document.getElementById(id);
+  if(el)el.classList.add('selected');
+  }
+function selectConn(id){
+  deselectAll(); selectedConnId=id;
+  document.querySelectorAll(`[data-conn="${id}"]`).forEach(el=>{
+    if(el.classList.contains('conn-path'))el.classList.add('selected');
+    if(el.classList.contains('conn-path'))el.setAttribute('marker-end','url(#arrow-tip-sel)');
+  });
+  }
+
+// ═══════════════════════════════════════════════════
+// RENDER CARDS
+// ═══════════════════════════════════════════════════
+function linkify(text){
+  const mds=[];
+  text=text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,(m,t,u)=>{
+    mds.push(`<a href="${u}" target="_blank" rel="noopener">${t}</a>`);
+    return`__ML${mds.length-1}__`;
+  });
+  text=text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+  mds.forEach((l,i)=>text=text.replace(`__ML${i}__`,l));
+  return text;
+}
+
+// ═══════════════════════════════════════════════════
+// IMAGE CARDS (ローカル画像)
+// ═══════════════════════════════════════════════════
+function addImageCard(){
+  document.getElementById('image-file-input').click();
+}
+
+function handleImageFileInput(e){
+  const file=e.target.files[0]; if(!file)return;
+  e.target.value='';
+  loadImageFileToCard(file);
+}
+
+function loadImageFileToCard(file, dropX, dropY){
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const dataUrl=ev.target.result;
+    const x=dropX!=null ? dropX : (-state.offsetX+window.innerWidth/2-120)/state.scale;
+    const y=dropY!=null ? dropY : (-state.offsetY+window.innerHeight/2-100)/state.scale;
+    snapshot();
+    const node={
+      id:'n'+Date.now()+Math.random().toString(36).slice(2),
+      x,y,z:++state.maxZ,
+      type:'image', imageData:dataUrl,
+      width:240, height:200,
+      title:'', body:''
+    };
+    state.nodes.push(node);
+    renderImageCard(node);
+    updateCounter(); saveState(); renderSidebar();
+    showToast('画像を追加しました');
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderImageCard(node){
+  const el=document.createElement('div');
+  el.className='card image-card'; if(node.resized)el.classList.add('resized');
+  el.id=node.id;
+  el.style.cssText=`left:${node.x}px;top:${node.y}px;z-index:${node.z||1000};`;
+  el.style.width=(node.width||240)+'px';
+  el.style.height=(node.height||200)+'px';
+
+  const img=document.createElement('img');
+  img.src=node.imageData; img.className='card-image'; img.draggable=false;
+
+  const acts=document.createElement('div'); acts.className='card-actions';
+  // Replace image button
+  const replBtn=document.createElement('div');
+  replBtn.className='act-btn'; replBtn.title='画像を差し替え';
+  replBtn.innerHTML=`<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 10l3.5-3.5 3 3 2.5-2.5 4 4"/></svg>`;
+  replBtn.onclick=e=>{
+    e.stopPropagation();
+    const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
+    inp.onchange=ev=>{
+      const f=ev.target.files[0]; if(!f)return;
+      const r=new FileReader();
+      r.onload=ev2=>{node.imageData=ev2.target.result; img.src=node.imageData; saveState();};
+      r.readAsDataURL(f);
+    };
+    inp.click();
+  };
+  const delBtn=document.createElement('div');
+  delBtn.className='act-btn del'; delBtn.title='削除';
+  delBtn.innerHTML=`<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l10 10M13 3L3 13"/></svg>`;
+  delBtn.onclick=e=>{e.stopPropagation();deleteNode(node.id)};
+  acts.append(replBtn,delBtn);
+
+  const resizer=document.createElement('div'); resizer.className='resizer';
+
+  el.addEventListener('mousedown',e=>{
+    if(e.target.closest('.act-btn'))return;
+    if(connectMode){handleConnectClick(node.id,el);return}
+    selectNode(node.id);
+    if(e.target===resizer){startResize(e,node,el);return}
+    startDragNode(e,node,el);
+  });
+  el.addEventListener('dblclick',e=>{
+    if(connectMode)return;
+    e.stopPropagation();
+    // ダブルクリックで画像を差し替え
+    replBtn.onclick(e);
+  });
+
+  el.append(img,acts,resizer);
+  board.appendChild(el);
+  return el;
+}
+
+function renderCardOrImage(node){
+  if(node.type==='image'&&node.imageData){return renderImageCard(node)}
+  return renderCard(node);
+}
+
+// ── ドラッグ&ドロップ（ボード上への画像ファイルドロップ）──────────
+container.addEventListener('dragover',e=>{
+  if([...e.dataTransfer.items].some(i=>i.kind==='file'&&i.type.startsWith('image/'))){
+    e.preventDefault(); e.dataTransfer.dropEffect='copy';
+    board.classList.add('img-drop-over');
+  }
+});
+container.addEventListener('dragleave',e=>{
+  if(!container.contains(e.relatedTarget)) board.classList.remove('img-drop-over');
+});
+container.addEventListener('drop',e=>{
+  board.classList.remove('img-drop-over');
+  const files=[...e.dataTransfer.files].filter(f=>f.type.startsWith('image/'));
+  if(!files.length)return;
+  e.preventDefault();
+  const rect=container.getBoundingClientRect();
+  files.forEach((f,i)=>{
+    const bx=(e.clientX-rect.left-state.offsetX)/state.scale + i*20;
+    const by=(e.clientY-rect.top-state.offsetY)/state.scale + i*20;
+    loadImageFileToCard(f, bx-120, by-100);
+  });
+});
+
+// ── クリップボードからの画像貼り付け ─────────────────────────────
+
+function renderCard(node){
+  const el=document.createElement('div');
+  el.className='card'; if(node.resized)el.classList.add('resized');
+  el.id=node.id;
+  el.style.cssText=`left:${node.x}px;top:${node.y}px;z-index:${node.z||1000};`;
+  if(node.width)el.style.width=node.width+'px';
+  if(node.height)el.style.height=node.height+'px';
+
+  const titleEl=document.createElement('div');
+  titleEl.className='card-title'; titleEl.innerText=node.title||'';
+
+  const bodyEl=document.createElement('div');
+  bodyEl.className='card-body'; bodyEl.innerHTML=linkify(node.body||'');
+
+  // Actions row
+  const acts=document.createElement('div'); acts.className='card-actions';
+  const delBtn=document.createElement('div');
+  delBtn.className='act-btn del'; delBtn.innerHTML=`<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" ><path d="M3 3l10 10M13 3L3 13"/></svg>`; delBtn.title='削除';
+  delBtn.onclick=e=>{e.stopPropagation();deleteNode(node.id)};
+  acts.appendChild(delBtn);
+
+  const resizer=document.createElement('div'); resizer.className='resizer';
+
+  titleEl.onblur=()=>endEdit(titleEl,node,bodyEl);
+  bodyEl.onblur=()=>endEdit(bodyEl,node);
+  titleEl.onkeydown=e=>{
+    if(e.ctrlKey&&e.key==='Enter'){e.preventDefault();endEdit(titleEl,node);addCardNear(node);return}
+    if(e.key==='Enter'){e.preventDefault();node._movingToBody=true;endEdit(titleEl,node,bodyEl);startEdit(bodyEl,node,el)}
+    if(e.key==='Tab'){e.preventDefault();node._movingToBody=true;endEdit(titleEl,node,bodyEl);startEdit(bodyEl,node,el)}
+    if(e.key==='Escape'){
+      e.preventDefault();
+      if(node._isNew && !titleEl.innerText.trim() && !node.body){
+        delete node._isNew; deleteNode(node.id);
+      } else { endEdit(titleEl,node); }
+    }
+  };
+  bodyEl.onkeydown=e=>{
+    if(e.ctrlKey&&e.key==='Enter'){e.preventDefault();endEdit(bodyEl,node);addCardNear(node);return}
+    if(e.key==='Escape'){
+      e.preventDefault();
+      if(node._isNew && !node.title && !bodyEl.innerText.trim()){
+        delete node._isNew; deleteNode(node.id);
+      } else { endEdit(bodyEl,node); }
+    }
+  };
+
+  el.addEventListener('mousedown',e=>{
+    if(e.target.closest('.act-btn'))return;
+    if(el.classList.contains('editing'))return;
+    if(connectMode){handleConnectClick(node.id,el);return}
+    selectNode(node.id);
+    if(e.target===resizer){startResize(e,node,el);return}
+    startDragNode(e,node,el);
+  });
+
+  el.addEventListener('dblclick',e=>{
+    if(connectMode)return;
+    e.stopPropagation();
+    if(el.classList.contains('editing'))return;
+    const rect=el.getBoundingClientRect();
+    const titleBottom=rect.top+(node.body&&node.body.trim()?titleEl.offsetHeight+8:el.offsetHeight);
+    const inBody=e.target===bodyEl||(node.body&&node.body.trim()&&e.clientY-rect.top>titleEl.offsetHeight+10);
+    startEdit(inBody?bodyEl:titleEl, node, el);
+    setTimeout(()=>{
+      const r=document.caretRangeFromPoint(e.clientX,e.clientY);
+      if(r){const s=window.getSelection();s.removeAllRanges();s.addRange(r)}
+    },0);
+    window.getSelection().removeAllRanges();
+  });
+
+  el.append(titleEl,bodyEl,acts,resizer);
+  board.appendChild(el);
+  updateCardState(el,node);
+  return el;
+}
+
+function updateCardState(el,node){
+  if(node.body&&node.body.trim()){
+    el.classList.add('has-notes');
+  } else {
+    el.classList.remove('has-notes');
+  }
+}
+
+function startEdit(el,node,card){
+  const cardEl=card||el.closest('.card');
+  if(el.classList.contains('card-body')){
+    el.textContent=node.body||'';
+    cardEl.style.minHeight=cardEl.offsetHeight+'px';
+    cardEl.style.height='auto';
+  } else if(el.classList.contains('card-title')){
+    el.textContent=node.title||'';
+  }
+  cardEl.classList.add('editing');
+  el.contentEditable='true'; el.focus();
+}
+
+function endEdit(el,node,nextEl){
+  const cardEl=el.closest('.card')||el.closest('.group');
+  if(!cardEl)return;
+  cardEl.classList.remove('editing');
+  el.contentEditable='false';
+  if(el.classList.contains('card-title')){
+    node.title=el.innerText.trim();
+    el.innerText=node.title;
+    if(node._isNew && !node.title && !node.body){
+      if(node._movingToBody){
+        // Tabで本文へ移動中なので削除しない
+        delete node._movingToBody;
+        return;
+      }
+      // フォーカスが外れただけ → 削除
+      delete node._isNew;
+      deleteNode(node.id);
+      return;
+    }
+    if(node._isNew) delete node._isNew;
+    delete node._movingToBody;
+  } else if(el.classList.contains('card-body')){
+    node.body=el.innerText;
+    el.innerHTML=linkify(node.body);
+    cardEl.style.minHeight=''; cardEl.style.height='';
+    if(node.height){cardEl.style.height=node.height+'px'}
+    updateCardState(cardEl,node);
+    if(node._isNew && !node.title && !node.body.trim()){
+      delete node._isNew;
+      deleteNode(node.id);
+      return;
+    }
+    if(node._isNew) delete node._isNew;
+  } else if(el.classList.contains('group-title')){
+    node.title=el.innerText;
+  }
+  saveState(); renderSidebar();
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER GROUPS
+// ═══════════════════════════════════════════════════
+function renderGroup(group){
+  const el=document.createElement('div');
+  el.className='group'; el.id=group.id;
+  el.style.cssText=`left:${group.x}px;top:${group.y}px;z-index:${(group.z||1000)-5000};width:${group.width}px;height:${group.height}px`;
+
+  const titleEl=document.createElement('div');
+  titleEl.className='group-title'; titleEl.innerText=group.title||'グループ';
+  const copyBtn=document.createElement('div');
+  copyBtn.className='group-copy-btn'; copyBtn.title='グループをOPMLとしてコピー';
+  copyBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="9" height="10" rx="1.5"/><path d="M3 12H2a1 1 0 01-1-1V2a1 1 0 011-1h9a1 1 0 011 1v1"/></svg>';
+  copyBtn.onclick=e=>{e.stopPropagation();copyGroupOPML(group.id)};
+
+  const acts=document.createElement('div'); acts.className='card-actions';
+  const delBtn=document.createElement('div');
+  delBtn.className='act-btn del'; delBtn.innerHTML='✕';
+  delBtn.onclick=e=>{e.stopPropagation();deleteGroup(group.id)};
+  acts.appendChild(delBtn);
+
+  const resizer=document.createElement('div'); resizer.className='resizer';
+
+  titleEl.onblur=()=>endEdit(titleEl,group);
+  titleEl.onkeydown=e=>{if(e.key==='Enter'||e.key==='Escape'){e.preventDefault();endEdit(titleEl,group)}};
+
+  el.addEventListener('mousedown',e=>{
+    if(e.target.closest('.act-btn'))return;
+    if(el.classList.contains('editing'))return;
+    if(connectMode){handleConnectClick(group.id,el);return}
+    selectNode(group.id);
+    if(e.target===resizer){startResize(e,group,el);return}
+    startDragGroup(e,group,el);
+  });
+
+  el.addEventListener('dblclick',e=>{
+    if(connectMode)return;
+    e.stopPropagation();
+    if(!el.classList.contains('editing')){
+      el.classList.add('editing');
+      titleEl.contentEditable='true'; titleEl.focus();
+      document.execCommand('selectAll',false,null);
+    }
+  });
+
+  el.append(titleEl,copyBtn,acts,resizer);
+  board.appendChild(el);
+  return el;
+}
+
+// ═══════════════════════════════════════════════════
+// CONNECTIONS
+// ═══════════════════════════════════════════════════
+function getNodeById(id){return state.nodes.find(n=>n.id===id)||state.groups.find(g=>g.id===id)}
+
+function getNodeActualSize(node){
+  const el=document.getElementById(node.id);
+  const w=node.width||(el?el.offsetWidth:200);
+  const h=el?el.offsetHeight:(node.height||80);
+  return{w,h};
+}
+
+function getAttachPoints(from,to){
+  const{w:fw,h:fh}=getNodeActualSize(from);
+  const{w:tw,h:th}=getNodeActualSize(to);
+  const fc={x:from.x+fw/2, y:from.y+fh/2};
+  const tc={x:to.x+tw/2, y:to.y+th/2};
+  const dx=tc.x-fc.x, dy=tc.y-fc.y;
+  let fp,tp;
+  if(Math.abs(dx)>=Math.abs(dy)){
+    if(dx>0){fp={x:from.x+fw,y:fc.y}; tp={x:to.x,y:tc.y}}
+    else{fp={x:from.x,y:fc.y}; tp={x:to.x+tw,y:tc.y}}
+  } else {
+    if(dy>0){fp={x:fc.x,y:from.y+fh}; tp={x:tc.x,y:to.y}}
+    else{fp={x:fc.x,y:from.y}; tp={x:tc.x,y:to.y+th}}
+  }
+  return{fp,tp,fc,tc};
+}
+
+function connPath(fp,tp,offset){
+  // offset: perpendicular shift (positive = left of direction, 0 = center)
+  const dx=tp.x-fp.x, dy=tp.y-fp.y;
+  const len=Math.sqrt(dx*dx+dy*dy)||1;
+  // perpendicular unit vector
+  const nx=-dy/len, ny=dx/len;
+  const ox=nx*offset, oy=ny*offset;
+  // shift start/end
+  const fsx=fp.x+ox, fsy=fp.y+oy;
+  const tex=tp.x+ox, tey=tp.y+oy;
+  const ddx=tex-fsx, ddy=tey-fsy;
+  if(Math.abs(ddy)>Math.abs(ddx)*0.5){
+    return`M${fsx} ${fsy} C${fsx} ${fsy+Math.abs(ddy)*.5} ${tex} ${tey-Math.abs(ddy)*.5} ${tex} ${tey}`;
+  }
+  const cx1=fsx+ddx*.5, cx2=tex-ddx*.5;
+  return`M${fsx} ${fsy} C${cx1} ${fsy} ${cx2} ${tey} ${tex} ${tey}`;
+}
+
+const connSvg=document.getElementById('conn-svg');
+function renderAllConnections(){
+  Array.from(connSvg.querySelectorAll('g[data-conn]')).forEach(g=>g.remove());
+
+  // Compute label font size from CSS var (px integer for SVG width calc)
+  const fsConnStr=getComputedStyle(document.documentElement).getPropertyValue('--fs-conn').trim()||'11px';
+  const fsPx=parseFloat(fsConnStr)||11;
+  const charW=fsPx*0.62, padH=fsPx*0.9, padV=fsPx*0.55;
+
+  // Build a set of bidirectional pairs for offset
+  const pairSet=new Set();
+  state.connections.forEach(c=>{
+    const rev=state.connections.find(r=>r.fromId===c.toId&&r.toId===c.fromId);
+    if(rev) pairSet.add(c.id);
+  });
+  const PAIR_OFFSET=18;
+
+  state.connections.forEach(conn=>{
+    const from=getNodeById(conn.fromId), to=getNodeById(conn.toId);
+    if(!from||!to)return;
+    const{fp,tp,fc,tc}=getAttachPoints(from,to);
+    // If this connection has a reverse pair, offset it to the left of its direction
+    const offset=pairSet.has(conn.id)?PAIR_OFFSET:0;
+    const d=connPath(fp,tp,offset);
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('data-conn',conn.id);
+
+    const hit=document.createElementNS('http://www.w3.org/2000/svg','path');
+    hit.setAttribute('d',d); hit.setAttribute('class','conn-hitbox');
+    hit.setAttribute('data-conn',conn.id);
+    hit.onclick=e=>{e.stopPropagation();selectConn(conn.id)};
+    hit.ondblclick=e=>{e.stopPropagation();openLabelEditor(conn,e.clientX,e.clientY)};
+
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',d);
+    const isSel=selectedConnId===conn.id;
+    const ctype=conn.type||'line';
+    let cls='conn-path'+(isSel?' selected':'');
+    if(ctype==='dashed') path.setAttribute('stroke-dasharray','6 4');
+    if(ctype==='arrow'||ctype==='dashed'){
+      path.setAttribute('marker-end',isSel?'url(#arrow-tip-sel)':'url(#arrow-tip)');
+    } else if(ctype==='both-arrow'){
+      path.setAttribute('marker-end',isSel?'url(#arrow-tip-sel)':'url(#arrow-tip)');
+      path.setAttribute('marker-start',isSel?'url(#arrow-tip-both-start-sel)':'url(#arrow-tip-both-start)');
+    }
+    path.setAttribute('class',cls);
+    path.setAttribute('data-conn',conn.id);
+    path.onclick=e=>{e.stopPropagation();selectConn(conn.id)};
+    path.ondblclick=e=>{e.stopPropagation();openLabelEditor(conn,e.clientX,e.clientY)};
+
+    g.append(hit,path);
+
+    if(conn.label){
+      // Use offset midpoint for label too
+      const dx2=tp.x-fp.x, dy2=tp.y-fp.y;
+      const len2=Math.sqrt(dx2*dx2+dy2*dy2)||1;
+      const nx2=-dy2/len2, ny2=dx2/len2;
+      const mx=(fp.x+tp.x)/2+nx2*offset, my=(fp.y+tp.y)/2+ny2*offset;
+      const rw=conn.label.length*charW+padH*2, rh=fsPx+padV*2;
+      const bgColor=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#19171a';
+      const strokeColor=getComputedStyle(document.documentElement).getPropertyValue('--conn-color').trim()||'#c8a96e';
+
+      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      rect.setAttribute('x',mx-rw/2); rect.setAttribute('y',my-rh/2);
+      rect.setAttribute('width',rw); rect.setAttribute('height',rh);
+      rect.setAttribute('rx',4); rect.setAttribute('fill',bgColor);
+      rect.setAttribute('stroke',strokeColor);
+      rect.setAttribute('stroke-width','1');
+      rect.style.pointerEvents='all'; rect.style.cursor='pointer';
+
+      const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x',mx); txt.setAttribute('y',my);
+      txt.setAttribute('class','conn-label-text'); txt.textContent=conn.label;
+      txt.onclick=e=>{e.stopPropagation();selectConn(conn.id)};
+      txt.ondblclick=e=>{e.stopPropagation();openLabelEditor(conn,e.clientX,e.clientY)};
+      rect.onclick=e=>{e.stopPropagation();selectConn(conn.id)};
+      rect.ondblclick=e=>{e.stopPropagation();openLabelEditor(conn,e.clientX,e.clientY)};
+      g.append(rect,txt);
+    }
+
+    connSvg.appendChild(g);
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// CONNECT MODE
+// ═══════════════════════════════════════════════════
+function toggleConnectMode(){
+  connectMode=!connectMode;
+  connectSourceId=null;
+  document.getElementById('conn-btn').classList.toggle('active',connectMode);
+  document.body.classList.toggle('connect-mode',connectMode);
+  document.querySelectorAll('.card').forEach(el=>el.classList.remove('connect-source','connect-hover'));
+  if(connectMode)showToast('接続モード: カードをクリックして起点を選択');
+}
+
+function handleConnectClick(id,el){
+  if(!connectSourceId){
+    connectSourceId=id;
+    el.classList.add('connect-source');
+    showToast('接続先のカードをクリック');
+  } else {
+    if(connectSourceId===id){
+      document.getElementById(connectSourceId)?.classList.remove('connect-source');
+      connectSourceId=null; return;
+    }
+    // Only prevent exact same direction duplicate
+    const exists=state.connections.some(c=>c.fromId===connectSourceId&&c.toId===id);
+    if(!exists){
+      snapshot();
+      state.connections.push({id:'c'+Date.now()+Math.random(), fromId:connectSourceId, toId:id, label:'', type:'line'});
+      renderAllConnections(); saveState();
+    }
+    document.getElementById(connectSourceId)?.classList.remove('connect-source');
+    connectSourceId=null;
+    toggleConnectMode();
+  }
+}
+
+// Label editor
+let editingConnId=null;
+function openLabelEditor(conn,cx,cy){
+  editingConnId=conn.id;
+  const ed=document.getElementById('label-editor');
+  document.getElementById('label-input').value=conn.label||'';
+  // Update type buttons
+  document.querySelectorAll('.le-type-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.type===(conn.type||'line'));
+  });
+  ed.style.display='flex';
+  const ex=Math.min(cx,window.innerWidth-240), ey=Math.min(cy-80,window.innerHeight-130);
+  ed.style.left=Math.max(0,ex)+'px'; ed.style.top=Math.max(0,ey)+'px';
+  document.getElementById('label-input').focus();
+}
+function setConnType(type){
+  const conn=state.connections.find(c=>c.id===editingConnId);
+  if(conn){conn.type=type; renderAllConnections();}
+  document.querySelectorAll('.le-type-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.type===type);
+  });
+}
+function saveConnLabel(){
+  const conn=state.connections.find(c=>c.id===editingConnId);
+  if(conn){conn.label=document.getElementById('label-input').value;saveState();renderAllConnections();}
+  document.getElementById('label-editor').style.display='none'; editingConnId=null;
+}
+function deleteSelectedConn(){
+  if(editingConnId){
+    state.connections=state.connections.filter(c=>c.id!==editingConnId);
+    saveState(); renderAllConnections();
+    document.getElementById('label-editor').style.display='none'; editingConnId=null;
+  }
+}
+document.getElementById('label-input').onkeydown=e=>{
+  if(e.key==='Enter')saveConnLabel();
+  if(e.key==='Escape'){document.getElementById('label-editor').style.display='none';editingConnId=null}
+};
+
+// ═══════════════════════════════════════════════════
+// CREATE / DELETE
+// ═══════════════════════════════════════════════════
+function createCard(x,y,data={},autoEdit=false){
+  snapshot();
+  const node={
+    id:'n'+Date.now()+Math.random().toString(36).slice(2),
+    x,y,z:++state.maxZ,
+    width:data.width||220,
+    title:data.title||'',
+    body:data.body||''
+  };
+  if(data.groupId)node.groupId=data.groupId;
+  if(data.type==='image'&&data.imageData){node.type='image';node.imageData=data.imageData;node.height=data.height||200}
+  state.nodes.push(node);
+  const el=(node.type==='image')?renderImageCard(node):renderCard(node);
+  updateCounter(); saveState(); renderSidebar();
+  if(autoEdit&&node.type!=='image'){
+    node._isNew=true;
+    setTimeout(()=>{
+      const titleEl=el.querySelector('.card-title');
+      startEdit(titleEl,node,el);
+    },10);
+  }
+  return node;
+}
+
+function createGroup(x,y,data={},autoEdit=false){
+  snapshot();
+  const group={
+    id:'g'+Date.now()+Math.random().toString(36).slice(2),
+    x,y,z:++state.maxZ,
+    width:data.width||300, height:data.height||200,
+    title:data.title||'グループ'
+  };
+  state.groups.push(group);
+  const el=renderGroup(group);
+  saveState(); renderSidebar();
+  if(autoEdit){
+    setTimeout(()=>{
+      el.classList.add('editing');
+      const titleEl=el.querySelector('.group-title');
+      titleEl.contentEditable='true'; titleEl.focus();
+      document.execCommand('selectAll',false,null);
+    },10);
+  }
+  return group;
+}
+
+function deleteNode(id){
+  snapshot();
+  state.nodes=state.nodes.filter(n=>n.id!==id);
+  state.connections=state.connections.filter(c=>c.fromId!==id&&c.toId!==id);
+  document.getElementById(id)?.remove();
+  renderAllConnections(); updateCounter(); saveState(); renderSidebar(); deselectAll();
+}
+function deleteGroup(id){
+  snapshot();
+  state.nodes.forEach(n=>{if(n.groupId===id)delete n.groupId});
+  state.groups=state.groups.filter(g=>g.id!==id);
+  state.connections=state.connections.filter(c=>c.fromId!==id&&c.toId!==id);
+  document.getElementById(id)?.remove();
+  renderAllConnections(); saveState(); renderSidebar(); deselectAll();
+}
+
+let _lastCardX=null, _lastCardY=null;
+function addCard(){
+  let x=(-state.offsetX+window.innerWidth/2-110)/state.scale;
+  let y=(-state.offsetY+window.innerHeight/2-40)/state.scale;
+  // Offset if overlapping last card
+  if(_lastCardX!==null && Math.abs(x-_lastCardX)<30 && Math.abs(y-_lastCardY)<30){
+    x=_lastCardX+24; y=_lastCardY+24;
+  }
+  _lastCardX=x; _lastCardY=y;
+  createCard(x,y,{},true);
+}
+function addCardNear(refNode){
+  const x=refNode.x;
+  const y=refNode.y+(document.getElementById(refNode.id)?.offsetHeight||80)+12;
+  _lastCardX=x; _lastCardY=y;
+  createCard(x,y,{},true);
+}
+function addGroup(){
+  const x=(-state.offsetX+window.innerWidth/2-150)/state.scale;
+  const y=(-state.offsetY+window.innerHeight/2-100)/state.scale;
+  createGroup(x,y,{},true);
+}
+function clearBoard(){
+  if(confirm('すべての要素（カード、グループ、接続、矢印、テキスト）を削除しますか？')){
+    snapshot();
+    state.nodes=[]; state.groups=[]; state.connections=[];
+    state.arrows=[]; state.texts=[];
+    board.innerHTML=''; board.appendChild(connSvg);
+    renderAllConnections();
+    renderAllArrows();
+    state.maxZ=1000; saveState(); updateCounter(); renderSidebar();
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// SIDEBAR
+// ═══════════════════════════════════════════════════
+function toggleSidebar(){
+  sidebarOpen=!sidebarOpen;
+  document.getElementById('sidebar').classList.toggle('open',sidebarOpen);
+  document.getElementById('sidebar-btn').classList.toggle('active',sidebarOpen);
+  if(sidebarOpen){renderBoardManager();renderSidebar();}
+}
+function renderSidebar(){
+  if(!sidebarOpen)return;
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const list=document.getElementById('sidebar-list');
+  list.innerHTML='';
+  const groups=state.groups.filter(g=>!q||g.title.toLowerCase().includes(q));
+  const nodes=state.nodes.filter(n=>!q||(n.title||n.body||'').toLowerCase().includes(q));
+  const texts=(state.texts||[]).filter(t=>!q||(t.text||'').toLowerCase().includes(q));
+  if(groups.length){
+    const lbl=document.createElement('div'); lbl.className='sidebar-group-label'; lbl.textContent='グループ';
+    list.appendChild(lbl);
+    groups.forEach(g=>{
+      const item=document.createElement('div'); item.className='sidebar-item';
+      item.innerHTML=`<div class="sidebar-item-title" style="display:flex;align-items:center;gap:5px;color:var(--accent)"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.7;color:var(--accent)"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke-dasharray="3 2"/><path d="M1 6h12"/></svg> ${g.title||'（無題）'}</div>`;
+      item.onclick=()=>panToNode(g);
+      list.appendChild(item);
+    });
+  }
+  if(nodes.length){
+    const lbl=document.createElement('div'); lbl.className='sidebar-group-label'; lbl.textContent='カード';
+    list.appendChild(lbl);
+    nodes.forEach(n=>{
+      const item=document.createElement('div'); item.className='sidebar-item';
+      const title=n.title||(n.body?.substring(0,30)||(n.type==='image'?'🖼 画像':'（空のカード）'));
+      const preview=n.title&&n.body?n.body.substring(0,40):'';
+      item.innerHTML=`<div class="sidebar-item-title" style="display:flex;align-items:center;gap:5px"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.7"><rect x="1" y="1" width="12" height="12" rx="1.5"/><line x1="3" y1="4.5" x2="11" y2="4.5"/><line x1="3" y1="7" x2="9" y2="7"/></svg> ${title}</div>${preview?`<div class="sidebar-item-preview">${preview}</div>`:''}`;
+      item.onclick=()=>panToNode(n);
+      list.appendChild(item);
+    });
+  }
+  if(texts.length){
+    const lbl=document.createElement('div'); lbl.className='sidebar-group-label'; lbl.textContent='テキスト';
+    list.appendChild(lbl);
+    texts.forEach(t=>{
+      const item=document.createElement('div'); item.className='sidebar-item';
+      const preview=t.text?.substring(0,40)||'（空）';
+      item.innerHTML=`<div class="sidebar-item-title" style="display:flex;align-items:center;gap:5px"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.7"><path d="M2 3h10M7 3v8M4.5 11h5"/></svg> ${preview}</div>`;
+      item.onclick=()=>panToNode(t);
+      list.appendChild(item);
+    });
+  }
+  if(!groups.length&&!nodes.length&&!texts.length){
+    list.innerHTML='<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:.7rem">要素がありません</div>';
+  }
+}
+function panToNode(node){
+  const w=node.width||220, h=node.height||80;
+  const tx=window.innerWidth/2-(node.x+w/2)*state.scale;
+  const ty=window.innerHeight/2-(node.y+h/2)*state.scale;
+  animatePan(tx,ty);
+  // Select the element after pan completes
+  setTimeout(()=>{
+    if(node.id.startsWith('n')) selectNode(node.id);
+    else if(node.id.startsWith('g')) selectNode(node.id);
+    else if(node.id.startsWith('ft')){
+      deselectAll(); selectedTextId=node.id;
+      document.getElementById(node.id)?.classList.add('selected');
+    }
+  }, 420);
+}
+function animatePan(tx,ty){
+  const sx=state.offsetX, sy=state.offsetY;
+  const start=performance.now();
+  function step(t){
+    const p=Math.min(1,(t-start)/400);
+    const e=1-Math.pow(1-p,3);
+    state.offsetX=sx+(tx-sx)*e; state.offsetY=sy+(ty-sy)*e;
+    updateTransform();
+    if(p<1)requestAnimationFrame(step);
+    else saveState();
+  }
+  requestAnimationFrame(step);
+}
+
+// ═══════════════════════════════════════════════════
+// OPML
+// ═══════════════════════════════════════════════════
+function importOPML(){document.getElementById('file-input').click()}
+function handleFileImport(e){
+  const file=e.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{parseAndImportOPML(ev.target.result)};
+  reader.readAsText(file);
+  e.target.value='';
+}
+window.addEventListener('paste',e=>{
+  const active=document.activeElement;
+  const isEditing=active&&(active.contentEditable==='true'||active.tagName==='INPUT'||active.tagName==='TEXTAREA');
+  if(isEditing)return;
+  // 画像をクリップボードから貼り付け
+  const imgItem=[...e.clipboardData.items].find(i=>i.type.startsWith('image/'));
+  if(imgItem){
+    e.preventDefault();
+    const file=imgItem.getAsFile();
+    if(file) loadImageFileToCard(file);
+    return;
+  }
+  const text=e.clipboardData.getData('text');
+  if(text.includes('<opml')||text.includes('<OPML')){e.preventDefault();parseAndImportOPML(text)}
+});
+function parseAndImportOPML(xml){
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(xml,'text/xml');
+  if(doc.querySelector('parsererror')){showToast('OPMLの解析に失敗しました');return}
+  snapshot();
+  let cx=(-state.offsetX+80)/state.scale, cy=(-state.offsetY+80)/state.scale;
+  const stepX=30, stepY=28; let idx=0;
+
+  function extractBodyLines(items, depth){
+    const lines=[];
+    items.forEach(it=>{
+      lines.push('  '.repeat(depth)+(it.getAttribute('text')||''));
+      lines.push(...extractBodyLines(Array.from(it.querySelectorAll(':scope > outline')),depth+1));
+    });
+    return lines;
+  }
+
+  function processItem(outline){
+    const title=outline.getAttribute('text')||'';
+    const type=outline.getAttribute('type')||'';
+    const children=Array.from(outline.querySelectorAll(':scope > outline'));
+
+    if(type==='group'){
+      // グループとして作成
+      const gw=320, gh=Math.max(200, children.length*90+60);
+      const gx=cx+(idx*stepX), gy=cy+(idx*stepY);
+      const group=createGroup(gx,gy,{title,width:gw,height:gh});
+      let cardX=gx+20, cardY=gy+50;
+      children.forEach(child=>{
+        const ctitle=child.getAttribute('text')||'';
+        const grandChildren=Array.from(child.querySelectorAll(':scope > outline'));
+        const body=extractBodyLines(grandChildren,0).join('\n');
+        createCard(cardX,cardY,{title:ctitle,body,groupId:group.id});
+        cardY+=90;
+      });
+      idx++;
+    } else if(children.length>0){
+      // タイトル＋下位項目をbodyに
+      const body=extractBodyLines(children,0).join('\n');
+      const w=Math.min(360,Math.max(180,title.length*7+40));
+      createCard(cx+(idx*stepX),cy+(idx*stepY),{title,body,width:w});
+      idx++;
+    } else {
+      // テキストのみ
+      createCard(cx+(idx*stepX),cy+(idx*stepY),{title,body:''});
+      idx++;
+    }
+  }
+
+  const bodyEl=doc.querySelector('body');
+  if(!bodyEl){showToast('OPMLの形式が正しくありません');return}
+
+  // body直下のoutlineを取得。単一のラッパー（Export等）なら1段階展開
+  let items=Array.from(bodyEl.querySelectorAll(':scope > outline'));
+  if(items.length===1 && items[0].querySelectorAll(':scope > outline').length>0){
+    items=Array.from(items[0].querySelectorAll(':scope > outline'));
+  }
+
+  items.forEach(item=>processItem(item));
+  renderAllConnections(); updateCounter(); saveState(); renderSidebar();
+  showToast(`インポート完了 (${idx}件)`);
+}
+
+function exportOPML(){
+  const groupMap={};
+  state.groups.forEach(g=>{
+    const cards=getCardsInGroup(g);
+    cards.forEach(c=>c.groupId=g.id);
+    groupMap[g.id]={group:g,cards};
+  });
+  const inGroup=new Set(Object.values(groupMap).flatMap(v=>v.cards.map(c=>c.id)));
+  const orphans=state.nodes.filter(n=>!inGroup.has(n.id));
+  const items=[];
+  state.groups.forEach(g=>items.push({type:'group',data:g,y:g.y,x:g.x}));
+  orphans.forEach(n=>items.push({type:'card',data:n,y:n.y,x:n.x}));
+  items.sort((a,b)=>Math.abs(a.y-b.y)<10?a.x-b.x:a.y-b.y);
+  let xml=`<?xml version="1.0" encoding="UTF-8"?><opml version="2.0"><body><outline text="Boardflowy Export">`;
+  function esc(s){return(s||'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":"&apos;"}[c]))}
+  items.forEach(item=>{
+    if(item.type==='group'){
+      const g=item.data;
+      xml+=`<outline text="${esc(g.title)}" type="group">`;
+      const cards=groupMap[g.id].cards.sort((a,b)=>Math.abs(a.y-b.y)<10?a.x-b.x:a.y-b.y);
+      cards.forEach(c=>{
+        xml+=`<outline text="${esc(c.title||c.body?.split('\n')[0]||'')}">`;
+        if(c.body)c.body.split('\n').forEach(l=>{if(l.trim())xml+=`<outline text="${esc(l.trim())}"/>`});
+        xml+=`</outline>`;
+      });
+      xml+=`</outline>`;
+    } else {
+      const n=item.data;
+      xml+=`<outline text="${esc(n.title||n.body?.split('\n')[0]||'')}">`;
+      if(n.body){
+        const lines=n.body.split('\n');
+        const startIdx=n.title?0:1;
+        lines.slice(startIdx).forEach(l=>{if(l.trim())xml+=`<outline text="${esc(l.trim())}"/>`});
+      }
+      xml+=`</outline>`;
+    }
+  });
+  xml+=`</outline></body></opml>`;
+  const ta=document.createElement('textarea');
+  ta.value=xml; document.body.appendChild(ta); ta.select();
+  document.execCommand('copy'); document.body.removeChild(ta);
+  showToast('OPMLをクリップボードにコピーしました');
+}
+
+// ═══════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════
+window.addEventListener('keydown',e=>{
+  const active=document.activeElement;
+  const isEditing=active&&(active.contentEditable==='true'||active.tagName==='INPUT'||active.tagName==='TEXTAREA');
+  if(isEditing)return;
+
+  if(e.ctrlKey||e.metaKey){
+    if(e.key==='z'){e.preventDefault();undo()}
+    if(e.key==='?'||e.key==='/'){e.preventDefault();toggleHint()}
+    return;
+  }
+
+  if(e.key==='n'||e.key==='N'){
+    e.preventDefault(); addCard();
+  } else if(e.key==='g'||e.key==='G'){
+    e.preventDefault(); addGroup();
+  } else if(e.key==='c'||e.key==='C'){
+    e.preventDefault(); toggleConnectMode();
+  } else if(e.key==='a'||e.key==='A'){
+    e.preventDefault(); toggleArrowDraw();
+  } else if(e.key==='t'||e.key==='T'){
+    e.preventDefault(); addFreeText();
+  } else if(e.key==='i'||e.key==='I'){
+    e.preventDefault(); addImageCard();
+  } else if(e.key==='\\'||e.key==='¥'){
+    e.preventDefault(); toggleToolbar();
+  } else if(e.key==='d'||e.key==='D'){
+    e.preventDefault();
+    if(selectedConnId){
+      snapshot();
+      state.connections=state.connections.filter(c=>c.id!==selectedConnId);
+      selectedConnId=null; renderAllConnections(); saveState(); deselectAll();
+    } else if(selectedArrowId){
+      snapshot();
+      state.arrows=state.arrows.filter(a=>a.id!==selectedArrowId);
+      selectedArrowId=null; renderAllArrows(); saveState(); deselectAll();
+    } else if(selectedTextId){
+      snapshot();
+      state.texts=state.texts.filter(t=>t.id!==selectedTextId);
+      document.getElementById(selectedTextId)?.remove();
+      selectedTextId=null; saveState();
+    } else if(selectedId){
+      if(selectedId.startsWith('g'))deleteGroup(selectedId);
+      else deleteNode(selectedId);
+    }
+  } else if(e.key==='Escape'){
+    if(connectMode){toggleConnectMode()}
+    else{deselectAll(); document.getElementById('label-editor').style.display='none'}
+  } else if(e.key==='l'||e.key==='L'){
+    e.preventDefault(); toggleSidebar();
+  }
+});
+
+
+
+// ═══════════════════════════════════════════════════
+// FREE ARROWS & TEXTS
+// ═══════════════════════════════════════════════════
+let selectedArrowId=null, selectedTextId=null;
+let arrowDrawMode=false, arrowDrawStart=null, arrowPreview=null;
+let editingArrowId=null;
+let draggingHandle=null, handleArrow=null, handleWhich=null;
+let draggingArrowBody=null, _arrowBodyPrevX=0, _arrowBodyPrevY=0;
+let draggingText=null, draggingTextEl=null;
+// track mouse in board coords for arrow handle drag
+let _handleMouseX=0, _handleMouseY=0;
+// track start mouse pos and element offset for text drag
+let _textDragStartX=0, _textDragStartY=0, _textDragOffX=0, _textDragOffY=0;
+
+function clientToBoard(cx,cy){
+  const rect=container.getBoundingClientRect();
+  return{
+    x:(cx-rect.left-state.offsetX)/state.scale,
+    y:(cy-rect.top-state.offsetY)/state.scale
+  };
+}
+
+function toggleArrowDraw(){
+  arrowDrawMode=!arrowDrawMode;
+  document.getElementById('arrow-btn').classList.toggle('active',arrowDrawMode);
+  document.body.classList.toggle('arrow-draw-mode',arrowDrawMode);
+  if(!arrowDrawMode && arrowPreview){arrowPreview.remove();arrowPreview=null;arrowDrawStart=null;}
+}
+
+// intercept canvas mousedown for arrow draw
+container.addEventListener('mousedown',e=>{
+  if(!arrowDrawMode) return;
+  if(e.button!==0) return;
+  e.stopPropagation(); e.preventDefault();
+  const p=clientToBoard(e.clientX,e.clientY);
+  arrowDrawStart=p;
+  arrowPreview=document.createElementNS('http://www.w3.org/2000/svg','line');
+  arrowPreview.setAttribute('x1',p.x); arrowPreview.setAttribute('y1',p.y);
+  arrowPreview.setAttribute('x2',p.x); arrowPreview.setAttribute('y2',p.y);
+  arrowPreview.setAttribute('stroke','var(--conn-color)');
+  arrowPreview.setAttribute('stroke-width','1.5');
+  arrowPreview.setAttribute('stroke-dasharray','5 3');
+  arrowPreview.setAttribute('marker-end','url(#free-arrow-tip)');
+  connSvg.appendChild(arrowPreview);
+},{capture:true});
+
+window.addEventListener('mousemove',e=>{
+  const p=clientToBoard(e.clientX,e.clientY);
+  _handleMouseX=p.x; _handleMouseY=p.y;
+
+  if(arrowDrawMode && arrowDrawStart && arrowPreview){
+    arrowPreview.setAttribute('x2',p.x); arrowPreview.setAttribute('y2',p.y);
+  }
+  if(draggingHandle && handleArrow){
+    let px=p.x, py=p.y;
+    const other_x=handleWhich==='start'?handleArrow.x2:handleArrow.x1;
+    const other_y=handleWhich==='start'?handleArrow.y2:handleArrow.y1;
+    const SNAP=8/state.scale;
+    if(Math.abs(px-other_x)<SNAP) px=other_x;
+    if(Math.abs(py-other_y)<SNAP) py=other_y;
+    if(handleWhich==='start'){handleArrow.x1=px; handleArrow.y1=py;}
+    else{handleArrow.x2=px; handleArrow.y2=py;}
+    renderAllArrows();
+  }
+  if(draggingArrowBody && !draggingHandle){
+    const ddx=p.x-_arrowBodyPrevX, ddy=p.y-_arrowBodyPrevY;
+    draggingArrowBody.x1+=ddx; draggingArrowBody.y1+=ddy;
+    draggingArrowBody.x2+=ddx; draggingArrowBody.y2+=ddy;
+    _arrowBodyPrevX=p.x; _arrowBodyPrevY=p.y;
+    renderAllArrows();
+  }
+  if(draggingText && draggingTextEl){
+    // Position text so the grabbed point stays under cursor
+    const nx=e.clientX - _textDragOffX;
+    const ny=e.clientY - _textDragOffY;
+    const bp=clientToBoard(nx, ny);
+    draggingText.x=bp.x; draggingText.y=bp.y;
+    draggingTextEl.style.left=draggingText.x+'px';
+    draggingTextEl.style.top=draggingText.y+'px';
+  }
+});
+
+window.addEventListener('mouseup',e=>{
+  if(arrowDrawMode && arrowDrawStart && arrowPreview){
+    const p=clientToBoard(e.clientX,e.clientY);
+    arrowPreview.remove(); arrowPreview=null;
+    const dx=p.x-arrowDrawStart.x, dy=p.y-arrowDrawStart.y;
+    if(Math.sqrt(dx*dx+dy*dy)>10){
+      snapshot();
+      const arr={id:'ar'+Date.now(), x1:arrowDrawStart.x, y1:arrowDrawStart.y,
+        x2:p.x, y2:p.y, type:'arrow', label:''};
+      state.arrows.push(arr);
+      renderAllArrows(); saveState();
+    }
+    arrowDrawStart=null;
+    toggleArrowDraw();
+  }
+  if(draggingHandle){
+    draggingHandle=null; handleArrow=null; handleWhich=null;
+    saveState();
+  }
+  if(draggingArrowBody){
+    draggingArrowBody=null;
+    saveState();
+  }
+  if(draggingText){
+    draggingText=null; draggingTextEl=null;
+    saveState();
+  }
+});
+
+function renderAllArrows(){
+  Array.from(connSvg.querySelectorAll('g[data-arrow]')).forEach(g=>g.remove());
+  const fsConnStr=getComputedStyle(document.documentElement).getPropertyValue('--fs-conn').trim()||'11px';
+  const fsPx=parseFloat(fsConnStr)||11;
+  const charW=fsPx*0.62, padH=fsPx*0.9, padV=fsPx*0.55;
+
+  state.arrows.forEach(arr=>{
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('data-arrow',arr.id);
+    g.setAttribute('class','arrow-group'+(selectedArrowId===arr.id?' selected':''));
+
+    const isSel=selectedArrowId===arr.id;
+    const atype=arr.type||'arrow';
+
+    const hit=document.createElementNS('http://www.w3.org/2000/svg','line');
+    hit.setAttribute('x1',arr.x1); hit.setAttribute('y1',arr.y1);
+    hit.setAttribute('x2',arr.x2); hit.setAttribute('y2',arr.y2);
+    hit.setAttribute('class','arrow-hitbox');
+    hit.style.cursor='move';
+    hit.onclick=e=>{e.stopPropagation();selectArrow(arr.id)};
+    hit.ondblclick=e=>{e.stopPropagation();openArrowLabelEditor(arr,e.clientX,e.clientY)};
+    hit.addEventListener('mousedown',e=>{
+      if(e.button!==0) return;
+      // Don't start body drag if a handle was the actual target
+      if(e.target && e.target.classList.contains('arrow-handle')) return;
+      e.stopPropagation(); e.preventDefault();
+      selectArrow(arr.id);
+      const p=clientToBoard(e.clientX,e.clientY);
+      draggingArrowBody=arr; _arrowBodyPrevX=p.x; _arrowBodyPrevY=p.y;
+    });
+
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',arr.x1); line.setAttribute('y1',arr.y1);
+    line.setAttribute('x2',arr.x2); line.setAttribute('y2',arr.y2);
+    line.setAttribute('class','arrow-line'+(isSel?' selected':''));
+    if(atype==='dashed') line.setAttribute('stroke-dasharray','6 4');
+    if(atype==='arrow'||atype==='dashed')
+      line.setAttribute('marker-end',isSel?'url(#free-arrow-tip-sel)':'url(#free-arrow-tip)');
+    else if(atype==='both-arrow'){
+      line.setAttribute('marker-end',isSel?'url(#free-arrow-tip-sel)':'url(#free-arrow-tip)');
+      line.setAttribute('marker-start','url(#free-arrow-start)');
+    }
+    line.onclick=e=>{e.stopPropagation();selectArrow(arr.id)};
+    line.ondblclick=e=>{e.stopPropagation();openArrowLabelEditor(arr,e.clientX,e.clientY)};
+
+    g.append(hit,line);
+
+    // Label
+    if(arr.label){
+      const mx=(arr.x1+arr.x2)/2, my=(arr.y1+arr.y2)/2;
+      const rw=arr.label.length*charW+padH*2, rh=fsPx+padV*2;
+      const bgColor=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#19171a';
+      const strokeColor=getComputedStyle(document.documentElement).getPropertyValue('--conn-color').trim()||'#c8a96e';
+      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      rect.setAttribute('x',mx-rw/2); rect.setAttribute('y',my-rh/2);
+      rect.setAttribute('width',rw); rect.setAttribute('height',rh);
+      rect.setAttribute('rx',4); rect.setAttribute('fill',bgColor);
+      rect.setAttribute('stroke',strokeColor); rect.setAttribute('stroke-width','1');
+      rect.style.pointerEvents='all'; rect.style.cursor='pointer';
+      const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x',mx); txt.setAttribute('y',my);
+      txt.setAttribute('class','arrow-label-text'); txt.textContent=arr.label;
+      txt.onclick=e=>{e.stopPropagation();selectArrow(arr.id)};
+      txt.ondblclick=e=>{e.stopPropagation();openArrowLabelEditor(arr,e.clientX,e.clientY)};
+      rect.onclick=e=>{e.stopPropagation();selectArrow(arr.id)};
+      rect.ondblclick=e=>{e.stopPropagation();openArrowLabelEditor(arr,e.clientX,e.clientY)};
+      g.append(rect,txt);
+    }
+
+    // Handles (visible when selected)
+    ['start','end'].forEach(which=>{
+      const cx=which==='start'?arr.x1:arr.x2;
+      const cy=which==='start'?arr.y1:arr.y2;
+      const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',cx); c.setAttribute('cy',cy); c.setAttribute('r',6);
+      c.setAttribute('class','arrow-handle');
+      c.style.cursor='crosshair';
+      c.style.pointerEvents='all';
+      c.addEventListener('mousedown',e=>{
+        e.stopPropagation(); e.preventDefault();
+        // Cancel any body drag that might have started
+        draggingArrowBody=null;
+        draggingHandle=c; handleArrow=arr; handleWhich=which;
+      });
+      g.appendChild(c);
+    });
+
+    connSvg.appendChild(g);
+  });
+}
+
+function selectArrow(id){
+  // Clear other selections without re-rendering arrows
+  selectedId=null; selectedConnId=null; selectedTextId=null;
+  document.querySelectorAll('.card.selected,.group.selected,.free-text.selected').forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll('.conn-path.selected').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('label-editor').style.display='none';
+  document.getElementById('arrow-label-editor').style.display='none';
+  // Set and render
+  selectedArrowId=id;
+  renderAllArrows();
+}
+
+function openArrowLabelEditor(arr,cx,cy){
+  editingArrowId=arr.id;
+  const ed=document.getElementById('arrow-label-editor');
+  document.getElementById('arrow-label-input').value=arr.label||'';
+  document.querySelectorAll('#arr-type-btns .le-type-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.type===(arr.type||'arrow'));
+  });
+  ed.style.display='flex';
+  ed.style.left=Math.max(0,Math.min(cx,window.innerWidth-200))+'px';
+  ed.style.top=Math.max(0,Math.min(cy-80,window.innerHeight-140))+'px';
+  document.getElementById('arrow-label-input').focus();
+}
+
+function setArrowType(type){
+  const arr=state.arrows.find(a=>a.id===editingArrowId);
+  if(arr){arr.type=type; renderAllArrows();}
+  document.querySelectorAll('#arr-type-btns .le-type-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.type===type);
+  });
+}
+
+function saveArrowLabel(){
+  const arr=state.arrows.find(a=>a.id===editingArrowId);
+  if(arr){arr.label=document.getElementById('arrow-label-input').value; saveState(); renderAllArrows();}
+  document.getElementById('arrow-label-editor').style.display='none'; editingArrowId=null;
+}
+
+function deleteSelectedArrow(){
+  if(editingArrowId){
+    state.arrows=state.arrows.filter(a=>a.id!==editingArrowId);
+    saveState(); renderAllArrows();
+    document.getElementById('arrow-label-editor').style.display='none'; editingArrowId=null;
+    selectedArrowId=null;
+  }
+}
+
+document.getElementById('arrow-label-input').onkeydown=e=>{
+  if(e.key==='Enter') saveArrowLabel();
+  if(e.key==='Escape'){document.getElementById('arrow-label-editor').style.display='none';editingArrowId=null;}
+};
+
+// ── FREE TEXT ────────────────────────────────────────
+function addFreeText(x,y,text=''){
+  snapshot();
+  const cx=x!=null?x:(-state.offsetX+window.innerWidth/2-60)/state.scale;
+  const cy=y!=null?y:(-state.offsetY+window.innerHeight/2-20)/state.scale;
+  const ft={id:'ft'+Date.now(), x:cx, y:cy, text:text||''};
+  state.texts.push(ft);
+  const el=renderFreeText(ft);
+  saveState();
+  // auto-edit
+  setTimeout(()=>{
+    ft._isNew=true;
+    startFreeTextEdit(ft, el);
+  },10);
+  return ft;
+}
+
+function renderFreeText(ft){
+  const el=document.createElement('div');
+  el.className='free-text'; el.id=ft.id;
+  el.style.left=ft.x+'px'; el.style.top=ft.y+'px';
+  el.style.zIndex=ft.z||500;
+  if(ft.fontSize) el.style.fontSize=ft.fontSize+'px';
+  // Inner content div
+  const inner=document.createElement('div');
+  inner.className='ft-inner';
+  inner.innerText=ft.text||'';
+  el.appendChild(inner);
+
+  // Font-size resize handle (SE corner — drag right to increase)
+  const rzBox=document.createElement('div'); rzBox.className='ft-resize-box';
+  let rzBoxX=0, rzStartFs=0;
+  rzBox.addEventListener('mousedown',e=>{
+    e.stopPropagation(); e.preventDefault();
+    rzBoxX=e.clientX;
+    rzStartFs=ft.fontSize||(parseFloat(getComputedStyle(el).fontSize)||13);
+    const onMove=em=>{
+      const d=(em.clientX-rzBoxX)/state.scale;
+      ft.fontSize=Math.max(8,Math.min(96,rzStartFs+d));
+      el.style.fontSize=ft.fontSize+'px';
+    };
+    const onUp=()=>{saveState();window.removeEventListener('mousemove',onMove);window.removeEventListener('mouseup',onUp)};
+    window.addEventListener('mousemove',onMove);
+    window.addEventListener('mouseup',onUp);
+  });
+  el.appendChild(rzBox);
+
+  el.addEventListener('mousedown',e=>{
+    if(el.classList.contains('editing')) return;
+    if(e.target===rzBox) return;
+    e.preventDefault(); e.stopPropagation();
+    deselectAll(); selectedTextId=ft.id; el.classList.add('selected');
+    ft.z=++state.maxZ; el.style.zIndex=ft.z;
+    draggingText=ft; draggingTextEl=el;
+    const elRect=el.getBoundingClientRect();
+    _textDragOffX=e.clientX - elRect.left;
+    _textDragOffY=e.clientY - elRect.top;
+  });
+
+  el.addEventListener('dblclick',e=>{
+    if(e.target===rzBox) return;
+    e.stopPropagation();
+    el.classList.add('editing');
+    inner.contentEditable='true';
+    inner.focus();
+    setTimeout(()=>{
+      const r=document.caretRangeFromPoint(e.clientX,e.clientY);
+      if(r){const s=window.getSelection();s.removeAllRanges();s.addRange(r);}
+      else{
+        const range=document.createRange(); range.selectNodeContents(inner);
+        range.collapse(false);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      }
+    },0);
+  });
+
+  const endEdit=()=>{
+    inner.contentEditable='false';
+    el.classList.remove('editing');
+    ft.text=inner.innerText;
+    if(ft._isNew && !ft.text.trim()){
+      delete ft._isNew;
+      state.texts=state.texts.filter(t=>t.id!==ft.id);
+      el.remove(); saveState(); return;
+    }
+    delete ft._isNew;
+    saveState();
+  };
+  inner.onblur=endEdit;
+  inner.onkeydown=e=>{
+    if(e.key==='Escape'){e.preventDefault(); inner.blur();}
+  };
+
+  board.appendChild(el);
+  return el;
+}
+
+// Helper: start editing a free text programmatically
+function startFreeTextEdit(ft, el){
+  const inner=el.querySelector('.ft-inner');
+  if(!inner) return;
+  el.classList.add('editing');
+  inner.contentEditable='true';
+  inner.focus();
+  document.execCommand('selectAll',false,null);
+}
+
+// double-click on canvas in arrow mode → free text
+container.addEventListener('dblclick',e=>{
+  if(e.target===container||e.target===board){
+    if(arrowDrawMode){
+      toggleArrowDraw();
+      return;
+    }
+  }
+},{capture:true,passive:false});
+
+
+// ═══════════════════════════════════════════════════
+// PNG EXPORT
+// ═══════════════════════════════════════════════════
+async function exportPNG(){
+  // Compute bounding box in board coords
+  let minX=Infinity, minY=Infinity, maxX=-Infinity, maxY=-Infinity;
+  const MARGIN=40;
+  state.nodes.forEach(n=>{
+    const el=document.getElementById(n.id);
+    const w=el?el.offsetWidth:(n.width||220), h=el?el.offsetHeight:(n.height||80);
+    minX=Math.min(minX,n.x); minY=Math.min(minY,n.y);
+    maxX=Math.max(maxX,n.x+w); maxY=Math.max(maxY,n.y+h);
+  });
+  state.groups.forEach(g=>{
+    minX=Math.min(minX,g.x); minY=Math.min(minY,g.y);
+    maxX=Math.max(maxX,g.x+g.width); maxY=Math.max(maxY,g.y+g.height);
+  });
+  state.arrows.forEach(a=>{
+    minX=Math.min(minX,a.x1,a.x2); minY=Math.min(minY,a.y1,a.y2);
+    maxX=Math.max(maxX,a.x1,a.x2); maxY=Math.max(maxY,a.y1,a.y2);
+  });
+  state.texts.forEach(t=>{
+    const el=document.getElementById(t.id);
+    const w=el?el.offsetWidth:120, h=el?el.offsetHeight:30;
+    minX=Math.min(minX,t.x); minY=Math.min(minY,t.y);
+    maxX=Math.max(maxX,t.x+w); maxY=Math.max(maxY,t.y+h);
+  });
+  if(!isFinite(minX)){showToast('書き出す要素がありません');return;}
+  minX-=MARGIN; minY-=MARGIN; maxX+=MARGIN; maxY+=MARGIN;
+  const cw=maxX-minX, ch=maxY-minY;
+
+  const cs=getComputedStyle(document.documentElement);
+  const bgColor=cs.getPropertyValue('--bg').trim()||'#19171a';
+  const connColor=cs.getPropertyValue('--conn-color').trim()||'#c8a96e';
+  const uiBg=cs.getPropertyValue('--ui-bg').trim()||bgColor;
+
+  // ── Save state and set up a clean 1:1 view ──────────────
+  deselectAll();
+  const prevScale=state.scale, prevOX=state.offsetX, prevOY=state.offsetY;
+  state.scale=1; state.offsetX=-minX; state.offsetY=-minY;
+  updateTransform();
+
+  // Hide UI chrome
+  const hideEls=['toolbar','sidebar','hint','hint-toggle','label-editor','arrow-label-editor','settings-panel'];
+  hideEls.forEach(id=>{const e=document.getElementById(id);if(e)e.style.visibility='hidden'});
+  document.querySelectorAll('.card-actions,.resizer,.arrow-handle,.ft-resize-box').forEach(e=>e.style.visibility='hidden');
+
+  // KEY FIX: expand container so overflow:hidden doesn't clip distant elements
+  const prevOverflow=container.style.overflow;
+  const prevW=container.style.width, prevH=container.style.height;
+  container.style.overflow='visible';
+  container.style.width=cw+'px';
+  container.style.height=ch+'px';
+
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+
+  try{
+    const DPR=Math.min(window.devicePixelRatio||1, 2);
+
+    // ── 1. Capture DOM via html2canvas on container ──
+    const domCanvas = typeof html2canvas !== 'undefined'
+      ? await html2canvas(container, {
+          x: 0, y: 0,
+          width: cw, height: ch,
+          backgroundColor: bgColor,
+          scale: DPR,
+          useCORS: true,
+          logging: false,
+          imageTimeout: 0,
+          ignoreElements: el => el.id==='conn-svg',
+        })
+      : null;
+
+    // ── 2. Build output canvas ──────────────────────────────────
+    const out=document.createElement('canvas');
+    out.width=Math.round(cw*DPR); out.height=Math.round(ch*DPR);
+    const ctx=out.getContext('2d');
+    // Enable crisp rendering
+    ctx.imageSmoothingEnabled=false;
+    if(domCanvas) ctx.drawImage(domCanvas,0,0);
+    else{ ctx.fillStyle=bgColor; ctx.fillRect(0,0,out.width,out.height); }
+
+    // ── 3. Draw SVG (connections + arrows) on top ───────────────
+    const svgEl=document.getElementById('conn-svg');
+    const svgClone=svgEl.cloneNode(true);
+    svgClone.querySelectorAll('.arrow-handle,.conn-hitbox,.arrow-hitbox').forEach(e=>e.remove());
+    svgClone.setAttribute('width',cw*DPR);
+    svgClone.setAttribute('height',ch*DPR);
+    svgClone.setAttribute('viewBox',`${minX} ${minY} ${cw} ${ch}`);
+    // Inline CSS vars so SVG renders correctly as image
+    svgClone.querySelectorAll('.conn-path,.arrow-line').forEach(el=>{
+      el.style.stroke=connColor;
+      el.style.strokeWidth='1.5';
+    });
+    svgClone.querySelectorAll('.conn-label-text,.arrow-label-text').forEach(el=>{
+      el.style.fill=connColor;
+      el.style.fontFamily='Outfit,sans-serif';
+      el.style.fontSize='11px';
+    });
+    svgClone.querySelectorAll('rect[class]').forEach(el=>{
+      if((el.className.baseVal||'').match(/label/)){
+        el.style.fill=uiBg; el.style.stroke=connColor;
+      }
+    });
+    svgClone.querySelectorAll('polygon').forEach(el=>el.setAttribute('fill',connColor));
+    const svgStr=new XMLSerializer().serializeToString(svgClone);
+    const svgUrl=URL.createObjectURL(new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'}));
+    await new Promise((res,rej)=>{
+      const img=new Image();
+      img.onload=()=>{
+        ctx.imageSmoothingEnabled=true;
+        ctx.drawImage(img,0,0);
+        URL.revokeObjectURL(svgUrl); res();
+      };
+      img.onerror=e=>{URL.revokeObjectURL(svgUrl);rej(e);};
+      img.src=svgUrl;
+    });
+
+    const link=document.createElement('a');
+    link.download='boardflowy.png';
+    link.href=out.toDataURL('image/png');
+    link.click();
+    showToast('PNG書き出し完了');
+  } catch(err){
+    showToast('書き出しに失敗しました: '+err.message);
+    console.error(err);
+  } finally {
+    container.style.overflow=prevOverflow||'';
+    container.style.width=prevW||'';
+    container.style.height=prevH||'';
+    state.scale=prevScale; state.offsetX=prevOX; state.offsetY=prevOY;
+    updateTransform();
+    hideEls.forEach(id=>{const e=document.getElementById(id);if(e)e.style.visibility=''});
+    document.querySelectorAll('.card-actions,.resizer,.arrow-handle,.ft-resize-box').forEach(e=>e.style.visibility='');
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// MULTI-BOARD
+// ═══════════════════════════════════════════════════
+const BOARDS_KEY='flowboard_boards';
+const CURRENT_KEY='flowboard_current';
+
+function getBoards(){
+  try{return JSON.parse(localStorage.getItem(BOARDS_KEY)||'[]')}catch{return []}
+}
+function saveBoards(boards){localStorage.setItem(BOARDS_KEY,JSON.stringify(boards))}
+function getCurrentBoardId(){return localStorage.getItem(CURRENT_KEY)||null}
+function setCurrentBoardId(id){localStorage.setItem(CURRENT_KEY,id)}
+
+function initBoards(){
+  let boards=getBoards();
+  // Migrate: if old single-board data exists but no boards list, create board entry
+  if(!boards.length){
+    const id='b_default';
+    boards=[{id,name:'ボード 1'}];
+    saveBoards(boards);
+    setCurrentBoardId(id);
+    // Migrate existing data from STORAGE_KEY to per-board key
+    const oldData=localStorage.getItem(STORAGE_KEY);
+    if(oldData) localStorage.setItem('flowboard_state_'+id, oldData);
+  }
+  // Ensure current board is in the list
+  let curId=getCurrentBoardId();
+  if(!curId||!boards.find(b=>b.id===curId)){
+    curId=boards[0].id;
+    setCurrentBoardId(curId);
+  }
+  state.boardId=curId;
+  state.boardName=boards.find(b=>b.id===curId)?.name||'ボード 1';
+}
+
+function saveBoardState(){
+  if(!state.boardId) return;
+  const key='flowboard_state_'+state.boardId;
+  localStorage.setItem(key, JSON.stringify(state));
+  // 更新順を記録
+  const boards=getBoards();
+  const b=boards.find(x=>x.id===state.boardId);
+  if(b){b.updatedAt=Date.now();saveBoards(boards);}
+}
+
+function loadBoardState(id){
+  const key='flowboard_state_'+id;
+  try{
+    const saved=JSON.parse(localStorage.getItem(key)||'null');
+    if(saved){
+      // Clear existing DOM
+      board.innerHTML=''; board.appendChild(connSvg);
+      Object.assign(state, {
+        offsetX:0,offsetY:0,scale:1,
+        nodes:[],groups:[],connections:[],arrows:[],texts:[],maxZ:1000,
+        ...saved, boardId:id
+      });
+      state.arrows=state.arrows||[];
+      state.texts=state.texts||[];
+    } else {
+      board.innerHTML=''; board.appendChild(connSvg);
+      state={offsetX:0,offsetY:0,scale:1,nodes:[],groups:[],connections:[],arrows:[],texts:[],maxZ:1000,boardId:id,boardName:getBoardName(id)};
+    }
+    state.boardId=id;
+    state.boardName=getBoardName(id);
+    setCurrentBoardId(id);
+    updateTitle();
+    state.groups.forEach(renderGroup);
+    state.nodes.forEach(renderCard);
+    state.texts.forEach(renderFreeText);
+    renderAllConnections(); renderAllArrows();
+    updateTransform(); updateCounter(); renderSidebar();
+  } catch(e){console.error(e)}
+}
+
+function getBoardName(id){
+  return getBoards().find(b=>b.id===id)?.name||'ボード';
+}
+
+function updateTitle(){
+  document.title=(state.boardName||'ボード')+' - Boardflowy';
+}
+
+function toggleBoardManager(){
+  const el=document.getElementById('board-manager');
+  el.classList.toggle('open');
+  if(el.classList.contains('open')) renderBoardManager();
+}
+
+function renderBoardManager(){
+  const el=document.getElementById('board-manager');
+  const boards=getBoards().slice().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  el.innerHTML='';
+  boards.forEach(b=>{
+    const row=document.createElement('div');
+    row.className='board-item'+(b.id===state.boardId?' active':'');
+    const nameEl=document.createElement('div');
+    nameEl.className='board-item-name';
+    nameEl.contentEditable='false';
+    nameEl.textContent=b.name;
+    nameEl.ondblclick=e=>{e.stopPropagation();nameEl.contentEditable='true';nameEl.focus();document.execCommand('selectAll',false,null)};
+    nameEl.onblur=()=>{
+      nameEl.contentEditable='false';
+      const boards2=getBoards();
+      const idx=boards2.findIndex(x=>x.id===b.id);
+      if(idx!==-1){boards2[idx].name=nameEl.textContent.trim()||b.name;saveBoards(boards2);}
+      if(b.id===state.boardId){state.boardName=nameEl.textContent.trim()||b.name;updateTitle();}
+      renderBoardManager();
+    };
+    nameEl.onkeydown=e=>{if(e.key==='Enter'||e.key==='Escape'){e.preventDefault();nameEl.blur()}};
+
+    const actions=document.createElement('div'); actions.className='board-item-actions';
+    const delBtn=document.createElement('div'); delBtn.className='board-item-btn';
+    delBtn.innerHTML='<svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2L2 12"/></svg>';
+    delBtn.onclick=e=>{
+      e.stopPropagation();
+      const bs=getBoards();
+      if(bs.length<=1){showToast('最後のボードは削除できません');return}
+      if(!confirm(`「${b.name}」を削除しますか？`))return;
+      const newBs=bs.filter(x=>x.id!==b.id);
+      saveBoards(newBs);
+      localStorage.removeItem('flowboard_state_'+b.id);
+      if(state.boardId===b.id) loadBoardState(newBs[0].id);
+      else renderBoardManager();
+    };
+    actions.appendChild(delBtn);
+    row.append(nameEl,actions);
+    if(b.id!==state.boardId) row.onclick=()=>{saveBoardState();loadBoardState(b.id);renderBoardManager()};
+    el.appendChild(row);
+  });
+  const addBtn=document.createElement('div'); addBtn.className='board-add-btn';
+  addBtn.textContent='＋ 新規ボード';
+  addBtn.onclick=()=>{
+    const id='b'+Date.now();
+    const boards2=getBoards();
+    boards2.push({id,name:'ボード '+(boards2.length+1)});
+    saveBoards(boards2); saveBoardState(); loadBoardState(id); renderBoardManager();
+  };
+  el.appendChild(addBtn);
+
+  // Full reset button
+  const resetBtn=document.createElement('div');
+  resetBtn.style.cssText='margin-top:8px;padding:5px;border-radius:6px;cursor:pointer;font-size:.65rem;font-family:Outfit,sans-serif;color:var(--red);text-align:center;border:1px dashed rgba(212,88,74,0.4);transition:all .12s;';
+  resetBtn.textContent='⚠ 全データ初期化';
+  resetBtn.onmouseover=()=>resetBtn.style.background='rgba(212,88,74,0.1)';
+  resetBtn.onmouseout=()=>resetBtn.style.background='';
+  resetBtn.onclick=()=>{
+    if(!confirm('すべてのボードとデータを完全に削除します。この操作は取り消せません。続けますか？')) return;
+    // Clear all flowboard keys
+    Object.keys(localStorage).filter(k=>k.startsWith('flowboard')).forEach(k=>localStorage.removeItem(k));
+    location.reload();
+  };
+  el.appendChild(resetBtn);
+}
+
+// Override saveState to use per-board storage
+function saveState(){
+  history.push(JSON.stringify(state));
+  if(history.length>40)history.shift();
+  saveBoardState();
+}
+
+// ═══════════════════════════════════════════════════
+// GROUP OPML EXPORT
+// ═══════════════════════════════════════════════════
+function copyGroupOPML(gid){
+  const group=state.groups.find(g=>g.id===gid);
+  if(!group) return;
+  const cards=state.nodes.filter(n=>n.groupId===gid);
+  let xml=`<?xml version="1.0" encoding="UTF-8"?><opml version="2.0"><head/><body>\n`;
+  xml+=`  <outline text="${escXml(group.title||'グループ')}">\n`;
+  cards.forEach(c=>{
+    xml+=`    <outline text="${escXml(c.title||c.body||'')}">\n`;
+    if(c.body&&c.title){
+      c.body.split('\n').forEach(line=>{
+        if(line.trim()) xml+=`      <outline text="${escXml(line)}"/>\n`;
+      });
+    }
+    xml+=`    </outline>\n`;
+  });
+  xml+=`  </outline>\n</body></opml>`;
+  navigator.clipboard.writeText(xml).then(()=>showToast('グループOPMLをコピーしました'));
+}
+function escXml(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+// ═══════════════════════════════════════════════════
+// RERENDER ALL
+// ═══════════════════════════════════════════════════
+function rerender(){
+  board.innerHTML=''; board.appendChild(connSvg);
+  state.groups.forEach(renderGroup);
+  state.nodes.forEach(renderCardOrImage);
+  state.texts.forEach(renderFreeText);
+  renderAllConnections(); renderAllArrows(); updateCounter();
+}
+
+// ═══════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════
+let toastTimer=null;
+function showToast(msg){
+  const old=document.querySelector('.toast'); if(old)old.remove();
+  if(toastTimer)clearTimeout(toastTimer);
+  const t=document.createElement('div'); t.className='toast'; t.textContent=msg;
+  document.body.appendChild(t);
+  toastTimer=setTimeout(()=>t.remove(),2200);
+}
+
+
+// ═══════════════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════════════
+const FONT_SIZES=[
+  {label:'XS', card:'.65rem', body:'.62rem', conn:'9px',  group:'.68rem'},
+  {label:'S',  card:'.70rem', body:'.66rem', conn:'10px', group:'.73rem'},
+  {label:'M',  card:'.76rem', body:'.70rem', conn:'11px', group:'.80rem'},
+  {label:'L',  card:'.84rem', body:'.78rem', conn:'13px', group:'.88rem'},
+  {label:'XL', card:'.94rem', body:'.87rem', conn:'15px', group:'.96rem'},
+];
+let fontSizeIdx=2; // default M
+
+function applyFontSize(idx){
+  fontSizeIdx=idx;
+  const fs=FONT_SIZES[idx];
+  document.documentElement.style.setProperty('--fs-card', fs.card);
+  document.documentElement.style.setProperty('--fs-body', fs.body);
+  document.documentElement.style.setProperty('--fs-conn', fs.conn);
+  document.documentElement.style.setProperty('--fs-group', fs.group);
+  document.getElementById('font-size-val').textContent=fs.label;
+  localStorage.setItem('flowboard_fontsize', idx);
+}
+
+function changeFontSize(d){
+  applyFontSize(Math.max(0, Math.min(FONT_SIZES.length-1, fontSizeIdx+d)));
+}
+
+function toggleToolbar(){
+  const tb=document.getElementById('toolbar');
+  tb.classList.toggle('collapsed');
+}
+
+// ── TOOLBAR TOOLTIP ──────────────────────────────────
+(function(){
+  const tip=document.createElement('div');
+  tip.id='tb-tooltip';
+  document.body.appendChild(tip);
+  let showTimer=null, hideTimer=null;
+
+  function showTip(el){
+    const text=el.getAttribute('data-tip');
+    if(!text) return;
+    clearTimeout(hideTimer);
+    tip.textContent=text;
+    tip.style.opacity='0';
+    tip.style.display='block';
+    const r=el.getBoundingClientRect();
+    const tw=tip.offsetWidth;
+    let left=r.left+r.width/2-tw/2;
+    // clamp to viewport
+    left=Math.max(8, Math.min(left, window.innerWidth-tw-8));
+    tip.style.left=left+'px';
+    tip.style.top=(r.top-tip.offsetHeight-8)+'px';
+    clearTimeout(showTimer);
+    showTimer=setTimeout(()=>{ tip.style.opacity='1' }, 80);
+  }
+
+  function hideTip(){
+    clearTimeout(showTimer);
+    hideTimer=setTimeout(()=>{ tip.style.opacity='0' }, 60);
+  }
+
+  document.getElementById('toolbar').addEventListener('mouseover', e=>{
+    const el=e.target.closest('[data-tip]');
+    if(el) showTip(el);
+    else hideTip();
+  });
+  document.getElementById('toolbar').addEventListener('mouseout', e=>{
+    const el=e.target.closest('[data-tip]');
+    if(el) hideTip();
+  });
+})();
+
+function toggleSettings(){
+  const p=document.getElementById('settings-panel');
+  const isOpen=p.classList.toggle('open');
+  document.getElementById('settings-btn').classList.toggle('active', isOpen);
+  if(isOpen) updateSettingsUI();
+}
+
+function updateSettingsUI(){
+  const isLight=document.documentElement.classList.contains('light');
+  document.getElementById('theme-dark-btn').classList.toggle('active',!isLight);
+  document.getElementById('theme-light-btn').classList.toggle('active',isLight);
+  document.getElementById('font-size-val').textContent=FONT_SIZES[fontSizeIdx].label;
+}
+
+function setTheme(mode){
+  const wantsLight=mode==='light';
+  const isLight=document.documentElement.classList.contains('light');
+  if(wantsLight!==isLight) toggleTheme();
+  updateSettingsUI();
+}
+
+// Close settings on outside click
+document.addEventListener('mousedown',e=>{
+  const p=document.getElementById('settings-panel');
+  const btn=document.getElementById('settings-btn');
+  if(p.classList.contains('open') && !p.contains(e.target) && !btn.contains(e.target)){
+    p.classList.remove('open');
+    btn.classList.remove('active');
+  }
+});
+// ═══════════════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════════════
+function toggleHint(){
+  document.getElementById('hint').classList.toggle('visible');
+}
+
+function toggleTheme(){
+  const isLight=document.documentElement.classList.toggle('light');
+  localStorage.setItem('flowboard_theme', isLight?'light':'dark');
+  updateSettingsUI();
+}
+(function initTheme(){
+  const saved=localStorage.getItem('flowboard_theme');
+  if(saved==='light'){
+    document.documentElement.classList.add('light');
+    // set after DOM ready
+    window.addEventListener('DOMContentLoaded',()=>{
+      const btn=document.getElementById('theme-btn');
+      if(btn)btn.textContent='🌙';
+    });
+  }
+})();
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+// Restore font size
+(function(){
+  const saved=localStorage.getItem('flowboard_fontsize');
+  if(saved!==null) applyFontSize(parseInt(saved));
+  else applyFontSize(2);
+})();
+updateSettingsUI();
+// Multi-board init: loads the last active board
+initBoards();
+{
+  const key='flowboard_state_'+state.boardId;
+  const saved=localStorage.getItem(key);
+  if(saved){
+    try{
+      const d=JSON.parse(saved);
+      Object.assign(state,d);
+      state.arrows=state.arrows||[];
+      state.texts=state.texts||[];
+      state.boardId=state.boardId||'b_default';
+    }catch(e){}
+  } else {
+    // fallback: try old STORAGE_KEY
+    loadState();
+    if(state.boardId) saveBoardState(); // migrate
+  }
+}
+updateTransform();
+updateTitle();
+state.groups.forEach(renderGroup);
+state.nodes.forEach(renderCardOrImage);
+state.texts.forEach(renderFreeText);
+renderAllConnections();
+renderAllArrows();
+updateCounter();
+renderSidebar();
+renderBoardManager();
+
+// Welcome cards if empty
+if(!state.nodes.length&&!state.groups.length){
+  const cx=(-state.offsetX+window.innerWidth/2)/state.scale;
+  const cy=(-state.offsetY+window.innerHeight/2)/state.scale;
+  createCard(cx-260,cy-100,{title:'Boardflowy へようこそ',body:'N: 新規カード\nG: グループ追加\nC: カード接続\nT: テキスト追加\n\\: ツールバー開閉\nCtrl+?: ショートカット一覧'});
+  createCard(cx+80,cy-60,{title:'Workflowy 連携',body:'OPMLをCtrl+Vで貼付してインポート\nOPMLコピーで書き出し\nグループはネストとして出力される'});
+  createCard(cx-80,cy+100,{title:'',body:'ダブルクリックでメモを編集\nEnterで下位項目を追加'});
+}
+</script>
+</body>
+</html>
