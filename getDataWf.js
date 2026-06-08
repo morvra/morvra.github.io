@@ -399,7 +399,26 @@ function getChildren(nodeId, allNodes) {
 
 // 再帰ヘルパー関数: ネストされたHTMLリストを構築
 function buildNestedListHtml(node, allNodes) {
-    let itemContentHtml = stripParagraphTags(markdownToHTML(node.name));
+    // <a href="URL">テキスト</a> 形式（Workflowyネイティブ）をそのまま通し、
+    // [テキスト](URL) 形式（Markdown）も <a> タグに変換する
+    const extractUrl = (url) => {
+        const m = url.match(/<a href="(.+?)">.+?<\/a>/);
+        return m ? m[1] : url;
+    };
+
+    let itemContentHtml = unescapeHtml(node.name)
+        // WorkflowyネイティブHTMLリンクをそのまま保持
+        .replace(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/g,
+            (m, url, text) => `<a href="${url}" target="_blank">${text}</a>`)
+        // Markdownリンクを変換
+        .replace(/\[([^\]]+)\]\(([^\)]+)\)/g,
+            (m, text, url) => {
+                const finalUrl = extractUrl(url);
+                return `<a href="${finalUrl}" target="_blank">${text}</a>`;
+            });
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        .replace(/`(.*?)`/g,      '<code>$1</code>')
+
     let listItemHtml = `<li>${itemContentHtml}`;
 
     const children = getChildren(node.id, allNodes);
