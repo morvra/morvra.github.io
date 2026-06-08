@@ -415,9 +415,9 @@ function buildNestedListHtml(node, allNodes) {
             (m, text, url) => {
                 const finalUrl = extractUrl(url);
                 return `<a href="${finalUrl}" target="_blank">${text}</a>`;
-            });
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        .replace(/`(.*?)`/g,      '<code>$1</code>')
+            })
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.*?)`/g,      '<code>$1</code>');
 
     let listItemHtml = `<li>${itemContentHtml}`;
 
