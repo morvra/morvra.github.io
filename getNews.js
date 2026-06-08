@@ -326,6 +326,8 @@ ${item.comment}
 // ============================================================
 
 function generateNewsDayPages(newsItems) {
+    const headerHtml = fs.readFileSync('header.html', 'utf8');
+    const footerHtml = fs.readFileSync('footer.html', 'utf8');
     const outputDir = 'news';
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
@@ -386,7 +388,7 @@ ${item.comment}
     gtag('config', 'G-0G0NP5Z9M9');
     </script>
 
-    <div id="header"></div>
+    ${headerHtml}
 
     <main>
         <div id="article-title"><h1>${dateLabel}のニュース</h1></div>
@@ -409,12 +411,8 @@ ${itemsHtml}        </ul>
         </div>
     </main>
 
-    <div id="footer"></div>
+    ${footerHtml}
 
-    <script>
-        fetch("/header.html").then(r => r.text()).then(d => document.querySelector("#header").innerHTML = d);
-        fetch("/footer.html").then(r => r.text()).then(d => document.querySelector("#footer").innerHTML = d);
-    </script>
 </body>
 </html>`;
 

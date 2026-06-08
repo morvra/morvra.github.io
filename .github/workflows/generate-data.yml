@@ -2,6 +2,11 @@ name: Generate Data and Push to GitHub
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'header.html'
+      - 'footer.html'
+      - 'article_template.html'
   schedule:
     - cron: '0 0 * * *'  # 毎日UTC 0時 → JST 9時
     - cron: '0 10 * * *' # 毎日UTC10時 → JST 19時

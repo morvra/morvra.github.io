@@ -650,7 +650,7 @@ ${year}年 <i class="fa ${iconClass}"></i>
  * @param {Array}  allItems   - 関連記事検索用の全コンテンツ（articles + pieces）
  * @param {Set}    articleIds - article/piece振り分け用のarticle UUIDセット
  */
-function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds) {
+function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds, headerHtml, footerHtml) {
     // 出力先ディレクトリが存在しない場合は作成
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
@@ -695,7 +695,9 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
             .replace(/\{\{TAGS\}\}/g,        tagsHtml)
             .replace(/\{\{DESCRIPTION\}\}/g, description)
             .replace(/\{\{BODY\}\}/g,        item.body)
-            .replace(/\{\{RELATED\}\}/g,     relatedHtml);
+            .replace(/\{\{RELATED\}\}/g,     relatedHtml)
+            .replace(/\{\{HEADER\}\}/g,      headerHtml)
+            .replace(/\{\{FOOTER\}\}/g,      footerHtml);
 
         const filePath = path.join(outputDir, `${item.id}.html`);
         fs.writeFileSync(filePath, html, 'utf8');
@@ -824,13 +826,15 @@ async function main() {
             return;
         }
 
-        const template = fs.readFileSync(templatePath, 'utf8');
+        const template   = fs.readFileSync(templatePath, 'utf8');
+        const headerHtml = fs.readFileSync('header.html', 'utf8');
+        const footerHtml = fs.readFileSync('footer.html', 'utf8');
 
         // 関連記事生成用に全コンテンツを統合
         const allItems = [...articles, ...pieces];
 
-        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs);
-        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs);
+        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs, headerHtml, footerHtml);
+        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs, headerHtml, footerHtml);
 
         console.log('Static HTML generation complete.');
 
