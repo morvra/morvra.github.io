@@ -478,7 +478,13 @@ function mergeNewsIntoRss(newsItems) {
             const pubDate   = new Date(`${date}T00:00:00+09:00`).toUTCString();
 
             const summary = byDate[date]
-                .map(i => `・${i.title}`)
+                .map(i => {
+                    const titleHtml = i.url
+                        ? `<a href="${i.url}">${i.title}</a>`
+                        : i.title;
+                    const commentHtml = i.comment || '';
+                    return `<p>${titleHtml}</p>${commentHtml}`;
+                })
                 .join('\n');
 
             return {
