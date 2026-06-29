@@ -1,63 +1,15 @@
 {
-	"date": "2026-06-26",
+	"date": "2026-06-29",
 	"news": [
 		{
-			"id": "5c8f8641-c5ec-43e5-8adf-47b953b6b4c1",
-			"title": "[5話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253191254640655602",
-			"date": "2026-06-26",
+			"id": "1d789b8e-112f-48fe-a68c-8068d63a7ffb",
+			"title": "[第196話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191254783402321",
+			"date": "2026-06-29",
 			"tags": [
 				"漫画"
 			],
-			"comment": "<div class=\"news-comment\"><p>緊張感が漂ってくる展開でゾクゾク。</p></div>"
-		},
-		{
-			"id": "daf4d190-84da-4f9e-8a07-2a4b22f3b0df",
-			"title": "太田光さんとradiko社長と、ラジオの話をしよう。",
-			"url": "https://dentsu-ho.com/articles/9783",
-			"date": "2026-06-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"Podcastは内容をしっかり聴こうと思ってる人が集まるけど、ラジオは農作業やお店をしながら一日中流しているという話もよく聞きます。\"</p></div>"
-		},
-		{
-			"id": "7585a60e-ee13-468c-a49b-9e2b061551f4",
-			"title": "物価を可視化するサイトを作りました - すけログ",
-			"url": "https://blog.foresuke.com/tech/20260306_bukka/",
-			"date": "2026-06-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>グラフで見ると一目瞭然。ロシアのウクライナ侵攻(2022/02~)のインパクトの大きさを改めて実感。</p><p>関連: <a href=\"https://bukka-graph.foresuke.com/?tab=graph&item=07301&areas=13100%2C27100%2C23100&start=202001\">物価推移グラフ - Price Tracker JP</a></p></div>"
-		},
-		{
-			"id": "2d3a69a7-235d-4607-9687-3fd1f86dd72f",
-			"title": "ブロガーたちはどこにいったのか | Lifehacking.jp",
-			"url": "https://lifehacking.jp/2026/06/bloggers/",
-			"date": "2026-06-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"大事なポイントとして、アルゴリズムによるおすすめは 多様性を増やす方向には進まない という点です。\"</p></div>"
-		},
-		{
-			"id": "cd8fa092-4f98-411f-80fe-3239bb038546",
-			"title": "電子書籍よりも紙のほうが脳は「省エネ化」する | ギズモード・ジャパン",
-			"url": "https://www.gizmodo.jp/article/manga_reading_on_paper/",
-			"date": "2026-06-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>まぁわかるな。電子の読書体験がVR方向に進化して物質っぽくなっていったらこれは変わるんだろうか。本棚やページめくりの概念があったら？</p></div>"
-		},
-		{
-			"id": "9f8656af-7d40-488c-bb36-1a1c0a91a20b",
-			"title": "1日の歩数に2倍近い地域差 150万人スマホデータ解析 東大など | NHKニュース | 医療・健康",
-			"url": "https://news.web.nhk/newsweb/na/na-k10015155641000",
-			"date": "2026-06-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>田舎は徒歩のみで移動するのしんどい。</p></div>"
-		},
-		{
-			"id": "ad96cf79-d661-4615-8b72-830008ee694c",
-			"title": "「オタク差別」がなくなったのは、「奇跡」でも「魔法」でもないんだよ、って話 - いつか電池がきれるまで",
-			"url": "https://fujipon.hatenablog.com/entry/2026/06/19/170311",
-			"date": "2026-06-26",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"「アニメをバカにしていた人たち（とくに年齢層が高い人たち）の多くは、世界から退場したり、発言力を失ったりして、「アニメ・ゲームネイティブ世代」がボリュームゾーンを占めるようになっただけ\" これ</p></div>"
+			"comment": ""
 		}
 	]
 }
