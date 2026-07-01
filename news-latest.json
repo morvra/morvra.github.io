@@ -1,15 +1,45 @@
 {
-	"date": "2026-06-29",
+	"date": "2026-07-01",
 	"news": [
 		{
-			"id": "1d789b8e-112f-48fe-a68c-8068d63a7ffb",
-			"title": "[第196話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253191254783402321",
-			"date": "2026-06-29",
-			"tags": [
-				"漫画"
-			],
+			"id": "9c2e663e-1e61-4cef-b0e7-970826222eed",
+			"title": "2026.06: Tables. and more – Workflowy",
+			"url": "https://blog.workflowy.com/2026-06-tables-and-more/",
+			"date": "2026-07-01",
+			"tags": [],
 			"comment": ""
+		},
+		{
+			"id": "16f57bb5-f70f-4c21-a3a5-19b0c8980759",
+			"title": "普通の言葉すぎて周囲の人には気づかれてない「漫画の引用」発表会 | オモコロ",
+			"url": "https://omocoro.jp/kiji/577776/",
+			"date": "2026-07-01",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>いいね</p></div>"
+		},
+		{
+			"id": "9a9539fa-05f6-406b-9522-b0e6a9498719",
+			"title": "「なんでこうらが重いのにういてるんですか？」との質問に対するウミガメ公園の回答が話題に「難儀すぎる」「知らなかった」 - Togetter",
+			"url": "https://togetter.com/li/2715029",
+			"date": "2026-07-01",
+			"tags": [],
+			"comment": ""
+		},
+		{
+			"id": "1d3fc9ff-4c3b-4a0e-b97b-7c3f6a6174ca",
+			"title": "食べ物を床に落としちゃった！一瞬ならOK？“3秒ルール”は真実か 食品衛生の専門家が明かす「秒数よりも重要なこと」とまさかの“本音” | TBS NEWS DIG",
+			"url": "https://newsdig.tbs.co.jp/articles/-/2760609",
+			"date": "2026-07-01",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"実は秒数は関係なくて、食品と床次第なんですよ\" そりゃそうｗｗｗ</p></div>"
+		},
+		{
+			"id": "9b223b60-d0d3-4c30-ae79-b81b05d9ad3f",
+			"title": "OKFとLLM Wiki - 西尾泰和の外部脳",
+			"url": "https://scrapbox.io/nishio/OKF%E3%81%A8LLM_Wiki",
+			"date": "2026-07-01",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>Cosense最強！</p></div>"
 		}
 	]
 }
