@@ -1,45 +1,31 @@
 {
-	"date": "2026-07-01",
+	"date": "2026-07-02",
 	"news": [
 		{
-			"id": "9c2e663e-1e61-4cef-b0e7-970826222eed",
-			"title": "2026.06: Tables. and more – Workflowy",
-			"url": "https://blog.workflowy.com/2026-06-tables-and-more/",
-			"date": "2026-07-01",
-			"tags": [],
+			"id": "55f97472-e108-4cc7-83dd-a9b802574a7f",
+			"title": "[第1話] シュガーハイに放課後 - ふじさちこ | となりのヤングジャンプ",
+			"url": "https://tonarinoyj.jp/episode/12207421983906108939",
+			"date": "2026-07-02",
+			"tags": [
+				"漫画"
+			],
 			"comment": ""
 		},
 		{
-			"id": "16f57bb5-f70f-4c21-a3a5-19b0c8980759",
-			"title": "普通の言葉すぎて周囲の人には気づかれてない「漫画の引用」発表会 | オモコロ",
-			"url": "https://omocoro.jp/kiji/577776/",
-			"date": "2026-07-01",
+			"id": "248e21fb-8634-4338-acec-d61299a543b3",
+			"title": "頭が良くて合理的な人が、会社で「穴掘ってまた埋めろ」みたいな指示されると「なんでそんなバカなことを」と反発して話が進まないことがあるが、本当に会社で必要な頭の良さはこちらではないか - Togetter",
+			"url": "https://togetter.com/li/2715830",
+			"date": "2026-07-02",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>いいね</p></div>"
+			"comment": "<div class=\"news-comment\"><p>意図は何なの？</p></div>"
 		},
 		{
-			"id": "9a9539fa-05f6-406b-9522-b0e6a9498719",
-			"title": "「なんでこうらが重いのにういてるんですか？」との質問に対するウミガメ公園の回答が話題に「難儀すぎる」「知らなかった」 - Togetter",
-			"url": "https://togetter.com/li/2715029",
-			"date": "2026-07-01",
+			"id": "31a12f14-a306-4d8e-bae1-77f9d7af5874",
+			"title": "井口がワールドカップから帰国して河本が泣く回 - YouTube",
+			"url": "https://www.youtube.com/watch?v=Itdm8NIWuyE",
+			"date": "2026-07-02",
 			"tags": [],
-			"comment": ""
-		},
-		{
-			"id": "1d3fc9ff-4c3b-4a0e-b97b-7c3f6a6174ca",
-			"title": "食べ物を床に落としちゃった！一瞬ならOK？“3秒ルール”は真実か 食品衛生の専門家が明かす「秒数よりも重要なこと」とまさかの“本音” | TBS NEWS DIG",
-			"url": "https://newsdig.tbs.co.jp/articles/-/2760609",
-			"date": "2026-07-01",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"実は秒数は関係なくて、食品と床次第なんですよ\" そりゃそうｗｗｗ</p></div>"
-		},
-		{
-			"id": "9b223b60-d0d3-4c30-ae79-b81b05d9ad3f",
-			"title": "OKFとLLM Wiki - 西尾泰和の外部脳",
-			"url": "https://scrapbox.io/nishio/OKF%E3%81%A8LLM_Wiki",
-			"date": "2026-07-01",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>Cosense最強！</p></div>"
+			"comment": "<div class=\"news-comment\"><p>開幕からｗｗ</p></div>"
 		}
 	]
 }
