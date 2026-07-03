@@ -135,8 +135,10 @@ function markdownToHTML(markdown) {
 
                 // HTMLタグかどうかを先に判定
                 if (line.trim().startsWith('<')) {
-                    // WorkflowyがHTML属性値内のURLを<a>タグに自動変換している場合、生のURLに戻す
-                    let finalLine = line.replace(/<a\s+href=["']([^"']+)["'][^>]*>.*?<\/a>/g, '$1');
+                    // WorkflowyがHTML属性値内のURLを<a>タグに自動変換している場合のみ、生のURLに戻す
+                    let finalLine = line.replace(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/g, (match, href, text) => {
+                        return text.trim() === href.trim() ? href : match;
+                    });
 
                     // ブロックレベル要素は<p>タグで囲まない（iframeなど）
                     const firstTag = ((finalLine.trim().match(/^<(\w[\w-]*)/) || [])[1] || '').toLowerCase();
