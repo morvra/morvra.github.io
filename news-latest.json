@@ -1,21 +1,31 @@
 {
-	"date": "2026-07-03",
+	"date": "2026-07-04",
 	"news": [
 		{
-			"id": "569feaf3-ca99-46e4-89ed-9576c2c0d028",
-			"title": "日本がサッカーW杯優勝のために必要なのは野球の世界浸透だ",
-			"url": "https://anond.hatelabo.jp/20260702123843",
-			"date": "2026-07-03",
+			"id": "af2dabe3-2b3e-499c-b11f-a4ae5e88ebe0",
+			"title": "デジタル・クラフト | R-style",
+			"url": "https://rashita.net/blog/?%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%83%88",
+			"date": "2026-07-04",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>増田の理論で言うならバスケの浸透の方が分散には近道な気がする。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>個人サイトづくりは庭いじりとか日曜作曲家的な楽しさある。</p></div>"
 		},
 		{
-			"id": "e5eefa8e-a477-4044-8c69-f57ba9e8cde0",
-			"title": "「転売目的での大量購入」という社会問題 | 本屋lighthouseのニュースレター",
-			"url": "https://book-lighthouse.theletter.jp/posts/d94ca881-fda6-4ffc-a395-c28a79c0d612",
-			"date": "2026-07-03",
+			"id": "0ff58c1f-0ddf-41c9-bcbb-ae3b6bf808cf",
+			"title": "Ado「Love me forever!」(Nintendo Switch用ゲームソフト「リズム天国 ミラクルスターズ」収録曲)のセルフライナーノーツ｜つんく♂",
+			"url": "https://note.tsunku.net/n/nae1f93033390",
+			"date": "2026-07-04",
+			"tags": [
+				"音楽"
+			],
+			"comment": "<div class=\"news-comment\"><p>これ読んでから聴くとまた良き。</p><p>関連: <a href=\"https://www.youtube.com/watch?v=WSuAVkaSC38\">【Ado】Love me forever!（Official Audio） - YouTube</a></p></div>"
+		},
+		{
+			"id": "1ecda5b1-1107-45d6-a32d-fb9001895395",
+			"title": "【公式】ニューヨーク 漫才「ち●こ太鼓」/ 単独ライブ『将来の夢』より - YouTube",
+			"url": "https://www.youtube.com/watch?v=-qRawbIEsDc",
+			"date": "2026-07-04",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>恐ろしい。ランダム商法なぁ。。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>笑った。ニューヨークの嘘過ぎる漫才好き。いわゆるワードセンスとは違う気がするけど言葉遣い巧みだよね。</p></div>"
 		}
 	]
 }
