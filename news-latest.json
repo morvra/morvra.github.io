@@ -1,31 +1,23 @@
 {
-	"date": "2026-07-04",
+	"date": "2026-07-05",
 	"news": [
 		{
-			"id": "af2dabe3-2b3e-499c-b11f-a4ae5e88ebe0",
-			"title": "デジタル・クラフト | R-style",
-			"url": "https://rashita.net/blog/?%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%83%88",
-			"date": "2026-07-04",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>個人サイトづくりは庭いじりとか日曜作曲家的な楽しさある。</p></div>"
-		},
-		{
-			"id": "0ff58c1f-0ddf-41c9-bcbb-ae3b6bf808cf",
-			"title": "Ado「Love me forever!」(Nintendo Switch用ゲームソフト「リズム天国 ミラクルスターズ」収録曲)のセルフライナーノーツ｜つんく♂",
-			"url": "https://note.tsunku.net/n/nae1f93033390",
-			"date": "2026-07-04",
+			"id": "6f59026f-439b-4c08-9bb3-78070c06b423",
+			"title": "[第１１４話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191254783402955",
+			"date": "2026-07-05",
 			"tags": [
-				"音楽"
+				"漫画"
 			],
-			"comment": "<div class=\"news-comment\"><p>これ読んでから聴くとまた良き。</p><p>関連: <a href=\"https://www.youtube.com/watch?v=WSuAVkaSC38\">【Ado】Love me forever!（Official Audio） - YouTube</a></p></div>"
+			"comment": "<div class=\"news-comment\"><p>展開気になるねぇ</p></div>"
 		},
 		{
-			"id": "1ecda5b1-1107-45d6-a32d-fb9001895395",
-			"title": "【公式】ニューヨーク 漫才「ち●こ太鼓」/ 単独ライブ『将来の夢』より - YouTube",
-			"url": "https://www.youtube.com/watch?v=-qRawbIEsDc",
-			"date": "2026-07-04",
+			"id": "23945272-3b51-4554-ae79-eb0ff5b21d93",
+			"title": "個人用メモアプリをつくっている - Gosuke Miyashita",
+			"url": "https://mizzy.org/blog/2026/07/03/2/",
+			"date": "2026-07-05",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>笑った。ニューヨークの嘘過ぎる漫才好き。いわゆるワードセンスとは違う気がするけど言葉遣い巧みだよね。</p></div>"
+			"comment": ""
 		}
 	]
 }
