@@ -1,15 +1,21 @@
 {
-	"date": "2026-07-09",
+	"date": "2026-07-10",
 	"news": [
 		{
-			"id": "8a077a62-0f30-4901-aa37-9eb35db4e1ec",
-			"title": "やめろ好きになってしまう第58話 松浦邸大爆破 その②｜ヤンジャン＋集英社公式・ジャンプ系青年マンガ誌アプリ",
-			"url": "https://ynjn.jp/viewer/21346/310589",
-			"date": "2026-07-09",
-			"tags": [
-				"漫画"
-			],
-			"comment": "<div class=\"news-comment\"><p>うぐぎ…</p></div>"
+			"id": "dd4b2ec1-f0a4-4ca8-bed9-96b0534da02d",
+			"title": "Yamanote.fun",
+			"url": "https://www.yamanote.fun/",
+			"date": "2026-07-10",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>すご</p></div>"
+		},
+		{
+			"id": "2a562b04-470e-410e-a3f8-4b3b4fe85fbd",
+			"title": "歌唱3秒の「は・か・た・の・しお」　カラオケ週間ランキング1位に [愛媛県]：朝日新聞",
+			"url": "https://www.asahi.com/sp/articles/ASV782W3PV78OXIE035M.html",
+			"date": "2026-07-10",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>採点競うのはおもろい発想だ</p></div>"
 		}
 	]
 }
