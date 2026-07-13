@@ -1,21 +1,31 @@
 {
-	"date": "2026-07-10",
+	"date": "2026-07-13",
 	"news": [
 		{
-			"id": "dd4b2ec1-f0a4-4ca8-bed9-96b0534da02d",
-			"title": "Yamanote.fun",
-			"url": "https://www.yamanote.fun/",
-			"date": "2026-07-10",
+			"id": "921974b4-57c1-4f44-9531-57a69a055acf",
+			"title": "仏像から平安時代末期の古文書 大量に見つかる 源義仲の記述も | NHKニュース | 歴史・文化財、大阪府、神奈川県",
+			"url": "https://news.web.nhk/newsweb/na/na-k10015174831000",
+			"date": "2026-07-13",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>すご</p></div>"
+			"comment": "<div class=\"news-comment\"><p>中身気になってたので少しでも知れて良かった。続報あるかな？</p></div>"
 		},
 		{
-			"id": "2a562b04-470e-410e-a3f8-4b3b4fe85fbd",
-			"title": "歌唱3秒の「は・か・た・の・しお」　カラオケ週間ランキング1位に [愛媛県]：朝日新聞",
-			"url": "https://www.asahi.com/sp/articles/ASV782W3PV78OXIE035M.html",
-			"date": "2026-07-10",
+			"id": "58c37139-7e7a-4f46-84dd-609c79c8c269",
+			"title": "「イエネコの防除推進外来種指定」について知って欲しいこと - たてぃとぅてとの雑記",
+			"url": "https://ta-tea-two-te-to.hatenablog.com/entry/2026/07/11/131600",
+			"date": "2026-07-13",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>採点競うのはおもろい発想だ</p></div>"
+			"comment": "<div class=\"news-comment\"><p>読んでよかった。知らずに防除推進だけ聴いたらぎょっとしてたかも。</p></div>"
+		},
+		{
+			"id": "9933df14-bac2-4fb1-9715-9a7a2c241f24",
+			"title": "[第198話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191255124421474",
+			"date": "2026-07-13",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>ゆずさんかっけー</p></div>"
 		}
 	]
 }
