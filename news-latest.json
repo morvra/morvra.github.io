@@ -1,13 +1,49 @@
 {
-	"date": "2026-07-17",
+	"date": "2026-07-18",
 	"news": [
 		{
-			"id": "9c6a1294-a276-4395-8184-007861defcb7",
-			"title": "デカい声であいさつをしてみる1年 (1/2) :: デイリーポータルZ",
-			"url": "https://dailyportalz.jp/kiji/dekai-koe-de-aisatsu",
-			"date": "2026-07-17",
+			"id": "01163911-091b-4522-aed7-91448b22a7fd",
+			"title": "緊急地震速報の音はなぜ「ギュイッ」と3回鳴る？眠っていても脳を覚醒させる1秒未満の音、その知られざる設計原理 環境音楽家・小久保隆氏に聞く(1/4) | JBpress (ジェイビープレス)",
+			"url": "https://jbpress.ismedia.jp/articles/-/95949",
+			"date": "2026-07-18",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>挨拶はガチ</p></div>"
+			"comment": "<div class=\"news-comment\"><p>\"「絶対に気づく音」とはなんだろう──。そのことをまず真剣に考えることから、制作がスタートしました。\" というかあの音「ギュイッ」なんだ</p></div>"
+		},
+		{
+			"id": "0b56441b-d27c-42b2-94dc-f0d1e77a8145",
+			"title": "メディチ家当主急死の真相が440年越しでDNA分析により明らかに - GIGAZINE",
+			"url": "https://gigazine.net/news/20260717-ancient-dna-solves-16th-medici-mystery/",
+			"date": "2026-07-18",
+			"tags": [
+				"歴史"
+			],
+			"comment": "<div class=\"news-comment\"><p>日本でもおもしろさ優先されてることあるんだろうな</p></div>"
+		},
+		{
+			"id": "62c07a5a-c919-42b3-9020-9af3f2d5c3c7",
+			"title": "家事のキツイところって、文句を言われるところ何だよな。 ひとり暮らしな..",
+			"url": "https://anond.hatelabo.jp/20260717063535",
+			"date": "2026-07-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>積み上げがないのがキツいってブコメあってわかる。でも効率よくなったり質向上の面白さもあるのでそっちに目を向けられたらいいよなって</p></div>"
+		},
+		{
+			"id": "5c7d8c99-57fe-4e2f-abba-19d2d626be9c",
+			"title": "ロマンス詐欺被害に遭った71歳法学者が赤裸々告白「私は自分が賢い人間だと思っていました」　名誉教授が借金を重ね、たった4か月で925万円を入金する一部始終｜NEWSポストセブン",
+			"url": "https://www.news-postseven.com/archives/20260717_2120658.html?DETAIL",
+			"date": "2026-07-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>恐ろしい。今後より制度が上がってくることを考えると自分なら平気とはとても思えない</p></div>"
+		},
+		{
+			"id": "dc7e30a2-a6b9-43b8-b9f6-edbf602bf245",
+			"title": "DEGA - ジャンプルーキー！",
+			"url": "https://rookie.shonenjump.com/series/OmkvmYUGxrw/OmkvmYUGxr4",
+			"date": "2026-07-18",
+			"tags": [
+				"漫画"
+			],
+			"comment": ""
 		}
 	]
 }
