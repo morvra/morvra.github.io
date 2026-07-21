@@ -1,21 +1,37 @@
 {
-	"date": "2026-07-20",
+	"date": "2026-07-21",
 	"news": [
 		{
-			"id": "61be65bd-7844-4015-a6c4-02d5f7691d34",
-			"title": "ワールドカップ2026 スペインが優勝 4大会ぶり2回目 アルゼンチンとの延長制す | NHKニュース | サッカーワールドカップ2026、サッカー、スペイン",
-			"url": "https://news.web.nhk/newsweb/na/na-k10015180471000",
-			"date": "2026-07-20",
+			"id": "d1dce5bf-fcbe-4570-943f-01e629078988",
+			"title": "風呂の換気扇は24時間回し続けるべき？SNSで議論勃発　TOTOとLIXILに聞いた: J-CAST ニュース【全文表示】",
+			"url": "https://www.j-cast.com/2026/07/19516397.html?p=all",
+			"date": "2026-07-21",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>前半は抗えてたけどじわじわキツくて、フェランとペドリの投入で圧倒。強かった！</p></div>"
+			"comment": "<div class=\"news-comment\"><p>扉は閉めよう。</p></div>"
 		},
 		{
-			"id": "2fd99607-df3e-468f-a3de-c89093996b5e",
-			"title": "周央サンゴインタビュー 志摩スペイン村との“相思相愛コラボ”で活動への意識が変化 | ANYCOLOR MAGAZINE",
-			"url": "https://magazine.anycolor.co.jp/articles/1483504439",
-			"date": "2026-07-20",
+			"id": "4d23b6ee-d826-4189-93c9-2424632acabd",
+			"title": "衰退ポルノ",
+			"url": "https://anond.hatelabo.jp/20260720110100",
+			"date": "2026-07-21",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"「ンゴが太鼓判を押します！ めっちゃいいんです」って言うことに対して、自信を持ちたいって思えるようになりました。\" 素敵。</p><p>関連: <a href=\"https://magazine.anycolor.co.jp/articles/1913797424\">志摩スペイン村スタッフ×ANYCOLOR営業チーム座談会　ネットの熱狂を現場につなげた、前例なきコラボが生まれた背景</a></p></div>"
+			"comment": "<div class=\"news-comment\"><p>衰退してるけどいいところもあるよねって慰めが日本スゴイ系の立ち位置だと思う。</p></div>"
+		},
+		{
+			"id": "55da4781-325a-4d50-afdb-b2554501ea0e",
+			"title": "ギャグ漫画家頂上対談／僕とロボコ連載6周年記念企画 - 宮崎周平 | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191255348929701",
+			"date": "2026-07-21",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>読み応えある対談。お互いの雑誌の違いなんかも語られてて面白かった。</p></div>"
+		},
+		{
+			"id": "3d7e3355-9c55-49aa-9f80-ff0ac321367b",
+			"title": "外部記憶と化したWebから生成AIを通じて情報を取り出すとき、何が起こっているのか | 記と憶 Ki to Oku",
+			"url": "https://ki-to-oku.net/outsourcing-judgment-to-ai-after-memory-goes-external/",
+			"date": "2026-07-21",
+			"tags": [],
+			"comment": ""
 		}
 	]
 }
