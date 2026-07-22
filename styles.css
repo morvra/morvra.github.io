@@ -222,6 +222,12 @@ ul.nav-icons {
     font-size: 0.85em;
 }
 
+#article-list-heading:before {
+    content: "##";
+    margin-right: 8px;
+    color: #a89104;
+}
+
 /* 年ごとのグループのスタイル */
 .year-group {
     list-style: none; /* デフォルトのリストスタイルをなくす */
@@ -312,7 +318,13 @@ iframe {
 #article-title h1 {
     font-size: 1.3em;
     color: #333;
+    font-family: 'Zen Old Mincho', serif;
 }
+#article-title h1:before {
+    content: "# ";
+    color: #a89104;
+}
+
 #article-date {
     display: inline;
     font-size: 0.9em;
@@ -334,21 +346,20 @@ iframe {
 }
 
 #article-content h2 {
-    font-size: 1.1em;
+    font-family: 'Zen Old Mincho', serif;
 }
 #article-content h2:before {
     content: "##";
     margin-right: 8px;
-    color: #bbb;
+    color: #a89104;
 }
-
 #article-content h3 {
-    font-size: 1em;
+    font-family: 'Zen Old Mincho', serif;
 }
 #article-content h3:before {
     content: "###";
     margin-right: 8px;
-    color: #bbb;
+    color: #a89104;
 }
 
 #article-content img {
@@ -383,6 +394,10 @@ code {
 
 #article-content li {
     padding: 2px 0px;
+}
+
+#article-content ul li::marker {
+    color: #a89104;
 }
 
 /* Amazonリンクカード */
@@ -500,7 +515,7 @@ ul#tag-list {
 #tag-list h2:before {
     content: "##";
     margin-right: 8px;
-    color: #bbb;
+    color: #a89104;
 }
 
 
