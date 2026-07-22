@@ -27,20 +27,26 @@
     gtag('js', new Date());
     gtag('config', 'G-0G0NP5Z9M9');
     </script>
+    
+    <script src="./nav.js" defer></script>
 
     <header>
     <div class="container">
         <h1 class="blog-title"><a href="https://morvra.github.io"><img src="/bullet_icon.png" class="blog-icon" alt="blog-icon">morvra lists</a></h1>
-        <nav>
+        <button id="nav-toggle" class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-nav">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <nav id="site-nav">
             <ul>
-                <li><a href="/piece" title="piece"><i class="fa fa-puzzle-piece" aria-hidden="true"></i></a></li>
-                <li><a href="/news" title="news"><i class="fa fa-bookmark"></i></a></li>
-                <li><a href="/search" title="search"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                <li><a href="/article?id=e884fec2-302e-eeec-9214-8e271fe22a69"><i class="fa fa-info" aria-hidden="true"></i><span class="nav-label">このサイトについて</span></a></li>
+                <li><a href="/piece"><i class="fa fa-puzzle-piece" aria-hidden="true"></i><span class="nav-label">記事未満のつぶやき</span></a></li>
+                <li><a href="/news"><i class="fa fa-bookmark" aria-hidden="true"></i><span class="nav-label">気になったニュース・リンク</span></a></li>
+                <li><a href="/taglist"><i class="fa fa-tags" aria-hidden="true"></i><span class="nav-label">タグ一覧</span></a></li>
+                <li><a href="/search"><i class="fa fa-search" aria-hidden="true"></i><span class="nav-label">検索</span></a></li>
             </ul>
         </nav>
     </div>
 </header>
-
 
     <main>
         <div id="article">
@@ -68,11 +74,11 @@
             <div id="related-articles">
 <h2>関連記事</h2>
 <ul>
+<li><a href="/articles/155f3986-4f8b-70ca-e046-2316c49adaf1.html">サイト内を検索できるようにした</a></li>
 <li><a href="/articles/ac08d795-be94-54c0-74ee-2d320f6d14d4.html">サイトのタイトルとアイコンを変更</a></li>
-<li><a href="/articles/1903c7ea-8e59-b9db-7834-68a1fc26f06e.html">Hello world!</a></li>
-<li><a href="/articles/c0245cfc-6ba5-e922-6520-d1fcc01b839f.html">記事テスト</a></li>
-<li><a href="/articles/e1dab0f9-5f9c-6a9b-010f-0ce91bb8d961.html">このサイトのRSSフィードを作った</a></li>
+<li><a href="/articles/b7d683f3-922d-430a-35a5-b29c0b98f7f1.html">サイトの構成やURL形式を変更した</a></li>
 <li><a href="/articles/835c2e31-6116-a79e-760a-b6dc8b0c00af.html">サイトの運用方法やデザインをアップデート</a></li>
+<li><a href="/articles/35623038-4d9e-b354-d009-8611a6b3f445.html">人力キュレーション×植リンク活動 羅列型ニュース始めます</a></li>
 </ul>
 </div>
         </div>

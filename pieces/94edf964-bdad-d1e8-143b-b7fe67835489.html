@@ -27,20 +27,26 @@
     gtag('js', new Date());
     gtag('config', 'G-0G0NP5Z9M9');
     </script>
+    
+    <script src="./nav.js" defer></script>
 
     <header>
     <div class="container">
         <h1 class="blog-title"><a href="https://morvra.github.io"><img src="/bullet_icon.png" class="blog-icon" alt="blog-icon">morvra lists</a></h1>
-        <nav>
+        <button id="nav-toggle" class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-nav">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <nav id="site-nav">
             <ul>
-                <li><a href="/piece" title="piece"><i class="fa fa-puzzle-piece" aria-hidden="true"></i></a></li>
-                <li><a href="/news" title="news"><i class="fa fa-bookmark"></i></a></li>
-                <li><a href="/search" title="search"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                <li><a href="/article?id=e884fec2-302e-eeec-9214-8e271fe22a69"><i class="fa fa-info" aria-hidden="true"></i><span class="nav-label">このサイトについて</span></a></li>
+                <li><a href="/piece"><i class="fa fa-puzzle-piece" aria-hidden="true"></i><span class="nav-label">記事未満のつぶやき</span></a></li>
+                <li><a href="/news"><i class="fa fa-bookmark" aria-hidden="true"></i><span class="nav-label">気になったニュース・リンク</span></a></li>
+                <li><a href="/taglist"><i class="fa fa-tags" aria-hidden="true"></i><span class="nav-label">タグ一覧</span></a></li>
+                <li><a href="/search"><i class="fa fa-search" aria-hidden="true"></i><span class="nav-label">検索</span></a></li>
             </ul>
         </nav>
     </div>
 </header>
-
 
     <main>
         <div id="article">
@@ -68,11 +74,11 @@
             <div id="related-articles">
 <h2>関連記事</h2>
 <ul>
-<li><a href="/articles/69078751-3526-69b5-f6cf-a8bbcc4a72f8.html">WorkflowyからCosenseに投稿するBookmarklet</a></li>
-<li><a href="/articles/ec39d359-3f00-4c8a-a1f8-cc2029095618.html">Workflowyで書いたメモに再会するためのHTMLツールをつくった</a></li>
-<li><a href="/articles/b7001f26-f872-2030-11bd-d9cc8f46ef70.html">Workflowyで表を扱うためのUserScript</a></li>
 <li><a href="/articles/3ca5a6a4-4d3f-4cf6-991a-0b8627409235.html">Workflowyの「軽さ」について考えた</a></li>
+<li><a href="/articles/ec39d359-3f00-4c8a-a1f8-cc2029095618.html">Workflowyで書いたメモに再会するためのHTMLツールをつくった</a></li>
+<li><a href="/articles/69078751-3526-69b5-f6cf-a8bbcc4a72f8.html">WorkflowyからCosenseに投稿するBookmarklet</a></li>
 <li><a href="/articles/ef97353a-5ca5-0ff4-ab6a-a6eeced6d423.html">このサイトの元データをDynalistからWorkflowyに移動した</a></li>
+<li><a href="/articles/f1f0b5f0-f360-4f46-870a-dac719665cde.html">2025-11時点でのWorkflowyの構造と使い方</a></li>
 </ul>
 </div>
         </div>
