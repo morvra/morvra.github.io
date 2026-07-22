@@ -26,18 +26,16 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: box-shadow 0.2s ease, border-bottom-color 0.2s ease;
-    border-bottom: 1px solid transparent;
-}
-header.scrolled {
-    border-bottom-color: #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.nav-toggle-checkbox {
+    display: none;
 }
 
 .nav-toggle {
     display: none;
-    background: none;
-    border: none;
     font-size: 20px;
     color: #555;
     cursor: pointer;
@@ -58,7 +56,7 @@ header.scrolled {
         border-top: 1px solid #e0e0e0;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
-    header nav.open {
+    .nav-toggle-checkbox:checked ~ nav {
         display: block;
     }
     header nav ul {
