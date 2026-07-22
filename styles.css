@@ -18,6 +18,77 @@ a:hover, a:focus {
     text-decoration: underline;
 }
 
+.container {
+    position: relative;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow 0.2s ease, border-bottom-color 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+header.scrolled {
+    border-bottom-color: #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+@media (max-width: 599px) {
+    .nav-toggle {
+        display: inline-block;
+    }
+    header nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+    header nav.open {
+        display: block;
+    }
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        padding: 8px 0;
+    }
+    header nav ul li {
+        margin: 0;
+    }
+    header nav ul li a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 18px;
+        color: #555;
+    }
+    header nav ul li a i {
+        width: 20px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+}
+
+@media (min-width: 600px) {
+    .nav-label {
+        display: none;
+    }
+}
+
 header {
     background-color: #fff;
     color: #333;
