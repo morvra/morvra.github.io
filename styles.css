@@ -318,7 +318,6 @@ iframe {
 #article-title h1 {
     font-size: 1.3em;
     color: #333;
-    font-family: 'Zen Old Mincho', serif;
 }
 #article-title h1:before {
     content: "# ";
@@ -345,17 +344,12 @@ iframe {
     overflow-wrap: break-word;
 }
 
-#article-content h2 {
-    font-family: 'Zen Old Mincho', serif;
-}
 #article-content h2:before {
     content: "##";
     margin-right: 8px;
     color: #a89104;
 }
-#article-content h3 {
-    font-family: 'Zen Old Mincho', serif;
-}
+
 #article-content h3:before {
     content: "###";
     margin-right: 8px;
