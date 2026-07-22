@@ -231,6 +231,13 @@ function processFootnotes(html) {
     const footnotes = [];
     let counter = 0;
 
+    // コードブロック（<pre>...</pre>）を一時的に退避させ、脚注変換の対象から除外する
+    const codeBlocks = [];
+    const htmlWithoutCode = html.replace(/<pre>[\s\S]*?<\/pre>/g, (match) => {
+        codeBlocks.push(match);
+        return `\u0000CODEBLOCK${codeBlocks.length - 1}\u0000`;
+    });
+
     // リンクをHTMLに変換するヘルパー (脚注リスト用)
     // WorkflowyネイティブHTMLリンクはそのまま通し、Markdownリンクを<a>に変換する
     const renderLinks = (text) => {
@@ -245,9 +252,8 @@ function processFootnotes(html) {
             .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1'); // Markdownリンク
     };
 
-    // [^テキスト] を脚注参照に置換
-    // ※ Markdownリンク [text](url) とは別パターン（URLがない）なので競合しない
-    const processed = html.replace(/\[\^([^\]]+)\]/g, (match, text) => {
+    // [^テキスト] を脚注参照に置換（コードブロックを除いた本文だけが対象）
+    const processed = htmlWithoutCode.replace(/\[\^([^\]]+)\]/g, (match, text) => {
         counter++;
         const trimmed = text.trim();
         footnotes.push({ num: counter, text: trimmed });
@@ -256,7 +262,10 @@ function processFootnotes(html) {
                `</sup>`;
     });
 
-    if (footnotes.length === 0) return html;
+    // 退避させておいたコードブロックを元の位置に戻す
+    const restored = processed.replace(/\u0000CODEBLOCK(\d+)\u0000/g, (m, i) => codeBlocks[Number(i)]);
+
+    if (footnotes.length === 0) return restored;
 
     // 脚注リストを末尾に追加 (リンクはHTML変換して出力)
     const fnItems = footnotes.map(fn =>
@@ -264,7 +273,7 @@ function processFootnotes(html) {
         `<a href="#fnref-${fn.num}" class="footnote-back">↩</a></li>`
     ).join('\n');
 
-    return processed +
+    return restored +
         `<div class="footnotes"><hr><ol>\n${fnItems}\n</ol></div>`;
 }
 
