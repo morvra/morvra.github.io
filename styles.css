@@ -272,10 +272,6 @@ ul.nav-icons {
 /* トップページのニュース最新枠 */
 #news-latest-inner {
     margin-bottom: 32px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .news-latest-header {
     display: flex;
@@ -283,10 +279,17 @@ ul.nav-icons {
     gap: 12px;
     margin-bottom: 10px;
 }
+
 .news-latest-title {
     font-weight: bold;
-    font-size: 1.05em;
+    font-size: 1.1em;
 }
+span.news-latest-title:before {
+    content: "##";
+    margin-right: 8px;
+    color: #a89104;
+}
+
 .news-latest-date {
     font-size: 0.85em;
     color: #999;
