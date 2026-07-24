@@ -1,29 +1,23 @@
 {
-	"date": "2026-07-23",
+	"date": "2026-07-24",
 	"news": [
 		{
-			"id": "c228044e-883c-4307-acde-386ca3aced4b",
-			"title": "セブン、人気キャラ商品の不正転売横行か 発売前に取り置いて出品 全国加盟店に警告 - 産経ニュース",
-			"url": "https://www.sankei.com/article/20260723-WN2KBU7I2NOL5GIOWYMNGJJGDU/",
-			"date": "2026-07-23",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>人間だな〜</p></div>"
+			"id": "56ecde65-c44a-4184-bdc0-e88e8bf68971",
+			"title": "[8話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191255348930569",
+			"date": "2026-07-24",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>ここからどういう理屈で動くのか。毎回続きが気になる。。</p></div>"
 		},
 		{
-			"id": "f48378c9-5f6f-4a56-86ee-0adbddea117b",
-			"title": "CEDEC2026『ポケモン』バトルシステム講演：複雑なシステムがどうなってるのか、ゲーフリの”専門家”に話を聞いてみた",
-			"url": "https://news.denfaminicogamer.jp/kikakuthetower/2607224z",
-			"date": "2026-07-23",
+			"id": "c3738027-f182-4fa3-b528-5e2525e524ef",
+			"title": "人は30歳頃を境にコンサートを立ち見よりも座って楽しむことを選ぶようになる　新しい調査結果 - amass",
+			"url": "https://amass.jp/190832/",
+			"date": "2026-07-24",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>ZAで同じ構造が走ってるの衝撃</p></div>"
-		},
-		{
-			"id": "90c0912d-7817-44e9-abb5-678057984e5b",
-			"title": "予備試験最強戦術 「武蔵理論」｜アカシックレコード",
-			"url": "https://note.com/wakarimasita/n/n6e8387a66172",
-			"date": "2026-07-23",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>すぐに答え合わせがあるのはいわゆるドパガキ向けにもよさそう</p></div>"
+			"comment": "<div class=\"news-comment\"><p>座りがデフォの界隈からするとそっちが当然なんだけど、立ち見がデフォで座りたくなった時のショックはありそう。</p></div>"
 		}
 	]
 }
