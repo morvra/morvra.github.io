@@ -1,11 +1,21 @@
 {
-	"date": "2026-07-25",
+	"date": "2026-07-27",
 	"news": [
 		{
-			"id": "676edcf4-3532-485e-bfbe-ae567858eee8",
-			"title": "はじめてのObsidian：Scrapbox風に改造する - Jazzと読書の日々",
-			"url": "https://wineroses.hatenablog.com/entry/2026/07/24/143236",
-			"date": "2026-07-25",
+			"id": "886400c3-18f5-49f3-b8a6-2bfb5335bda0",
+			"title": "能美先輩！飲み過ぎですよッ - 丹羽庭 | ビッコミ（ビッグコミックス）",
+			"url": "https://bigcomics.jp/series/9659a1fef99c1/new",
+			"date": "2026-07-27",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>この二人に次はあるのだろうか？</p></div>"
+		},
+		{
+			"id": "97ba0b29-5f72-40a6-a27d-bf8171050822",
+			"title": "将棋AIの大会、ついに先手勝率94%になる | やねうら王 公式サイトやねうら王 公式サイト",
+			"url": "https://yaneuraou.yaneu.com/2026/07/23/shogi-ai-black-win-rate-94-percent/",
+			"date": "2026-07-27",
 			"tags": [],
 			"comment": ""
 		}
