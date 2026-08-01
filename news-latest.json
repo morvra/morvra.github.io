@@ -1,15 +1,41 @@
 {
-	"date": "2026-07-31",
+	"date": "2026-08-01",
 	"news": [
 		{
-			"id": "1947f8ac-5b53-4494-85f4-f49c5b19c7e5",
-			"title": "[9話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253191255561726002",
-			"date": "2026-07-31",
+			"id": "613564da-28df-4b03-a0a1-699be3392259",
+			"title": "『君は人間』読切 - 田山巽 | COMIC OGYAAA!!",
+			"url": "https://comic-ogyaaa.com/episode/12207421984027250358",
+			"date": "2026-08-01",
 			"tags": [
 				"漫画"
 			],
 			"comment": ""
+		},
+		{
+			"id": "7131453f-f235-44b6-b213-246fe016acbe",
+			"title": "論破したがりが使う「ストローマン論法」、議論上手が使う「スティールマン論法」とは - ナゾロジー",
+			"url": "https://nazology.kusuguru.co.jp/archives/198168",
+			"date": "2026-08-01",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"だからこそ、反論する前に「この理解で合っていますか」と確認することが重要なのです。\"</p></div>"
+		},
+		{
+			"id": "e3c396f7-5931-4b1c-990c-b9608ceeaede",
+			"title": "「かつてのMP3プレーヤーを思わせる」スティック型DAP、FIIO「Snowsky ECHO NANO」。約1.3万円、6色展開 - AV Watch",
+			"url": "https://av.watch.impress.co.jp/docs/news/2129333.html",
+			"date": "2026-08-01",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>このタイプのウォークマン使ってたなぁ</p></div>"
+		},
+		{
+			"id": "9c9d00a5-b755-465c-998a-85d38bd492c7",
+			"title": "【メメント・モリ】山田五郎、最後の授業。伝えたい言葉。【皆様へのメッセージ】 - YouTube",
+			"url": "https://www.youtube.com/watch?v=DMe_hWiAp50",
+			"date": "2026-08-01",
+			"tags": [
+				"言葉"
+			],
+			"comment": "<div class=\"news-comment\"><p>たくさん楽しませていただきました。最後のテーマがこれという凄み。対句のカルペ・ディエム（今日の花を摘め）を知れてよかった。</p></div>"
 		}
 	]
 }
