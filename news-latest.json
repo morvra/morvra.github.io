@@ -1,41 +1,31 @@
 {
-	"date": "2026-08-01",
+	"date": "2026-08-03",
 	"news": [
 		{
-			"id": "613564da-28df-4b03-a0a1-699be3392259",
-			"title": "『君は人間』読切 - 田山巽 | COMIC OGYAAA!!",
-			"url": "https://comic-ogyaaa.com/episode/12207421984027250358",
-			"date": "2026-08-01",
+			"id": "48c4ba1f-1ae1-4865-a268-ae396f4f3554",
+			"title": "[第201話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191255607512335",
+			"date": "2026-08-03",
 			"tags": [
 				"漫画"
 			],
 			"comment": ""
 		},
 		{
-			"id": "7131453f-f235-44b6-b213-246fe016acbe",
-			"title": "論破したがりが使う「ストローマン論法」、議論上手が使う「スティールマン論法」とは - ナゾロジー",
-			"url": "https://nazology.kusuguru.co.jp/archives/198168",
-			"date": "2026-08-01",
+			"id": "f694b24f-d110-4e26-b358-214f97203ecb",
+			"title": "池袋連続脱糞事件とは (イケブクロレンゾクダップンジケンとは) [単語記事] - ニコニコ大百科",
+			"url": "https://dic.nicovideo.jp/a/%E6%B1%A0%E8%A2%8B%E9%80%A3%E7%B6%9A%E8%84%B1%E7%B3%9E%E4%BA%8B%E4%BB%B6",
+			"date": "2026-08-03",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>\"だからこそ、反論する前に「この理解で合っていますか」と確認することが重要なのです。\"</p></div>"
+			"comment": "<div class=\"news-comment\"><p>よくまとまってて草</p></div>"
 		},
 		{
-			"id": "e3c396f7-5931-4b1c-990c-b9608ceeaede",
-			"title": "「かつてのMP3プレーヤーを思わせる」スティック型DAP、FIIO「Snowsky ECHO NANO」。約1.3万円、6色展開 - AV Watch",
-			"url": "https://av.watch.impress.co.jp/docs/news/2129333.html",
-			"date": "2026-08-01",
+			"id": "39762520-12ea-4b55-a6d0-000dc994d83f",
+			"title": "サッカーゲームは「動かせない21人」といかにして戦ってきたか｜遊星歯車機関",
+			"url": "https://note.com/planetary_gear/n/nc5f8073392e3",
+			"date": "2026-08-03",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>このタイプのウォークマン使ってたなぁ</p></div>"
-		},
-		{
-			"id": "9c9d00a5-b755-465c-998a-85d38bd492c7",
-			"title": "【メメント・モリ】山田五郎、最後の授業。伝えたい言葉。【皆様へのメッセージ】 - YouTube",
-			"url": "https://www.youtube.com/watch?v=DMe_hWiAp50",
-			"date": "2026-08-01",
-			"tags": [
-				"言葉"
-			],
-			"comment": "<div class=\"news-comment\"><p>たくさん楽しませていただきました。最後のテーマがこれという凄み。対句のカルペ・ディエム（今日の花を摘め）を知れてよかった。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>\"つまりサッカーゲームだけが「リアルタイム・連続空間・高い自律性を持つAIへの委任」という条件を同時に背負っている。\" 改めて考えるととんでもないことしてるな。</p></div>"
 		}
 	]
 }
