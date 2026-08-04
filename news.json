@@ -1,6 +1,30 @@
 {
 	"news": [
 		{
+			"id": "b7c78417-d716-422c-a94b-eea3cafd5f3b",
+			"title": "人文学とはなにか - Jazzと読書の日々",
+			"url": "https://wineroses.hatenablog.com/entry/2026/08/04/093848",
+			"date": "2026-08-04",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>両輪必要だと素朴に思うけど人文目線だからか？</p></div>"
+		},
+		{
+			"id": "54fa067f-5b45-41fa-bbcb-b31c6fedf763",
+			"title": "うみしだ",
+			"url": "https://kotou.deca.jp/blog/",
+			"date": "2026-08-04",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>Bluesky経由で見つけたサイト。デザインめっちゃ好み！軽いのも良い。</p></div>"
+		},
+		{
+			"id": "59b88e13-7b01-4b30-b562-d95c43f3d53f",
+			"title": "SF・コンピューター技術ライフライン",
+			"url": "https://matsuo-koya.github.io/sf-tech-lifeline/",
+			"date": "2026-08-04",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>自分の年齢と見比べられるSF年表。</p></div>"
+		},
+		{
 			"id": "48c4ba1f-1ae1-4865-a268-ae396f4f3554",
 			"title": "[第201話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
 			"url": "https://shonenjumpplus.com/episode/9253191255607512335",
