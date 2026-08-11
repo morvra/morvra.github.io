@@ -1,6 +1,32 @@
 {
 	"news": [
 		{
+			"id": "c5830c2a-1ab5-46ea-a8b8-2f81a5fcf39c",
+			"title": "ASCII.jp：とんでもない動画生成AIが出てきた 無料で試し放題の「MiniMax H3」を徹底検証 (1/5)",
+			"url": "https://ascii.jp/elem/000/004/426/4426043/",
+			"date": "2026-08-11",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>めちゃすごいんだけど、動画系に関しては消費電力の心配も増す。開発が進むと省エネになっていったりするのか？</p></div>"
+		},
+		{
+			"id": "78368351-bc35-4ad3-a262-4221212b2855",
+			"title": "ある意味「デジタル世界改変」。Google Earthの画像生成機能、1日で停止 | ギズモード・ジャパン",
+			"url": "https://www.gizmodo.jp/article/google-earth-ai-image-generation/",
+			"date": "2026-08-11",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>人類には早すぎるというか持て余すというか…… おもしろいけど地図サービスとは食い合わせ悪い。</p></div>"
+		},
+		{
+			"id": "634a8a91-7080-4c6d-a501-7f1cd2761e86",
+			"title": "子供がラ行とダ行を区別できないのはなぜですか - ことば研究館 | 国立国語研究所",
+			"url": "https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-246/",
+			"date": "2026-08-11",
+			"tags": [
+				"言葉"
+			],
+			"comment": "<div class=\"news-comment\"><p>ナ行とタ行も加えられそう。</p></div>"
+		},
+		{
 			"id": "462a8eb4-5426-45d1-a24f-3d3f56c6491c",
 			"title": "[第202話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
 			"url": "https://shonenjumpplus.com/episode/9253191255729391354",
