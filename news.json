@@ -1,6 +1,24 @@
 {
 	"news": [
 		{
+			"id": "a88b4100-2d8e-4a37-aa0f-823bf70e3f46",
+			"title": "[11話]ヒトナー - 屋宜知宏 | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191255729392691",
+			"date": "2026-08-12",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>SFだなー！</p></div>"
+		},
+		{
+			"id": "08daf956-49fd-4ddc-a26d-37b3e33f9c29",
+			"title": "使い続けているモノ｜高木俊輔 Shunsuke Takagi",
+			"url": "https://note.com/tkgshn/n/n4aa752a5fcd5",
+			"date": "2026-08-12",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>登山する人のアイテム厳選とかそのこだわり読むの面白い。</p></div>"
+		},
+		{
 			"id": "c5830c2a-1ab5-46ea-a8b8-2f81a5fcf39c",
 			"title": "ASCII.jp：とんでもない動画生成AIが出てきた 無料で試し放題の「MiniMax H3」を徹底検証 (1/5)",
 			"url": "https://ascii.jp/elem/000/004/426/4426043/",
