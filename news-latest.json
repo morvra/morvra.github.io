@@ -1,37 +1,31 @@
 {
-	"date": "2026-08-23",
+	"date": "2026-08-25",
 	"news": [
 		{
-			"id": "4fc41dbe-ea7a-4831-9e15-8fd140337bb0",
-			"title": "こち亀のClaude Codeの回が読みたい｜Ninagawa123",
-			"url": "https://note.com/ninagawa123/n/n41b074ac506b",
-			"date": "2026-08-23",
+			"id": "7489bb79-1928-4941-ba5e-e1f9c3344d29",
+			"title": "私が好きなインターネットの文章",
+			"url": "https://studio15.jp/blog/internet-good-text/",
+			"date": "2026-08-25",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>雰囲気はある。あくまで雰囲気だが。</p></div>"
+			"comment": ""
 		},
 		{
-			"id": "433371e9-5554-487d-abdd-7ba5880b6774",
-			"title": "【漫画】なぜ最近のネット広告はウザがられるのか？アドミュージアム東京に行って考えてみた | Webのコト、教えてホシイの！ | Web担当者Forum",
-			"url": "https://webtan.impress.co.jp/e/2026/08/21/53021",
-			"date": "2026-08-23",
+			"id": "49dab84a-71be-4679-8c24-80228ba6bb22",
+			"title": "「うるう秒」27年に事実上廃止へ　自転とのずれ「1時間」まで容認　10月に国際会議で採決 - ITmedia NEWS",
+			"url": "https://www.itmedia.co.jp/news/article/2608/24/2000000718/",
+			"date": "2026-08-25",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>これまで広告無く見れたものが広告あるようになると邪魔に感じるのはしょうがない。今の閉じさせない\"工夫\"みたいなものはギルティ。</p></div>"
+			"comment": ""
 		},
 		{
-			"id": "7d570c58-84e4-4265-8e61-4406e192e029",
-			"title": "トーナメントの2位は本当に2位か？ - YouTube",
-			"url": "https://www.youtube.com/watch?v=mKftkdYj3IM",
-			"date": "2026-08-23",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>思ったより妥当だった。</p></div>"
-		},
-		{
-			"id": "8b7e71dd-73e4-46f1-8f7b-69020c9d368b",
-			"title": "なぜAI生成画像は嫌われるのか？ - YouTube",
-			"url": "https://www.youtube.com/watch?v=PULWk8a98iA",
-			"date": "2026-08-23",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>サムネ比較面白かった。確かに設計図型は嫌われてない。</p></div>"
+			"id": "07d2f270-8347-4f01-9132-c23853ad165d",
+			"title": "重音テトvsダンプカー / 重音テトVS - YouTube",
+			"url": "https://www.youtube.com/watch?v=XIOD_B038ak",
+			"date": "2026-08-25",
+			"tags": [
+				"音楽"
+			],
+			"comment": "<div class=\"news-comment\"><p>下の一言があることで歌ネタ感マシマシ</p></div>"
 		}
 	]
 }
