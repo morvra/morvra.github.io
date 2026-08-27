@@ -1,31 +1,31 @@
 {
-	"date": "2026-08-25",
+	"date": "2026-08-28",
 	"news": [
 		{
-			"id": "7489bb79-1928-4941-ba5e-e1f9c3344d29",
-			"title": "私が好きなインターネットの文章",
-			"url": "https://studio15.jp/blog/internet-good-text/",
-			"date": "2026-08-25",
-			"tags": [],
-			"comment": ""
-		},
-		{
-			"id": "49dab84a-71be-4679-8c24-80228ba6bb22",
-			"title": "「うるう秒」27年に事実上廃止へ　自転とのずれ「1時間」まで容認　10月に国際会議で採決 - ITmedia NEWS",
-			"url": "https://www.itmedia.co.jp/news/article/2608/24/2000000718/",
-			"date": "2026-08-25",
-			"tags": [],
-			"comment": ""
-		},
-		{
-			"id": "07d2f270-8347-4f01-9132-c23853ad165d",
-			"title": "重音テトvsダンプカー / 重音テトVS - YouTube",
-			"url": "https://www.youtube.com/watch?v=XIOD_B038ak",
-			"date": "2026-08-25",
+			"id": "d8a10d5d-bd91-4595-a51f-e6c691d8f46f",
+			"title": "[12話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191256195090026",
+			"date": "2026-08-28",
 			"tags": [
-				"音楽"
+				"漫画"
 			],
-			"comment": "<div class=\"news-comment\"><p>下の一言があることで歌ネタ感マシマシ</p></div>"
+			"comment": "<div class=\"news-comment\"><p>展開が読めなすぎて引き込まれる。台詞がいちいちカッコいいのもよい。</p></div>"
+		},
+		{
+			"id": "637cc769-8c88-43d4-a9e5-aad4184b26aa",
+			"title": "昭和の時代劇の「架空の江戸」は「ナーロッパ」と近しい存在だった…時代劇をやらなくなったことで「架空の江戸」が共有世界じゃなくなってしまった - Togetter",
+			"url": "https://togetter.com/li/2738026",
+			"date": "2026-08-28",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"フィクションの蓄積そのものが、次のフィクションのための共有世界を作ることがある。\" これわかる。設定等の描写の大幅な省略が可能なんだろうな。</p></div>"
+		},
+		{
+			"id": "1c9145b9-5201-4192-8f9c-c828ae4a0fa3",
+			"title": "AIはインプットを増やしてはくれない | yamotty",
+			"url": "https://yamotty.me/post/20250512",
+			"date": "2026-08-28",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>本質だ。</p><p>via: <a href=\"https://dabun.net/news/20260828\">2026年08月28日 - 駄文にゅうす</a></p></div>"
 		}
 	]
 }
