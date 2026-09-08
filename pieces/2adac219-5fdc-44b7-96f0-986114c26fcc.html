@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rhizonoteで書いてるノートを公開する場所を作った - morvra lists</title>
-    <meta name="description" content="前回記事で書いた Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。その名もRhizoroji。由来はRhizome+...">
-    <meta property="og:title" content="Rhizonoteで書いてるノートを公開する場所を作った - morvra lists">
-    <meta property="og:description" content="前回記事で書いた Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。その名もRhizoroji。由来はRhizome+...">
+    <title>レシピサイトのURLからWorkflowyやCosense用のテキストブロックに整形するClaude Skillを作った - morvra lists</title>
+    <meta name="description" content="URLやレシピの内容をAIのチャット欄に貼って、「このレシピをWorkflowyにペーストするために整形したテキストブロックを生成して」みたいなプロンプトをよく書いていたんだけど、面倒になってきた。で、スキルを使えばURL貼るだけでやってく...">
+    <meta property="og:title" content="レシピサイトのURLからWorkflowyやCosense用のテキストブロックに整形するClaude Skillを作った - morvra lists">
+    <meta property="og:description" content="URLやレシピの内容をAIのチャット欄に貼って、「このレシピをWorkflowyにペーストするために整形したテキストブロックを生成して」みたいなプロンプトをよく書いていたんだけど、面倒になってきた。で、スキルを使えばURL貼るだけでやってく...">
     <meta property="og:image" content='/ogp.png'/>
     <meta property="og:type" content="article">
     <link rel="stylesheet" href="/styles.css">
@@ -49,12 +49,12 @@
 
     <main>
         <div id="article">
-            <div id="article-title"><h1>Rhizonoteで書いてるノートを公開する場所を作った</h1></div>
-            <div id="article-date">2026-01-17</div>
-            <div id="article-tags"><a href="/tag?tag=自作ツール">自作ツール</a></div>
+            <div id="article-title"><h1>レシピサイトのURLからWorkflowyやCosense用のテキストブロックに整形するClaude Skillを作った</h1></div>
+            <div id="article-date">2026-09-08</div>
+            <div id="article-tags"></div>
 
             <div id="article-content">
-                <p><a href="/articles/518b6ce8-0f78-8965-ba43-295d96da0816.html">前回記事で書いた</a> Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。</p><p>その名も<a href="https://morvra.github.io/rhizoroji/">Rhizoroji</a>。由来はRhizome+露地（Roji）。</p><p>Rhizonoteの中を公開するからRhizoはつけたい＆庭の要素つけたいけどRhizogardenは長いし地下茎とガーデンってニュアンスがちょっと合わないかなってことで、茶室につながる庭でやや野味のある趣な露地という語を採用。</p><p>仕組みとしては、</p><ul><li>Rhizonote側の機能でPublishをonにしたノートを</li><li>DropboxAPIを使ってGithubActionsでHTMLに変換して</li><li>GithubPagesに静的サイトとしてビルト</li></ul><p>することで公開している。</p>
+                <p>URLやレシピの内容をAIのチャット欄に貼って、「このレシピをWorkflowyにペーストするために整形したテキストブロックを生成して」みたいなプロンプトをよく書いていたんだけど、面倒になってきた。</p><p>で、スキルを使えばURL貼るだけでやってくれるんじゃないか、と思いついたのでClaudeに作ってもらった。</p><p>そのスキルを使えばURLから一発でレシピの内容を取得して、自分専用のフォーマット（材料のうち調味料以外をブラケティングするなど）に整形して段差つきのテキストを生成してもらえる。神！</p><p>繰り返しやる作業はスキル化しとくのがいいね。</p>
             </div>
 
             <div id="ad">
@@ -70,16 +70,7 @@
                 </script>
             </div>
 
-            <div id="related-articles">
-<h2>関連記事</h2>
-<ul>
-<li><a href="/articles/ae773cd3-35e8-0406-cc9f-7780e0a42992.html">Google AI Studioを使ってPoIC用のWebアプリを作ってみた</a></li>
-<li><a href="/articles/ec39d359-3f00-4c8a-a1f8-cc2029095618.html">Workflowyで書いたメモに再会するためのHTMLツールをつくった</a></li>
-<li><a href="/articles/6feb0874-9c92-cd89-3f60-237fe8e05904.html">マンダラートのWebアプリ作った</a></li>
-<li><a href="/articles/21f14291-a88c-1ac7-01e3-da1d16d8d2dc.html">Dynalistで指定したタグがある項目を一覧＆ジャンプするUserScriptをつくった</a></li>
-<li><a href="/articles/894eb4dd-c928-e030-d0f6-6dbf4a89b68c.html">d-PoICに2ホップリンク機能を追加</a></li>
-</ul>
-</div>
+            
         </div>
     </main>
 
