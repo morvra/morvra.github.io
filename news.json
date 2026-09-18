@@ -1,6 +1,24 @@
 {
 	"news": [
 		{
+			"id": "5ccd500c-8591-4036-9ddf-a085380f65a2",
+			"title": "[14話]世界を繋ぎ尽くすインターネット巫女 - コガッツオ/木野イチカ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191256637716411",
+			"date": "2026-09-18",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>子どもたちの意志がまぶしいけど繋がることで争いが減るとは限らないんだよ、、という悲しみもある</p></div>"
+		},
+		{
+			"id": "c58149ad-573a-4316-adf1-ba5afb079bcc",
+			"title": "ドライヤー中が暇なあなたへ - YouTube",
+			"url": "https://www.youtube.com/watch?v=iE0hLKlKc-M",
+			"date": "2026-09-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>一回目はぜひドライヤーしながら見て欲しいｗ</p></div>"
+		},
+		{
 			"id": "b2d8e2ff-6ddf-4557-ae9c-985997168610",
 			"title": "「Gyazo」への不正アクセスによる情報漏えいに関するお知らせとお詫び",
 			"url": "https://corp.helpfeel.com/news/news-20260916-1",
