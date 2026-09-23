@@ -1,13 +1,15 @@
 {
-	"date": "2026-09-19",
+	"date": "2026-09-23",
 	"news": [
 		{
-			"id": "d52facd2-b901-4ff4-985c-420622a35720",
-			"title": "学長ノート - 立命館アジア太平洋大学",
-			"url": "https://www.apu.ac.jp/home/notes/article/?storyid=139",
-			"date": "2026-09-19",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>名文。折に触れて読み返したい。</p><p>via: <a href=\"https://bsky.app/profile/rashita.bsky.social\">倉下忠憲 (@rashita.bsky.social) — Bluesky</a></p></div>"
+			"id": "b5ca6e63-b54a-4c1a-8497-185e23cbb39f",
+			"title": "[13話]ヒトナー - 屋宜知宏 | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191256672010607",
+			"date": "2026-09-23",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>一見色ボケの推理があながち間違ってないかもしれないと思わせる力がこの漫画にはある</p></div>"
 		}
 	]
 }
