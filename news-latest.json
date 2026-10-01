@@ -1,37 +1,25 @@
 {
-	"date": "2026-09-28",
+	"date": "2026-10-01",
 	"news": [
 		{
-			"id": "a6c5e223-1f24-4b50-9075-bc8e2833f024",
-			"title": "はてブコメントで攻撃的なやつをJevで隠す拡張機能 - 本しゃぶり",
-			"url": "https://honeshabri.hatenablog.com/entry/hatebu-veil",
-			"date": "2026-09-28",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>こんなことできるのね。id関係なくコメント本文のみを判断してること、攻撃性と有益さの2軸にしているところにこの人のバランス感覚が現れてる。</p></div>"
+			"id": "5c7bd95f-fc62-41a1-9f3c-40cb399f0dda",
+			"title": "やめろ好きになってしまう第67話 お腹減りヌンティウス｜ヤンジャン＋集英社公式・ジャンプ系青年マンガ誌アプリ",
+			"url": "https://ynjn.jp/viewer/21346/321535",
+			"date": "2026-10-01",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>ぐぎぎ</p></div>"
 		},
 		{
-			"id": "09011930-c991-49fd-aa69-e3b4dbb5a1e4",
-			"title": "画像共有サービス「Gyazo」が9日ぶりにサービス再開 ～不正アクセス・情報漏えい - 窓の杜",
-			"url": "https://forest.watch.impress.co.jp/docs/news/2143577.html",
-			"date": "2026-09-28",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>続報。自分は一括で再公開した。</p></div>"
-		},
-		{
-			"id": "f51a7704-49f7-4515-a7c1-69ca16809460",
-			"title": "「新しいドパ」フラッシュ暗算のように次々本の文章を出していく「RSVR」という読書手法を、AIを使って再現したらなかなか読める - Togetter",
-			"url": "https://togetter.com/li/2751150",
-			"date": "2026-09-28",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>いわゆる速読にはよさそう。別に速読したい文章無いけど。</p></div>"
-		},
-		{
-			"id": "4999acf1-02db-435c-b8f3-52553e306e64",
-			"title": "オタクで、表現の自由戦士で、自認左翼であることの寄る辺なさ｜スケボン",
-			"url": "https://note.com/scarecrowbone/n/n1911dbdbd060",
-			"date": "2026-09-28",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>ここに書かれていることは広く受け入れられる\"普通\"の感覚だと思うけど、だからこそそれを声高に主張しない人も多そう、あと現代のネットだと気づかれにくかったり。</p><p>\"オタク\"も\"表現の自由戦士\"も\"左翼\"もだいぶ雑なラベリングだよなぁ。\"思想が「全部入りの強制抱き合わせパッケージ」になっている\"という見出しは頷けるけどSNSに毒されすぎてない？とも思う。</p></div>"
+			"id": "de36c750-3372-49f9-a96a-3b2225268f0d",
+			"title": "『１・２・３』 にじさんじライバーたちが しょうぶをしかけてきた！▼ - YouTube",
+			"url": "https://www.youtube.com/watch?v=KIE-CW0Mp54",
+			"date": "2026-10-01",
+			"tags": [
+				"音楽"
+			],
+			"comment": ""
 		}
 	]
 }
