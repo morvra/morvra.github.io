@@ -123,17 +123,16 @@ ul.news-items {
     margin: 0;
 }
 
-/* ニュース項目: 余白は今のまま(行ホバーなし) */
+/* ニュース項目 */
 .news-item { padding: 8px 0; margin-bottom: 16px; }
 
-/* 「■」をアクセントバーに置き換え */
 .news-item-header::before {
     content: "";
     display: inline-block;
     width: 4px;
     height: 1.1em;
     border-radius: 2px;
-    background: #9bbcf0;
+    background: #a89104;
     margin-right: 8px;
     vertical-align: -0.2em;
 }
