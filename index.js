@@ -51,23 +51,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // 最新ニュース
     const newsElement = document.getElementById('latest-news');
 
-    fetch('./news.html')
+    fetch('./newslist.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error(
-                    `Failed to load news.html: ${response.status}`
+                    `Failed to load newslist.html: ${response.status}`
                 );
             }
 
             return response.text();
         })
         .then(html => {
-
             const temp = document.createElement('div');
             temp.innerHTML = html;
 
-            // news.htmlの先頭部分から最新5件を取得
-            const items = temp.querySelectorAll('li');
+            // 最新のニュース記事を5件取得
+            const items = temp.querySelectorAll('.news-item');
 
             items.forEach((item, index) => {
                 if (index < 5) {
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => {
-            console.error('Error loading news:', error);
+            console.error('Error loading news list:', error);
         });
 
 });
