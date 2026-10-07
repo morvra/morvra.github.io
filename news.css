@@ -123,35 +123,65 @@ ul.news-items {
     margin: 0;
 }
 
-/* 個別ニュースアイテム */
-.news-item {
-    padding: 8px 0;
-    margin-bottom: 16px;
+/* ニュース項目: 余白は今のまま(行ホバーなし) */
+.news-item { padding: 8px 0; margin-bottom: 16px; }
+
+/* 「■」をアクセントバーに置き換え */
+.news-item-header::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 1.1em;
+    border-radius: 2px;
+    background: #9bbcf0;
+    margin-right: 8px;
+    vertical-align: -0.2em;
 }
 
-/* アイテムヘッダー (タイトル + タグ) */
-.news-item-header {
-    line-height: 1.5;
-}
-.news-item-header::before {
-    content: "■ ";
-    color: #888;
-}
+/* タイトル */
 .news-item-header a:first-child {
-    font-weight: normal;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.news-item-header a:first-child:hover {
+    color: #0088cc;
+    text-decoration: underline;
 }
 
 /* タグ */
-.news-tags {
-    margin-left: 6px;
-    white-space: nowrap;
-}
+.news-tags { margin-left: 6px; white-space: nowrap; }
 .news-tags a {
-    color: #aaa;
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 1px 9px;
     margin-right: 4px;
+    border-radius: 999px;
+    background: #eaf2fd;
+    color: #3a6fb0;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
 }
 .news-tags a:hover {
-    color: #555;
+    background: #d4e5fb;
+    color: #1f4f8f;
+}
+
+/* コメント: 薄い背景の枠 */
+.news-comment {
+    margin: 6px 0 0 12px;
+    padding: 8px 12px;
+    background: #f5f6f8;
+    border-radius: 8px;
+    line-height: 1.6;    
+}
+.news-comment p {
+    margin: 2px 0;
+}
+.news-comment a {
+    color: #0088cc;
+}
+.news-comment code {
+    font-size: 0.9em;
 }
 
 /* 日付 (リンク付き) */
@@ -177,17 +207,4 @@ ul.news-day-list {
     padding: 0;
     margin: 0;
 }
-.news-comment {
-    margin-top: 4px;
-    font-size: 0.9em;
-    color: #333;
-}
-.news-comment p {
-    margin: 2px 0;
-}
-.news-comment a {
-    color: #0088cc;
-}
-.news-comment code {
-    font-size: 0.9em;
-}
+
