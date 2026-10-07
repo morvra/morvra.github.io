@@ -158,9 +158,11 @@ ul.news-items {
     background: #f6f1cf;
     color: #6e5f02;
     text-decoration: none;
-    transition: background 0.15s, color 0.15s;
 }
-.news-tags a:hover { background: #ece3a6; }
+.news-tags a:hover { 
+    background: #ece3a6;
+    color: #6e5f02;
+}
 
 /* コメント: 薄い背景の枠 */
 .news-comment {
