@@ -155,15 +155,12 @@ ul.news-items {
     padding: 1px 9px;
     margin-right: 4px;
     border-radius: 999px;
-    background: #eaf2fd;
-    color: #3a6fb0;
+    background: #f6f1cf;
+    color: #6e5f02;
     text-decoration: none;
     transition: background 0.15s, color 0.15s;
 }
-.news-tags a:hover {
-    background: #d4e5fb;
-    color: #1f4f8f;
-}
+.news-tags a:hover { background: #ece3a6; }
 
 /* コメント: 薄い背景の枠 */
 .news-comment {
