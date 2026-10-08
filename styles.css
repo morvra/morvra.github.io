@@ -802,13 +802,6 @@ ul#tag-list {
     margin: 0;
 }
 
-p.piece-description {
-    margin-top: 8px;
-    margin-bottom: 20px;
-    color: #888;
-    font-size: 0.9em;
-}
-
 h2#piece-title {
     margin: 0;
     font-size: 1em;
@@ -1023,6 +1016,13 @@ h2#piece-title a {
     color: #aaa;
     font-size: 90%;
     text-align: center;
+}
+
+p.page-description {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: #888;
+    font-size: 0.9em;
 }
 
 .navigation {

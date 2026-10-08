@@ -1,4 +1,4 @@
-// articles.js
+// archives.js
 
 document.addEventListener('DOMContentLoaded', function() {
     const articleListElement = document.getElementById('article-list');
