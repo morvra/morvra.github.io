@@ -1,6 +1,22 @@
 {
 	"news": [
 		{
+			"id": "1f8f9109-c2e2-4fb0-aca3-a884d5319e1c",
+			"title": "Obsidian：手遊びとしてのブログ - Jazzと読書の日々",
+			"url": "https://wineroses.hatenablog.com/entry/2026/10/07/100829",
+			"date": "2026-10-08",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>これわかるなぁ。デザイン含めた庭いじり的な楽しさ。</p></div>"
+		},
+		{
+			"id": "c82b7ed8-025a-41bc-b008-d5f8ad52123f",
+			"title": "嫌われるデザインの歴史",
+			"url": "https://zenn.dev/blackmose/articles/de0170a13be930",
+			"date": "2026-10-08",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>よくまとまってる。手抜きというかそのままなのは嫌われがち。</p></div>"
+		},
+		{
 			"id": "42787e82-037b-4f0f-bc7f-eda9cacd6684",
 			"title": "Claudeを日記として使用した女性がAnthropicに内容を通報されて逮捕される - GIGAZINE",
 			"url": "https://gigazine.net/news/20261006-woman-arrested-claude-diary/",
