@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const match = date.textContent.match(/\d{4}-(\d{2})-(\d{2})/);
 
                     if (match) {
-                        dateElement.textContent = `${match[1]}−${match[2]}`;
+                        dateElement.textContent = `${match[1]}-${match[2]}`;
                     }
                 }
 
