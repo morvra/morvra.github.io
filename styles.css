@@ -690,18 +690,27 @@ footer {
     list-style: none;
 }
 
-#article-list li {
-    margin-bottom: 10px;
+#article-list .top-article {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    margin-bottom: 12px;
 }
 
-#article-list a {
+#article-list .top-article-date {
+    color: #a89104;
+    font-size: 0.9em;
+    font-variant-numeric: tabular-nums;
+}
+
+#article-list .top-article a {
+    color: #333;
     text-decoration: none;
 }
 
-#article-list .article-date {
-    font-size: 0.85em;
-    color: #777;
-    margin-left: 0.5em;
+#article-list .top-article a:hover,
+#article-list .top-article a:focus {
+    color: #0088cc;
+    text-decoration: underline;
 }
 
 

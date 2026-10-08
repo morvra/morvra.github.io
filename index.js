@@ -40,8 +40,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // 記事部分だけを表示
-            articleListElement.innerHTML = articleSubList.innerHTML;
+            // トップページ用に日付とタイトルを整形
+            articleListElement.innerHTML = '';
+
+            articleSubList.querySelectorAll(':scope > li').forEach(item => {
+                const link = item.querySelector('a');
+                const date = item.querySelector('.article-date');
+
+                if (!link) {
+                    return;
+                }
+
+                const li = document.createElement('li');
+                li.className = 'top-article';
+
+                const dateElement = document.createElement('span');
+                dateElement.className = 'top-article-date';
+
+                if (date) {
+                    const match = date.textContent.match(/\d{4}-(\d{2})-(\d{2})/);
+
+                    if (match) {
+                        dateElement.textContent = `${match[1]}−${match[2]}`;
+                    }
+                }
+
+                const titleLink = link.cloneNode(true);
+
+                li.appendChild(dateElement);
+                li.appendChild(titleLink);
+
+                articleListElement.appendChild(li);
+            });
+        
         })
         .catch(error => {
             console.error('Error loading article list:', error);
