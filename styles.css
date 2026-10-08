@@ -416,7 +416,7 @@ code {
 
 .news-tags a:hover {
     background: #ece3a6;
-    color: #6e5f02;
+    color: #6e5f02 !important;
 }
 
 .news-comment {
