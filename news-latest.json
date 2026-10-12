@@ -1,13 +1,15 @@
 {
-	"date": "2026-10-11",
+	"date": "2026-10-12",
 	"news": [
 		{
-			"id": "293fe0ee-ca9f-48b2-b3f1-ab3b458798e8",
-			"title": "ブログを14年続けてわかったこと：あらゆるリンクは消える - 或る阿呆の記",
-			"url": "https://hack-le.com/blog-14/",
-			"date": "2026-10-11",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>ソシャゲの儚さはよく感じる。パワサカとか好きだったけどもう触れないと思うとさみしい。</p><p>via: <a href=\"https://dabun.net/news/20261011\">2026年10月11日 - 駄文にゅうす</a></p></div>"
+			"id": "517fdeca-7909-4e1e-b4a0-ea99293edab4",
+			"title": "[1話]のろのろぷくぷく - 茶んた | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191257069547292",
+			"date": "2026-10-12",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>やっぱこの人の漫画好きだな。<a href=\"https://shonenjumpplus.com/episode/9253191257227136268\">2話</a> もよい。この人情味がいいのよね。そして猫他の人から見えてたんだ……ｗ</p></div>"
 		}
 	]
 }
