@@ -1,15 +1,33 @@
 {
-	"date": "2026-10-12",
+	"date": "2026-10-18",
 	"news": [
 		{
-			"id": "517fdeca-7909-4e1e-b4a0-ea99293edab4",
-			"title": "[1話]のろのろぷくぷく - 茶んた | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253191257069547292",
-			"date": "2026-10-12",
+			"id": "aa66ea42-a99b-4936-8a59-17b3274b03c7",
+			"title": "「キングオブコント2026」ジェラードンが優勝、19代目王者に - お笑いナタリー",
+			"url": "https://natalie.mu/owarai/news/694149",
+			"date": "2026-10-18",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>面白かった〜。ジェラードンはもちろん最高だったけど蛙亭と相性はいいよねも笑った。</p></div>"
+		},
+		{
+			"id": "e251e4d9-cf8b-4ee1-a973-ab0f70aa99fa",
+			"title": "ローカルヒストリア - 街の数だけ、歴史がある。",
+			"url": "https://local-historia.jp/",
+			"date": "2026-10-18",
 			"tags": [
-				"漫画"
+				"歴史"
 			],
-			"comment": "<div class=\"news-comment\"><p>やっぱこの人の漫画好きだな。<a href=\"https://shonenjumpplus.com/episode/9253191257227136268\">2話</a> もよい。この人情味がいいのよね。そして猫他の人から見えてたんだ……ｗ</p></div>"
+			"comment": "<div class=\"news-comment\"><p>この（規模感にしては）網羅性はAI共同ならでは？質に関してもそこそこちゃんとしてて取っ掛かりには良さそうだし、引用元も参照できるのがありがたい。</p></div>"
+		},
+		{
+			"id": "9e5be3f6-dcd0-4171-9e5d-8a9652ed8147",
+			"title": "KissHug / aiko - Acapella Cover (Studio Session) - YouTube",
+			"url": "https://www.youtube.com/watch?v=yEqKS05-55Q",
+			"date": "2026-10-18",
+			"tags": [
+				"音楽"
+			],
+			"comment": ""
 		}
 	]
 }
