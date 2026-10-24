@@ -1,6 +1,32 @@
 {
 	"news": [
 		{
+			"id": "2992fcbd-6d42-4784-b20e-22f914037e0d",
+			"title": "[第19歩目]あっ、悪魔ちゃん - 深津ザオウ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191257382361595",
+			"date": "2026-10-24",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>次回絶対おもろいｗ</p></div>"
+		},
+		{
+			"id": "3e034229-6c85-4ebb-9b0c-efdad5b3b423",
+			"title": "松井秀喜氏 記者会見 巨人の新監督就任へ プロ野球 | NHKニュース | プロ野球、野球、石川県",
+			"url": "https://news.web.nhk/newsweb/na/nd-20261023de64015",
+			"date": "2026-10-24",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>さすがに楽しみ。今後の人事や采配にも注目集まるね。</p></div>"
+		},
+		{
+			"id": "ec85d812-3466-48ef-9488-602bc08929cf",
+			"title": "任天堂・宮本茂氏が\"文化勲章\"を受章。ゲーム関係者として初の快挙",
+			"url": "https://news.denfaminicogamer.jp/interview/261023n",
+			"date": "2026-10-24",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>痺れるインタビュー</p></div>"
+		},
+		{
 			"id": "aa66ea42-a99b-4936-8a59-17b3274b03c7",
 			"title": "「キングオブコント2026」ジェラードンが優勝、19代目王者に - お笑いナタリー",
 			"url": "https://natalie.mu/owarai/news/694149",

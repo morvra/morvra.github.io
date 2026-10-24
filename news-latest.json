@@ -1,33 +1,31 @@
 {
-	"date": "2026-10-18",
+	"date": "2026-10-24",
 	"news": [
 		{
-			"id": "aa66ea42-a99b-4936-8a59-17b3274b03c7",
-			"title": "「キングオブコント2026」ジェラードンが優勝、19代目王者に - お笑いナタリー",
-			"url": "https://natalie.mu/owarai/news/694149",
-			"date": "2026-10-18",
+			"id": "2992fcbd-6d42-4784-b20e-22f914037e0d",
+			"title": "[第19歩目]あっ、悪魔ちゃん - 深津ザオウ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191257382361595",
+			"date": "2026-10-24",
+			"tags": [
+				"漫画"
+			],
+			"comment": "<div class=\"news-comment\"><p>次回絶対おもろいｗ</p></div>"
+		},
+		{
+			"id": "3e034229-6c85-4ebb-9b0c-efdad5b3b423",
+			"title": "松井秀喜氏 記者会見 巨人の新監督就任へ プロ野球 | NHKニュース | プロ野球、野球、石川県",
+			"url": "https://news.web.nhk/newsweb/na/nd-20261023de64015",
+			"date": "2026-10-24",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>面白かった〜。ジェラードンはもちろん最高だったけど蛙亭と相性はいいよねも笑った。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>さすがに楽しみ。今後の人事や采配にも注目集まるね。</p></div>"
 		},
 		{
-			"id": "e251e4d9-cf8b-4ee1-a973-ab0f70aa99fa",
-			"title": "ローカルヒストリア - 街の数だけ、歴史がある。",
-			"url": "https://local-historia.jp/",
-			"date": "2026-10-18",
-			"tags": [
-				"歴史"
-			],
-			"comment": "<div class=\"news-comment\"><p>この（規模感にしては）網羅性はAI共同ならでは？質に関してもそこそこちゃんとしてて取っ掛かりには良さそうだし、引用元も参照できるのがありがたい。</p></div>"
-		},
-		{
-			"id": "9e5be3f6-dcd0-4171-9e5d-8a9652ed8147",
-			"title": "KissHug / aiko - Acapella Cover (Studio Session) - YouTube",
-			"url": "https://www.youtube.com/watch?v=yEqKS05-55Q",
-			"date": "2026-10-18",
-			"tags": [
-				"音楽"
-			],
-			"comment": ""
+			"id": "ec85d812-3466-48ef-9488-602bc08929cf",
+			"title": "任天堂・宮本茂氏が\"文化勲章\"を受章。ゲーム関係者として初の快挙",
+			"url": "https://news.denfaminicogamer.jp/interview/261023n",
+			"date": "2026-10-24",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>痺れるインタビュー</p></div>"
 		}
 	]
 }
