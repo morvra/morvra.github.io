@@ -1,15 +1,21 @@
 {
-	"date": "2026-11-07",
+	"date": "2026-11-08",
 	"news": [
 		{
-			"id": "a4b359a5-fa9d-4749-b73a-cdf42fae78d6",
-			"title": "[第21歩目]あっ、悪魔ちゃん - 深津ザオウ | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253191257689746274",
-			"date": "2026-11-07",
-			"tags": [
-				"漫画"
-			],
-			"comment": "<div class=\"news-comment\"><p>頑張れ！</p></div>"
+			"id": "3aa878ae-155a-4531-8347-33f227c403a1",
+			"title": "アンリミ環境Tier表",
+			"url": "https://unlimited-tier.yura-yura.workers.dev/",
+			"date": "2026-11-08",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>めちゃ見やすくまとまってる。相性表はやや懐疑しつつも概ね合ってそう。</p></div>"
+		},
+		{
+			"id": "6bc7f8c5-2a9d-4337-b6ff-038edf7eee9b",
+			"title": "きしたかのが新作の栄冠ナインで3年以内に甲子園優勝へ！［きしたかの栄冠ナイン3年縛り第10回］(1話目) - YouTube",
+			"url": "https://www.youtube.com/watch?v=FzPIkixzoI8",
+			"date": "2026-11-08",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>新作きた！</p></div>"
 		}
 	]
 }
