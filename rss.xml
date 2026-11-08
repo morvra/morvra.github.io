@@ -4,7 +4,7 @@
         <title>morvra lists</title>
         <link>https://morvra.github.io/</link>
         <description>morvraが何でも書く場所</description>
-        <lastBuildDate>Sun, 08 Nov 2026 03:17:02 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 08 Nov 2026 03:30:14 GMT</lastBuildDate>
         <language>ja-jp</language>
         <item>
           <title>2026年11月7日のニュース</title>
@@ -1064,7 +1064,7 @@
         <item>
           <title>Rhizonoteで書いてるノートを公開する場所を作った</title>
           <link>https://morvra.github.io/articles/7da3f4e4-1c72-0666-2548-4d5df5b79abc.html</link>
-          <description><![CDATA[<p><a href="/articles/518b6ce8-0f78-8965-ba43-295d96da0816.html">前回記事で書いた</a> Rhizonoteを開発しているうちに、デジタルガーデン（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。</p><p>その名も<a href="https://morvra.github.io/rhizoroji/">Rhizoroji</a>。由来はRhizome+露地（Roji）。</p><p>Rhizonoteの中を公開するからRhizoはつけたい＆庭の要素つけたいけどRhizogardenは長いし地下茎とガーデンってニュアンスがちょっと合わないかなってことで、茶室につながる庭でやや野味のある趣な露地という語を採用。</p><p>仕組みとしては、</p><ul><li>Rhizonote側の機能でPublishをonにしたノートを</li><li>DropboxAPIを使ってGithubActionsでHTMLに変換して</li><li>GithubPagesに静的サイトとしてビルト</li></ul><p>することで公開している。</p>]]></description>
+          <description><![CDATA[<p><a href="/articles/518b6ce8-0f78-8965-ba43-295d96da0816.html">前回記事で書いた</a> Rhizonoteを開発しているうちに、<a href="/concepts/digital-garden.html">デジタルガーデン</a>（書いてる途中のノートも公開する内部リンクを重視したサイト）をやってみたいと思い、ノートを公開する場所を作ってみた。</p><p>その名も<a href="https://morvra.github.io/rhizoroji/">Rhizoroji</a>。由来はRhizome+露地（Roji）。</p><p>Rhizonoteの中を公開するからRhizoはつけたい＆庭の要素つけたいけどRhizogardenは長いし地下茎とガーデンってニュアンスがちょっと合わないかなってことで、茶室につながる庭でやや野味のある趣な露地という語を採用。</p><p>仕組みとしては、</p><ul><li>Rhizonote側の機能でPublishをonにしたノートを</li><li>DropboxAPIを使ってGithubActionsでHTMLに変換して</li><li>GithubPagesに静的サイトとしてビルト</li></ul><p>することで公開している。</p>]]></description>
           <pubDate>Sat, 17 Jan 2026 00:00:00 GMT</pubDate>
           <guid isPermaLink="true">https://morvra.github.io/articles/7da3f4e4-1c72-0666-2548-4d5df5b79abc.html</guid>
         </item>
