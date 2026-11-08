@@ -279,7 +279,8 @@ function processFootnotes(html) {
 
 // WorkflowyのURLを条件に応じて変換またはテキスト化する関数
 // articleUUIDs: articleノードのUUIDセット（article/pieceでフォルダを振り分けるために使用）
-function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs, articleUUIDs) {
+// conceptUuidToSlug: (省略可) 概念ノードのUUID -> slug の Map。指定時は概念ノードへのリンクを /concepts/{slug}.html に変換する
+function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs, articleUUIDs, conceptUuidToSlug) {
     // <a href="https://workflowy.com/#/shortId">text</a> の形式をキャプチャ
     const linkPattern = /<a\s+href=["']https:\/\/workflowy\.com\/#\/([a-zA-Z0-9-]+)["'][^>]*>(.*?)<\/a>/g;
 
@@ -292,6 +293,9 @@ function replaceWorkflowyUrls(body, shortIdToUuidMap, publicUUIDs, articleUUIDs)
             // article か piece かでフォルダを振り分けて新URL形式で出力
             const folder = articleUUIDs.has(uuid) ? 'articles' : 'pieces';
             return `<a href="/${folder}/${uuid}.html">${linkText}</a>`;
+        } else if (uuid && conceptUuidToSlug && conceptUuidToSlug.has(uuid)) {
+            // 概念ノードへのリンク
+            return `<a href="/concepts/${conceptUuidToSlug.get(uuid)}.html">${linkText}</a>`;
         } else {
             // 非公開または存在しないノードへのリンクは、素のテキストのみを返す
             return linkText;
@@ -679,8 +683,9 @@ ${year}年 <i class="fa ${iconClass}"></i>
  * @param {string} template   - article_template.html の内容
  * @param {Array}  allItems   - 関連記事検索用の全コンテンツ（articles + pieces）
  * @param {Set}    articleIds - article/piece振り分け用のarticle UUIDセット
+ * @param {Map}    [conceptSlugByTitle] - (省略可) 概念タイトル -> slug。同名のタグは概念ページへリンクする
  */
-function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds, headerHtml, footerHtml) {
+function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds, headerHtml, footerHtml, conceptSlugByTitle) {
     // 出力先ディレクトリが存在しない場合は作成
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
@@ -695,7 +700,12 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
 
         // --- {{TAGS}}: タグをリンクに変換（絶対パス）---
         const tagsHtml = (item.tags && item.tags.length > 0)
-            ? item.tags.map(tag => `<a href="/tag?tag=${escapeHtml(tag)}">${escapeHtml(tag)}</a>`).join(', ')
+            ? item.tags.map(tag => {
+                // 同名の概念ページがあるタグは概念ページへ、無ければ従来どおりタグページへ
+                const conceptSlug = conceptSlugByTitle && conceptSlugByTitle.get(normalizeTagKey(tag));
+                const href = conceptSlug ? `/concepts/${conceptSlug}.html` : `/tag?tag=${escapeHtml(tag)}`;
+                return `<a href="${href}">${escapeHtml(tag)}</a>`;
+            }).join(', ')
             : '';
 
         // --- {{RELATED}}: 共通タグを持つ関連記事リストを生成 ---
@@ -735,6 +745,380 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
     }
 
     console.log(`Generated ${count} HTML file(s) in ${outputDir}/`);
+}
+
+// ============================================================
+// 概念ページ (#concept) 関連
+// 既存のArticle/Piece処理とは独立した関数群。
+//   - 概念ノードの収集 (タイトル・slug)
+//   - Article/Piece本文中の [概念名] のリンク化 (概念ページが無ければカッコを外す)
+//   - 概念ページごとの「関連するページ」収集
+//   - concept_template.html を使った /concepts/{slug}.html の生成
+// ============================================================
+
+const CONCEPT_TAG_REGEX = /#concept(?![\p{L}\p{N}\-_])/u;
+const CONCEPT_TEMPLATE_PATH = 'concept_template.html';
+const CONCEPT_OUTPUT_DIR = 'concepts';
+const CONCEPT_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
+
+// HTMLエンティティを広めにデコードする (概念名マッチ・description生成用)
+function decodeHtmlEntities(text) {
+    const fromCode = (code, original) => {
+        try { return String.fromCodePoint(code); } catch (e) { return original; }
+    };
+    return String(text)
+        .replace(/&#[xX]([0-9a-fA-F]+);/g, (m, h) => fromCode(parseInt(h, 16), m))
+        .replace(/&#(\d+);/g, (m, d) => fromCode(parseInt(d, 10), m))
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&apos;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&amp;/g, '&'); // &amp; は最後 (二重デコード防止)
+}
+
+function escapeRegExp(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// 概念名比較用の正規化 (エンティティのデコード + 空白の正規化)
+function normalizeConceptKey(text) {
+    return decodeHtmlEntities(text).replace(/\s+/g, ' ').trim();
+}
+
+// タグと概念名の照合用キー (タグは小文字運用・概念名は正式名称のため、大文字小文字を区別しない)
+function normalizeTagKey(text) {
+    return normalizeConceptKey(text).toLowerCase();
+}
+
+// ノードのnoteから `slug: xxx` を取得する
+function getConceptSlug(note) {
+    if (!note) return { found: false, value: '' };
+    const lines = unescapeHtml(note).split('\n');
+    for (const line of lines) {
+        const m = line.trim().match(/^slug:\s*(.*)$/i);
+        if (m) return { found: true, value: m[1].trim() };
+    }
+    return { found: false, value: '' };
+}
+
+// 概念ノードのタイトルを取得する (#concept を除外し、リンク・タグ・エンティティを整理)
+function getConceptTitle(name) {
+    let title = (name || '').replace(/#concept(?![\p{L}\p{N}\-_])/gu, '');
+    title = stripMarkdownLinks(title);
+    title = title.replace(/<[^>]*>/g, '');
+    title = decodeHtmlEntities(title);
+    return title.replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * #concept タグを持つノードから、生成対象の概念の一覧を作る。
+ * - slug が無い / 不正な形式のノードは除外 (警告)
+ * - slug が重複しているノードは、重複するもの全てを除外 (警告)
+ * - タイトルが重複している場合は先に出現したものだけを [概念名] のリンク先にする (警告)
+ *
+ * @returns {Array<{id: string, node: object, title: string, slug: string}>}
+ */
+function collectConcepts(allNodes, publicUUIDs) {
+    const candidates = [];
+
+    for (const node of allNodes) {
+        const tagged = CONCEPT_TAG_REGEX.test(node.name || '') || CONCEPT_TAG_REGEX.test(node.note || '');
+        if (!tagged) continue;
+
+        const label = `"${(node.name || '').trim()}" (id: ${node.id})`;
+
+        if (publicUUIDs.has(node.id)) {
+            console.warn(`Warning: Concept node ${label} is also an article/piece. Skipping as a concept.`);
+            continue;
+        }
+
+        const title = getConceptTitle(node.name);
+        if (!title) {
+            console.warn(`Warning: Concept node ${label} has an empty title. Skipping.`);
+            continue;
+        }
+
+        const { found, value } = getConceptSlug(node.note);
+        if (!found || !value) {
+            console.warn(`Warning: Concept "${title}" (id: ${node.id}) has no slug. Skipping.`);
+            continue;
+        }
+        if (!CONCEPT_SLUG_PATTERN.test(value)) {
+            console.warn(`Warning: Concept "${title}" has an invalid slug "${value}" (lowercase letters, digits and hyphens only). Skipping.`);
+            continue;
+        }
+
+        candidates.push({ id: node.id, node, title, slug: value });
+    }
+
+    // slug重複: 重複しているものは全て除外
+    const slugCounts = new Map();
+    candidates.forEach(c => slugCounts.set(c.slug, (slugCounts.get(c.slug) || 0) + 1));
+    const concepts = [];
+    for (const c of candidates) {
+        if (slugCounts.get(c.slug) > 1) {
+            console.warn(`Warning: Duplicate concept slug "${c.slug}" (concept "${c.title}", id: ${c.id}). Skipping.`);
+            continue;
+        }
+        concepts.push(c);
+    }
+
+    // タイトル重複: [概念名] のリンク先は先勝ち
+    const seenTitles = new Set();
+    for (const c of concepts) {
+        const key = normalizeConceptKey(c.title);
+        if (seenTitles.has(key)) {
+            console.warn(`Warning: Duplicate concept title "${c.title}" (slug: ${c.slug}). Auto-linking will use the first concept only.`);
+        }
+        seenTitles.add(key);
+    }
+
+    return concepts;
+}
+
+// 概念タイトルにマッチする正規表現のソースを作る。
+//  - htmlMode: HTML中のテキスト用。& < > " ' はエスケープ済み/未エスケープの両方にマッチさせる
+//  - タイトルの先頭/末尾が英数字(ASCII)の場合は、単語の途中でのマッチを防ぐ
+//    (日本語など単語区切りの無い文字は、長いタイトル優先ルールで誤変換を防ぐ)
+const HTML_CHAR_VARIANTS = {
+    '&': '(?:&amp;|&)',
+    '<': '(?:&lt;|<)',
+    '>': '(?:&gt;|>)',
+    '"': '(?:&quot;|")',
+    "'": "(?:&#0?39;|&apos;|')"
+};
+function buildTitlePatternSource(title, htmlMode) {
+    let src = '';
+    for (const ch of title) {
+        if (htmlMode && HTML_CHAR_VARIANTS[ch]) src += HTML_CHAR_VARIANTS[ch];
+        else src += escapeRegExp(ch);
+    }
+    const chars = [...title];
+    const isWordChar = (ch) => /[A-Za-z0-9_]/.test(ch);
+    const pre  = isWordChar(chars[0]) ? '(?<![A-Za-z0-9_])' : '';
+    const post = isWordChar(chars[chars.length - 1]) ? '(?![A-Za-z0-9_])' : '';
+    return pre + src + post;
+}
+
+/**
+ * 本文HTML中の [概念名] を、概念ページへのリンクに変換する関数を作る。
+ *  - 概念ページが存在する場合:     [ほげ] -> <a href="/concepts/{slug}.html">ほげ</a>
+ *  - 概念ページが存在しない場合:   [ほげ] -> ほげ (カッコを外して通常のテキストにする)
+ *  - 素の「ほげ」(カッコ無し) は変換しない (自動リンクはしない)
+ *  - 変換するのはテキストノードのみ。タグ・属性値、<a> / <pre> / <code> / <script> / <style> /
+ *    <textarea> / <button> の内側は変換しない
+ *  - [[...]] (二重カッコ)、[^...] (脚注)、[...](...) (Markdownリンク) は対象外
+ * 概念が1件も無くても、カッコを外す処理のために常に関数を返す。
+ */
+function createConceptBracketConverter(concepts) {
+    const titleMap = new Map(); // 正規化タイトル -> concept (先勝ち)
+    for (const c of concepts) {
+        const key = normalizeConceptKey(c.title);
+        if (!key || titleMap.has(key)) continue;
+        titleMap.set(key, c);
+    }
+
+    const BRACKET_REGEX = /(?<!\[)\[([^\[\]\n]+)\](?![\](])/g;
+    const TAG_REGEX = /<!--[\s\S]*?-->|<\/?[a-zA-Z][^\s\/>]*(?:"[^"]*"|'[^']*'|[^'">])*>|<\/?[a-zA-Z][^>]*>/g;
+    const SKIP_TAGS = ['a', 'pre', 'code', 'script', 'style', 'textarea', 'button'];
+
+    const convertText = (text) => {
+        if (!text || text.indexOf('[') === -1) return text;
+        return text.replace(BRACKET_REGEX, (match, inner) => {
+            if (inner.startsWith('^')) return match;           // 脚注 [^...]
+            const key = normalizeConceptKey(inner);
+            if (!key) return match;                            // [ ] など中身が空
+            const concept = titleMap.get(key);
+            return concept
+                ? `<a href="/concepts/${concept.slug}.html">${inner}</a>`
+                : inner;
+        });
+    };
+
+    return function convertBrackets(html) {
+        try {
+            const depth = {};
+            SKIP_TAGS.forEach(t => { depth[t] = 0; });
+            const isSkipping = () => SKIP_TAGS.some(t => depth[t] > 0);
+
+            let out = '';
+            let last = 0;
+            let tm;
+            TAG_REGEX.lastIndex = 0;
+            while ((tm = TAG_REGEX.exec(html)) !== null) {
+                const text = html.slice(last, tm.index);
+                out += isSkipping() ? text : convertText(text);
+                out += tm[0];
+                last = tm.index + tm[0].length;
+
+                if (!tm[0].startsWith('<!--')) {
+                    const nameMatch = tm[0].match(/^<(\/?)([a-zA-Z][a-zA-Z0-9-]*)/);
+                    if (nameMatch) {
+                        const name = nameMatch[2].toLowerCase();
+                        if (name in depth) {
+                            if (nameMatch[1] === '/') depth[name] = Math.max(0, depth[name] - 1);
+                            else if (!tm[0].endsWith('/>')) depth[name]++;
+                        }
+                    }
+                }
+            }
+            const rest = html.slice(last);
+            out += isSkipping() ? rest : convertText(rest);
+            return out;
+        } catch (e) {
+            console.warn('Warning: concept bracket conversion failed; leaving body unchanged.', e.message);
+            return html;
+        }
+    };
+}
+
+// HTML本文からプレーンテキストを取り出す (概念名の出現判定用)
+function htmlToPlainText(html) {
+    const withoutScripts = html
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/<(script|style)[\s\S]*?<\/\1\s*>/gi, '');
+    // タグは改行に置換 (段落をまたいだ偶発的な一致を防ぐ)
+    return decodeHtmlEntities(withoutScripts.replace(/<\/?[a-zA-Z][^>]*>/g, '\n'));
+}
+
+// 本文(変換前)中のWorkflowy内部リンクが参照している概念UUIDの集合を返す
+function collectConceptReferences(rawBody, shortIdToUuidMap, conceptUuidToSlug) {
+    const refs = new Set();
+    const linkPattern = /<a\s+href=["']https:\/\/workflowy\.com\/#\/([a-zA-Z0-9-]+)["'][^>]*>(.*?)<\/a>/g;
+    let m;
+    while ((m = linkPattern.exec(rawBody)) !== null) {
+        const uuid = shortIdToUuidMap[m[1]];
+        if (uuid && conceptUuidToSlug.has(uuid)) refs.add(uuid);
+    }
+    return refs;
+}
+
+/**
+ * 概念ごとの「関連するページ」を集める。
+ * 次のいずれかを満たす Article/Piece を関連ページとする (重複なし)。
+ *   1. 本文中のWorkflowy内部リンクがその概念ノードを参照している (変換前の本文で判定)
+ *   2. タイトルまたは本文中に概念タイトルと完全一致する文字列が登場する (素の「ほげ」も [ほげ] も対象)
+ *   3. 概念タイトルと同名のタグ (#ほげ) が付いている (大文字小文字は区別しない: #workflowy = Workflowy)
+ *
+ * @returns {Map<string, Array>} 概念ID -> 日付の新しい順の関連ページ配列
+ */
+function collectRelatedPages(concepts, articles, pieces, ctx) {
+    const conceptUuidToSlug = ctx.conceptUuidToSlug;
+    const plainRegexes = concepts.map(c => ({
+        concept: c,
+        regex: new RegExp(buildTitlePatternSource(normalizeConceptKey(c.title), false), 'u')
+    }));
+
+    const related = new Map(concepts.map(c => [c.id, []]));
+
+    const scan = (items, type) => {
+        for (const item of items) {
+            const rawBody = getBody(ctx.allNodes, { id: item.id });
+            const refs = collectConceptReferences(rawBody, ctx.shortIdToUuidMap, conceptUuidToSlug);
+            // タイトルと本文の両方を判定対象にする (改行で区切り、タイトル末尾と本文冒頭が連結して偶発的に一致するのを防ぐ)
+            const plainText = decodeHtmlEntities(item.title || '') + '\n' + htmlToPlainText(item.body);
+
+            const itemTags = new Set((item.tags || []).map(normalizeTagKey));
+
+            for (const { concept, regex } of plainRegexes) {
+                if (refs.has(concept.id) || itemTags.has(normalizeTagKey(concept.title)) || regex.test(plainText)) {
+                    related.get(concept.id).push({
+                        id: item.id,
+                        title: item.title,
+                        date: item.date || '',
+                        type,
+                        folder: type === 'Article' ? 'articles' : 'pieces'
+                    });
+                }
+            }
+        }
+    };
+    scan(articles, 'Article');
+    scan(pieces, 'Piece');
+
+    // 日付の新しい順 (同日はタイトル順)
+    for (const list of related.values()) {
+        list.sort((a, b) => {
+            if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+            return a.title.localeCompare(b.title);
+        });
+    }
+    return related;
+}
+
+// 「関連するページ」のHTML (テンプレートの <h2> の直後に入る部分)
+function renderRelatedPagesHtml(pages) {
+    if (!pages || pages.length === 0) {
+        return '<p class="no-related-pages">この概念に関連するページはまだありません。</p>';
+    }
+    const items = pages.map(p => {
+        const title = escapeHtml(unescapeHtml(p.title));
+        return `<li>\n<span class="page-type">${p.type}</span>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
+    }).join('\n');
+    return `<ul>\n${items}\n</ul>`;
+}
+
+/**
+ * concept_template.html を使って /concepts/{slug}.html を書き出す。
+ * 失敗しても例外を外に出さず、Article/Piece の生成には影響させない。
+ */
+function generateConceptPages(concepts, articles, pieces, ctx) {
+    try {
+        if (concepts.length === 0) {
+            console.log('No concept pages to generate.');
+            return;
+        }
+        if (!fs.existsSync(CONCEPT_TEMPLATE_PATH)) {
+            console.warn(`Warning: ${CONCEPT_TEMPLATE_PATH} not found. Skipping concept page generation.`);
+            return;
+        }
+
+        const template   = fs.readFileSync(CONCEPT_TEMPLATE_PATH, 'utf8');
+        const headerHtml = fs.readFileSync('header.html', 'utf8');
+        const footerHtml = fs.readFileSync('footer.html', 'utf8');
+
+        if (!fs.existsSync(CONCEPT_OUTPUT_DIR)) {
+            fs.mkdirSync(CONCEPT_OUTPUT_DIR, { recursive: true });
+            console.log(`Created directory: ${CONCEPT_OUTPUT_DIR}/`);
+        }
+
+        const relatedMap = collectRelatedPages(concepts, articles, pieces, ctx);
+
+        let count = 0;
+        for (const concept of concepts) {
+            // 本文: Article/Pieceと同じ変換処理 (slug を書いた概念ノード自身のnoteは getBody の対象外)
+            const body = ctx.convertConceptBrackets(processFootnotes(
+                replaceWorkflowyUrls(
+                    getBody(ctx.allNodes, concept.node),
+                    ctx.shortIdToUuidMap, ctx.publicUUIDs, ctx.articleUUIDs, ctx.conceptUuidToSlug
+                )
+            ));
+
+            const plainText = htmlToPlainText(body).replace(/\s+/g, ' ').trim();
+            const description = escapeHtml(plainText ? plainText.substring(0, 120).trim() + '...' : concept.title);
+
+            const values = {
+                TITLE:         escapeHtml(concept.title),
+                DESCRIPTION:   description,
+                BODY:          body,
+                RELATED_PAGES: renderRelatedPagesHtml(relatedMap.get(concept.id)),
+                HEADER:        headerHtml,
+                FOOTER:        footerHtml
+            };
+            // 1回の置換で全プレースホルダーを処理 (置換文字列中の $ や {{...}} が再解釈されない)
+            const html = template.replace(
+                /\{\{(TITLE|DESCRIPTION|BODY|RELATED_PAGES|HEADER|FOOTER)\}\}/g,
+                (m, key) => values[key]
+            );
+
+            fs.writeFileSync(path.join(CONCEPT_OUTPUT_DIR, `${concept.slug}.html`), html, 'utf8');
+            count++;
+        }
+        console.log(`Generated ${count} HTML file(s) in ${CONCEPT_OUTPUT_DIR}/`);
+    } catch (error) {
+        console.warn('Warning: concept page generation failed. Article/Piece output is unaffected.', error);
+    }
 }
 
 // Workflowyからデータを取得する部分
@@ -779,6 +1163,29 @@ async function main() {
 
         // article/piece のフォルダ振り分け用セット
         const articleUUIDs = new Set(articleNodes.map(n => n.id));
+
+        // #concept タグを持つノードを概念として取得 (失敗しても Article/Piece の生成には影響させない)
+        let concepts = [];
+        try {
+            concepts = collectConcepts(data.nodes, publicUUIDs);
+            // テンプレートが無い場合は概念ページを生成しないため、内部リンク変換・[概念名] のリンク化は行わない (リンク切れ防止)
+            if (concepts.length > 0 && !fs.existsSync(CONCEPT_TEMPLATE_PATH)) {
+                console.warn(`Warning: ${CONCEPT_TEMPLATE_PATH} not found. Skipping concept page generation.`);
+                concepts = [];
+            }
+        } catch (e) {
+            console.warn('Warning: failed to collect concept nodes. Skipping concepts.', e);
+            concepts = [];
+        }
+        const conceptUuidToSlug = new Map(concepts.map(c => [c.id, c.slug]));
+        // 本文中の [概念名] を概念ページへのリンクに変換 (概念ページが無ければカッコを外してテキストにする)
+        const convertConceptBrackets = createConceptBracketConverter(concepts);
+        // タグ表示用: 概念タイトル(小文字化) -> slug (同名タイトルは先勝ち)
+        const conceptSlugByTitle = new Map();
+        concepts.forEach(c => {
+            const key = normalizeTagKey(c.title);
+            if (key && !conceptSlugByTitle.has(key)) conceptSlugByTitle.set(key, c.slug);
+        });
         
         const articles = articleNodes.map(obj => {
             const id = obj.id;
@@ -788,9 +1195,9 @@ async function main() {
             const title = stripMarkdownLinks(rawTitle);
             const { date } = getMetadata(obj);
             const tags = getTags(obj.note);
-            const body = processFootnotes(
-                replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs)
-            );
+            const body = convertConceptBrackets(processFootnotes(
+                replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs, conceptUuidToSlug)
+            ));
             
             return { id, title, date, tags, body };
         });
@@ -821,9 +1228,9 @@ async function main() {
             const tagsFromNote = getTags(obj.note);
             const tags = [...new Set([...tagsFromName, ...tagsFromNote])];
 
-            const body = processFootnotes(
-                replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs)
-            );
+            const body = convertConceptBrackets(processFootnotes(
+                replaceWorkflowyUrls(getBody(data.nodes, obj), shortIdToUuidMap, publicUUIDs, articleUUIDs, conceptUuidToSlug)
+            ));
 
             return { id, title, date, tags, body };
         });
@@ -847,6 +1254,17 @@ async function main() {
 
         generateArticleListHtml(articles);
 
+        // --- 概念ページを生成する (article_template.html の有無とは独立) ---
+
+        generateConceptPages(concepts, articles, pieces, {
+            allNodes: data.nodes,
+            shortIdToUuidMap,
+            publicUUIDs,
+            articleUUIDs,
+            conceptUuidToSlug,
+            convertConceptBrackets
+        });
+
         // --- 静的HTMLファイルを生成する ---
 
         // article_template.html が存在しない場合はスキップ（後方互換）
@@ -863,8 +1281,8 @@ async function main() {
         // 関連記事生成用に全コンテンツを統合
         const allItems = [...articles, ...pieces];
 
-        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs, headerHtml, footerHtml);
-        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs, headerHtml, footerHtml);
+        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs, headerHtml, footerHtml, conceptSlugByTitle);
+        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs, headerHtml, footerHtml, conceptSlugByTitle);
 
         console.log('Static HTML generation complete.');
 
