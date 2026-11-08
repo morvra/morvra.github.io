@@ -1065,6 +1065,19 @@ function renderRelatedPagesHtml(pages) {
 }
 
 /**
+ * 概念ページの本文HTMLを作る。Article/Pieceと同じ変換処理を通す。
+ * (slug を書いた概念ノード自身のnoteは getBody の対象外なので本文には出ない)
+ */
+function buildConceptBody(concept, ctx) {
+    return ctx.convertConceptBrackets(processFootnotes(
+        replaceWorkflowyUrls(
+            getBody(ctx.allNodes, concept.node),
+            ctx.shortIdToUuidMap, ctx.publicUUIDs, ctx.articleUUIDs, ctx.conceptUuidToSlug
+        )
+    ));
+}
+
+/**
  * 概念ページの一覧ページ (/concept.html) を書き出す。
  * concept_index_template.html が無い場合は警告を出して一覧ページだけスキップする。
  */
@@ -1124,13 +1137,10 @@ function generateConceptPages(concepts, articles, pieces, ctx) {
 
         let count = 0;
         for (const concept of concepts) {
-            // 本文: Article/Pieceと同じ変換処理 (slug を書いた概念ノード自身のnoteは getBody の対象外)
-            const body = ctx.convertConceptBrackets(processFootnotes(
-                replaceWorkflowyUrls(
-                    getBody(ctx.allNodes, concept.node),
-                    ctx.shortIdToUuidMap, ctx.publicUUIDs, ctx.articleUUIDs, ctx.conceptUuidToSlug
-                )
-            ));
+            // 本文 (data.json 用に main() で生成済み。無ければここで生成する)
+            const body = ctx.conceptBodies && ctx.conceptBodies.has(concept.id)
+                ? ctx.conceptBodies.get(concept.id)
+                : buildConceptBody(concept, ctx);
 
             const plainText = htmlToPlainText(body).replace(/\s+/g, ' ').trim();
             const description = escapeHtml(plainText ? plainText.substring(0, 120).trim() + '...' : concept.title);
@@ -1275,12 +1285,38 @@ async function main() {
             return { id, title, date, tags, body };
         });
 
+        // --- 概念ページの本文を作る (data.json にも載せる。失敗しても Article/Piece の生成には影響させない) ---
+
+        const conceptCtx = {
+            allNodes: data.nodes,
+            shortIdToUuidMap,
+            publicUUIDs,
+            articleUUIDs,
+            conceptUuidToSlug,
+            convertConceptBrackets,
+            conceptBodies: new Map()
+        };
+        try {
+            concepts.forEach(c => conceptCtx.conceptBodies.set(c.id, buildConceptBody(c, conceptCtx)));
+        } catch (e) {
+            console.warn('Warning: failed to build concept bodies.', e);
+            conceptCtx.conceptBodies = new Map();
+        }
+
         // --- 既存の処理: data.json と rss.xml を書き出す ---
 
         const output = {
             articles: articles,
             pieces: pieces
         };
+        // 概念ページ (検索用)。概念が1件も無いときは従来どおりのキー構成のままにする
+        if (concepts.length > 0 && conceptCtx.conceptBodies.size === concepts.length) {
+            output.concepts = concepts.map(c => ({
+                slug: c.slug,
+                title: c.title,
+                body: conceptCtx.conceptBodies.get(c.id)
+            }));
+        }
 
         fs.writeFileSync('data.json', JSON.stringify(output, null, '\t'));
         console.log('data.json generated.');
@@ -1296,14 +1332,7 @@ async function main() {
 
         // --- 概念ページを生成する (article_template.html の有無とは独立) ---
 
-        generateConceptPages(concepts, articles, pieces, {
-            allNodes: data.nodes,
-            shortIdToUuidMap,
-            publicUUIDs,
-            articleUUIDs,
-            conceptUuidToSlug,
-            convertConceptBrackets
-        });
+        generateConceptPages(concepts, articles, pieces, conceptCtx);
 
         // --- 静的HTMLファイルを生成する ---
 

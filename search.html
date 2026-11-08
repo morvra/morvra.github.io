@@ -81,14 +81,27 @@
                     return response.json();
                 })
                 .then(data => {
+                    // 概念ページ (data.concepts)。キーが無い場合は概念ページ無しで検索する
+                    const concepts = data.concepts || [];
+
                     // article/piece の振り分け用セット
                     const articleIds = new Set(data.articles.map(a => a.id));
 
-                    allContent = [...data.articles, ...data.pieces].map(item => ({
-                        ...item,
-                        _folder: articleIds.has(item.id) ? 'articles' : 'pieces'
+                    const dated = [...data.articles, ...data.pieces].map(item => {
+                        const folder = articleIds.has(item.id) ? 'articles' : 'pieces';
+                        return { ...item, _folder: folder, _url: `/${folder}/${item.id}.html` };
+                    });
+                    dated.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                    // 概念ページは日付を持たないので、結果の先頭に並べる
+                    const conceptItems = concepts.map(c => ({
+                        title: c.title,
+                        body: c.body,
+                        _isConcept: true,
+                        _url: `/concepts/${c.slug}.html`
                     }));
-                    allContent.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                    allContent = [...conceptItems, ...dated];
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -127,12 +140,13 @@
 
                     const titleLink = document.createElement('a');
                     // article/piece に応じた新URLで直接リンク
-                    titleLink.href = `/${content._folder}/${content.id}.html`;
-                    titleLink.innerHTML = highlightMatch(content.title, query);
+                    titleLink.href = content._url;
+                    // 概念ページのタイトルはプレーンテキストなので、HTMLとして埋め込む前にエスケープする
+                    titleLink.innerHTML = highlightMatch(content._isConcept ? escapeHtml(content.title) : content.title, query);
                     
                     const dateSpan = document.createElement('span');
                     dateSpan.classList.add('search-result-date');
-                    dateSpan.textContent = `(${content.date})`;
+                    dateSpan.textContent = content._isConcept ? '(概念ページ)' : `(${content.date})`;
                     listItem.appendChild(titleLink);
                     listItem.appendChild(dateSpan);
 
@@ -153,8 +167,11 @@
             };
 
             // テキスト内の検索ワードをハイライトするヘルパー関数（タイトル専用）
+            const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const escapeHtml = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
             const highlightMatch = (text, query) => {
-                const regex = new RegExp(`(${query})`, 'gi');
+                const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
                 return text.replace(regex, `<span class="highlight">$1</span>`);
             };
             
@@ -169,7 +186,7 @@
                 
                 let node;
                 const nodesToReplace = [];
-                const regex = new RegExp(query, 'gi');
+                const regex = new RegExp(escapeRegExp(query), 'gi');
 
                 while (node = treeWalker.nextNode()) {
                     if (node.nodeValue.toLowerCase().includes(query.toLowerCase())) {
