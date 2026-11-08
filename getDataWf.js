@@ -1054,7 +1054,9 @@ function renderRelatedPagesHtml(pages) {
     }
     const items = pages.map(p => {
         const title = escapeHtml(unescapeHtml(p.title));
-        return `<li>\n<span class="page-type">${p.type}</span>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
+        // 並びは 日付 -> 種別 -> タイトル。種別は小文字で表示し、CSS用に同名のクラスも付ける (article / piece / concept)
+        const type = p.type.toLowerCase();
+        return `<li>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<span class="page-type ${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
     }).join('\n');
     return `<ul>\n${items}\n</ul>`;
 }

@@ -15,6 +15,7 @@
  * 11. Amazonカード
  * 12. 脚注
  * 13. その他
+ * 14. 概念ページ
  */
 
 
@@ -307,50 +308,59 @@ ul#article-list a {
     color: #888;
 }
 
-#article-content {
+#article-content,
+.concept-body {
     font-size: 1em;
     color: #333;
     overflow-wrap: break-word;
 }
 
-#article-content h2:before {
+#article-content h2:before,
+.concept-body h2:before {
     content: "##";
     margin-right: 8px;
     color: #a89104;
 }
 
-#article-content h3:before {
+#article-content h3:before,
+.concept-body h3:before {
     content: "###";
     margin-right: 8px;
     color: #a89104;
 }
 
-#article-content img {
+#article-content img,
+.concept-body img {
     max-width: 100%;
     box-shadow: rgba(0, 0, 0, 0.15) 0 2px 8px;
 }
 
-#article-content hr {
+#article-content hr,
+.concept-body hr {
     border: 1px dashed #ccc;
     margin: 28px auto;
 }
 
-#article-content blockquote {
+#article-content blockquote,
+.concept-body blockquote {
     margin: 8px 16px;
     padding: 2px 16px;
     background-color: #eee;
 }
 
-#article-content ul {
+#article-content ul,
+.concept-body ul {
     margin: 4px 0;
     padding-inline-start: 24px;
 }
 
-#article-content li {
+#article-content li,
+.concept-body li {
     padding: 2px 0;
 }
 
-#article-content ul li::marker {
+#article-content ul li::marker,
+.concept-body ul li::marker {
     color: #a89104;
 }
 
@@ -1035,4 +1045,63 @@ a.next {
 
 a.prev {
     float: left;
+}
+
+
+/* =========================================================
+   14. 概念ページ
+   ========================================================= */
+
+/* タイトル: 記事ページ (#article-title h1) と同じデザイン */
+
+.concept-title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.concept-title:before {
+    content: "# ";
+    color: #a89104;
+}
+
+/* 本文: 記事本文 (#article-content) と同じデザイン (セクション5のルールを共有) */
+
+/* 関連するページ: 日付 → 種別 → タイトル */
+
+.related-pages h2:before {
+    content: "##";
+    margin-right: 8px;
+    color: #a89104;
+}
+
+.related-pages ul {
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+}
+
+.related-pages li {
+    padding: 2px 0;
+}
+
+.related-pages .page-date {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.related-pages .page-type {
+    margin: 0 0.4em;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.related-pages .page-type.article { color: #d32f2f; } /* 赤 */
+.related-pages .page-type.piece   { color: #1976d2; } /* 青 */
+.related-pages .page-type.concept { color: #c99700; } /* 黄色 (白背景で読めるよう濃いめ) */
+
+.related-pages .no-related-pages {
+    color: #888;
+    font-size: 0.9em;
 }
