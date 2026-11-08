@@ -1123,17 +1123,20 @@ a.prev {
 /* 一覧ページ (/concept.html) と、各ページからの一覧へのリンク */
 
 .concept-list {
-    list-style: none;
     margin: 4px 0;
-    padding: 0;
+    padding-inline-start: 24px;
 }
 
-.concept-list li {
-    padding: 2px 0;
+.concept-list a {
+    color: #a89104;
+}
+
+.concept-list a:hover,
+.concept-list a:focus {
+    color: #766802;
 }
 
 .concept-index-link {
     margin-top: 24px;
     font-size: 0.9em;
-    text-align: center;
 }
