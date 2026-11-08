@@ -760,7 +760,7 @@ const CONCEPT_TAG_REGEX = /#concept(?![\p{L}\p{N}\-_])/u;
 const CONCEPT_TEMPLATE_PATH = 'concept_template.html';
 const CONCEPT_INDEX_TEMPLATE_PATH = 'concept_index_template.html'; // 一覧ページ用テンプレート
 const CONCEPT_INDEX_OUTPUT = 'concept.html';                      // 一覧ページの出力先 (/concept.html)
-const CONCEPT_INDEX_TITLE = 'キーワード';                              // 一覧ページの名称 (タイトル・各ページからのリンク文字列)
+const CONCEPT_INDEX_TITLE = '概念ページ';                              // 一覧ページの名称 (タイトル・各ページからのリンク文字列)
 const CONCEPT_OUTPUT_DIR = 'concepts';
 const CONCEPT_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
 
