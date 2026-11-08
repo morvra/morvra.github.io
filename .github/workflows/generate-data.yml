@@ -7,6 +7,7 @@ on:
       - 'header.html'
       - 'footer.html'
       - 'article_template.html'
+      - 'concept_template.html'
   schedule:
     - cron: '0 0 * * *'  # 毎日UTC 0時 → JST 9時
     - cron: '0 10 * * *' # 毎日UTC10時 → JST 19時
@@ -17,12 +18,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
-        node-version: '20'
+        node-version: '24'
 
     - name: Install dependencies
       run: npm install node-fetch
@@ -33,9 +34,9 @@ jobs:
       run: node getDataWf.js
 
     - name: Commit and push changes
-      uses: EndBug/add-and-commit@v9
+      uses: EndBug/add-and-commit@v10
       with:
-        add: 'data.json rss.xml articlelist.html articles/ pieces/'
+        add: 'data.json rss.xml articlelist.html articles/ pieces/ concepts/'
         message: 'feat: Update data.json, rss.xml, articlelist.html, and static HTML from Workflowy'
         new_branch: main
         github_token: ${{ secrets.GH_TOKEN }}
