@@ -758,6 +758,9 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
 
 const CONCEPT_TAG_REGEX = /#concept(?![\p{L}\p{N}\-_])/u;
 const CONCEPT_TEMPLATE_PATH = 'concept_template.html';
+const CONCEPT_INDEX_TEMPLATE_PATH = 'concept_index_template.html'; // 一覧ページ用テンプレート
+const CONCEPT_INDEX_OUTPUT = 'concept.html';                      // 一覧ページの出力先 (/concept.html)
+const CONCEPT_INDEX_TITLE = 'キーワード';                              // 一覧ページの名称 (タイトル・各ページからのリンク文字列)
 const CONCEPT_OUTPUT_DIR = 'concepts';
 const CONCEPT_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
 
@@ -1050,7 +1053,7 @@ function collectRelatedPages(concepts, articles, pieces, ctx) {
 // 「関連するページ」のHTML (テンプレートの <h2> の直後に入る部分)
 function renderRelatedPagesHtml(pages) {
     if (!pages || pages.length === 0) {
-        return '<p class="no-related-pages">この概念に関連するページはまだありません。</p>';
+        return '<p class="no-related-pages">関連するページはまだありません。</p>';
     }
     const items = pages.map(p => {
         const title = escapeHtml(unescapeHtml(p.title));
@@ -1059,6 +1062,38 @@ function renderRelatedPagesHtml(pages) {
         return `<li>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<span class="page-type ${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
     }).join('\n');
     return `<ul>\n${items}\n</ul>`;
+}
+
+/**
+ * 概念ページの一覧ページ (/concept.html) を書き出す。
+ * concept_index_template.html が無い場合は警告を出して一覧ページだけスキップする。
+ */
+function generateConceptIndexPage(concepts, headerHtml, footerHtml) {
+    if (!fs.existsSync(CONCEPT_INDEX_TEMPLATE_PATH)) {
+        console.warn(`Warning: ${CONCEPT_INDEX_TEMPLATE_PATH} not found. Skipping ${CONCEPT_INDEX_OUTPUT}.`);
+        return;
+    }
+    const template = fs.readFileSync(CONCEPT_INDEX_TEMPLATE_PATH, 'utf8');
+
+    // タイトルの五十音順 (日本語ロケール)
+    const sorted = [...concepts].sort((a, b) => a.title.localeCompare(b.title, 'ja'));
+    const list = '<ul class="concept-list">\n' +
+        sorted.map(c => `<li><a href="/${CONCEPT_OUTPUT_DIR}/${c.slug}.html">${escapeHtml(c.title)}</a></li>`).join('\n') +
+        '\n</ul>';
+
+    const values = {
+        TITLE:       escapeHtml(CONCEPT_INDEX_TITLE),
+        DESCRIPTION: escapeHtml(`${CONCEPT_INDEX_TITLE}の一覧 (${sorted.length}件)`),
+        BODY:        list,
+        HEADER:      headerHtml,
+        FOOTER:      footerHtml
+    };
+    const html = template.replace(
+        /\{\{(TITLE|DESCRIPTION|BODY|HEADER|FOOTER)\}\}/g,
+        (m, key) => values[key]
+    );
+    fs.writeFileSync(CONCEPT_INDEX_OUTPUT, html, 'utf8');
+    console.log(`${CONCEPT_INDEX_OUTPUT} generated.`);
 }
 
 /**
@@ -1105,12 +1140,13 @@ function generateConceptPages(concepts, articles, pieces, ctx) {
                 DESCRIPTION:   description,
                 BODY:          body,
                 RELATED_PAGES: renderRelatedPagesHtml(relatedMap.get(concept.id)),
+                INDEX_TITLE:   escapeHtml(CONCEPT_INDEX_TITLE),
                 HEADER:        headerHtml,
                 FOOTER:        footerHtml
             };
             // 1回の置換で全プレースホルダーを処理 (置換文字列中の $ や {{...}} が再解釈されない)
             const html = template.replace(
-                /\{\{(TITLE|DESCRIPTION|BODY|RELATED_PAGES|HEADER|FOOTER)\}\}/g,
+                /\{\{(TITLE|DESCRIPTION|BODY|RELATED_PAGES|INDEX_TITLE|HEADER|FOOTER)\}\}/g,
                 (m, key) => values[key]
             );
 
@@ -1118,6 +1154,8 @@ function generateConceptPages(concepts, articles, pieces, ctx) {
             count++;
         }
         console.log(`Generated ${count} HTML file(s) in ${CONCEPT_OUTPUT_DIR}/`);
+
+        generateConceptIndexPage(concepts, headerHtml, footerHtml);
     } catch (error) {
         console.warn('Warning: concept page generation failed. Article/Piece output is unaffected.', error);
     }

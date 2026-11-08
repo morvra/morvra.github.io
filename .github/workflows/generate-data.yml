@@ -8,6 +8,7 @@ on:
       - 'footer.html'
       - 'article_template.html'
       - 'concept_template.html'
+      - 'concept_index_template.html'
   schedule:
     - cron: '0 0 * * *'  # 毎日UTC 0時 → JST 9時
     - cron: '0 10 * * *' # 毎日UTC10時 → JST 19時
@@ -36,7 +37,7 @@ jobs:
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v10
       with:
-        add: 'data.json rss.xml articlelist.html articles/ pieces/ concepts/'
+        add: 'data.json rss.xml articlelist.html articles/ pieces/ concepts/ concept.html'
         message: 'feat: Update data.json, rss.xml, articlelist.html, and static HTML from Workflowy'
         new_branch: main
         github_token: ${{ secrets.GH_TOKEN }}

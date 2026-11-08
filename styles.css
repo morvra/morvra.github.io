@@ -1105,3 +1105,35 @@ a.prev {
     color: #888;
     font-size: 0.9em;
 }
+
+/* 本文中の概念ページへのリンクは、通常のリンク色と区別する */
+
+#article-content a[href^="/concepts/"],
+.concept-body a[href^="/concepts/"] {
+    color: #a89104;
+}
+
+#article-content a[href^="/concepts/"]:hover,
+#article-content a[href^="/concepts/"]:focus,
+.concept-body a[href^="/concepts/"]:hover,
+.concept-body a[href^="/concepts/"]:focus {
+    color: #766802;
+}
+
+/* 一覧ページ (/concept.html) と、各ページからの一覧へのリンク */
+
+.concept-list {
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+}
+
+.concept-list li {
+    padding: 2px 0;
+}
+
+.concept-index-link {
+    margin-top: 24px;
+    font-size: 0.9em;
+    text-align: center;
+}
