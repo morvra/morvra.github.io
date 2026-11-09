@@ -1,21 +1,23 @@
 {
-	"date": "2026-11-08",
+	"date": "2026-11-09",
 	"news": [
 		{
-			"id": "3aa878ae-155a-4531-8347-33f227c403a1",
-			"title": "アンリミ環境Tier表",
-			"url": "https://unlimited-tier.yura-yura.workers.dev/",
-			"date": "2026-11-08",
-			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>めちゃ見やすくまとまってる。相性表はやや懐疑しつつも概ね合ってそう。</p></div>"
+			"id": "e207f84a-1922-480a-a818-97d9d0e1c985",
+			"title": "[5話]のろのろぷくぷく - 茶んた | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191257737706212",
+			"date": "2026-11-09",
+			"tags": [
+				"漫画"
+			],
+			"comment": ""
 		},
 		{
-			"id": "6bc7f8c5-2a9d-4337-b6ff-038edf7eee9b",
-			"title": "きしたかのが新作の栄冠ナインで3年以内に甲子園優勝へ！［きしたかの栄冠ナイン3年縛り第10回］(1話目) - YouTube",
-			"url": "https://www.youtube.com/watch?v=FzPIkixzoI8",
-			"date": "2026-11-08",
+			"id": "a3f0a89c-be53-4fbf-88b4-4afdcaf50f61",
+			"title": "【芸人トーク】ドンココ 最初はM1とか言ってたけど、色々聞いたら嫌なことばっかり言うし喧嘩したりします - YouTube",
+			"url": "https://www.youtube.com/watch?v=Tb7aCOf2M48",
+			"date": "2026-11-09",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>新作きた！</p></div>"
+			"comment": ""
 		}
 	]
 }
