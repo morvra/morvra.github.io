@@ -1072,10 +1072,11 @@ function renderRelatedPagesHtml(pages) {
     }
     const items = pages.map(p => {
         const title = escapeHtml(unescapeHtml(p.title));
-        // 並びは 日付 -> 種別 -> タイトル。種別は小文字で表示し、CSS用に type-article / type-piece / type-concept のクラスを付ける
-        // (サイト既存の .piece などのクラスと衝突しないよう type- を付けている)
+        // 並びは 種別 -> タイトル -> (日付)。種別は小文字で表示し、CSS用に type-article / type-piece / type-concept のクラスを付ける
+        // (サイト既存の .piece などのクラスと衝突しないよう type- を付けている)。概念ページ (concept) は日付なし
         const type = p.type.toLowerCase();
-        return `<li>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<span class="page-type type-${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
+        const date = type !== 'concept' && p.date ? ` <span class="page-date">(${escapeHtml(p.date)})</span>` : '';
+        return `<li>\n<span class="page-type type-${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>${date}\n</li>`;
     }).join('\n');
     return `<ul>\n${items}\n</ul>`;
 }
