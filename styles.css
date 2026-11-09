@@ -1097,9 +1097,12 @@ a.prev {
     font-weight: bold;
 }
 
-.related-pages .page-type.article { color: #d32f2f; } /* 赤 */
-.related-pages .page-type.piece   { color: #1976d2; } /* 青 */
-.related-pages .page-type.concept { color: #c99700; } /* 黄色 (白背景で読めるよう濃いめ) */
+.related-pages .page-type.article,
+#related-articles .page-type.article { color: #d32f2f; } /* 赤 */
+.related-pages .page-type.piece,
+#related-articles .page-type.piece   { color: #1976d2; } /* 青 */
+.related-pages .page-type.concept,
+#related-articles .page-type.concept { color: #c99700; } /* 黄色 (白背景で読めるよう濃いめ) */
 
 .related-pages .no-related-pages {
     color: #888;
@@ -1118,6 +1121,14 @@ a.prev {
 .concept-body a[href^="/concepts/"]:hover,
 .concept-body a[href^="/concepts/"]:focus {
     color: #766802;
+}
+
+/* 記事・Pieceの「関連記事」リスト: 種別ラベル (concept / article / piece) の体裁 */
+
+#related-articles .page-type {
+    margin-right: 0.4em;
+    font-size: 0.9em;
+    font-weight: bold;
 }
 
 /* 一覧ページ (/concept.html) と、各ページからの一覧へのリンク */
