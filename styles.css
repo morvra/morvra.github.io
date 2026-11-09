@@ -1068,7 +1068,7 @@ a.prev {
 
 /* 本文: 記事本文 (#article-content) と同じデザイン (セクション5のルールを共有) */
 
-/* 関連するページ: 日付 → 種別 → タイトル (タイトルの開始位置をそろえる) */
+/* 関連するページ: 黒丸 種別 タイトル (日付) */
 
 .related-pages h2:before {
     content: "##";
@@ -1077,28 +1077,15 @@ a.prev {
 }
 
 .related-pages ul {
-    list-style: none;
     margin: 4px 0;
-    padding: 0;
-}
-
-.related-pages li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5em;
-    padding: 2px 0;
+    padding-inline-start: 24px;
 }
 
 .related-pages .page-date {
-    flex: none;
+    margin-left: 0.2em;
     font-size: 0.9em;
     font-variant-numeric: tabular-nums;
     color: #888;
-}
-
-.related-pages li a {
-    flex: 1;
-    min-width: 0;
 }
 
 /* 種別ラベル (concept / article / piece): 幅を固定してタイトルの位置をそろえる
@@ -1107,7 +1094,6 @@ a.prev {
 .related-pages .page-type,
 #related-articles .page-type {
     display: inline-block;
-    flex: none;
     width: 4.6em;
     font-size: 0.9em;
     font-weight: bold;
