@@ -1068,7 +1068,7 @@ a.prev {
 
 /* 本文: 記事本文 (#article-content) と同じデザイン (セクション5のルールを共有) */
 
-/* 関連するページ: 日付 → 種別 → タイトル */
+/* 関連するページ: 日付 → 種別 → タイトル (タイトルの開始位置をそろえる) */
 
 .related-pages h2:before {
     content: "##";
@@ -1083,26 +1083,42 @@ a.prev {
 }
 
 .related-pages li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
     padding: 2px 0;
 }
 
 .related-pages .page-date {
+    flex: none;
     font-size: 0.9em;
+    font-variant-numeric: tabular-nums;
     color: #888;
 }
 
-.related-pages .page-type {
-    margin: 0 0.4em;
+.related-pages li a {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 種別ラベル (concept / article / piece): 幅を固定してタイトルの位置をそろえる
+   クラス名は、サイト既存の .piece などと衝突しないよう type- を付けている */
+
+.related-pages .page-type,
+#related-articles .page-type {
+    display: inline-block;
+    flex: none;
+    width: 4.6em;
     font-size: 0.9em;
     font-weight: bold;
 }
 
-.related-pages .page-type.article,
-#related-articles .page-type.article { color: #d32f2f; } /* 赤 */
-.related-pages .page-type.piece,
-#related-articles .page-type.piece   { color: #1976d2; } /* 青 */
-.related-pages .page-type.concept,
-#related-articles .page-type.concept { color: #c99700; } /* 黄色 (白背景で読めるよう濃いめ) */
+.related-pages .page-type.type-article,
+#related-articles .page-type.type-article { color: #d32f2f; } /* 赤 */
+.related-pages .page-type.type-piece,
+#related-articles .page-type.type-piece   { color: #1976d2; } /* 青 */
+.related-pages .page-type.type-concept,
+#related-articles .page-type.type-concept { color: #c99700; } /* 黄色 (白背景で読めるよう濃いめ) */
 
 .related-pages .no-related-pages {
     color: #888;
@@ -1121,14 +1137,6 @@ a.prev {
 .concept-body a[href^="/concepts/"]:hover,
 .concept-body a[href^="/concepts/"]:focus {
     color: #766802;
-}
-
-/* 記事・Pieceの「関連記事」リスト: 種別ラベル (concept / article / piece) の体裁 */
-
-#related-articles .page-type {
-    margin-right: 0.4em;
-    font-size: 0.9em;
-    font-weight: bold;
 }
 
 /* 一覧ページ (/concept.html) と、各ページからの一覧へのリンク */
