@@ -1798,9 +1798,19 @@
 	],
 	"concepts": [
 		{
+			"slug": "poic",
+			"title": "PoIC",
+			"body": "<blockquote><p>PoIC (Pile of Index Cards：情報カードの積み重ね) とは、「情報カード」を使った生産性向上のためのシステムと、それに付随するメソッド（方法論）を指します。</p></blockquote><p>参考: <a href=\"https://poic2023.capture.jp/\">メインページ • Pile of Index Cards</a></p><ul><li>身の回りの情報、アイディアを1枚1トピックに書き時系列でドックに貯める<ul><li>カードを4つのタイプ（記録・発見・GTD・参照）に分類する</li></ul></li><li>その後カードを用いてタスクフォースを編成し、新しい知恵・知識・成果の再生産を行う</li></ul>"
+		},
+		{
+			"slug": "outliner",
+			"title": "アウトライナー",
+			"body": ""
+		},
+		{
 			"slug": "workflowy",
 			"title": "Workflowy",
-			"body": "<p>クラウド型のアウトライナー。</p><p>軽い動作と豊富なAPI、すべてが1つのアウトラインで構成される点が気に入っている。</p><p>このサイトの中身は基本的にWorkflowyに置かれていて、APIとGithub Actionsを介してHTMLに変換されている。</p>"
+			"body": "<p>クラウド型の<a href=\"/concepts/outliner.html\">アウトライナー</a>。</p><p>軽い動作と豊富なAPI、すべてが1つのアウトラインで構成される点が気に入っている。</p><p>このサイトの中身は基本的にWorkflowyに置かれていて、APIとGithub Actionsを介してHTMLに変換されている。</p>"
 		},
 		{
 			"slug": "concept-page",
@@ -1810,12 +1820,12 @@
 		{
 			"slug": "life-outline",
 			"title": "ライフ・アウトライン",
-			"body": "<p>Tak. さんが提唱する、アウトライナーを使ってライフ（生活・人生）について考え実践するための手法。</p><p>参考: <a href=\"https://note.com/takwordpiece/n/n1c97298287ff\">「人生を総合的に良くする」ためのアウトライン｜Tak.（Word Piece）</a></p>"
+			"body": "<p>Tak. さんが提唱する、<a href=\"/concepts/outliner.html\">アウトライナー</a>を使ってライフ（生活・人生）について考え実践するための手法。</p><p>参考: <a href=\"https://note.com/takwordpiece/n/n1c97298287ff\">「人生を総合的に良くする」ためのアウトライン｜Tak.（Word Piece）</a></p>"
 		},
 		{
 			"slug": "d-poic",
 			"title": "d-PoIC",
-			"body": "<p>自作のメモツール。デジタル上で知的生産の手法であるPoIC（Pile if Index Cards）をやってみたくて作った。主にGoogle AI Studio製。</p>"
+			"body": "<p>自作のメモツール。デジタル上で知的生産の手法である<a href=\"/concepts/poic.html\">PoIC</a>（Pile if Index Cards）をやってみたくて作った。主にGoogle AI Studio製。</p>"
 		},
 		{
 			"slug": "digital-garden",
