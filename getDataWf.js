@@ -684,8 +684,9 @@ ${year}年 <i class="fa ${iconClass}"></i>
  * @param {Array}  allItems   - 関連記事検索用の全コンテンツ（articles + pieces）
  * @param {Set}    articleIds - article/piece振り分け用のarticle UUIDセット
  * @param {Map}    [conceptSlugByTitle] - (省略可) 概念タイトル -> slug。同名のタグは概念ページへリンクする
+ * @param {Map}    [conceptBacklinks] - (省略可) ページID -> [{slug, title}]。関連記事リストの先頭に載せる概念ページ
  */
-function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds, headerHtml, footerHtml, conceptSlugByTitle) {
+function generateStaticHtmlFiles(items, outputDir, template, allItems, articleIds, headerHtml, footerHtml, conceptSlugByTitle, conceptBacklinks) {
     // 出力先ディレクトリが存在しない場合は作成
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
@@ -708,8 +709,18 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
             }).join(', ')
             : '';
 
-        // --- {{RELATED}}: 共通タグを持つ関連記事リストを生成 ---
+        // --- {{RELATED}}: 関連記事リストを生成 ---
+        //   1. このページを関連ページとして載せている概念ページ (バックリンク。全件・先頭)
+        //   2. 共通タグを持つ記事/Piece (最大5件・ランダム)
+        //   各行の先頭に種別 (concept / article / piece) を色付きで表示する (CSSは .page-type)
         let relatedHtml = '';
+        const relatedItems = [];
+
+        const conceptLinks = (conceptBacklinks && conceptBacklinks.get(item.id)) || [];
+        conceptLinks.forEach(c => {
+            relatedItems.push(`<li class="related-concept"><span class="page-type concept">concept</span> <a href="/concepts/${c.slug}.html">${escapeHtml(c.title)}</a></li>`);
+        });
+
         if (item.tags && item.tags.length > 0) {
             const related = allItems.filter(other =>
                 other.id !== item.id &&
@@ -720,12 +731,16 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
             if (related.length > 0) {
                 related.sort(() => 0.5 - Math.random());
                 const relatedSliced = related.slice(0, 5);
-                const listItems = relatedSliced.map(r => {
+                relatedSliced.forEach(r => {
                     const folder = articleIds.has(r.id) ? 'articles' : 'pieces';
-                    return `<li><a href="/${folder}/${r.id}.html">${escapeHtml(r.title)}</a></li>`;
-                }).join('\n');
-                relatedHtml = `<div id="related-articles">\n<h2>関連記事</h2>\n<ul>\n${listItems}\n</ul>\n</div>`;
+                    const type = folder === 'articles' ? 'article' : 'piece';
+                    relatedItems.push(`<li><span class="page-type ${type}">${type}</span> <a href="/${folder}/${r.id}.html">${escapeHtml(r.title)}</a></li>`);
+                });
             }
+        }
+
+        if (relatedItems.length > 0) {
+            relatedHtml = `<div id="related-articles">\n<h2>関連記事</h2>\n<ul>\n${relatedItems.join('\n')}\n</ul>\n</div>`;
         }
 
         // --- プレースホルダーを一括置換 ---
@@ -1133,7 +1148,7 @@ function generateConceptPages(concepts, articles, pieces, ctx) {
             console.log(`Created directory: ${CONCEPT_OUTPUT_DIR}/`);
         }
 
-        const relatedMap = collectRelatedPages(concepts, articles, pieces, ctx);
+        const relatedMap = ctx.relatedMap || collectRelatedPages(concepts, articles, pieces, ctx);
 
         let count = 0;
         for (const concept of concepts) {
@@ -1303,6 +1318,26 @@ async function main() {
             conceptCtx.conceptBodies = new Map();
         }
 
+        // --- 概念ページの関連ページを集め、逆向き (ページ -> 概念) のバックリンクも作る ---
+        const conceptBacklinks = new Map();
+        try {
+            if (concepts.length > 0) {
+                conceptCtx.relatedMap = collectRelatedPages(concepts, articles, pieces, conceptCtx);
+                [...concepts]
+                    .sort((a, b) => a.title.localeCompare(b.title, 'ja'))
+                    .forEach(c => {
+                        (conceptCtx.relatedMap.get(c.id) || []).forEach(page => {
+                            if (!conceptBacklinks.has(page.id)) conceptBacklinks.set(page.id, []);
+                            conceptBacklinks.get(page.id).push({ slug: c.slug, title: c.title });
+                        });
+                    });
+            }
+        } catch (e) {
+            console.warn('Warning: failed to collect concept backlinks.', e);
+            conceptBacklinks.clear();
+            delete conceptCtx.relatedMap;
+        }
+
         // --- 既存の処理: data.json と rss.xml を書き出す ---
 
         const output = {
@@ -1350,8 +1385,8 @@ async function main() {
         // 関連記事生成用に全コンテンツを統合
         const allItems = [...articles, ...pieces];
 
-        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs, headerHtml, footerHtml, conceptSlugByTitle);
-        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs, headerHtml, footerHtml, conceptSlugByTitle);
+        generateStaticHtmlFiles(articles, 'articles', template, allItems, articleUUIDs, headerHtml, footerHtml, conceptSlugByTitle, conceptBacklinks);
+        generateStaticHtmlFiles(pieces,   'pieces',  template, allItems, articleUUIDs, headerHtml, footerHtml, conceptSlugByTitle, conceptBacklinks);
 
         console.log('Static HTML generation complete.');
 
