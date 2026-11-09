@@ -1032,6 +1032,7 @@ function collectRelatedPages(concepts, articles, pieces, ctx) {
 
     const scan = (items, type) => {
         for (const item of items) {
+            const isConceptItem = type === 'Concept';
             const rawBody = getBody(ctx.allNodes, { id: item.id });
             const refs = collectConceptReferences(rawBody, ctx.shortIdToUuidMap, conceptUuidToSlug);
             // タイトルと本文の両方を判定対象にする (改行で区切り、タイトル末尾と本文冒頭が連結して偶発的に一致するのを防ぐ)
@@ -1040,24 +1041,34 @@ function collectRelatedPages(concepts, articles, pieces, ctx) {
             const itemTags = new Set((item.tags || []).map(normalizeTagKey));
 
             for (const { concept, regex } of plainRegexes) {
+                if (isConceptItem && item.id === concept.id) continue; // 自分自身は載せない
                 if (refs.has(concept.id) || itemTags.has(normalizeTagKey(concept.title)) || regex.test(plainText)) {
                     related.get(concept.id).push({
                         id: item.id,
+                        file: isConceptItem ? item.slug : item.id, // URLに使う名前 (概念ページは slug)
                         title: item.title,
                         date: item.date || '',
                         type,
-                        folder: type === 'Article' ? 'articles' : 'pieces'
+                        folder: type === 'Article' ? 'articles' : (isConceptItem ? 'concepts' : 'pieces')
                     });
                 }
             }
         }
     };
+    // 他の概念ページ (本文がリンク・[概念名]・テキストでその概念に触れているもの)。本文が未生成なら対象外
+    const conceptItems = concepts
+        .filter(c => ctx.conceptBodies && ctx.conceptBodies.has(c.id))
+        .map(c => ({ id: c.id, slug: c.slug, title: c.title, body: ctx.conceptBodies.get(c.id), tags: [] }));
+    scan(conceptItems, 'Concept');
     scan(articles, 'Article');
     scan(pieces, 'Piece');
 
-    // 日付の新しい順 (同日はタイトル順)
+    // 概念ページが先頭 (タイトルの五十音順)、そのあとに記事/Pieceを日付の新しい順 (同日はタイトル順)
     for (const list of related.values()) {
         list.sort((a, b) => {
+            const aC = a.type === 'Concept', bC = b.type === 'Concept';
+            if (aC !== bC) return aC ? -1 : 1;
+            if (aC) return a.title.localeCompare(b.title, 'ja');
             if (a.date !== b.date) return a.date < b.date ? 1 : -1;
             return a.title.localeCompare(b.title);
         });
@@ -1076,7 +1087,7 @@ function renderRelatedPagesHtml(pages) {
         // (サイト既存の .piece などのクラスと衝突しないよう type- を付けている)。概念ページ (concept) は日付なし
         const type = p.type.toLowerCase();
         const date = type !== 'concept' && p.date ? ` <span class="page-date">(${escapeHtml(p.date)})</span>` : '';
-        return `<li>\n<span class="page-type type-${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>${date}\n</li>`;
+        return `<li>\n<span class="page-type type-${type}">${type}</span>\n<a href="/${p.folder}/${p.file || p.id}.html">${title}</a>${date}\n</li>`;
     }).join('\n');
     return `<ul>\n${items}\n</ul>`;
 }
@@ -1329,6 +1340,7 @@ async function main() {
                     .sort((a, b) => a.title.localeCompare(b.title, 'ja'))
                     .forEach(c => {
                         (conceptCtx.relatedMap.get(c.id) || []).forEach(page => {
+                            if (page.type === 'Concept') return; // 記事/Pieceの関連記事リスト用なので、概念ページ同士は除く
                             if (!conceptBacklinks.has(page.id)) conceptBacklinks.set(page.id, []);
                             conceptBacklinks.get(page.id).push({ slug: c.slug, title: c.title });
                         });
