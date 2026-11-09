@@ -718,7 +718,7 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
 
         const conceptLinks = (conceptBacklinks && conceptBacklinks.get(item.id)) || [];
         conceptLinks.forEach(c => {
-            relatedItems.push(`<li class="related-concept"><span class="page-type concept">concept</span> <a href="/concepts/${c.slug}.html">${escapeHtml(c.title)}</a></li>`);
+            relatedItems.push(`<li class="related-concept"><span class="page-type type-concept">concept</span> <a href="/concepts/${c.slug}.html">${escapeHtml(c.title)}</a></li>`);
         });
 
         if (item.tags && item.tags.length > 0) {
@@ -734,7 +734,7 @@ function generateStaticHtmlFiles(items, outputDir, template, allItems, articleId
                 relatedSliced.forEach(r => {
                     const folder = articleIds.has(r.id) ? 'articles' : 'pieces';
                     const type = folder === 'articles' ? 'article' : 'piece';
-                    relatedItems.push(`<li><span class="page-type ${type}">${type}</span> <a href="/${folder}/${r.id}.html">${escapeHtml(r.title)}</a></li>`);
+                    relatedItems.push(`<li><span class="page-type type-${type}">${type}</span> <a href="/${folder}/${r.id}.html">${escapeHtml(r.title)}</a></li>`);
                 });
             }
         }
@@ -1072,9 +1072,10 @@ function renderRelatedPagesHtml(pages) {
     }
     const items = pages.map(p => {
         const title = escapeHtml(unescapeHtml(p.title));
-        // 並びは 日付 -> 種別 -> タイトル。種別は小文字で表示し、CSS用に同名のクラスも付ける (article / piece / concept)
+        // 並びは 日付 -> 種別 -> タイトル。種別は小文字で表示し、CSS用に type-article / type-piece / type-concept のクラスを付ける
+        // (サイト既存の .piece などのクラスと衝突しないよう type- を付けている)
         const type = p.type.toLowerCase();
-        return `<li>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<span class="page-type ${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
+        return `<li>\n<span class="page-date">${escapeHtml(p.date)}</span>\n<span class="page-type type-${type}">${type}</span>\n<a href="/${p.folder}/${p.id}.html">${title}</a>\n</li>`;
     }).join('\n');
     return `<ul>\n${items}\n</ul>`;
 }
