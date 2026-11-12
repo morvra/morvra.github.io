@@ -993,7 +993,7 @@ body.active-tab-storage-section .info-container{display:block}
 
             if (typeof data.cards === 'object' && data.cards !== null) {
               let importedCardClassesCount = 0;
-              for (const className in data.cards) { if (Array.isArray(data.cards[className])) { Storage.set(CARD_CLASS_PREFIX + className, data[className]); importedCardClassesCount++; } }
+              for (const className in data.cards) { if (Array.isArray(data.cards[className])) { Storage.set(CARD_CLASS_PREFIX + className, data.cards[className]); importedCardClassesCount++; } }
               if (importedCardClassesCount === 0) console.warn('No valid card classes found in overall data.');
             } else console.warn('No valid card data found in overall data.');
 
