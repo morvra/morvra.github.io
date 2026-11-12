@@ -44,6 +44,7 @@ main{max-width:1240px;margin:0 auto;padding:12px 16px 32px}
 .tab-navigation-button.active{background:var(--surface);color:var(--ink);font-weight:700;box-shadow:0 0 0 1px var(--line-strong)}
 /* layout */
 .two-column-layout{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start}
+.flex-column-item{width:100%}
 .panel{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
 .panel h3{font-size:16px;font-weight:700;margin-bottom:14px}
 .record-panel{flex-direction:column}
@@ -172,6 +173,8 @@ textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-
 .file-input-label:hover .file-input-button{background:var(--sunken);border-color:var(--muted)}
 .file-input-label input{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer}
 .file-input-label input:focus-visible+.file-input-button{outline:2px solid var(--focus);outline-offset:2px}
+#ad{max-width:336px;margin:16px auto 0}
+.ad-notice p{margin:0 0 8px;font-size:12.5px;line-height:1.8;color:var(--ink-2)}.ad-notice p:last-child{margin-bottom:0}.ad-notice a{color:var(--ink);text-underline-offset:2px}
 /* info & modal */
 .info-container{display:none;position:fixed;right:20px;bottom:20px;z-index:1010}
 body.active-tab-storage-section .info-container{display:block}
@@ -199,7 +202,8 @@ body.active-tab-storage-section .info-container{display:block}
   </header>
   <main>
     <div class="two-column-layout">
-      <section class="panel flex-column-item counter-storage-column tab-content" id="counter-section">
+      <section class="flex-column-item counter-storage-column tab-content" id="counter-section">
+        <div class="panel">
         <div class="card-list-container">
           <div class="card-head">
             <h3>警戒カードリスト</h3>
@@ -225,6 +229,10 @@ body.active-tab-storage-section .info-container{display:block}
           <div id="current-class-note-display" class="info-display"></div>
           <textarea id="class-note-textarea" class="ctl" placeholder="このクラスのメモ" aria-label="クラスメモ"></textarea>
         </div>
+        </div>
+        <div id="ad">
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3575252598876356" data-ad-slot="6223968026" data-ad-format="rectangle"></ins>
+        </div>
       </section>
 
       <section class="panel flex-column-item counter-storage-column tab-content" id="storage-section" style="display: none;">
@@ -239,6 +247,10 @@ body.active-tab-storage-section .info-container{display:block}
             <label class="file-input-label"><input type="file" id="import-all-data-file-input" accept=".json"><span class="file-input-button">全体</span></label></div></div>
           <div class="data-group"><h3>戦績の削除</h3><div class="button-row">
             <button type="button" id="clear-records-button" class="form-action-button danger">全削除</button></div></div>
+          <div class="data-group ad-notice"><h3>広告について</h3>
+            <p>このサイトはGoogle AdSenseを使用しています。Google AdSenseはデータを収集するために、Cookieやウェブビーコンを使用して広告配信をしています。</p>
+            <p>Cookieを使用することにより、インターネットにおけるご自身のサイトや他のサイトへのアクセス情報に基づいてユーザーに広告を配信することが可能になります。</p>
+            <p>情報提供を望まない場合は、<a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank" rel="noopener noreferrer">Googleのポリシーと原則</a>のページより、Cookieオプションを使用しないように設定することができます。</p></div>
           <div class="data-group"><h3>表示テーマ</h3><div class="button-row">
             <button type="button" id="toggle-dark-mode-button" class="form-action-button">ダークモード ON/OFF</button></div></div>
         </div>
@@ -325,6 +337,7 @@ body.active-tab-storage-section .info-container{display:block}
       </div>
     </div>
   </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
     // Local Storage Utility
     const Storage = {
@@ -459,6 +472,7 @@ body.active-tab-storage-section .info-container{display:block}
           const targetTab = document.querySelector(`.tab-navigation-button[data-tab="${targetPaneId}"]`);
           if (targetTab) { targetTab.classList.add('active'); targetTab.setAttribute('aria-selected', 'true'); }
         }
+        if (targetPaneId === 'counter-section') loadAds();
       };
 
       const init = () => {
@@ -494,6 +508,18 @@ body.active-tab-storage-section .info-container{display:block}
       return { init, getSelectedValue, setActiveButton };
     })();
 
+    // AdSense: 表示中でまだ読み込んでいない枠だけ push する
+    const loadAds = () => {
+      setTimeout(() => {
+        try {
+          document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
+            if (ad.dataset.adRequested || ad.offsetParent === null) return;
+            ad.dataset.adRequested = '1';
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+          });
+        } catch (error) { console.error('Error loading AdSense:', error); }
+      }, 100);
+    };
     const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const TRASH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>';
 
@@ -1034,7 +1060,7 @@ body.active-tab-storage-section .info-container{display:block}
     // Initialize all modules when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
       ModalManager.init(); DarkModeManager.init(); TabManager.init(); ToggleButtonGroup.init();
-      RecordManager.init(); CardListManager.init(); ClassNoteManager.init(); DataManager.init(); TooltipManager.init();
+      RecordManager.init(); CardListManager.init(); ClassNoteManager.init(); DataManager.init(); TooltipManager.init(); loadAds();
     });
   </script>
 </body>
