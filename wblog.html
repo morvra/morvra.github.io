@@ -6,514 +6,309 @@
   <link href='./WB_icon.png' rel='icon' type='image/x-icon'/>
   <link href='./WB_icon.png' rel='shortcut icon'/>
   <link href='./WB_icon.png' rel='apple-touch-icon'/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <title>WBログノート | シャドウバースWB 対戦支援</title>
   <style>
-    /* 基本スタイル */
-    body { font-family: sans-serif; background: #f7f9fb; color: #333; margin: 0; padding: 0; transition: background 0.3s, color 0.3s; }
-    main { padding: 8px; max-width: 1200px; margin: auto; }
-    h2, h3 { color: #2c3e50; margin-top: 0; transition: color 0.3s; }
+:root{--bg:#F2F3F6;--surface:#fff;--sunken:#F6F7F9;--line:#E3E6EC;--line-strong:#CBD0DA;--ink:#171A22;--ink-2:#4A5163;--muted:#7B8396;--win:#1E9E6A;--lose:#9AA2B2;--lose-fill:#626B7D;--danger:#D13B4F;--danger-soft:rgba(209,59,79,.1);--focus:#3F72E0;--ring:rgba(63,114,224,.22);color-scheme:light;
+--font:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif}
+body.dark-mode{--bg:#0F1117;--surface:#171A22;--sunken:#1D212B;--line:#292E3A;--line-strong:#3B4252;--ink:#ECEEF3;--ink-2:#B5BBC9;--muted:#8A92A4;--win:#34C48A;--lose:#6F7788;--danger:#F06A7B;--danger-soft:rgba(240,106,123,.14);--focus:#7AA2FF;--ring:rgba(122,162,255,.28);color-scheme:dark}
+[data-class="エルフ"],[data-value="エルフ"],[data-opponent="エルフ"]{--c:#3C9F4A;--on:#fff}
+[data-class="ロイヤル"],[data-value="ロイヤル"],[data-opponent="ロイヤル"]{--c:#D9A520;--on:#2B2100}
+[data-class="ウィッチ"],[data-value="ウィッチ"],[data-opponent="ウィッチ"]{--c:#3F72E0;--on:#fff}
+[data-class="ドラゴン"],[data-value="ドラゴン"],[data-opponent="ドラゴン"]{--c:#E5572F;--on:#fff}
+[data-class="ナイトメア"],[data-value="ナイトメア"],[data-opponent="ナイトメア"]{--c:#8B55D6;--on:#fff}
+[data-class="ビショップ"],[data-value="ビショップ"],[data-opponent="ビショップ"]{--c:#BDB6A3;--on:#262318}
+[data-class="ネメシス"],[data-value="ネメシス"],[data-opponent="ネメシス"]{--c:#17A2B8;--on:#fff}
+#counter-section:has(#class-filter-group [data-class="エルフ"].active){--cc:#3C9F4A}
+#counter-section:has(#class-filter-group [data-class="ロイヤル"].active){--cc:#D9A520}
+#counter-section:has(#class-filter-group [data-class="ウィッチ"].active){--cc:#3F72E0}
+#counter-section:has(#class-filter-group [data-class="ドラゴン"].active){--cc:#E5572F}
+#counter-section:has(#class-filter-group [data-class="ナイトメア"].active){--cc:#8B55D6}
+#counter-section:has(#class-filter-group [data-class="ビショップ"].active){--cc:#BDB6A3}
+#counter-section:has(#class-filter-group [data-class="ネメシス"].active){--cc:#17A2B8}
 
-    /* レイアウト */
-    .two-column-layout { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
-    .flex-column-item { width: 100%; box-sizing: border-box; margin: 0 auto; display: flex; flex-direction: column; flex-shrink: 0; }
-
-    /* PCレイアウト */
-    @media (min-width: 984px) {
-      .flex-column-item { width: auto; margin: 0; flex-basis: 0; min-width: 370px; }
-      .counter-storage-column { flex-grow: 2; max-width: 336px; }
-      .record-panel-column { flex-grow: 5; max-width: 840px; }
-      .panel { height: fit-content; }
-      .record-panel { display: flex; flex-direction: column; flex-grow: 1; height: auto; box-sizing: border-box; }
-    }
-
-    .panel { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); margin-bottom: 16px; width: 100%; box-sizing: border-box; transition: background 0.3s, box-shadow 0.3s; }
-    .record-panel h3, .record-panel .app-form, .record-panel .filter-controls { flex-shrink: 0; }
-
-    /* カウンターコントロール */
-    .counter-control-group { align-items: center; margin-bottom: 12px; }
-    .counter-control-group span.label { width: 200px; font-weight: 600; font-size: 15px; }
-    .counter-control-group button { background: #ecf0f1; border: none; padding: 6px 12px; font-size: 18px; margin: 0 6px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
-    .counter-control-group button:hover { background: #d0d7de; }
-    .count-value { font-size: 18px; width: 40px; text-align: center; }
-
-    /* フォーム要素 */
-    .app-form input, .app-form select, .app-form textarea { width: 100%; max-width: 400px; padding: 8px; margin: 6px 0 16px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-    .app-form label { display: block; font-weight: 500; margin-bottom: 4px; }
-    .app-form textarea { resize: vertical; }
-
-    /* フォームアクションボタン */
-    .form-action-button { padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; transition: background 0.2s; color: white; }
-    .form-action-button.primary { background: #1abc9c; }
-    .form-action-button.primary:hover { background: #16a085; }
-    .form-action-button.secondary { background: #F39C12; color: white; }
-    .form-action-button.secondary:hover { background: #d35400; }
-    .form-action-button.neutral { background: #7f8c8d; }
-    .form-action-button.neutral:hover { background: #5d6d7e; }
-    .form-action-button.danger { background: #e74c3c; color: white; }
-    .form-action-button.danger:hover { background: #c0392b; }
-
-    /* トグルボタン */
-    .toggle-button-group { display: flex; flex-wrap: wrap; gap: 8px; }
-    .toggle-button-group button { background: #ecf0f1; border: 1px solid #ccc; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; color: #333; transition: background 0.2s, border-color 0.2s, color 0.2s; }
-    .toggle-button-group button.active { background: #1abc9c; color: white; border-color: #16a085; }
-
-    /* データテーブル */
-    .data-table { width: 100%; border-collapse: collapse; background: #fff; overflow: hidden; font-size: 14px; table-layout: fixed; transition: background 0.3s; }
-    .data-table thead { background: #ecf0f1; font-weight: bold; transition: background 0.3s; }
-    .data-table th, .data-table td { text-align: center; padding: 10px; border-bottom: 1px solid #eee; overflow: hidden; white-space: nowrap; transition: border-color 0.3s; }
-    .data-table tr:hover { background: #f9f9f9; }
-    .data-table td:last-child button { background: #e74c3c; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
-    .data-table td:last-child button:hover { background: #c0392b; }
-
-    /* PP、カード名、メモ入力スタイル */
-    .data-table td input[type="text"], .data-table td input[type="number"], .data-table td textarea { width: 100%; box-sizing: border-box; border: 1px solid #ccc; padding: 4px; font-size: 14px; line-height: 1.2; display: block; min-width: 0; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-    .data-table td textarea { min-height: 40px; resize: vertical; overflow: hidden; }
-
-    /* 戦績テーブルのメモ欄 */
-    #match-record-table th:nth-child(7), #match-record-table td:nth-child(7) { word-break: break-word; white-space: normal; }
-    /* テキスト左寄せ */
-    #match-record-table td:nth-child(7), #card-data-table td:nth-child(2) { text-align: left; word-break: break-word; white-space: normal; }
-
-    /* 各テーブルの列幅 */
-    #card-data-table th:nth-child(1), #card-data-table td:nth-child(1) { width: 30px; } /* PP */
-    #card-data-table th:nth-child(2), #card-data-table td:nth-child(2) { width: auto; } /* カード名&メモ */
-    #card-data-table th:nth-child(3), #card-data-table td:nth-child(3) { width: 100px; } /* カウント */
-    #card-data-table th:nth-child(4), #card-data-table td:nth-child(4) { width: 50px; } /* 削除 */
-
-    #match-record-table th:nth-child(1), #match-record-table td:nth-child(1) { width: 120px; } /* 日時 */
-    #match-record-table th:nth-child(2), #match-record-table td:nth-child(2) { width: 20px; } /* シーズン */
-    #match-record-table th:nth-child(3), #match-record-table td:nth-child(3) { width: 15%; } /* デッキ */
-    #match-record-table th:nth-child(4), #match-record-table td:nth-child(4) { width: 10%; } /* 相手 */
-    #match-record-table th:nth-child(5), #match-record-table td:nth-child(5) { width: 70px; } /* 先後 */
-    #match-record-table th:nth-child(6), #match-record-table td:nth-child(6) { width: 70px; } /* 勝敗 */
-    #match-record-table th:nth-child(7), #match-record-table td:nth-child(7) { width: auto; } /* メモ */
-    #match-record-table th:nth-child(8), #match-record-table td:nth-child(8) { width: 50px; } /* 削除 */
-
-    /* カードアクション */
-    .card-actions { display: flex; gap: 8px; margin: 12px 0; }
-    .card-actions .form-action-button { padding: 6px 12px; font-size: 14px; }
-
-    /* カード削除モード */
-    .card-delete-button { display: none; }
-    .delete-mode .card-delete-button { display: inline-block; }
-    #card-data-table th:nth-child(4), #card-data-table td:nth-child(4) { display: none; }
-    #counter-section.delete-mode #card-data-table th:nth-child(4), #counter-section.delete-mode #card-data-table td:nth-child(4) { display: table-cell; }
-
-    /* データ管理パネル */
-    .data-management-panel > h3 { color: #2c3e50; margin: 0 0 12px 0; transition: color 0.3s; }
-    .data-management-panel .toggle-button-group { margin-bottom: 12px; }
-    .data-management-panel .form-action-button { min-width: 96px; text-align: center; }
-    .file-input-label { cursor: pointer; }
-    .file-input-button { display: inline-block; background: #ecf0f1; border: 1px solid #ccc; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: #333; user-select: none; min-width: 70px; text-align: center; transition: background 0.2s, border-color 0.2s, color 0.2s; }
-    .file-input-button:hover { background: #d0d7de; }
-    .data-management-panel input[type="file"] { display: none; }
-		
-		/* Adsense */
-    #ad { text-align: center; color: #aaa; font-size: 90%; max-width: 336px; margin: 40px auto 24px; }
-
-    /* タブナビゲーション */
-    .tab-navigation { display: flex; margin-bottom: 20px; background: #e9ecef; transition: background 0.3s; }
-    .tab-navigation-button { flex: 1; padding: 10px 5px; font-size: 15px; text-align: center; cursor: pointer; background: transparent; border: none; transition: background 0.3s, color 0.3s; font-weight: 600; color: #495057; -webkit-tap-highlight-color: transparent; }
-    .tab-navigation-button:hover { background: #dee2e6; }
-    .tab-navigation-button.active { background: #fff; color: #1abc9c; }
-
-    /* フォームカラム */
-    .form-columns { display: flex; flex-wrap: wrap; gap: 20px; }
-    .form-left, .form-right { flex: 1; min-width: 250px; }
-
-    /* フィルターコントロール */
-    .filter-controls { margin: 20px 0; padding: 0; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fcfcfc; overflow: hidden; transition: background-color 0.3s, border-color 0.3s; }
-    .filter-controls details { border: none; }
-    .filter-controls summary { padding: 16px; cursor: pointer; outline: none; font-weight: bold; color: #2c3e50; position: relative; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: color 0.3s; }
-    .filter-controls summary::marker, .filter-controls summary::-webkit-details-marker { display: none; }
-    .filter-controls summary .filter-summary-title { margin: 0; font-size:18px; }
-    .filter-controls summary .toggle-icon { display: inline-block; width: 20px; height: 20px; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center; transition: transform 0.2s ease-in-out; }
-    .filter-controls details[open] summary .toggle-icon { transform: rotate(180deg); }
-	input#filter-deck-name-input, input#filter-season-input { margin-top: 4px; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-
-    .filter-content-wrapper { padding: 0 16px 16px 16px; overflow: hidden; max-height: 0; transition: max-height 0.3s ease-out; }
-    .filter-controls details[open] .filter-content-wrapper { max-height: 500px; }
-
-    .filter-content-wrapper .app-form input[type="text"] { margin-bottom: 16px; }
-    .filter-content-wrapper .form-action-button { margin-top: 15px; }
-
-    /* カード追加フォームのレイアウト */
-    .add-card-form-layout { margin-top:12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .add-card-form-layout input[type="number"] { width: 60px; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size:14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-    .add-card-form-layout input[type="text"] { flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size:14px; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-    .add-card-form-layout .form-action-button { padding: 4px 16px; margin-top: -10px; font-size: 14px; }
-
-    /* カードデータテーブルのボタン (PC用デフォルト) */
-    #card-data-table td button { width: 24px; height: 24px; padding: 0; font-size: 18px; color: #333; border-radius: 4px; border: 1px solid #ccc; background: #ecf0f1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-    #card-data-table td button:hover { background: #d0d7de; }
-    #card-data-table td button:first-child { margin-right: 6px; }
-    #card-data-table td button:last-child { margin-left: 6px; }
-
-    /* カードデータテーブルのカウント表示 (PC用デフォルト) */
-    #card-data-table td span { display: inline-block; width: 24px; text-align: center; }
-
-    .data-table th, .data-table td { padding: 6px; border-bottom: 1px solid #ddd; }
-    .data-table thead tr { background:#ecf0f1; }
-    .info-display { font-weight: bold; margin-bottom: 8px; min-height: 24px; }
-
-    /* モバイルレイアウト */
-    @media (max-width: 983px) {
-      .tab-navigation { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; margin-bottom: 0; border-radius: 0; z-index: 1000; padding-bottom: env(safe-area-inset-bottom, 4px); }
-      body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
-      #match-record-table-wrapper { display: none; }
-      #match-record-cards-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-      .match-record-card {
-          background: white;
-          border-radius: 8px;
-          padding: 16px; /* Increased padding */
-          border: 1px solid #e0e0e0;
-          display: flex;
-          flex-direction: column;
-          gap: 10px; /* Increased gap */
-          position: relative;
-          font-size: 14px;
-          transition: background 0.3s, border-color 0.3s;
-      }
-      .match-record-card .card-item { display: flex; align-items: flex-start; }
-      .match-record-card .card-label { font-weight: bold; min-width: 50px; margin-right: 6px; color: #444; transition: color 0.3s; }
-      .match-record-card .card-value { flex-grow: 1; word-break: break-word; font-size: 14px; white-space: normal; }
-      .match-record-card .delete-card-button { position: absolute; top: 6px; right: 6px; background: transparent; border: none; font-size: 16px; cursor: pointer; color: #e74c3c; padding: 4px; border-radius: 4px; }
-      .match-record-card .delete-card-button:hover { color: #c0392b; background-color: #fce7e7; }
-      
-      /* モバイルでのテーブルセルパディングを調整 */
-      .data-table th, .data-table td { padding: 8px 6px; }
-
-
-      /* モバイルでのカウンタボタンの調整 */
-	  #card-data-table th:nth-child(3), #card-data-table td:nth-child(3) { width: 112px; }
-      #card-data-table td button { width: 40px; height: 40px; font-size: 22px; padding: 0; box-sizing: border-box; vertical-align: middle; }
-      #card-data-table td button:first-child { margin-right: 4px; }
-      #card-data-table td button:last-child { margin-left: 4px; }
-
-      /* モバイルでのカウント数字の表示調整 */
-      #card-data-table td span { font-size: 18px; padding: 0 2px; vertical-align: middle; }
-
-      /* スマホでのシーズンとデッキ名の横並びを維持 */
-      .form-row-flex { flex-direction: row; align-items: flex-end; gap: 8px; width: 100%; }
-      .form-field-group { flex: none; width: auto; }
-      .form-field-group:first-child { flex-shrink: 0; }
-      .form-field-group:last-child { flex-grow: 1; }
-      .form-field-group label { white-space: nowrap; }
-      .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
-      .form-field-group input[type="text"] { min-width: 100px; }
-    }
-
-    /* PCレイアウト（再定義） */
-    @media (min-width: 984px) {
-      .tab-navigation { position: static; margin-bottom: 20px; border-top: none; }
-      body { padding-bottom: 0; }
-      #match-record-table-wrapper { display: block; height: auto; flex-grow: 1; overflow-y: auto; max-height: 86vh; }
-      #match-record-cards-container { display: none; }
-      #load-more-records-button { display: none; }
-
-      /* PCでのシーズンとデッキ名のレイアウト */
-      .form-row-flex { flex-direction: row; align-items: flex-end; gap: 16px; }
-      .form-field-group { flex: auto; min-width: 80px; }
-      .form-field-group:first-child { flex-shrink: 0; }
-      .form-field-group:last-child { flex-grow: 1; }
-      .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
-      .form-field-group input[type="text"] { flex-grow: 1; }
-    }
-
-    /* インフォメーションボタンとツールチップ */
-    .info-container { display: none; position: fixed; right: 24px; bottom: 24px; z-index: 1010; }
-    body.active-tab-storage-section .info-container { display: block; }
-    .info-button { width: 44px; height: 44px; border-radius: 50%; background-color: #7f8c8d; color: white; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; cursor: help; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: background-color 0.2s; user-select: none; }
-    .info-button:hover { background-color: #5d6d7e; }
-    .info-tooltip { visibility: hidden; opacity: 0; position: absolute; bottom: 120%; right: 0; width: max-content; max-width: 320px; background-color: #2c3e50; color: #fff; text-align: left; padding: 12px; border-radius: 8px; font-size: 14px; line-height: 1.6; box-shadow: 0 4px 12px rgba(0,0,0,0.25); transition: opacity 0.3s ease, visibility 0.3s ease; pointer-events: none; }
-    .info-tooltip::after { content: ''; position: absolute; top: 100%; right: 15px; border-width: 6px; border-style: solid; border-color: #2c3e50 transparent transparent transparent; }
-    .info-tooltip.show { visibility: visible; opacity: 1; }
-
-    @media (max-width: 983px) {
-      .info-container { bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 20px); right: 20px; }
-      .info-button { width: 40px; height: 40px; font-size: 20px; }
-      .info-tooltip { font-size: 13px; }
-    }
-
-    /* 統計情報 */
-    .record-summary { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-    .record-stats { display: flex; gap: 15px; flex-wrap: wrap; padding: 0; }
-    .stat-item { white-space: nowrap; }
-    .stat-label { font-weight: normal; color: #555; transition: color 0.3s; }
-    .stat-value { font-weight: bold; color: #2c3e50; transition: color 0.3s; }
-
-    /* ダークモード */
-    body.dark-mode { background: #2c3e50; color: #ecf0f1; }
-    body.dark-mode h2, body.dark-mode h3, body.dark-mode .data-management-panel > h3, body.dark-mode .filter-controls summary { color: #ecf0f1; }
-    body.dark-mode .panel { background: #34495e; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    body.dark-mode .app-form input, body.dark-mode .app-form select, body.dark-mode .app-form textarea, body.dark-mode .data-table td input[type="text"], body.dark-mode .data-table td input[type="number"], body.dark-mode input#filter-deck-name-input, body.dark-mode input#filter-season-input, body.dark-mode .add-card-form-layout input[type="number"], body.dark-mode .add-card-form-layout input[type="text"] { background: #446688; border-color: #557799; color: #ecf0f1; }
-    body.dark-mode .toggle-button-group button { background: #446688; border-color: #557799; color: #ecf0f1; }
-    body.dark-mode .toggle-button-group button.active { background: #16a085; border-color: #1abc9c; color: white; }
-    body.dark-mode .data-table { background: #34495e; color: #ecf0f1; }
-    body.dark-mode .data-table thead, body.dark-mode .data-table thead tr { background: #4a627a; }
-    body.dark-mode .data-table th, body.dark-mode .data-table td { border-bottom: 1px solid #557799; color: #ecf0f1; }
-    body.dark-mode .data-table tr:hover { background: #507080; }
-    body.dark-mode #card-data-table td button { background: #446688; border-color: #557799; color: #ecf0f1; }
-    body.dark-mode #card-data-table td button:hover { background: #557799; }
-    body.dark-mode .file-input-button { background: #446688; border-color: #557799; color: #ecf0f1; }
-    body.dark-mode .file-input-button:hover { background: #557799; }
-    body.dark-mode .tab-navigation { background: #3a536a; }
-    body.dark-mode .tab-navigation-button { color: #bdc3c7; }
-    body.dark-mode .tab-navigation-button:hover { background: #4a627a; }
-    body.dark-mode .tab-navigation-button.active { background: #34495e; color: #1abc9c; }
-    body.dark-mode .filter-controls { background-color: #3a536a; border-color: #557799; }
-    body.dark-mode .filter-controls summary .toggle-icon { filter: invert(1); }
-    body.dark-mode .match-record-card { background: #34495e; border: 1px solid #557799; }
-    body.dark-mode .match-record-card .card-label { color: #bdc3c7; }
-    body.dark-mode #custom-modal-overlay { background: rgba(0,0,0,0.8); }
-    body.dark-mode #custom-modal-content { background: #34495e !important; color: #ecf0f1; }
-    body.dark-mode .stat-label { color: #bdc3c7; }
-    body.dark-mode .stat-value { color: #ecf0f1; }
-
-    /* クラスメモ */
-    .class-notes-container { margin-top: 24px; }
-    .class-notes-container textarea { width: 100%; min-height: 150px; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; line-height: 1.6; box-sizing: border-box; background: white; color: #333; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-    body.dark-mode .class-notes-container textarea { background: #446688; border-color: #557799; color: #ecf0f1; }
-
-    /* 入力ペアリングスタイル */
-    .form-row-flex { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 16px; }
-    .form-field-group { display: flex; flex-direction: column; flex: none; min-width: 80px; }
-    .form-field-group label { margin-bottom: 4px; }
-    .form-field-group input[type="text"], .form-field-group input[type="number"] { width: 84%; margin: 0; }
-    .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
-    .form-field-group input[type="text"] { flex-grow: 1; }
-
-    /* モバイルでの入力ペアリング */
-    @media (max-width: 983px) {
-        .form-row-flex { flex-direction: row; align-items: flex-end; gap: 8px; width: 100%; }
-        .form-field-group { flex: none; width: auto; }
-        .form-field-group:first-child { flex-shrink: 0; }
-        .form-field-group:last-child { flex-grow: 1; }
-        .form-field-group label { white-space: nowrap; }
-        .form-field-group input[type="number"] { width: 60px; flex-shrink: 0; }
-        .form-field-group input[type="text"] { min-width: 100px; }
-    }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 var(--font);-webkit-text-size-adjust:100%;transition:background .2s,color .2s}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1,h2,h3{margin:0}
+.app-header{max-width:1240px;margin:0 auto;padding:16px 16px 6px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.app-title{font-size:19px;font-weight:700;letter-spacing:.02em}
+main{max-width:1240px;margin:0 auto;padding:12px 16px 32px}
+/* tabs */
+.tab-navigation{display:flex;gap:4px;padding:4px;background:var(--line);border-radius:999px}
+.tab-navigation-button{position:relative;display:flex;align-items:center;gap:6px;padding:7px 16px;border:0;border-radius:999px;background:transparent;color:var(--ink-2);font-size:14px;font-weight:500}
+.tab-navigation-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab-navigation-button.active{background:var(--surface);color:var(--ink);font-weight:700;box-shadow:0 0 0 1px var(--line-strong)}
+/* layout */
+.two-column-layout{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start}
+.panel{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.panel h3{font-size:16px;font-weight:700;margin-bottom:14px}
+.record-panel{flex-direction:column}
+@media(min-width:984px){.counter-storage-column{flex:0 0 400px;width:400px}.record-panel-column{flex:1 1 0;min-width:0;max-width:860px}
+#match-record-table-wrapper{display:block;overflow:auto;max-height:78vh}#match-record-cards-container,#load-more-records-button{display:none!important}}
+@media(max-width:983px){.app-header{padding-top:12px}.panel{padding:16px}body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.tab-navigation{position:fixed;left:0;right:0;bottom:0;z-index:1000;gap:0;padding:0 8px env(safe-area-inset-bottom,0px);border-radius:0;background:var(--surface);border-top:1px solid var(--line)}
+.tab-navigation-button{flex:1;flex-direction:column;gap:2px;padding:9px 4px 7px;border-radius:0;font-size:11.5px}
+.tab-navigation-button.active{background:none;box-shadow:none}
+.tab-navigation-button.active::before{content:"";position:absolute;top:0;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:var(--ink)}
+#match-record-table-wrapper{display:none}#match-record-cards-container{display:flex;flex-direction:column;gap:10px}}
+/* buttons */
+.form-action-button{min-height:40px;padding:0 18px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:500;transition:background .15s,border-color .15s}
+.form-action-button:hover{background:var(--sunken);border-color:var(--muted)}
+.form-action-button.primary{background:var(--ink);border-color:var(--ink);color:var(--surface);font-weight:700}
+.form-action-button.primary:hover{opacity:.88;background:var(--ink)}
+.form-action-button.neutral{background:var(--sunken)}
+.form-action-button.danger{border-color:var(--danger);color:var(--danger)}
+.form-action-button.danger:hover{background:var(--danger-soft);border-color:var(--danger)}
+.form-action-button[aria-pressed="true"]{border-color:var(--danger);color:var(--danger);background:var(--danger-soft)}
+.icon-button{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--muted)}
+.icon-button:hover{color:var(--danger);background:var(--danger-soft)}
+.icon-button svg{width:18px;height:18px}
+.button-row{display:flex;flex-wrap:wrap;gap:8px}
+/* toggle chips */
+.toggle-button-group{display:flex;flex-wrap:wrap;gap:8px}
+.toggle-button-group button{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface);font-size:14px;transition:background .15s,border-color .15s}
+.toggle-button-group button:hover{border-color:var(--muted)}
+.toggle-button-group button.active{background:var(--ink);border-color:var(--ink);color:var(--surface);font-weight:700}
+.toggle-button-group button.active:is([data-class],[data-value="エルフ"],[data-value="ロイヤル"],[data-value="ウィッチ"],[data-value="ドラゴン"],[data-value="ナイトメア"],[data-value="ビショップ"],[data-value="ネメシス"]){background:var(--c);border-color:var(--c);color:var(--on)}
+#match-result-selection button[data-value="⭕"].active{background:var(--win);border-color:var(--win);color:#fff}
+#match-result-selection button[data-value="✖"].active{background:var(--lose-fill);border-color:var(--lose-fill);color:#fff}
+.class-filter-group,#opponent-class-selection{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.class-filter-group{margin-bottom:14px}
+.class-filter-group button,#opponent-class-selection button{min-width:0;justify-content:center;padding:0 4px;white-space:nowrap}
+#filter-opponent-class-selection{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+#filter-opponent-class-selection button{min-width:0;justify-content:center;padding:0 4px;white-space:nowrap}
+@media(max-width:400px){.class-filter-group button,#opponent-class-selection button,#filter-opponent-class-selection button{font-size:13px}}
+@media(max-width:983px){.toggle-button-group button{min-height:42px}}
+/* fields */
+.field{margin-bottom:16px}.field>label,.field-label{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:var(--ink-2)}
+.ctl{width:100%;height:42px;padding:0 12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);font-size:16px}
+textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-size:15px}
+.ctl:focus,.data-table td input:focus,.data-table td textarea:focus{outline:0;border-color:var(--focus);box-shadow:0 0 0 3px var(--ring)}
+.ctl::placeholder{color:var(--muted)}
+.form-row-flex{display:flex;gap:12px}.form-row-flex .season{flex:0 0 84px}.form-row-flex .grow{flex:1;min-width:0}
+.form-columns{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+.form-pair{display:flex;flex-wrap:wrap;gap:0 24px}
+@media(max-width:983px){.form-columns{grid-template-columns:1fr}.form-action-button.submit{width:100%;min-height:46px}}
+/* counter */
+.card-list-container{container-type:inline-size}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.card-head h3{margin:0}
+.card-actions{display:flex;gap:6px}
+.card-actions .form-action-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:38px;min-height:38px;padding:0 9px;font-size:13px}
+.card-actions svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn-label{display:none}
+@container (min-width:520px){.btn-label{display:inline}.card-actions .form-action-button{padding:0 14px}}
+#current-class-display{display:none}
+.data-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}
+.data-table th{padding:8px 6px;border-bottom:1px solid var(--line-strong);background:var(--surface);color:var(--muted);font-size:12.5px;font-weight:500;text-align:center}
+.data-table td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.data-table tbody tr:last-child td{border-bottom:0}
+@media(hover:hover){.data-table tbody tr:hover{background:var(--sunken)}}
+.data-table td input,.data-table td textarea{display:block;width:100%;min-width:0;padding:5px 8px;border:1px solid var(--focus);border-radius:8px;background:var(--surface);font-size:14px;line-height:1.4}
+.data-table td textarea{min-height:40px;resize:vertical}
+#card-data-table th:nth-child(1),#card-data-table td:nth-child(1){width:52px;color:var(--ink-2);font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer}
+#card-data-table td:nth-child(2){text-align:left;overflow-wrap:anywhere;cursor:pointer}
+#card-data-table th:nth-child(3),#card-data-table td:nth-child(3){width:112px;white-space:nowrap}
+#card-data-table th:nth-child(4),#card-data-table td:nth-child(4){display:none;width:44px}
+#counter-section.delete-mode #card-data-table th:nth-child(4),#counter-section.delete-mode #card-data-table td:nth-child(4){display:table-cell}
+#card-data-table td:nth-child(3) button{width:34px;height:34px;padding:0;border:1px solid var(--line-strong);border-radius:9px;background:var(--surface);font-size:18px;line-height:1;vertical-align:middle}
+#card-data-table td:nth-child(3) button:hover{background:var(--sunken)}
+#card-data-table td:nth-child(3) span{display:inline-block;width:30px;text-align:center;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted);vertical-align:middle}
+#card-data-table tr.has-count td:first-child{box-shadow:inset 3px 0 0 var(--cc,var(--ink))}
+#card-data-table tr.has-count td:nth-child(3) span{color:var(--cc,var(--ink))}
+@media(max-width:983px){#card-data-table th:nth-child(3),#card-data-table td:nth-child(3){width:132px}#card-data-table td:nth-child(3) button{width:42px;height:42px}#card-data-table td:nth-child(3) span{width:32px}}
+.card-delete-button{display:none}.delete-mode .card-delete-button{display:inline-grid}
+.add-card-form-layout{display:flex;gap:8px;margin-top:14px}
+.add-card-form-layout input[type=number]{flex:0 0 72px;width:72px}.add-card-form-layout input[type=text]{flex:1;min-width:0}
+.class-notes-container{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.info-display{margin:0 0 6px;font-size:13px;font-weight:500;color:var(--ink-2)}
+.class-notes-container textarea{min-height:140px}
+.form-hint{margin:8px 0 0;font-size:12px;color:var(--muted)}
+#card-data-table tr.is-counter td:nth-child(1){color:var(--muted);font-weight:400}
+#card-data-table tr.is-counter+tr:not(.is-counter) td{border-top:1px solid var(--line-strong)}
+/* records */
+.filter-controls{margin:20px 0;border:1px solid var(--line);border-radius:12px;background:var(--sunken)}
+.filter-controls summary{display:flex;align-items:center;justify-content:space-between;padding:0 16px;min-height:46px;cursor:pointer;list-style:none;font-size:14.5px;font-weight:700}
+.filter-controls summary::-webkit-details-marker{display:none}
+.filter-controls summary svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--muted);transition:transform .2s}
+.filter-controls details[open] summary svg{transform:rotate(180deg)}
+.filter-content-wrapper{padding:4px 16px 16px}
+.list-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;margin-bottom:10px}.list-head h3{margin:0}
+.record-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 16px;font-variant-numeric:tabular-nums}
+.stat-item{white-space:nowrap}.stat-label{margin-right:4px;font-size:12.5px;color:var(--muted)}.stat-value{font-weight:700}
+#match-record-table th{position:sticky;top:0;z-index:1}
+#match-record-table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#match-record-table th:nth-child(1){width:112px}#match-record-table th:nth-child(2){width:44px}#match-record-table th:nth-child(3){width:17%}#match-record-table th:nth-child(4){width:104px}#match-record-table th:nth-child(5){width:64px}#match-record-table th:nth-child(6){width:56px}#match-record-table th:nth-child(8){width:48px}
+#match-record-table td:nth-child(7){text-align:left}
+#match-record-table td:nth-child(1){color:var(--ink-2);font-size:12.5px;font-variant-numeric:tabular-nums}
+#match-record-table td:nth-child(3),#match-record-table td:nth-child(7){white-space:normal;overflow-wrap:anywhere}
+#match-record-table td:nth-child(3){font-weight:700}
+#match-record-table tr[data-opponent] td:nth-child(4)::before{content:"";display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+#match-record-table td:has(>input)::before{display:none!important}
+.match-record-card{--bar:var(--lose);display:grid;gap:10px;position:relative;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.match-record-card[data-result="⭕"]{--bar:var(--win)}
+.mrc-head{display:flex;align-items:center;gap:10px;padding-right:36px}
+.mrc-result{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--bar);color:#fff;font-size:14px;font-weight:700}
+.mrc-deck{min-width:0;font-size:16px;font-weight:700;overflow-wrap:anywhere}
+.mrc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.mrc-chip{display:inline-flex;align-items:center;gap:6px;padding:2px 11px;border:1px solid var(--line-strong);border-radius:999px;font-size:13px}
+.mrc-opp::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+.mrc-date{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.mrc-memo{padding-top:10px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2);white-space:pre-wrap;overflow-wrap:anywhere}
+.delete-card-button{position:absolute;top:8px;right:8px}
+.memo-cell{display:flex;align-items:center;gap:6px}
+.memo-first{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.memo-more[hidden]{display:none}
+.memo-more{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:6px;color:var(--muted);cursor:pointer}
+.memo-more:hover{background:var(--line);color:var(--ink)}
+.memo-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+#memo-popover{display:none;position:fixed;z-index:1500;max-width:360px;padding:10px 12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none;box-shadow:0 6px 20px rgba(0,0,0,.14)}
+/* data */
+.data-group+.data-group{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
+.file-input-label{position:relative;cursor:pointer}
+.file-input-button{display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);font-size:14px;font-weight:500;user-select:none}
+.file-input-label:hover .file-input-button{background:var(--sunken);border-color:var(--muted)}
+.file-input-label input{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer}
+.file-input-label input:focus-visible+.file-input-button{outline:2px solid var(--focus);outline-offset:2px}
+/* info & modal */
+.info-container{display:none;position:fixed;right:20px;bottom:20px;z-index:1010}
+body.active-tab-storage-section .info-container{display:block}
+.info-button{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface);color:var(--ink-2);font-weight:700;cursor:pointer;user-select:none}
+.info-tooltip{visibility:hidden;opacity:0;position:absolute;bottom:130%;right:0;width:max-content;max-width:300px;padding:12px 14px;border-radius:12px;background:var(--ink);color:var(--surface);font-size:13px;line-height:1.7;pointer-events:none;transition:opacity .2s,visibility .2s}
+.info-tooltip.show{visibility:visible;opacity:1}
+@media(max-width:983px){.info-container{bottom:calc(64px + env(safe-area-inset-bottom,0px) + 16px)}}
+#custom-modal-overlay{position:fixed;inset:0;z-index:2000;padding:16px;background:rgba(10,12,18,.55);justify-content:center;align-items:center}
+.modal-card{width:360px;max-width:100%;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--surface);animation:pop .16s ease-out}
+#modal-message{margin:0 0 20px;font-size:15px;line-height:1.7}
+#modal-buttons{display:flex;justify-content:flex-end;gap:8px}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
 </head>
 
 <body>
-  <main>
+  <header class="app-header">
+    <h1 class="app-title">WBログノート</h1>
     <div class="tab-navigation">
-      <button class="tab-navigation-button active" data-tab="counter-section" aria-controls="counter-section" aria-selected="true">プレイ中</button>
-      <button class="tab-navigation-button" data-tab="record-section" aria-controls="record-section" aria-selected="false">対戦記録</button>
-      <button class="tab-navigation-button" data-tab="storage-section" aria-controls="storage-section" aria-selected="false">データ管理</button>
+      <button class="tab-navigation-button active" data-tab="counter-section" aria-controls="counter-section" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="11" height="15" rx="2"/><path d="M9 21h8a2 2 0 0 0 2-2V8"/></svg>プレイ中</button>
+      <button class="tab-navigation-button" data-tab="record-section" aria-controls="record-section" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>対戦記録</button>
+      <button class="tab-navigation-button" data-tab="storage-section" aria-controls="storage-section" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>データ管理</button>
     </div>
-
+  </header>
+  <main>
     <div class="two-column-layout">
       <section class="panel flex-column-item counter-storage-column tab-content" id="counter-section">
-          <div class="card-list-container">
-              <h3>警戒カードリスト</h3>
-              <div class="toggle-button-group class-filter-group" id="class-filter-group">
-                <button type="button" data-class="エルフ">エルフ</button>
-                <button type="button" data-class="ロイヤル">ロイヤル</button>
-                <button type="button" data-class="ウィッチ">ウィッチ</button>
-                <button type="button" data-class="ドラゴン">ドラゴン</button>
-                <button type="button" data-class="ナイトメア">ナイトメア</button>
-                <button type="button" data-class="ビショップ">ビショップ</button>
-                <button type="button" data-class="ネメシス">ネメシス</button>
-              </div>
-              <div class="card-actions">
-                <button type="button" id="reset-card-counts-button" class="form-action-button secondary">カウントをクリア</button>
-                <button type="button" id="toggle-card-delete-mode-button" class="form-action-button neutral">削除モード OFF</button>
-              </div>
-              <div id="current-class-display" class="info-display"></div>
-              <table id="card-data-table" class="data-table">
-                <thead>
-                  <tr>
-                    <th>PP</th>
-                    <th>カード名&メモ</th>
-                    <th>カウント</th>
-                    <th>削除</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <form id="add-card-form" class="app-form add-card-form-layout">
-                <input type="number" id="new-card-pp-input" placeholder="PP" min="0" required>
-                <input type="text" id="new-card-name-input" placeholder="カード名" required>
-                <button type="submit" class="form-action-button primary">追加</button>
-              </form>
+        <div class="card-list-container">
+          <div class="card-head">
+            <h3>警戒カードリスト</h3>
+            <div class="card-actions">
+              <button type="button" id="reset-card-counts-button" class="form-action-button" title="カウントをクリア" aria-label="カウントをクリア"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span class="btn-label">カウントをクリア</span></button>
+              <button type="button" id="toggle-card-delete-mode-button" class="form-action-button" title="削除モード" aria-label="削除モード"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg><span class="btn-label">削除モード OFF</span></button>
+            </div>
           </div>
-
-          <!-- クラス毎のメモ欄 -->
-          <div class="class-notes-container">
-              <div id="current-class-note-display" class="info-display"></div>
-              <textarea id="class-note-textarea" placeholder="このクラスのメモ" aria-label="クラスメモ"></textarea>
-          </div>
+          <div class="toggle-button-group class-filter-group" id="class-filter-group"><button type="button" data-class="エルフ">エルフ</button><button type="button" data-class="ロイヤル">ロイヤル</button><button type="button" data-class="ウィッチ">ウィッチ</button><button type="button" data-class="ドラゴン">ドラゴン</button><button type="button" data-class="ナイトメア">ナイトメア</button><button type="button" data-class="ビショップ">ビショップ</button><button type="button" data-class="ネメシス">ネメシス</button></div>
+          <div id="current-class-display" class="info-display"></div>
+          <table id="card-data-table" class="data-table">
+            <thead><tr><th>PP</th><th>カード名&amp;メモ</th><th>カウント</th><th>削除</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <form id="add-card-form" class="add-card-form-layout">
+            <input type="number" id="new-card-pp-input" class="ctl" placeholder="PP" min="0" title="空欄にすると、カウンターとして先頭に固定されます">
+            <input type="text" id="new-card-name-input" class="ctl" placeholder="カード名" required>
+            <button type="submit" class="form-action-button primary">追加</button>
+          </form>
+          <p class="form-hint">PPを空欄にすると、カウンターとして先頭に固定されます</p>
+        </div>
+        <div class="class-notes-container">
+          <div id="current-class-note-display" class="info-display"></div>
+          <textarea id="class-note-textarea" class="ctl" placeholder="このクラスのメモ" aria-label="クラスメモ"></textarea>
+        </div>
       </section>
 
       <section class="panel flex-column-item counter-storage-column tab-content" id="storage-section" style="display: none;">
-          <div class="data-management-panel">
-              <h3>エクスポート</h3>
-              <div class="toggle-button-group">
-                <button type="button" id="export-records-button" class="form-action-button secondary">戦績</button>
-                <button type="button" id="export-cards-button" class="form-action-button secondary">カードリスト</button>
-                <button type="button" id="export-all-data-button" class="form-action-button secondary">全体</button>
-              </div>
-              <h3>インポート</h3>
-              <div class="toggle-button-group" style="margin-top: 10px;">
-              <label class="file-input-label">
-                  <span class="file-input-button">戦績</span>
-                  <input type="file" id="import-records-file-input" accept=".json">
-                </label>
-                <label class="file-input-label">
-                  <span class="file-input-button">カードリスト</span>
-                  <input type="file" id="import-cards-file-input" accept=".json">
-                </label>
-                <label class="file-input-label">
-                  <span class="file-input-button">全体</span>
-                  <input type="file" id="import-all-data-file-input" accept=".json">
-                </label>
-              </div>
-				<h3>戦績の削除</h3>
-					<div class="toggle-button-group">
-					  <button type="button" id="clear-records-button" class="form-action-button danger">
-					    全削除
-					  </button>
-					</div>
-                <h3>表示テーマ</h3>
-                <div class="toggle-button-group" style="margin-top: 10px;">
-                    <button type="button" id="toggle-dark-mode-button" class="form-action-button neutral">ダークモード ON/OFF</button>
-                </div>
-          </div>
-				<div id="ad">
-					スポンサードリンク
-					<ins class="adsbygoogle"
-							 style="display:block"
-							 data-ad-client="ca-pub-3575252598876356"
-							 data-ad-slot="6223968026"
-							 data-ad-format="rectangle"></ins>
+        <div class="data-management-panel">
+          <div class="data-group"><h3>エクスポート</h3><div class="button-row">
+            <button type="button" id="export-records-button" class="form-action-button">戦績</button>
+            <button type="button" id="export-cards-button" class="form-action-button">カードリスト</button>
+            <button type="button" id="export-all-data-button" class="form-action-button">全体</button></div></div>
+          <div class="data-group"><h3>インポート</h3><div class="button-row">
+            <label class="file-input-label"><input type="file" id="import-records-file-input" accept=".json"><span class="file-input-button">戦績</span></label>
+            <label class="file-input-label"><input type="file" id="import-cards-file-input" accept=".json"><span class="file-input-button">カードリスト</span></label>
+            <label class="file-input-label"><input type="file" id="import-all-data-file-input" accept=".json"><span class="file-input-button">全体</span></label></div></div>
+          <div class="data-group"><h3>戦績の削除</h3><div class="button-row">
+            <button type="button" id="clear-records-button" class="form-action-button danger">全削除</button></div></div>
+          <div class="data-group"><h3>表示テーマ</h3><div class="button-row">
+            <button type="button" id="toggle-dark-mode-button" class="form-action-button">ダークモード ON/OFF</button></div></div>
         </div>
       </section>
 
       <section class="panel record-panel tab-content flex-column-item record-panel-column" id="record-section" style="display: none;">
-        <h3 style="flex-shrink: 0;">対戦記録</h3>
-        <form id="add-record-form" class="app-form" style="flex-shrink: 0;">
+        <h3>戦績を記録</h3>
+        <form id="add-record-form" class="app-form">
           <div class="form-columns">
             <div class="form-left">
-              <div class="form-row-flex">
-                <div class="form-field-group">
-                  <label for="season-input">シーズン</label>
-                  <input type="number" id="season-input" name="season" placeholder="例: 1" min="1" value="1">
-                </div>
-                <div class="form-field-group">
-                  <label for="my-deck-input">自分のデッキ</label>
-                  <input type="text" id="my-deck-input" name="deck" required>
-                </div>
+              <div class="form-row-flex field">
+                <div class="season"><label class="field-label" for="season-input">シーズン</label><input type="number" id="season-input" class="ctl" name="season" placeholder="1" min="1" value="1"></div>
+                <div class="grow"><label class="field-label" for="my-deck-input">自分のデッキ</label><input type="text" id="my-deck-input" class="ctl" name="deck" required></div>
               </div>
-              <label>相手のクラス</label>
-              <div class="toggle-button-group" id="opponent-class-selection">
-                <button type="button" data-value="エルフ">エルフ</button>
-                <button type="button" data-value="ロイヤル">ロイヤル</button>
-                <button type="button" data-value="ウィッチ">ウィッチ</button>
-                <button type="button" data-value="ドラゴン">ドラゴン</button>
-                <button type="button" data-value="ナイトメア">ナイトメア</button>
-                <button type="button" data-value="ビショップ">ビショップ</button>
-                <button type="button" data-value="ネメシス">ネメシス</button>
-              </div>
+              <div class="field"><span class="field-label">相手のクラス</span><div class="toggle-button-group" id="opponent-class-selection"><button type="button" data-value="エルフ">エルフ</button><button type="button" data-value="ロイヤル">ロイヤル</button><button type="button" data-value="ウィッチ">ウィッチ</button><button type="button" data-value="ドラゴン">ドラゴン</button><button type="button" data-value="ナイトメア">ナイトメア</button><button type="button" data-value="ビショップ">ビショップ</button><button type="button" data-value="ネメシス">ネメシス</button></div></div>
             </div>
             <div class="form-right">
-              <label>先後</label>
-              <div class="toggle-button-group" id="turn-order-selection">
-                <button type="button" data-value="先攻">先攻</button>
-                <button type="button" data-value="後攻">後攻</button>
+              <div class="form-pair">
+                <div class="field"><span class="field-label">先後</span><div class="toggle-button-group" id="turn-order-selection"><button type="button" data-value="先攻">先攻</button><button type="button" data-value="後攻">後攻</button></div></div>
+                <div class="field"><span class="field-label">勝敗</span><div class="toggle-button-group" id="match-result-selection"><button type="button" data-value="⭕">勝ち</button><button type="button" data-value="✖">負け</button></div></div>
               </div>
-              <label>勝敗</label>
-              <div class="toggle-button-group" id="match-result-selection">
-                <button type="button" data-value="⭕">勝ち</button>
-                <button type="button" data-value="✖">負け</button>
-              </div>
-              <label for="record-memo-input">メモ</label>
-              <textarea id="record-memo-input" name="memo" rows="2"></textarea>
+              <div class="field"><label class="field-label" for="record-memo-input">メモ</label><textarea id="record-memo-input" class="ctl" name="memo" rows="2" placeholder="Ctrl + Enter で記録"></textarea></div>
             </div>
           </div>
-          <button type="submit" class="form-action-button primary">記録する</button>
+          <button type="submit" class="form-action-button primary submit">記録する</button>
         </form>
 
-        <div class="filter-controls" style="flex-shrink: 0;">
-            <details id="record-filter-details">
-                <summary>
-                    <span class="filter-summary-title">戦績フィルター <span class="toggle-icon"></span></span>
-                </summary>
-                <div class="filter-content-wrapper">
-                    <div class="form-columns">
-                        <div class="form-left">
-                            <div class="form-row-flex">
-                                <div class="form-field-group">
-                                    <label for="filter-season-input">シーズン</label>
-                                    <input type="number" id="filter-season-input" placeholder="例: 1" min="1">
-                                </div>
-                                <div class="form-field-group">
-                                    <label for="filter-deck-name-input">デッキ名で絞り込み</label>
-                                    <input type="text" id="filter-deck-name-input" placeholder="デッキ名を入力">
-                                </div>
-                            </div>
-                            <div style="display: box; margin-top: 8px;"><label style="margin-top: 15px;">先後で絞り込み</label></div>
-                            <div class="toggle-button-group" id="filter-turn-order-selection">
-                              <button type="button" data-value="">すべて</button>
-                              <button type="button" data-value="先攻">先攻</button>
-                              <button type="button" data-value="後攻">後攻</button>
-                            </div>
-                        </div>
-                        <div class="form-right">
-                            <label>相手のクラスで絞り込み</label>
-                            <div class="toggle-button-group" id="filter-opponent-class-selection">
-                              <button type="button" data-value="">すべて</button>
-                              <button type="button" data-value="エルフ">エルフ</button>
-                              <button type="button" data-value="ロイヤル">ロイヤル</button>
-                              <button type="button" data-value="ウィッチ">ウィッチ</button>
-                              <button type="button" data-value="ドラゴン">ドラゴン</button>
-                              <button type="button" data-value="ナイトメア">ナイトメア</button>
-                              <button type="button" data-value="ビショップ">ビショップ</button>
-                              <button type="button" data-value="ネメシス">ネメシス</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" id="clear-record-filters-button" class="form-action-button primary">フィルターをクリア</button>
-
-                    <div class="record-summary">
-                        <div class="record-stats">
-                            <span class="stat-item"><span class="stat-label">試合数: </span><span id="total-matches-display" class="stat-value">0</span></span>
-                            <span class="stat-item"><span class="stat-label">勝利数: </span><span id="total-wins-display" class="stat-value">0</span></span>
-                            <span class="stat-item"><span class="stat-label">勝率: </span><span id="win-rate-display" class="stat-value">0.00%</span></span>
-                        </div>
-                    </div>
+        <div class="filter-controls">
+          <details id="record-filter-details">
+            <summary><span>戦績フィルター</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+            <div class="filter-content-wrapper">
+              <div class="form-columns">
+                <div class="form-left">
+                  <div class="form-row-flex field">
+                    <div class="season"><label class="field-label" for="filter-season-input">シーズン</label><input type="number" id="filter-season-input" class="ctl" placeholder="1" min="1"></div>
+                    <div class="grow"><label class="field-label" for="filter-deck-name-input">デッキ名</label><input type="text" id="filter-deck-name-input" class="ctl" placeholder="デッキ名を入力"></div>
+                  </div>
+                  <div class="field"><span class="field-label">先後</span><div class="toggle-button-group" id="filter-turn-order-selection"><button type="button" data-value="">すべて</button><button type="button" data-value="先攻">先攻</button><button type="button" data-value="後攻">後攻</button></div></div>
                 </div>
-            </details>
+                <div class="form-right">
+                  <div class="field"><span class="field-label">相手のクラス</span><div class="toggle-button-group" id="filter-opponent-class-selection"><button type="button" data-value="">すべて</button><button type="button" data-value="エルフ">エルフ</button><button type="button" data-value="ロイヤル">ロイヤル</button><button type="button" data-value="ウィッチ">ウィッチ</button><button type="button" data-value="ドラゴン">ドラゴン</button><button type="button" data-value="ナイトメア">ナイトメア</button><button type="button" data-value="ビショップ">ビショップ</button><button type="button" data-value="ネメシス">ネメシス</button></div></div>
+                </div>
+              </div>
+              <button type="button" id="clear-record-filters-button" class="form-action-button">フィルターをクリア</button>
+            </div>
+          </details>
         </div>
 
-		<h3 style="margin-bottom:8px;">記録一覧</h3>
-		<div class="record-table-wrapper" id="match-record-table-wrapper">
-        <table id="match-record-table" class="data-table">
-          <thead>
-            <tr>
-              <th>日時</th>
-              <th>S</th>
-              <th>デッキ</th>
-              <th>相手</th>
-              <th>先後</th>
-              <th>勝敗</th>
-              <th>メモ</th>
-              <th>削除</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-		</div>
-        <div id="match-record-cards-container">
-            </div>
-        <button id="load-more-records-button" class="form-action-button neutral" style="display: none; width: 100%; margin-top: 20px;">さらに表示</button>
+        <div class="list-head">
+          <h3>記録一覧</h3>
+          <div class="record-stats">
+            <span class="stat-item"><span class="stat-label">試合数</span><span id="total-matches-display" class="stat-value">0</span></span>
+            <span class="stat-item"><span class="stat-label">勝利数</span><span id="total-wins-display" class="stat-value">0</span></span>
+            <span class="stat-item rate"><span class="stat-label">勝率</span><span id="win-rate-display" class="stat-value">0.00%</span></span>
+          </div>
+        </div>
+        <div class="record-table-wrapper" id="match-record-table-wrapper">
+          <table id="match-record-table" class="data-table">
+            <thead><tr><th>日時</th><th>S</th><th>デッキ</th><th>相手</th><th>先後</th><th>勝敗</th><th>メモ</th><th>削除</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="match-record-cards-container"></div>
+        <button id="load-more-records-button" class="form-action-button neutral" style="display: none; width: 100%; margin-top: 16px;">さらに表示</button>
       </section>
-	</div>
+    </div>
   </main>
 
   <div class="info-container">
-    <div class="info-button" id="info-button-trigger">i</div>
+    <div class="info-button" id="info-button-trigger" role="button" tabindex="0" aria-label="このツールについて">i</div>
     <div class="info-tooltip" id="info-tooltip-content">
       このツールは morvra によって個人で制作された、<br>
       Shadowverse: Worlds Beyond の非公式ファンツールです。<br>
@@ -521,18 +316,15 @@
     </div>
   </div>
 
-  <!-- カスタムモーダルUI -->
-  <div id="custom-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
-    <div id="custom-modal-content" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-width: 90%; width: 350px; text-align: center;">
-      <p id="modal-message" style="margin-bottom: 20px; font-size: 16px;"></p>
+  <div id="custom-modal-overlay" style="display: none;">
+    <div id="custom-modal-content" class="modal-card" role="dialog" aria-modal="true">
+      <p id="modal-message"></p>
       <div id="modal-buttons">
-        <button id="modal-ok-button" class="form-action-button primary" style="margin: 0 5px;">OK</button>
-        <button id="modal-cancel-button" class="form-action-button neutral" style="margin: 0 5px; display: none;">キャンセル</button>
+        <button id="modal-cancel-button" class="form-action-button" style="display: none;">キャンセル</button>
+        <button id="modal-ok-button" class="form-action-button primary">OK</button>
       </div>
     </div>
   </div>
-
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
     // Local Storage Utility
     const Storage = {
@@ -667,20 +459,6 @@
           const targetTab = document.querySelector(`.tab-navigation-button[data-tab="${targetPaneId}"]`);
           if (targetTab) { targetTab.classList.add('active'); targetTab.setAttribute('aria-selected', 'true'); }
         }
-
-        // AdSense reload
-        if (targetPaneId === 'storage-section') {
-            setTimeout(() => {
-                try {
-                    if (window.adsbygoogle && typeof window.adsbygoogle.push === 'function') {
-                        document.querySelectorAll('ins.adsbygoogle').forEach(ad => {
-                            if (ad.offsetParent !== null) { (window.adsbygoogle = window.adsbygoogle || []).push({}); }
-                            else { console.warn('AdSense slot is not visible, skipping push.'); }
-                        });
-                    } else { console.warn('AdSense object not found or push method is missing.'); }
-                } catch (error) { console.error('Error reloading AdSense:', error); }
-            }, 100);
-        }
       };
 
       const init = () => {
@@ -715,6 +493,9 @@
       };
       return { init, getSelectedValue, setActiveButton };
     })();
+
+    const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const TRASH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>';
 
     // Record Management Module
     const RecordManager = (() => {
@@ -793,6 +574,51 @@
         }
       };
 
+      const MEMO_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>';
+      const memoPopover = document.createElement('div');
+      memoPopover.id = 'memo-popover';
+      document.body.appendChild(memoPopover);
+      const hideMemoPopover = () => { memoPopover.style.display = 'none'; };
+      document.addEventListener('scroll', hideMemoPopover, true);
+
+      // メモ列は1行目だけ表示し、2行目以降があればアイコン＋ホバーで全文表示
+      const setCellContent = (td, fieldName, val) => {
+        if (fieldName !== 'memo') { td.textContent = val; return; }
+        td.textContent = '';
+        const text = String(val ?? '');
+        const lines = text.split('\n');
+        const wrap = document.createElement('div');
+        wrap.className = 'memo-cell';
+        const first = document.createElement('span');
+        first.className = 'memo-first';
+        first.textContent = lines[0];
+        wrap.appendChild(first);
+        const multi = lines.slice(1).some(l => l.trim() !== '');
+        const more = document.createElement('span');
+        more.className = 'memo-more';
+        more.hidden = !multi;
+        more.innerHTML = MEMO_ICON;
+        more.setAttribute('aria-label', 'メモの全文を表示');
+        more.addEventListener('mouseenter', () => {
+          memoPopover.textContent = text;
+          memoPopover.style.display = 'block';
+          const r = more.getBoundingClientRect();
+          const w = memoPopover.offsetWidth, h = memoPopover.offsetHeight;
+          memoPopover.style.left = Math.max(8, Math.min(r.right - w, window.innerWidth - w - 8)) + 'px';
+          memoPopover.style.top = (r.bottom + 6 + h > window.innerHeight ? Math.max(8, r.top - 6 - h) : r.bottom + 6) + 'px';
+        });
+        more.addEventListener('mouseleave', hideMemoPopover);
+        more.addEventListener('click', hideMemoPopover);
+        wrap.appendChild(more);
+        td.appendChild(wrap);
+        // 複数行、または1行に収まらない長さのときだけアイコンを表示
+        const ro = new ResizeObserver(() => {
+          if (!wrap.isConnected) { ro.disconnect(); return; }
+          more.hidden = !(multi || first.scrollWidth > wrap.clientWidth);
+        });
+        ro.observe(wrap);
+      };
+
       const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
           if (td.querySelector('input') || td.querySelector('textarea')) return;
@@ -811,13 +637,14 @@
             let val = input.value.trim();
             if (fieldName === 'season') { val = parseInt(val, 10); if (isNaN(val) || val < 1) val = 1; }
             if (entry[fieldName] !== val) { entry[fieldName] = val; saveRecords(); }
-            td.textContent = val;
+            setCellContent(td, fieldName, val);
+            if (td.parentElement && (fieldName === 'result' || fieldName === 'opponent')) td.parentElement.dataset[fieldName] = val;
             if (input.parentNode === td) input.remove();
           };
           input.addEventListener('blur', finalizeEdit);
           input.addEventListener('keydown', (ev) => {
             if (ev.key === 'Enter') { if (type === 'textarea' && ev.shiftKey) return; ev.preventDefault(); finalizeEdit(); }
-            else if (ev.key === 'Escape') { td.textContent = currentValue; if (input.parentNode === td) input.remove(); }
+            else if (ev.key === 'Escape') { setCellContent(td, fieldName, currentValue); if (input.parentNode === td) input.remove(); }
           });
         });
       };
@@ -828,19 +655,20 @@
 
           if (isLargeScreen) {
               const tr = document.createElement('tr');
+              tr.dataset.result = entry.result; tr.dataset.opponent = entry.opponent;
               ['date', 'season', 'deck', 'opponent', 'firstSecond', 'result', 'memo'].forEach(field => {
                 const td = document.createElement('td');
                 td.textContent = (field === 'date') ? formattedDate : entry[field];
                 td.dataset.label = (field === 'date') ? '日時' : (field === 'season' ? 'シーズン' : (field === 'deck' ? 'デッキ' : (field === 'opponent' ? '相手' : (field === 'firstSecond' ? '先後' : 'メモ'))));
-                if (field === 'memo') makeEditableCell(td, entry, field, 'textarea');
+                if (field === 'memo') { setCellContent(td, field, entry.memo); makeEditableCell(td, entry, field, 'textarea'); }
                 else if (field === 'season') makeEditableCell(td, entry, field, 'number');
                 else if (field !== 'date') makeEditableCell(td, entry, field, 'text');
                 tr.appendChild(td);
               });
               const delTd = document.createElement('td');
               const delBtn = document.createElement('button');
-              delBtn.textContent = '🗑️';
-              Object.assign(delBtn.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
+              delBtn.className = 'icon-button'; delBtn.innerHTML = TRASH_ICON;
+              
               delBtn.title = '削除';
               delBtn.setAttribute('aria-label', `Delete record for ${formattedDate}`);
               delBtn.onclick = () => {
@@ -853,20 +681,16 @@
           } else {
               const cardDiv = document.createElement('div');
               cardDiv.classList.add('match-record-card');
-              cardDiv.dataset.timestamp = entry.timestamp;
+              cardDiv.dataset.timestamp = entry.timestamp; cardDiv.dataset.result = entry.result; cardDiv.dataset.opponent = entry.opponent;
               cardDiv.innerHTML = `
-                  <div class="card-item"><span class="card-label">日時:</span> <span class="card-value">${formattedDate}</span></div>
-                  <div class="card-item"><span class="card-label">シーズン:</span> <span class="card-value">${entry.season}</span></div>
-                  <div class="card-item"><span class="card-label">デッキ:</span> <span class="card-value">${entry.deck}</span></div>
-                  <div class="card-item"><span class="card-label">相手:</span> <span class="card-value">${entry.opponent}</span></div>
-                  <div class="card-item"><span class="card-label">先後:</span> <span class="card-value">${entry.firstSecond}</span></div>
-                  <div class="card-item"><span class="card-label">勝敗:</span> <span class="card-value">${entry.result}</span></div>
-                  <div class="card-item"><span class="card-label">メモ:</span> <span class="card-value">${entry.memo}</span></div>
+                  <div class="mrc-head"><span class="mrc-result">${entry.result === '⭕' ? '勝' : '負'}</span><span class="mrc-deck">${escapeHtml(entry.deck)}</span></div>
+                  <div class="mrc-meta"><span class="mrc-chip mrc-opp">${escapeHtml(entry.opponent)}</span><span class="mrc-chip">${escapeHtml(entry.firstSecond)}</span><span class="mrc-chip">S${escapeHtml(entry.season)}</span><span class="mrc-date">${formattedDate}</span></div>
+                  ${entry.memo ? `<div class="mrc-memo">${escapeHtml(entry.memo)}</div>` : ''}
               `;
               const deleteButton = document.createElement('button');
-              deleteButton.classList.add('delete-card-button');
+              deleteButton.classList.add('delete-card-button', 'icon-button');
               deleteButton.title = '削除';
-              deleteButton.textContent = '🗑️';
+              deleteButton.innerHTML = TRASH_ICON;
               deleteButton.setAttribute('aria-label', `Delete record for ${formattedDate}`);
               cardDiv.appendChild(deleteButton);
               deleteButton.addEventListener('click', () => {
@@ -924,6 +748,9 @@
         loadRecords();
 
         addRecordForm.addEventListener('submit', handleRecordSubmit);
+        recordMemoInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !e.isComposing) { e.preventDefault(); addRecordForm.requestSubmit(); }
+        });
         filterDeckNameInput.addEventListener('input', () => { Storage.set(FILTER_DECK_KEY, filterDeckNameInput.value); debouncedLoadRecords(); });
         filterSeasonInput.addEventListener('input', () => { Storage.set(FILTER_SEASON_KEY, filterSeasonInput.value); debouncedLoadRecords(); });
         document.addEventListener('filterChange', (e) => {
@@ -967,7 +794,9 @@
       const saveCards = (className) => { if (className) Storage.set(CARD_CLASS_PREFIX + className, allCardData[className] || []); };
       const loadCards = (className) => className ? Storage.get(CARD_CLASS_PREFIX + className, []) : [];
       const loadAllClassCards = () => { CLASS_NAMES.forEach(name => { allCardData[name] = loadCards(name); }); if (currentClass) renderCardList(); };
-      const sortCards = (cards) => cards.sort((a, b) => a.pp - b.pp);
+      // PP未設定（null）のものはカウンターとして先頭に固定
+      const ppKey = (c) => (c.pp == null ? -1 : c.pp);
+      const sortCards = (cards) => cards.sort((a, b) => ppKey(a) - ppKey(b));
 
       const renderCardList = () => {
         cardDataTableBody.innerHTML = '';
@@ -976,18 +805,20 @@
         const cards = allCardData[currentClass] || [];
         sortCards(cards).forEach((card, index) => {
           const tr = document.createElement('tr');
+          tr.classList.toggle('has-count', card.count > 0);
+          tr.classList.toggle('is-counter', card.pp == null);
           const tdPP = document.createElement('td');
-          tdPP.textContent = card.pp;
+          tdPP.textContent = card.pp == null ? '—' : card.pp;
           Object.assign(tdPP.style, { cursor: 'pointer' });
           tdPP.title = 'クリックで編集';
           tdPP.addEventListener('click', () => {
             if (tdPP.querySelector('input')) return;
             const input = document.createElement('input');
-            input.type = 'number'; input.min = '0'; input.value = card.pp;
+            input.type = 'number'; input.min = '0'; input.value = card.pp ?? '';
             Object.assign(input.style, { fontSize: '14px' });
             input.setAttribute('aria-label', `Edit card PP: ${card.name}`);
             tdPP.textContent = ''; tdPP.appendChild(input); input.focus();
-            const finishEdit = () => { let val = parseInt(input.value, 10); if (isNaN(val) || val < 0) val = 0; card.pp = val; renderCardList(); saveCards(currentClass); };
+            const finishEdit = () => { let val = input.value.trim() === '' ? null : parseInt(input.value, 10); if (val !== null && (isNaN(val) || val < 0)) val = 0; card.pp = val; renderCardList(); saveCards(currentClass); };
             input.addEventListener('blur', finishEdit);
             input.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') finishEdit(); else if (ev.key === 'Escape') renderCardList(); });
           });
@@ -1024,8 +855,8 @@
 
           const tdDel = document.createElement('td');
           const btnDel = document.createElement('button');
-          btnDel.classList.add('card-delete-button'); btnDel.textContent = '🗑️';
-          Object.assign(btnDel.style, { cursor: 'pointer', fontSize: '16px', border: 'none', background: 'transparent' });
+          btnDel.classList.add('card-delete-button', 'icon-button'); btnDel.innerHTML = TRASH_ICON;
+          
           btnDel.title = '削除'; btnDel.setAttribute('aria-label', `Delete ${card.name} from list`);
           btnDel.addEventListener('click', (e) => { e.preventDefault(); allCardData[currentClass].splice(index, 1); renderCardList(); saveCards(currentClass); });
           tdDel.appendChild(btnDel);
@@ -1047,8 +878,8 @@
       const handleCardAdd = async (e) => {
         e.preventDefault();
         if (!currentClass) { await ModalManager.showAlert('まず左上のクラスを選択してください'); return; }
-        let ppVal = parseInt(newCardPpInput.value, 10);
-        if (isNaN(ppVal) || ppVal < 0) { await ModalManager.showAlert('PPは0以上の整数を入力してください'); newCardPpInput.focus(); return; }
+        let ppVal = newCardPpInput.value.trim() === '' ? null : parseInt(newCardPpInput.value, 10);
+        if (ppVal !== null && (isNaN(ppVal) || ppVal < 0)) { await ModalManager.showAlert('PPは0以上の整数を入力してください'); newCardPpInput.focus(); return; }
         let nameVal = newCardNameInput.value.trim();
         if (!nameVal) { await ModalManager.showAlert('カード名を入力してください'); newCardNameInput.focus(); return; }
         if (!allCardData[currentClass]) allCardData[currentClass] = [];
@@ -1064,7 +895,7 @@
 
       const toggleDeleteMode = () => {
         const isActive = counterSection.classList.toggle('delete-mode');
-        toggleCardDeleteModeButton.textContent = isActive ? '削除モード ON' : '削除モード OFF';
+        toggleCardDeleteModeButton.querySelector('.btn-label').textContent = isActive ? '削除モード ON' : '削除モード OFF';
         toggleCardDeleteModeButton.setAttribute('aria-pressed', isActive);
       };
       const init = () => {
