@@ -109,6 +109,7 @@ textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-
 @media(hover:hover){.data-table tbody tr:hover{background:var(--sunken)}}
 .data-table td input,.data-table td textarea{display:block;width:100%;min-width:0;padding:5px 8px;border:1px solid var(--focus);border-radius:8px;background:var(--surface);font-size:14px;line-height:1.4}
 .data-table td textarea{min-height:40px;resize:vertical}
+.data-table td select{display:block;width:100%;padding:5px 4px;border:1px solid var(--focus);border-radius:8px;background:var(--surface);font-size:14px}
 #card-data-table th:nth-child(1),#card-data-table td:nth-child(1){width:52px;color:var(--ink-2);font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer}
 #card-data-table td:nth-child(2){text-align:left;overflow-wrap:anywhere;cursor:pointer}
 #card-data-table th:nth-child(3),#card-data-table td:nth-child(3){width:112px;white-space:nowrap}
@@ -141,12 +142,12 @@ textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-
 .stat-item{white-space:nowrap}.stat-label{margin-right:4px;font-size:12.5px;color:var(--muted)}.stat-value{font-weight:700}
 #match-record-table th{position:sticky;top:0;z-index:1}
 #match-record-table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#match-record-table th:nth-child(1){width:112px}#match-record-table th:nth-child(2){width:44px}#match-record-table th:nth-child(3){width:17%}#match-record-table th:nth-child(4){width:104px}#match-record-table th:nth-child(5){width:64px}#match-record-table th:nth-child(6){width:56px}#match-record-table th:nth-child(8){width:48px}
-#match-record-table td:nth-child(7){text-align:left}
+#match-record-table th:nth-child(1){width:112px}#match-record-table th:nth-child(2){width:44px}#match-record-table th:nth-child(3){width:88px}#match-record-table th:nth-child(4){width:15%}#match-record-table th:nth-child(5){width:104px}#match-record-table th:nth-child(6){width:64px}#match-record-table th:nth-child(7){width:56px}#match-record-table th:nth-child(9){width:48px}
+#match-record-table td:nth-child(8){text-align:left}
 #match-record-table td:nth-child(1){color:var(--ink-2);font-size:12.5px;font-variant-numeric:tabular-nums}
-#match-record-table td:nth-child(3),#match-record-table td:nth-child(7){white-space:normal;overflow-wrap:anywhere}
-#match-record-table td:nth-child(3){font-weight:700}
-#match-record-table tr[data-opponent] td:nth-child(4)::before{content:"";display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+#match-record-table td:nth-child(4),#match-record-table td:nth-child(8){white-space:normal;overflow-wrap:anywhere}
+#match-record-table td:nth-child(4){font-weight:700}
+#match-record-table tr[data-opponent] td:nth-child(5)::before{content:"";display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
 #match-record-table td:has(>input)::before{display:none!important}
 .match-record-card{--bar:var(--lose);display:grid;gap:10px;position:relative;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .match-record-card[data-result="⭕"]{--bar:var(--win)}
@@ -166,6 +167,29 @@ textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-
 .memo-more:hover{background:var(--line);color:var(--ink)}
 .memo-more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 #memo-popover{display:none;position:fixed;z-index:1500;max-width:360px;padding:10px 12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none;box-shadow:0 6px 20px rgba(0,0,0,.14)}
+.stat-sub{margin-left:4px;font-size:12px;font-weight:400;color:var(--muted)}
+.breakdown-foot{margin:10px 0 0;font-size:12.5px;color:var(--ink-2)}
+.breakdown-hint{margin:2px 0 0;font-size:11.5px;color:var(--muted)}
+.breakdown-table td[data-act]{cursor:pointer}
+@media(hover:hover){.breakdown-table td[data-act]:hover{background:var(--sunken)}}
+.breakdown-table td.is-active{background:var(--line);font-weight:700}
+.stats-note{margin:0 0 10px;font-size:12px;color:var(--muted)}
+.class-breakdown{margin-bottom:14px}
+.class-breakdown summary{display:flex;align-items:center;gap:8px;list-style:none;cursor:pointer}
+.class-breakdown summary::-webkit-details-marker{display:none}
+.class-breakdown summary svg{flex:none;width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.class-breakdown[open] summary svg{transform:rotate(180deg)}
+.class-bar{flex:1;display:flex;gap:2px;height:20px;border-radius:8px;overflow:hidden;background:var(--line)}
+.class-seg{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;white-space:nowrap;background:var(--c);color:var(--on);font-size:11px;font-weight:700}
+.class-seg-empty{flex:1;display:grid;place-items:center;font-size:12px;color:var(--muted)}
+.breakdown-table{width:100%;margin-top:10px;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.breakdown-table th{padding:6px 4px;border-bottom:1px solid var(--line-strong);font-size:12px;font-weight:500;color:var(--muted);text-align:center}
+.breakdown-table td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle;line-height:1.35}
+.breakdown-table tr:last-child td{border-bottom:0}
+.breakdown-table th:first-child,.breakdown-table td:first-child{text-align:left;white-space:nowrap}
+.breakdown-table td:first-child::before{content:"";display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+.breakdown-table .stat-sub{display:block;margin:0;font-size:11px}
+.breakdown-table tr.is-empty td{color:var(--muted)}
 /* data */
 .data-group+.data-group{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
 .file-input-label{position:relative;cursor:pointer}
@@ -261,6 +285,7 @@ body.active-tab-storage-section .info-container{display:block}
         <form id="add-record-form" class="app-form">
           <div class="form-columns">
             <div class="form-left">
+              <div class="field"><span class="field-label">フォーマット</span><div class="toggle-button-group" id="format-selection"><button type="button" data-value="ローテ">ローテ</button><button type="button" data-value="アンリミ">アンリミ</button></div></div>
               <div class="form-row-flex field">
                 <div class="season"><label class="field-label" for="season-input">シーズン</label><input type="number" id="season-input" class="ctl" name="season" placeholder="1" min="1" value="1"></div>
                 <div class="grow"><label class="field-label" for="my-deck-input">自分のデッキ</label><input type="text" id="my-deck-input" class="ctl" name="deck" required></div>
@@ -273,9 +298,9 @@ body.active-tab-storage-section .info-container{display:block}
                 <div class="field"><span class="field-label">勝敗</span><div class="toggle-button-group" id="match-result-selection"><button type="button" data-value="⭕">勝ち</button><button type="button" data-value="✖">負け</button></div></div>
               </div>
               <div class="field"><label class="field-label" for="record-memo-input">メモ</label><textarea id="record-memo-input" class="ctl" name="memo" rows="2" placeholder="Ctrl + Enter で記録"></textarea></div>
+              <button type="submit" class="form-action-button primary submit">記録する</button>
             </div>
           </div>
-          <button type="submit" class="form-action-button primary submit">記録する</button>
         </form>
 
         <div class="filter-controls">
@@ -284,6 +309,7 @@ body.active-tab-storage-section .info-container{display:block}
             <div class="filter-content-wrapper">
               <div class="form-columns">
                 <div class="form-left">
+                  <div class="field"><span class="field-label">フォーマット</span><div class="toggle-button-group" id="filter-format-selection"><button type="button" data-value="">すべて</button><button type="button" data-value="ローテ">ローテ</button><button type="button" data-value="アンリミ">アンリミ</button></div></div>
                   <div class="form-row-flex field">
                     <div class="season"><label class="field-label" for="filter-season-input">シーズン</label><input type="number" id="filter-season-input" class="ctl" placeholder="1" min="1"></div>
                     <div class="grow"><label class="field-label" for="filter-deck-name-input">デッキ名</label><input type="text" id="filter-deck-name-input" class="ctl" placeholder="デッキ名を入力"></div>
@@ -292,9 +318,9 @@ body.active-tab-storage-section .info-container{display:block}
                 </div>
                 <div class="form-right">
                   <div class="field"><span class="field-label">相手のクラス</span><div class="toggle-button-group" id="filter-opponent-class-selection"><button type="button" data-value="">すべて</button><button type="button" data-value="エルフ">エルフ</button><button type="button" data-value="ロイヤル">ロイヤル</button><button type="button" data-value="ウィッチ">ウィッチ</button><button type="button" data-value="ドラゴン">ドラゴン</button><button type="button" data-value="ナイトメア">ナイトメア</button><button type="button" data-value="ビショップ">ビショップ</button><button type="button" data-value="ネメシス">ネメシス</button></div></div>
+                  <button type="button" id="clear-record-filters-button" class="form-action-button">フィルターをクリア</button>
                 </div>
               </div>
-              <button type="button" id="clear-record-filters-button" class="form-action-button">フィルターをクリア</button>
             </div>
           </details>
         </div>
@@ -305,11 +331,23 @@ body.active-tab-storage-section .info-container{display:block}
             <span class="stat-item"><span class="stat-label">試合数</span><span id="total-matches-display" class="stat-value">0</span></span>
             <span class="stat-item"><span class="stat-label">勝利数</span><span id="total-wins-display" class="stat-value">0</span></span>
             <span class="stat-item rate"><span class="stat-label">勝率</span><span id="win-rate-display" class="stat-value">0.00%</span></span>
+            <span class="stat-item"><span class="stat-label">先攻勝率</span><span id="first-win-rate-display" class="stat-value">—</span></span>
+            <span class="stat-item"><span class="stat-label">後攻勝率</span><span id="second-win-rate-display" class="stat-value">—</span></span>
           </div>
         </div>
+        <p id="stats-note" class="stats-note" hidden></p>
+        <details id="class-breakdown" class="class-breakdown">
+          <summary><div id="class-bar" class="class-bar"><span class="class-seg-empty">データなし</span></div><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <p id="first-ratio-line" class="breakdown-foot"></p>
+          <p class="breakdown-hint">クラス名や先攻時・後攻時の数字をタップすると、その条件で絞り込みます</p>
+          <table id="class-breakdown-table" class="breakdown-table">
+            <thead><tr><th>相手クラス</th><th>試合数</th><th>勝率</th><th>先攻時</th><th>後攻時</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </details>
         <div class="record-table-wrapper" id="match-record-table-wrapper">
           <table id="match-record-table" class="data-table">
-            <thead><tr><th>日時</th><th>S</th><th>デッキ</th><th>相手</th><th>先後</th><th>勝敗</th><th>メモ</th><th>削除</th></tr></thead>
+            <thead><tr><th>日時</th><th>S</th><th>フォーマット</th><th>デッキ</th><th>相手</th><th>先後</th><th>勝敗</th><th>メモ</th><th>削除</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -383,6 +421,8 @@ body.active-tab-storage-section .info-container{display:block}
     const FILTER_TURN_KEY = 'svwb-filter-turn';
     const FILTER_SEASON_KEY = 'svwb-filter-season';
     const FILTER_OPEN_KEY = 'svwb-filter-open-state';
+    const LAST_FORMAT_KEY = 'svwb-last-format';
+    const FILTER_FORMAT_KEY = 'svwb-filter-format';
     const CARD_CLASS_PREFIX = 'svwb-cards-';
     const CLASS_NOTE_PREFIX = 'svwb-class-note-';
     const DARK_MODE_KEY = 'svwb-dark-mode';
@@ -557,7 +597,7 @@ body.active-tab-storage-section .info-container{display:block}
 
       const loadRecords = () => {
         allRecords = Storage.get(RECORDS_KEY, []);
-        allRecords.forEach(record => { if (record.season === undefined) record.season = ''; });
+        allRecords.forEach(record => { if (record.season === undefined) record.season = ''; if (!record.format) record.format = 'アンリミ'; });
         allRecords.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         currentDisplayCount = recordsPerPage;
         applyFilters();
@@ -572,6 +612,54 @@ body.active-tab-storage-section .info-container{display:block}
           winRateDisplay.textContent = `${winRate}%`;
       };
 
+      // 相手クラス別・先後別の集計（それぞれ自身の絞り込みを除いて数える）
+      const readFilters = () => ({
+        deck: filterDeckNameInput.value.toLowerCase(),
+        season: filterSeasonInput.value,
+        opp: ToggleButtonGroup.getSelectedValue('filter-opponent-class-selection'),
+        turn: ToggleButtonGroup.getSelectedValue('filter-turn-order-selection'),
+        format: ToggleButtonGroup.getSelectedValue('filter-format-selection')
+      });
+      const tally = (list) => ({ n: list.length, w: list.filter(r => r.result === '⭕').length });
+      const rateHtml = (t) => t.n > 0 ? `${Math.round(t.w / t.n * 100)}%<span class="stat-sub">${t.w}/${t.n}</span>` : '—';
+      const updateBreakdown = () => {
+        const f = readFilters();
+        const base = allRecords.filter(r => r.deck.toLowerCase().includes(f.deck) && (f.season === '' || String(r.season) === f.season) && (f.format === '' || r.format === f.format));
+        const forTurn = base.filter(r => f.opp === '' || r.opponent === f.opp);
+        const first = tally(forTurn.filter(r => r.firstSecond === '先攻'));
+        const second = tally(forTurn.filter(r => r.firstSecond === '後攻'));
+        const setHtml = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+        setHtml('first-win-rate-display', rateHtml(first));
+        setHtml('second-win-rate-display', rateHtml(second));
+        setHtml('first-ratio-line', forTurn.length > 0 ? `先攻率 ${Math.round(first.n / forTurn.length * 100)}%（先攻 ${first.n}戦 / 後攻 ${second.n}戦）` : '先攻率 —');
+
+        let barHtml = '', rows = '';
+        CLASS_NAMES.forEach(name => {
+          const list = base.filter(r => r.opponent === name);
+          const t = tally(list);
+          const tf = tally(list.filter(r => r.firstSecond === '先攻'));
+          const ts = tally(list.filter(r => r.firstSecond === '後攻'));
+          const share = base.length > 0 ? Math.round(t.n / base.length * 100) : 0;
+          if (t.n > 0) barHtml += `<span class="class-seg" data-opponent="${name}" style="flex:${t.n} 1 0" title="${name} ${t.n}戦（${share}%）">${share >= 16 ? name : ''}</span>`;
+          const cell = (act, active, html, enabled) => enabled ? `<td data-act="${act}" tabindex="0" role="button"${active ? ' class="is-active"' : ''}>${html}</td>` : `<td>${html}</td>`;
+          rows += `<tr data-opponent="${name}"${t.n === 0 ? ' class="is-empty"' : ''}>${cell('class', f.opp === name && f.turn === '', name, t.n > 0)}<td>${t.n}<span class="stat-sub">${share}%</span></td><td>${rateHtml(t)}</td>${cell('first', f.opp === name && f.turn === '先攻', rateHtml(tf), tf.n > 0)}${cell('second', f.opp === name && f.turn === '後攻', rateHtml(ts), ts.n > 0)}</tr>`;
+        });
+        setHtml('class-bar', barHtml || '<span class="class-seg-empty">データなし</span>');
+        const body = document.querySelector('#class-breakdown-table tbody');
+        if (body) body.innerHTML = rows;
+
+        const notes = [];
+        if (f.turn) notes.push('先攻・後攻は先後の絞り込みを除いて集計');
+        if (f.opp || f.turn) notes.push('相手クラス別はデッキ・シーズン・フォーマットの絞り込みのみ反映');
+        const noteEl = document.getElementById('stats-note');
+        if (noteEl) { noteEl.textContent = notes.join(' / '); noteEl.hidden = notes.length === 0; }
+      };
+      const refreshStats = () => {
+        const f = readFilters();
+        updateStatistics(allRecords.filter(r => r.deck.toLowerCase().includes(f.deck) && (f.opp === '' || r.opponent === f.opp) && (f.turn === '' || r.firstSecond === f.turn) && (f.season === '' || String(r.season) === f.season) && (f.format === '' || r.format === f.format)));
+        updateBreakdown();
+      };
+
       const applyFilters = () => {
         matchRecordTableBody.innerHTML = '';
         matchRecordCardsContainer.innerHTML = '';
@@ -579,15 +667,17 @@ body.active-tab-storage-section .info-container{display:block}
         const filterOpponentClass = ToggleButtonGroup.getSelectedValue('filter-opponent-class-selection');
         const filterTurnOrder = ToggleButtonGroup.getSelectedValue('filter-turn-order-selection');
         const filterSeason = filterSeasonInput.value;
+        const filterFormat = ToggleButtonGroup.getSelectedValue('filter-format-selection');
 
         filteredRecordsCache = allRecords.filter(record => {
           const matchesDeck = record.deck.toLowerCase().includes(filterDeckName);
           const matchesClass = filterOpponentClass === '' || record.opponent === filterOpponentClass;
           const matchesTurnOrder = filterTurnOrder === '' || record.firstSecond === filterTurnOrder;
           const matchesSeason = filterSeason === '' || (String(record.season) === filterSeason); 
-          return matchesDeck && matchesClass && matchesTurnOrder && matchesSeason;
+          return matchesDeck && matchesClass && matchesTurnOrder && matchesSeason && (filterFormat === '' || record.format === filterFormat);
         });
         updateStatistics(filteredRecordsCache);
+        updateBreakdown();
 
         const isLargeScreen = window.matchMedia('(min-width: 984px)').matches;
         if (isLargeScreen) {
@@ -647,9 +737,10 @@ body.active-tab-storage-section .info-container{display:block}
 
       const makeEditableCell = (td, entry, fieldName, type = 'text') => { 
         td.addEventListener('click', () => {
-          if (td.querySelector('input') || td.querySelector('textarea')) return;
+          if (td.querySelector('input') || td.querySelector('textarea') || td.querySelector('select')) return;
           const currentValue = entry[fieldName];
-          const input = type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+          const input = type === 'textarea' ? document.createElement('textarea') : (type === 'select' ? document.createElement('select') : document.createElement('input'));
+          if (type === 'select') { ['ローテ', 'アンリミ'].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; input.appendChild(o); }); }
           if (type === 'text') input.type = 'text';
           if (fieldName === 'season') { input.type = 'number'; input.min = '1'; }
           input.value = currentValue;
@@ -662,12 +753,13 @@ body.active-tab-storage-section .info-container{display:block}
           const finalizeEdit = () => {
             let val = input.value.trim();
             if (fieldName === 'season') { val = parseInt(val, 10); if (isNaN(val) || val < 1) val = 1; }
-            if (entry[fieldName] !== val) { entry[fieldName] = val; saveRecords(); }
+            if (entry[fieldName] !== val) { entry[fieldName] = val; saveRecords(); refreshStats(); }
             setCellContent(td, fieldName, val);
             if (td.parentElement && (fieldName === 'result' || fieldName === 'opponent')) td.parentElement.dataset[fieldName] = val;
             if (input.parentNode === td) input.remove();
           };
           input.addEventListener('blur', finalizeEdit);
+          if (type === 'select') input.addEventListener('change', finalizeEdit);
           input.addEventListener('keydown', (ev) => {
             if (ev.key === 'Enter') { if (type === 'textarea' && ev.shiftKey) return; ev.preventDefault(); finalizeEdit(); }
             else if (ev.key === 'Escape') { setCellContent(td, fieldName, currentValue); if (input.parentNode === td) input.remove(); }
@@ -682,12 +774,13 @@ body.active-tab-storage-section .info-container{display:block}
           if (isLargeScreen) {
               const tr = document.createElement('tr');
               tr.dataset.result = entry.result; tr.dataset.opponent = entry.opponent;
-              ['date', 'season', 'deck', 'opponent', 'firstSecond', 'result', 'memo'].forEach(field => {
+              ['date', 'season', 'format', 'deck', 'opponent', 'firstSecond', 'result', 'memo'].forEach(field => {
                 const td = document.createElement('td');
                 td.textContent = (field === 'date') ? formattedDate : entry[field];
-                td.dataset.label = (field === 'date') ? '日時' : (field === 'season' ? 'シーズン' : (field === 'deck' ? 'デッキ' : (field === 'opponent' ? '相手' : (field === 'firstSecond' ? '先後' : 'メモ'))));
+                td.dataset.label = ({ date: '日時', season: 'シーズン', format: 'フォーマット', deck: 'デッキ', opponent: '相手', firstSecond: '先後', result: '勝敗' })[field] || 'メモ';
                 if (field === 'memo') { setCellContent(td, field, entry.memo); makeEditableCell(td, entry, field, 'textarea'); }
                 else if (field === 'season') makeEditableCell(td, entry, field, 'number');
+                else if (field === 'format') makeEditableCell(td, entry, field, 'select');
                 else if (field !== 'date') makeEditableCell(td, entry, field, 'text');
                 tr.appendChild(td);
               });
@@ -710,7 +803,7 @@ body.active-tab-storage-section .info-container{display:block}
               cardDiv.dataset.timestamp = entry.timestamp; cardDiv.dataset.result = entry.result; cardDiv.dataset.opponent = entry.opponent;
               cardDiv.innerHTML = `
                   <div class="mrc-head"><span class="mrc-result">${entry.result === '⭕' ? '勝' : '負'}</span><span class="mrc-deck">${escapeHtml(entry.deck)}</span></div>
-                  <div class="mrc-meta"><span class="mrc-chip mrc-opp">${escapeHtml(entry.opponent)}</span><span class="mrc-chip">${escapeHtml(entry.firstSecond)}</span><span class="mrc-chip">S${escapeHtml(entry.season)}</span><span class="mrc-date">${formattedDate}</span></div>
+                  <div class="mrc-meta"><span class="mrc-chip mrc-opp">${escapeHtml(entry.opponent)}</span><span class="mrc-chip">${escapeHtml(entry.firstSecond)}</span><span class="mrc-chip">${escapeHtml(entry.format)}</span><span class="mrc-chip">S${escapeHtml(entry.season)}</span><span class="mrc-date">${formattedDate}</span></div>
                   ${entry.memo ? `<div class="mrc-memo">${escapeHtml(entry.memo)}</div>` : ''}
               `;
               const deleteButton = document.createElement('button');
@@ -727,8 +820,8 @@ body.active-tab-storage-section .info-container{display:block}
           }
       };
 
-      const addRecordEntry = (deck, opponent, firstSecond, result, memo, season) => {
-        const newRecord = { timestamp: new Date().toISOString(), date: new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-'), deck, opponent, firstSecond, result, memo, season };
+      const addRecordEntry = (deck, opponent, firstSecond, result, memo, season, format) => {
+        const newRecord = { timestamp: new Date().toISOString(), date: new Date().toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-'), deck, opponent, firstSecond, result, memo, season, format };
         allRecords.unshift(newRecord);
         saveRecords();
         currentDisplayCount = recordsPerPage;
@@ -744,8 +837,10 @@ body.active-tab-storage-section .info-container{display:block}
         const firstSecond = ToggleButtonGroup.getSelectedValue('turn-order-selection');
         const result = ToggleButtonGroup.getSelectedValue('match-result-selection');
         const memo = recordMemoInput.value;
-        if (!opponent || !firstSecond || !result) { await ModalManager.showAlert('すべて選択してください'); return; }
-        addRecordEntry(deck, opponent, firstSecond, result, memo, season);
+        const format = ToggleButtonGroup.getSelectedValue('format-selection');
+        if (!format || !opponent || !firstSecond || !result) { await ModalManager.showAlert('すべて選択してください'); return; }
+        addRecordEntry(deck, opponent, firstSecond, result, memo, season, format);
+        Storage.set(LAST_FORMAT_KEY, format);
         Storage.set(LAST_DECK_KEY, deck);
         Storage.set(LAST_SEASON_KEY, season);
         recordMemoInput.value = '';
@@ -767,6 +862,8 @@ body.active-tab-storage-section .info-container{display:block}
       const init = () => {
         if (Storage.get(LAST_DECK_KEY)) myDeckInput.value = Storage.get(LAST_DECK_KEY);
         seasonInput.value = Storage.get(LAST_SEASON_KEY, 1);
+        ToggleButtonGroup.setActiveButton('format-selection', Storage.get(LAST_FORMAT_KEY, 'アンリミ'));
+        ToggleButtonGroup.setActiveButton('filter-format-selection', Storage.get(FILTER_FORMAT_KEY, ''));
         filterDeckNameInput.value = Storage.get(FILTER_DECK_KEY, '');
         filterSeasonInput.value = Storage.get(FILTER_SEASON_KEY, '');
         ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', Storage.get(FILTER_CLASS_KEY, ''));
@@ -774,6 +871,26 @@ body.active-tab-storage-section .info-container{display:block}
         loadRecords();
 
         addRecordForm.addEventListener('submit', handleRecordSubmit);
+        // 相手クラス別の表: クラス名・先攻時・後攻時のセルで絞り込み（同じ条件をもう一度押すと解除）
+        const applyBreakdownFilter = (opp, turn) => {
+          ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', opp);
+          ToggleButtonGroup.setActiveButton('filter-turn-order-selection', turn);
+          Storage.set(FILTER_CLASS_KEY, opp);
+          Storage.set(FILTER_TURN_KEY, turn);
+          loadRecords();
+        };
+        const onBreakdownActivate = (e) => {
+          const td = e.target.closest('td[data-act]');
+          if (!td) return;
+          const name = td.parentElement.dataset.opponent;
+          const f = readFilters();
+          const turn = td.dataset.act === 'first' ? '先攻' : (td.dataset.act === 'second' ? '後攻' : '');
+          if (f.opp === name && f.turn === turn) applyBreakdownFilter(turn === '' ? '' : name, '');
+          else applyBreakdownFilter(name, turn);
+        };
+        const breakdownTable = document.getElementById('class-breakdown-table');
+        breakdownTable.addEventListener('click', onBreakdownActivate);
+        breakdownTable.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onBreakdownActivate(e); } });
         recordMemoInput.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !e.isComposing) { e.preventDefault(); addRecordForm.requestSubmit(); }
         });
@@ -782,12 +899,15 @@ body.active-tab-storage-section .info-container{display:block}
         document.addEventListener('filterChange', (e) => {
             if (e.detail.groupId === 'filter-opponent-class-selection') { Storage.set(FILTER_CLASS_KEY, e.detail.value); loadRecords(); }
             else if (e.detail.groupId === 'filter-turn-order-selection') { Storage.set(FILTER_TURN_KEY, e.detail.value); loadRecords(); }
+            else if (e.detail.groupId === 'filter-format-selection') { Storage.set(FILTER_FORMAT_KEY, e.detail.value); loadRecords(); }
         });
         clearRecordFiltersButton.addEventListener('click', () => {
             filterDeckNameInput.value = '';
             filterSeasonInput.value = '';
             ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', '');
             ToggleButtonGroup.setActiveButton('filter-turn-order-selection', '');
+            ToggleButtonGroup.setActiveButton('filter-format-selection', '');
+            Storage.remove(FILTER_FORMAT_KEY);
             Storage.remove(FILTER_DECK_KEY);
             Storage.remove(FILTER_CLASS_KEY);
             Storage.remove(FILTER_TURN_KEY);
