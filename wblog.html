@@ -7,7 +7,7 @@
   <link href='./WB_icon.png' rel='shortcut icon'/>
   <link href='./WB_icon.png' rel='apple-touch-icon'/>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
   <title>WBログノート | シャドウバースWB 対戦支援</title>
   <style>
 :root{--bg:#F2F3F6;--surface:#fff;--sunken:#F6F7F9;--line:#E3E6EC;--line-strong:#CBD0DA;--ink:#171A22;--ink-2:#4A5163;--muted:#7B8396;--win:#1E9E6A;--lose:#9AA2B2;--lose-fill:#626B7D;--danger:#D13B4F;--danger-soft:rgba(209,59,79,.1);--focus:#3F72E0;--ring:rgba(63,114,224,.22);color-scheme:light;
@@ -142,7 +142,7 @@ textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-
 .stat-item{white-space:nowrap}.stat-label{margin-right:4px;font-size:12.5px;color:var(--muted)}.stat-value{font-weight:700}
 #match-record-table th{position:sticky;top:0;z-index:1}
 #match-record-table td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#match-record-table th:nth-child(1){width:112px}#match-record-table th:nth-child(2){width:44px}#match-record-table th:nth-child(3){width:88px}#match-record-table th:nth-child(4){width:15%}#match-record-table th:nth-child(5){width:104px}#match-record-table th:nth-child(6){width:64px}#match-record-table th:nth-child(7){width:56px}#match-record-table th:nth-child(9){width:48px}
+#match-record-table th:nth-child(1){width:96px}#match-record-table th:nth-child(2){width:44px}#match-record-table th:nth-child(3){width:48px}#match-record-table th:nth-child(4){width:15%}#match-record-table th:nth-child(5){width:92px}#match-record-table th:nth-child(6){width:64px}#match-record-table th:nth-child(7){width:56px}#match-record-table th:nth-child(9){width:48px}
 #match-record-table td:nth-child(8){text-align:left}
 #match-record-table td:nth-child(1){color:var(--ink-2);font-size:12.5px;font-variant-numeric:tabular-nums}
 #match-record-table td:nth-child(4),#match-record-table td:nth-child(8){white-space:normal;overflow-wrap:anywhere}
@@ -212,6 +212,54 @@ body.active-tab-storage-section .info-container{display:block}
 #modal-buttons{display:flex;justify-content:flex-end;gap:8px}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  
+/* ===== Scoreboard theme (案2) ===== */
+:root{--bg:#ECEEF1;--surface:#fff;--sunken:#F3F4F6;--line:#DCE0E6;--line-strong:#BFC6D0;--ink:#14171C;--ink-2:#454C58;--muted:#68717F;
+--accent:#FFB020;--accent-text:#9A5B00;--count-off:#B3BAC6;--focus:#B87400;--ring:rgba(255,176,32,.35);--mono:"IBM Plex Mono",ui-monospace,monospace}
+body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--line-strong:#2E343D;--ink:#E8EAED;--ink-2:#C9CED6;--muted:#8B93A1;
+--accent-text:#FFB020;--count-off:#3A414B;--focus:#FFB020;--ring:rgba(255,176,32,.3)}
+.app-title{display:flex;align-items:center;gap:10px;font-size:16px;letter-spacing:.04em}
+.app-title::before{content:"";width:8px;height:8px;background:var(--accent)}
+.panel{border-radius:4px}.panel h3{font-size:14px;color:var(--ink-2)}
+.tab-navigation{padding:0;gap:2px;background:none;border-radius:0}
+.tab-navigation-button{border-radius:0;padding:10px 14px;background:none;color:var(--muted);box-shadow:none}
+.tab-navigation-button.active{background:none;box-shadow:inset 0 -2px 0 var(--accent);color:var(--accent-text)}
+.form-action-button{border-radius:3px}
+.form-action-button.primary{background:var(--accent);border-color:var(--accent);color:#14171C}
+.form-action-button.primary:hover{background:var(--accent);opacity:.9}
+.ctl{border-radius:3px;background:var(--sunken)}
+.toggle-button-group button{border-radius:3px;font-weight:700}
+.toggle-button-group button:is([data-class],[data-value="エルフ"],[data-value="ロイヤル"],[data-value="ウィッチ"],[data-value="ドラゴン"],[data-value="ナイトメア"],[data-value="ビショップ"],[data-value="ネメシス"]){min-height:44px;border-top:3px solid var(--c)}
+.toggle-button-group button.active:is([data-class],[data-value="エルフ"],[data-value="ロイヤル"],[data-value="ウィッチ"],[data-value="ドラゴン"],[data-value="ナイトメア"],[data-value="ビショップ"],[data-value="ネメシス"]){border-top-color:var(--c)}
+.class-seg,.class-bar{border-radius:3px}
+.icon-button,.data-table td input,.data-table td textarea,.data-table td select{border-radius:3px}
+#card-data-table td:nth-child(1){font-family:var(--mono);font-weight:500;color:var(--muted)}
+#card-data-table td{padding-top:9px;padding-bottom:9px}
+#card-data-table td:nth-child(3) button{border-radius:3px;background:var(--sunken)}
+#card-data-table td:nth-child(3) span{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--count-off)}
+#card-data-table tr.has-count td:first-child{box-shadow:none}
+#card-data-table tr.has-count td:nth-child(3) span{color:var(--accent-text)}
+.stat-value,.stat-sub,#match-record-table td:nth-child(1),.breakdown-table td{font-family:var(--mono)}
+.stat-value{font-weight:600}
+.filter-controls,.mrc-chip,.mrc-result,.match-record-card,.modal-card{border-radius:4px}
+.mrc-chip{border-radius:3px}
+.info-tooltip{border-radius:4px}
+@media(max-width:983px){
+.tab-navigation{background:var(--surface);gap:0}
+.tab-navigation-button{padding:9px 4px 7px}
+.tab-navigation-button.active{box-shadow:inset 0 2px 0 var(--accent)}
+.tab-navigation-button.active::before{display:none}}
+  
+/* format icon / no class dots / date width */
+#match-record-table td:nth-child(1){font-size:12px}
+#match-record-table td:nth-child(3){font-size:0;color:var(--ink-2)}
+#match-record-table td:nth-child(3)::before{content:"";display:inline-block;width:18px;height:18px;vertical-align:middle;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+#match-record-table tr[data-format="ローテ"]{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12a9 9 0 1 0 3-6.7L3 8'/%3E%3Cpath d='M3 3v5h5'/%3E%3C/svg%3E")}
+#match-record-table tr[data-format="アンリミ"]{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8'/%3E%3C/svg%3E")}
+#match-record-table td:has(>select){overflow:visible;position:relative}
+#match-record-table td:has(>select)::before{display:none}
+#match-record-table td select{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;z-index:3}
+#match-record-table tr[data-opponent] td:nth-child(5)::before,.breakdown-table td:first-child::before,.mrc-opp::before{display:none}
   </style>
 </head>
 
@@ -347,7 +395,7 @@ body.active-tab-storage-section .info-container{display:block}
         </details>
         <div class="record-table-wrapper" id="match-record-table-wrapper">
           <table id="match-record-table" class="data-table">
-            <thead><tr><th>日時</th><th>S</th><th>フォーマット</th><th>デッキ</th><th>相手</th><th>先後</th><th>勝敗</th><th>メモ</th><th>削除</th></tr></thead>
+            <thead><tr><th>日時</th><th>S</th><th title="フォーマット">形式</th><th>デッキ</th><th>相手</th><th>先後</th><th>勝敗</th><th>メモ</th><th>削除</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -755,7 +803,8 @@ body.active-tab-storage-section .info-container{display:block}
             if (fieldName === 'season') { val = parseInt(val, 10); if (isNaN(val) || val < 1) val = 1; }
             if (entry[fieldName] !== val) { entry[fieldName] = val; saveRecords(); refreshStats(); }
             setCellContent(td, fieldName, val);
-            if (td.parentElement && (fieldName === 'result' || fieldName === 'opponent')) td.parentElement.dataset[fieldName] = val;
+            if (td.parentElement && (fieldName === 'result' || fieldName === 'opponent' || fieldName === 'format')) td.parentElement.dataset[fieldName] = val;
+            if (fieldName === 'format') td.title = val;
             if (input.parentNode === td) input.remove();
           };
           input.addEventListener('blur', finalizeEdit);
@@ -773,11 +822,12 @@ body.active-tab-storage-section .info-container{display:block}
 
           if (isLargeScreen) {
               const tr = document.createElement('tr');
-              tr.dataset.result = entry.result; tr.dataset.opponent = entry.opponent;
+              tr.dataset.result = entry.result; tr.dataset.opponent = entry.opponent; tr.dataset.format = entry.format;
               ['date', 'season', 'format', 'deck', 'opponent', 'firstSecond', 'result', 'memo'].forEach(field => {
                 const td = document.createElement('td');
-                td.textContent = (field === 'date') ? formattedDate : entry[field];
+                if (field === 'date') { td.textContent = formattedDate.slice(5).replace('-', '/'); td.title = formattedDate; } else { td.textContent = entry[field]; }
                 td.dataset.label = ({ date: '日時', season: 'シーズン', format: 'フォーマット', deck: 'デッキ', opponent: '相手', firstSecond: '先後', result: '勝敗' })[field] || 'メモ';
+              if (field === 'format') td.title = entry.format;
                 if (field === 'memo') { setCellContent(td, field, entry.memo); makeEditableCell(td, entry, field, 'textarea'); }
                 else if (field === 'season') makeEditableCell(td, entry, field, 'number');
                 else if (field === 'format') makeEditableCell(td, entry, field, 'select');
