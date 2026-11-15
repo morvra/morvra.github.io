@@ -1,13 +1,23 @@
 {
-	"date": "2026-11-14",
+	"date": "2026-11-15",
 	"news": [
 		{
-			"id": "87da27a2-4a38-4693-b910-3708724156b6",
-			"title": "アンリミ通信～ニーゲルヘリア前期環境解説～｜紫香楽氷",
-			"url": "https://note.com/ori_shigaraki_51/n/ncea8aec7d382",
-			"date": "2026-11-14",
+			"id": "92f770b3-d530-479b-8e3e-ea4541fa484d",
+			"title": "[第１２９話]ふつうの軽音部 - クワハリ/出内テツオ | 少年ジャンプ＋",
+			"url": "https://shonenjumpplus.com/episode/9253191257737711371",
+			"date": "2026-11-15",
+			"tags": [
+				"漫画"
+			],
+			"comment": ""
+		},
+		{
+			"id": "496860be-d095-4b98-9839-59ffdfb332a4",
+			"title": "【新概念】ムパい芸人ベスト3、ウチらに語らせて～！ - YouTube",
+			"url": "https://www.youtube.com/watch?v=ODOJLbjDmA0",
+			"date": "2026-11-15",
 			"tags": [],
-			"comment": "<div class=\"news-comment\"><p>メモメモ。カッスロのディメンションストレンジャー採用してみよう。</p></div>"
+			"comment": "<div class=\"news-comment\"><p>だんだん分かってくるのおもろいｗ</p></div>"
 		}
 	]
 }
