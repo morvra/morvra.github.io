@@ -89,6 +89,10 @@ main{max-width:1240px;margin:0 auto;padding:12px 16px 32px}
 textarea.ctl{height:auto;padding:10px 12px;line-height:1.6;resize:vertical;font-size:15px}
 .ctl:focus,.data-table td input:focus,.data-table td textarea:focus{outline:0;border-color:var(--focus);box-shadow:0 0 0 3px var(--ring)}
 .ctl::placeholder{color:var(--muted)}
+/* datalist の ▼: ブラウザ標準の矢印は位置がずれるので、自前の矢印を上下中央に描き、標準のボタンは透明にして右端に重ねる */
+input.ctl[list]{position:relative;line-height:normal;padding-right:36px}
+input.ctl[list]:hover,input.ctl[list]:focus{background-repeat:no-repeat;background-position:right 12px center;background-size:12px 8px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5z' fill='%238B93A1'/%3E%3C/svg%3E")}
+input.ctl[list]::-webkit-calendar-picker-indicator{position:absolute;top:0;right:0;bottom:0;left:auto;width:36px;height:100%;margin:0;padding:0;opacity:0;cursor:pointer}
 .form-row-flex{display:flex;gap:12px}.form-row-flex .season{flex:0 0 84px}.form-row-flex .grow{flex:1;min-width:0}
 .form-columns{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
 .form-pair{display:flex;flex-wrap:wrap;gap:0 24px}
@@ -336,7 +340,7 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
               <div class="field"><span class="field-label">フォーマット</span><div class="toggle-button-group" id="format-selection"><button type="button" data-value="ローテ">ローテ</button><button type="button" data-value="アンリミ">アンリミ</button></div></div>
               <div class="form-row-flex field">
                 <div class="season"><label class="field-label" for="season-input">シーズン</label><input type="number" id="season-input" class="ctl" name="season" placeholder="1" min="1" value="1"></div>
-                <div class="grow"><label class="field-label" for="my-deck-input">自分のデッキ</label><input type="text" id="my-deck-input" class="ctl" name="deck" required></div>
+                <div class="grow"><label class="field-label" for="my-deck-input">自分のデッキ</label><input type="text" id="my-deck-input" class="ctl" name="deck" required list="filter-deck-datalist" autocomplete="off"></div>
               </div>
               <div class="field"><span class="field-label">相手のクラス</span><div class="toggle-button-group" id="opponent-class-selection"><button type="button" data-value="エルフ">エルフ</button><button type="button" data-value="ロイヤル">ロイヤル</button><button type="button" data-value="ウィッチ">ウィッチ</button><button type="button" data-value="ドラゴン">ドラゴン</button><button type="button" data-value="ナイトメア">ナイトメア</button><button type="button" data-value="ビショップ">ビショップ</button><button type="button" data-value="ネメシス">ネメシス</button></div></div>
             </div>
@@ -360,7 +364,7 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
                   <div class="field"><span class="field-label">フォーマット</span><div class="toggle-button-group" id="filter-format-selection"><button type="button" data-value="">すべて</button><button type="button" data-value="ローテ">ローテ</button><button type="button" data-value="アンリミ">アンリミ</button></div></div>
                   <div class="form-row-flex field">
                     <div class="season"><label class="field-label" for="filter-season-input">シーズン</label><input type="number" id="filter-season-input" class="ctl" placeholder="1" min="1"></div>
-                    <div class="grow"><label class="field-label" for="filter-deck-name-input">デッキ名</label><input type="text" id="filter-deck-name-input" class="ctl" placeholder="デッキ名を入力"></div>
+                    <div class="grow"><label class="field-label" for="filter-deck-name-input">デッキ名</label><input type="text" id="filter-deck-name-input" class="ctl" placeholder="選択 または 入力" list="filter-deck-datalist" autocomplete="off"><datalist id="filter-deck-datalist"></datalist></div>
                   </div>
                   <div class="field"><span class="field-label">先後</span><div class="toggle-button-group" id="filter-turn-order-selection"><button type="button" data-value="">すべて</button><button type="button" data-value="先攻">先攻</button><button type="button" data-value="後攻">後攻</button></div></div>
                 </div>
@@ -621,6 +625,7 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
       const seasonInput = document.getElementById('season-input');
       const recordMemoInput = document.getElementById('record-memo-input');
       const filterDeckNameInput = document.getElementById('filter-deck-name-input');
+      const filterDeckDatalist = document.getElementById('filter-deck-datalist');
       const filterSeasonInput = document.getElementById('filter-season-input');
       const clearRecordFiltersButton = document.getElementById('clear-record-filters-button');
       const recordFilterDetails = document.getElementById('record-filter-details');
@@ -708,7 +713,29 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
         updateBreakdown();
       };
 
+      // 記録済みデッキ名を候補に反映（直近に使った順・重複なし）。自由入力も従来どおり可能
+      let lastDeckOptionsKey = '';
+      const updateDeckOptions = () => {
+        if (!filterDeckDatalist) return;
+        const names = [];
+        const seen = new Set();
+        allRecords.forEach(r => {
+          const name = (r.deck || '').trim();
+          if (name && !seen.has(name)) { seen.add(name); names.push(name); }
+        });
+        const key = names.join('\u0000');
+        if (key === lastDeckOptionsKey) return;
+        lastDeckOptionsKey = key;
+        filterDeckDatalist.innerHTML = '';
+        names.forEach(name => {
+          const opt = document.createElement('option');
+          opt.value = name;
+          filterDeckDatalist.appendChild(opt);
+        });
+      };
+
       const applyFilters = () => {
+        updateDeckOptions();
         matchRecordTableBody.innerHTML = '';
         matchRecordCardsContainer.innerHTML = '';
         const filterDeckName = filterDeckNameInput.value.toLowerCase();
