@@ -178,6 +178,10 @@ input.ctl[list]::-webkit-calendar-picker-indicator{position:absolute;top:0;right
 @media(hover:hover){.breakdown-table td[data-act]:hover{background:var(--sunken)}}
 .breakdown-table td.is-active{background:var(--line);font-weight:700}
 .stats-note{margin:0 0 10px;font-size:12px;color:var(--muted)}
+.breakdown-hint-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px}
+.breakdown-hint-row .breakdown-hint{margin:0;flex:1;min-width:0}
+.breakdown-hint-row .form-action-button{flex:none;min-height:32px;padding:0 12px;font-size:13px}
+.form-action-button:disabled{opacity:.45;cursor:default;background:var(--surface);border-color:var(--line-strong)}
 .class-breakdown{margin-bottom:14px}
 .class-breakdown summary{display:flex;align-items:center;gap:8px;list-style:none;cursor:pointer}
 .class-breakdown summary::-webkit-details-marker{display:none}
@@ -391,7 +395,10 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
         <details id="class-breakdown" class="class-breakdown">
           <summary><div id="class-bar" class="class-bar"><span class="class-seg-empty">データなし</span></div><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
           <p id="first-ratio-line" class="breakdown-foot"></p>
-          <p class="breakdown-hint">クラス名や先攻時・後攻時の数字をタップすると、その条件で絞り込みます</p>
+          <div class="breakdown-hint-row">
+            <p class="breakdown-hint">クラス名や先攻時・後攻時の数字をタップすると、その条件で絞り込みます</p>
+            <button type="button" id="reset-filters-button" class="form-action-button" title="シーズン以外の絞り込みをすべてに戻します" disabled>絞り込みをリセット</button>
+          </div>
           <table id="class-breakdown-table" class="breakdown-table">
             <thead><tr><th>相手クラス</th><th>試合数</th><th>勝率</th><th>先攻時</th><th>後攻時</th></tr></thead>
             <tbody></tbody>
@@ -628,6 +635,7 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
       const filterDeckDatalist = document.getElementById('filter-deck-datalist');
       const filterSeasonInput = document.getElementById('filter-season-input');
       const clearRecordFiltersButton = document.getElementById('clear-record-filters-button');
+      const resetFiltersButton = document.getElementById('reset-filters-button');
       const recordFilterDetails = document.getElementById('record-filter-details');
       const matchRecordCardsContainer = document.getElementById('match-record-cards-container');
       const loadMoreButton = document.getElementById('load-more-records-button');
@@ -704,6 +712,7 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
         const notes = [];
         if (f.turn) notes.push('先攻・後攻は先後の絞り込みを除いて集計');
         if (f.opp || f.turn) notes.push('相手クラス別はデッキ・シーズン・フォーマットの絞り込みのみ反映');
+        if (resetFiltersButton) resetFiltersButton.disabled = !(f.deck || f.opp || f.turn || f.format);
         const noteEl = document.getElementById('stats-note');
         if (noteEl) { noteEl.textContent = notes.join(' / '); noteEl.hidden = notes.length === 0; }
       };
@@ -977,6 +986,18 @@ body.dark-mode{--bg:#0D0F12;--surface:#14171C;--sunken:#1A1D23;--line:#22272E;--
             if (e.detail.groupId === 'filter-opponent-class-selection') { Storage.set(FILTER_CLASS_KEY, e.detail.value); loadRecords(); }
             else if (e.detail.groupId === 'filter-turn-order-selection') { Storage.set(FILTER_TURN_KEY, e.detail.value); loadRecords(); }
             else if (e.detail.groupId === 'filter-format-selection') { Storage.set(FILTER_FORMAT_KEY, e.detail.value); loadRecords(); }
+        });
+        // シーズン以外（フォーマット・デッキ名・先後・相手クラス）をすべてに戻す
+        resetFiltersButton.addEventListener('click', () => {
+            filterDeckNameInput.value = '';
+            ToggleButtonGroup.setActiveButton('filter-opponent-class-selection', '');
+            ToggleButtonGroup.setActiveButton('filter-turn-order-selection', '');
+            ToggleButtonGroup.setActiveButton('filter-format-selection', '');
+            Storage.remove(FILTER_FORMAT_KEY);
+            Storage.remove(FILTER_DECK_KEY);
+            Storage.remove(FILTER_CLASS_KEY);
+            Storage.remove(FILTER_TURN_KEY);
+            loadRecords();
         });
         clearRecordFiltersButton.addEventListener('click', () => {
             filterDeckNameInput.value = '';
