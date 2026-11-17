@@ -1,23 +1,37 @@
 {
-	"date": "2026-11-16",
+	"date": "2026-11-17",
 	"news": [
 		{
-			"id": "cfc0172b-1241-47bf-b634-d7aa0b239e8b",
-			"title": "[第214話]ラーメン赤猫 - アンギャマン | 少年ジャンプ＋",
-			"url": "https://shonenjumpplus.com/episode/9253191257982513603",
-			"date": "2026-11-16",
-			"tags": [
-				"漫画"
-			],
-			"comment": "<div class=\"news-comment\"><p>それぞれのボノ評に納得しかなく、自然と頭の中で相関図ができてるんだなぁと</p></div>"
+			"id": "8739eafd-937c-477a-af8f-e154f5bbe3d3",
+			"title": "Claudeにレシピを任せるのが良いことに最近気がついた｜冬木糸一",
+			"url": "https://note.com/huyukiitoichi/n/nefbf43c71822",
+			"date": "2026-11-17",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>自分用に考えてくれて修正・アレンジまでしてくれるの良さそう。</p></div>"
 		},
 		{
-			"id": "7a6fde05-85d6-4eb5-bd5a-29d6a7916339",
-			"title": "「ひらがなの『へ』とカタカナの『ヘ』見分けつかない説」を情報科学的に検証してみた件｜原因地",
-			"url": "https://note.com/genninnchi/n/n4ac5c65be50d",
-			"date": "2026-11-16",
+			"id": "cdb323af-4787-4a43-9768-a4f94deaf499",
+			"title": "あたらしいホームページのつくりかた",
+			"url": "https://tsukurikata.net/",
+			"date": "2026-11-17",
 			"tags": [],
 			"comment": ""
+		},
+		{
+			"id": "3613e64c-e579-4fb7-ab43-2d21a2cbaf12",
+			"title": "いつまで広告を見ることになるのか | weblog.ason.as",
+			"url": "https://weblog.ason.as/%E3%81%84%E3%81%A4%E3%81%BE%E3%81%A7%E5%BA%83%E5%91%8A%E3%82%92%E8%A6%8B%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B",
+			"date": "2026-11-17",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>\"とりあえず広告の入稿を受けて出していくとその企業は儲かるみたいな世界線なのはやっぱおかしいよなぁと感じる。画面の向こう側には人間がいるのだよ。\" 慣れきって麻痺してたけど確かにおかしいとこあるよな。</p></div>"
+		},
+		{
+			"id": "45263fd9-b33d-460d-9f4f-c8fff765f8c2",
+			"title": "新作初の大舞台に挑む！2年目の夏に奇跡を起こせ！［きしたかの栄冠ナイン3年縛り第10回］(4話目) - YouTube",
+			"url": "https://www.youtube.com/watch?v=G4m7XY7YgNA",
+			"date": "2026-11-17",
+			"tags": [],
+			"comment": "<div class=\"news-comment\"><p>このシリーズ追い続けて良かった！</p></div>"
 		}
 	]
 }
